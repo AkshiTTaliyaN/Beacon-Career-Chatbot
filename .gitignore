@@ -1,11 +1,9 @@
-# ─── Secrets (never commit) ───────────────────────────────────────────────
 .env
 .env.local
 .env.*.local
 *.pem
 *.key
 
-# Keep example env files — they have no real passwords
 !.env.example
 
 # ─── Python / FastAPI backend ─────────────────────────────────────────────
