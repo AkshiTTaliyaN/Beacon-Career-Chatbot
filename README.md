@@ -47,8 +47,8 @@ A web-based career counselling platform with an AI chatbot that helps students a
 
 ```bash
 # Clone the repo
-git clone https://github.com/your-org/careercompass.git
-cd careercompass
+git clone https://github.com/your-org/beacon-career-chatbot.git
+cd beacon-career-chatbot
 
 # Backend
 pip install -r requirements.txt
@@ -57,18 +57,37 @@ cp .env.example .env       # fill in your config
 # Start database services
 docker-compose up -d
 
-# Run backend
-uvicorn main:app --reload
+# Beacon — React onboarding
 
-# Frontend
-cd frontend
+Six-screen login and profile flow.
+
+## Quick start (demo — no database)
+
+```bash
+cd pathfinder-frontend
 npm install
-npm start
+npm run dev
 ```
 
-App runs at `http://localhost:3000`
+Open http://localhost:5173 — `DEMO_MODE` is **on** by default (see `src/config.js`). The UI does **not** call the backend until you turn demo off.
 
----
+## Connect frontend to backend
+
+See **[CONNECT_BACKEND.md](./CONNECT_BACKEND.md)** for the full step-by-step guide.
+
+Short version:
+
+1. Set up PostgreSQL + Redis and run the API (`pathfinder-backend-copy`).
+2. In `src/config.js` set `DEMO_MODE = false`.
+3. Restart `npm run dev`.
+
+## Deploy
+
+```bash
+VITE_API_URL=https://your-api.example.in npm run build
+```
+
+Upload the `dist/` folder to your web host.
 
 ## Project Structure
 
