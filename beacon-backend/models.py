@@ -1,0 +1,159 @@
+"""
+models.py
+All SQLAlchemy database models (tables) for Beacon.
+"""
+from sqlalchemy import (
+    Column, String, Integer, DateTime, Boolean,
+    Text, JSON, ForeignKey, Enum as SAEnum
+)
+from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import relationship
+from sqlalchemy.sql import func
+import uuid
+import enum
+
+from database import Base
+
+
+# ─── ENUMS ────────────────────────────────────────────────────────────────────
+
+class StreamEnum(str, enum.Enum):
+    PCM    = "pcm"
+    PCB    = "pcb"
+    PCMB   = "pcmb"
+    COMM   = "comm"
+    ARTS   = "arts"
+    NONE   = "none"   # not decided yet (Class 8-9)
+
+class BoardEnum(str, enum.Enum):
+    CBSE    = "CBSE"
+    ICSE    = "ICSE"
+    STATE   = "State Board"
+    OTHER   = "Other"
+
+class PerfBandEnum(str, enum.Enum):
+    ABOVE_90 = "90+"
+    BAND_75  = "75-90"
+    BAND_60  = "60-75"
+    BELOW_60 = "<60"
+
+class IncomeBracketEnum(str, enum.Enum):
+    A = "A"   # below 2L
+    B = "B"   # 2-5L
+    C = "C"   # 5-10L
+    D = "D"   # above 10L
+
+class SectorEnum(str, enum.Enum):
+    GOVT         = "govt"
+    PRIVATE      = "private"
+    STUDY        = "study"
+    ENTREPRENEUR = "entrepreneur"
+    OPEN         = "open"
+
+class RelocationEnum(str, enum.Enum):
+    YES    = "yes"
+    STATE  = "state"
+    NO     = "no"
+    UNSURE = "unsure"
+
+class CostEnum(str, enum.Enum):
+    YES        = "yes"
+    SCHOLARSHIP = "scholarship"
+    MODERATE   = "moderate"
+    NO         = "no"
+
+
+# ─── STUDENT TABLE ────────────────────────────────────────────────────────────
+
+class Student(Base):
+    """
+    Core auth table. Stores email hash only — never plain text email.
+    """
+    __tablename__ = "students"
+
+    id         = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    email_hash = Column(String(64), unique=True, nullable=False, index=True)
+    # We store email encrypted so we can send OTPs — but hash for lookup
+    email_encrypted = Column(Text, nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    last_login = Column(DateTime(timezone=True), onupdate=func.now())
+    is_active  = Column(Boolean, default=True)
+
+    # Relationship
+    profile     = relationship("StudentProfile", back_populates="student", uselist=False)
+    recommendations = relationship("Recommendation", back_populates="student")
+
+
+# ─── STUDENT PROFILE TABLE ────────────────────────────────────────────────────
+
+class StudentProfile(Base):
+    """
+    All data collected through the onboarding form.
+    Updated whenever student changes any answer.
+    """
+    __tablename__ = "student_profiles"
+
+    id         = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    student_id = Column(UUID(as_uuid=True), ForeignKey("students.id"), unique=True, nullable=False)
+
+    # ── Identity ──────────────────────────────────────────
+    current_class = Column(Integer, nullable=True)          # 8, 9, 10, 11, 12
+    board         = Column(SAEnum(BoardEnum), nullable=True)
+    stream        = Column(SAEnum(StreamEnum), nullable=True)
+    city          = Column(String(100), nullable=True)
+    state         = Column(String(100), nullable=True)
+    school_name   = Column(String(200), nullable=True)      # optional
+
+    # ── Academic ──────────────────────────────────────────
+    performance_band  = Column(SAEnum(PerfBandEnum), nullable=True)
+    strongest_subject = Column(String(100), nullable=True)
+    weakest_subject   = Column(String(100), nullable=True)
+
+    # ── Family context (all optional) ─────────────────────
+    income_bracket    = Column(SAEnum(IncomeBracketEnum), nullable=True)
+    father_occupation = Column(String(100), nullable=True)
+    mother_occupation = Column(String(100), nullable=True)
+    relative_influence = Column(Text, nullable=True)        # free text
+    family_preference  = Column(Text, nullable=True)        # free text
+
+    # ── Goals ─────────────────────────────────────────────
+    target_sector    = Column(SAEnum(SectorEnum), nullable=True)
+    relocation_pref  = Column(SAEnum(RelocationEnum), nullable=True)
+    cost_constraint  = Column(SAEnum(CostEnum), nullable=True)
+    additional_notes = Column(Text, nullable=True)          # free text, optional
+
+    # ── Derived (set by chatbot module, not the form) ─────
+    riasec_scores      = Column(JSON, nullable=True)        # {"R":3,"I":7,"A":5,...}
+    interests_summary  = Column(Text, nullable=True)        # agent-generated summary
+
+    # ── Meta ──────────────────────────────────────────────
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+    is_complete = Column(Boolean, default=False)            # True after form submitted
+
+    # Relationship
+    student = relationship("Student", back_populates="profile")
+
+
+# ─── RECOMMENDATION TABLE ────────────────────────────────────────────────────
+
+class Recommendation(Base):
+    """
+    Stores each career recommendation generated by the chatbot.
+    One student can have multiple recommendations over time.
+    """
+    __tablename__ = "recommendations"
+
+    id         = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    student_id = Column(UUID(as_uuid=True), ForeignKey("students.id"), nullable=False)
+
+    career_path_1 = Column(String(200), nullable=True)
+    career_path_2 = Column(String(200), nullable=True)
+    career_path_3 = Column(String(200), nullable=True)
+    full_output   = Column(JSON, nullable=True)     # complete recommendation JSON
+    pdf_generated = Column(Boolean, default=False)
+
+    generated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    # Relationship
+    student = relationship("Student", back_populates="recommendations")

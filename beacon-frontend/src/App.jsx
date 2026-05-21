@@ -1,0 +1,120 @@
+import { useState, useEffect } from "react";
+import "./App.css";
+import { INITIAL_FORM } from "./constants/formOptions";
+import { DEMO_MODE } from "./config";
+import { getMyProfile } from "./api/client";
+import LoginScreen from "./screens/LoginScreen";
+import OTPScreen from "./screens/OTPScreen";
+import BasicInfoScreen from "./screens/BasicInfoScreen";
+import AcademicsScreen from "./screens/AcademicsScreen";
+import GoalsScreen from "./screens/GoalsScreen";
+import SuccessScreen from "./screens/SuccessScreen";
+
+const STEP = {
+  LOGIN: "login",
+  OTP: "otp",
+  BASIC: "basic",
+  ACADEMICS: "academics",
+  GOALS: "goals",
+  SUCCESS: "success",
+};
+
+export default function App() {
+  const [step, setStep] = useState(STEP.LOGIN);
+  const [email, setEmail] = useState("");
+  const [form, setForm] = useState(INITIAL_FORM);
+  const [booting, setBooting] = useState(true);
+
+  useEffect(() => {
+    async function restoreSession() {
+      if (DEMO_MODE) {
+        setBooting(false);
+        return;
+      }
+      try {
+        const profile = await getMyProfile();
+        if (profile?.is_complete) {
+          setStep(STEP.SUCCESS);
+        }
+      } catch {
+        /* ignore — user will log in again */
+      } finally {
+        setBooting(false);
+      }
+    }
+    restoreSession();
+  }, []);
+
+  function handleLoginSuccess(addr) {
+    setEmail(addr);
+    setStep(STEP.OTP);
+  }
+
+  function handleOtpSuccess(data) {
+    if (data.profile_complete) {
+      setStep(STEP.SUCCESS);
+    } else {
+      setStep(STEP.BASIC);
+    }
+  }
+
+  function handleLaunchChatbot() {
+    alert(
+      "Career chatbot will be connected here.\n\nYour team can route this button to the chatbot route when it is ready."
+    );
+  }
+
+  if (booting) {
+    return (
+      <div className="layout">
+        <main className="main">
+          <p className="center muted">Loading…</p>
+        </main>
+      </div>
+    );
+  }
+
+  switch (step) {
+    case STEP.LOGIN:
+      return <LoginScreen onSuccess={handleLoginSuccess} />;
+    case STEP.OTP:
+      return (
+        <OTPScreen
+          email={email}
+          onSuccess={handleOtpSuccess}
+          onBack={() => setStep(STEP.LOGIN)}
+        />
+      );
+    case STEP.BASIC:
+      return (
+        <BasicInfoScreen
+          form={form}
+          setForm={setForm}
+          onNext={() => setStep(STEP.ACADEMICS)}
+          onBack={() => setStep(STEP.OTP)}
+        />
+      );
+    case STEP.ACADEMICS:
+      return (
+        <AcademicsScreen
+          form={form}
+          setForm={setForm}
+          onNext={() => setStep(STEP.GOALS)}
+          onBack={() => setStep(STEP.BASIC)}
+        />
+      );
+    case STEP.GOALS:
+      return (
+        <GoalsScreen
+          form={form}
+          setForm={setForm}
+          onSuccess={() => setStep(STEP.SUCCESS)}
+          onBack={() => setStep(STEP.ACADEMICS)}
+        />
+      );
+    case STEP.SUCCESS:
+      return <SuccessScreen onLaunchChatbot={handleLaunchChatbot} />;
+    default:
+      return <LoginScreen onSuccess={handleLoginSuccess} />;
+  }
+}
