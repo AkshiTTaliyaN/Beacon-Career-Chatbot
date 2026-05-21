@@ -174,8 +174,8 @@ uvicorn main:app --reload
 
 You should see:
 ```
-✅ Database tables created / verified
-✅ Beacon API started
+Database tables created / verified
+Beacon API started
 INFO: Uvicorn running on http://127.0.0.1:8000
 ```
 
@@ -320,7 +320,7 @@ The token is saved in `localStorage` so the student stays logged in across brows
 
 ```
 project/
-├── pathfinder-backend-copy/
+├── Beacon-backend/
 │   ├── venv/               ← virtual environment (do not commit this)
 │   ├── main.py
 │   ├── database.py
@@ -332,7 +332,7 @@ project/
 │   ├── .env                ← your actual config (do not commit this)
 │   └── .env.example        ← safe to commit
 │
-└── pathfinder-frontend/
+└── Beacon-frontend/
     └── (React — Beacon onboarding)
 ```
 
@@ -346,16 +346,3 @@ __pycache__/
 ```
 
 ---
-
-## What the Other Teammates Connect To
-
-**Person 2 (ML / Chatbot module):**
-- Calls `GET /profile/me` at session start to load student profile
-- Calls `PATCH /profile/update` to save RIASEC scores after conversation
-- Calls `POST /recommendations/save` when recommendation is generated
-- All calls need the student's JWT token passed in the Authorization header
-
-**Person 3 (PDF module / RAG module):**
-- PDF module receives recommendation data from the chatbot and generates the file
-- RAG module is a separate ChromaDB service — no connection to this SQL backend needed
-- Both connect through FastAPI routes that Person 3 adds to `routes.py`

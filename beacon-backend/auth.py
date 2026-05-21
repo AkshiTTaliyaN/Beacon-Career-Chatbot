@@ -22,7 +22,6 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 load_dotenv()
 
-# ─── CONFIG ──────────────────────────────────────────────────────────────────
 
 SECRET_KEY             = os.getenv("SECRET_KEY", "change-this-in-production")
 ALGORITHM              = os.getenv("ALGORITHM", "HS256")
@@ -36,14 +35,11 @@ SMTP_PASSWORD          = os.getenv("SMTP_PASSWORD", "")
 FROM_EMAIL             = os.getenv("FROM_EMAIL", "")
 FROM_NAME              = os.getenv("FROM_NAME", "Beacon")
 
-# Redis client
 redis_client = redis.from_url(REDIS_URL, decode_responses=True)
 
-# Bearer token scheme
 bearer_scheme = HTTPBearer()
 
 
-# ─── EMAIL HASHING ───────────────────────────────────────────────────────────
 
 def hash_email(email: str) -> str:
     """
@@ -70,8 +66,6 @@ def decrypt_email(encrypted: str) -> str:
     return base64.b64decode(encrypted.encode()).decode()
 
 
-# ─── OTP FUNCTIONS ───────────────────────────────────────────────────────────
-
 def generate_otp() -> str:
     """Generate a 6-digit numeric OTP."""
     return "".join(random.choices(string.digits, k=6))
@@ -96,7 +90,7 @@ def verify_otp(email: str, otp: str) -> bool:
     key = f"otp:{hash_email(email)}"
     stored = redis_client.get(key)
     if stored and stored == otp:
-        redis_client.delete(key)   # one-time use
+        redis_client.delete(key)   
         return True
     return False
 
@@ -112,7 +106,6 @@ def send_otp_email(email: str, otp: str) -> bool:
         msg["From"]    = f"{FROM_NAME} <{FROM_EMAIL}>"
         msg["To"]      = email
 
-        # Plain text version
         text = f"""
 Your Beacon login code is: {otp}
 
@@ -150,7 +143,6 @@ If you did not request this, ignore this email.
         return False
 
 
-# ─── JWT FUNCTIONS ───────────────────────────────────────────────────────────
 
 def create_access_token(student_id: str) -> str:
     """

@@ -13,7 +13,6 @@ from models import (
 )
 
 
-# ─── AUTH SCHEMAS ────────────────────────────────────────────────────────────
 
 class OTPRequest(BaseModel):
     email: EmailStr
@@ -37,13 +36,9 @@ class TokenResponse(BaseModel):
     profile_complete: bool      # True = returning user, skip form
 
 
-# ─── PROFILE SCHEMAS ─────────────────────────────────────────────────────────
 
 class ProfileCreate(BaseModel):
-    """
-    Received from the frontend form on submit.
-    All family context fields are truly optional.
-    """
+
     # Identity
     current_class: int
     board: Optional[BoardEnum] = None
@@ -122,7 +117,6 @@ class ProfileUpdate(BaseModel):
     """
     riasec_scores: Optional[dict] = None
     interests_summary: Optional[str] = None
-    # Any profile field can also be updated here
     stream: Optional[StreamEnum] = None
     current_class: Optional[int] = None
 
@@ -147,7 +141,6 @@ class RecommendationResponse(BaseModel):
         from_attributes = True
 
 
-# ─── GENERIC RESPONSES ───────────────────────────────────────────────────────
 
 class MessageResponse(BaseModel):
     message: str

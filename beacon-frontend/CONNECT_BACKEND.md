@@ -53,7 +53,7 @@ Should print `PONG`.
 ### Step 4 — Configure the backend
 
 ```powershell
-cd c:\Users\Lenovo\Documents\EDCIL\code\pathfinder-backend-copy
+cd beacon-backend
 copy .env.example .env
 ```
 
@@ -84,7 +84,7 @@ Check:
 
 ### Step 6 — Turn off demo mode in the frontend
 
-Edit `pathfinder-frontend/src/config.js`:
+Edit `beacon-frontend/src/config.js`:
 
 ```javascript
 export const DEMO_MODE = false;
@@ -99,7 +99,7 @@ VITE_API_URL=http://localhost:8000
 ### Step 7 — Start the frontend
 
 ```powershell
-cd c:\Users\Lenovo\Documents\EDCIL\code\pathfinder-frontend
+cd beacon-frontend
 npm run dev
 ```
 

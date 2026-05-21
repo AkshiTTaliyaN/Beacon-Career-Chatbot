@@ -38,7 +38,7 @@ export default function Layout({ children, step, totalSteps, title, subtitle }) 
       </main>
 
       <footer className="footer">
-        <p>Government Career Guidance Platform</p>
+        <p>Career Guidance Platform</p>
       </footer>
     </div>
   );

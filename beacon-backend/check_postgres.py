@@ -1,10 +1,5 @@
 """
 PostgreSQL-only connection test. Does not need Redis or the API server.
-
-Run:
-  cd beacon-backend
-  .\venv\Scripts\activate
-  python check_postgres.py
 """
 import os
 import sys

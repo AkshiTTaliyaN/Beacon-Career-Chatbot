@@ -1,8 +1,3 @@
-/**
- * Beacon — app configuration.
- * Change these when deploying or switching to production auth.
- */
-
 /** Backend base URL. Change when you deploy the API. */
 export const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
 

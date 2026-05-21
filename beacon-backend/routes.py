@@ -1,6 +1,5 @@
 """
 routes.py
-All API endpoints grouped into routers.
 - /auth  → login, OTP, token
 - /profile → save, get, update
 """
@@ -23,7 +22,6 @@ from auth import (
 )
 
 
-# ─── AUTH ROUTER ─────────────────────────────────────────────────────────────
 
 auth_router = APIRouter(prefix="/auth", tags=["Authentication"])
 
@@ -42,7 +40,6 @@ def request_otp(body: OTPRequest, db: Session = Depends(get_db)):
     sent = send_otp_email(body.email, otp)
 
     if not sent:
-        # During development: print OTP to terminal instead of failing
         print(f"\n📧 DEV MODE — OTP for {body.email}: {otp}\n")
 
     return {"message": f"OTP sent to {body.email}"}
@@ -56,7 +53,6 @@ def verify_otp_route(body: OTPVerify, db: Session = Depends(get_db)):
     - Create student record if first login
     - Return JWT token
     """
-    # Verify OTP
     if not verify_otp(body.email, body.otp):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -65,7 +61,6 @@ def verify_otp_route(body: OTPVerify, db: Session = Depends(get_db)):
 
     email_hash = hash_email(body.email)
 
-    # Check if student exists
     student = db.query(Student).filter(
         Student.email_hash == email_hash
     ).first()
@@ -84,19 +79,16 @@ def verify_otp_route(body: OTPVerify, db: Session = Depends(get_db)):
         db.refresh(student)
         is_new_user = True
     else:
-        # Returning student — check if profile is complete
         from sqlalchemy.orm import Session as OrmSession
         profile = db.query(StudentProfile).filter(
             StudentProfile.student_id == student.id
         ).first()
         profile_complete = profile.is_complete if profile else False
 
-    # Update last login
     from datetime import datetime
     student.last_login = datetime.utcnow()
     db.commit()
 
-    # Create JWT
     token = create_access_token(str(student.id))
 
     return {
@@ -108,7 +100,6 @@ def verify_otp_route(body: OTPVerify, db: Session = Depends(get_db)):
     }
 
 
-# ─── PROFILE ROUTER ──────────────────────────────────────────────────────────
 
 profile_router = APIRouter(prefix="/profile", tags=["Profile"])
 
@@ -126,18 +117,15 @@ def save_profile(
     """
     student_uuid = UUID(student_id)
 
-    # Check if profile already exists
     profile = db.query(StudentProfile).filter(
         StudentProfile.student_id == student_uuid
     ).first()
 
     if profile:
-        # Update existing profile
         for field, value in body.model_dump(exclude_unset=True).items():
             setattr(profile, field, value)
         profile.is_complete = True
     else:
-        # Create new profile
         profile = StudentProfile(
             student_id=student_uuid,
             **body.model_dump(),
@@ -196,7 +184,6 @@ def update_profile(
     if not profile:
         raise HTTPException(status_code=404, detail="Profile not found")
 
-    # Only update fields that were actually sent
     update_data = body.model_dump(exclude_unset=True)
     for field, value in update_data.items():
         setattr(profile, field, value)
@@ -206,8 +193,6 @@ def update_profile(
 
     return _profile_to_response(profile, student_id)
 
-
-# ─── RECOMMENDATION ROUTER ───────────────────────────────────────────────────
 
 rec_router = APIRouter(prefix="/recommendations", tags=["Recommendations"])
 
@@ -275,7 +260,6 @@ def get_latest_recommendation(
     )
 
 
-# ─── HELPER ──────────────────────────────────────────────────────────────────
 
 def _profile_to_response(profile: StudentProfile, student_id: str) -> dict:
     """Convert a StudentProfile model to a dict for the response."""

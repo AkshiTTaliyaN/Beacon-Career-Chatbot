@@ -1,6 +1,5 @@
 """
 models.py
-All SQLAlchemy database models (tables) for Beacon.
 """
 from sqlalchemy import (
     Column, String, Integer, DateTime, Boolean,
@@ -14,8 +13,6 @@ import enum
 
 from database import Base
 
-
-# ─── ENUMS ────────────────────────────────────────────────────────────────────
 
 class StreamEnum(str, enum.Enum):
     PCM    = "pcm"
@@ -63,7 +60,6 @@ class CostEnum(str, enum.Enum):
     NO         = "no"
 
 
-# ─── STUDENT TABLE ────────────────────────────────────────────────────────────
 
 class Student(Base):
     """
@@ -79,24 +75,18 @@ class Student(Base):
     last_login = Column(DateTime(timezone=True), onupdate=func.now())
     is_active  = Column(Boolean, default=True)
 
-    # Relationship
     profile     = relationship("StudentProfile", back_populates="student", uselist=False)
     recommendations = relationship("Recommendation", back_populates="student")
 
 
-# ─── STUDENT PROFILE TABLE ────────────────────────────────────────────────────
 
 class StudentProfile(Base):
-    """
-    All data collected through the onboarding form.
-    Updated whenever student changes any answer.
-    """
+
     __tablename__ = "student_profiles"
 
     id         = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     student_id = Column(UUID(as_uuid=True), ForeignKey("students.id"), unique=True, nullable=False)
 
-    # ── Identity ──────────────────────────────────────────
     current_class = Column(Integer, nullable=True)          # 8, 9, 10, 11, 12
     board         = Column(SAEnum(BoardEnum), nullable=True)
     stream        = Column(SAEnum(StreamEnum), nullable=True)
@@ -104,38 +94,31 @@ class StudentProfile(Base):
     state         = Column(String(100), nullable=True)
     school_name   = Column(String(200), nullable=True)      # optional
 
-    # ── Academic ──────────────────────────────────────────
     performance_band  = Column(SAEnum(PerfBandEnum), nullable=True)
     strongest_subject = Column(String(100), nullable=True)
     weakest_subject   = Column(String(100), nullable=True)
 
-    # ── Family context (all optional) ─────────────────────
     income_bracket    = Column(SAEnum(IncomeBracketEnum), nullable=True)
     father_occupation = Column(String(100), nullable=True)
     mother_occupation = Column(String(100), nullable=True)
     relative_influence = Column(Text, nullable=True)        # free text
     family_preference  = Column(Text, nullable=True)        # free text
 
-    # ── Goals ─────────────────────────────────────────────
     target_sector    = Column(SAEnum(SectorEnum), nullable=True)
     relocation_pref  = Column(SAEnum(RelocationEnum), nullable=True)
     cost_constraint  = Column(SAEnum(CostEnum), nullable=True)
     additional_notes = Column(Text, nullable=True)          # free text, optional
 
-    # ── Derived (set by chatbot module, not the form) ─────
     riasec_scores      = Column(JSON, nullable=True)        # {"R":3,"I":7,"A":5,...}
     interests_summary  = Column(Text, nullable=True)        # agent-generated summary
 
-    # ── Meta ──────────────────────────────────────────────
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
     is_complete = Column(Boolean, default=False)            # True after form submitted
 
-    # Relationship
     student = relationship("Student", back_populates="profile")
 
 
-# ─── RECOMMENDATION TABLE ────────────────────────────────────────────────────
 
 class Recommendation(Base):
     """

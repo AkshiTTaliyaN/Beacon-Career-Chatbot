@@ -60,7 +60,7 @@ export default function App() {
 
   function handleLaunchChatbot() {
     alert(
-      "Career chatbot will be connected here.\n\nYour team can route this button to the chatbot route when it is ready."
+      "Career chatbot will be connected here.\n"
     );
   }
 
