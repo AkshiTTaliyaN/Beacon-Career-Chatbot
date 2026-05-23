@@ -1,5 +1,13 @@
 import { DEMO_MODE } from "../config";
 
+/**
+ * Layout.jsx — updated for full-website presentation.
+ * Changes:
+ *  - Removed "B" brand-mark icon
+ *  - "Beacon" and "Career Guidance Portal" are centered
+ *  - Wider max-width card for desktop
+ *  - Header and card padding improved for website context
+ */
 export default function Layout({ children, step, totalSteps, title, subtitle }) {
   const showProgress = step >= 2 && step <= 4;
   const progressPct = showProgress ? ((step - 1) / (totalSteps - 2)) * 100 : 0;
@@ -8,10 +16,10 @@ export default function Layout({ children, step, totalSteps, title, subtitle }) 
     <div className="layout">
       <header className="header">
         <div className="brand">
-          <span className="brand-mark">B</span>
-          <div>
+          {/* Brand-mark icon removed as requested */}
+          <div className="brand-text">
             <p className="brand-name">Beacon</p>
-            <p className="brand-tag">Career guidance portal</p>
+            <p className="brand-tag">Career Guidance Portal</p>
           </div>
         </div>
         {DEMO_MODE && <span className="demo-badge">Demo mode</span>}
@@ -38,7 +46,7 @@ export default function Layout({ children, step, totalSteps, title, subtitle }) 
       </main>
 
       <footer className="footer">
-        <p>Career Guidance Platform</p>
+        <p>© {new Date().getFullYear()} Beacon — Career Guidance Platform</p>
       </footer>
     </div>
   );

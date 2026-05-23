@@ -7,15 +7,37 @@ import {
   STREAMS,
   INDIAN_STATES,
 } from "../constants/formOptions";
+import { STATE_CITIES } from "../constants/indianCities";
 import { validateBasicInfo } from "../utils/validation";
 
+/**
+ * BasicInfoScreen.jsx — updated with state-linked city dropdown.
+ *
+ * When a state is selected:
+ *  1. The city dropdown is populated with cities for that state only.
+ *  2. If the previously-selected city doesn't belong to the new state,
+ *     it is cleared so the backend never receives a stale value.
+ */
 export default function BasicInfoScreen({ form, setForm, onNext, onBack }) {
   const [errors, setErrors] = useState({});
   const cls = Number(form.current_class);
   const showStream = cls >= 10;
 
+  // Derive city list from the currently selected state
+  const cityOptions = form.state ? (STATE_CITIES[form.state] || []) : [];
+
   function update(field, value) {
     setForm((prev) => ({ ...prev, [field]: value }));
+  }
+
+  function handleStateChange(newState) {
+    // Clear city if it no longer belongs to the new state
+    const citiesForNewState = STATE_CITIES[newState] || [];
+    setForm((prev) => ({
+      ...prev,
+      state: newState,
+      city: citiesForNewState.includes(prev.city) ? prev.city : "",
+    }));
   }
 
   function handleNext(e) {
@@ -33,6 +55,7 @@ export default function BasicInfoScreen({ form, setForm, onNext, onBack }) {
       subtitle="Tell us about your class and location."
     >
       <form onSubmit={handleNext} className="form">
+        {/* ── Class ── */}
         <fieldset className="fieldset">
           <legend className="field-label">Current class *</legend>
           <div className="pill-row">
@@ -50,9 +73,12 @@ export default function BasicInfoScreen({ form, setForm, onNext, onBack }) {
               </button>
             ))}
           </div>
-          {errors.current_class && <p className="field-error">{errors.current_class}</p>}
+          {errors.current_class && (
+            <p className="field-error">{errors.current_class}</p>
+          )}
         </fieldset>
 
+        {/* ── Board ── */}
         <label className="field">
           <span className="field-label">Board *</span>
           <select
@@ -69,6 +95,7 @@ export default function BasicInfoScreen({ form, setForm, onNext, onBack }) {
           {errors.board && <p className="field-error">{errors.board}</p>}
         </label>
 
+        {/* ── Stream (Class 10+) ── */}
         {showStream && (
           <div className="field">
             <span className="field-label">Stream *</span>
@@ -82,20 +109,13 @@ export default function BasicInfoScreen({ form, setForm, onNext, onBack }) {
           </div>
         )}
 
-        <label className="field">
-          <span className="field-label">City *</span>
-          <input
-            type="text"
-            placeholder="Your city"
-            value={form.city}
-            onChange={(e) => update("city", e.target.value)}
-          />
-          {errors.city && <p className="field-error">{errors.city}</p>}
-        </label>
-
+        {/* ── State ── (choose state FIRST so city list populates) */}
         <label className="field">
           <span className="field-label">State *</span>
-          <select value={form.state} onChange={(e) => update("state", e.target.value)}>
+          <select
+            value={form.state}
+            onChange={(e) => handleStateChange(e.target.value)}
+          >
             <option value="">Select state</option>
             {INDIAN_STATES.map((s) => (
               <option key={s} value={s}>
@@ -106,6 +126,39 @@ export default function BasicInfoScreen({ form, setForm, onNext, onBack }) {
           {errors.state && <p className="field-error">{errors.state}</p>}
         </label>
 
+        {/* ── City — populated from state ── */}
+        <label className="field">
+          <span className="field-label">City *</span>
+          {cityOptions.length > 0 ? (
+            <select
+              value={form.city}
+              onChange={(e) => update("city", e.target.value)}
+              disabled={!form.state}
+            >
+              <option value="">Select city</option>
+              {cityOptions.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
+          ) : (
+            /* Fallback text input if state has no mapped cities (shouldn't happen) */
+            <input
+              type="text"
+              placeholder={form.state ? "Enter your city" : "Select a state first"}
+              value={form.city}
+              disabled={!form.state}
+              onChange={(e) => update("city", e.target.value)}
+            />
+          )}
+          {errors.city && <p className="field-error">{errors.city}</p>}
+          {!form.state && (
+            <p className="field-hint">Select your state above to see cities.</p>
+          )}
+        </label>
+
+        {/* ── School name (optional) ── */}
         <label className="field">
           <span className="field-label">
             School name <span className="optional">(optional)</span>
