@@ -1,27 +1,11 @@
-import Layout from "../components/Layout";
+import { useEffect } from "react";
 
-export default function SuccessScreen({ onLaunchChatbot }) {
-  return (
-    <Layout
-      step={5}
-      totalSteps={6}
-      title="You're all set!"
-      subtitle="Your profile is saved. The career chatbot will use this when you connect it."
-    >
-      <div className="success-body">
-        <div className="success-icon" aria-hidden>
-          ✓
-        </div>
-        <p className="muted">
-          In demo mode, open the browser console (F12) to see the JSON payload that would be sent to the API.
-        </p>
-        <button type="button" className="btn btn-primary" onClick={onLaunchChatbot}>
-          Launch career chatbot
-        </button>
-        <p className="field-hint center">
-          Chatbot module coming soon — this button is a placeholder for your team&apos;s integration.
-        </p>
-      </div>
-    </Layout>
-  );
+export default function SuccessScreen() {
+  useEffect(() => {
+    // Immediately redirect to the Dashboard after onboarding completes.
+    // Using location.href ensures a navigation to /dashboard so the app root will render Dashboard.
+    window.location.href = '/dashboard';
+  }, []);
+
+  return null;
 }
