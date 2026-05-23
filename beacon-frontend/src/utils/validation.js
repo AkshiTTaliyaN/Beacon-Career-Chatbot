@@ -39,16 +39,24 @@ export function validateGoals(form) {
 }
 
 export function buildProfilePayload(form) {
+  // Bug 1 fix: guard against invalid / unparseable class value
   const cls = Number(form.current_class);
+  if (![8, 9, 10, 11, 12].includes(cls)) {
+    throw new Error("Select a valid class before submitting.");
+  }
+
   const payload = {
-    current_class: cls,
+    current_class: cls,          
     board: form.board,
     city: form.city.trim(),
     state: form.state,
   };
 
-  if (form.stream) payload.stream = form.stream;
-  else if (cls < 10) payload.stream = "none";
+  if (form.stream) {
+    payload.stream = form.stream;
+  } else if (cls < 10) {
+    payload.stream = "none";
+  }
 
   if (form.school_name?.trim()) payload.school_name = form.school_name.trim();
   if (form.performance_band) payload.performance_band = form.performance_band;

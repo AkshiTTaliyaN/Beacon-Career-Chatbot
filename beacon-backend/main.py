@@ -1,23 +1,25 @@
 """
 main.py
 FastAPI application entry point.
+
 """
+
+from dotenv import load_dotenv
+load_dotenv()
+# ─────────────────────────────────────────────────────────────────────────────
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from dotenv import load_dotenv
 import os
 
 from database import create_tables
 from routes import auth_router, profile_router, rec_router
-
-load_dotenv()
 
 app = FastAPI(
     title="Beacon API",
     description="Government Career Guidance Platform — Backend API",
     version="1.0.0"
 )
-
 
 app.add_middleware(
     CORSMiddleware,
@@ -32,7 +34,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 app.include_router(auth_router)
 app.include_router(profile_router)

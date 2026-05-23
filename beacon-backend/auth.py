@@ -5,6 +5,7 @@ All authentication logic:
 - OTP generation and storage in Redis
 - OTP email sending via SMTP
 - JWT token creation and verification
+
 """
 import hashlib
 import random
@@ -19,6 +20,7 @@ from jose import JWTError, jwt
 from dotenv import load_dotenv
 from fastapi import HTTPException, status, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from cryptography.fernet import Fernet, InvalidToken
 
 load_dotenv()
 
@@ -35,36 +37,78 @@ SMTP_PASSWORD          = os.getenv("SMTP_PASSWORD", "")
 FROM_EMAIL             = os.getenv("FROM_EMAIL", "")
 FROM_NAME              = os.getenv("FROM_NAME", "Beacon")
 
+_EMAIL_ENCRYPTION_KEY  = os.getenv("EMAIL_ENCRYPTION_KEY", "")
+
+if _EMAIL_ENCRYPTION_KEY:
+    _fernet = Fernet(_EMAIL_ENCRYPTION_KEY.encode())
+else:
+    # No key configured — warn loudly in dev, refuse to start in prod
+    import sys
+    if os.getenv("ENVIRONMENT", "development") == "production":
+        print(
+            "FATAL: EMAIL_ENCRYPTION_KEY is not set. "
+            "Cannot start in production without email encryption."
+        )
+        sys.exit(1)
+    else:
+        print(
+            "WARNING: EMAIL_ENCRYPTION_KEY not set. "
+            "Email encryption is disabled — do NOT use this in production.\n"
+            "Generate a key with: python -c \"from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())\"\n"
+            "Then add EMAIL_ENCRYPTION_KEY=<key> to your .env file."
+        )
+        _fernet = None
+
 redis_client = redis.from_url(REDIS_URL, decode_responses=True)
 
 bearer_scheme = HTTPBearer()
 
 
+# ─── Email hashing ────────────────────────────────────────────────────────────
 
 def hash_email(email: str) -> str:
     """
     SHA-256 hash of lowercased email.
-    This is stored in the DB — never the plain email.
-    Used for: looking up a student by email without storing it.
+    Stored in DB for lookups — never the plain email.
     """
     return hashlib.sha256(email.lower().strip().encode()).hexdigest()
 
 
+# ─── Email encryption (Bug 7 fix) ────────────────────────────────────────────
+
 def encrypt_email(email: str) -> str:
     """
-    Simple reversible storage of email so we can send OTPs.
-    In production replace with proper encryption (Fernet / AWS KMS).
-    For now: base64 encoding as a placeholder.
+    Fernet symmetric encryption of the email address.
+    Requires EMAIL_ENCRYPTION_KEY in .env.
+
+    Bug 7 fix: replaces the previous base64 'encryption' which was
+    trivially reversible by anyone with database access.
     """
-    import base64
-    return base64.b64encode(email.lower().strip().encode()).decode()
+    if _fernet is None:
+        # Dev fallback only — base64 so the app still runs without a key
+        import base64
+        return base64.b64encode(email.lower().strip().encode()).decode()
+    return _fernet.encrypt(email.lower().strip().encode()).decode()
 
 
 def decrypt_email(encrypted: str) -> str:
-    """Reverse of encrypt_email."""
-    import base64
-    return base64.b64decode(encrypted.encode()).decode()
+    """
+    Reverse of encrypt_email.
+    Used when we need to send an OTP to a returning user's address.
+    """
+    if _fernet is None:
+        import base64
+        return base64.b64decode(encrypted.encode()).decode()
+    try:
+        return _fernet.decrypt(encrypted.encode()).decode()
+    except InvalidToken:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Could not decrypt email address. Encryption key may have changed."
+        )
 
+
+# ─── OTP ─────────────────────────────────────────────────────────────────────
 
 def generate_otp() -> str:
     """Generate a 6-digit numeric OTP."""
@@ -74,9 +118,7 @@ def generate_otp() -> str:
 def store_otp(email: str, otp: str) -> None:
     """
     Store OTP in Redis with expiry.
-    Key: otp:<email_hash>
-    Value: the OTP string
-    Expires: OTP_EXPIRE_MINUTES (default 10)
+    Key: otp:<email_hash>   Value: OTP string
     """
     key = f"otp:{hash_email(email)}"
     redis_client.setex(key, OTP_EXPIRE_MINUTES * 60, otp)
@@ -90,10 +132,12 @@ def verify_otp(email: str, otp: str) -> bool:
     key = f"otp:{hash_email(email)}"
     stored = redis_client.get(key)
     if stored and stored == otp:
-        redis_client.delete(key)   
+        redis_client.delete(key)
         return True
     return False
 
+
+# ─── Email sending ────────────────────────────────────────────────────────────
 
 def send_otp_email(email: str, otp: str) -> bool:
     """
@@ -115,17 +159,16 @@ If you did not request this, ignore this email.
 — Beacon Team
 """
 
-        # HTML version
         html = f"""
 <html><body style="font-family:sans-serif;max-width:480px;margin:40px auto;color:#1A1714">
   <p style="font-size:14px;color:#6B6560;margin-bottom:8px">Your login code</p>
   <p style="font-size:48px;font-weight:700;letter-spacing:8px;color:#2D5BE3;margin:0">{otp}</p>
   <p style="font-size:13px;color:#A09B96;margin-top:16px">
-    Expires in {OTP_EXPIRE_MINUTES} minutes. 
+    Expires in {OTP_EXPIRE_MINUTES} minutes.
     If you did not request this, ignore this email.
   </p>
   <hr style="border:none;border-top:1px solid #E4E0DB;margin:24px 0"/>
-  <p style="font-size:12px;color:#A09B96">Beacon — Government Career Guidance Platform</p>
+  <p style="font-size:12px;color:#A09B96">Beacon — Career Guidance Platform</p>
 </body></html>
 """
         msg.attach(MIMEText(text, "plain"))
@@ -143,6 +186,7 @@ If you did not request this, ignore this email.
         return False
 
 
+# ─── JWT ─────────────────────────────────────────────────────────────────────
 
 def create_access_token(student_id: str) -> str:
     """
@@ -178,10 +222,5 @@ def get_current_student_id(
     """
     FastAPI dependency — extracts and validates JWT from
     the Authorization: Bearer <token> header.
-
-    Usage:
-        @app.get("/profile")
-        def get_profile(student_id: str = Depends(get_current_student_id)):
-            ...
     """
     return decode_access_token(credentials.credentials)

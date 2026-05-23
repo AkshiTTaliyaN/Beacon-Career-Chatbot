@@ -2,6 +2,8 @@
 routes.py
 - /auth  → login, OTP, token
 - /profile → save, get, update
+- /recommendations → save, get latest
+
 """
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
@@ -22,6 +24,7 @@ from auth import (
 )
 
 
+# ─── AUTH ─────────────────────────────────────────────────────────────────────
 
 auth_router = APIRouter(prefix="/auth", tags=["Authentication"])
 
@@ -79,7 +82,6 @@ def verify_otp_route(body: OTPVerify, db: Session = Depends(get_db)):
         db.refresh(student)
         is_new_user = True
     else:
-        from sqlalchemy.orm import Session as OrmSession
         profile = db.query(StudentProfile).filter(
             StudentProfile.student_id == student.id
         ).first()
@@ -100,6 +102,7 @@ def verify_otp_route(body: OTPVerify, db: Session = Depends(get_db)):
     }
 
 
+# ─── PROFILE ──────────────────────────────────────────────────────────────────
 
 profile_router = APIRouter(prefix="/profile", tags=["Profile"])
 
@@ -194,6 +197,8 @@ def update_profile(
     return _profile_to_response(profile, student_id)
 
 
+# ─── RECOMMENDATIONS ──────────────────────────────────────────────────────────
+
 rec_router = APIRouter(prefix="/recommendations", tags=["Recommendations"])
 
 
@@ -260,9 +265,16 @@ def get_latest_recommendation(
     )
 
 
+# ─── HELPER ───────────────────────────────────────────────────────────────────
 
 def _profile_to_response(profile: StudentProfile, student_id: str) -> dict:
-    """Convert a StudentProfile model to a dict for the response."""
+    """
+    Convert a StudentProfile ORM model to a dict for the API response.
+
+    Bug 6 fix: riasec_scores and interests_summary are now included.
+    Previously these fields were written by PATCH /profile/update but
+    never returned, so the chatbot could never read them back.
+    """
     return {
         "student_id": student_id,
         "current_class": profile.current_class,
@@ -285,4 +297,7 @@ def _profile_to_response(profile: StudentProfile, student_id: str) -> dict:
         "additional_notes": profile.additional_notes,
         "is_complete": profile.is_complete,
         "updated_at": profile.updated_at,
+        # Bug 6 fix: return these so the chatbot can read them
+        "riasec_scores": profile.riasec_scores,
+        "interests_summary": profile.interests_summary,
     }

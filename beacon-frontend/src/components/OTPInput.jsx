@@ -6,8 +6,10 @@ export default function OTPInput({ value, onChange, disabled }) {
   const digits = value.padEnd(6, " ").split("").slice(0, 6);
 
   useEffect(() => {
-    refs.current[0]?.focus();
-  }, []);
+    if (!disabled) {
+      refs.current[0]?.focus();
+    }
+  }, [disabled]);
 
   function updateDigit(index, char) {
     const onlyDigit = char.replace(/\D/g, "").slice(-1);

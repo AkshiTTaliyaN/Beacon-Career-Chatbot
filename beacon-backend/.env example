@@ -10,6 +10,18 @@ SECRET_KEY=change-this-to-a-long-random-string-in-production
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=43200
 
+# ─── EMAIL ENCRYPTION ───────────────────────
+# Generate your key once with:
+#   python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
+# Then paste the output below. Keep this secret — losing it means
+# you cannot decrypt stored emails.
+EMAIL_ENCRYPTION_KEY=your-fernet-key-here
+
+# ─── ENVIRONMENT ────────────────────────────────────────
+# Set to "production" on your live server.
+# In production, the app will refuse to start if EMAIL_ENCRYPTION_KEY is missing.
+ENVIRONMENT=development
+
 # ─── EMAIL (SMTP) — optional for dev; OTP prints in terminal if this fails ───
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587

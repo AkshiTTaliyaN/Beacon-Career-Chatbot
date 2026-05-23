@@ -2,6 +2,7 @@
 schemas.py
 Pydantic models — define what data comes IN to the API
 and what goes OUT. FastAPI validates automatically.
+
 """
 from pydantic import BaseModel, EmailStr, field_validator
 from typing import Optional
@@ -13,6 +14,7 @@ from models import (
 )
 
 
+# ─── AUTH SCHEMAS ─────────────────────────────────────────────────────────────
 
 class OTPRequest(BaseModel):
     email: EmailStr
@@ -36,6 +38,7 @@ class TokenResponse(BaseModel):
     profile_complete: bool      # True = returning user, skip form
 
 
+# ─── PROFILE SCHEMAS ──────────────────────────────────────────────────────────
 
 class ProfileCreate(BaseModel):
 
@@ -83,6 +86,11 @@ class ProfileCreate(BaseModel):
 class ProfileResponse(BaseModel):
     """
     Sent back to the frontend after profile is saved or loaded.
+
+    Bug 6 fix: riasec_scores and interests_summary are now included.
+    Previously these were stored in StudentProfile and could be updated
+    via PATCH /profile/update but were never returned to the caller,
+    meaning the chatbot module could never read them.
     """
     student_id: str
     current_class: Optional[int]
@@ -105,6 +113,9 @@ class ProfileResponse(BaseModel):
     additional_notes: Optional[str]
     is_complete: bool
     updated_at: Optional[datetime]
+    # Bug 6 fix: these two fields were in the model but missing from the response
+    riasec_scores: Optional[dict] = None
+    interests_summary: Optional[str] = None
 
     class Config:
         from_attributes = True
@@ -121,7 +132,7 @@ class ProfileUpdate(BaseModel):
     current_class: Optional[int] = None
 
 
-# ─── RECOMMENDATION SCHEMAS ──────────────────────────────────────────────────
+# ─── RECOMMENDATION SCHEMAS ───────────────────────────────────────────────────
 
 class RecommendationCreate(BaseModel):
     career_path_1: Optional[str] = None
@@ -141,6 +152,7 @@ class RecommendationResponse(BaseModel):
         from_attributes = True
 
 
+# ─── GENERIC ──────────────────────────────────────────────────────────────────
 
 class MessageResponse(BaseModel):
     message: str

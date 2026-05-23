@@ -128,7 +128,8 @@ export const COST_CONSTRAINTS = [
 export const INITIAL_FORM = {
   current_class: "",
   board: "",
-  stream: "",
+  // Bug 2 fix: null instead of "" — empty string is not a valid StreamEnum value
+  stream: null,
   city: "",
   state: "",
   school_name: "",
