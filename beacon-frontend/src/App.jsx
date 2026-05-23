@@ -9,6 +9,9 @@ import BasicInfoScreen from "./screens/BasicInfoScreen";
 import AcademicsScreen from "./screens/AcademicsScreen";
 import GoalsScreen from "./screens/GoalsScreen";
 import SuccessScreen from "./screens/SuccessScreen";
+import ReportPage from "./screens/ReportPage";
+import CareerLibrary from "./screens/CareerLibrary";
+import ExamExplorer from "./screens/ExamExplorer";
 
 const STEP = {
   LOGIN: "login",
@@ -20,6 +23,10 @@ const STEP = {
 };
 
 export default function App() {
+  const path = typeof window !== 'undefined' ? window.location.pathname : '/'
+  if (path === '/report') return <ReportPage />
+  if (path === '/careers') return <CareerLibrary />
+  if (path === '/exams') return <ExamExplorer />
   const [step, setStep] = useState(STEP.LOGIN);
   const [email, setEmail] = useState("");
   const [form, setForm] = useState(INITIAL_FORM);
@@ -59,9 +66,10 @@ export default function App() {
   }
 
   function handleLaunchChatbot() {
-    alert(
-      "Career chatbot will be connected here.\n"
-    );
+    // After onboarding completion, route user to the Dashboard page
+    window.history.pushState({}, '', '/dashboard');
+    // Trigger a navigation event so the app root can react if needed
+    window.dispatchEvent(new PopStateEvent('popstate'));
   }
 
   if (booting) {

@@ -7,17 +7,9 @@ import {
   STREAMS,
   INDIAN_STATES,
 } from "../constants/formOptions";
-import { STATE_CITIES } from "../constants/indianCities";
+import { STATE_CITIES } from "../constants/IndianCities";
 import { validateBasicInfo } from "../utils/validation";
 
-/**
- * BasicInfoScreen.jsx — updated with state-linked city dropdown.
- *
- * When a state is selected:
- *  1. The city dropdown is populated with cities for that state only.
- *  2. If the previously-selected city doesn't belong to the new state,
- *     it is cleared so the backend never receives a stale value.
- */
 export default function BasicInfoScreen({ form, setForm, onNext, onBack }) {
   const [errors, setErrors] = useState({});
   const cls = Number(form.current_class);
@@ -143,7 +135,6 @@ export default function BasicInfoScreen({ form, setForm, onNext, onBack }) {
               ))}
             </select>
           ) : (
-            /* Fallback text input if state has no mapped cities (shouldn't happen) */
             <input
               type="text"
               placeholder={form.state ? "Enter your city" : "Select a state first"}
