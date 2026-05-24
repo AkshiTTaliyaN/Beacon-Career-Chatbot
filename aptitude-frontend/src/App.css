@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap');
+
+:root {
+  --navy: #0f172a;
+  --navy-light: #1e293b;
+  --blue: #3b82f6;
+  --blue-dark: #2563eb;
+  --bg: #f8fafc;
+  --white: #ffffff;
+  --gray: #64748b;
+  --gray-light: #e2e8f0;
+  --text: #0f172a;
+  --border: #e2e8f0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.app { min-height: 100vh; }
+
+.cc-header {
+  background: var(--navy);
+  padding: 20px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.cc-logo {
+  font-family: 'DM Serif Display', serif;
+  color: white;
+  font-size: 22px;
+  letter-spacing: -0.3px;
+}
+
+.cc-header-center { text-align: center; color: white; }
+.cc-header-center h1 { font-size: 17px; font-weight: 600; }
+.cc-header-center p { font-size: 14px; color: #94a3b8; margin-top: 2px; }
+
+.btn-primary {
+  background: var(--blue); color: white; border: none;
+  padding: 12px 26px; border-radius: 7px;
+  font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500;
+  cursor: pointer; transition: background 0.2s;
+}
+.btn-primary:hover { background: var(--blue-dark); }
+
+.btn-outline {
+  background: transparent; color: white;
+  border: 1.5px solid rgba(255,255,255,0.3);
+  padding: 11px 24px; border-radius: 7px;
+  font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s;
+}
+.btn-outline:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
+
+.btn-ghost {
+  background: transparent; color: var(--gray);
+  border: 1.5px solid var(--border);
+  padding: 11px 24px; border-radius: 7px;
+  font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s;
+}
+.btn-ghost:hover { background: var(--gray-light); }
