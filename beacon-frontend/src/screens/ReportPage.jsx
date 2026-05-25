@@ -100,9 +100,9 @@ export default function ReportPage() {
     <div style={{ background: COLORS.white, color: '#111827', minHeight: '100vh', fontFamily: 'Inter, system-ui, -apple-system, Roboto, sans-serif' }}>
       {/* Top header strip */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 2rem', background: COLORS.navy, color: COLORS.white }}>
-        <div style={{ fontWeight: 800, fontSize: 18 }}>CareerCompass</div>
+        <div style={{ fontWeight: 800, fontSize: 18 }}>Beacon</div>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: 18, fontWeight: 800 }}>CareerCompass Personality & Career Report</div>
+          <div style={{ fontSize: 18, fontWeight: 800 }}>Beacon Personality & Career Report</div>
           <div style={{ marginTop: 6 }}>{report.studentName} • {report.class} • {report.stream}</div>
           <div style={{ marginTop: 4, fontSize: 13, opacity: 0.9 }}>{report.date}</div>
         </div>
@@ -195,7 +195,7 @@ export default function ReportPage() {
         </section>
 
         <footer style={{ color: COLORS.muted, fontSize: 13, textAlign: 'center', padding: '1rem 0 4rem 0' }}>
-          CareerCompass © 2026 — This report is an illustrative guide based on an assessment. For personalised counselling contact our team.
+          Beacon © 2026 — This report is an illustrative guide based on an assessment. For personalised counselling contact our team.
         </footer>
       </div>
 

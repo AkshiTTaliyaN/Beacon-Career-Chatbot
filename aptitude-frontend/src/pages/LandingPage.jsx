@@ -13,7 +13,7 @@ export default function LandingPage({ onStart }) {
   return (
     <div className="landing">
       <header className="cc-header">
-        <span className="cc-logo">CareerCompass</span>
+        <span className="cc-logo">Beacon</span>
         <nav className="landing-nav">
           <a href="#">Home</a>
           <a href="#">About</a>
@@ -147,7 +147,7 @@ export default function LandingPage({ onStart }) {
       </section>
 
       <footer className="landing-footer">
-        <p>CareerCompass © 2026 — A psychometric career guidance tool for Indian students.</p>
+        <p>Beacon © 2026 — A psychometric career guidance tool for Indian students.</p>
       </footer>
     </div>
   );

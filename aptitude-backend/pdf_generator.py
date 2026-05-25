@@ -55,14 +55,14 @@ def generate_pdf(result: dict) -> bytes:
 
     # ── HEADER BANNER ──────────────────────────────────────────────────────────
     header_data = [[
-        Paragraph("<font color='white' size='16'><b>CareerCompass</b></font>", styles["Normal"]),
+        Paragraph("<font color='white' size='16'><b>Beacon</b></font>", styles["Normal"]),
         Paragraph(
-            f"<font color='white' size='14'><b>CareerCompass Personality &amp; Career Report</b></font><br/>"
+            f"<font color='white' size='14'><b>Beacon Personality &amp; Career Report</b></font><br/>"
             f"<font color='#94a3b8' size='10'>{result['name']} • {result['class_level']} • {result['stream']}</font><br/>"
             f"<font color='#94a3b8' size='9'>{datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')}</font>",
             styles["Normal"]
         ),
-        Paragraph("<font color='white' size='9'>CareerCompass Report</font>", styles["Normal"]),
+        Paragraph("<font color='white' size='9'>Beacon Report</font>", styles["Normal"]),
     ]]
     header_table = Table(header_data, colWidths=[4*cm, 10*cm, 3*cm])
     header_table.setStyle(TableStyle([
@@ -216,7 +216,7 @@ def generate_pdf(result: dict) -> bytes:
     story.append(HRFlowable(width="100%", thickness=0.5, color=BORDER_COLOR))
     story.append(Spacer(1, 0.2*cm))
     story.append(Paragraph(
-        "CareerCompass © 2026 — This report is an illustrative guide based on an assessment. For personalised counselling contact our team.",
+        "Beacon © 2026 — This report is an illustrative guide based on an assessment. For personalised counselling contact our team.",
         ParagraphStyle("Footer", parent=styles["Normal"], fontSize=8, textColor=GRAY_TEXT, alignment=TA_CENTER)
     ))
 

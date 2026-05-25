@@ -10,8 +10,9 @@ const COLORS = {
 const styles = {
   hero: {
     background: COLORS.navy,
+    backgroundImage: 'radial-gradient(ellipse at top, rgba(59,130,246,0.08) 0%, transparent 70%)',
     color: COLORS.white,
-    padding: '4.5rem 1rem',
+    padding: '7rem 1rem',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'
@@ -36,7 +37,9 @@ const styles = {
   ctaWrap: {
     marginTop: '1.5rem',
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    gap: '0.75rem',
+    flexWrap: 'wrap'
   },
   cta: {
     background: COLORS.white,
@@ -77,35 +80,55 @@ export default function HeroSection({
   children = null,
 }) {
   return (
-    <section style={styles.hero} aria-label="CareerCompass hero">
+    <section style={styles.hero} aria-label="Beacon hero">
       <div style={styles.container}>
         <h1 style={styles.title}>{title}</h1>
         <p style={styles.subtitle}>{subtitle}</p>
 
         <div style={styles.ctaWrap}>
-          <button
-            type="button"
-            style={styles.cta}
-            onClick={onPrimary || (() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }))}
-          >
-            {primaryText}
-          </button>
-          {secondaryText ? (
+          {primaryText === 'Start Free Test' ? (
             <button
               type="button"
-              style={{ ...styles.cta, background: 'transparent', color: COLORS.white, border: '1px solid rgba(255,255,255,0.12)', boxShadow: 'none' }}
-              onClick={onSecondary}
+              className="dashboard-button"
+              style={styles.cta}
+              onClick={() => window.open('http://localhost:3001', '_blank')}
             >
-              {secondaryText}
+              {primaryText}
             </button>
+          ) : (
+            <button
+              type="button"
+              className="dashboard-button"
+              style={styles.cta}
+              onClick={onPrimary || (() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }))}
+            >
+              {primaryText}
+            </button>
+          )}
+
+          {secondaryText ? (
+            secondaryText === 'Take Psychometric Test' ? (
+              <button
+                type="button"
+                className="dashboard-button secondary"
+                style={{ ...styles.cta, background: 'transparent', color: COLORS.white, border: '1px solid rgba(255,255,255,0.12)', boxShadow: 'none' }}
+                onClick={() => window.open('http://localhost:3001', '_blank')}
+              >
+                {secondaryText}
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="dashboard-button secondary"
+                style={{ ...styles.cta, background: 'transparent', color: COLORS.white, border: '1px solid rgba(255,255,255,0.12)', boxShadow: 'none' }}
+                onClick={onSecondary}
+              >
+                {secondaryText}
+              </button>
+            )
           ) : null}
         </div>
 
-        <ul style={styles.badges} aria-hidden={false}>
-          <li style={styles.badge}>Free Forever</li>
-          <li style={styles.badge}>No Login Needed</li>
-          <li style={styles.badge}>All Streams Covered</li>
-        </ul>
         {children}
       </div>
     </section>

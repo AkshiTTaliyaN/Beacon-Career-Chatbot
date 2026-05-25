@@ -7,7 +7,7 @@ import io
 from scoring import calculate_scores, get_result
 from pdf_generator import generate_pdf
 
-app = FastAPI(title="CareerCompass Aptitude API")
+app = FastAPI(title="Beacon Aptitude API")
 
 app.add_middleware(
     CORSMiddleware,
@@ -43,7 +43,7 @@ def download_pdf(req: PDFRequest):
     return StreamingResponse(
         io.BytesIO(pdf_bytes),
         media_type="application/pdf",
-        headers={"Content-Disposition": f"attachment; filename=CareerCompass_Report_{req.name.replace(' ', '_')}.pdf"}
+        headers={"Content-Disposition": f"attachment; filename=Beacon_Report_{req.name.replace(' ', '_')}.pdf"}
     )
 
 @app.get("/health")

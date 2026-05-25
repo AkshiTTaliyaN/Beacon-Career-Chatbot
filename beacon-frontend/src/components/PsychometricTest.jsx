@@ -157,7 +157,7 @@ export default function PsychometricTest({ isEmbedded = false }) {
         </button>
 
         <div style={{ background: COLORS.white, borderRadius: 12, padding: '1.5rem', boxShadow: '0 6px 18px rgba(7,20,58,0.06)' }}>
-          <h2 style={{ color: COLORS.navy, fontWeight: 800, marginBottom: '0.5rem' }}>CareerCompass Personality Test</h2>
+          <h2 style={{ color: COLORS.navy, fontWeight: 800, marginBottom: '0.5rem' }}>Beacon Personality Test</h2>
           <p style={{ color: COLORS.muted, fontSize: '0.95rem', marginBottom: '1.5rem' }}>Answer each question on a scale of 1 (Not interested) to 5 (Very interested)</p>
 
           <div style={{ marginBottom: '2rem' }}>
@@ -198,9 +198,10 @@ export default function PsychometricTest({ isEmbedded = false }) {
     <section style={{ maxWidth: 1100, margin: '2rem auto', padding: '0 1rem' }}>
       <div style={{ background: COLORS.navy, borderRadius: 12, padding: '2rem', color: COLORS.white }}>
         <h2 style={{ margin: 0, fontSize: '1.35rem', fontWeight: 800 }}>Find what career suits you</h2>
-        <p style={{ marginTop: '0.75rem', fontSize: '1rem', opacity: 0.95 }}>Answer 15 quick questions and discover your personality type and matching careers — completely free, no login needed</p>
+        <p style={{ marginTop: '0.75rem', fontSize: '1rem', opacity: 0.95 }}>Answer 60 questions and discover your personality type and matching careers — completely free, no login needed</p>
         <button
-          onClick={() => setTestStarted(true)}
+          type="button"
+          onClick={() => window.open('http://localhost:3001', '_blank')}
           style={{ marginTop: '1rem', padding: '0.75rem 1.25rem', borderRadius: 10, border: 'none', background: COLORS.white, color: COLORS.navy, fontWeight: 700, cursor: 'pointer' }}
         >
           Take the Test

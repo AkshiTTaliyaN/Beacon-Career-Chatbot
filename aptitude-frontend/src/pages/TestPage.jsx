@@ -116,7 +116,7 @@ export default function TestPage({ onSubmit, onBack }) {
     return (
       <div className="test-page">
         <header className="cc-header">
-          <span className="cc-logo">CareerCompass</span>
+          <span className="cc-logo">Beacon</span>
           <button className="btn-outline" onClick={onBack}>← Back</button>
         </header>
         <div className="details-container">
@@ -172,7 +172,7 @@ export default function TestPage({ onSubmit, onBack }) {
   return (
     <div className="test-page">
       <header className="cc-header">
-        <span className="cc-logo">CareerCompass</span>
+        <span className="cc-logo">Beacon</span>
         <div className="cc-header-center">
           <h1>Career Aptitude Test</h1>
           <p>{details.name} • {details.class_level} • {details.stream}</p>

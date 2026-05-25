@@ -61,9 +61,9 @@ export default function ResultPage({ result, onDownloadPDF, onRetake }) {
   return (
     <div className="result-page">
       <header className="cc-header">
-        <span className="cc-logo">CareerCompass</span>
+        <span className="cc-logo">Beacon</span>
         <div className="cc-header-center">
-          <h1>CareerCompass Personality &amp; Career Report</h1>
+          <h1>Beacon Personality &amp; Career Report</h1>
           <p>{result.name} • {result.class_level} • {result.stream}</p>
           <p style={{fontSize:"12px", color:"#64748b"}}>{new Date().toISOString()}</p>
         </div>
@@ -234,7 +234,7 @@ export default function ResultPage({ result, onDownloadPDF, onRetake }) {
 
         {/* Footer */}
         <div className="result-footer">
-          <p>CareerCompass © 2026 — This report is an illustrative guide based on a psychometric assessment. For personalised counselling, contact a qualified career counsellor.</p>
+          <p>Beacon © 2026 — This report is an illustrative guide based on a psychometric assessment. For personalised counselling, contact a qualified career counsellor.</p>
           <div className="footer-actions">
             <button className="btn-primary" onClick={onDownloadPDF}>↓ Download PDF Report</button>
             <button className="btn-ghost" onClick={onRetake}>Take Test Again</button>
