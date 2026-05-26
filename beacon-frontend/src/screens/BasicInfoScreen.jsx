@@ -8,14 +8,13 @@ import {
   INDIAN_STATES,
 } from "../constants/formOptions";
 import { STATE_CITIES } from "../constants/IndianCities";
-import { validateBasicInfo } from "../utils/validation";
+import { validateBasicInfo, validateName } from "../utils/validation";
 
 export default function BasicInfoScreen({ form, setForm, onNext, onBack }) {
   const [errors, setErrors] = useState({});
   const cls = Number(form.current_class);
   const showStream = cls >= 10;
 
-  // Derive city list from the currently selected state
   const cityOptions = form.state ? (STATE_CITIES[form.state] || []) : [];
 
   function update(field, value) {
@@ -23,7 +22,6 @@ export default function BasicInfoScreen({ form, setForm, onNext, onBack }) {
   }
 
   function handleStateChange(newState) {
-    // Clear city if it no longer belongs to the new state
     const citiesForNewState = STATE_CITIES[newState] || [];
     setForm((prev) => ({
       ...prev,
@@ -34,9 +32,12 @@ export default function BasicInfoScreen({ form, setForm, onNext, onBack }) {
 
   function handleNext(e) {
     e.preventDefault();
-    const nextErrors = validateBasicInfo(form);
-    setErrors(nextErrors);
-    if (Object.keys(nextErrors).length === 0) onNext();
+    // Validate name + the rest of basic info together
+    const nameErrors = validateName(form);
+    const basicErrors = validateBasicInfo(form);
+    const allErrors = { ...nameErrors, ...basicErrors };
+    setErrors(allErrors);
+    if (Object.keys(allErrors).length === 0) onNext();
   }
 
   return (
@@ -44,9 +45,23 @@ export default function BasicInfoScreen({ form, setForm, onNext, onBack }) {
       step={2}
       totalSteps={6}
       title="Basic information"
-      subtitle="Tell us about your class and location."
+      subtitle="Let's start with your name and where you're studying."
     >
       <form onSubmit={handleNext} className="form">
+
+        {/* ── B: Name — first field ── */}
+        <label className="field">
+          <span className="field-label">Your name *</span>
+          <input
+            type="text"
+            autoComplete="given-name"
+            placeholder="e.g. Aryan Sharma"
+            value={form.name}
+            onChange={(e) => update("name", e.target.value)}
+          />
+          {errors.name && <p className="field-error">{errors.name}</p>}
+        </label>
+
         {/* ── Class ── */}
         <fieldset className="fieldset">
           <legend className="field-label">Current class *</legend>
@@ -101,7 +116,7 @@ export default function BasicInfoScreen({ form, setForm, onNext, onBack }) {
           </div>
         )}
 
-        {/* ── State ── (choose state FIRST so city list populates) */}
+        {/* ── State ── */}
         <label className="field">
           <span className="field-label">State *</span>
           <select
@@ -118,7 +133,7 @@ export default function BasicInfoScreen({ form, setForm, onNext, onBack }) {
           {errors.state && <p className="field-error">{errors.state}</p>}
         </label>
 
-        {/* ── City — populated from state ── */}
+        {/* ── City ── */}
         <label className="field">
           <span className="field-label">City *</span>
           {cityOptions.length > 0 ? (

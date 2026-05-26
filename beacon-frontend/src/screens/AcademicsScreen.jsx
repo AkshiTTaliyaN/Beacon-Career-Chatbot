@@ -6,6 +6,10 @@ import {
   SUBJECTS,
   INCOME_BRACKETS,
   OCCUPATIONS,
+  STUDY_HOURS,
+  COACHING_STATUS,
+  CAREER_CLARITY,
+  LEARNING_STYLES,
 } from "../constants/formOptions";
 import { validateAcademics } from "../utils/validation";
 
@@ -14,6 +18,19 @@ export default function AcademicsScreen({ form, setForm, onNext, onBack }) {
 
   function update(field, value) {
     setForm((prev) => ({ ...prev, [field]: value }));
+  }
+
+  /** Toggle a subject in the enjoyed_subjects multi-select array */
+  function toggleEnjoyedSubject(subject) {
+    setForm((prev) => {
+      const current = prev.enjoyed_subjects || [];
+      return {
+        ...prev,
+        enjoyed_subjects: current.includes(subject)
+          ? current.filter((s) => s !== subject)
+          : [...current, subject],
+      };
+    });
   }
 
   function handleNext(e) {
@@ -27,10 +44,12 @@ export default function AcademicsScreen({ form, setForm, onNext, onBack }) {
     <Layout
       step={3}
       totalSteps={6}
-      title="Academics & family"
-      subtitle="Performance and family context help us tailor guidance. Family fields are optional."
+      title="Academics & background"
+      subtitle="Help us understand how you study and where you're headed. Family fields are optional."
     >
       <form onSubmit={handleNext} className="form">
+
+        {/* ── Performance band ── */}
         <div className="field">
           <span className="field-label">Overall performance band *</span>
           <RadioCards
@@ -42,6 +61,7 @@ export default function AcademicsScreen({ form, setForm, onNext, onBack }) {
           />
         </div>
 
+        {/* ── Strongest subject ── */}
         <label className="field">
           <span className="field-label">Strongest subject *</span>
           <select
@@ -50,9 +70,7 @@ export default function AcademicsScreen({ form, setForm, onNext, onBack }) {
           >
             <option value="">Select subject</option>
             {SUBJECTS.map((s) => (
-              <option key={s} value={s}>
-                {s}
-              </option>
+              <option key={s} value={s}>{s}</option>
             ))}
           </select>
           {errors.strongest_subject && (
@@ -60,6 +78,7 @@ export default function AcademicsScreen({ form, setForm, onNext, onBack }) {
           )}
         </label>
 
+        {/* ── Weakest subject ── */}
         <label className="field">
           <span className="field-label">Weakest subject *</span>
           <select
@@ -68,14 +87,103 @@ export default function AcademicsScreen({ form, setForm, onNext, onBack }) {
           >
             <option value="">Select subject</option>
             {SUBJECTS.map((s) => (
-              <option key={s} value={s}>
-                {s}
-              </option>
+              <option key={s} value={s}>{s}</option>
             ))}
           </select>
           {errors.weakest_subject && (
             <p className="field-error">{errors.weakest_subject}</p>
           )}
+        </label>
+
+        {/* ── A: Subjects enjoyed (multi-select pills) ── */}
+        <fieldset className="fieldset">
+          <legend className="field-label">
+            Subjects you genuinely enjoy{" "}
+            <span className="optional">(select all that apply)</span>
+          </legend>
+          <div className="pill-row" style={{ marginTop: "0.5rem" }}>
+            {SUBJECTS.map((s) => (
+              <button
+                key={s}
+                type="button"
+                className={`pill ${
+                  (form.enjoyed_subjects || []).includes(s) ? "selected" : ""
+                }`}
+                onClick={() => toggleEnjoyedSubject(s)}
+              >
+                {s}
+              </button>
+            ))}
+          </div>
+        </fieldset>
+
+        {/* ── A: Study hours per day ── */}
+        <div className="field">
+          <span className="field-label">
+            How many hours do you study outside school per day? *
+          </span>
+          <RadioCards
+            name="study_hours"
+            options={STUDY_HOURS}
+            value={form.study_hours}
+            onChange={(v) => update("study_hours", v)}
+            error={errors.study_hours}
+          />
+        </div>
+
+        {/* ── A: Coaching / study setup ── */}
+        <div className="field">
+          <span className="field-label">How are you currently studying? *</span>
+          <RadioCards
+            name="coaching_status"
+            options={COACHING_STATUS}
+            value={form.coaching_status}
+            onChange={(v) => update("coaching_status", v)}
+            error={errors.coaching_status}
+          />
+        </div>
+
+        {/* ── A: Career clarity ── */}
+        <div className="field">
+          <span className="field-label">
+            How clear are you about what career you want? *
+          </span>
+          <RadioCards
+            name="career_clarity"
+            options={CAREER_CLARITY}
+            value={form.career_clarity}
+            onChange={(v) => update("career_clarity", v)}
+            error={errors.career_clarity}
+          />
+        </div>
+
+        {/* ── A: Learning style ── */}
+        <div className="field">
+          <span className="field-label">How do you learn best? *</span>
+          <RadioCards
+            name="learning_style"
+            options={LEARNING_STYLES}
+            value={form.learning_style}
+            onChange={(v) => update("learning_style", v)}
+            error={errors.learning_style}
+          />
+        </div>
+
+        {/* ── A: Extracurricular (free text, optional) ── */}
+        <label className="field">
+          <span className="field-label">
+            Extracurricular activities or hobbies{" "}
+            <span className="optional">(optional)</span>
+          </span>
+          <textarea
+            rows={2}
+            placeholder="e.g. robotics club, painting, cricket, coding projects"
+            value={form.extracurricular}
+            onChange={(e) => update("extracurricular", e.target.value)}
+          />
+          <p className="field-hint">
+            These help us understand your interests beyond academics.
+          </p>
         </label>
 
         <hr className="divider" />
@@ -91,9 +199,7 @@ export default function AcademicsScreen({ form, setForm, onNext, onBack }) {
           >
             <option value="">Prefer not to say</option>
             {INCOME_BRACKETS.map((b) => (
-              <option key={b.value} value={b.value}>
-                {b.label}
-              </option>
+              <option key={b.value} value={b.value}>{b.label}</option>
             ))}
           </select>
         </label>
@@ -108,9 +214,7 @@ export default function AcademicsScreen({ form, setForm, onNext, onBack }) {
           >
             <option value="">Select</option>
             {OCCUPATIONS.map((o) => (
-              <option key={o} value={o}>
-                {o}
-              </option>
+              <option key={o} value={o}>{o}</option>
             ))}
           </select>
         </label>
@@ -125,9 +229,7 @@ export default function AcademicsScreen({ form, setForm, onNext, onBack }) {
           >
             <option value="">Select</option>
             {OCCUPATIONS.map((o) => (
-              <option key={o} value={o}>
-                {o}
-              </option>
+              <option key={o} value={o}>{o}</option>
             ))}
           </select>
         </label>

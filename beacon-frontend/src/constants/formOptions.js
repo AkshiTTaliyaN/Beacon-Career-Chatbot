@@ -125,22 +125,76 @@ export const COST_CONSTRAINTS = [
   { label: "No major constraint", value: "no" },
 ];
 
+// ─── NEW: Academic profile constants ────────────────────────────────────────
+
+/** How many hours per day the student studies outside school */
+export const STUDY_HOURS = [
+  { label: "Less than 1 hour", value: "lt1" },
+  { label: "1 – 2 hours", value: "1to2" },
+  { label: "2 – 4 hours", value: "2to4" },
+  { label: "More than 4 hours", value: "gt4" },
+];
+
+/** Where the student is getting academic support */
+export const COACHING_STATUS = [
+  { label: "Self-study only", value: "self" },
+  { label: "School tuition / extra classes", value: "school_tuition" },
+  { label: "Private coaching centre", value: "coaching" },
+  { label: "Online courses / apps", value: "online" },
+  { label: "Mix of the above", value: "mix" },
+];
+
+/** How clear the student is about their career direction */
+export const CAREER_CLARITY = [
+  { label: "Very clear — I know what I want", value: "clear" },
+  { label: "Have a few options in mind", value: "some_idea" },
+  { label: "Still exploring, no fixed idea", value: "exploring" },
+  { label: "No idea at all", value: "no_idea" },
+];
+
+/** How the student prefers to learn */
+export const LEARNING_STYLES = [
+  { label: "Visual — diagrams, videos, charts", value: "visual" },
+  { label: "Reading — notes, textbooks", value: "reading" },
+  { label: "Practical — experiments, projects", value: "practical" },
+  { label: "Listening — lectures, discussions", value: "listening" },
+  { label: "Mix of all styles", value: "mix" },
+];
+
+// ─── INITIAL_FORM ────────────────────────────────────────────────────────────
+
 export const INITIAL_FORM = {
+  // B: name is now the first field collected
+  name: "",
+
   current_class: "",
   board: "",
-  // Bug 2 fix: null instead of "" — empty string is not a valid StreamEnum value
   stream: null,
   city: "",
   state: "",
   school_name: "",
+
+  // existing academic
   performance_band: "",
   strongest_subject: "",
   weakest_subject: "",
+
+  // A: new academic fields
+  enjoyed_subjects: [],       // multi-select from SUBJECTS
+  study_hours: "",            // from STUDY_HOURS
+  coaching_status: "",        // from COACHING_STATUS
+  career_clarity: "",         // from CAREER_CLARITY
+  learning_style: "",         // from LEARNING_STYLES
+  extracurricular: "",        // free text
+
+  // family context
   income_bracket: "",
   father_occupation: "",
   mother_occupation: "",
   relative_influence: "",
   family_preference: "",
+
+  // goals
   target_sector: "",
   relocation_pref: "",
   cost_constraint: "",

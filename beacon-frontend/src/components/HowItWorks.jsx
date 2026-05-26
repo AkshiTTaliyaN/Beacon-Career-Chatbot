@@ -17,7 +17,6 @@ const styles = {
 }
 
 function Icon({ name }) {
-  // Minimal Tabler-like icons as inline SVGs
   switch (name) {
     case 'test':
       return (

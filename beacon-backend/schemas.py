@@ -1,20 +1,20 @@
 """
 schemas.py
 Pydantic models — define what data comes IN to the API
-and what goes OUT. FastAPI validates automatically.
-
+and what goes OUT.
 """
 from pydantic import BaseModel, EmailStr, field_validator
-from typing import Optional
+from typing import Optional, List
 from uuid import UUID
 from datetime import datetime
 from models import (
     StreamEnum, BoardEnum, PerfBandEnum, IncomeBracketEnum,
-    SectorEnum, RelocationEnum, CostEnum
+    SectorEnum, RelocationEnum, CostEnum,
+    StudyHoursEnum, CoachingStatusEnum, CareerClarityEnum, LearningStyleEnum,
 )
 
 
-# ─── AUTH SCHEMAS ─────────────────────────────────────────────────────────────
+# ─── AUTH ─────────────────────────────────────────────────────────────────────
 
 class OTPRequest(BaseModel):
     email: EmailStr
@@ -34,15 +34,18 @@ class TokenResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"
     student_id: str
-    is_new_user: bool           # True = first login, show full form
-    profile_complete: bool      # True = returning user, skip form
+    is_new_user: bool
+    profile_complete: bool
 
 
-# ─── PROFILE SCHEMAS ──────────────────────────────────────────────────────────
+# ─── PROFILE ──────────────────────────────────────────────────────────────────
 
 class ProfileCreate(BaseModel):
 
-    # Identity
+    # B: student name
+    name: Optional[str] = None
+
+    # Basic info
     current_class: int
     board: Optional[BoardEnum] = None
     stream: Optional[StreamEnum] = None
@@ -50,12 +53,20 @@ class ProfileCreate(BaseModel):
     state: Optional[str] = None
     school_name: Optional[str] = None
 
-    # Academic
+    # Existing academic
     performance_band: Optional[PerfBandEnum] = None
     strongest_subject: Optional[str] = None
     weakest_subject: Optional[str] = None
 
-    # Family context — all optional
+    # A: new academic fields
+    enjoyed_subjects: Optional[List[str]] = None
+    study_hours: Optional[StudyHoursEnum] = None
+    coaching_status: Optional[CoachingStatusEnum] = None
+    career_clarity: Optional[CareerClarityEnum] = None
+    learning_style: Optional[LearningStyleEnum] = None
+    extracurricular: Optional[str] = None
+
+    # Family context
     income_bracket: Optional[IncomeBracketEnum] = None
     father_occupation: Optional[str] = None
     mother_occupation: Optional[str] = None
@@ -82,38 +93,58 @@ class ProfileCreate(BaseModel):
             raise ValueError("City cannot be empty")
         return v.strip()
 
+    @field_validator("name")
+    @classmethod
+    def name_clean(cls, v):
+        if v is not None:
+            v = v.strip()
+            if len(v) > 80:
+                raise ValueError("Name must be under 80 characters")
+        return v
+
 
 class ProfileResponse(BaseModel):
-    """
-    Sent back to the frontend after profile is saved or loaded.
-
-    Bug 6 fix: riasec_scores and interests_summary are now included.
-    Previously these were stored in StudentProfile and could be updated
-    via PATCH /profile/update but were never returned to the caller,
-    meaning the chatbot module could never read them.
-    """
     student_id: str
+
+    # B: name
+    name: Optional[str]
+
+    # Basic info
     current_class: Optional[int]
     board: Optional[str]
     stream: Optional[str]
     city: Optional[str]
     state: Optional[str]
     school_name: Optional[str]
+
+    # Existing academic
     performance_band: Optional[str]
     strongest_subject: Optional[str]
     weakest_subject: Optional[str]
+
+    # A: new academic fields
+    enjoyed_subjects: Optional[List[str]]
+    study_hours: Optional[str]
+    coaching_status: Optional[str]
+    career_clarity: Optional[str]
+    learning_style: Optional[str]
+    extracurricular: Optional[str]
+
+    # Family
     income_bracket: Optional[str]
     father_occupation: Optional[str]
     mother_occupation: Optional[str]
     relative_influence: Optional[str]
     family_preference: Optional[str]
+
+    # Goals
     target_sector: Optional[str]
     relocation_pref: Optional[str]
     cost_constraint: Optional[str]
     additional_notes: Optional[str]
+
     is_complete: bool
     updated_at: Optional[datetime]
-    # Bug 6 fix: these two fields were in the model but missing from the response
     riasec_scores: Optional[dict] = None
     interests_summary: Optional[str] = None
 
@@ -122,17 +153,14 @@ class ProfileResponse(BaseModel):
 
 
 class ProfileUpdate(BaseModel):
-    """
-    For partial updates — chatbot module uses this to update
-    specific fields (like RIASEC scores) without touching others.
-    """
+    """Partial update — used by chatbot to write RIASEC scores back."""
     riasec_scores: Optional[dict] = None
     interests_summary: Optional[str] = None
     stream: Optional[StreamEnum] = None
     current_class: Optional[int] = None
 
 
-# ─── RECOMMENDATION SCHEMAS ───────────────────────────────────────────────────
+# ─── RECOMMENDATIONS ──────────────────────────────────────────────────────────
 
 class RecommendationCreate(BaseModel):
     career_path_1: Optional[str] = None
