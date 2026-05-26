@@ -14,6 +14,10 @@ import enum
 from database import Base
 
 
+def enum_values(enum_cls):
+    return [member.value for member in enum_cls]
+
+
 class StreamEnum(str, enum.Enum):
     PCM    = "pcm"
     PCB    = "pcb"
@@ -127,10 +131,10 @@ class StudentProfile(Base):
 
     # ── A: new academic fields ────────────────────────────────────────────────
     enjoyed_subjects  = Column(JSON, nullable=True)          # list[str]
-    study_hours       = Column(SAEnum(StudyHoursEnum), nullable=True)
-    coaching_status   = Column(SAEnum(CoachingStatusEnum), nullable=True)
-    career_clarity    = Column(SAEnum(CareerClarityEnum), nullable=True)
-    learning_style    = Column(SAEnum(LearningStyleEnum), nullable=True)
+    study_hours       = Column(SAEnum(StudyHoursEnum, values_callable=enum_values), nullable=True)
+    coaching_status   = Column(SAEnum(CoachingStatusEnum, values_callable=enum_values), nullable=True)
+    career_clarity    = Column(SAEnum(CareerClarityEnum, values_callable=enum_values), nullable=True)
+    learning_style    = Column(SAEnum(LearningStyleEnum, values_callable=enum_values, name="learningstylee"), nullable=True)
     extracurricular   = Column(Text, nullable=True)          # free text
 
     # ── Family context ────────────────────────────────────────────────────────
