@@ -1,4 +1,4 @@
-# Beacon-Career-Chatbot
+# Beacon-Career-Counselling-Platform
 A web-based career counselling platform with an AI chatbot that helps students across Science, Commerce, and Arts streams figure out what to do after school.
 
 ---
