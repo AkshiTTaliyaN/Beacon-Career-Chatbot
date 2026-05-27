@@ -6,6 +6,9 @@ import { getMyProfile } from "./api/client";
 import LoginScreen from "./screens/LoginScreen";
 import OTPScreen from "./screens/OTPScreen";
 import BasicInfoScreen from "./screens/BasicInfoScreen";
+import SubjectRatings from "./screens/SubjectRatings";
+import SubjectDeepDive from "./screens/SubjectDeepDive";
+import WorkStyle from "./screens/WorkStyle";
 import AcademicsScreen from "./screens/AcademicsScreen";
 import GoalsScreen from "./screens/GoalsScreen";
 import SuccessScreen from "./screens/SuccessScreen";
@@ -17,6 +20,9 @@ const STEP = {
   LOGIN: "login",
   OTP: "otp",
   BASIC: "basic",
+  SUBJECT_RATINGS: "subject_ratings",
+  SUBJECT_DEEP_DIVE: "subject_deep_dive",
+  WORK_STYLE: "work_style",
   ACADEMICS: "academics",
   GOALS: "goals",
   SUCCESS: "success",
@@ -98,9 +104,21 @@ export default function App() {
         <BasicInfoScreen
           form={form}
           setForm={setForm}
-          onNext={() => setStep(STEP.ACADEMICS)}
+          onNext={() => setStep(STEP.SUBJECT_RATINGS)}
           onBack={() => setStep(STEP.OTP)}
         />
+      );
+    case STEP.SUBJECT_RATINGS:
+      return (
+        <SubjectRatings form={form} setForm={setForm} onNext={() => setStep(STEP.SUBJECT_DEEP_DIVE)} onBack={() => setStep(STEP.BASIC)} />
+      );
+    case STEP.SUBJECT_DEEP_DIVE:
+      return (
+        <SubjectDeepDive form={form} setForm={setForm} onNext={() => setStep(STEP.WORK_STYLE)} onBack={() => setStep(STEP.SUBJECT_RATINGS)} />
+      );
+    case STEP.WORK_STYLE:
+      return (
+        <WorkStyle form={form} setForm={setForm} onNext={() => setStep(STEP.ACADEMICS)} onBack={() => setStep(STEP.SUBJECT_DEEP_DIVE)} />
       );
     case STEP.ACADEMICS:
       return (
@@ -108,7 +126,7 @@ export default function App() {
           form={form}
           setForm={setForm}
           onNext={() => setStep(STEP.GOALS)}
-          onBack={() => setStep(STEP.BASIC)}
+          onBack={() => setStep(STEP.WORK_STYLE)}
         />
       );
     case STEP.GOALS:

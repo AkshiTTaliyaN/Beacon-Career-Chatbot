@@ -42,8 +42,8 @@ export default function AcademicsScreen({ form, setForm, onNext, onBack }) {
 
   return (
     <Layout
-      step={3}
-      totalSteps={6}
+      step={6}
+      totalSteps={9}
       title="Academics & background"
       subtitle="Help us understand how you study and where you're headed. Family fields are optional."
     >

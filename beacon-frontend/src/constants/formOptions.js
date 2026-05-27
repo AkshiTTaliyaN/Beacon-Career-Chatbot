@@ -199,4 +199,10 @@ export const INITIAL_FORM = {
   relocation_pref: "",
   cost_constraint: "",
   additional_notes: "",
+  // New onboarding fields
+  subjectRatings: {},        // e.g. { mathematics: 4, physics: 3 }
+  subjectInterests: {},      // e.g. { mathematics: 'Calculus', physics: 'Mechanics' }
+  workStyle: {},             // sliders: building, researching, creative, helping, leading, structured
+  careerPriorities: [],      // array of 3 selected priorities
+  workPreferences: {},       // { soloTeam: 3, relocation: 'Yes' }
 };

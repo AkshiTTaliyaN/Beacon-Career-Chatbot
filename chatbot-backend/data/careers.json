@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Software Engineer",
+    "description": "A career in software engineering focuses on building applications, systems, and products using coding and software design.",
+    "stream": "PCM"
+  },
+  {
+    "name": "Doctor",
+    "description": "A medical career that involves treating patients, diagnosing illnesses, and working in hospitals or clinics.",
+    "stream": "PCB"
+  },
+  {
+    "name": "Lawyer",
+    "description": "A legal career that involves helping clients, arguing cases, and interpreting laws in courts or advisory roles.",
+    "stream": "Arts/Commerce"
+  }
+]

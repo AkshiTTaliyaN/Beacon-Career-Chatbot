@@ -39,8 +39,8 @@ export default function GoalsScreen({ form, setForm, onSuccess, onBack }) {
 
   return (
     <Layout
-      step={4}
-      totalSteps={6}
+      step={7}
+      totalSteps={9}
       title="Your goals"
       subtitle="Where you want to go — we use this to shape career paths."
     >

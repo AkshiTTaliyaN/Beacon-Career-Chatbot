@@ -9,8 +9,8 @@ import { DEMO_MODE } from "../config";
  *  - Header and card padding improved for website context
  */
 export default function Layout({ children, step, totalSteps, title, subtitle }) {
-  const showProgress = step >= 2 && step <= 4;
-  const progressPct = showProgress ? ((step - 1) / (totalSteps - 2)) * 100 : 0;
+  const showProgress = typeof step === 'number' && typeof totalSteps === 'number' && totalSteps > 1 && step >= 1;
+  const progressPct = showProgress ? (Number(step) / (Number(totalSteps) - 1)) * 100 : 0;
 
   return (
     <div className="layout">
@@ -36,7 +36,7 @@ export default function Layout({ children, step, totalSteps, title, subtitle }) 
                 <div className="progress-fill" style={{ width: `${progressPct}%` }} />
               </div>
               <p className="progress-label">
-                Step {step - 1} of 3 — Profile setup
+                Step {step} of {totalSteps - 1} — Profile setup
               </p>
             </div>
           )}

@@ -43,7 +43,7 @@ export default function BasicInfoScreen({ form, setForm, onNext, onBack }) {
   return (
     <Layout
       step={2}
-      totalSteps={6}
+      totalSteps={9}
       title="Basic information"
       subtitle="Let's start with your name and where you're studying."
     >

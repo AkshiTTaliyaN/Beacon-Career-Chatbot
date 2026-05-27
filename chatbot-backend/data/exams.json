@@ -1,0 +1,17 @@
+[
+  {
+    "name": "JEE Main",
+    "description": "National engineering entrance exam for admission to NITs, IIITs, and other engineering colleges.",
+    "stream": "PCM"
+  },
+  {
+    "name": "NEET",
+    "description": "National eligibility test for admission to medical and dental colleges.",
+    "stream": "PCB"
+  },
+  {
+    "name": "CLAT",
+    "description": "Common law admission test for undergraduate law programs.",
+    "stream": "Arts/Commerce"
+  }
+]

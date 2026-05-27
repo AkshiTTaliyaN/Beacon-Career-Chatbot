@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Indian Institute of Technology",
+    "type": "Engineering",
+    "location": "Multiple cities"
+  },
+  {
+    "name": "All India Institute of Medical Sciences",
+    "type": "Medical",
+    "location": "New Delhi"
+  },
+  {
+    "name": "National Law School of India University",
+    "type": "Law",
+    "location": "Bengaluru"
+  }
+]

@@ -28,7 +28,7 @@ export default function LoginScreen({ onSuccess }) {
   }
 
   return (
-    <Layout step={0} totalSteps={6} title="Sign in" subtitle="Enter your email to receive a one-time password.">
+    <Layout step={0} totalSteps={9} title="Sign in" subtitle="Enter your email to receive a one-time password.">
       <form onSubmit={handleSubmit} className="form">
         <label className="field">
           <span className="field-label">Email address</span>

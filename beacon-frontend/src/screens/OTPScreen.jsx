@@ -42,7 +42,7 @@ export default function OTPScreen({ email, onSuccess, onBack }) {
   return (
     <Layout
       step={1}
-      totalSteps={6}
+      totalSteps={9}
       title="Verify OTP"
       subtitle={
         DEMO_MODE
