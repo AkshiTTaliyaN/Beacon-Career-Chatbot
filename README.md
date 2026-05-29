@@ -145,6 +145,18 @@ Isolated services for offline testing of the decision tree algorithm.
 
 ---
 
+## Utility Scripts Reference
+
+| Command | Action |
+| :--- | :--- |
+| `npm run dev` | Spins up the central backend/frontend, psychometric backend/frontend, and sandbox frontend/backend |
+| `npm run setup` | Automatic setup script targeting virtual environments, pip packages, and npm dependencies |
+| `npm run install:all` | Performs a fresh reinstall of all platform dependencies |
+| `npm run dev:beacon-front` | Runs only the main portal frontend |
+| `npm run dev:beacon-back` | Runs only the main portal backend |
+
+---
+
 ## Project Structure
 
 ```text
@@ -161,18 +173,6 @@ code/
 ├── package.json          # Main portal npm launcher configurations
 └── README.md
 ```
-
----
-
-## Utility Scripts Reference
-
-| Command | Action |
-| :--- | :--- |
-| `npm run dev` | Spins up the central backend/frontend, psychometric backend/frontend, and sandbox frontend/backend |
-| `npm run setup` | Automatic setup script targeting virtual environments, pip packages, and npm dependencies |
-| `npm run install:all` | Performs a fresh reinstall of all platform dependencies |
-| `npm run dev:beacon-front` | Runs only the main portal frontend |
-| `npm run dev:beacon-back` | Runs only the main portal backend |
 
 ---
 
