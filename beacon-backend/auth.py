@@ -182,7 +182,7 @@ If you did not request this, ignore this email.
         return True
 
     except Exception as e:
-        print(f"❌ Email send failed: {e}")
+        print(f"[ERROR] Email send failed: {e}")
         return False
 
 

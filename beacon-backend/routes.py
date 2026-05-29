@@ -3,9 +3,14 @@ routes.py  — only the _profile_to_response helper needs to change.
 Everything else (auth_router, profile_router, rec_router) is identical
 to the original. Replace the entire file.
 """
+import json
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+from uuid import UUID, uuid4
+
 from fastapi import APIRouter, Depends, HTTPException, status
+from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
-from uuid import UUID
 
 from database import get_db
 from models import Student, StudentProfile, Recommendation
@@ -22,6 +27,274 @@ from auth import (
 )
 
 
+# ─── CHATBOT ────────────────────────────────────────────────────────────────
+
+CHAT_TREE_PATH = Path(__file__).resolve().parent.parent / "chatbot-backend" / "decision_tree.json"
+START_NODE_ID = "Q1"
+CHAT_SESSIONS: Dict[str, Dict[str, Any]] = {}
+
+
+class ChatOption(BaseModel):
+    letter: str
+    text: str
+    next: Optional[str] = None
+
+
+class ChatRequest(BaseModel):
+    session_id: str
+    choice: Optional[str] = None
+    message: Optional[str] = None
+
+
+class ChatResponse(BaseModel):
+    session_id: str
+    question_id: str
+    question: str
+    type: str
+    options: List[ChatOption] = Field(default_factory=list)
+    description: Optional[List[str]] = None
+    careers: Optional[List[Dict[str, Any]]] = None
+    exams: Optional[List[Dict[str, Any]]] = None
+    next_steps: Optional[List[str]] = None
+    timeline: Optional[str] = None
+    title: Optional[str] = None
+    handoff_message: Optional[str] = None
+    contact_options: Optional[List[Dict[str, str]]] = None
+    profile_summary: Optional[Dict[str, Any]] = None
+    skipped_profile_questions: List[str] = Field(default_factory=list)
+
+
+def _load_chat_tree() -> Dict[str, Dict[str, Any]]:
+    if not CHAT_TREE_PATH.exists():
+        raise RuntimeError(f"Chat decision tree not found at {CHAT_TREE_PATH}")
+    with CHAT_TREE_PATH.open("r", encoding="utf-8") as f:
+        items = json.load(f)
+    return {item["id"]: item for item in items}
+
+
+CHAT_TREE = _load_chat_tree()
+
+
+def _clean_text(value: Any) -> Any:
+    if isinstance(value, str):
+        replacements = {
+            "â€”": "-",
+            "â€“": "-",
+            "â€˜": "'",
+            "â€™": "'",
+            "â€œ": '"',
+            "â€": '"',
+            "â‚¹": "Rs ",
+            "ï¸": "",
+        }
+        for old, new in replacements.items():
+            value = value.replace(old, new)
+        return value
+    if isinstance(value, list):
+        return [_clean_text(item) for item in value]
+    if isinstance(value, dict):
+        return {key: _clean_text(item) for key, item in value.items()}
+    return value
+
+
+def _profile_summary(profile: StudentProfile) -> Dict[str, Any]:
+    return {
+        "name": profile.name,
+        "current_class": profile.current_class,
+        "stream": profile.stream.value if profile.stream else None,
+        "city": profile.city,
+        "state": profile.state,
+        "enjoyed_subjects": profile.enjoyed_subjects or [],
+        "study_hours": profile.study_hours.value if profile.study_hours else None,
+        "coaching_status": profile.coaching_status.value if profile.coaching_status else None,
+        "career_clarity": profile.career_clarity.value if profile.career_clarity else None,
+        "learning_style": profile.learning_style.value if profile.learning_style else None,
+        "target_sector": profile.target_sector.value if profile.target_sector else None,
+        "relocation_pref": profile.relocation_pref.value if profile.relocation_pref else None,
+        "cost_constraint": profile.cost_constraint.value if profile.cost_constraint else None,
+        "has_riasec_scores": bool(profile.riasec_scores),
+    }
+
+
+def _get_profile_for_student(student_id: str, db: Session) -> StudentProfile:
+    profile = db.query(StudentProfile).filter(
+        StudentProfile.student_id == UUID(student_id)
+    ).first()
+    if not profile:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Profile not found. Please complete onboarding before using chat."
+        )
+    return profile
+
+
+def _class_branch(profile: StudentProfile) -> str:
+    if profile.current_class in (8, 9):
+        return "Q3"
+    if profile.current_class == 10:
+        return "Q4" if not profile.stream or profile.stream.value == "none" else _stream_branch(profile, "career")
+    return _stream_branch(profile, "career")
+
+
+def _stream_branch(profile: StudentProfile, intent: str) -> str:
+    stream = profile.stream.value if profile.stream else None
+    if intent == "exam":
+        return {
+            "pcm": "Q11",
+            "pcmb": "Q11",
+            "pcb": "Q12",
+            "comm": "Q13",
+            "arts": "Q14",
+        }.get(stream, "Q4")
+    return {
+        "pcm": "Q6",
+        "pcmb": "Q6",
+        "pcb": "Q7B",
+        "comm": "Q8",
+        "arts": "Q7",
+    }.get(stream, "Q9")
+
+
+def _resolve_next_node(profile: StudentProfile, current_id: str, next_id: str) -> tuple[str, List[str]]:
+    skipped: List[str] = []
+
+    if next_id == "Q2" and profile.current_class:
+        skipped.append("current_class")
+        next_id = _class_branch(profile)
+
+    if next_id in {"Q5", "Q10"} and profile.stream and profile.stream.value != "none":
+        skipped.append("stream")
+        next_id = _stream_branch(profile, "exam" if next_id == "Q10" else "career")
+
+    if next_id == "Q25":
+        if profile.current_class:
+            skipped.append("current_class")
+        if profile.stream and profile.stream.value != "none":
+            skipped.append("stream")
+            next_id = _stream_branch(profile, "career")
+        elif profile.current_class:
+            next_id = _class_branch(profile)
+
+    if current_id == START_NODE_ID:
+        if next_id == "Q2":
+            if profile.current_class:
+                skipped.append("current_class")
+            if profile.stream and profile.stream.value != "none":
+                skipped.append("stream")
+            next_id = _class_branch(profile)
+        elif next_id == "Q10" and profile.stream and profile.stream.value != "none":
+            skipped.append("stream")
+            next_id = _stream_branch(profile, "exam")
+
+    if next_id not in CHAT_TREE:
+        raise HTTPException(status_code=400, detail=f"Next chat node '{next_id}' is not available")
+
+    return next_id, skipped
+
+
+def _personalized_start_node(profile: StudentProfile, session_id: str) -> Dict[str, Any]:
+    summary = _profile_summary(profile)
+    known_bits = []
+    if summary["current_class"]:
+        known_bits.append(f"Class {summary['current_class']}")
+    if summary["stream"] and summary["stream"] != "none":
+        known_bits.append(summary["stream"].upper())
+    if summary["enjoyed_subjects"]:
+        known_bits.append(", ".join(summary["enjoyed_subjects"][:3]))
+
+    name = f" {profile.name.strip()}" if profile.name else ""
+    if known_bits:
+        question = f"Hi{name}, I already have your {', '.join(known_bits)} details from onboarding. What would you like help with today?"
+    else:
+        question = f"Hi{name}, what would you like help with today?"
+
+    node = dict(CHAT_TREE[START_NODE_ID])
+    node["question"] = question
+    CHAT_SESSIONS[session_id] = {
+        "student_id": str(profile.student_id),
+        "current_node_id": START_NODE_ID,
+        "path_taken": [],
+        "profile_snapshot": summary,
+    }
+    return node
+
+
+def _node_response(
+    session_id: str,
+    node: Dict[str, Any],
+    profile: StudentProfile,
+    skipped: Optional[List[str]] = None,
+) -> Dict[str, Any]:
+    clean_node = _clean_text(node)
+    node_type = clean_node.get("type", "question")
+    return {
+        "session_id": session_id,
+        "question_id": clean_node["id"],
+        "question": clean_node.get("question") or clean_node.get("title") or "",
+        "type": node_type,
+        "options": clean_node.get("options", []),
+        "description": clean_node.get("description"),
+        "careers": clean_node.get("careers"),
+        "exams": clean_node.get("exams"),
+        "next_steps": clean_node.get("next_steps"),
+        "timeline": clean_node.get("timeline"),
+        "title": clean_node.get("title"),
+        "handoff_message": clean_node.get("message") if node_type == "handoff" else None,
+        "contact_options": clean_node.get("contact_options"),
+        "profile_summary": _profile_summary(profile),
+        "skipped_profile_questions": skipped or [],
+    }
+
+
+chat_router = APIRouter(prefix="/chat", tags=["Chat"])
+
+
+@chat_router.post("/start", response_model=ChatResponse)
+def start_chat(
+    student_id: str = Depends(get_current_student_id),
+    db: Session = Depends(get_db)
+):
+    profile = _get_profile_for_student(student_id, db)
+    session_id = str(uuid4())
+    node = _personalized_start_node(profile, session_id)
+    return _node_response(session_id, node, profile)
+
+
+@chat_router.post("", response_model=ChatResponse)
+def continue_chat(
+    body: ChatRequest,
+    student_id: str = Depends(get_current_student_id),
+    db: Session = Depends(get_db)
+):
+    profile = _get_profile_for_student(student_id, db)
+    session = CHAT_SESSIONS.get(body.session_id)
+    if not session or session.get("student_id") != student_id:
+        node = _personalized_start_node(profile, body.session_id)
+        return _node_response(body.session_id, node, profile)
+
+    current = CHAT_TREE.get(session["current_node_id"], CHAT_TREE[START_NODE_ID])
+    if current.get("type") != "question":
+        return _node_response(body.session_id, current, profile)
+
+    choice = (body.choice or "").strip().upper()
+    if not choice:
+        return _node_response(body.session_id, current, profile)
+
+    selected = next((opt for opt in current.get("options", []) if opt.get("letter") == choice), None)
+    if not selected:
+        raise HTTPException(status_code=400, detail=f"Invalid choice '{body.choice}' for question {current.get('id')}")
+
+    next_id, skipped = _resolve_next_node(profile, current["id"], selected["next"])
+    session["path_taken"].append({
+        "node_id": current["id"],
+        "choice": choice,
+        "choice_text": selected.get("text"),
+        "skipped_profile_questions": skipped,
+    })
+    session["current_node_id"] = next_id
+    return _node_response(body.session_id, CHAT_TREE[next_id], profile, skipped)
+
+
 # ─── AUTH ─────────────────────────────────────────────────────────────────────
 
 auth_router = APIRouter(prefix="/auth", tags=["Authentication"])
@@ -33,7 +306,7 @@ def request_otp(body: OTPRequest, db: Session = Depends(get_db)):
     store_otp(body.email, otp)
     sent = send_otp_email(body.email, otp)
     if not sent:
-        print(f"\n📧 DEV MODE — OTP for {body.email}: {otp}\n")
+        print(f"\n[DEV MODE] OTP for {body.email}: {otp}\n")
     return {"message": f"OTP sent to {body.email}"}
 
 

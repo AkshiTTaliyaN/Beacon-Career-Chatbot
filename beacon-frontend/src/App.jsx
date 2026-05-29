@@ -8,10 +8,12 @@ import OTPScreen from "./screens/OTPScreen";
 import BasicInfoScreen from "./screens/BasicInfoScreen";
 import SubjectRatings from "./screens/SubjectRatings";
 import SubjectDeepDive from "./screens/SubjectDeepDive";
-import WorkStyle from "./screens/WorkStyle";
 import AcademicsScreen from "./screens/AcademicsScreen";
+import WorkStyle from "./screens/WorkStyle";
 import GoalsScreen from "./screens/GoalsScreen";
 import SuccessScreen from "./screens/SuccessScreen";
+import Dashboard from "./screens/Dashboard";
+import ChatScreen from "./screens/ChatScreen";
 import ReportPage from "./screens/ReportPage";
 import CareerLibrary from "./screens/CareerLibrary";
 import ExamExplorer from "./screens/ExamExplorer";
@@ -22,22 +24,29 @@ const STEP = {
   BASIC: "basic",
   SUBJECT_RATINGS: "subject_ratings",
   SUBJECT_DEEP_DIVE: "subject_deep_dive",
-  WORK_STYLE: "work_style",
   ACADEMICS: "academics",
+  WORK_STYLE: "work_style",
   GOALS: "goals",
   SUCCESS: "success",
 };
 
 export default function App() {
-  const path = typeof window !== 'undefined' ? window.location.pathname : '/'
-  if (path === '/report') return <ReportPage />
-  if (path === '/careers') return <CareerLibrary />
-  if (path === '/exams') return <ExamExplorer />
   const [step, setStep] = useState(STEP.LOGIN);
   const [email, setEmail] = useState("");
   const [form, setForm] = useState(INITIAL_FORM);
   const [booting, setBooting] = useState(true);
+  const [path, setPath] = useState(window.location.pathname);
 
+  // Listen for URL changes (pushState + popstate from Dashboard navigation)
+  useEffect(() => {
+    function onPathChange() {
+      setPath(window.location.pathname);
+    }
+    window.addEventListener("popstate", onPathChange);
+    return () => window.removeEventListener("popstate", onPathChange);
+  }, []);
+
+  // Restore session on boot
   useEffect(() => {
     async function restoreSession() {
       if (DEMO_MODE) {
@@ -47,6 +56,10 @@ export default function App() {
       try {
         const profile = await getMyProfile();
         if (profile?.is_complete) {
+          // Store the user's name so Dashboard can show it
+          if (profile.name) {
+            localStorage.setItem("userName", profile.name);
+          }
           setStep(STEP.SUCCESS);
         }
       } catch {
@@ -58,6 +71,15 @@ export default function App() {
     restoreSession();
   }, []);
 
+  // ─── Path-based routing (takes priority over step-based flow) ───
+  if (path === "/dashboard") return <Dashboard userName={localStorage.getItem("userName") || ""} />;
+  if (path === "/chat") return <ChatScreen />;
+  if (path === "/report") return <ReportPage />;
+  if (path === "/careers") return <CareerLibrary />;
+  if (path === "/exams") return <ExamExplorer />;
+
+  // ─── Step-based onboarding flow ───
+
   function handleLoginSuccess(addr) {
     setEmail(addr);
     setStep(STEP.OTP);
@@ -65,17 +87,21 @@ export default function App() {
 
   function handleOtpSuccess(data) {
     if (data.profile_complete) {
+      if (data.name) localStorage.setItem("userName", data.name);
       setStep(STEP.SUCCESS);
     } else {
       setStep(STEP.BASIC);
     }
   }
 
-  function handleLaunchChatbot() {
-    // After onboarding completion, route user to the Dashboard page
-    window.history.pushState({}, '', '/dashboard');
-    // Trigger a navigation event so the app root can react if needed
-    window.dispatchEvent(new PopStateEvent('popstate'));
+  function handleProfileComplete() {
+    // Store the user's name for the dashboard greeting
+    if (form.name) {
+      localStorage.setItem("userName", form.name);
+    }
+    // Navigate to dashboard
+    window.history.pushState({}, "", "/dashboard");
+    setPath("/dashboard");
   }
 
   if (booting) {
@@ -86,6 +112,12 @@ export default function App() {
         </main>
       </div>
     );
+  }
+
+  // If session was restored and profile is complete, go to dashboard
+  if (step === STEP.SUCCESS) {
+    window.history.replaceState({}, "", "/dashboard");
+    return <Dashboard userName={localStorage.getItem("userName") || ""} />;
   }
 
   switch (step) {
@@ -110,23 +142,38 @@ export default function App() {
       );
     case STEP.SUBJECT_RATINGS:
       return (
-        <SubjectRatings form={form} setForm={setForm} onNext={() => setStep(STEP.SUBJECT_DEEP_DIVE)} onBack={() => setStep(STEP.BASIC)} />
+        <SubjectRatings
+          form={form}
+          setForm={setForm}
+          onNext={() => setStep(STEP.SUBJECT_DEEP_DIVE)}
+          onBack={() => setStep(STEP.BASIC)}
+        />
       );
     case STEP.SUBJECT_DEEP_DIVE:
       return (
-        <SubjectDeepDive form={form} setForm={setForm} onNext={() => setStep(STEP.WORK_STYLE)} onBack={() => setStep(STEP.SUBJECT_RATINGS)} />
-      );
-    case STEP.WORK_STYLE:
-      return (
-        <WorkStyle form={form} setForm={setForm} onNext={() => setStep(STEP.ACADEMICS)} onBack={() => setStep(STEP.SUBJECT_DEEP_DIVE)} />
+        <SubjectDeepDive
+          form={form}
+          setForm={setForm}
+          onNext={() => setStep(STEP.ACADEMICS)}
+          onBack={() => setStep(STEP.SUBJECT_RATINGS)}
+        />
       );
     case STEP.ACADEMICS:
       return (
         <AcademicsScreen
           form={form}
           setForm={setForm}
+          onNext={() => setStep(STEP.WORK_STYLE)}
+          onBack={() => setStep(STEP.SUBJECT_DEEP_DIVE)}
+        />
+      );
+    case STEP.WORK_STYLE:
+      return (
+        <WorkStyle
+          form={form}
+          setForm={setForm}
           onNext={() => setStep(STEP.GOALS)}
-          onBack={() => setStep(STEP.WORK_STYLE)}
+          onBack={() => setStep(STEP.ACADEMICS)}
         />
       );
     case STEP.GOALS:
@@ -134,12 +181,10 @@ export default function App() {
         <GoalsScreen
           form={form}
           setForm={setForm}
-          onSuccess={() => setStep(STEP.SUCCESS)}
-          onBack={() => setStep(STEP.ACADEMICS)}
+          onSuccess={handleProfileComplete}
+          onBack={() => setStep(STEP.WORK_STYLE)}
         />
       );
-    case STEP.SUCCESS:
-      return <SuccessScreen onLaunchChatbot={handleLaunchChatbot} />;
     default:
       return <LoginScreen onSuccess={handleLoginSuccess} />;
   }

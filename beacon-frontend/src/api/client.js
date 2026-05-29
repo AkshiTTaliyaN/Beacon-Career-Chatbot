@@ -106,6 +106,73 @@ export async function saveProfile(payload) {
   return res.json();
 }
 
+/** Start an authenticated chatbot session using the saved profile */
+export async function startChat() {
+  if (DEMO_MODE) {
+    return {
+      session_id: `demo-chat-${Date.now()}`,
+      question_id: "Q1",
+      question: "Hi, I already have your demo profile context. What would you like help with today?",
+      type: "question",
+      options: [
+        { letter: "A", text: "Career Guidance" },
+        { letter: "B", text: "Exam Selection" },
+        { letter: "C", text: "College Guidance" },
+        { letter: "D", text: "I don't know where to start" },
+      ],
+      profile_summary: {},
+      skipped_profile_questions: [],
+    };
+  }
+
+  const token = getToken();
+  if (!token) throw new Error("Not logged in. Please sign in again.");
+
+  const res = await fetch(`${API}/chat/start`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!res.ok) throw new Error(await parseError(res));
+  return res.json();
+}
+
+/** Continue an authenticated chatbot session */
+export async function sendChatChoice({ sessionId, choice, message }) {
+  if (DEMO_MODE) {
+    return {
+      session_id: sessionId,
+      question_id: "R_DEMO",
+      question: "For the live personalized recommendation, run the Beacon backend and turn demo mode off.",
+      type: "recommendation",
+      title: "Demo Chat",
+      description: ["The production chat will use your saved onboarding profile to skip repeated questions."],
+      careers: [],
+      exams: [],
+      next_steps: ["Start the backend", "Log in with OTP", "Open /chat again"],
+      profile_summary: {},
+      skipped_profile_questions: [],
+    };
+  }
+
+  const token = getToken();
+  if (!token) throw new Error("Not logged in. Please sign in again.");
+
+  const res = await fetch(`${API}/chat`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      session_id: sessionId,
+      choice,
+      message,
+    }),
+  });
+  if (!res.ok) throw new Error(await parseError(res));
+  return res.json();
+}
+
 export function clearSession() {
   localStorage.removeItem(STORAGE_KEYS.token);
   localStorage.removeItem(STORAGE_KEYS.email);

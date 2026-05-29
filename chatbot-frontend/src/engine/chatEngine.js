@@ -66,6 +66,17 @@ export function selectOption(sessionId = "default", letter) {
   if (!nextId) return null;
   state.currentNodeId = nextId;
   const nextNode = nodeMap.get(nextId);
+  if (!nextNode) {
+    // Node missing from the decision tree — return a graceful fallback
+    return normalizeNode({
+      id: nextId,
+      type: "recommendation",
+      title: "Pathway under construction",
+      question: "This career pathway is still being developed. Please try a different option or start over.",
+      options: [],
+      next_steps: ["Click 'Start Over' to explore other career paths"],
+    });
+  }
   return normalizeNode(nextNode);
 }
 

@@ -106,7 +106,7 @@ export default function Dashboard({ userName }) {
         title={heading}
         subtitle={'Explore careers, take the psychometric test, or chat with our AI counsellor'}
         primaryText={'Chat with AI'}
-        onPrimary={() => (window.location.hash = '#chat')}
+        onPrimary={() => { window.history.pushState({}, '', '/chat'); window.dispatchEvent(new PopStateEvent('popstate')) }}
         secondaryText={'Take Psychometric Test'}
         onSecondary={() => window.open('http://localhost:3001', '_blank')}
       />
@@ -157,7 +157,7 @@ export default function Dashboard({ userName }) {
               cursor: 'pointer',
               boxShadow: '0 4px 12px rgba(7,20,58,0.15)'
             }}
-            onClick={() => (window.location.hash = '#chat')}
+            onClick={() => { window.history.pushState({}, '', '/chat'); window.dispatchEvent(new PopStateEvent('popstate')) }}
           >
             Start Chatting
           </button>
@@ -434,7 +434,7 @@ export default function Dashboard({ userName }) {
                 >
                   Psychometric Test
                 </button>
-                <a onClick={() => { window.history.pushState({}, '', '/#chat'); window.dispatchEvent(new PopStateEvent('popstate')) }} style={{ color: '#fff', opacity: 0.95, cursor: 'pointer' }}>Chat with AI</a>
+                <a onClick={() => { window.history.pushState({}, '', '/chat'); window.dispatchEvent(new PopStateEvent('popstate')) }} style={{ color: '#fff', opacity: 0.95, cursor: 'pointer' }}>Chat with AI</a>
                 <a onClick={() => { window.history.pushState({}, '', '/report'); window.dispatchEvent(new PopStateEvent('popstate')) }} style={{ color: '#fff', opacity: 0.95, cursor: 'pointer' }}>Download Report</a>
               </div>
             </div>

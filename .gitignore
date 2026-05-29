@@ -75,8 +75,16 @@ Desktop.ini
 # Cursor (optional local state)
 .cursor/
 
+# Gemini / Antigravity local state
+.gemini/
+
+# ─── Diagnostic / one-off scripts ─────────────────────────────────────────
+check_postgres.py
+check_setup.py
+
 # ─── Misc ─────────────────────────────────────────────────────────────────
 *.bak
 *.tmp
 *.temp
 ~$*
+*.code-workspace
