@@ -24,11 +24,11 @@ This detailed data populates the student profile, customizing their dashboard an
 
 ## Features
 
-* 🎯 **Knowledge-Based Career Chatbot** - Integrated directly under the `/chat` route in the portal, offering bulletproof, context-aware career paths, exam explorer links, and counsel handoffs.
-* 📊 **Dynamic Student Dashboard** - Welcomes recurring users by name, summarizes their career choices, and provides one-click navigation to the Chatbot and the Psychometric Test.
-* 🧠 **RIASEC Psychometric Test** - A dedicated psychometric microservice that maps RIASEC codes (Realistic, Investigative, Artistic, Social, Enterprising, Conventional) to direct career options.
-* 📚 **Comprehensive Stream Coverage** - Tailored pathways for Science (PCM/PCB), Commerce, and Humanities.
-* 📋 **Professional PDF Reports** - Dynamically generates beautiful, downloadable career summaries that students can share with parents and teachers.
+* **Knowledge-Based Career Chatbot** - Integrated directly under the `/chat` route in the portal, offering bulletproof, context-aware career paths, exam explorer links, and counsel handoffs.
+* **Dynamic Student Dashboard** - Welcomes recurring users by name, summarizes their career choices, and provides one-click navigation to the Chatbot and the Psychometric Test.
+* **RIASEC Psychometric Test** - A dedicated psychometric microservice that maps RIASEC codes (Realistic, Investigative, Artistic, Social, Enterprising, Conventional) to direct career options.
+* **Comprehensive Stream Coverage** - Tailored pathways for Science (PCM/PCB), Commerce, and Humanities.
+* **Professional PDF Reports** - Dynamically generates beautiful, downloadable career summaries that students can share with parents and teachers.
 
 ---
 
