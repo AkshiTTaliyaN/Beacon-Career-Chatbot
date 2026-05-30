@@ -154,17 +154,8 @@ export default function App() {
         <SubjectDeepDive
           form={form}
           setForm={setForm}
-          onNext={() => setStep(STEP.ACADEMICS)}
-          onBack={() => setStep(STEP.SUBJECT_RATINGS)}
-        />
-      );
-    case STEP.ACADEMICS:
-      return (
-        <AcademicsScreen
-          form={form}
-          setForm={setForm}
           onNext={() => setStep(STEP.WORK_STYLE)}
-          onBack={() => setStep(STEP.SUBJECT_DEEP_DIVE)}
+          onBack={() => setStep(STEP.SUBJECT_RATINGS)}
         />
       );
     case STEP.WORK_STYLE:
@@ -172,8 +163,17 @@ export default function App() {
         <WorkStyle
           form={form}
           setForm={setForm}
+          onNext={() => setStep(STEP.ACADEMICS)}
+          onBack={() => setStep(STEP.SUBJECT_DEEP_DIVE)}
+        />
+      );
+    case STEP.ACADEMICS:
+      return (
+        <AcademicsScreen
+          form={form}
+          setForm={setForm}
           onNext={() => setStep(STEP.GOALS)}
-          onBack={() => setStep(STEP.ACADEMICS)}
+          onBack={() => setStep(STEP.WORK_STYLE)}
         />
       );
     case STEP.GOALS:

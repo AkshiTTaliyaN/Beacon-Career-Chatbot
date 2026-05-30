@@ -88,8 +88,10 @@ export default function SubjectDeepDive({ form, setForm, onNext, onBack }) {
     e.preventDefault();
     const nextErrors = {};
     visibleKeys.forEach(k => {
-      if (!form.subjectInterests?.[k]) {
-        nextErrors[k] = `Please pick an area within ${getLabel(k)}`;
+      const val = form.subjectInterests?.[k];
+      // "none" = valid (student not interested), empty = invalid
+      if (!val) {
+        nextErrors[k] = `Please pick an area or select "Not interested" for ${getLabel(k)}`;
       }
     });
     setErrors(nextErrors);
@@ -189,10 +191,16 @@ export default function SubjectDeepDive({ form, setForm, onNext, onBack }) {
                   }}
                 >
                   <option value="">Select an area…</option>
+                  <option value="none">🚫 None / Not interested in this subject</option>
                   {opts.map(o => (
                     <option key={o} value={o}>{o}</option>
                   ))}
                 </select>
+                {selected === "none" && (
+                  <p style={{ margin: "4px 0 0", fontSize: "0.78rem", color: "#6b7280", fontStyle: "italic" }}>
+                    That's okay — we'll focus your recommendations on other subjects.
+                  </p>
+                )}
                 {errors[key] && (
                   <p style={{ margin: "4px 0 0", fontSize: "0.8rem", color: "#ef4444" }}>
                     {errors[key]}

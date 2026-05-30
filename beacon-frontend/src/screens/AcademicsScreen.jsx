@@ -20,16 +20,16 @@ export default function AcademicsScreen({ form, setForm, onNext, onBack }) {
     setForm((prev) => ({ ...prev, [field]: value }));
   }
 
-  /** Toggle a subject in the enjoyed_subjects multi-select array */
+  /** Toggle a subject in the enjoyed_subjects multi-select array (max 4) */
+  const MAX_ENJOYED = 4;
   function toggleEnjoyedSubject(subject) {
     setForm((prev) => {
       const current = prev.enjoyed_subjects || [];
-      return {
-        ...prev,
-        enjoyed_subjects: current.includes(subject)
-          ? current.filter((s) => s !== subject)
-          : [...current, subject],
-      };
+      if (current.includes(subject)) {
+        return { ...prev, enjoyed_subjects: current.filter((s) => s !== subject) };
+      }
+      if (current.length >= MAX_ENJOYED) return prev; // silently ignore beyond cap
+      return { ...prev, enjoyed_subjects: [...current, subject] };
     });
   }
 
@@ -95,25 +95,39 @@ export default function AcademicsScreen({ form, setForm, onNext, onBack }) {
           )}
         </label>
 
-        {/* ── A: Subjects enjoyed (multi-select pills) ── */}
         <fieldset className="fieldset">
           <legend className="field-label">
             Subjects you genuinely enjoy{" "}
-            <span className="optional">(select all that apply)</span>
+            <span className="optional">(choose up to {MAX_ENJOYED})</span>
           </legend>
-          <div className="pill-row" style={{ marginTop: "0.5rem" }}>
-            {SUBJECTS.map((s) => (
-              <button
-                key={s}
-                type="button"
-                className={`pill ${
-                  (form.enjoyed_subjects || []).includes(s) ? "selected" : ""
-                }`}
-                onClick={() => toggleEnjoyedSubject(s)}
-              >
-                {s}
-              </button>
-            ))}
+          {/* Count indicator */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: "0.4rem", marginBottom: "0.5rem" }}>
+            <span style={{ fontSize: "0.8rem", color: (form.enjoyed_subjects || []).length >= MAX_ENJOYED ? "#2d5be3" : "#6b7280", fontWeight: 600 }}>
+              {(form.enjoyed_subjects || []).length} / {MAX_ENJOYED} selected
+            </span>
+            {(form.enjoyed_subjects || []).length >= MAX_ENJOYED && (
+              <span style={{ fontSize: "0.76rem", color: "#2d5be3", fontWeight: 600, background: "#e8eeff", padding: "2px 8px", borderRadius: 999 }}>
+                ✓ Limit reached
+              </span>
+            )}
+          </div>
+          <div className="pill-row">
+            {SUBJECTS.map((s) => {
+              const isSelected = (form.enjoyed_subjects || []).includes(s);
+              const atLimit = (form.enjoyed_subjects || []).length >= MAX_ENJOYED;
+              return (
+                <button
+                  key={s}
+                  type="button"
+                  className={`pill ${isSelected ? "selected" : ""}`}
+                  onClick={() => toggleEnjoyedSubject(s)}
+                  disabled={!isSelected && atLimit}
+                  style={{ opacity: !isSelected && atLimit ? 0.38 : 1, cursor: !isSelected && atLimit ? "not-allowed" : "pointer" }}
+                >
+                  {s}
+                </button>
+              );
+            })}
           </div>
         </fieldset>
 
