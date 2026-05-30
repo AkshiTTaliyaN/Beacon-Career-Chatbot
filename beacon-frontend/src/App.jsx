@@ -11,7 +11,6 @@ import SubjectDeepDive from "./screens/SubjectDeepDive";
 import AcademicsScreen from "./screens/AcademicsScreen";
 import WorkStyle from "./screens/WorkStyle";
 import GoalsScreen from "./screens/GoalsScreen";
-import SuccessScreen from "./screens/SuccessScreen";
 import Dashboard from "./screens/Dashboard";
 import ChatScreen from "./screens/ChatScreen";
 import ReportPage from "./screens/ReportPage";
@@ -60,6 +59,8 @@ export default function App() {
           if (profile.name) {
             localStorage.setItem("userName", profile.name);
           }
+          // Mark as returning — they already completed onboarding before
+          localStorage.setItem("beaconReturning", "1");
           setStep(STEP.SUCCESS);
         }
       } catch {
@@ -88,8 +89,12 @@ export default function App() {
   function handleOtpSuccess(data) {
     if (data.profile_complete) {
       if (data.name) localStorage.setItem("userName", data.name);
+      // They already completed onboarding before → mark as returning
+      localStorage.setItem("beaconReturning", "1");
       setStep(STEP.SUCCESS);
     } else {
+      // Fresh user starting onboarding — clear any stale returning flag
+      localStorage.removeItem("beaconReturning");
       setStep(STEP.BASIC);
     }
   }
@@ -99,6 +104,8 @@ export default function App() {
     if (form.name) {
       localStorage.setItem("userName", form.name);
     }
+    // Do NOT set beaconReturning here — this is a brand-new user
+    // finishing onboarding for the first time.
     // Navigate to dashboard
     window.history.pushState({}, "", "/dashboard");
     setPath("/dashboard");

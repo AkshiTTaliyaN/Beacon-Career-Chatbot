@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { sendChatChoice, startChat } from "../api/client";
 import "./ChatScreen.css";
 
@@ -163,7 +163,7 @@ export default function ChatScreen() {
   const [error, setError] = useState("");
   const messagesEndRef = useRef(null);
 
-  async function bootChat() {
+  const bootChat = useCallback(async () => {
     setLoading(true);
     setError("");
     setMessages([]);
@@ -179,11 +179,11 @@ export default function ChatScreen() {
     } finally {
       setLoading(false);
     }
-  }
+  }, []);
 
   useEffect(() => {
     bootChat();
-  }, []);
+  }, [bootChat]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });

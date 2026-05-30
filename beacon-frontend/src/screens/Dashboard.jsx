@@ -40,6 +40,7 @@ const styles = {
 export default function Dashboard({ userName }) {
   const [name, setName] = useState(userName || '')
   const [navScrolled, setNavScrolled] = useState(false)
+  const [isReturning, setIsReturning] = useState(false)
 
   useEffect(() => {
     if (!userName) {
@@ -47,6 +48,11 @@ export default function Dashboard({ userName }) {
       if (stored) setName(stored)
     }
   }, [userName])
+
+  useEffect(() => {
+    // Only show "Welcome back" if they have visited before (flag set on login)
+    setIsReturning(window.localStorage.getItem('beaconReturning') === '1')
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => setNavScrolled(window.scrollY > 8)
@@ -73,8 +79,19 @@ export default function Dashboard({ userName }) {
     }
   }, [])
 
-  const isReturning = Boolean(name && name.trim())
-  const heading = isReturning ? `Welcome back, ${name}` : 'Your career journey starts here'
+  const firstName = name ? name.trim().split(' ')[0] : ''
+
+  let heading, heroSubtitle
+  if (isReturning && firstName) {
+    heading = `Welcome back, ${firstName}! 👋`
+    heroSubtitle = 'Ready to continue your career journey? Pick up where you left off.'
+  } else if (firstName) {
+    heading = `Hello, ${firstName}! 🎉`
+    heroSubtitle = "Your profile is set up — let's find the perfect career path for you."
+  } else {
+    heading = 'Your career journey starts here'
+    heroSubtitle = 'Explore careers, take the psychometric test, or chat with our AI counsellor'
+  }
 
   return (
     <div style={styles.root}>
@@ -104,7 +121,7 @@ export default function Dashboard({ userName }) {
 
       <HeroSection
         title={heading}
-        subtitle={'Explore careers, take the psychometric test, or chat with our AI counsellor'}
+        subtitle={heroSubtitle}
         primaryText={'Chat with AI'}
         onPrimary={() => { window.history.pushState({}, '', '/chat'); window.dispatchEvent(new PopStateEvent('popstate')) }}
         secondaryText={'Take Psychometric Test'}
