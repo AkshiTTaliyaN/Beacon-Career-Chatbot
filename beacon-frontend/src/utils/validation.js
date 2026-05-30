@@ -24,7 +24,7 @@ export function validateName(form) {
 export function validateBasicInfo(form) {
   const errors = {};
   const cls = Number(form.current_class);
-  if (![8, 9, 10, 11, 12].includes(cls)) errors.current_class = "Select your class";
+  if (![9, 10, 11, 12].includes(cls)) errors.current_class = "Select your class";
   if (!form.board) errors.board = "Select your board";
   if (cls >= 10 && !form.stream) errors.stream = "Select your stream";
   if (!form.city?.trim()) errors.city = "Enter your city";
@@ -82,7 +82,7 @@ export function validateGoals(form) {
 
 export function buildProfilePayload(form) {
   const cls = Number(form.current_class);
-  if (![8, 9, 10, 11, 12].includes(cls)) {
+  if (![9, 10, 11, 12].includes(cls)) {
     throw new Error("Select a valid class before submitting.");
   }
 

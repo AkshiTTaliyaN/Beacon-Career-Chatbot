@@ -1,6 +1,6 @@
 /** UI labels map to backend enum values in models.py / schemas.py */
 
-export const CLASSES = [8, 9, 10, 11, 12];
+export const CLASSES = [9, 10, 11, 12];
 
 export const BOARDS = [
   { label: "CBSE", value: "CBSE" },
