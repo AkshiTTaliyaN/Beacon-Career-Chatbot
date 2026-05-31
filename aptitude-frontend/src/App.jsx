@@ -20,29 +20,6 @@ export default function App() {
         body: JSON.stringify(data),
       });
       const json = await res.json();
-
-      if (json.scores && Array.isArray(json.scores)) {
-        const realisticScore = json.scores.find((item) => item.code === 'R')?.score ?? 0;
-        const investigativeScore = json.scores.find((item) => item.code === 'I')?.score ?? 0;
-        const artisticScore = json.scores.find((item) => item.code === 'A')?.score ?? 0;
-        const socialScore = json.scores.find((item) => item.code === 'S')?.score ?? 0;
-        const enterprisingScore = json.scores.find((item) => item.code === 'E')?.score ?? 0;
-        const conventionalScore = json.scores.find((item) => item.code === 'C')?.score ?? 0;
-
-        const scores = {
-          R: realisticScore,
-          I: investigativeScore,
-          A: artisticScore,
-          S: socialScore,
-          E: enterprisingScore,
-          C: conventionalScore,
-        };
-
-        const params = new URLSearchParams(scores);
-        window.location.href = `http://localhost:5173/report?${params.toString()}`;
-        return;
-      }
-
       setResult(json);
       setPage("result");
     } catch (err) {
