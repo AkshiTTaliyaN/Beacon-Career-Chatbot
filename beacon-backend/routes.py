@@ -4,6 +4,7 @@ Everything else (auth_router, profile_router, rec_router) is identical
 to the original. Replace the entire file.
 """
 import json
+import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 from uuid import UUID, uuid4
@@ -25,6 +26,7 @@ from auth import (
     generate_otp, store_otp, verify_otp, send_otp_email,
     create_access_token, get_current_student_id
 )
+from career_scorer import score_careers
 
 
 # ─── CHATBOT ────────────────────────────────────────────────────────────────
@@ -430,6 +432,89 @@ def update_profile(
 
 rec_router = APIRouter(prefix="/recommendations", tags=["Recommendations"])
 
+CACHE_TTL_HOURS = 24
+
+
+@rec_router.get("/smart")
+def get_smart_recommendations(
+    student_id: str = Depends(get_current_student_id),
+    db: Session = Depends(get_db)
+):
+    """Unified 5-signal career recommendation engine. Returns top 5 careers."""
+    student_uuid = UUID(student_id)
+
+    # 1 — load profile
+    profile = db.query(StudentProfile).filter(
+        StudentProfile.student_id == student_uuid
+    ).first()
+
+    if not profile:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Profile not found. Please complete onboarding."
+        )
+
+    # 2 — gate: RIASEC scores required
+    if not profile.riasec_scores:
+        raise HTTPException(
+            status_code=428,  # Precondition Required
+            detail="riasec_required"
+        )
+
+    # 3 — check 24h cache in Recommendation.full_output
+    cached = db.query(Recommendation).filter(
+        Recommendation.student_id == student_uuid
+    ).order_by(Recommendation.generated_at.desc()).first()
+
+    if cached and cached.full_output:
+        fo = cached.full_output
+        if fo.get("type") == "smart_v1":
+            generated_at_str = fo.get("smart_generated_at", "")
+            if generated_at_str:
+                generated_at = datetime.datetime.fromisoformat(generated_at_str)
+                age_hours = (datetime.datetime.utcnow() - generated_at).total_seconds() / 3600
+                if age_hours < CACHE_TTL_HOURS:
+                    return fo
+
+    # 4 — run scoring engine
+    recommendations = score_careers(profile)
+
+    # 5 — build response payload
+    now_iso = datetime.datetime.utcnow().isoformat()
+    payload = {
+        "type": "smart_v1",
+        "recommendations": recommendations,
+        "generated_at": now_iso,
+        "smart_generated_at": now_iso,
+        "based_on": {
+            "riasec_taken": bool(profile.riasec_scores),
+            "subject_ratings_present": bool(profile.subject_ratings),
+            "work_style_present": bool(profile.work_style),
+            "priorities_present": bool(profile.career_priorities),
+            "profile_complete": bool(profile.is_complete),
+        },
+    }
+
+    # 6 — cache: upsert into recommendations table
+    if cached:
+        cached.full_output = payload
+        cached.career_path_1 = recommendations[0]["title"] if len(recommendations) > 0 else None
+        cached.career_path_2 = recommendations[1]["title"] if len(recommendations) > 1 else None
+        cached.career_path_3 = recommendations[2]["title"] if len(recommendations) > 2 else None
+        db.commit()
+    else:
+        rec = Recommendation(
+            student_id=student_uuid,
+            career_path_1=recommendations[0]["title"] if len(recommendations) > 0 else None,
+            career_path_2=recommendations[1]["title"] if len(recommendations) > 1 else None,
+            career_path_3=recommendations[2]["title"] if len(recommendations) > 2 else None,
+            full_output=payload,
+        )
+        db.add(rec)
+        db.commit()
+
+    return payload
+
 
 @rec_router.post("/save", response_model=RecommendationResponse)
 def save_recommendation(
@@ -530,4 +615,7 @@ def _profile_to_response(profile: StudentProfile, student_id: str) -> dict:
         "updated_at": profile.updated_at,
         "riasec_scores": profile.riasec_scores,
         "interests_summary": profile.interests_summary,
+        "subject_ratings": profile.subject_ratings,
+        "work_style": profile.work_style,
+        "career_priorities": profile.career_priorities,
     }

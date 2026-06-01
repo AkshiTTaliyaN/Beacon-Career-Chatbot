@@ -1,205 +1,279 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 
-const COLORS = {
-  navy: '#07143a',
-  white: '#ffffff',
-  muted: '#374151',
-  accent: '#2563EB',
-  lightGray: '#f7f9fb'
+
+const BEACON_API = 'http://localhost:8000';
+
+const RIASEC_COLORS = {
+  Investigative: '#3b82f6',
+  Realistic: '#ef4444',
+  Conventional: '#22c55e',
+  Enterprising: '#f97316',
+  Artistic: '#8b5cf6',
+  Social: '#14b8a6',
+};
+
+const RIASEC_FULL = {
+  R: 'Realistic', I: 'Investigative', A: 'Artistic',
+  S: 'Social', E: 'Enterprising', C: 'Conventional',
+};
+
+const PERSONALITY_DESCS = {
+  Investigative: 'Investigative individuals are analytical, curious, and enjoy research and problem solving. You prefer working with ideas and data rather than routine tasks, and you are motivated by understanding how systems work.',
+  Realistic: 'Realistic individuals are practical, hands-on, and mechanically inclined. You enjoy working with tools, machines, and physical systems and prefer concrete tasks over abstract ones.',
+  Artistic: 'Artistic individuals are creative, expressive, and imaginative. You thrive when given freedom to communicate ideas through design, writing, music, or performance.',
+  Social: 'Social individuals are empathetic, collaborative, and people-oriented. You are motivated by helping, teaching, and connecting with others.',
+  Enterprising: 'Enterprising individuals are ambitious, persuasive, and natural leaders. You are drawn to challenges involving influence, initiative, and building things.',
+  Conventional: 'Conventional individuals are detail-oriented, organised, and methodical. You thrive in structured environments where accuracy and systems matter.',
+};
+
+function getToken() {
+  return localStorage.getItem('beacon_token');
 }
-
-// Default hardcoded report (used when no route/localStorage data available)
-const DEFAULT_REPORT = {
-  studentName: 'Aryan Sharma',
-  class: 'Class 11',
-  stream: 'PCM',
-  date: new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' }),
-  topType: 'Investigative',
-  secondaryType: 'Realistic',
-  scores: {
-    Realistic: 72,
-    Investigative: 89,
-    Artistic: 45,
-    Social: 38,
-    Enterprising: 55,
-    Conventional: 61
-  }
-}
-
-const CAREERS = [
-  {
-    name: 'Data Scientist',
-    why: 'Your analytical nature and love for problem solving makes this a strong fit. You will enjoy finding patterns in data and building models.',
-    stream: 'PCM',
-    salary: '₹8 - 25 LPA'
-  },
-  {
-    name: 'Research Scientist',
-    why: 'Your curiosity and investigative personality aligns perfectly with research work in labs or institutions.',
-    stream: 'PCM/PCB',
-    salary: '₹6 - 18 LPA'
-  },
-  {
-    name: 'Software Engineer',
-    why: 'Investigative types excel at debugging, system design, and building logical solutions to complex problems.',
-    stream: 'PCM',
-    salary: '₹7 - 30 LPA'
-  }
-]
-
-const EXAMS = [
-  { exam: 'JEE Main', leadsTo: 'NITs and IIITs for engineering' },
-  { exam: 'JEE Advanced', leadsTo: 'IITs' },
-  { exam: 'IISER Aptitude Test', leadsTo: 'Research-focused BSc / MSc programs' },
-  { exam: 'BITSAT', leadsTo: 'BITS Pilani' }
-]
-
-const SKILLS = [
-  { title: 'Python programming', tip: 'Start with an NPTEL or Coursera beginner course and build small projects.' },
-  { title: 'Mathematics', tip: 'Strengthen calculus and statistics; focus on Class 12 topics and problem solving.' },
-  { title: 'Logical reasoning', tip: 'Practice previous year JEE problems and timed reasoning tests.' },
-  { title: 'Data analysis basics', tip: 'Try Google Sheets or Excel projects with real datasets.' },
-  { title: 'Scientific reading', tip: 'Read one article per week on ArXiv, ScienceDaily, or popular science outlets.' }
-]
 
 function Bar({ label, value, color }) {
-  const pct = Math.max(0, Math.min(100, value))
+  const pct = Math.max(0, Math.min(100, value));
   return (
-    <div style={{ marginBottom: 12 }}>
+    <div style={{ marginBottom: 14 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
-        <div style={{ color: COLORS.navy, fontWeight: 700 }}>{label}</div>
-        <div style={{ color: COLORS.muted }}>{pct}%</div>
+        <span style={{ color: '#07143a', fontWeight: 700, fontSize: '0.95rem' }}>{label}</span>
+        <span style={{ color: '#374151', fontWeight: 600 }}>{pct}%</span>
       </div>
-      <div style={{ background: '#e6eef9', borderRadius: 6, height: 14, overflow: 'hidden' }}>
-        <div style={{ width: `${pct}%`, height: '100%', background: color || COLORS.accent, borderRadius: 6 }} />
+      <div style={{ background: '#e6eef9', borderRadius: 8, height: 12, overflow: 'hidden' }}>
+        <div
+          style={{
+            width: `${pct}%`,
+            height: '100%',
+            background: color || '#2563EB',
+            borderRadius: 8,
+            transition: 'width 0.8s ease',
+          }}
+        />
       </div>
     </div>
-  )
+  );
 }
 
 export default function ReportPage() {
-  // Read report data from localStorage if available
-  let report = DEFAULT_REPORT
-  try {
-    if (typeof window !== 'undefined') {
-      const raw = window.localStorage.getItem('careerReport')
-      if (raw) {
-        const parsed = JSON.parse(raw)
-        report = { ...report, ...parsed }
-        // Ensure scores present
-        report.scores = { ...DEFAULT_REPORT.scores, ...(parsed.scores || {}) }
-      }
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [scores, setScores] = useState(null);  // from URL or profile
+
+  // ── 1. Read URL params (from aptitude redirect, now legacy) ──────────────
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlScores = {};
+  ['R', 'I', 'A', 'S', 'E', 'C'].forEach(k => {
+    const v = urlParams.get(k);
+    if (v !== null) urlScores[k] = Number(v);
+  });
+  const hasUrlScores = Object.keys(urlScores).length === 6;
+
+  // ── 2. On mount: load profile & set scores ───────────────────────────────
+  useEffect(() => {
+    async function load() {
+      const token = getToken();
+      if (!token) { setLoading(false); return; }
+      try {
+        const res = await fetch(`${BEACON_API}/profile/me`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setProfile(data);
+          // Priority: URL params > profile scores
+          if (hasUrlScores) {
+            setScores(urlScores);
+          } else if (data.riasec_scores) {
+            setScores(data.riasec_scores);
+          }
+        }
+      } catch { /* ignore */ }
+      finally { setLoading(false); }
     }
-  } catch (e) {
-    // ignore
+    load();
+  }, []);
+
+  // ── UI helpers ────────────────────────────────────────────────────────────
+  const NAVY = '#07143a';
+
+  if (loading) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Inter, system-ui, sans-serif' }}>
+        <p style={{ color: '#6b7280' }}>Loading your report…</p>
+      </div>
+    );
   }
 
-  const handlePrint = () => window.print()
+  // Derive personality info from scores
+  let sortedScores = [];
+  let primaryCode = 'I', secondaryCode = 'R';
+  let primaryName = 'Investigative', secondaryName = 'Realistic';
+
+  if (scores && Object.keys(scores).length >= 2) {
+    sortedScores = Object.entries(scores)
+      .map(([code, val]) => ({ code, name: RIASEC_FULL[code] || code, value: Number(val) }))
+      .sort((a, b) => b.value - a.value);
+    primaryCode = sortedScores[0]?.code || 'I';
+    secondaryCode = sortedScores[1]?.code || 'R';
+    primaryName = RIASEC_FULL[primaryCode] || primaryCode;
+    secondaryName = RIASEC_FULL[secondaryCode] || secondaryCode;
+  }
+
+  const studentName = profile?.name || localStorage.getItem('userName') || 'Student';
+  const streamDisplay = {
+    pcm: 'PCM', pcb: 'PCB', pcmb: 'PCM/PCB', comm: 'Commerce', arts: 'Arts', none: 'Not decided',
+  }[profile?.stream || ''] || '';
+
+  const hasScores = sortedScores.length >= 2;
+  const primaryColor = RIASEC_COLORS[primaryName] || '#2563EB';
 
   return (
-    <div style={{ background: COLORS.white, color: '#111827', minHeight: '100vh', fontFamily: 'Inter, system-ui, -apple-system, Roboto, sans-serif' }}>
-      {/* Top header strip */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 2rem', background: COLORS.navy, color: COLORS.white }}>
-        <div style={{ fontWeight: 800, fontSize: 18 }}>Beacon</div>
+    <div style={{ background: '#fff', color: '#111827', minHeight: '100vh', fontFamily: 'Inter, system-ui, -apple-system, Roboto, sans-serif' }}>
+
+      {/* Header */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 2rem', background: NAVY, color: '#fff' }}>
+        <div style={{ fontWeight: 800, fontSize: 18, cursor: 'pointer' }}
+          onClick={() => { window.history.pushState({}, '', '/dashboard'); window.dispatchEvent(new PopStateEvent('popstate')); }}>
+          Beacon
+        </div>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: 18, fontWeight: 800 }}>Beacon Personality & Career Report</div>
-          <div style={{ marginTop: 6 }}>{report.studentName} • {report.class} • {report.stream}</div>
-          <div style={{ marginTop: 4, fontSize: 13, opacity: 0.9 }}>{report.date}</div>
+          <div style={{ fontSize: 18, fontWeight: 800 }}>Beacon Personality &amp; Career Report</div>
+          <div style={{ marginTop: 6, opacity: 0.9 }}>
+            {studentName}{streamDisplay ? ` • ${streamDisplay}` : ''}
+          </div>
+          <div style={{ marginTop: 4, fontSize: 13, opacity: 0.75 }}>
+            {new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </div>
         </div>
         <div>
-          <button onClick={handlePrint} style={{ background: COLORS.white, color: COLORS.navy, border: 'none', padding: '0.5rem 0.9rem', borderRadius: 8, fontWeight: 700, cursor: 'pointer' }}>⬇ Download PDF</button>
+          <button
+            onClick={() => window.print()}
+            style={{ background: '#fff', color: NAVY, border: 'none', padding: '0.5rem 0.9rem', borderRadius: 8, fontWeight: 700, cursor: 'pointer' }}
+          >
+            ⬇ Download PDF
+          </button>
         </div>
       </div>
 
       <div style={{ maxWidth: 900, margin: '2rem auto', padding: '0 1rem' }}>
-        {/* Personality section */}
-        <section style={{ marginBottom: 24 }}>
-          <h2 style={{ color: COLORS.navy, margin: '0 0 8px 0' }}>Personality Overview</h2>
 
-          <div style={{ display: 'flex', gap: 20, alignItems: 'flex-start' }}>
-            <div style={{ flex: '0 0 140px' }}>
-              <div style={{ background: '#eaf4ff', color: COLORS.accent, padding: 20, borderRadius: 8, textAlign: 'center', fontWeight: 800, fontSize: 20 }}>
-                {report.topType}
-              </div>
-              <div style={{ marginTop: 8, color: COLORS.muted }}>Secondary: <strong>{report.secondaryType}</strong></div>
-            </div>
-
-            <div style={{ flex: 1 }}>
-              <p style={{ marginTop: 0, color: COLORS.muted, lineHeight: 1.6 }}>
-                Investigative individuals are analytical, curious, and enjoy research and problem solving. You prefer working with ideas and data rather than routine tasks, and you are motivated by understanding how systems work. Deep focus, logical thinking, and a love for discovery are hallmarks of this type.
-              </p>
-
-              <div style={{ marginTop: 12 }}>
-                <h4 style={{ margin: '0 0 8px 0', color: COLORS.navy }}>RIASEC Scores</h4>
-                <div style={{ background: COLORS.lightGray, padding: 12, borderRadius: 8 }}>
-                  <Bar label="Investigative" value={report.scores.Investigative} color="#2563EB" />
-                  <Bar label="Realistic" value={report.scores.Realistic} color="#DC2626" />
-                  <Bar label="Conventional" value={report.scores.Conventional} color="#059669" />
-                  <Bar label="Enterprising" value={report.scores.Enterprising} color="#D97706" />
-                  <Bar label="Artistic" value={report.scores.Artistic} color="#7C3AED" />
-                  <Bar label="Social" value={report.scores.Social} color="#047857" />
+        {!hasScores ? (
+          /* ── No scores state ────────────────────────────────────────────── */
+          <div style={{ textAlign: 'center', padding: '4rem 2rem' }}>
+            <div style={{ fontSize: 48, marginBottom: 16 }}>🧪</div>
+            <h2 style={{ color: NAVY, marginBottom: 12 }}>No test results yet</h2>
+            <p style={{ color: '#374151', marginBottom: 24, maxWidth: 420, margin: '0 auto 24px' }}>
+              Take the psychometric test to generate your personalised RIASEC report.
+              It takes 10–15 minutes and your results are saved to your profile.
+            </p>
+            <button
+              onClick={() => window.open('http://localhost:3001', '_blank')}
+              style={{ background: NAVY, color: '#fff', border: 'none', padding: '0.9rem 2rem', borderRadius: 10, fontWeight: 700, fontSize: '1rem', cursor: 'pointer' }}
+            >
+              Take the Psychometric Test →
+            </button>
+          </div>
+        ) : (
+          <>
+            {/* ── Personality Overview ────────────────────────────────────── */}
+            <section style={{ marginBottom: 32 }}>
+              <h2 style={{ color: NAVY, margin: '0 0 16px 0', fontSize: '1.4rem', fontWeight: 800 }}>Personality Overview</h2>
+              <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start', flexWrap: 'wrap' }}>
+                <div style={{ flex: '0 0 160px' }}>
+                  <div style={{ background: primaryColor + '18', color: primaryColor, padding: '1.2rem', borderRadius: 12, textAlign: 'center', fontWeight: 800, fontSize: '1.3rem', border: `2px solid ${primaryColor}30` }}>
+                    {primaryName}
+                  </div>
+                  <div style={{ marginTop: 10, color: '#374151', fontSize: '0.9rem' }}>
+                    Secondary: <strong style={{ color: NAVY }}>{secondaryName}</strong>
+                  </div>
+                  <div style={{ marginTop: 8, fontSize: '0.85rem', color: '#6b7280' }}>
+                    Holland Code: <strong style={{ color: NAVY }}>{sortedScores.slice(0, 3).map(s => s.code).join('')}</strong>
+                  </div>
+                </div>
+                <div style={{ flex: 1, minWidth: 220 }}>
+                  <p style={{ marginTop: 0, color: '#374151', lineHeight: 1.7, fontSize: '0.95rem' }}>
+                    {PERSONALITY_DESCS[primaryName] || ''}
+                  </p>
+                  <div style={{ marginTop: 16 }}>
+                    <h4 style={{ margin: '0 0 12px 0', color: NAVY, fontSize: '0.95rem' }}>RIASEC Scores</h4>
+                    <div style={{ background: '#f7f9fb', padding: 16, borderRadius: 10 }}>
+                      {sortedScores.map(item => (
+                        <Bar
+                          key={item.code}
+                          label={item.name}
+                          value={item.value}
+                          color={RIASEC_COLORS[item.name] || '#2563EB'}
+                        />
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
+            </section>
 
-        {/* Top careers */}
-        <section style={{ marginBottom: 24 }}>
-          <h2 style={{ color: COLORS.navy, margin: '0 0 8px 0' }}>Top 3 Career Matches</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 12 }}>
-            {CAREERS.map((c, i) => (
-              <div key={i} style={{ borderRadius: 8, padding: 16, background: '#ffffff', boxShadow: '0 6px 18px rgba(2,6,23,0.04)', borderLeft: `4px solid ${i === 0 ? '#2563EB' : i === 1 ? '#0ea5a4' : '#7c3aed'}` }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <h3 style={{ margin: 0, color: COLORS.navy }}>{i + 1}. {c.name}</h3>
-                  <div style={{ color: COLORS.muted, fontWeight: 700 }}>{c.salary}</div>
-                </div>
-                <p style={{ marginTop: 8, color: COLORS.muted }}>{c.why}</p>
-                <div style={{ marginTop: 8, display: 'flex', gap: 12 }}>
-                  <div style={{ background: '#f0f7ff', padding: '6px 10px', borderRadius: 6, fontWeight: 700, color: '#2563EB' }}>{c.stream}</div>
-                </div>
+            <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '2rem 0' }} />
+
+            {/* ── Next steps nudge ────────────────────────────────────────── */}
+            <section style={{ marginBottom: 32 }}>
+              <div style={{ background: primaryColor + '0d', border: `1px solid ${primaryColor}30`, borderRadius: 12, padding: '1.5rem 2rem' }}>
+                <h3 style={{ color: NAVY, margin: '0 0 8px 0', fontSize: '1.1rem', fontWeight: 800 }}>
+                  ✨ See your personalised career matches
+                </h3>
+                <p style={{ color: '#374151', margin: '0 0 16px 0', lineHeight: 1.6 }}>
+                  Your RIASEC scores have been saved to your profile. Head back to the dashboard to see
+                  your top 5 career recommendations — matched using your personality, subjects, and goals.
+                </p>
+                <button
+                  onClick={() => { window.history.pushState({}, '', '/dashboard'); window.dispatchEvent(new PopStateEvent('popstate')); }}
+                  style={{ background: NAVY, color: '#fff', border: 'none', padding: '0.75rem 1.5rem', borderRadius: 9, fontWeight: 700, cursor: 'pointer', fontSize: '0.95rem' }}
+                >
+                  Go to Dashboard →
+                </button>
               </div>
-            ))}
-          </div>
-        </section>
+            </section>
 
-        {/* Entrance exams */}
-        <section style={{ marginBottom: 24 }}>
-          <h2 style={{ color: COLORS.navy, margin: '0 0 8px 0' }}>Entrance Exams to Target</h2>
-          <ul style={{ paddingLeft: 18, color: COLORS.muted }}>
-            {EXAMS.map((e, i) => (
-              <li key={i} style={{ marginBottom: 8 }}><strong>{e.exam}</strong> — {e.leadsTo}</li>
-            ))}
-          </ul>
-        </section>
+            <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '2rem 0' }} />
 
-        {/* Skills */}
-        <section style={{ marginBottom: 24 }}>
-          <h2 style={{ color: COLORS.navy, margin: '0 0 8px 0' }}>Skills to Build Now</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12 }}>
-            {SKILLS.map((s, i) => (
-              <div key={i} style={{ background: '#ffffff', borderRadius: 8, padding: 12, boxShadow: '0 6px 18px rgba(2,6,23,0.03)' }}>
-                <div style={{ fontWeight: 800, color: COLORS.navy }}>{s.title}</div>
-                <div style={{ marginTop: 6, color: COLORS.muted }}>{s.tip}</div>
+            {/* ── Detailed scores table ─────────────────────────────────── */}
+            <section style={{ marginBottom: 32 }}>
+              <h2 style={{ color: NAVY, margin: '0 0 16px 0', fontSize: '1.4rem', fontWeight: 800 }}>Your Full Score Breakdown</h2>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 12 }}>
+                {sortedScores.map((item, i) => (
+                  <div key={item.code} style={{
+                    background: '#fff',
+                    border: `1px solid ${i === 0 ? item.color || primaryColor : '#e5e7eb'}`,
+                    borderTop: `3px solid ${RIASEC_COLORS[item.name] || '#94a3b8'}`,
+                    borderRadius: 10,
+                    padding: '1rem 1.2rem',
+                    boxShadow: '0 2px 8px rgba(7,20,58,0.05)',
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <div>
+                        <div style={{ fontWeight: 800, color: NAVY, fontSize: '1rem' }}>{item.name}</div>
+                        <div style={{ fontSize: '0.8rem', color: '#6b7280', marginTop: 2 }}>{item.code}</div>
+                      </div>
+                      <div style={{ fontSize: '1.8rem', fontWeight: 800, color: RIASEC_COLORS[item.name] || '#6b7280' }}>
+                        {item.value}%
+                      </div>
+                    </div>
+                    <div style={{ marginTop: 10, background: '#f1f5f9', borderRadius: 6, height: 8, overflow: 'hidden' }}>
+                      <div style={{ width: `${item.value}%`, height: '100%', background: RIASEC_COLORS[item.name] || '#6b7280', borderRadius: 6 }} />
+                    </div>
+                    {i === 0 && <div style={{ marginTop: 8, fontSize: '0.78rem', color: primaryColor, fontWeight: 600 }}>Primary type</div>}
+                    {i === 1 && <div style={{ marginTop: 8, fontSize: '0.78rem', color: '#6b7280', fontWeight: 600 }}>Secondary type</div>}
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </section>
+            </section>
 
-        {/* Closing */}
-        <section style={{ marginBottom: 24 }}>
-          <h2 style={{ color: COLORS.navy, margin: '0 0 8px 0' }}>Closing Note</h2>
-          <div style={{ background: '#f8fafc', padding: 16, borderRadius: 8, color: COLORS.muted }}>
-            Your Investigative personality means you thrive when given complex problems to solve. The careers ahead of you are intellectually rich and financially rewarding. Start building your analytical skills now — learn Python, strengthen your mathematics, and practice real-world data projects. With steady focus and curiosity, the right path will become clear. Share this report with your parents and teachers to plan the next steps together.
-          </div>
-        </section>
-
-        <footer style={{ color: COLORS.muted, fontSize: 13, textAlign: 'center', padding: '1rem 0 4rem 0' }}>
-          Beacon © 2026 — This report is an illustrative guide based on an assessment. For personalised counselling contact our team.
-        </footer>
+            <footer style={{ color: '#9ca3af', fontSize: 13, textAlign: 'center', padding: '1rem 0 4rem 0' }}>
+              Beacon © 2026 — This report is based on the globally validated RIASEC psychometric model.
+              For personalised counselling contact our team.
+            </footer>
+          </>
+        )}
       </div>
 
-      <style>{`@media print { button { display:none } .no-print { display: none } }`}</style>
+      <style>{`@media print { button { display:none } }`}</style>
     </div>
-  )
+  );
 }

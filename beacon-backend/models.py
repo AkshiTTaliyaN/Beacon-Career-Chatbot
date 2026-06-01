@@ -154,6 +154,11 @@ class StudentProfile(Base):
     riasec_scores     = Column(JSON, nullable=True)
     interests_summary = Column(Text, nullable=True)
 
+    # ── Scoring engine inputs (from onboarding) ───────────────────────────────
+    subject_ratings   = Column(JSON, nullable=True)   # {"mathematics": 4, "physics": 3, ...}
+    work_style        = Column(JSON, nullable=True)   # {"building": 2, "researching": 5, ...}
+    career_priorities = Column(JSON, nullable=True)   # ["High Salary", "Intellectual Challenge", ...]
+
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
     is_complete = Column(Boolean, default=False)

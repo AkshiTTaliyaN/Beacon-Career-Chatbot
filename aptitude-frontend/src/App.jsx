@@ -1,15 +1,45 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import LandingPage from "./pages/LandingPage";
 import TestPage from "./pages/TestPage";
 import ResultPage from "./pages/ResultPage";
 import "./App.css";
+
+const BEACON_API = "http://localhost:8000";
 
 export default function App() {
   const [page, setPage] = useState("landing"); // "landing" | "test" | "result"
   const [result, setResult] = useState(null);
   const [formData, setFormData] = useState(null);
 
+  // Capture beacon JWT from URL params (passed by beacon-frontend Dashboard)
+  const beaconToken = useRef(null);
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("beacon_token");
+    if (token) beaconToken.current = token;
+  }, []);
+
   const handleStartTest = () => setPage("test");
+
+  /** Silent write-back: PATCH beacon-backend with RIASEC scores */
+  async function writeScoresBack(scoreList) {
+    if (!beaconToken.current) return;
+    try {
+      // scoreList is [{ category: "Realistic", code: "R", score: 72 }, ...]
+      const scores = {};
+      scoreList.forEach(({ code, score }) => { scores[code] = score; });
+      await fetch(`${BEACON_API}/profile/update`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${beaconToken.current}`,
+        },
+        body: JSON.stringify({ riasec_scores: scores }),
+      });
+    } catch {
+      // Silently ignore — this is a background write, never blocks the UI
+    }
+  }
 
   const handleSubmit = async (data) => {
     setFormData(data);
@@ -22,6 +52,10 @@ export default function App() {
       const json = await res.json();
       setResult(json);
       setPage("result");
+      // Write scores back to beacon-backend silently
+      if (json.scores) {
+        writeScoresBack(json.scores);
+      }
     } catch (err) {
       console.error("Submission error:", err);
       alert("Could not connect to the server. Make sure the backend is running on port 8001.");
@@ -63,4 +97,4 @@ export default function App() {
       )}
     </div>
   );
-}
+}

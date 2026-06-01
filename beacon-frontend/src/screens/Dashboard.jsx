@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import HeroSection from '../components/HeroSection.jsx'
 import PsychometricTest from '../components/PsychometricTest.jsx'
+import RiasecGate from './RiasecGate.jsx'
+import { getSmartRecommendations } from '../api/client.js'
 
 const COLORS = {
   navy: '#07143a',
@@ -42,17 +44,28 @@ export default function Dashboard({ userName }) {
   const [navScrolled, setNavScrolled] = useState(false)
   const [isReturning, setIsReturning] = useState(false)
 
+  // ── Career Recommendations state ───────────────────────────────────────────────────
+  const [recs, setRecs] = useState(null)          // null=loading, []=empty
+  const [recsGated, setRecsGated] = useState(false)   // show gate screen
+  const [recsError, setRecsError] = useState(null)
+
+  useEffect(() => {
+    getSmartRecommendations()
+      .then(data => setRecs(data.recommendations || []))
+      .catch(err => {
+        if (err.code === 'riasec_required') setRecsGated(true)
+        else setRecsError('Could not load recommendations — try refreshing.')
+      })
+  }, [])
+
   useEffect(() => {
     if (!userName) {
       const stored = window.localStorage.getItem('userName')
       if (stored) setName(stored)
     }
-  }, [userName])
 
-  useEffect(() => {
-    // Only show "Welcome back" if they have visited before (flag set on login)
     setIsReturning(window.localStorage.getItem('beaconReturning') === '1')
-  }, [])
+  }, [userName])
 
   useEffect(() => {
     const handleScroll = () => setNavScrolled(window.scrollY > 8)
@@ -108,6 +121,7 @@ export default function Dashboard({ userName }) {
         .typing-dots span:nth-child(2) { animation-delay: 0.15s; }
         .typing-dots span:nth-child(3) { animation-delay: 0.3s; }
         @keyframes pulse { 0%, 80%, 100% { transform: scale(1); opacity: 0.6; } 40% { transform: scale(1.4); opacity: 1; } }
+        @keyframes shimmer { 0% { background-position: -400% 0; } 100% { background-position: 400% 0; } }
       `}</style>
 
       <header style={{ ...styles.navbar, ...(navScrolled ? styles.navbarScrolled : {}) }}>
@@ -125,7 +139,13 @@ export default function Dashboard({ userName }) {
         primaryText={'Chat with AI'}
         onPrimary={() => { window.history.pushState({}, '', '/chat'); window.dispatchEvent(new PopStateEvent('popstate')) }}
         secondaryText={'Take Psychometric Test'}
-        onSecondary={() => window.open('http://localhost:3001', '_blank')}
+        onSecondary={() => {
+          const token = localStorage.getItem('beacon_token');
+          const url = token
+            ? `http://localhost:3001?beacon_token=${encodeURIComponent(token)}`
+            : 'http://localhost:3001';
+          window.open(url, '_blank');
+        }}
       />
 
       <section className="fade-up" style={{ maxWidth: 1100, margin: '0 auto', padding: '5rem 1rem', background: COLORS.white }}>
@@ -179,6 +199,80 @@ export default function Dashboard({ userName }) {
             Start Chatting
           </button>
         </div>
+      </section>
+
+      {/* ─── CAREER RECOMMENDATIONS ─── */}
+      <section className="fade-up" style={{ maxWidth: 1100, margin: '0 auto', padding: '5rem 1rem' }}>
+        <div style={styles.sectionHeading}>
+          <div style={styles.headingAccent} />
+          <h2 style={styles.sectionTitle}>Your Career Matches</h2>
+        </div>
+        <p style={{ color: COLORS.muted, marginTop: '0.5rem', marginBottom: '2rem', fontSize: '1rem' }}>
+          Ranked using your RIASEC personality, subjects, work style, and goals.
+        </p>
+
+        {/* Loading skeleton */}
+        {!recsGated && !recsError && recs === null && (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px,1fr))', gap: '1.25rem' }}>
+            {[0,1,2,3,4].map(i => (
+              <div key={i} style={{
+                background: '#f1f5f9', borderRadius: 14, padding: '1.5rem', height: 140,
+                animation: 'shimmer 1.6s infinite',
+                backgroundImage: 'linear-gradient(90deg,#f1f5f9 25%,#e2e8f0 50%,#f1f5f9 75%)',
+                backgroundSize: '400% 100%',
+              }} />
+            ))}
+          </div>
+        )}
+
+        {/* Gate screen */}
+        {recsGated && <RiasecGate />}
+
+        {/* Error */}
+        {recsError && (
+          <p style={{ color: '#6b7280', fontSize: '0.95rem' }}>{recsError}</p>
+        )}
+
+        {/* Career cards */}
+        {recs && recs.length > 0 && (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px,1fr))', gap: '1.25rem' }}>
+            {recs.map((career, i) => (
+              <div key={i} className="interactive-card" style={{
+                background: '#fff',
+                border: '1px solid rgba(7,20,58,0.08)',
+                borderRadius: 14,
+                padding: '1.5rem',
+                boxShadow: '0 4px 14px rgba(7,20,58,0.06)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 10,
+              }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12 }}>
+                  <div style={{
+                    width: 36, height: 36, borderRadius: 8,
+                    background: COLORS.navy, color: '#fff',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontWeight: 800, fontSize: '1.1rem', flexShrink: 0,
+                  }}>{career.rank}</div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontWeight: 800, color: COLORS.navy, fontSize: '1.05rem' }}>{career.title}</div>
+                    <div style={{ display: 'flex', gap: 6, marginTop: 5, flexWrap: 'wrap' }}>
+                      <span style={{ background: 'rgba(7,20,58,0.07)', color: COLORS.navy, padding: '2px 8px', borderRadius: 5, fontSize: '0.78rem', fontWeight: 700 }}>
+                        {career.stream}
+                      </span>
+                      <span style={{ background: '#f0fdf4', color: '#15803d', padding: '2px 8px', borderRadius: 5, fontSize: '0.78rem', fontWeight: 700 }}>
+                        {career.salary}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <p style={{ margin: 0, color: '#374151', fontSize: '0.875rem', lineHeight: 1.65 }}>
+                  {career.reason}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
       </section>
 
       <section className="fade-up" style={{ maxWidth: 1100, margin: '0 auto', padding: '5rem 1rem', background: COLORS.white }}>

@@ -79,6 +79,11 @@ class ProfileCreate(BaseModel):
     cost_constraint: Optional[CostEnum] = None
     additional_notes: Optional[str] = None
 
+    # Scoring engine inputs (from onboarding forms)
+    subject_ratings: Optional[dict] = None    # {"mathematics": 4, "computerScience": 5, ...}
+    work_style: Optional[dict] = None         # {"building": 2, "researching": 5, ...}
+    career_priorities: Optional[list] = None  # ["High Salary", "Intellectual Challenge", ...]
+
     @field_validator("current_class")
     @classmethod
     def class_must_be_valid(cls, v):
@@ -147,17 +152,23 @@ class ProfileResponse(BaseModel):
     updated_at: Optional[datetime]
     riasec_scores: Optional[dict] = None
     interests_summary: Optional[str] = None
+    subject_ratings: Optional[dict] = None
+    work_style: Optional[dict] = None
+    career_priorities: Optional[list] = None
 
     class Config:
         from_attributes = True
 
 
 class ProfileUpdate(BaseModel):
-    """Partial update — used by chatbot to write RIASEC scores back."""
+    """Partial update — used by chatbot / aptitude-frontend to write data back."""
     riasec_scores: Optional[dict] = None
     interests_summary: Optional[str] = None
     stream: Optional[StreamEnum] = None
     current_class: Optional[int] = None
+    subject_ratings: Optional[dict] = None
+    work_style: Optional[dict] = None
+    career_priorities: Optional[list] = None
 
 
 # ─── RECOMMENDATIONS ──────────────────────────────────────────────────────────

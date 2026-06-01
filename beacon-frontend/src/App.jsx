@@ -73,7 +73,7 @@ export default function App() {
   }, []);
 
   // ─── Path-based routing (takes priority over step-based flow) ───
-  if (path === "/dashboard") return <Dashboard userName={localStorage.getItem("userName") || ""} />;
+  if (path === "/dashboard" || path === "/recommendations") return <Dashboard userName={localStorage.getItem("userName") || ""} />;
   if (path === "/chat") return <ChatScreen />;
   if (path === "/report") return <ReportPage />;
   if (path === "/careers") return <CareerLibrary />;

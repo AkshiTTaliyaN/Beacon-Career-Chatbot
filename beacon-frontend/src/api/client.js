@@ -181,3 +181,48 @@ export function clearSession() {
 export function hasSession() {
   return Boolean(getToken());
 }
+
+/** GET /recommendations/smart — throws {code: 'riasec_required'} on HTTP 428 */
+export async function getSmartRecommendations() {
+  if (DEMO_MODE) {
+    // Demo stub: return gate signal so dashboard shows the gate
+    const err = new Error("RIASEC scores required");
+    err.code = "riasec_required";
+    throw err;
+  }
+
+  const token = getToken();
+  if (!token) throw new Error("Not logged in.");
+
+  const res = await fetch(`${API}/recommendations/smart`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+  if (res.status === 428) {
+    const err = new Error("RIASEC scores required");
+    err.code = "riasec_required";
+    throw err;
+  }
+
+  if (!res.ok) throw new Error(await parseError(res));
+  return res.json();
+}
+
+/** PATCH /profile/update with RIASEC scores (called from ReportPage on mount) */
+export async function updateRiasecScores(scores) {
+  if (DEMO_MODE) return;
+
+  const token = getToken();
+  if (!token) return; // silent — no token means not logged in
+
+  const res = await fetch(`${API}/profile/update`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ riasec_scores: scores }),
+  });
+  // Silently ignore errors — this is a background write
+  return res.ok ? res.json() : null;
+}

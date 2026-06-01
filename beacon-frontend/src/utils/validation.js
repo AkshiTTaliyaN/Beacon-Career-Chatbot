@@ -135,5 +135,13 @@ export function buildProfilePayload(form) {
   if (form.additional_notes?.trim())
     payload.additional_notes = form.additional_notes.trim();
 
+  // Scoring engine inputs
+  if (form.subjectRatings && Object.keys(form.subjectRatings).length)
+    payload.subject_ratings = form.subjectRatings;
+  if (form.workStyle && Object.keys(form.workStyle).length)
+    payload.work_style = form.workStyle;
+  if (form.careerPriorities?.length)
+    payload.career_priorities = form.careerPriorities;
+
   return payload;
 }

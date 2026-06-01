@@ -1,4 +1,4 @@
-import { Download, Briefcase, GraduationCap, Target, Users, Compass, AlertTriangle, CheckCircle2, Calendar, MapPin, BookOpen, TrendingUp, Heart } from "lucide-react";
+import { Download, Briefcase, GraduationCap, Target, Users, Compass, AlertTriangle, CheckCircle2, Calendar, MapPin, BookOpen, TrendingUp, Heart, FileText } from "lucide-react";
 import "./ResultPage.css";
 
 const CATEGORY_COLORS = {
@@ -480,6 +480,7 @@ export default function ResultPage({ result, onDownloadPDF, onRetake }) {
         <div className="result-footer">
           <p>Beacon © 2026 — This report is an illustrative guide based on a psychometric assessment. For personalised counselling, contact a qualified career counsellor.</p>
           <div className="footer-actions">
+            <button className="btn-primary" style={{ background: '#10b981' }} onClick={() => window.location.href = "http://localhost:5173/recommendations"}><Compass size={16}/> Return to Beacon Dashboard</button>
             <button className="btn-primary" onClick={onDownloadPDF}><Download size={16}/> Download PDF Report</button>
             <button className="btn-ghost" onClick={onRetake}>Take Test Again</button>
           </div>
