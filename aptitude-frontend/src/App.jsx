@@ -13,10 +13,37 @@ export default function App() {
 
   // Capture beacon JWT from URL params (passed by beacon-frontend Dashboard)
   const beaconToken = useRef(null);
+  const [profileData, setProfileData] = useState(null);
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const token = params.get("beacon_token");
-    if (token) beaconToken.current = token;
+    if (token) {
+      beaconToken.current = token;
+      // Fetch profile info from beacon-backend
+      fetch(`${BEACON_API}/profile/me`, {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.name) {
+          const streamDisplayMap = {
+            "pcm": "PCM",
+            "pcb": "PCB",
+            "comm": "Commerce",
+            "arts": "Humanities"
+          };
+          setProfileData({
+            name: data.name,
+            class_level: data.current_class ? `Class ${data.current_class}` : "",
+            stream: streamDisplayMap[data.stream] || ""
+          });
+        }
+      })
+      .catch(err => console.error("Error fetching profile:", err));
+    }
   }, []);
 
   const handleStartTest = () => setPage("test");
@@ -91,7 +118,7 @@ export default function App() {
   return (
     <div className="app">
       {page === "landing" && <LandingPage onStart={handleStartTest} />}
-      {page === "test" && <TestPage onSubmit={handleSubmit} onBack={() => setPage("landing")} />}
+      {page === "test" && <TestPage onSubmit={handleSubmit} onBack={() => setPage("landing")} profileData={profileData} />}
       {page === "result" && result && (
         <ResultPage result={result} onDownloadPDF={handleDownloadPDF} onRetake={handleRetake} />
       )}

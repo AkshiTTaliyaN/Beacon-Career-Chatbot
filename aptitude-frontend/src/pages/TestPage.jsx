@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import QUESTIONS from "../data/questions";
 import "./TestPage.css";
 
@@ -66,9 +66,23 @@ const SCALE = [
   { value: 5, label: "Strongly Agree" },
 ];
 
-export default function TestPage({ onSubmit, onBack }) {
+export default function TestPage({ onSubmit, onBack, profileData }) {
   const [step, setStep] = useState("details");
-  const [details, setDetails] = useState({ name: "", class_level: "", stream: "" });
+  const [details, setDetails] = useState({
+    name: profileData?.name || "",
+    class_level: profileData?.class_level || "",
+    stream: profileData?.stream || ""
+  });
+
+  useEffect(() => {
+    if (profileData && profileData.name) {
+      setDetails({
+        name: profileData.name,
+        class_level: profileData.class_level,
+        stream: profileData.stream
+      });
+    }
+  }, [profileData]);
   const [answers, setAnswers] = useState(Array(60).fill(0));
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState(0);
@@ -133,16 +147,18 @@ export default function TestPage({ onSubmit, onBack }) {
             </div>
           </div>
           <form className="details-form" onSubmit={handleDetailsSubmit}>
-            <h2>Enter your details</h2>
-            <p className="form-sub">Your details appear on your personalised report. They are not stored anywhere.</p>
+            <h2>{profileData ? "Confirm your details" : "Enter your details"}</h2>
+            <p className="form-sub" style={profileData ? {color: '#10b981', fontWeight: 600} : {}}>
+              {profileData ? "✓ Your details are pre-filled from your Beacon profile." : "Your details appear on your personalised report. They are not stored anywhere."}
+            </p>
             <div className="form-group">
               <label>Full Name</label>
-              <input type="text" placeholder="e.g. Aryan Sharma" value={details.name} onChange={e => setDetails({...details, name: e.target.value})} required/>
+              <input type="text" placeholder="e.g. Aryan Sharma" value={details.name} onChange={e => setDetails({...details, name: e.target.value})} disabled={!!profileData} required/>
             </div>
             <div className="form-row">
               <div className="form-group">
                 <label>Current Class</label>
-                <select value={details.class_level} onChange={e => setDetails({...details, class_level: e.target.value})} required>
+                <select value={details.class_level} onChange={e => setDetails({...details, class_level: e.target.value})} disabled={!!profileData} required>
                   <option value="">Select class</option>
                   <option value="Class 10">Class 10</option>
                   <option value="Class 11">Class 11</option>
@@ -151,7 +167,7 @@ export default function TestPage({ onSubmit, onBack }) {
               </div>
               <div className="form-group">
                 <label>Stream (or Intended)</label>
-                <select value={details.stream} onChange={e => setDetails({...details, stream: e.target.value})} required>
+                <select value={details.stream} onChange={e => setDetails({...details, stream: e.target.value})} disabled={!!profileData} required>
                   <option value="">Select stream</option>
                   <option value="PCM">PCM (Physics, Chemistry, Maths)</option>
                   <option value="PCB">PCB (Physics, Chemistry, Biology)</option>
