@@ -127,7 +127,6 @@ export const COST_CONSTRAINTS = [
 
 // ─── NEW: Academic profile constants ────────────────────────────────────────
 
-/** How many hours per day the student studies outside school */
 export const STUDY_HOURS = [
   { label: "Less than 1 hour", value: "lt1" },
   { label: "1 – 2 hours", value: "1to2" },
@@ -135,7 +134,6 @@ export const STUDY_HOURS = [
   { label: "More than 4 hours", value: "gt4" },
 ];
 
-/** Where the student is getting academic support */
 export const COACHING_STATUS = [
   { label: "Self-study only", value: "self" },
   { label: "School tuition / extra classes", value: "school_tuition" },
@@ -144,7 +142,6 @@ export const COACHING_STATUS = [
   { label: "Mix of the above", value: "mix" },
 ];
 
-/** How clear the student is about their career direction */
 export const CAREER_CLARITY = [
   { label: "Very clear — I know what I want", value: "clear" },
   { label: "Have a few options in mind", value: "some_idea" },
@@ -152,7 +149,6 @@ export const CAREER_CLARITY = [
   { label: "No idea at all", value: "no_idea" },
 ];
 
-/** How the student prefers to learn */
 export const LEARNING_STYLES = [
   { label: "Visual — diagrams, videos, charts", value: "visual" },
   { label: "Reading — notes, textbooks", value: "reading" },
@@ -164,7 +160,6 @@ export const LEARNING_STYLES = [
 // ─── INITIAL_FORM ────────────────────────────────────────────────────────────
 
 export const INITIAL_FORM = {
-  // B: name is now the first field collected
   name: "",
 
   current_class: "",
@@ -199,7 +194,7 @@ export const INITIAL_FORM = {
   relocation_pref: "",
   cost_constraint: "",
   additional_notes: "",
-  // New onboarding fields
+
   subjectRatings: {},        // e.g. { mathematics: 4, physics: 3 }
   subjectInterests: {},      // e.g. { mathematics: 'Calculus', physics: 'Mechanics' }
   workStyle: {},             // sliders: building, researching, creative, helping, leading, structured

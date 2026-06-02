@@ -217,7 +217,7 @@ psql -U beacon_user -d beacon
 ## Step 8 — Open the Frontend
 
 ```bash
-cd ../pathfinder-frontend
+cd ../beacon-frontend
 npm install
 npm run dev
 ```

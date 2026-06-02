@@ -46,9 +46,7 @@ def get_db():
 
 
 def create_tables():
-    """
-    Creates all tables defined in models.py if they don't exist.
-    """
+
     from models import Student, StudentProfile, Recommendation  # noqa — ensures models registered
     Base.metadata.create_all(bind=engine)
     print("Database tables created / verified")
