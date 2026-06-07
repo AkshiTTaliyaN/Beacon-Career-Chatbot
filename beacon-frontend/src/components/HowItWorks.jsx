@@ -1,14 +1,16 @@
+import { ED_CIL_THEME } from '../theme.js'
+
 const COLORS = {
-  navy: '#07143a',
-  white: '#ffffff',
-  muted: 'rgba(7,20,58,0.65)'
+  navy: ED_CIL_THEME.primary,
+  white: ED_CIL_THEME.surface,
+  muted: 'rgba(16,40,73,0.65)'
 }
 
 const styles = {
-  wrap: { maxWidth: 1100, margin: '1.5rem auto', padding: '0 1rem', background: '#F8FAFF', borderRadius: 16 },
+  wrap: { maxWidth: 1100, margin: '1.5rem auto', padding: '0 1rem', background: '#f7f9ff', borderRadius: 16 },
   row: { display: 'flex', gap: '1rem', justifyContent: 'space-between', alignItems: 'stretch' },
-  step: { flex: 1, background: COLORS.white, borderRadius: 12, padding: '1rem', border: '1px solid rgba(7,20,58,0.04)', boxShadow: '0 6px 18px rgba(7,20,58,0.04)', display: 'flex', gap: '0.75rem', alignItems: 'flex-start' },
-  number: { width: 36, height: 36, borderRadius: 10, background: 'linear-gradient(135deg, #1e3a6e 0%, #2563eb 100%)', boxShadow: '0 4px 14px rgba(37,99,235,0.3)', color: COLORS.white, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, flexShrink: 0 },
+  step: { flex: 1, background: COLORS.white, borderRadius: 12, padding: '1rem', border: `1px solid ${ED_CIL_THEME.border}`, boxShadow: '0 6px 18px rgba(44,84,146,0.08)', display: 'flex', gap: '0.75rem', alignItems: 'flex-start' },
+  number: { width: 36, height: 36, borderRadius: 10, background: `linear-gradient(135deg, ${ED_CIL_THEME.primary} 0%, ${ED_CIL_THEME.secondary} 100%)`, boxShadow: '0 4px 14px rgba(44,84,146,0.3)', color: COLORS.white, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, flexShrink: 0 },
   icon: { width: 28, height: 28, marginLeft: 'auto', opacity: 0.9 },
   title: { fontSize: '0.98rem', fontWeight: 700, color: COLORS.navy },
   desc: { marginTop: '0.4rem', color: COLORS.muted, fontSize: '0.95rem' }

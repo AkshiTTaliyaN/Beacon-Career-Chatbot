@@ -102,11 +102,11 @@ export default function AcademicsScreen({ form, setForm, onNext, onBack }) {
           </legend>
           {/* Count indicator */}
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: "0.4rem", marginBottom: "0.5rem" }}>
-            <span style={{ fontSize: "0.8rem", color: (form.enjoyed_subjects || []).length >= MAX_ENJOYED ? "#2d5be3" : "#6b7280", fontWeight: 600 }}>
+            <span style={{ fontSize: "0.8rem", color: (form.enjoyed_subjects || []).length >= MAX_ENJOYED ? "#2C5492" : "#556d8f", fontWeight: 600 }}>
               {(form.enjoyed_subjects || []).length} / {MAX_ENJOYED} selected
             </span>
             {(form.enjoyed_subjects || []).length >= MAX_ENJOYED && (
-              <span style={{ fontSize: "0.76rem", color: "#2d5be3", fontWeight: 600, background: "#e8eeff", padding: "2px 8px", borderRadius: 999 }}>
+              <span style={{ fontSize: "0.76rem", color: "#2C5492", fontWeight: 600, background: "#e8eeff", padding: "2px 8px", borderRadius: 999 }}>
                 ✓ Limit reached
               </span>
             )}

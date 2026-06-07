@@ -1,16 +1,17 @@
 import React from 'react'
+import { ED_CIL_THEME } from '../theme.js'
 
 const COLORS = {
-  navy: '#07143a',
-  white: '#ffffff',
-  muted: 'rgba(255,255,255,0.85)',
-  badgeBg: 'rgba(255,255,255,0.06)'
+  navy: ED_CIL_THEME.primary,
+  white: ED_CIL_THEME.surface,
+  muted: 'rgba(255,255,255,0.92)',
+  badgeBg: 'rgba(255,255,255,0.12)'
 }
 
 const styles = {
   hero: {
-    background: COLORS.navy,
-    backgroundImage: 'radial-gradient(ellipse at top, rgba(59,130,246,0.08) 0%, transparent 70%)',
+    background: ED_CIL_THEME.primary,
+    backgroundImage: 'radial-gradient(ellipse at top, rgba(44,84,146,0.22) 0%, transparent 70%)',
     color: COLORS.white,
     padding: '7rem 1rem',
     display: 'flex',
@@ -20,10 +21,25 @@ const styles = {
   container: {
     maxWidth: 980,
     width: '100%',
-    textAlign: 'center'
+    textAlign: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  logoWrap: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginBottom: 32,
+    width: '100%'
+  },
+  logo: {
+    height: 'clamp(160px, 12vw, 224px)',
+    width: 'auto',
+    maxWidth: 360,
+    objectFit: 'contain'
   },
   title: {
-    fontSize: '2.25rem',
+    fontSize: 'clamp(1.75rem, 4vw, 2.25rem)',
     lineHeight: 1.05,
     fontWeight: 800,
     margin: 0,
@@ -50,7 +66,7 @@ const styles = {
     fontWeight: 700,
     borderRadius: 10,
     cursor: 'pointer',
-    boxShadow: '0 6px 18px rgba(7,20,58,0.35)'
+    boxShadow: '0 6px 18px rgba(44,84,146,0.22)'
   },
   badges: {
     display: 'flex',
@@ -77,11 +93,19 @@ export default function HeroSection({
   onPrimary = null,
   secondaryText = null,
   onSecondary = null,
+  logoSrc = null,
+  logoAlt = 'EdCIL Logo',
   children = null,
 }) {
   return (
     <section style={styles.hero} aria-label="Beacon hero">
       <div style={styles.container}>
+        {logoSrc ? (
+          <div style={styles.logoWrap}>
+            <img src={logoSrc} alt={logoAlt} style={styles.logo} />
+          </div>
+        ) : null}
+
         <h1 style={styles.title}>{title}</h1>
         <p style={styles.subtitle}>{subtitle}</p>
 

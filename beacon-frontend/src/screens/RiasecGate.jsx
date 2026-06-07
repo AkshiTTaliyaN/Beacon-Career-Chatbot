@@ -1,4 +1,6 @@
 
+import { ED_CIL_THEME } from '../theme.js'
+
 export default function RiasecGate() {
   function openTest() {
     const token = localStorage.getItem('beacon_token');
@@ -10,7 +12,7 @@ export default function RiasecGate() {
 
   return (
     <div style={{
-      background: 'linear-gradient(135deg, #07143a 0%, #0f2060 100%)',
+      background: `linear-gradient(135deg, ${ED_CIL_THEME.primary} 0%, ${ED_CIL_THEME.secondary} 100%)`,
       borderRadius: 16,
       padding: '2.5rem',
       color: '#fff',
@@ -86,7 +88,7 @@ export default function RiasecGate() {
             id="take-psychometric-test-btn"
             onClick={openTest}
             style={{
-              background: '#2563EB',
+              background: ED_CIL_THEME.primary,
               color: '#fff',
               border: 'none',
               padding: '0.9rem 2rem',
@@ -94,16 +96,16 @@ export default function RiasecGate() {
               fontWeight: 700,
               fontSize: '1rem',
               cursor: 'pointer',
-              boxShadow: '0 4px 20px rgba(37,99,235,0.4)',
+              boxShadow: '0 4px 20px rgba(44,84,146,0.35)',
               transition: 'transform 0.2s ease, box-shadow 0.2s ease',
             }}
             onMouseEnter={e => {
               e.currentTarget.style.transform = 'scale(1.03)';
-              e.currentTarget.style.boxShadow = '0 6px 28px rgba(37,99,235,0.55)';
+              e.currentTarget.style.boxShadow = '0 6px 28px rgba(44,84,146,0.5)';
             }}
             onMouseLeave={e => {
               e.currentTarget.style.transform = 'scale(1)';
-              e.currentTarget.style.boxShadow = '0 4px 20px rgba(37,99,235,0.4)';
+              e.currentTarget.style.boxShadow = '0 4px 20px rgba(44,84,146,0.35)';
             }}
           >
             Take the Psychometric Test →

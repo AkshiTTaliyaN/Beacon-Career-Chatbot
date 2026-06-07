@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
+import { ED_CIL_THEME } from '../theme.js'
 
 const COLORS = {
-  navy: '#07143a',
-  white: '#ffffff',
-  muted: 'rgba(7,20,58,0.7)',
-  lightMuted: 'rgba(7,20,58,0.5)'
+  navy: ED_CIL_THEME.primary,
+  white: ED_CIL_THEME.surface,
+  muted: 'rgba(16,40,73,0.7)',
+  lightMuted: 'rgba(16,40,73,0.4)'
 }
 
 // RIASEC questions (2-3 per type)
@@ -115,17 +116,17 @@ export default function PsychometricTest({ isEmbedded = false }) {
     const result = RESULT_TYPES[topType]
     return (
       <section style={{ maxWidth: 1100, margin: '2rem auto', padding: '0 1rem' }}>
-        <div style={{ background: COLORS.white, borderRadius: 12, padding: '2rem', boxShadow: '0 6px 18px rgba(7,20,58,0.06)', border: `1px solid rgba(7,20,58,0.04)` }}>
+        <div style={{ background: COLORS.white, borderRadius: 12, padding: '2rem', boxShadow: '0 6px 18px rgba(44,84,146,0.06)', border: `1px solid ${ED_CIL_THEME.border}` }}>
           <div style={{ textAlign: 'center' }}>
             <div style={{ fontSize: '3rem', fontWeight: 800, color: COLORS.navy, marginBottom: '0.5rem' }}>{topType}</div>
             <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: COLORS.navy, margin: 0 }}>{result.name} Type</h2>
             <p style={{ marginTop: '1rem', color: COLORS.muted, lineHeight: 1.6, maxWidth: 600, margin: '1rem auto' }}>{result.desc}</p>
 
-            <div style={{ marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: `1px solid rgba(7,20,58,0.1)` }}>
+            <div style={{ marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: `1px solid rgba(44,84,146,0.15)` }}>
               <h3 style={{ color: COLORS.navy, fontWeight: 700, marginBottom: '1rem' }}>Careers that match your type</h3>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1rem' }}>
                 {result.careers.map((career, idx) => (
-                  <div key={idx} style={{ padding: '0.75rem', borderRadius: 8, background: 'rgba(7,20,58,0.04)', color: COLORS.navy, fontWeight: 600, textAlign: 'center' }}>
+                  <div key={idx} style={{ padding: '0.75rem', borderRadius: 8, background: 'rgba(44,84,146,0.08)', color: COLORS.navy, fontWeight: 600, textAlign: 'center' }}>
                     {career}
                   </div>
                 ))}
@@ -156,13 +157,13 @@ export default function PsychometricTest({ isEmbedded = false }) {
           ← Back
         </button>
 
-        <div style={{ background: COLORS.white, borderRadius: 12, padding: '1.5rem', boxShadow: '0 6px 18px rgba(7,20,58,0.06)' }}>
+        <div style={{ background: COLORS.white, borderRadius: 12, padding: '1.5rem', boxShadow: '0 6px 18px rgba(44,84,146,0.06)' }}>
           <h2 style={{ color: COLORS.navy, fontWeight: 800, marginBottom: '0.5rem' }}>Beacon Personality Test</h2>
           <p style={{ color: COLORS.muted, fontSize: '0.95rem', marginBottom: '1.5rem' }}>Answer each question on a scale of 1 (Not interested) to 5 (Very interested)</p>
 
           <div style={{ marginBottom: '2rem' }}>
             {QUESTIONS.map((q, idx) => (
-              <div key={q.id} style={{ marginBottom: '1.5rem', paddingBottom: '1.5rem', borderBottom: idx < QUESTIONS.length - 1 ? `1px solid rgba(7,20,58,0.1)` : 'none' }}>
+              <div key={q.id} style={{ marginBottom: '1.5rem', paddingBottom: '1.5rem', borderBottom: idx < QUESTIONS.length - 1 ? `1px solid rgba(44,84,146,0.12)` : 'none' }}>
                 <div style={{ fontWeight: 600, color: COLORS.navy, marginBottom: '0.5rem' }}>
                   {idx + 1}. {q.text}
                 </div>
@@ -179,7 +180,7 @@ export default function PsychometricTest({ isEmbedded = false }) {
               padding: '0.85rem',
               borderRadius: 10,
               border: 'none',
-              background: allAnswered ? COLORS.navy : 'rgba(7,20,58,0.3)',
+              background: allAnswered ? COLORS.navy : 'rgba(44,84,146,0.22)',
               color: COLORS.white,
               fontWeight: 700,
               cursor: allAnswered ? 'pointer' : 'not-allowed',

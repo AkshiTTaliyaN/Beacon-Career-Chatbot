@@ -8,16 +8,18 @@
  */
 
 :root {
-  --blue: #2d5be3;
-  --blue-dark: #1e44b8;
-  --blue-light: #e8eeff;
-  --text: #1a1714;
-  --muted: #6b6560;
-  --border: #e4e0db;
+  --blue: #2C5492;
+  --blue-secondary: #426FB1;
+  --blue-dark: #233a72;
+  --blue-light: #6A9AD4;
+  --blue-bg: #EAF1FB;
+  --text: #102849;
+  --muted: #5f6b8d;
+  --border: #dce4f5;
   --white: #ffffff;
   --error: #c62828;
   --radius: 12px;
-  --shadow: 0 8px 32px rgba(45, 91, 227, 0.08);
+  --shadow: 0 8px 32px rgba(44, 84, 146, 0.08);
 }
 
 * {
@@ -28,7 +30,7 @@ body {
   margin: 0;
   font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
   color: var(--text);
-  background: linear-gradient(160deg, #f7f9ff 0%, #ffffff 45%);
+  background: linear-gradient(160deg, #f5f8ff 0%, #ffffff 45%);
   min-height: 100vh;
 }
 
@@ -412,9 +414,9 @@ body {
   text-align: center;
   padding: 1.25rem;
   font-size: 0.75rem;
-  color: var(--muted);
-  border-top: 1px solid var(--border);
-  background: var(--white);
+  color: var(--white);
+  border-top: 1px solid transparent;
+  background: var(--blue);
 }
 
 .footer p {

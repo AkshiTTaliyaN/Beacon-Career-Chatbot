@@ -1,13 +1,14 @@
 :root {
   color-scheme: light;
   font-family: 'Inter', system-ui, sans-serif;
-  --navy: #0f172a;
-  --navy-mid: #1e3a8a;
-  --blue: #1d4ed8;
-  --blue-light: #eff6ff;
-  --border: #e2e8f0;
-  --text-muted: #475569;
-  --bg: #f0f4f8;
+  --blue: #2C5492;
+  --blue-secondary: #426FB1;
+  --blue-light: #6A9AD4;
+  --blue-bg: #EAF1FB;
+  --blue-dark: #233a72;
+  --border: #dce4f5;
+  --text-muted: #5f6b8d;
+  --bg: #EAF1FB;
   --white: #ffffff;
 }
 
@@ -27,7 +28,7 @@ body, html, #root {
 html, body, #root {
   height: 100vh;
   overflow: hidden;
-  background: var(--navy);
+  background: var(--bg);
   font-family: 'Inter', system-ui, sans-serif;
 }
 
@@ -98,8 +99,8 @@ body {
   background: transparent;
   color: var(--white);
   font-weight: 600;
-  font-size: 0.85rem;
-  padding: 8px 18px;
+  font-size: 0.9rem;
+  padding: 10px 20px;
   border-radius: 999px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -203,7 +204,7 @@ body {
   border-radius: 999px;
   background: var(--navy);
   color: var(--white);
-  padding: 16px 36px;
+  padding: 18px 36px;
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
@@ -214,7 +215,7 @@ body {
 .welcome-start-button:hover {
   background: var(--blue);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(29,78,216,0.3);
+  box-shadow: 0 8px 24px rgba(44,84,146,0.3);
 }
 
 /* ── MESSAGES ── */
@@ -304,7 +305,7 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 12px;
-  padding: 20px 40px 28px;
+  padding: 24px 40px 32px;
   background: var(--white);
   border-top: 1px solid var(--border);
 }
@@ -312,14 +313,15 @@ body {
 .option-button {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 14px 18px;
+  gap: 14px;
+  padding: 16px 20px;
+  min-height: 56px;
   border: 1.5px solid var(--border);
-  border-radius: 14px;
+  border-radius: 16px;
   background: var(--white);
   color: var(--navy);
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.2s ease;
   text-align: left;
@@ -329,16 +331,16 @@ body {
   transform: translateY(-2px);
   border-color: var(--blue);
   background: var(--blue-light);
-  box-shadow: 0 6px 20px rgba(29,78,216,0.12);
+  box-shadow: 0 6px 20px rgba(44,84,146,0.12);
 }
 
 .option-letter {
-  width: 28px;
-  height: 28px;
-  min-width: 28px;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
   display: grid;
   place-items: center;
-  border-radius: 8px;
+  border-radius: 10px;
   background: var(--navy);
   color: var(--white);
   font-size: 0.8rem;
@@ -347,12 +349,12 @@ body {
 
 /* ── RECOMMENDATION CARD ── */
 .recommendation-card {
-  margin: 20px 40px 28px;
-  border-radius: 20px;
+  margin: 24px 40px 32px;
+  border-radius: 22px;
   background: var(--white);
   border: 1px solid var(--border);
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(15,23,42,0.08);
+  box-shadow: 0 10px 32px rgba(44,84,146,0.22);
 }
 
 .rec-header {
@@ -395,18 +397,18 @@ body {
   margin: 0 0 10px;
   color: var(--text-muted);
   line-height: 1.7;
-  font-size: 0.9rem;
+  padding: 24px 32px 0;
 }
 
 .rec-section {
-  padding: 20px 28px 0;
+  padding: 24px 32px 0;
 }
 
 .rec-section-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   font-size: 0.95rem;
   font-weight: 700;
   color: var(--navy);
@@ -459,8 +461,8 @@ body {
 }
 
 .stream-tag {
-  background: #e0f2fe;
-  color: #0369a1;
+  background: var(--blue-light);
+  color: var(--navy);
   border-radius: 999px;
   padding: 3px 9px;
   font-size: 0.75rem;
@@ -561,17 +563,17 @@ body {
 .rec-actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  padding: 20px 28px 24px;
-  margin-top: 8px;
+  gap: 14px;
+  padding: 24px 32px 28px;
+  margin-top: 10px;
 }
 
 .btn-primary {
   border: none;
-  border-radius: 12px;
-  padding: 14px 18px;
+  border-radius: 16px;
+  padding: 15px 22px;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   cursor: pointer;
   background: var(--navy);
   color: var(--white);
@@ -585,10 +587,10 @@ body {
 
 .btn-secondary {
   border: 1.5px solid var(--navy);
-  border-radius: 12px;
-  padding: 14px 18px;
+  border-radius: 16px;
+  padding: 15px 22px;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   cursor: pointer;
   background: transparent;
   color: var(--navy);

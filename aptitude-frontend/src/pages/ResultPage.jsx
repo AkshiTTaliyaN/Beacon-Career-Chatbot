@@ -1,10 +1,8 @@
 import { Download, Briefcase, GraduationCap, Target, Users, Compass, AlertTriangle, CheckCircle2, Calendar, MapPin, BookOpen, TrendingUp, Heart, FileText } from "lucide-react";
+import { RIASEC_COLORS } from "../constants/riasecColors";
 import "./ResultPage.css";
 
-const CATEGORY_COLORS = {
-  Investigative: "#3b82f6", Realistic: "#ef4444", Conventional: "#22c55e",
-  Enterprising: "#f97316", Artistic: "#8b5cf6", Social: "#14b8a6",
-};
+const getColor = (category) => RIASEC_COLORS[category?.[0]] || "#2C5492";
 
 const TRAITS = {
   Investigative: ["Deeply analytical and logical", "Naturally curious about how things work", "Prefers working independently on complex problems", "Drawn to research, data, and evidence", "Thinks carefully before acting", "Values knowledge and intellectual challenge"],
@@ -211,7 +209,7 @@ const ADMISSION_PROCESS = {
 
 export default function ResultPage({ result, onDownloadPDF, onRetake }) {
   const primary = result.primary_type;
-  const primaryCode = primary[0];
+  const primaryColor = getColor(primary);
   const traits = TRAITS[primary] || [];
   const strengths = STRENGTHS[primary] || [];
   const challenges = CHALLENGES[primary] || [];
@@ -241,7 +239,7 @@ export default function ResultPage({ result, onDownloadPDF, onRetake }) {
           <h2 className="section-title">Personality Overview</h2>
           <div className="overview-layout">
             <div className="overview-left">
-              <span className="primary-type" style={{color: CATEGORY_COLORS[primary] || "#3b82f6"}}>{primary}</span>
+              <span className="primary-type" style={{color: primaryColor}}>{primary}</span>
               <p className="secondary-type">Secondary: <strong>{result.secondary_type}</strong></p>
               <div className="holland-code">
                 <span className="hc-label">Holland Code</span>
@@ -259,7 +257,7 @@ export default function ResultPage({ result, onDownloadPDF, onRetake }) {
               <div key={item.category} className="score-row">
                 <span className="score-label">{item.category}</span>
                 <div className="score-bar-wrap">
-                  <div className="score-bar-fill" style={{width:`${item.score}%`, background: CATEGORY_COLORS[item.category] || "#3b82f6"}}/>
+                  <div className="score-bar-fill" style={{width:`${item.score}%`, background: getColor(item.category)}}/>
                 </div>
                 <span className="score-pct">{item.score}%</span>
               </div>
@@ -276,7 +274,7 @@ export default function ResultPage({ result, onDownloadPDF, onRetake }) {
           <div className="traits-grid">
             {traits.map((trait, i) => (
               <div key={i} className="trait-chip">
-                <span className="trait-dot" style={{background: CATEGORY_COLORS[primary]}}/>
+                <span className="trait-dot" style={{background: primaryColor}}/>
                 {trait}
               </div>
             ))}
@@ -289,11 +287,11 @@ export default function ResultPage({ result, onDownloadPDF, onRetake }) {
         <section className="result-section">
           <h2 className="section-title">Strengths &amp; Challenges</h2>
           <div className="sc-layout">
-            <div className="sc-card strengths-card">
+            <div className="sc-card strengths-card" style={{borderTopColor: primaryColor}}>
               <h3><CheckCircle2 size={18}/> Your strengths</h3>
               <ul>{strengths.map((s, i) => <li key={i}>{s}</li>)}</ul>
             </div>
-            <div className="sc-card challenges-card">
+            <div className="sc-card challenges-card" style={{borderTopColor: primaryColor}}>
               <h3><AlertTriangle size={18}/> Potential challenges</h3>
               <ul>{challenges.map((c, i) => <li key={i}>{c}</li>)}</ul>
               <p className="challenge-note">These are natural tendencies, not fixed limitations. Awareness is the first step to growth.</p>
@@ -367,7 +365,7 @@ export default function ResultPage({ result, onDownloadPDF, onRetake }) {
           <p className="section-sub">Based on your personality profile, these career paths may feel draining or misaligned with how you naturally work. This does not mean you cannot do them — only that they may require more effort to sustain long-term.</p>
           <div className="avoid-grid">
             {avoidCareers.map((c, i) => (
-              <div key={i} className="avoid-chip">{c}</div>
+              <div key={i} className="avoid-chip"><span className="avoid-icon" style={{color: primaryColor}}>&#10007;</span>{c}</div>
             ))}
           </div>
         </section>
@@ -455,9 +453,9 @@ export default function ResultPage({ result, onDownloadPDF, onRetake }) {
         <section className="result-section">
           <h2 className="section-title">For Your Parents</h2>
           <p className="section-sub">A clear, jargon-free note to share with your parents — to help them understand your personality type and how to support you.</p>
-          <div className="parent-card" style={{borderLeftColor: CATEGORY_COLORS[primary]}}>
+          <div className="parent-card" style={{borderLeftColor: primaryColor}}>
             <div className="parent-card-header">
-              <Heart size={20} style={{color: CATEGORY_COLORS[primary]}}/>
+              <Heart size={20} style={{color: primaryColor}}/>
               <h4>A note for parents of a <strong>{primary}</strong> child</h4>
             </div>
             <p>{parentNote}</p>
@@ -471,7 +469,7 @@ export default function ResultPage({ result, onDownloadPDF, onRetake }) {
         <section className="result-section">
           <h2 className="section-title">A Note for You</h2>
           <div className="closing-card">
-            <div className="closing-accent" style={{background: CATEGORY_COLORS[primary]}}/>
+            <div className="closing-accent" style={{background: primaryColor}}/>
             <p className="closing-text">{result.closing_note}</p>
             <p className="closing-footer">Remember — this report is a starting point, not a verdict. Career paths are rarely straight lines. Use this as a guide to explore, ask questions, and make informed choices. You have time.</p>
           </div>

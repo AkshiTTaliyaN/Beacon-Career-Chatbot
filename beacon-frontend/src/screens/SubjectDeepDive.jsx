@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Layout from "../components/Layout";
 
-const COLORS = { muted: "#6b7280" };
+const COLORS = { muted: "#556d8f" };
 
 /* ─── Sub-topic options keyed by subject key ─────────────────── */
 const OPTIONS = {
@@ -135,7 +135,7 @@ export default function SubjectDeepDive({ form, setForm, onNext, onBack }) {
           return (
             <div key={key} style={{
               borderRadius: 14,
-              border: selected ? "1.5px solid #2d5be3" : "1.5px solid #e4e0db",
+              border: selected ? "1.5px solid #2C5492" : "1.5px solid #e4e0db",
               background: selected
                 ? "linear-gradient(135deg, #eef1fd 0%, #f7f8ff 100%)"
                 : "#ffffff",
@@ -197,7 +197,7 @@ export default function SubjectDeepDive({ form, setForm, onNext, onBack }) {
                   ))}
                 </select>
                 {selected === "none" && (
-                  <p style={{ margin: "4px 0 0", fontSize: "0.78rem", color: "#6b7280", fontStyle: "italic" }}>
+                  <p style={{ margin: "4px 0 0", fontSize: "0.78rem", color: "#556d8f", fontStyle: "italic" }}>
                     That's okay — we'll focus your recommendations on other subjects.
                   </p>
                 )}

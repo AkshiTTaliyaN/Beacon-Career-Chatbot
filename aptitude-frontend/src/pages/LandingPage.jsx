@@ -1,6 +1,16 @@
 import { Brain, BarChart3, Briefcase, FileText, Wrench, Download, Compass, Users, Lightbulb, MapPin } from "lucide-react";
 import heroImage from "../assets/hero.jpg";
 import "./LandingPage.css";
+import { RIASEC_COLORS } from "../constants/riasecColors";
+
+const RIASEC_TYPES = [
+  { code: "R", name: "Realistic", desc: "Practical, hands-on, mechanical", color: RIASEC_COLORS.R },
+  { code: "I", name: "Investigative", desc: "Analytical, curious, research-oriented", color: RIASEC_COLORS.I },
+  { code: "A", name: "Artistic", desc: "Creative, expressive, imaginative", color: RIASEC_COLORS.A },
+  { code: "S", name: "Social", desc: "Empathetic, collaborative, people-focused", color: RIASEC_COLORS.S },
+  { code: "E", name: "Enterprising", desc: "Ambitious, persuasive, leadership-driven", color: RIASEC_COLORS.E },
+  { code: "C", name: "Conventional", desc: "Organised, precise, detail-oriented", color: RIASEC_COLORS.C },
+];
 
 const FAQS = [
   { q: "Is this test free?", a: "Yes, completely free. No login, no payment, no hidden charges. You can take the test as many times as you want." },
@@ -69,14 +79,7 @@ export default function LandingPage({ onStart }) {
               </p>
             </div>
             <div className="riasec-types-grid">
-              {[
-                { code: "R", name: "Realistic", desc: "Practical, hands-on, mechanical", color: "#ef4444" },
-                { code: "I", name: "Investigative", desc: "Analytical, curious, research-oriented", color: "#3b82f6" },
-                { code: "A", name: "Artistic", desc: "Creative, expressive, imaginative", color: "#8b5cf6" },
-                { code: "S", name: "Social", desc: "Empathetic, collaborative, people-focused", color: "#14b8a6" },
-                { code: "E", name: "Enterprising", desc: "Ambitious, persuasive, leadership-driven", color: "#f97316" },
-                { code: "C", name: "Conventional", desc: "Organised, precise, detail-oriented", color: "#22c55e" },
-              ].map(t => (
+              {RIASEC_TYPES.map(t => (
                 <div key={t.code} className="type-pill">
                   <span className="type-code" style={{ color: t.color }}>{t.code}</span>
                   <div>

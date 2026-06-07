@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import QUESTIONS from "../data/questions";
+import { RIASEC_COLORS } from "../constants/riasecColors";
 import "./TestPage.css";
 
 const CATEGORY_LABELS = { R: "Realistic", I: "Investigative", A: "Artistic", S: "Social", E: "Enterprising", C: "Conventional" };
@@ -15,42 +16,42 @@ const CATEGORY_MOTTOS = {
 
 const CATEGORY_INFO = {
   R: {
-    color: "#ef4444",
+    color: RIASEC_COLORS.R,
     tagline: "The Builder",
     about: "Realistic types are practical, hands-on people who enjoy working with tools, machines, and physical systems. They prefer concrete tasks with visible results over abstract thinking.",
     careers: ["Mechanical Engineer", "Architect", "Electrician", "Pilot", "Civil Engineer"],
     tip: "Think about activities you genuinely enjoy — not ones you think sound good.",
   },
   I: {
-    color: "#3b82f6",
+    color: RIASEC_COLORS.I,
     tagline: "The Thinker",
     about: "Investigative types are curious, analytical, and love solving complex problems. They are driven by a need to understand how things work and thrive in research and data-driven environments.",
     careers: ["Data Scientist", "Research Scientist", "Doctor", "Software Engineer", "Economist"],
     tip: "Answer based on your natural curiosity — not what you studied or were told to like.",
   },
   A: {
-    color: "#8b5cf6",
+    color: RIASEC_COLORS.A,
     tagline: "The Creator",
     about: "Artistic types are imaginative, expressive, and value originality. They thrive in environments that offer creative freedom and dislike rigid structures or routine.",
     careers: ["UI/UX Designer", "Film Director", "Journalist", "Architect", "Musician"],
     tip: "Think about when you feel most free and energised — that is your Artistic side speaking.",
   },
   S: {
-    color: "#14b8a6",
+    color: RIASEC_COLORS.S,
     tagline: "The Helper",
     about: "Social types are empathetic, people-oriented, and motivated by helping others. They are natural communicators who find meaning in making a positive difference in people's lives.",
     careers: ["Psychologist", "Teacher", "Doctor", "Social Worker", "HR Manager"],
     tip: "Reflect on moments when helping someone felt genuinely fulfilling — not just polite.",
   },
   E: {
-    color: "#f97316",
+    color: RIASEC_COLORS.E,
     tagline: "The Leader",
     about: "Enterprising types are ambitious, persuasive, and natural leaders. They are energised by challenge, competition, and the opportunity to influence and achieve.",
     careers: ["Entrepreneur", "Lawyer", "Marketing Manager", "Politician", "Business Consultant"],
     tip: "Think about whether you naturally step up in group situations — or prefer to follow.",
   },
   C: {
-    color: "#22c55e",
+    color: RIASEC_COLORS.C,
     tagline: "The Organiser",
     about: "Conventional types are detail-oriented, methodical, and thrive in structured environments. They excel at managing information, following systems, and ensuring accuracy.",
     careers: ["Chartered Accountant", "Financial Analyst", "Bank Manager", "Data Analyst", "Administrator"],

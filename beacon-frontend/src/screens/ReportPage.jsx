@@ -35,7 +35,7 @@ function Bar({ label, value, color }) {
   return (
     <div style={{ marginBottom: 14 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
-        <span style={{ color: '#07143a', fontWeight: 700, fontSize: '0.95rem' }}>{label}</span>
+        <span style={{ color: '#102849', fontWeight: 700, fontSize: '0.95rem' }}>{label}</span>
         <span style={{ color: '#374151', fontWeight: 600 }}>{pct}%</span>
       </div>
       <div style={{ background: '#e6eef9', borderRadius: 8, height: 12, overflow: 'hidden' }}>
@@ -43,7 +43,7 @@ function Bar({ label, value, color }) {
           style={{
             width: `${pct}%`,
             height: '100%',
-            background: color || '#2563EB',
+            background: color || '#2C5492',
             borderRadius: 8,
             transition: 'width 0.8s ease',
           }}
@@ -93,12 +93,12 @@ export default function ReportPage() {
   }, []);
 
   // ── UI helpers ────────────────────────────────────────────────────────────
-  const NAVY = '#07143a';
+  const NAVY = '#2C5492';
 
   if (loading) {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Inter, system-ui, sans-serif' }}>
-        <p style={{ color: '#6b7280' }}>Loading your report…</p>
+        <p style={{ color: '#556d8f' }}>Loading your report…</p>
       </div>
     );
   }
@@ -124,7 +124,7 @@ export default function ReportPage() {
   }[profile?.stream || ''] || '';
 
   const hasScores = sortedScores.length >= 2;
-  const primaryColor = RIASEC_COLORS[primaryName] || '#2563EB';
+  const primaryColor = RIASEC_COLORS[primaryName] || '#2C5492';
 
   return (
     <div style={{ background: '#fff', color: '#111827', minHeight: '100vh', fontFamily: 'Inter, system-ui, -apple-system, Roboto, sans-serif' }}>
@@ -185,7 +185,7 @@ export default function ReportPage() {
                   <div style={{ marginTop: 10, color: '#374151', fontSize: '0.9rem' }}>
                     Secondary: <strong style={{ color: NAVY }}>{secondaryName}</strong>
                   </div>
-                  <div style={{ marginTop: 8, fontSize: '0.85rem', color: '#6b7280' }}>
+                  <div style={{ marginTop: 8, fontSize: '0.85rem', color: '#556d8f' }}>
                     Holland Code: <strong style={{ color: NAVY }}>{sortedScores.slice(0, 3).map(s => s.code).join('')}</strong>
                   </div>
                 </div>
@@ -201,7 +201,7 @@ export default function ReportPage() {
                           key={item.code}
                           label={item.name}
                           value={item.value}
-                          color={RIASEC_COLORS[item.name] || '#2563EB'}
+                          color={RIASEC_COLORS[item.name] || '#2C5492'}
                         />
                       ))}
                     </div>
@@ -244,22 +244,22 @@ export default function ReportPage() {
                     borderTop: `3px solid ${RIASEC_COLORS[item.name] || '#94a3b8'}`,
                     borderRadius: 10,
                     padding: '1rem 1.2rem',
-                    boxShadow: '0 2px 8px rgba(7,20,58,0.05)',
+                    boxShadow: '0 2px 8px rgba(44,84,146,0.08)',
                   }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div>
                         <div style={{ fontWeight: 800, color: NAVY, fontSize: '1rem' }}>{item.name}</div>
-                        <div style={{ fontSize: '0.8rem', color: '#6b7280', marginTop: 2 }}>{item.code}</div>
+                        <div style={{ fontSize: '0.8rem', color: '#556d8f', marginTop: 2 }}>{item.code}</div>
                       </div>
-                      <div style={{ fontSize: '1.8rem', fontWeight: 800, color: RIASEC_COLORS[item.name] || '#6b7280' }}>
+                      <div style={{ fontSize: '1.8rem', fontWeight: 800, color: RIASEC_COLORS[item.name] || '#556d8f' }}>
                         {item.value}%
                       </div>
                     </div>
                     <div style={{ marginTop: 10, background: '#f1f5f9', borderRadius: 6, height: 8, overflow: 'hidden' }}>
-                      <div style={{ width: `${item.value}%`, height: '100%', background: RIASEC_COLORS[item.name] || '#6b7280', borderRadius: 6 }} />
+                      <div style={{ width: `${item.value}%`, height: '100%', background: RIASEC_COLORS[item.name] || '#2C5492', borderRadius: 6 }} />
                     </div>
                     {i === 0 && <div style={{ marginTop: 8, fontSize: '0.78rem', color: primaryColor, fontWeight: 600 }}>Primary type</div>}
-                    {i === 1 && <div style={{ marginTop: 8, fontSize: '0.78rem', color: '#6b7280', fontWeight: 600 }}>Secondary type</div>}
+                    {i === 1 && <div style={{ marginTop: 8, fontSize: '0.78rem', color: '#556d8f', fontWeight: 600 }}>Secondary type</div>}
                   </div>
                 ))}
               </div>

@@ -4,12 +4,17 @@
   "private": true,
   "description": "Beacon Career Counselling Platform — unified dev launcher",
   "scripts": {
-    "dev": "concurrently -k -n BB,BF,CB,CF,AB,AF -c blue,cyan,green,yellow,magenta,red \"npm:dev:beacon-back\" \"npm:dev:beacon-front\" \"npm:dev:chatbot-back\" \"npm:dev:chatbot-front\" \"npm:dev:aptitude-back\" \"npm:dev:aptitude-front\"",
+    "dev": "node -e \"const { spawnSync } = require('child_process'); const isWin = process.platform === 'win32'; const cmd = isWin ? 'npm run dev:windows' : 'npm run dev:mac'; const r = spawnSync(cmd, { stdio: 'inherit', shell: true }); process.exit(r.status);\"",
+    "dev:windows": "concurrently -k -n BB,BF,CB,CF,AB,AF -c blue,cyan,green,yellow,magenta,red \"npm:dev:beacon-back\" \"npm:dev:beacon-front\" \"npm:dev:chatbot-back\" \"npm:dev:chatbot-front\" \"npm:dev:aptitude-back\" \"npm:dev:aptitude-front\"",
+    "dev:mac": "concurrently -k -n BB,BF,CB,CF,AB,AF -c blue,cyan,green,yellow,magenta,red \"npm:dev:beacon-back:mac\" \"npm:dev:beacon-front\" \"npm:dev:chatbot-back:mac\" \"npm:dev:chatbot-front\" \"npm:dev:aptitude-back:mac\" \"npm:dev:aptitude-front\"",
     "dev:beacon-back": "powershell -NoProfile -Command \"cd beacon-backend; & .\\venv\\Scripts\\Activate.ps1; uvicorn main:app --reload --host 127.0.0.1 --port 8000\"",
+    "dev:beacon-back:mac": "cd beacon-backend && . .venv/bin/activate && uvicorn main:app --reload --host 127.0.0.1 --port 8000",
     "dev:beacon-front": "cd beacon-frontend && npx vite --port 5173",
     "dev:chatbot-back": "powershell -NoProfile -Command \"cd chatbot-backend; & .\\venv\\Scripts\\Activate.ps1; uvicorn main:app --reload --host 127.0.0.1 --port 8002\"",
+    "dev:chatbot-back:mac": "cd chatbot-backend && . .venv/bin/activate && uvicorn main:app --reload --host 127.0.0.1 --port 8002",
     "dev:chatbot-front": "cd chatbot-frontend && npx vite --port 5174",
     "dev:aptitude-back": "powershell -NoProfile -Command \"cd aptitude-backend; & .\\venv\\Scripts\\Activate.ps1; uvicorn main:app --reload --host 127.0.0.1 --port 8001\"",
+    "dev:aptitude-back:mac": "cd aptitude-backend && . .venv/bin/activate && uvicorn main:app --reload --host 127.0.0.1 --port 8001",
     "dev:aptitude-front": "cd aptitude-frontend && npx vite --port 3001",
     "setup": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/setup.ps1",
     "install:all": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/install-all.ps1"

@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
+import { ED_CIL_THEME } from '../theme.js'
 
 const COLORS = {
-  navy: '#07143a',
-  white: '#ffffff',
-  muted: '#374151',
-  blue: '#2563EB',
+  navy: ED_CIL_THEME.primary,
+  white: ED_CIL_THEME.surface,
+  muted: '#556d8f',
+  blue: ED_CIL_THEME.primary,
   green: '#059669',
-  purple: '#7C3AED',
-  lightGray: '#f7f9fb'
+  purple: '#7c3aed',
+  lightGray: '#eef4ff'
 }
 
 const careersData = [
@@ -64,7 +65,7 @@ export default function CareerLibrary() {
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 12 }}>
           {filtered.map((c, idx) => (
-            <article key={idx} onClick={() => setSelected(c)} style={{ cursor: 'pointer', borderRadius: 12, padding: 16, background: '#fff', boxShadow: '0 6px 18px rgba(7,20,58,0.06)', border: '1px solid rgba(7,20,58,0.04)' }}>
+            <article key={idx} onClick={() => setSelected(c)} style={{ cursor: 'pointer', borderRadius: 12, padding: 16, background: '#fff', boxShadow: '0 6px 18px rgba(44,84,146,0.10)', border: '1px solid rgba(44,84,146,0.12)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <div style={{ fontWeight: 800, color: COLORS.navy }}>{c.name}</div>
                 <div style={{ fontWeight: 800, padding: '4px 8px', borderRadius: 8, fontSize: 12, color: '#fff', background: c.stream === 'Science' ? COLORS.blue : c.stream === 'Commerce' ? COLORS.green : COLORS.purple }}>{c.stream}</div>

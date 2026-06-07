@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Layout from "../components/Layout";
 
-const NAVY = '#07143a';
+const NAVY = '#2C5492';
 
 const PRIORITIES = [
   'High Salary',

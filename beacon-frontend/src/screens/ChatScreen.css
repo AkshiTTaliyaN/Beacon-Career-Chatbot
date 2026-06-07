@@ -1,7 +1,7 @@
 .chat-page {
   min-height: 100vh;
-  background: #eef3f8;
-  color: #07143a;
+  background: var(--blue-bg);
+  color: #102849;
   display: flex;
   flex-direction: column;
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -9,14 +9,14 @@
 
 .chat-topbar {
   height: 76px;
-  background: #07143a;
+  background: var(--blue);
   color: #fff;
   display: grid;
   grid-template-columns: 112px 1fr 112px;
   align-items: center;
   gap: 16px;
   padding: 0 24px;
-  box-shadow: 0 12px 36px rgba(7, 20, 58, 0.16);
+  box-shadow: 0 12px 36px rgba(55, 88, 213, 0.16);
 }
 
 .chat-topbar p {
@@ -60,7 +60,7 @@
 .restart-button {
   justify-self: end;
   background: #fff;
-  color: #07143a;
+  color: var(--blue);
 }
 
 .restart-button:disabled {
@@ -86,9 +86,9 @@
 }
 
 .profile-strip strong {
-  color: #07143a;
-  background: #e8f0ff;
-  border: 1px solid #cddbf4;
+  color: #102849;
+  background: var(--blue-bg);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 6px 10px;
   font-size: 0.8rem;
@@ -135,7 +135,7 @@
   display: grid;
   place-items: center;
   border-radius: 8px;
-  background: #07143a;
+  background: var(--blue);
   color: #fff;
   font-size: 0.78rem;
   font-weight: 900;
@@ -148,13 +148,13 @@
   font-size: 0.95rem;
   border: 1px solid #dce5ef;
   background: #fff;
-  box-shadow: 0 5px 18px rgba(7, 20, 58, 0.05);
+  box-shadow: 0 5px 18px rgba(55, 88, 213, 0.05);
 }
 
 .chat-message.user .chat-bubble {
   color: #fff;
-  background: #07143a;
-  border-color: #07143a;
+  background: var(--blue);
+  border-color: var(--blue);
 }
 
 .typing-row {
@@ -172,7 +172,7 @@
   width: 7px;
   height: 7px;
   border-radius: 999px;
-  background: #07143a;
+  background: var(--blue);
   opacity: 0.3;
   animation: chatPulse 1s infinite ease-in-out;
 }
@@ -186,7 +186,7 @@
   gap: 12px;
   padding: 16px 18px 18px;
   background: #fff;
-  border-top: 1px solid #d8e1ec;
+  border-top: 1px solid var(--border);
 }
 
 .chat-option {
@@ -194,7 +194,7 @@
   border: 1px solid #cfd9e6;
   border-radius: 8px;
   background: #fff;
-  color: #07143a;
+  color: #102849;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -205,7 +205,7 @@
 
 .chat-option:hover:not(:disabled) {
   background: #eef5ff;
-  border-color: #2d5be3;
+  border-color: var(--blue);
   transform: translateY(-1px);
 }
 
@@ -221,7 +221,7 @@
   display: grid;
   place-items: center;
   border-radius: 7px;
-  background: #07143a;
+  background: var(--blue);
   color: #fff;
   font-size: 0.78rem;
   font-weight: 900;
@@ -241,7 +241,7 @@
   border: 1px solid #dce5ef;
   border-radius: 8px;
   padding: 22px;
-  box-shadow: 0 10px 28px rgba(7, 20, 58, 0.08);
+  box-shadow: 0 10px 28px rgba(55, 88, 213, 0.08);
 }
 
 .chat-result-header {
@@ -252,7 +252,7 @@
 
 .chat-result-header span {
   display: block;
-  color: #2d5be3;
+  color: var(--blue);
   font-size: 0.75rem;
   font-weight: 900;
   text-transform: uppercase;
@@ -275,7 +275,7 @@
 .fit-notes p,
 .chat-result > p {
   margin: 0;
-  color: #526070;
+  color: #556d8f;
   line-height: 1.62;
   font-size: 0.92rem;
 }
@@ -316,7 +316,7 @@
 .career-tile p,
 .exam-list p {
   margin: 0;
-  color: #526070;
+  color: #556d8f;
   font-size: 0.84rem;
   line-height: 1.5;
 }
@@ -330,8 +330,8 @@
 .tile-tags span {
   border-radius: 7px;
   padding: 5px 8px;
-  background: #e8f0ff;
-  color: #07143a;
+  background: var(--blue-bg);
+  color: #102849;
   font-size: 0.75rem;
   font-weight: 800;
 }
@@ -352,7 +352,7 @@
 
 .exam-list span {
   display: block;
-  color: #2d5be3;
+  color: var(--blue);
   font-size: 0.78rem;
   font-weight: 800;
   margin: 4px 0 6px;
@@ -386,7 +386,7 @@
   border-radius: 6px;
   display: grid;
   place-items: center;
-  background: #07143a;
+  background: var(--blue);
   color: #fff;
   font-size: 0.74rem;
   font-weight: 900;
@@ -414,14 +414,14 @@
 .result-actions button,
 .handoff-actions a,
 .chat-error button {
-  background: #07143a;
+  background: var(--blue);
   color: #fff;
 }
 
 .result-actions .secondary {
   background: #fff;
-  color: #07143a;
-  border: 1px solid #07143a;
+  color: var(--blue);
+  border: 1px solid var(--blue);
 }
 
 .chat-error {

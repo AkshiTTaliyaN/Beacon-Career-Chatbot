@@ -210,10 +210,10 @@ export default function SubjectRatings({ form, setForm, onNext, onBack }) {
           fontSize: "0.8rem",
           fontWeight: 700,
           letterSpacing: "0.04em",
-          background: "linear-gradient(90deg, #2d5be3 0%, #5b8af5 100%)",
+          background: "linear-gradient(90deg, #2C5492 0%, #7b9ef7 100%)",
           color: "#fff",
           marginBottom: "1.25rem",
-          boxShadow: "0 2px 10px rgba(45,91,227,0.25)",
+          boxShadow: "0 2px 10px rgba(44,84,146,0.25)",
           alignSelf: "flex-start",
         }}>
           ✦ {streamLabels[form.stream] || form.stream} stream
@@ -238,7 +238,7 @@ export default function SubjectRatings({ form, setForm, onNext, onBack }) {
             display: "flex",
             justifyContent: "space-between",
             fontSize: "0.8rem",
-            color: "#6b7280",
+            color: "#556d8f",
             marginBottom: 6,
           }}>
             <span style={{ fontWeight: 600 }}>
@@ -259,7 +259,7 @@ export default function SubjectRatings({ form, setForm, onNext, onBack }) {
               width: `${(ratedCount / subjects.length) * 100}%`,
               background: allRated
                 ? "linear-gradient(90deg, #10b981, #34d399)"
-                : "linear-gradient(90deg, #2d5be3, #5b8af5)",
+                : "linear-gradient(90deg, #2C5492, #7b9ef7)",
               borderRadius: 999,
               transition: "width 0.3s ease",
             }} />

@@ -3,12 +3,13 @@ import HeroSection from '../components/HeroSection.jsx'
 import PsychometricTest from '../components/PsychometricTest.jsx'
 import RiasecGate from './RiasecGate.jsx'
 import { getSmartRecommendations } from '../api/client.js'
+import EdCilLogo from '../assets/edcil.jpeg'
 
 const COLORS = {
-  navy: '#07143a',
+  navy: '#2C5492',
   white: '#ffffff',
-  lightNavy: '#0b1b45',
-  muted: 'rgba(7,20,58,0.7)'
+  lightNavy: '#5f7dd6',
+  muted: 'rgba(16,40,73,0.7)'
 }
 
 const styles = {
@@ -18,22 +19,22 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '1rem 1.25rem',
-    background: 'rgba(10,25,60,0.95)',
-    color: COLORS.white,
+    background: 'rgba(44,84,146,0.12)',
+    color: COLORS.navy,
     position: 'sticky',
     top: 0,
     zIndex: 40,
     backdropFilter: 'blur(12px)',
     WebkitBackdropFilter: 'blur(12px)',
-    borderBottom: '1px solid rgba(255,255,255,0.08)'
+    borderBottom: '1px solid rgba(44,84,146,0.16)'
   },
   navbarScrolled: {
     boxShadow: '0 1px 20px rgba(0,0,0,0.15)'
   },
   logo: { fontWeight: 800, fontSize: '1.15rem', letterSpacing: '-0.02em' },
   navLinks: { display: 'flex', gap: '1rem', alignItems: 'center' },
-  link: { color: COLORS.white, textDecoration: 'none', fontWeight: 600, opacity: 0.95 },
-  profile: { width: 36, height: 36, borderRadius: 999, background: 'rgba(255,255,255,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: COLORS.white, fontWeight: 700 },
+  link: { color: COLORS.navy, textDecoration: 'none', fontWeight: 600, opacity: 0.95 },
+  profile: { width: 36, height: 36, borderRadius: 999, background: 'rgba(44,84,146,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: COLORS.navy, fontWeight: 700 },
   sectionHeading: { display: 'flex', alignItems: 'center', gap: '0.85rem', marginBottom: '0.75rem' },
   headingAccent: { width: 3, height: 32, background: COLORS.navy, borderRadius: 2 },
   sectionTitle: { color: COLORS.navy, margin: 0, fontSize: '1.85rem', fontWeight: 800 }
@@ -112,12 +113,12 @@ export default function Dashboard({ userName }) {
         .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
         .fade-up.visible { opacity: 1; transform: translateY(0); }
         .interactive-card { transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, border-top-color 0.25s ease; border-top: 3px solid transparent; }
-        .interactive-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(30,58,138,0.12); border-color: rgba(15,23,42,0.18); border-top-color: #0f172a; }
+        .interactive-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(44,84,146,0.18); border-color: rgba(44,84,146,0.18); border-top-color: #2C5492; }
         .dashboard-button { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .dashboard-button:hover { transform: scale(1.03); box-shadow: 0 4px 20px rgba(37,99,235,0.35); }
-        .dashboard-button.secondary:hover { transform: scale(1.03); box-shadow: 0 4px 20px rgba(37,99,235,0.18); }
+        .dashboard-button:hover { transform: scale(1.03); box-shadow: 0 4px 20px rgba(44,84,146,0.28); }
+        .dashboard-button.secondary:hover { transform: scale(1.03); box-shadow: 0 4px 20px rgba(44,84,146,0.16); }
         .typing-dots { display: flex; gap: 6px; margin-top: 0.75rem; }
-        .typing-dots span { width: 8px; height: 8px; border-radius: 50%; background: rgba(7,20,58,0.35); animation: pulse 1.2s infinite ease-in-out; opacity: 0.8; }
+        .typing-dots span { width: 8px; height: 8px; border-radius: 50%; background: rgba(44,84,146,0.35); animation: pulse 1.2s infinite ease-in-out; opacity: 0.8; }
         .typing-dots span:nth-child(2) { animation-delay: 0.15s; }
         .typing-dots span:nth-child(3) { animation-delay: 0.3s; }
         @keyframes pulse { 0%, 80%, 100% { transform: scale(1); opacity: 0.6; } 40% { transform: scale(1.4); opacity: 1; } }
@@ -134,6 +135,8 @@ export default function Dashboard({ userName }) {
       </header>
 
       <HeroSection
+        logoSrc={EdCilLogo}
+        logoAlt="EdCIL Logo"
         title={heading}
         subtitle={heroSubtitle}
         primaryText={'Chat with AI'}
@@ -163,13 +166,13 @@ export default function Dashboard({ userName }) {
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '1rem' }}>
-            <div style={{ background: COLORS.white, color: COLORS.navy, padding: '0.75rem 1rem', borderRadius: '12px 12px 12px 0px', border: `1px solid rgba(7,20,58,0.1)`, maxWidth: '80%', wordWrap: 'break-word' }}>
+            <div style={{ background: COLORS.white, color: COLORS.navy, padding: '0.75rem 1rem', borderRadius: '12px 12px 12px 0px', border: `1px solid rgba(44,84,146,0.15)`, maxWidth: '80%', wordWrap: 'break-word' }}>
               Great question! With PCM, careers like Software Engineering, Data Science, and Mechanical Engineering are excellent fits.
             </div>
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-            <div style={{ background: COLORS.white, color: COLORS.navy, padding: '0.75rem 1rem', borderRadius: '12px 12px 12px 0px', border: `1px solid rgba(7,20,58,0.1)`, maxWidth: '80%', wordWrap: 'break-word' }}>
+            <div style={{ background: COLORS.white, color: COLORS.navy, padding: '0.75rem 1rem', borderRadius: '12px 12px 12px 0px', border: `1px solid rgba(44,84,146,0.15)`, maxWidth: '80%', wordWrap: 'break-word' }}>
               I'd recommend exploring these through our Career Library, and take the psychometric test to align them with your interests!
               <div className="typing-dots">
                 <span />
@@ -192,7 +195,7 @@ export default function Dashboard({ userName }) {
               fontWeight: 700,
               fontSize: '1rem',
               cursor: 'pointer',
-              boxShadow: '0 4px 12px rgba(7,20,58,0.15)'
+              boxShadow: '0 4px 12px rgba(44,84,146,0.22)'
             }}
             onClick={() => { window.history.pushState({}, '', '/chat'); window.dispatchEvent(new PopStateEvent('popstate')) }}
           >
@@ -230,7 +233,7 @@ export default function Dashboard({ userName }) {
 
         {/* Error */}
         {recsError && (
-          <p style={{ color: '#6b7280', fontSize: '0.95rem' }}>{recsError}</p>
+          <p style={{ color: '#556d8f', fontSize: '0.95rem' }}>{recsError}</p>
         )}
 
         {/* Career cards */}
@@ -239,10 +242,10 @@ export default function Dashboard({ userName }) {
             {recs.map((career, i) => (
               <div key={i} className="interactive-card" style={{
                 background: '#fff',
-                border: '1px solid rgba(7,20,58,0.08)',
+                border: '1px solid rgba(44,84,146,0.12)',
                 borderRadius: 14,
                 padding: '1.5rem',
-                boxShadow: '0 4px 14px rgba(7,20,58,0.06)',
+                boxShadow: '0 4px 14px rgba(44,84,146,0.10)',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: 10,
@@ -257,7 +260,7 @@ export default function Dashboard({ userName }) {
                   <div style={{ flex: 1 }}>
                     <div style={{ fontWeight: 800, color: COLORS.navy, fontSize: '1.05rem' }}>{career.title}</div>
                     <div style={{ display: 'flex', gap: 6, marginTop: 5, flexWrap: 'wrap' }}>
-                      <span style={{ background: 'rgba(7,20,58,0.07)', color: COLORS.navy, padding: '2px 8px', borderRadius: 5, fontSize: '0.78rem', fontWeight: 700 }}>
+                      <span style={{ background: 'rgba(44,84,146,0.08)', color: COLORS.navy, padding: '2px 8px', borderRadius: 5, fontSize: '0.78rem', fontWeight: 700 }}>
                         {career.stream}
                       </span>
                       <span style={{ background: '#f0fdf4', color: '#15803d', padding: '2px 8px', borderRadius: 5, fontSize: '0.78rem', fontWeight: 700 }}>
@@ -293,10 +296,10 @@ export default function Dashboard({ userName }) {
               className="fade-up interactive-card"
               style={{
                 background: COLORS.white,
-                border: `1px solid rgba(7,20,58,0.08)`,
+                border: `1px solid rgba(44,84,146,0.12)`,
                 borderRadius: 12,
                 padding: '1.5rem',
-                boxShadow: '0 6px 18px rgba(7,20,58,0.06)',
+                boxShadow: '0 6px 18px rgba(44,84,146,0.10)',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
@@ -309,7 +312,7 @@ export default function Dashboard({ userName }) {
                 </h3>
                 <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
                   <span style={{
-                    background: 'rgba(7,20,58,0.08)',
+                    background: 'rgba(44,84,146,0.12)',
                     color: COLORS.navy,
                     padding: '0.3rem 0.6rem',
                     borderRadius: 6,
@@ -319,7 +322,7 @@ export default function Dashboard({ userName }) {
                     {career.stream}
                   </span>
                   <span style={{
-                    background: 'rgba(7,20,58,0.08)',
+                    background: 'rgba(44,84,146,0.12)',
                     color: COLORS.navy,
                     padding: '0.3rem 0.6rem',
                     borderRadius: 6,
@@ -352,7 +355,7 @@ export default function Dashboard({ userName }) {
               fontWeight: 700,
               fontSize: '0.95rem',
               cursor: 'pointer',
-              boxShadow: '0 4px 12px rgba(7,20,58,0.15)'
+              boxShadow: '0 4px 12px rgba(44,84,146,0.22)'
             }}
             onClick={() => { window.history.pushState({}, '', '/careers'); window.dispatchEvent(new PopStateEvent('popstate')) }}
           >
@@ -379,10 +382,10 @@ export default function Dashboard({ userName }) {
               className="fade-up interactive-card"
               style={{
                 background: COLORS.white,
-                border: `1px solid rgba(7,20,58,0.08)`,
+                border: `1px solid rgba(44,84,146,0.12)`,
                 borderRadius: 12,
                 padding: '1.5rem',
-                boxShadow: '0 6px 18px rgba(7,20,58,0.06)',
+                boxShadow: '0 6px 18px rgba(44,84,146,0.10)',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
@@ -395,7 +398,7 @@ export default function Dashboard({ userName }) {
                 </h3>
                 <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
                   <span style={{
-                    background: 'rgba(7,20,58,0.08)',
+                    background: 'rgba(44,84,146,0.12)',
                     color: COLORS.navy,
                     padding: '0.3rem 0.6rem',
                     borderRadius: 6,
@@ -405,7 +408,7 @@ export default function Dashboard({ userName }) {
                     {exam.stream}
                   </span>
                   <span style={{
-                    background: 'rgba(7,20,58,0.08)',
+                    background: 'rgba(44,84,146,0.12)',
                     color: COLORS.navy,
                     padding: '0.3rem 0.6rem',
                     borderRadius: 6,
@@ -438,7 +441,7 @@ export default function Dashboard({ userName }) {
               fontWeight: 700,
               fontSize: '0.95rem',
               cursor: 'pointer',
-              boxShadow: '0 4px 12px rgba(7,20,58,0.15)'
+              boxShadow: '0 4px 12px rgba(44,84,146,0.22)'
             }}
             onClick={() => { window.history.pushState({}, '', '/exams'); window.dispatchEvent(new PopStateEvent('popstate')) }}
           >
@@ -481,7 +484,7 @@ export default function Dashboard({ userName }) {
                   background: COLORS.white,
                   padding: '2rem',
                   borderRadius: 12,
-                  boxShadow: '0 4px 12px rgba(7,20,58,0.08)',
+                  boxShadow: '0 4px 12px rgba(44,84,146,0.08)',
                   textAlign: 'center',
                   display: 'flex',
                   flexDirection: 'column',

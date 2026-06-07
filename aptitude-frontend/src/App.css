@@ -1,16 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap');
 
 :root {
-  --navy: #0f172a;
-  --navy-light: #1e293b;
-  --blue: #3b82f6;
-  --blue-dark: #2563eb;
-  --bg: #f8fafc;
+  --blue: #2C5492;
+  --blue-secondary: #426FB1;
+  --blue-dark: #233a72;
+  --blue-light: #6A9AD4;
+  --blue-bg: #EAF1FB;
+  --navy: #2C5492;
+  --navy-light: #6A9AD4;
+  --bg: #EAF1FB;
   --white: #ffffff;
-  --gray: #64748b;
-  --gray-light: #e2e8f0;
-  --text: #0f172a;
-  --border: #e2e8f0;
+  --gray: #68758a;
+  --gray-light: #dce4f5;
+  --text: #102849;
+  --border: #dce4f5;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
