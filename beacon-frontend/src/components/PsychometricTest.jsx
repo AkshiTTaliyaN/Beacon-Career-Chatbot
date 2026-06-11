@@ -69,7 +69,7 @@ function ScaleInput({ value, onChange }) {
   )
 }
 
-export default function PsychometricTest({ isEmbedded = false }) {
+export default function PsychometricTest({ isEmbedded = false, hasResults = false }) {
   const [testStarted, setTestStarted] = useState(false)
   const [answers, setAnswers] = useState({})
   const [resultsShown, setResultsShown] = useState(false)
@@ -198,22 +198,58 @@ export default function PsychometricTest({ isEmbedded = false }) {
   return (
     <section style={{ maxWidth: 1100, margin: '2rem auto', padding: '0 1rem' }}>
       <div style={{ background: COLORS.navy, borderRadius: 12, padding: '2rem', color: COLORS.white }}>
-        <h2 style={{ margin: 0, fontSize: '1.35rem', fontWeight: 800 }}>Find what career suits you</h2>
-        <p style={{ marginTop: '0.75rem', fontSize: '1rem', opacity: 0.95 }}>Answer 60 questions and discover your personality type and matching careers — completely free, no login needed</p>
-        <button
-          type="button"
-          onClick={() => {
-            const token = localStorage.getItem('beacon_token');
-            const origin = window.location.origin;
-            const url = token
-              ? `http://localhost:3001?beacon_token=${encodeURIComponent(token)}&origin=${encodeURIComponent(origin)}`
-              : `http://localhost:3001?origin=${encodeURIComponent(origin)}`;
-            window.open(url, '_blank');
-          }}
-          style={{ marginTop: '1rem', padding: '0.75rem 1.25rem', borderRadius: 10, border: 'none', background: COLORS.white, color: COLORS.navy, fontWeight: 700, cursor: 'pointer' }}
-        >
-          Take the Test
-        </button>
+        <h2 style={{ margin: 0, fontSize: '1.35rem', fontWeight: 800 }}>
+          {hasResults ? 'Your Personality Report is Ready' : 'Find what career suits you'}
+        </h2>
+        <p style={{ marginTop: '0.75rem', fontSize: '1rem', opacity: 0.95 }}>
+          {hasResults
+            ? 'You have already completed the psychometric test. Review your detailed RIASEC personality analysis, subject profile, and recommended careers.'
+            : 'Answer 60 questions and discover your personality type and matching careers — completely free, no login needed'}
+        </p>
+        <div style={{ display: 'flex', gap: '1rem', marginTop: '1.25rem', flexWrap: 'wrap' }}>
+          {hasResults && (
+            <button
+              type="button"
+              onClick={() => {
+                window.history.pushState({}, '', '/report');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+              }}
+              style={{
+                padding: '0.75rem 1.25rem',
+                borderRadius: 10,
+                border: 'none',
+                background: COLORS.white,
+                color: COLORS.navy,
+                fontWeight: 700,
+                cursor: 'pointer'
+              }}
+            >
+              View Full Report →
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={() => {
+              const token = localStorage.getItem('beacon_token');
+              const origin = window.location.origin;
+              const url = token
+                ? `http://localhost:3001?beacon_token=${encodeURIComponent(token)}&origin=${encodeURIComponent(origin)}`
+                : `http://localhost:3001?origin=${encodeURIComponent(origin)}`;
+              window.open(url, '_blank');
+            }}
+            style={{
+              padding: '0.75rem 1.25rem',
+              borderRadius: 10,
+              border: hasResults ? '1.5px solid #fff' : 'none',
+              background: hasResults ? 'transparent' : COLORS.white,
+              color: hasResults ? '#fff' : COLORS.navy,
+              fontWeight: 700,
+              cursor: 'pointer'
+            }}
+          >
+            {hasResults ? 'Retake the Test' : 'Take the Test'}
+          </button>
+        </div>
       </div>
     </section>
   )

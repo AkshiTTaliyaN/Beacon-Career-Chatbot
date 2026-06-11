@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import {
   RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
   BarChart, Bar, XAxis, YAxis, Tooltip, Legend, Cell,
@@ -32,34 +32,7 @@ const PERSONALITY_DESCS = {
   Conventional: 'Conventional individuals are detail-oriented, organised, and methodical. You thrive in structured environments where accuracy and systems matter.',
 };
 
-/* ── WorkStyle key → RIASEC axis ────────────────────────────────── */
-const WORKSTYLE_TO_RIASEC = {
-  building:    'Realistic',
-  researching: 'Investigative',
-  creative:    'Artistic',
-  helping:     'Social',
-  leading:     'Enterprising',
-  structured:  'Conventional',
-};
 
-/* ── Subject key → display label ────────────────────────────────── */
-const SUBJECT_LABELS = {
-  mathematics:      'Mathematics',
-  physics:          'Physics',
-  chemistry:        'Chemistry',
-  biology:          'Biology',
-  computerScience:  'Computer Science',
-  englishLiterature:'English & Lit.',
-  accountancy:      'Accountancy',
-  businessStudies:  'Business Studies',
-  economics:        'Economics',
-  history:          'History',
-  geography:        'Geography',
-  politicalScience: 'Political Science',
-  science:          'Science',
-  socialScience:    'Social Science',
-  hindi:            'Hindi',
-};
 
 function getToken() {
   return localStorage.getItem('beacon_token');
@@ -124,14 +97,21 @@ export default function ReportPage() {
   const NAVY = '#2C5492';
 
   // ── 1. Read URL params ───────────────────────────────────────────
-  const urlParams = new URLSearchParams(window.location.search);
-  const freshTest = urlParams.get('scores_written') === '1';
-  const urlScores = {};
-  ['R', 'I', 'A', 'S', 'E', 'C'].forEach(k => {
-    const v = urlParams.get(k);
-    if (v !== null) urlScores[k] = Number(v);
-  });
-  const hasUrlScores = Object.keys(urlScores).length === 6;
+  const freshTest = useMemo(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('scores_written') === '1';
+  }, []);
+
+  const urlScores = useMemo(() => {
+    const params = new URLSearchParams(window.location.search);
+    const scores = {};
+    ['R', 'I', 'A', 'S', 'E', 'C'].forEach(k => {
+      const v = params.get(k);
+      if (v !== null) scores[k] = Number(v);
+    });
+    return scores;
+  }, []);
+  const hasUrlScores = useMemo(() => Object.keys(urlScores).length === 6, [urlScores]);
 
   // ── 2. Load profile & scores ─────────────────────────────────────
   useEffect(() => {
@@ -152,7 +132,7 @@ export default function ReportPage() {
       finally { setLoading(false); }
     }
     load();
-  }, []);
+  }, [hasUrlScores, urlScores]);
 
   // ── 3. Fetch banner image (only for fresh test results) ──────────
   useEffect(() => {
@@ -161,6 +141,12 @@ export default function ReportPage() {
       .then(url => setBannerImage(url))
       .catch(() => {});
   }, [freshTest]);
+
+  // ── Build radar data (RIASEC + WorkStyle overlay) ────────────────
+  const radarData = useMemo(() => transformRadarData(scores, profile?.work_style), [scores, profile?.work_style]);
+
+  // ── Build subject bar data ────────────────────────────────────────
+  const subjectData = useMemo(() => transformSubjectData(profile?.subject_ratings), [profile?.subject_ratings]);
 
   if (loading) {
     return (
@@ -172,15 +158,14 @@ export default function ReportPage() {
 
   // ── Derive personality info ──────────────────────────────────────
   let sortedScores = [];
-  let primaryCode = 'I', secondaryCode = 'R';
   let primaryName = 'Investigative', secondaryName = 'Realistic';
 
   if (scores && Object.keys(scores).length >= 2) {
     sortedScores = Object.entries(scores)
       .map(([code, val]) => ({ code, name: RIASEC_FULL[code] || code, value: Number(val) }))
       .sort((a, b) => b.value - a.value);
-    primaryCode   = sortedScores[0]?.code || 'I';
-    secondaryCode = sortedScores[1]?.code || 'R';
+    const primaryCode   = sortedScores[0]?.code || 'I';
+    const secondaryCode = sortedScores[1]?.code || 'R';
     primaryName   = RIASEC_FULL[primaryCode]   || primaryCode;
     secondaryName = RIASEC_FULL[secondaryCode] || secondaryCode;
   }
@@ -192,12 +177,6 @@ export default function ReportPage() {
 
   const hasScores    = sortedScores.length >= 2;
   const primaryColor = RIASEC_COLORS[primaryName] || NAVY;
-
-  // ── Build radar data (RIASEC + WorkStyle overlay) ────────────────
-  const radarData = useMemo_radarData(scores, profile?.work_style);
-
-  // ── Build subject bar data ────────────────────────────────────────
-  const subjectData = useMemo_subjectData(profile?.subject_ratings);
 
   return (
     <div style={{ background: '#fff', color: '#111827', minHeight: '100vh', fontFamily: 'Inter, system-ui, -apple-system, Roboto, sans-serif' }}>
@@ -578,14 +557,10 @@ export default function ReportPage() {
   );
 }
 
-/* ─────────────────────────────────────────────────────────────────────
-   Pure data-transform helpers (named like hooks but used as functions
-   to keep things simple — no hook rules violated since they don't use
-   React state/effects internally)
-───────────────────────────────────────────────────────────────────── */
+/* ── Data-transform helpers ───────────────────────────────────────── */
 
 /** Build the 6-axis radar dataset from RIASEC scores + work_style sliders */
-function useMemo_radarData(scores, workStyle) {
+function transformRadarData(scores, workStyle) {
   if (!scores) return null;
 
   const axes = [
@@ -619,7 +594,7 @@ function useMemo_radarData(scores, workStyle) {
 }
 
 /** Build subject bar chart data from subject_ratings object */
-function useMemo_subjectData(subjectRatings) {
+function transformSubjectData(subjectRatings) {
   if (!subjectRatings || Object.keys(subjectRatings).length === 0) return null;
 
   const LABELS = {

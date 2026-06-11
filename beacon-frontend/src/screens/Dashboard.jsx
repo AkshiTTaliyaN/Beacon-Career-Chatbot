@@ -231,6 +231,9 @@ export default function Dashboard({ userName }) {
         <nav style={styles.navLinks} aria-label="Primary">
           <a onClick={() => { window.history.pushState({}, '', '/careers'); window.dispatchEvent(new PopStateEvent('popstate')) }} style={{ ...styles.link, cursor: 'pointer' }}>Career Library</a>
           <a onClick={() => { window.history.pushState({}, '', '/exams'); window.dispatchEvent(new PopStateEvent('popstate')) }} style={{ ...styles.link, cursor: 'pointer' }}>Exam Explorer</a>
+          {profile?.riasec_scores && (
+            <a onClick={() => { window.history.pushState({}, '', '/report'); window.dispatchEvent(new PopStateEvent('popstate')) }} style={{ ...styles.link, cursor: 'pointer' }}>My Report</a>
+          )}
           <div style={styles.profile} title={name || 'Profile'}>{(name && name[0]) || 'P'}</div>
         </nav>
       </header>
@@ -403,9 +406,29 @@ export default function Dashboard({ userName }) {
 
       {/* ─── PROFILE ANALYTICS ─── */}
       <section className="fade-up" style={{ maxWidth: 1100, margin: '3rem auto 5rem', padding: '0 1rem' }}>
-          <div style={styles.sectionHeading}>
-            <div style={styles.headingAccent} />
-            <h2 style={styles.sectionTitle}>Your Profile Analysis &amp; Strengths</h2>
+          <div style={{ ...styles.sectionHeading, justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+              <div style={styles.headingAccent} />
+              <h2 style={styles.sectionTitle}>Your Profile Analysis &amp; Strengths</h2>
+            </div>
+            {profile?.riasec_scores && (
+              <button
+                className="dashboard-button"
+                style={{
+                  background: 'transparent',
+                  color: COLORS.navy,
+                  border: `1.5px solid ${COLORS.navy}`,
+                  padding: '0.5rem 1rem',
+                  borderRadius: 8,
+                  fontWeight: 700,
+                  fontSize: '0.9rem',
+                  cursor: 'pointer',
+                }}
+                onClick={() => { window.history.pushState({}, '', '/report'); window.dispatchEvent(new PopStateEvent('popstate')); }}
+              >
+                View Full Report →
+              </button>
+            )}
           </div>
           <p style={{ color: COLORS.muted, marginTop: '0.5rem', marginBottom: '2rem', fontSize: '1rem' }}>
             A comprehensive overview of your personality type, work styles, and subject ratings.
@@ -733,7 +756,7 @@ export default function Dashboard({ userName }) {
         </div>
       </section>
 
-      <PsychometricTest />
+      <PsychometricTest hasResults={Boolean(profile?.riasec_scores)} />
 
       <section className="fade-up" style={{ background: COLORS.white, padding: '5rem 1rem' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
