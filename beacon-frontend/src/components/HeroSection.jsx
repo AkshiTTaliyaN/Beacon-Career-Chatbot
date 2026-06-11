@@ -110,46 +110,26 @@ export default function HeroSection({
         <p style={styles.subtitle}>{subtitle}</p>
 
         <div style={styles.ctaWrap}>
-          {primaryText === 'Start Free Test' ? (
+          {primaryText ? (
             <button
               type="button"
               className="dashboard-button"
               style={styles.cta}
-              onClick={() => window.open('http://localhost:3001', '_blank')}
+              onClick={onPrimary || (() => window.open('http://localhost:3001', '_blank'))}
             >
               {primaryText}
             </button>
-          ) : (
-            <button
-              type="button"
-              className="dashboard-button"
-              style={styles.cta}
-              onClick={onPrimary || (() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }))}
-            >
-              {primaryText}
-            </button>
-          )}
+          ) : null}
 
           {secondaryText ? (
-            secondaryText === 'Take Psychometric Test' ? (
-              <button
-                type="button"
-                className="dashboard-button secondary"
-                style={{ ...styles.cta, background: 'transparent', color: COLORS.white, border: '1px solid rgba(255,255,255,0.12)', boxShadow: 'none' }}
-                onClick={() => window.open('http://localhost:3001', '_blank')}
-              >
-                {secondaryText}
-              </button>
-            ) : (
-              <button
-                type="button"
-                className="dashboard-button secondary"
-                style={{ ...styles.cta, background: 'transparent', color: COLORS.white, border: '1px solid rgba(255,255,255,0.12)', boxShadow: 'none' }}
-                onClick={onSecondary}
-              >
-                {secondaryText}
-              </button>
-            )
+            <button
+              type="button"
+              className="dashboard-button secondary"
+              style={{ ...styles.cta, background: 'transparent', color: COLORS.white, border: '1px solid rgba(255,255,255,0.12)', boxShadow: 'none' }}
+              onClick={onSecondary || (() => window.open('http://localhost:3001', '_blank'))}
+            >
+              {secondaryText}
+            </button>
           ) : null}
         </div>
 

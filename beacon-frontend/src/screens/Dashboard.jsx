@@ -11,20 +11,6 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-const RIASEC_COLORS = {
-  Investigative: '#3b82f6',
-  Realistic: '#ef4444',
-  Conventional: '#22c55e',
-  Enterprising: '#f97316',
-  Artistic: '#8b5cf6',
-  Social: '#14b8a6',
-};
-
-const RIASEC_FULL = {
-  R: 'Realistic', I: 'Investigative', A: 'Artistic',
-  S: 'Social', E: 'Enterprising', C: 'Conventional',
-};
-
 function RadarTooltipContent({ active, payload }) {
   if (!active || !payload || !payload.length) return null;
   return (
@@ -136,17 +122,20 @@ const styles = {
 
 export default function Dashboard({ userName }) {
   const urlParams = new URLSearchParams(window.location.search)
-  const freshTest = urlParams.get('scores_written') === '1'
+  const [freshTest] = useState(urlParams.get('scores_written') === '1')
+  const hasProfileToken = Boolean(localStorage.getItem('beacon_token'))
 
-  const [name, setName] = useState(userName || '')
+  const name = userName || window.localStorage.getItem('userName') || ''
   const [navScrolled, setNavScrolled] = useState(false)
-  const [isReturning, setIsReturning] = useState(false)
+  const isReturning = window.localStorage.getItem('beaconReturning') === '1'
 
   // ── Career Recommendations state ───────────────────────────────────────────────────
   const [recs, setRecs] = useState(null)          // null=loading, []=empty
   const [recsGated, setRecsGated] = useState(false)   // show gate screen
   const [recsError, setRecsError] = useState(null)
   const [profile, setProfile] = useState(null)
+  const [profileLoading, setProfileLoading] = useState(hasProfileToken)
+  const [profileError, setProfileError] = useState(null)
 
   useEffect(() => {
     getSmartRecommendations()
@@ -161,18 +150,14 @@ export default function Dashboard({ userName }) {
     if (token) {
       getMyProfile()
         .then(data => setProfile(data))
-        .catch(() => {})
-    }
-  }, [])
-
-  useEffect(() => {
-    if (!userName) {
-      const stored = window.localStorage.getItem('userName')
-      if (stored) setName(stored)
+        .catch(() => setProfileError('Could not load your profile analytics. Please refresh and try again.'))
+        .finally(() => setProfileLoading(false))
     }
 
-    setIsReturning(window.localStorage.getItem('beaconReturning') === '1')
-  }, [userName])
+    if (freshTest) {
+      window.history.replaceState({}, '', '/dashboard')
+    }
+  }, [freshTest])
 
   useEffect(() => {
     const handleScroll = () => setNavScrolled(window.scrollY > 8)
@@ -189,17 +174,27 @@ export default function Dashboard({ userName }) {
       { threshold: 0.18 }
     )
 
-    document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el))
+    const observeFadeUps = () => {
+      document.querySelectorAll('.fade-up:not(.visible)').forEach((el) => observer.observe(el))
+    }
+
+    const mutationObserver = new MutationObserver(observeFadeUps)
+    observeFadeUps()
+    mutationObserver.observe(document.body, { childList: true, subtree: true })
     handleScroll()
     window.addEventListener('scroll', handleScroll)
 
     return () => {
       observer.disconnect()
+      mutationObserver.disconnect()
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
 
   const firstName = name ? name.trim().split(' ')[0] : ''
+  const radarData = useMemo_radarData(profile?.riasec_scores, profile?.work_style)
+  const subjectData = useMemo_subjectData(profile?.subject_ratings)
+  const hasProfileAnalytics = Boolean(radarData || subjectData)
 
   let heading, heroSubtitle
   if (isReturning && firstName) {
@@ -407,8 +402,7 @@ export default function Dashboard({ userName }) {
       </section>
 
       {/* ─── PROFILE ANALYTICS ─── */}
-      {recs && recs.length > 0 && (
-        <section className="fade-up" style={{ maxWidth: 1100, margin: '3rem auto 5rem', padding: '0 1rem' }}>
+      <section className="fade-up" style={{ maxWidth: 1100, margin: '3rem auto 5rem', padding: '0 1rem' }}>
           <div style={styles.sectionHeading}>
             <div style={styles.headingAccent} />
             <h2 style={styles.sectionTitle}>Your Profile Analysis &amp; Strengths</h2>
@@ -417,9 +411,34 @@ export default function Dashboard({ userName }) {
             A comprehensive overview of your personality type, work styles, and subject ratings.
           </p>
 
+          {profileLoading && (
+            <div style={{
+              height: 280,
+              borderRadius: 16,
+              backgroundImage: 'linear-gradient(90deg,#f1f5f9 25%,#e2e8f0 50%,#f1f5f9 75%)',
+              backgroundSize: '400% 100%',
+              animation: 'shimmer 1.6s infinite',
+            }} />
+          )}
+
+          {profileError && (
+            <div style={{ background: '#fff7ed', border: '1px solid #fed7aa', borderRadius: 12, padding: '1rem 1.25rem', color: '#9a3412' }}>
+              {profileError}
+            </div>
+          )}
+
+          {!profileLoading && !profileError && !hasProfileAnalytics && (
+            <div style={{ background: '#f8fafc', border: '1px solid rgba(44,84,146,0.12)', borderRadius: 16, padding: '2rem', textAlign: 'center' }}>
+              <h3 style={{ color: COLORS.navy, margin: '0 0 8px', fontSize: '1.15rem' }}>Your analytics will appear here</h3>
+              <p style={{ color: COLORS.muted, margin: 0, lineHeight: 1.6 }}>
+                Complete the psychometric test to add your RIASEC personality scores. Your onboarding subject and work-style insights will be shown alongside them.
+              </p>
+            </div>
+          )}
+
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '2rem' }}>
             {/* Radar chart */}
-            {profile && useMemo_radarData(profile.riasec_scores, profile.work_style) && (
+            {radarData && (
               <div style={{ background: '#f8fafc', border: '1px solid rgba(44,84,146,0.12)', borderRadius: 16, padding: '1.5rem', boxShadow: '0 4px 14px rgba(44,84,146,0.06)' }}>
                 <h3 style={{ color: COLORS.navy, fontSize: '1.15rem', fontWeight: 800, margin: '0 0 8px 0' }}>
                   Personality &amp; Work Style Alignment
@@ -429,7 +448,7 @@ export default function Dashboard({ userName }) {
                 </p>
                 <div style={{ height: 320 }}>
                   <ResponsiveContainer width="100%" height="100%">
-                    <RadarChart cx="50%" cy="50%" outerRadius="70%" data={useMemo_radarData(profile.riasec_scores, profile.work_style)}>
+                    <RadarChart cx="50%" cy="50%" outerRadius="70%" data={radarData}>
                       <PolarGrid gridType="polygon" stroke="#cbd5e1" />
                       <PolarAngleAxis
                         dataKey="dimension"
@@ -470,7 +489,7 @@ export default function Dashboard({ userName }) {
             )}
 
             {/* Bar chart */}
-            {profile && useMemo_subjectData(profile.subject_ratings) && (
+            {subjectData && (
               <div style={{ background: '#f8fafc', border: '1px solid rgba(44,84,146,0.12)', borderRadius: 16, padding: '1.5rem', boxShadow: '0 4px 14px rgba(44,84,146,0.06)', display: 'flex', flexDirection: 'column' }}>
                 <h3 style={{ color: COLORS.navy, fontSize: '1.15rem', fontWeight: 800, margin: '0 0 8px 0' }}>
                   Subject Strength Profile
@@ -479,9 +498,9 @@ export default function Dashboard({ userName }) {
                   Your self-rated performance across stream subjects, rated from 1 (struggling) to 5 (favourite).
                 </p>
                 <div style={{ flex: 1, minHeight: 300, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                  <ResponsiveContainer width="100%" height={Math.max(200, useMemo_subjectData(profile.subject_ratings).length * 48)}>
+                  <ResponsiveContainer width="100%" height={Math.max(200, subjectData.length * 48)}>
                     <BarChart
-                      data={useMemo_subjectData(profile.subject_ratings)}
+                      data={subjectData}
                       layout="vertical"
                       margin={{ top: 4, right: 30, left: 10, bottom: 4 }}
                     >
@@ -507,7 +526,7 @@ export default function Dashboard({ userName }) {
                         contentStyle={{ borderRadius: 8, border: '1px solid #e5e7eb', fontSize: 12 }}
                       />
                       <Bar dataKey="rating" radius={[0, 6, 6, 0]} maxBarSize={22}>
-                        {useMemo_subjectData(profile.subject_ratings).map((entry, i) => (
+                        {subjectData.map((entry, i) => (
                           <Cell
                             key={i}
                             fill={entry.rating >= 4 ? '#f59e0b' : entry.rating === 3 ? '#2C5492' : '#94a3b8'}
@@ -525,8 +544,7 @@ export default function Dashboard({ userName }) {
               </div>
             )}
           </div>
-        </section>
-      )}
+      </section>
 
       {/* ─── CAREER MIND MAP ─── */}
       {recs && recs.length > 0 && (
@@ -808,7 +826,14 @@ export default function Dashboard({ userName }) {
               <div style={{ display: 'grid', gap: 6 }}>
                 <button
                   type="button"
-                  onClick={() => window.open('http://localhost:3001', '_blank')}
+                  onClick={() => {
+                    const token = localStorage.getItem('beacon_token');
+                    const origin = window.location.origin;
+                    const url = token
+                      ? `http://localhost:3001?beacon_token=${encodeURIComponent(token)}&origin=${encodeURIComponent(origin)}`
+                      : `http://localhost:3001?origin=${encodeURIComponent(origin)}`;
+                    window.open(url, '_blank');
+                  }}
                   style={{ color: '#fff', opacity: 0.95, cursor: 'pointer', background: 'transparent', border: 'none', padding: 0, font: 'inherit', textAlign: 'left' }}
                 >
                   Psychometric Test

@@ -207,18 +207,17 @@ const ADMISSION_PROCESS = {
   Humanities: { timeline: "Class 12 final year — CUET in May, CLAT in Dec, NID/NIFT in Jan.", docs: "Class 10 & 12 marksheets, entrance exam scorecard, portfolio (for design), ID proof.", cutoffs: "CUET: 95+ percentile for top humanities colleges. CLAT: rank under 500 for NLU Bangalore." },
 };
 
-export default function ResultPage({ result, onDownloadPDF, onRetake }) {
+export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onRetake }) {
   const primary = result.primary_type;
   const primaryColor = getColor(primary);
   const traits = TRAITS[primary] || [];
   const strengths = STRENGTHS[primary] || [];
   const challenges = CHALLENGES[primary] || [];
   const workEnv = WORK_ENV[primary] || "";
-  const avoidCareers = AVOID_CAREERS[primary] || [];
   const parentNote = PARENT_NOTES[primary] || "";
-  const broaderCareers = BROADER_CAREERS[primary] || {};
   const actionPlan = ACTION_PLAN[primary] || [];
   const admission = ADMISSION_PROCESS[result.stream] || ADMISSION_PROCESS["PCM"];
+  const dashboardUrl = `${beaconOrigin || "http://localhost:5173"}/dashboard?scores_written=1`;
 
   return (
     <div className="result-page">
@@ -233,6 +232,27 @@ export default function ResultPage({ result, onDownloadPDF, onRetake }) {
       </header>
 
       <div className="result-container">
+        <section className="celebration-card" aria-label="Test completed">
+          <div className="celebration-gif-wrap">
+            <img
+              className="celebration-gif"
+              src="https://media.giphy.com/media/l4Ep2bPV5Uh2sVEqs/giphy-downsized.gif"
+              alt="Celebration confetti"
+              onError={(event) => {
+                event.currentTarget.style.display = "none";
+                event.currentTarget.nextElementSibling.style.display = "flex";
+              }}
+            />
+            <div className="celebration-fallback" aria-hidden="true">
+              <span>Congratulations!</span>
+            </div>
+          </div>
+          <div className="celebration-copy">
+            <p className="celebration-kicker">Assessment complete</p>
+            <h2>You did it, {result.name.split(" ")[0]}!</h2>
+            <p>Your complete RIASEC personality analysis is ready. Explore what your scores say about how you think, work, and learn.</p>
+          </div>
+        </section>
 
         {/* Personality Overview */}
         <section className="result-section">
@@ -307,66 +327,6 @@ export default function ResultPage({ result, onDownloadPDF, onRetake }) {
           <div className="work-env-card">
             <MapPin size={20} className="env-icon"/>
             <p>{workEnv}</p>
-          </div>
-        </section>
-
-        <hr className="divider"/>
-
-        {/* Top 3 Career Matches with international salary */}
-        <section className="result-section">
-          <h2 className="section-title">Top 3 Career Matches</h2>
-          <p className="section-sub">These careers are matched to your Holland Code <strong>{result.holland_code}</strong> and stream <strong>{result.stream}</strong>. Salary ranges shown for India and the US.</p>
-          {result.careers.map((career, i) => (
-            <div key={i} className="career-card">
-              <div className="career-header">
-                <div>
-                  <h3>{i + 1}. {career.title}</h3>
-                  <span className="stream-tag">{career.stream}</span>
-                </div>
-                <div className="career-right">
-                  <span className="salary">{career.salary}</span>
-                  <span className="salary-label">India (annual)</span>
-                  {INTERNATIONAL_SALARY[career.title] && (
-                    <>
-                      <span className="salary-intl">{INTERNATIONAL_SALARY[career.title]}</span>
-                      <span className="salary-label">International</span>
-                    </>
-                  )}
-                </div>
-              </div>
-              <p className="career-reason">{career.reason}</p>
-            </div>
-          ))}
-        </section>
-
-        <hr className="divider"/>
-
-        {/* Broader Career Sectors */}
-        <section className="result-section">
-          <h2 className="section-title">Careers Across Other Sectors</h2>
-          <p className="section-sub">Beyond your top 3, your <strong>{primary}</strong> personality also fits well in these careers across different industries:</p>
-          <div className="sectors-grid">
-            {Object.entries(broaderCareers).map(([sector, careers]) => (
-              <div key={sector} className="sector-card">
-                <h4><Briefcase size={16}/> {sector.replace(/_/g, " ")}</h4>
-                <ul>
-                  {careers.map((c, i) => <li key={i}>{c}</li>)}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <hr className="divider"/>
-
-        {/* Careers to avoid */}
-        <section className="result-section">
-          <h2 className="section-title">Careers Less Suited to You</h2>
-          <p className="section-sub">Based on your personality profile, these career paths may feel draining or misaligned with how you naturally work. This does not mean you cannot do them — only that they may require more effort to sustain long-term.</p>
-          <div className="avoid-grid">
-            {avoidCareers.map((c, i) => (
-              <div key={i} className="avoid-chip"><span className="avoid-icon" style={{color: primaryColor}}>&#10007;</span>{c}</div>
-            ))}
           </div>
         </section>
 
@@ -478,7 +438,7 @@ export default function ResultPage({ result, onDownloadPDF, onRetake }) {
         <div className="result-footer">
           <p>Beacon © 2026 — This report is an illustrative guide based on a psychometric assessment. For personalised counselling, contact a qualified career counsellor.</p>
           <div className="footer-actions">
-            <button className="btn-primary" style={{ background: '#10b981' }} onClick={() => window.location.href = "http://localhost:5173/recommendations"}><Compass size={16}/> Return to Beacon Dashboard</button>
+            <button className="btn-primary" style={{ background: '#10b981' }} onClick={() => { window.location.href = dashboardUrl; }}><Compass size={16}/> View Dashboard Analytics</button>
             <button className="btn-primary" onClick={onDownloadPDF}><Download size={16}/> Download PDF Report</button>
             <button className="btn-ghost" onClick={onRetake}>Take Test Again</button>
           </div>

@@ -202,7 +202,14 @@ export default function PsychometricTest({ isEmbedded = false }) {
         <p style={{ marginTop: '0.75rem', fontSize: '1rem', opacity: 0.95 }}>Answer 60 questions and discover your personality type and matching careers — completely free, no login needed</p>
         <button
           type="button"
-          onClick={() => window.open('http://localhost:3001', '_blank')}
+          onClick={() => {
+            const token = localStorage.getItem('beacon_token');
+            const origin = window.location.origin;
+            const url = token
+              ? `http://localhost:3001?beacon_token=${encodeURIComponent(token)}&origin=${encodeURIComponent(origin)}`
+              : `http://localhost:3001?origin=${encodeURIComponent(origin)}`;
+            window.open(url, '_blank');
+          }}
           style={{ marginTop: '1rem', padding: '0.75rem 1.25rem', borderRadius: 10, border: 'none', background: COLORS.white, color: COLORS.navy, fontWeight: 700, cursor: 'pointer' }}
         >
           Take the Test

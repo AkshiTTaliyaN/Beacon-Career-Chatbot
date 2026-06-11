@@ -239,7 +239,14 @@ export default function ReportPage() {
               It takes 10–15 minutes and your results are saved to your profile.
             </p>
             <button
-              onClick={() => window.open(import.meta.env.VITE_TEST_APP_URL || "http://127.0.0.1:3001", '_blank')}
+              onClick={() => {
+                const token = getToken();
+                const origin = window.location.origin;
+                const url = token
+                  ? `http://localhost:3001?beacon_token=${encodeURIComponent(token)}&origin=${encodeURIComponent(origin)}`
+                  : `http://localhost:3001?origin=${encodeURIComponent(origin)}`;
+                window.open(url, '_blank');
+              }}
               style={{ background: NAVY, color: '#fff', border: 'none', padding: '0.9rem 2rem', borderRadius: 10, fontWeight: 700, fontSize: '1rem', cursor: 'pointer' }}
             >
               Take the Psychometric Test →
