@@ -106,7 +106,7 @@ def _feasibility_score(profile_data: dict, career: dict) -> str | float:
 
     # ── Hard filter 1: stream must match ──────────────────────────────────────
     career_streams = career.get("streams", [])
-    if student_stream and career_streams and student_stream not in career_streams:
+    if student_stream and student_stream != "none" and career_streams and student_stream not in career_streams:
         return HARD_FILTER_EXCLUDE
 
     # ── Hard filter 2: cost — student needs low cost, career is high cost ─────

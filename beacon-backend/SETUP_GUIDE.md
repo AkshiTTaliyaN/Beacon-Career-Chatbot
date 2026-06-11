@@ -187,7 +187,6 @@ The `--reload` flag means the server restarts automatically whenever you save a 
 ```
 
 **View all API endpoints:** Open http://localhost:8000/docs
-This is the auto-generated Swagger UI — you can test every endpoint here without writing any code.
 
 ---
 

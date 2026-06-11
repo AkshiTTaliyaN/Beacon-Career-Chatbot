@@ -2,8 +2,102 @@ import { useEffect, useState } from 'react'
 import HeroSection from '../components/HeroSection.jsx'
 import PsychometricTest from '../components/PsychometricTest.jsx'
 import RiasecGate from './RiasecGate.jsx'
-import { getSmartRecommendations } from '../api/client.js'
+import CareerMindMap from '../components/CareerMindMap.jsx'
+import { getSmartRecommendations, getMyProfile } from '../api/client.js'
 import EdCilLogo from '../assets/edcil.jpeg'
+import {
+  RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
+  BarChart, Bar, XAxis, YAxis, Tooltip, Legend, Cell,
+  ResponsiveContainer,
+} from 'recharts';
+
+const RIASEC_COLORS = {
+  Investigative: '#3b82f6',
+  Realistic: '#ef4444',
+  Conventional: '#22c55e',
+  Enterprising: '#f97316',
+  Artistic: '#8b5cf6',
+  Social: '#14b8a6',
+};
+
+const RIASEC_FULL = {
+  R: 'Realistic', I: 'Investigative', A: 'Artistic',
+  S: 'Social', E: 'Enterprising', C: 'Conventional',
+};
+
+function RadarTooltipContent({ active, payload }) {
+  if (!active || !payload || !payload.length) return null;
+  return (
+    <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 8, padding: '8px 14px', boxShadow: '0 4px 12px rgba(0,0,0,0.12)', fontSize: 12 }}>
+      {payload.map((p, i) => (
+        <div key={i} style={{ color: p.color, fontWeight: 700, marginBottom: 2 }}>
+          {p.name}: {p.value}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function useMemo_radarData(scores, workStyle) {
+  if (!scores) return null;
+
+  const axes = [
+    { key: 'Realistic',     wsKey: 'building'    },
+    { key: 'Investigative', wsKey: 'researching' },
+    { key: 'Artistic',      wsKey: 'creative'    },
+    { key: 'Social',        wsKey: 'helping'     },
+    { key: 'Enterprising',  wsKey: 'leading'     },
+    { key: 'Conventional',  wsKey: 'structured'  },
+  ];
+
+  const codeToName = { R:'Realistic', I:'Investigative', A:'Artistic', S:'Social', E:'Enterprising', C:'Conventional' };
+
+  const scoreByName = {};
+  Object.entries(scores).forEach(([k, v]) => {
+    const name = codeToName[k] || k;
+    scoreByName[name] = Number(v);
+  });
+
+  return axes.map(({ key, wsKey }) => {
+    const riasecVal   = scoreByName[key] ?? 0;
+    const wsRaw       = workStyle?.[wsKey];
+    const workStyleVal = wsRaw != null ? Math.round((Number(wsRaw) / 5) * 100) : null;
+
+    const row = { dimension: key, riasec: riasecVal };
+    if (workStyleVal !== null) row.workStyle = workStyleVal;
+    return row;
+  });
+}
+
+function useMemo_subjectData(subjectRatings) {
+  if (!subjectRatings || Object.keys(subjectRatings).length === 0) return null;
+
+  const LABELS = {
+    mathematics:       'Mathematics',
+    physics:           'Physics',
+    chemistry:         'Chemistry',
+    biology:           'Biology',
+    computerScience:   'Computer Science',
+    englishLiterature: 'English & Lit.',
+    accountancy:       'Accountancy',
+    businessStudies:   'Business Studies',
+    economics:         'Economics',
+    history:           'History',
+    geography:         'Geography',
+    politicalScience:  'Political Science',
+    science:           'Science',
+    socialScience:     'Social Science',
+    hindi:             'Hindi',
+  };
+
+  return Object.entries(subjectRatings)
+    .filter(([, v]) => v > 0)
+    .sort(([, a], [, b]) => b - a)
+    .map(([key, val]) => ({
+      subject: LABELS[key] || key,
+      rating:  Number(val),
+    }));
+}
 
 const COLORS = {
   navy: '#2C5492',
@@ -41,6 +135,9 @@ const styles = {
 }
 
 export default function Dashboard({ userName }) {
+  const urlParams = new URLSearchParams(window.location.search)
+  const freshTest = urlParams.get('scores_written') === '1'
+
   const [name, setName] = useState(userName || '')
   const [navScrolled, setNavScrolled] = useState(false)
   const [isReturning, setIsReturning] = useState(false)
@@ -49,6 +146,7 @@ export default function Dashboard({ userName }) {
   const [recs, setRecs] = useState(null)          // null=loading, []=empty
   const [recsGated, setRecsGated] = useState(false)   // show gate screen
   const [recsError, setRecsError] = useState(null)
+  const [profile, setProfile] = useState(null)
 
   useEffect(() => {
     getSmartRecommendations()
@@ -57,6 +155,14 @@ export default function Dashboard({ userName }) {
         if (err.code === 'riasec_required') setRecsGated(true)
         else setRecsError('Could not load recommendations — try refreshing.')
       })
+
+    // Fetch profile
+    const token = localStorage.getItem('beacon_token')
+    if (token) {
+      getMyProfile()
+        .then(data => setProfile(data))
+        .catch(() => {})
+    }
   }, [])
 
   useEffect(() => {
@@ -134,6 +240,27 @@ export default function Dashboard({ userName }) {
         </nav>
       </header>
 
+      {freshTest && (
+        <div style={{
+          background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+          padding: '1rem 2rem',
+          color: '#fff',
+          textAlign: 'center',
+          fontWeight: 700,
+          boxShadow: '0 4px 12px rgba(16,185,129,0.2)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: 8,
+          fontSize: '0.95rem',
+          position: 'relative',
+          zIndex: 35
+        }}>
+          <span>🎉</span>
+          <span><strong>Aptitude test completed successfully!</strong> Your career matches and profile analytics have been updated below.</span>
+        </div>
+      )}
+
       <HeroSection
         logoSrc={EdCilLogo}
         logoAlt="EdCIL Logo"
@@ -144,9 +271,10 @@ export default function Dashboard({ userName }) {
         secondaryText={'Take Psychometric Test'}
         onSecondary={() => {
           const token = localStorage.getItem('beacon_token');
+          const origin = window.location.origin;
           const url = token
-            ? `http://localhost:3001?beacon_token=${encodeURIComponent(token)}`
-            : 'http://localhost:3001';
+            ? `http://localhost:3001?beacon_token=${encodeURIComponent(token)}&origin=${encodeURIComponent(origin)}`
+            : `http://localhost:3001?origin=${encodeURIComponent(origin)}`;
           window.open(url, '_blank');
         }}
       />
@@ -277,6 +405,143 @@ export default function Dashboard({ userName }) {
           </div>
         )}
       </section>
+
+      {/* ─── PROFILE ANALYTICS ─── */}
+      {recs && recs.length > 0 && (
+        <section className="fade-up" style={{ maxWidth: 1100, margin: '3rem auto 5rem', padding: '0 1rem' }}>
+          <div style={styles.sectionHeading}>
+            <div style={styles.headingAccent} />
+            <h2 style={styles.sectionTitle}>Your Profile Analysis &amp; Strengths</h2>
+          </div>
+          <p style={{ color: COLORS.muted, marginTop: '0.5rem', marginBottom: '2rem', fontSize: '1rem' }}>
+            A comprehensive overview of your personality type, work styles, and subject ratings.
+          </p>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '2rem' }}>
+            {/* Radar chart */}
+            {profile && useMemo_radarData(profile.riasec_scores, profile.work_style) && (
+              <div style={{ background: '#f8fafc', border: '1px solid rgba(44,84,146,0.12)', borderRadius: 16, padding: '1.5rem', boxShadow: '0 4px 14px rgba(44,84,146,0.06)' }}>
+                <h3 style={{ color: COLORS.navy, fontSize: '1.15rem', fontWeight: 800, margin: '0 0 8px 0' }}>
+                  Personality &amp; Work Style Alignment
+                </h3>
+                <p style={{ fontSize: '0.85rem', color: COLORS.muted, margin: '0 0 16px 0', lineHeight: 1.5 }}>
+                  Overlay of your RIASEC psychometric scores (blue) and self-rated onboarding work styles (teal).
+                </p>
+                <div style={{ height: 320 }}>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <RadarChart cx="50%" cy="50%" outerRadius="70%" data={useMemo_radarData(profile.riasec_scores, profile.work_style)}>
+                      <PolarGrid gridType="polygon" stroke="#cbd5e1" />
+                      <PolarAngleAxis
+                        dataKey="dimension"
+                        tick={{ fill: COLORS.navy, fontWeight: 700, fontSize: 11 }}
+                      />
+                      <PolarRadiusAxis
+                        angle={30}
+                        domain={[0, 100]}
+                        tick={{ fill: '#94a3b8', fontSize: 10 }}
+                        tickCount={5}
+                      />
+                      <Radar
+                        name="RIASEC Score"
+                        dataKey="riasec"
+                        stroke="#2C5492"
+                        fill="#2C5492"
+                        fillOpacity={0.18}
+                        strokeWidth={2}
+                        dot={{ fill: '#2C5492', r: 3 }}
+                      />
+                      <Radar
+                        name="Work Style"
+                        dataKey="workStyle"
+                        stroke="#14b8a6"
+                        fill="#14b8a6"
+                        fillOpacity={0.18}
+                        strokeWidth={2}
+                        dot={{ fill: '#14b8a6', r: 3 }}
+                      />
+                      <Legend
+                        formatter={v => <span style={{ color: '#374151', fontWeight: 600, fontSize: 12 }}>{v}</span>}
+                      />
+                      <Tooltip content={<RadarTooltipContent />} />
+                    </RadarChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+            )}
+
+            {/* Bar chart */}
+            {profile && useMemo_subjectData(profile.subject_ratings) && (
+              <div style={{ background: '#f8fafc', border: '1px solid rgba(44,84,146,0.12)', borderRadius: 16, padding: '1.5rem', boxShadow: '0 4px 14px rgba(44,84,146,0.06)', display: 'flex', flexDirection: 'column' }}>
+                <h3 style={{ color: COLORS.navy, fontSize: '1.15rem', fontWeight: 800, margin: '0 0 8px 0' }}>
+                  Subject Strength Profile
+                </h3>
+                <p style={{ fontSize: '0.85rem', color: COLORS.muted, margin: '0 0 16px 0', lineHeight: 1.5 }}>
+                  Your self-rated performance across stream subjects, rated from 1 (struggling) to 5 (favourite).
+                </p>
+                <div style={{ flex: 1, minHeight: 300, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                  <ResponsiveContainer width="100%" height={Math.max(200, useMemo_subjectData(profile.subject_ratings).length * 48)}>
+                    <BarChart
+                      data={useMemo_subjectData(profile.subject_ratings)}
+                      layout="vertical"
+                      margin={{ top: 4, right: 30, left: 10, bottom: 4 }}
+                    >
+                      <XAxis
+                        type="number"
+                        domain={[0, 5]}
+                        ticks={[1, 2, 3, 4, 5]}
+                        tick={{ fill: '#94a3b8', fontSize: 11 }}
+                        tickFormatter={v => ['', '😟', '😐', '🙂', '😄', '⭐'][v] || v}
+                        axisLine={false}
+                        tickLine={false}
+                      />
+                      <YAxis
+                        type="category"
+                        dataKey="subject"
+                        width={110}
+                        tick={{ fill: COLORS.navy, fontWeight: 700, fontSize: 12 }}
+                        axisLine={false}
+                        tickLine={false}
+                      />
+                      <Tooltip
+                        formatter={(val) => [`${val}/5 — ${['','Struggling','Getting by','Comfortable','Really good','Favourite'][val] || val}`, 'Rating']}
+                        contentStyle={{ borderRadius: 8, border: '1px solid #e5e7eb', fontSize: 12 }}
+                      />
+                      <Bar dataKey="rating" radius={[0, 6, 6, 0]} maxBarSize={22}>
+                        {useMemo_subjectData(profile.subject_ratings).map((entry, i) => (
+                          <Cell
+                            key={i}
+                            fill={entry.rating >= 4 ? '#f59e0b' : entry.rating === 3 ? '#2C5492' : '#94a3b8'}
+                          />
+                        ))}
+                      </Bar>
+                    </BarChart>
+                  </ResponsiveContainer>
+                  <div style={{ display: 'flex', gap: 12, justifyContent: 'center', marginTop: 12, fontSize: 11, color: '#556d8f' }}>
+                    <span><span style={{ color: '#f59e0b', fontWeight: 800 }}>■</span> Strong (4–5)</span>
+                    <span><span style={{ color: '#2C5492', fontWeight: 800 }}>■</span> Average (3)</span>
+                    <span><span style={{ color: '#94a3b8', fontWeight: 800 }}>■</span> Needs work (1–2)</span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* ─── CAREER MIND MAP ─── */}
+      {recs && recs.length > 0 && (
+        <section className="fade-up" style={{ maxWidth: 1100, margin: '0 auto', padding: '0 1rem 5rem' }}>
+          <div style={styles.sectionHeading}>
+            <div style={styles.headingAccent} />
+            <h2 style={styles.sectionTitle}>Your Career Mind Map</h2>
+          </div>
+          <p style={{ color: COLORS.muted, marginTop: '0.5rem', marginBottom: '1.75rem', fontSize: '1rem' }}>
+            A visual map of your top career matches and the traits that drive each recommendation.
+            Drag nodes to explore — zoom in with the controls on the left.
+          </p>
+          <CareerMindMap recs={recs} />
+        </section>
+      )}
 
       <section className="fade-up" style={{ maxWidth: 1100, margin: '0 auto', padding: '5rem 1rem', background: COLORS.white }}>
         <div style={styles.sectionHeading}>

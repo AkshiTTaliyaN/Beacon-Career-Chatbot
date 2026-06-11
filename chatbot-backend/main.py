@@ -9,10 +9,9 @@ import importlib.util
 
 app = FastAPI()
 
-origins = ["http://localhost:5174"]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origin_regex="https?://.*",
     allow_credentials=True,
     allow_methods=["POST", "GET", "OPTIONS"],
     allow_headers=["*"]

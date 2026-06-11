@@ -3,7 +3,6 @@ import Layout from "../components/Layout";
 import RadioCards from "../components/RadioCards";
 import {
   PERFORMANCE_BANDS,
-  SUBJECTS,
   INCOME_BRACKETS,
   OCCUPATIONS,
   STUDY_HOURS,
@@ -18,19 +17,6 @@ export default function AcademicsScreen({ form, setForm, onNext, onBack }) {
 
   function update(field, value) {
     setForm((prev) => ({ ...prev, [field]: value }));
-  }
-
-  /** Toggle a subject in the enjoyed_subjects multi-select array (max 4) */
-  const MAX_ENJOYED = 4;
-  function toggleEnjoyedSubject(subject) {
-    setForm((prev) => {
-      const current = prev.enjoyed_subjects || [];
-      if (current.includes(subject)) {
-        return { ...prev, enjoyed_subjects: current.filter((s) => s !== subject) };
-      }
-      if (current.length >= MAX_ENJOYED) return prev; // silently ignore beyond cap
-      return { ...prev, enjoyed_subjects: [...current, subject] };
-    });
   }
 
   function handleNext(e) {
@@ -60,76 +46,6 @@ export default function AcademicsScreen({ form, setForm, onNext, onBack }) {
             error={errors.performance_band}
           />
         </div>
-
-        {/* ── Strongest subject ── */}
-        <label className="field">
-          <span className="field-label">Strongest subject *</span>
-          <select
-            value={form.strongest_subject}
-            onChange={(e) => update("strongest_subject", e.target.value)}
-          >
-            <option value="">Select subject</option>
-            {SUBJECTS.map((s) => (
-              <option key={s} value={s}>{s}</option>
-            ))}
-          </select>
-          {errors.strongest_subject && (
-            <p className="field-error">{errors.strongest_subject}</p>
-          )}
-        </label>
-
-        {/* ── Weakest subject ── */}
-        <label className="field">
-          <span className="field-label">Weakest subject *</span>
-          <select
-            value={form.weakest_subject}
-            onChange={(e) => update("weakest_subject", e.target.value)}
-          >
-            <option value="">Select subject</option>
-            {SUBJECTS.map((s) => (
-              <option key={s} value={s}>{s}</option>
-            ))}
-          </select>
-          {errors.weakest_subject && (
-            <p className="field-error">{errors.weakest_subject}</p>
-          )}
-        </label>
-
-        <fieldset className="fieldset">
-          <legend className="field-label">
-            Subjects you genuinely enjoy{" "}
-            <span className="optional">(choose up to {MAX_ENJOYED})</span>
-          </legend>
-          {/* Count indicator */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: "0.4rem", marginBottom: "0.5rem" }}>
-            <span style={{ fontSize: "0.8rem", color: (form.enjoyed_subjects || []).length >= MAX_ENJOYED ? "#2C5492" : "#556d8f", fontWeight: 600 }}>
-              {(form.enjoyed_subjects || []).length} / {MAX_ENJOYED} selected
-            </span>
-            {(form.enjoyed_subjects || []).length >= MAX_ENJOYED && (
-              <span style={{ fontSize: "0.76rem", color: "#2C5492", fontWeight: 600, background: "#e8eeff", padding: "2px 8px", borderRadius: 999 }}>
-                ✓ Limit reached
-              </span>
-            )}
-          </div>
-          <div className="pill-row">
-            {SUBJECTS.map((s) => {
-              const isSelected = (form.enjoyed_subjects || []).includes(s);
-              const atLimit = (form.enjoyed_subjects || []).length >= MAX_ENJOYED;
-              return (
-                <button
-                  key={s}
-                  type="button"
-                  className={`pill ${isSelected ? "selected" : ""}`}
-                  onClick={() => toggleEnjoyedSubject(s)}
-                  disabled={!isSelected && atLimit}
-                  style={{ opacity: !isSelected && atLimit ? 0.38 : 1, cursor: !isSelected && atLimit ? "not-allowed" : "pointer" }}
-                >
-                  {s}
-                </button>
-              );
-            })}
-          </div>
-        </fieldset>
 
         {/* ── A: Study hours per day ── */}
         <div className="field">

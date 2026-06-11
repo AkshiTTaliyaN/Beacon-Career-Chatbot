@@ -40,19 +40,7 @@ export function validateAcademics(form) {
   if (!form.performance_band)
     errors.performance_band = "Select your performance band";
 
-  if (!form.strongest_subject)
-    errors.strongest_subject = "Select your strongest subject";
 
-  if (!form.weakest_subject)
-    errors.weakest_subject = "Select your weakest subject";
-
-  if (
-    form.strongest_subject &&
-    form.weakest_subject &&
-    form.strongest_subject === form.weakest_subject
-  ) {
-    errors.weakest_subject = "Must be different from strongest subject";
-  }
 
   // New required fields
   if (!form.study_hours)
@@ -106,12 +94,10 @@ export function buildProfilePayload(form) {
 
   // Existing academic
   if (form.performance_band) payload.performance_band = form.performance_band;
-  if (form.strongest_subject) payload.strongest_subject = form.strongest_subject;
-  if (form.weakest_subject) payload.weakest_subject = form.weakest_subject;
+
 
   // A: new academic fields
-  if (form.enjoyed_subjects?.length)
-    payload.enjoyed_subjects = form.enjoyed_subjects;
+
   if (form.study_hours) payload.study_hours = form.study_hours;
   if (form.coaching_status) payload.coaching_status = form.coaching_status;
   if (form.career_clarity) payload.career_clarity = form.career_clarity;

@@ -72,9 +72,6 @@ Desktop.ini
 *.sln
 *.sw?
 
-# Cursor (optional local state)
-.cursor/
-
 # Gemini / Antigravity local state
 .gemini/
 

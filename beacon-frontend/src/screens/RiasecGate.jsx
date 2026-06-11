@@ -4,9 +4,10 @@ import { ED_CIL_THEME } from '../theme.js'
 export default function RiasecGate() {
   function openTest() {
     const token = localStorage.getItem('beacon_token');
+    const origin = window.location.origin;
     const url = token
-      ? `http://localhost:3001?beacon_token=${encodeURIComponent(token)}`
-      : 'http://localhost:3001';
+      ? `http://localhost:3001?beacon_token=${encodeURIComponent(token)}&origin=${encodeURIComponent(origin)}`
+      : `http://localhost:3001?origin=${encodeURIComponent(origin)}`;
     window.open(url, '_blank');
   }
 
@@ -110,8 +111,11 @@ export default function RiasecGate() {
           >
             Take the Psychometric Test →
           </button>
-          <span style={{ opacity: 0.55, fontSize: '0.83rem' }}>
-            Already taken it? Refresh this page to see your results.
+          <span
+            onClick={() => { window.history.pushState({}, '', '/report'); window.dispatchEvent(new PopStateEvent('popstate')); }}
+            style={{ opacity: 0.7, fontSize: '0.83rem', cursor: 'pointer', textDecoration: 'underline', color: '#fff' }}
+          >
+            Already taken it? View your report →
           </span>
         </div>
       </div>

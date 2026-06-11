@@ -148,18 +148,22 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
             </div>
           </div>
           <form className="details-form" onSubmit={handleDetailsSubmit}>
-            <h2>{profileData ? "Confirm your details" : "Enter your details"}</h2>
-            <p className="form-sub" style={profileData ? {color: '#10b981', fontWeight: 600} : {}}>
-              {profileData ? "✓ Your details are pre-filled from your Beacon profile." : "Your details appear on your personalised report. They are not stored anywhere."}
+            <h2>{profileData?.name ? "Confirm your details" : "Enter your details"}</h2>
+            <p className="form-sub" style={profileData?.name ? {color: '#10b981', fontWeight: 600} : {}}>
+              {profileData?.name
+                ? details.stream
+                  ? "✓ Your details are pre-filled from your Beacon profile."
+                  : "✓ Name pre-filled from your Beacon profile. Please select your stream below."
+                : "Your details appear on your personalised report. They are not stored anywhere."}
             </p>
             <div className="form-group">
               <label>Full Name</label>
-              <input type="text" placeholder="e.g. Aryan Sharma" value={details.name} onChange={e => setDetails({...details, name: e.target.value})} disabled={!!profileData} required/>
+              <input type="text" placeholder="e.g. Aryan Sharma" value={details.name} onChange={e => setDetails({...details, name: e.target.value})} required/>
             </div>
             <div className="form-row">
               <div className="form-group">
                 <label>Current Class</label>
-                <select value={details.class_level} onChange={e => setDetails({...details, class_level: e.target.value})} disabled={!!profileData} required>
+                <select value={details.class_level} onChange={e => setDetails({...details, class_level: e.target.value})} required>
                   <option value="">Select class</option>
                   <option value="Class 10">Class 10</option>
                   <option value="Class 11">Class 11</option>
@@ -168,12 +172,13 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
               </div>
               <div className="form-group">
                 <label>Stream (or Intended)</label>
-                <select value={details.stream} onChange={e => setDetails({...details, stream: e.target.value})} disabled={!!profileData} required>
+                <select value={details.stream} onChange={e => setDetails({...details, stream: e.target.value})} required>
                   <option value="">Select stream</option>
                   <option value="PCM">PCM (Physics, Chemistry, Maths)</option>
                   <option value="PCB">PCB (Physics, Chemistry, Biology)</option>
                   <option value="Commerce">Commerce</option>
                   <option value="Humanities">Humanities / Arts</option>
+                  <option value="none">Not Decided / General</option>
                 </select>
               </div>
             </div>

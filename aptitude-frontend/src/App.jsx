@@ -1,23 +1,28 @@
 import { useState, useEffect, useRef } from "react";
 import LandingPage from "./pages/LandingPage";
 import TestPage from "./pages/TestPage";
-import ResultPage from "./pages/ResultPage";
+// import ResultPage from "./pages/ResultPage"; // kept intact — bypass active, revert by uncommenting
 import "./App.css";
 
-const BEACON_API = "http://localhost:8000";
+const BEACON_API = "http://127.0.0.1:8000";
 
 export default function App() {
-  const [page, setPage] = useState("landing"); // "landing" | "test" | "result"
-  const [result, setResult] = useState(null);
-  const [formData, setFormData] = useState(null);
+  const [page, setPage] = useState("landing"); // "landing" | "test"  ("result" bypassed — redirect active)
+  // const [result, setResult] = useState(null);   // unused while bypass is active
+  // const [formData, setFormData] = useState(null); // unused while bypass is active
 
   // Capture beacon JWT from URL params (passed by beacon-frontend Dashboard)
   const beaconToken = useRef(null);
   const [profileData, setProfileData] = useState(null);
+  const [origin, setOrigin] = useState("http://localhost:5173");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const token = params.get("beacon_token");
+    const passedOrigin = params.get("origin");
+    if (passedOrigin) {
+      setOrigin(passedOrigin);
+    }
     if (token) {
       beaconToken.current = token;
       // Fetch profile info from beacon-backend
@@ -33,7 +38,8 @@ export default function App() {
             "pcm": "PCM",
             "pcb": "PCB",
             "comm": "Commerce",
-            "arts": "Humanities"
+            "arts": "Humanities",
+            "none": "none"
           };
           setProfileData({
             name: data.name,
@@ -69,30 +75,46 @@ export default function App() {
   }
 
   const handleSubmit = async (data) => {
-    setFormData(data);
+    // setFormData(data); // unused while bypass is active
     try {
-      const res = await fetch("http://localhost:8001/api/submit", {
+      const res = await fetch("http://127.0.0.1:8001/api/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
       const json = await res.json();
-      setResult(json);
-      setPage("result");
-      // Write scores back to beacon-backend silently
+
+      // ── BYPASS: redirect to beacon-frontend/report instead of local ResultPage ──
+      // To revert: comment out the redirect block below and uncomment the two lines after it
       if (json.scores) {
-        writeScoresBack(json.scores);
+        await writeScoresBack(json.scores);
+        // Build URL params: pass each RIASEC score so beacon ReportPage can show
+        // results immediately (Option B — works even without a beacon_token)
+        const params = new URLSearchParams();
+        json.scores.forEach(({ code, score }) => params.set(code, score));
+        params.set("scores_written", "1");
+        window.location.href = `${origin}/dashboard?${params.toString()}`;
+        return;
       }
+      // ── END BYPASS ──
+
+      // Original result page routing (commented out — remove comments to revert):
+      // setResult(json);
+      // setPage("result");
+
     } catch (err) {
       console.error("Submission error:", err);
       alert("Could not connect to the server. Make sure the backend is running on port 8001.");
     }
   };
 
+  // handleDownloadPDF and handleRetake kept below — unused while bypass is active.
+  // Remove the comment markers to revert to local ResultPage.
+  /*
   const handleDownloadPDF = async () => {
     if (!formData) return;
     try {
-      const res = await fetch("http://localhost:8001/api/download-pdf", {
+      const res = await fetch("http://127.0.0.1:8001/api/download-pdf", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -114,14 +136,17 @@ export default function App() {
     setFormData(null);
     setPage("landing");
   };
+  */
 
   return (
     <div className="app">
       {page === "landing" && <LandingPage onStart={handleStartTest} />}
       {page === "test" && <TestPage onSubmit={handleSubmit} onBack={() => setPage("landing")} profileData={profileData} />}
+      {/* ResultPage route bypassed — redirect to beacon-frontend/report is active.
+          To revert: uncomment below and restore setResult/setPage in handleSubmit above.
       {page === "result" && result && (
         <ResultPage result={result} onDownloadPDF={handleDownloadPDF} onRetake={handleRetake} />
-      )}
+      )} */}
     </div>
   );
 }
