@@ -453,7 +453,7 @@ export default function Dashboard({ userName }) {
             <div style={{
               background: 'linear-gradient(135deg, rgba(0,212,255,0.15), rgba(139,92,246,0.1))',
               border: '1px solid rgba(0,212,255,0.2)',
-              color: 'rgba(255,255,255,0.95)',
+              color: 'var(--ft-text-primary)',
               padding: '0.75rem 1.1rem',
               borderRadius: '14px 14px 2px 14px',
               maxWidth: '80%',
@@ -467,9 +467,9 @@ export default function Dashboard({ userName }) {
           {/* AI response */}
           <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '1rem' }}>
             <div style={{
-              background: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.08)',
-              color: 'rgba(255,255,255,0.9)',
+              background: 'var(--ft-bg-tertiary)',
+              border: '1px solid var(--ft-border-subtle)',
+              color: 'var(--ft-text-primary)',
               padding: '0.75rem 1.1rem',
               borderRadius: '14px 14px 14px 2px',
               maxWidth: '80%',
@@ -482,9 +482,9 @@ export default function Dashboard({ userName }) {
 
           <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
             <div style={{
-              background: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.08)',
-              color: 'rgba(255,255,255,0.9)',
+              background: 'var(--ft-bg-tertiary)',
+              border: '1px solid var(--ft-border-subtle)',
+              color: 'var(--ft-text-primary)',
               padding: '0.75rem 1.1rem',
               borderRadius: '14px 14px 14px 2px',
               maxWidth: '80%',
@@ -546,7 +546,7 @@ export default function Dashboard({ userName }) {
 
         {/* Error */}
         {recsError && (
-          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem' }}>{recsError}</p>
+          <p style={{ color: 'var(--ft-text-secondary)', fontSize: '0.95rem' }}>{recsError}</p>
         )}
 
         {/* Career cards */}
@@ -575,14 +575,14 @@ export default function Dashboard({ userName }) {
                       boxShadow: `0 0 16px ${accent}20`,
                     }}>{career.rank}</div>
                     <div style={{ flex: 1 }}>
-                      <div style={{ fontWeight: 800, color: 'rgba(255,255,255,0.95)', fontSize: '1.05rem' }}>{career.title}</div>
+                      <div style={{ fontWeight: 800, color: 'var(--ft-text-primary)', fontSize: '1.05rem' }}>{career.title}</div>
                       <div style={{ display: 'flex', gap: 6, marginTop: 6, flexWrap: 'wrap' }}>
                         <span className="ft-tag ft-tag--cyan">{career.stream}</span>
                         <span className="ft-tag ft-tag--green">{career.salary}</span>
                       </div>
                     </div>
                   </div>
-                  <p style={{ margin: '12px 0 0', color: 'rgba(255,255,255,0.65)', fontSize: '0.87rem', lineHeight: 1.65, position: 'relative' }}>
+                  <p style={{ margin: '12px 0 0', color: 'var(--ft-text-secondary)', fontSize: '0.87rem', lineHeight: 1.65, position: 'relative' }}>
                     {career.reason}
                   </p>
                 </GlassCard>
@@ -630,8 +630,8 @@ export default function Dashboard({ userName }) {
 
         {!profileLoading && !profileError && !hasProfileAnalytics && (
           <GlassCard style={{ textAlign: 'center', padding: '3rem 2rem' }}>
-            <h3 style={{ color: 'rgba(255,255,255,0.9)', margin: '0 0 10px', fontSize: '1.15rem' }}>Your analytics will appear here</h3>
-            <p style={{ color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.6, maxWidth: 500, marginInline: 'auto' }}>
+            <h3 style={{ color: 'var(--ft-text-primary)', margin: '0 0 10px', fontSize: '1.15rem' }}>Your analytics will appear here</h3>
+            <p style={{ color: 'var(--ft-text-muted)', margin: 0, lineHeight: 1.6, maxWidth: 500, marginInline: 'auto' }}>
               Complete the psychometric test to add your RIASEC personality scores. Your onboarding subject and work-style insights will be shown alongside them.
             </p>
           </GlassCard>
@@ -643,10 +643,10 @@ export default function Dashboard({ userName }) {
           {/* ── Holographic Radar Chart ── */}
           {radarData && (
             <GlassCard elevated className="ft-animate-in ft-delay-1">
-              <h3 style={{ color: 'rgba(255,255,255,0.95)', fontSize: '1.1rem', fontWeight: 800, margin: '0 0 6px 0' }}>
+              <h3 style={{ color: 'var(--ft-text-primary)', fontSize: '1.1rem', fontWeight: 800, margin: '0 0 6px 0' }}>
                 ✦ Personality & Work Style Alignment
               </h3>
-              <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.45)', margin: '0 0 16px 0', lineHeight: 1.5 }}>
+              <p style={{ fontSize: '0.82rem', color: 'var(--ft-text-muted)', margin: '0 0 16px 0', lineHeight: 1.5 }}>
                 Overlay of your RIASEC psychometric scores and self-rated work styles.
               </p>
               <div style={{ height: 340 }}>
@@ -714,10 +714,10 @@ export default function Dashboard({ userName }) {
           {/* ── Neon Subject Bar Chart ── */}
           {subjectData && (
             <GlassCard elevated className="ft-animate-in ft-delay-2" style={{ display: 'flex', flexDirection: 'column' }}>
-              <h3 style={{ color: 'rgba(255,255,255,0.95)', fontSize: '1.1rem', fontWeight: 800, margin: '0 0 6px 0' }}>
+              <h3 style={{ color: 'var(--ft-text-primary)', fontSize: '1.1rem', fontWeight: 800, margin: '0 0 6px 0' }}>
                 ✦ Subject Strength Profile
               </h3>
-              <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.45)', margin: '0 0 16px 0', lineHeight: 1.5 }}>
+              <p style={{ fontSize: '0.82rem', color: 'var(--ft-text-muted)', margin: '0 0 16px 0', lineHeight: 1.5 }}>
                 Self-rated performance across subjects, from 1 (struggling) to 5 (favourite).
               </p>
               <div style={{ flex: 1, minHeight: 300, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
@@ -812,7 +812,7 @@ export default function Dashboard({ userName }) {
         {/* ── RIASEC Radial Gauge Cluster ── */}
         {radarData && (
           <div className="ft-animate-in ft-delay-3" style={{ marginTop: '2rem' }}>
-            <h3 style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1rem', fontWeight: 700, margin: '0 0 1.25rem', display: 'flex', alignItems: 'center', gap: 8 }}>
+            <h3 style={{ color: 'var(--ft-text-primary)', fontSize: '1rem', fontWeight: 700, margin: '0 0 1.25rem', display: 'flex', alignItems: 'center', gap: 8 }}>
               <span style={{ width: 3, height: 20, background: 'linear-gradient(180deg, #00d4ff, #8b5cf6)', borderRadius: 2 }} />
               RIASEC Score Breakdown
             </h3>
@@ -877,7 +877,7 @@ export default function Dashboard({ userName }) {
                 transitionDelay: `${i * 0.1}s`,
               }}
             >
-              <h3 style={{ color: 'rgba(255,255,255,0.95)', margin: '0 0 0.75rem 0', fontSize: '1.05rem', fontWeight: 800 }}>
+              <h3 style={{ color: 'var(--ft-text-primary)', margin: '0 0 0.75rem 0', fontSize: '1.05rem', fontWeight: 800 }}>
                 {career.name}
               </h3>
               <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
@@ -929,15 +929,15 @@ export default function Dashboard({ userName }) {
                 transitionDelay: `${i * 0.1}s`,
               }}
             >
-              <h3 style={{ color: 'rgba(255,255,255,0.95)', margin: '0 0 0.75rem 0', fontSize: '1.05rem', fontWeight: 800 }}>
+              <h3 style={{ color: 'var(--ft-text-primary)', margin: '0 0 0.75rem 0', fontSize: '1.05rem', fontWeight: 800 }}>
                 {exam.name}
               </h3>
               <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
                 <span className="ft-tag ft-tag--cyan">{exam.stream}</span>
                 <span className="ft-tag ft-tag--amber">{exam.month}</span>
               </div>
-              <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.92rem', fontWeight: 600 }}>
-                Leads to: <span style={{ color: 'rgba(255,255,255,0.85)' }}>{exam.leads}</span>
+              <div style={{ color: 'var(--ft-text-secondary)', fontSize: '0.92rem', fontWeight: 600 }}>
+                Leads to: <span style={{ color: 'var(--ft-text-primary)' }}>{exam.leads}</span>
               </div>
               <div style={{ marginTop: '1rem', color: '#00d4ff', fontWeight: 700, opacity: 0.8, fontSize: '0.9rem' }}>
                 Explore →
@@ -990,10 +990,10 @@ export default function Dashboard({ userName }) {
               }}>
                 {point.icon}
               </div>
-              <h3 style={{ color: 'rgba(255,255,255,0.95)', margin: 0, fontSize: '1.05rem', fontWeight: 800 }}>
+              <h3 style={{ color: 'var(--ft-text-primary)', margin: 0, fontSize: '1.05rem', fontWeight: 800 }}>
                 {point.title}
               </h3>
-              <p style={{ color: 'rgba(255,255,255,0.55)', margin: 0, fontSize: '0.92rem' }}>
+              <p style={{ color: 'var(--ft-text-muted)', margin: 0, fontSize: '0.92rem' }}>
                 {point.desc}
               </p>
             </GlassCard>
