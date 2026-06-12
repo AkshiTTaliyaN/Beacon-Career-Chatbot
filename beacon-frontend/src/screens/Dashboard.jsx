@@ -1,30 +1,65 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import HeroSection from '../components/HeroSection.jsx'
 import PsychometricTest from '../components/PsychometricTest.jsx'
 import RiasecGate from './RiasecGate.jsx'
 import CareerMindMap from '../components/CareerMindMap.jsx'
+import { GlassCard, RadialGauge, KPICard, SectionHeader, FuturisticTooltip, AnimatedBar, GradientDefs, RIASEC_THEME } from '../components/FuturisticCharts.jsx'
 import { getSmartRecommendations, getMyProfile } from '../api/client.js'
 import EdCilLogo from '../assets/edcil.jpeg'
+import '../styles/futuristic.css'
 import {
   RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
   BarChart, Bar, XAxis, YAxis, Tooltip, Legend, Cell,
   ResponsiveContainer,
 } from 'recharts';
 
+/* ─── Radar Tooltip ───────────────────────────────────────────────── */
 function RadarTooltipContent({ active, payload }) {
   if (!active || !payload || !payload.length) return null;
   return (
-    <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 8, padding: '8px 14px', boxShadow: '0 4px 12px rgba(0,0,0,0.12)', fontSize: 12 }}>
+    <div style={{
+      background: 'rgba(13,19,51,0.95)',
+      border: '1px solid rgba(0,212,255,0.2)',
+      borderRadius: 10,
+      padding: '10px 16px',
+      boxShadow: '0 8px 32px rgba(0,0,0,0.4), 0 0 20px rgba(0,212,255,0.1)',
+      backdropFilter: 'blur(12px)',
+      fontSize: 13,
+    }}>
       {payload.map((p, i) => (
-        <div key={i} style={{ color: p.color, fontWeight: 700, marginBottom: 2 }}>
-          {p.name}: {p.value}
+        <div key={i} style={{ color: p.color, fontWeight: 700, marginBottom: 3, display: 'flex', alignItems: 'center', gap: 8 }}>
+          <span style={{ width: 8, height: 8, borderRadius: '50%', background: p.color, boxShadow: `0 0 6px ${p.color}` }} />
+          {p.name}: <span style={{ color: 'rgba(255,255,255,0.95)' }}>{p.value}</span>
         </div>
       ))}
     </div>
   );
 }
 
-function useMemo_radarData(scores, workStyle) {
+/* ─── Custom Radar Axis Tick ──────────────────────────────────────── */
+function FuturisticRadarTick({ x, y, payload }) {
+  const theme = RIASEC_THEME[payload.value] || {};
+  return (
+    <g transform={`translate(${x},${y})`}>
+      <text
+        textAnchor="middle"
+        dy={3}
+        style={{
+          fill: theme.color || 'rgba(255,255,255,0.7)',
+          fontSize: 11,
+          fontWeight: 700,
+          fontFamily: 'Inter, system-ui, sans-serif',
+          filter: `drop-shadow(0 0 4px ${theme.color || 'transparent'})`,
+        }}
+      >
+        {theme.icon || ''} {payload.value}
+      </text>
+    </g>
+  );
+}
+
+/* ─── Data Transform Helpers ──────────────────────────────────────── */
+function computeRadarData(scores, workStyle) {
   if (!scores) return null;
 
   const axes = [
@@ -55,7 +90,7 @@ function useMemo_radarData(scores, workStyle) {
   });
 }
 
-function useMemo_subjectData(subjectRatings) {
+function computeSubjectData(subjectRatings) {
   if (!subjectRatings || Object.keys(subjectRatings).length === 0) return null;
 
   const LABELS = {
@@ -85,39 +120,37 @@ function useMemo_subjectData(subjectRatings) {
     }));
 }
 
-const COLORS = {
-  navy: '#2C5492',
-  white: '#ffffff',
-  lightNavy: '#5f7dd6',
-  muted: 'rgba(16,40,73,0.7)'
+/* ─── KPI Data Helpers ────────────────────────────────────────────── */
+function getTopCareerMatch(recs) {
+  if (!recs || recs.length === 0) return null;
+  return recs[0];
 }
 
-const styles = {
-  root: { fontFamily: 'Inter, system-ui, -apple-system, Roboto, sans-serif', background: COLORS.white, minHeight: '100vh' },
-  navbar: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: '1rem 1.25rem',
-    background: 'rgba(44,84,146,0.12)',
-    color: COLORS.navy,
-    position: 'sticky',
-    top: 0,
-    zIndex: 40,
-    backdropFilter: 'blur(12px)',
-    WebkitBackdropFilter: 'blur(12px)',
-    borderBottom: '1px solid rgba(44,84,146,0.16)'
-  },
-  navbarScrolled: {
-    boxShadow: '0 1px 20px rgba(0,0,0,0.15)'
-  },
-  logo: { fontWeight: 800, fontSize: '1.15rem', letterSpacing: '-0.02em' },
-  navLinks: { display: 'flex', gap: '1rem', alignItems: 'center' },
-  link: { color: COLORS.navy, textDecoration: 'none', fontWeight: 600, opacity: 0.95 },
-  profile: { width: 36, height: 36, borderRadius: 999, background: 'rgba(44,84,146,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: COLORS.navy, fontWeight: 700 },
-  sectionHeading: { display: 'flex', alignItems: 'center', gap: '0.85rem', marginBottom: '0.75rem' },
-  headingAccent: { width: 3, height: 32, background: COLORS.navy, borderRadius: 2 },
-  sectionTitle: { color: COLORS.navy, margin: 0, fontSize: '1.85rem', fontWeight: 800 }
+function getDominantRIASEC(scores) {
+  if (!scores) return null;
+  const codeToName = { R:'Realistic', I:'Investigative', A:'Artistic', S:'Social', E:'Enterprising', C:'Conventional' };
+  let maxKey = null, maxVal = 0;
+  Object.entries(scores).forEach(([k, v]) => {
+    if (Number(v) > maxVal) { maxVal = Number(v); maxKey = k; }
+  });
+  return maxKey ? { code: maxKey, name: codeToName[maxKey], score: maxVal } : null;
+}
+
+function getProfileCompletion(profile) {
+  if (!profile) return 0;
+  const fields = ['name', 'current_class', 'board', 'stream', 'city', 'riasec_scores', 'subject_ratings', 'work_style', 'career_priorities', 'target_sector'];
+  const filled = fields.filter(f => {
+    const v = profile[f];
+    return v !== null && v !== undefined && v !== '' && (typeof v !== 'object' || Object.keys(v).length > 0);
+  });
+  return Math.round((filled.length / fields.length) * 100);
+}
+
+/* ─── Subject Bar Colors (futuristic) ─────────────────────────────── */
+function getSubjectBarColor(rating) {
+  if (rating >= 4) return '#00d4ff';
+  if (rating === 3) return '#8b5cf6';
+  return 'rgba(255,255,255,0.25)';
 }
 
 export default function Dashboard({ userName }) {
@@ -171,11 +204,11 @@ export default function Dashboard({ userName }) {
           }
         })
       },
-      { threshold: 0.18 }
+      { threshold: 0.12 }
     )
 
     const observeFadeUps = () => {
-      document.querySelectorAll('.fade-up:not(.visible)').forEach((el) => observer.observe(el))
+      document.querySelectorAll('.ft-animate-in:not(.visible)').forEach((el) => observer.observe(el))
     }
 
     const mutationObserver = new MutationObserver(observeFadeUps)
@@ -192,9 +225,15 @@ export default function Dashboard({ userName }) {
   }, [])
 
   const firstName = name ? name.trim().split(' ')[0] : ''
-  const radarData = useMemo_radarData(profile?.riasec_scores, profile?.work_style)
-  const subjectData = useMemo_subjectData(profile?.subject_ratings)
+  const radarData = computeRadarData(profile?.riasec_scores, profile?.work_style)
+  const subjectData = computeSubjectData(profile?.subject_ratings)
   const hasProfileAnalytics = Boolean(radarData || subjectData)
+
+  // KPI computations
+  const topCareer = getTopCareerMatch(recs)
+  const dominantRIASEC = getDominantRIASEC(profile?.riasec_scores)
+  const profileCompletion = getProfileCompletion(profile)
+  const subjectCount = subjectData ? subjectData.length : 0
 
   let heading, heroSubtitle
   if (isReturning && firstName) {
@@ -209,56 +248,50 @@ export default function Dashboard({ userName }) {
   }
 
   return (
-    <div style={styles.root}>
-      <style>{`
-        .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
-        .fade-up.visible { opacity: 1; transform: translateY(0); }
-        .interactive-card { transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, border-top-color 0.25s ease; border-top: 3px solid transparent; }
-        .interactive-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(44,84,146,0.18); border-color: rgba(44,84,146,0.18); border-top-color: #2C5492; }
-        .dashboard-button { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .dashboard-button:hover { transform: scale(1.03); box-shadow: 0 4px 20px rgba(44,84,146,0.28); }
-        .dashboard-button.secondary:hover { transform: scale(1.03); box-shadow: 0 4px 20px rgba(44,84,146,0.16); }
-        .typing-dots { display: flex; gap: 6px; margin-top: 0.75rem; }
-        .typing-dots span { width: 8px; height: 8px; border-radius: 50%; background: rgba(44,84,146,0.35); animation: pulse 1.2s infinite ease-in-out; opacity: 0.8; }
-        .typing-dots span:nth-child(2) { animation-delay: 0.15s; }
-        .typing-dots span:nth-child(3) { animation-delay: 0.3s; }
-        @keyframes pulse { 0%, 80%, 100% { transform: scale(1); opacity: 0.6; } 40% { transform: scale(1.4); opacity: 1; } }
-        @keyframes shimmer { 0% { background-position: -400% 0; } 100% { background-position: 400% 0; } }
-      `}</style>
-
-      <header style={{ ...styles.navbar, ...(navScrolled ? styles.navbarScrolled : {}) }}>
-        <div style={styles.logo}>Beacon</div>
-        <nav style={styles.navLinks} aria-label="Primary">
-          <a onClick={() => { window.history.pushState({}, '', '/careers'); window.dispatchEvent(new PopStateEvent('popstate')) }} style={{ ...styles.link, cursor: 'pointer' }}>Career Library</a>
-          <a onClick={() => { window.history.pushState({}, '', '/exams'); window.dispatchEvent(new PopStateEvent('popstate')) }} style={{ ...styles.link, cursor: 'pointer' }}>Exam Explorer</a>
+    <div className="ft-dashboard-bg">
+      {/* ─── Navbar ─── */}
+      <header className={`ft-navbar ${navScrolled ? 'ft-navbar-scrolled' : ''}`}>
+        <div className="ft-nav-logo">Beacon</div>
+        <nav style={{ display: 'flex', gap: '1.25rem', alignItems: 'center' }} aria-label="Primary">
+          <a onClick={() => { window.history.pushState({}, '', '/careers'); window.dispatchEvent(new PopStateEvent('popstate')) }} className="ft-nav-link">Career Library</a>
+          <a onClick={() => { window.history.pushState({}, '', '/exams'); window.dispatchEvent(new PopStateEvent('popstate')) }} className="ft-nav-link">Exam Explorer</a>
           {profile?.riasec_scores && (
-            <a onClick={() => { window.history.pushState({}, '', '/report'); window.dispatchEvent(new PopStateEvent('popstate')) }} style={{ ...styles.link, cursor: 'pointer' }}>My Report</a>
+            <a onClick={() => { window.history.pushState({}, '', '/report'); window.dispatchEvent(new PopStateEvent('popstate')) }} className="ft-nav-link">My Report</a>
           )}
-          <div style={styles.profile} title={name || 'Profile'}>{(name && name[0]) || 'P'}</div>
+          <div style={{
+            width: 36, height: 36, borderRadius: 999,
+            background: 'rgba(0,212,255,0.12)',
+            border: '1px solid rgba(0,212,255,0.2)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            color: '#00d4ff', fontWeight: 700, fontSize: 14,
+          }} title={name || 'Profile'}>{(name && name[0]) || 'P'}</div>
         </nav>
       </header>
 
+      {/* ─── Fresh Test Banner ─── */}
       {freshTest && (
         <div style={{
-          background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-          padding: '1rem 2rem',
-          color: '#fff',
+          background: 'linear-gradient(135deg, rgba(0,255,136,0.15) 0%, rgba(0,212,255,0.1) 100%)',
+          borderBottom: '1px solid rgba(0,255,136,0.2)',
+          padding: '0.9rem 2rem',
+          color: '#00ff88',
           textAlign: 'center',
           fontWeight: 700,
-          boxShadow: '0 4px 12px rgba(16,185,129,0.2)',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          gap: 8,
-          fontSize: '0.95rem',
+          gap: 10,
+          fontSize: '0.92rem',
           position: 'relative',
-          zIndex: 35
+          zIndex: 35,
+          textShadow: '0 0 20px rgba(0,255,136,0.3)',
         }}>
           <span>🎉</span>
           <span><strong>Aptitude test completed successfully!</strong> Your career matches and profile analytics have been updated below.</span>
         </div>
       )}
 
+      {/* ─── Hero Section ─── */}
       <HeroSection
         logoSrc={EdCilLogo}
         logoAlt="EdCIL Logo"
@@ -277,52 +310,126 @@ export default function Dashboard({ userName }) {
         }}
       />
 
-      <section className="fade-up" style={{ maxWidth: 1100, margin: '0 auto', padding: '5rem 1rem', background: COLORS.white }}>
-        <div style={styles.sectionHeading}>
-          <div style={styles.headingAccent} />
-          <h2 style={styles.sectionTitle}>Chat with our AI Counsellor</h2>
-        </div>
-        <p style={{ color: COLORS.muted, marginTop: '0.5rem', marginBottom: '2rem', fontSize: '1rem' }}>Get personalised career guidance based on your stream, interests, and goals.</p>
+      {/* ═══════════════════════════════════════════════════════════════════
+          KPI SUMMARY CARDS — Power BI-style top metrics row
+          ═══════════════════════════════════════════════════════════════════ */}
+      {(recs && recs.length > 0 || hasProfileAnalytics) && (
+        <section className="ft-animate-in ft-section" style={{ paddingTop: '3rem', paddingBottom: '1rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+            {topCareer && (
+              <KPICard
+                icon="🎯"
+                label="Top Career Match"
+                value={topCareer.title || 'N/A'}
+                color="cyan"
+                subtitle={topCareer.salary || ''}
+                isText
+              />
+            )}
+            {dominantRIASEC && (
+              <KPICard
+                icon={RIASEC_THEME[dominantRIASEC.name]?.icon || '🧠'}
+                label="Dominant Type"
+                value={dominantRIASEC.score}
+                suffix="%"
+                color="magenta"
+                subtitle={dominantRIASEC.name}
+              />
+            )}
+            <KPICard
+              icon="📋"
+              label="Profile Completion"
+              value={profileCompletion}
+              suffix="%"
+              color="green"
+              subtitle={profileCompletion >= 80 ? 'Looking great!' : 'Complete your profile'}
+            />
+            {subjectCount > 0 && (
+              <KPICard
+                icon="📚"
+                label="Subjects Analyzed"
+                value={subjectCount}
+                color="purple"
+                subtitle="Self-rated subjects"
+              />
+            )}
+          </div>
+        </section>
+      )}
 
-        <div style={{ background: '#f5f7fa', borderRadius: 12, padding: '2rem', marginBottom: '2rem', maxWidth: '600px', margin: '0 auto 2rem' }}>
+      {/* ═══════════════════════════════════════════════════════════════════
+          CHAT WITH AI COUNSELLOR
+          ═══════════════════════════════════════════════════════════════════ */}
+      <section className="ft-animate-in ft-section" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
+        <SectionHeader
+          title="Chat with our AI Counsellor"
+          subtitle="Get personalised career guidance based on your stream, interests, and goals."
+          accentColor="cyan"
+        />
+
+        <GlassCard elevated style={{ maxWidth: 620, margin: '0 auto 2rem', padding: '2rem' }}>
+          {/* User message */}
           <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem' }}>
-            <div style={{ background: COLORS.navy, color: COLORS.white, padding: '0.75rem 1rem', borderRadius: '12px 12px 0px 12px', maxWidth: '80%', wordWrap: 'break-word' }}>
+            <div style={{
+              background: 'linear-gradient(135deg, rgba(0,212,255,0.15), rgba(139,92,246,0.1))',
+              border: '1px solid rgba(0,212,255,0.2)',
+              color: 'rgba(255,255,255,0.95)',
+              padding: '0.75rem 1.1rem',
+              borderRadius: '14px 14px 2px 14px',
+              maxWidth: '80%',
+              fontSize: '0.92rem',
+              lineHeight: 1.5,
+            }}>
               I took PCM and love solving problems. What careers suit me?
             </div>
           </div>
 
+          {/* AI response */}
           <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '1rem' }}>
-            <div style={{ background: COLORS.white, color: COLORS.navy, padding: '0.75rem 1rem', borderRadius: '12px 12px 12px 0px', border: `1px solid rgba(44,84,146,0.15)`, maxWidth: '80%', wordWrap: 'break-word' }}>
+            <div style={{
+              background: 'rgba(255,255,255,0.04)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              color: 'rgba(255,255,255,0.9)',
+              padding: '0.75rem 1.1rem',
+              borderRadius: '14px 14px 14px 2px',
+              maxWidth: '80%',
+              fontSize: '0.92rem',
+              lineHeight: 1.6,
+            }}>
               Great question! With PCM, careers like Software Engineering, Data Science, and Mechanical Engineering are excellent fits.
             </div>
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-            <div style={{ background: COLORS.white, color: COLORS.navy, padding: '0.75rem 1rem', borderRadius: '12px 12px 12px 0px', border: `1px solid rgba(44,84,146,0.15)`, maxWidth: '80%', wordWrap: 'break-word' }}>
+            <div style={{
+              background: 'rgba(255,255,255,0.04)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              color: 'rgba(255,255,255,0.9)',
+              padding: '0.75rem 1.1rem',
+              borderRadius: '14px 14px 14px 2px',
+              maxWidth: '80%',
+              fontSize: '0.92rem',
+              lineHeight: 1.6,
+            }}>
               I'd recommend exploring these through our Career Library, and take the psychometric test to align them with your interests!
-              <div className="typing-dots">
-                <span />
-                <span />
-                <span />
+              <div style={{ display: 'flex', gap: 6, marginTop: 10 }}>
+                {[0,1,2].map(i => (
+                  <span key={i} style={{
+                    width: 8, height: 8, borderRadius: '50%',
+                    background: '#00d4ff',
+                    animation: 'ft-pulse-glow 1.2s infinite ease-in-out',
+                    animationDelay: `${i * 0.15}s`,
+                    opacity: 0.7,
+                  }} />
+                ))}
               </div>
             </div>
           </div>
-        </div>
+        </GlassCard>
 
         <div style={{ textAlign: 'center' }}>
           <button
-            className="dashboard-button"
-            style={{
-              background: COLORS.navy,
-              color: COLORS.white,
-              border: 'none',
-              padding: '0.9rem 2rem',
-              borderRadius: 10,
-              fontWeight: 700,
-              fontSize: '1rem',
-              cursor: 'pointer',
-              boxShadow: '0 4px 12px rgba(44,84,146,0.22)'
-            }}
+            className="ft-button-primary"
             onClick={() => { window.history.pushState({}, '', '/chat'); window.dispatchEvent(new PopStateEvent('popstate')) }}
           >
             Start Chatting
@@ -330,24 +437,24 @@ export default function Dashboard({ userName }) {
         </div>
       </section>
 
-      {/* ─── CAREER RECOMMENDATIONS ─── */}
-      <section className="fade-up" style={{ maxWidth: 1100, margin: '0 auto', padding: '5rem 1rem' }}>
-        <div style={styles.sectionHeading}>
-          <div style={styles.headingAccent} />
-          <h2 style={styles.sectionTitle}>Your Career Matches</h2>
-        </div>
-        <p style={{ color: COLORS.muted, marginTop: '0.5rem', marginBottom: '2rem', fontSize: '1rem' }}>
-          Ranked using your RIASEC personality, subjects, work style, and goals.
-        </p>
+      {/* ═══════════════════════════════════════════════════════════════════
+          CAREER RECOMMENDATIONS
+          ═══════════════════════════════════════════════════════════════════ */}
+      <section className="ft-animate-in ft-section" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
+        <SectionHeader
+          title="Your Career Matches"
+          subtitle="Ranked using your RIASEC personality, subjects, work style, and goals."
+          accentColor="magenta"
+        />
 
         {/* Loading skeleton */}
         {!recsGated && !recsError && recs === null && (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px,1fr))', gap: '1.25rem' }}>
             {[0,1,2,3,4].map(i => (
-              <div key={i} style={{
-                background: '#f1f5f9', borderRadius: 14, padding: '1.5rem', height: 140,
-                animation: 'shimmer 1.6s infinite',
-                backgroundImage: 'linear-gradient(90deg,#f1f5f9 25%,#e2e8f0 50%,#f1f5f9 75%)',
+              <div key={i} className="ft-glass-card" style={{
+                height: 150,
+                animation: 'ft-shimmer 1.6s infinite',
+                backgroundImage: 'linear-gradient(90deg, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.02) 75%)',
                 backgroundSize: '400% 100%',
               }} />
             ))}
@@ -359,310 +466,354 @@ export default function Dashboard({ userName }) {
 
         {/* Error */}
         {recsError && (
-          <p style={{ color: '#556d8f', fontSize: '0.95rem' }}>{recsError}</p>
+          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem' }}>{recsError}</p>
         )}
 
         {/* Career cards */}
         {recs && recs.length > 0 && (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px,1fr))', gap: '1.25rem' }}>
-            {recs.map((career, i) => (
-              <div key={i} className="interactive-card" style={{
-                background: '#fff',
-                border: '1px solid rgba(44,84,146,0.12)',
-                borderRadius: 14,
-                padding: '1.5rem',
-                boxShadow: '0 4px 14px rgba(44,84,146,0.10)',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 10,
-              }}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12 }}>
+            {recs.map((career, i) => {
+              const rankColors = ['#00d4ff', '#8b5cf6', '#ff006e', '#00ff88', '#f59e0b'];
+              const accent = rankColors[i] || '#00d4ff';
+              return (
+                <GlassCard key={i} style={{ borderLeft: `3px solid ${accent}`, position: 'relative', overflow: 'hidden' }}>
+                  {/* Subtle glow overlay at top */}
                   <div style={{
-                    width: 36, height: 36, borderRadius: 8,
-                    background: COLORS.navy, color: '#fff',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontWeight: 800, fontSize: '1.1rem', flexShrink: 0,
-                  }}>{career.rank}</div>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontWeight: 800, color: COLORS.navy, fontSize: '1.05rem' }}>{career.title}</div>
-                    <div style={{ display: 'flex', gap: 6, marginTop: 5, flexWrap: 'wrap' }}>
-                      <span style={{ background: 'rgba(44,84,146,0.08)', color: COLORS.navy, padding: '2px 8px', borderRadius: 5, fontSize: '0.78rem', fontWeight: 700 }}>
-                        {career.stream}
-                      </span>
-                      <span style={{ background: '#f0fdf4', color: '#15803d', padding: '2px 8px', borderRadius: 5, fontSize: '0.78rem', fontWeight: 700 }}>
-                        {career.salary}
-                      </span>
+                    position: 'absolute', top: 0, left: 0, right: 0, height: 60,
+                    background: `linear-gradient(180deg, ${accent}08, transparent)`,
+                    pointerEvents: 'none',
+                  }} />
+
+                  <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12, position: 'relative' }}>
+                    <div style={{
+                      width: 38, height: 38, borderRadius: 10,
+                      background: `${accent}20`,
+                      border: `1px solid ${accent}40`,
+                      color: accent,
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      fontWeight: 800, fontSize: '1rem', flexShrink: 0,
+                      boxShadow: `0 0 16px ${accent}20`,
+                    }}>{career.rank}</div>
+                    <div style={{ flex: 1 }}>
+                      <div style={{ fontWeight: 800, color: 'rgba(255,255,255,0.95)', fontSize: '1.05rem' }}>{career.title}</div>
+                      <div style={{ display: 'flex', gap: 6, marginTop: 6, flexWrap: 'wrap' }}>
+                        <span className="ft-tag ft-tag--cyan">{career.stream}</span>
+                        <span className="ft-tag ft-tag--green">{career.salary}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <p style={{ margin: 0, color: '#374151', fontSize: '0.875rem', lineHeight: 1.65 }}>
-                  {career.reason}
-                </p>
-              </div>
-            ))}
+                  <p style={{ margin: '12px 0 0', color: 'rgba(255,255,255,0.65)', fontSize: '0.87rem', lineHeight: 1.65, position: 'relative' }}>
+                    {career.reason}
+                  </p>
+                </GlassCard>
+              );
+            })}
           </div>
         )}
       </section>
 
-      {/* ─── PROFILE ANALYTICS ─── */}
-      <section className="fade-up" style={{ maxWidth: 1100, margin: '3rem auto 5rem', padding: '0 1rem' }}>
-          <div style={{ ...styles.sectionHeading, justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-              <div style={styles.headingAccent} />
-              <h2 style={styles.sectionTitle}>Your Profile Analysis &amp; Strengths</h2>
-            </div>
-            {profile?.riasec_scores && (
-              <button
-                className="dashboard-button"
-                style={{
-                  background: 'transparent',
-                  color: COLORS.navy,
-                  border: `1.5px solid ${COLORS.navy}`,
-                  padding: '0.5rem 1rem',
-                  borderRadius: 8,
-                  fontWeight: 700,
-                  fontSize: '0.9rem',
-                  cursor: 'pointer',
-                }}
-                onClick={() => { window.history.pushState({}, '', '/report'); window.dispatchEvent(new PopStateEvent('popstate')); }}
-              >
-                View Full Report →
-              </button>
-            )}
+      {/* ═══════════════════════════════════════════════════════════════════
+          PROFILE ANALYTICS — Radar + Subject Charts + RIASEC Gauges
+          ═══════════════════════════════════════════════════════════════════ */}
+      <section className="ft-animate-in ft-section" style={{ paddingTop: '3rem', paddingBottom: '4rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, alignItems: 'flex-start' }}>
+          <SectionHeader
+            title="Your Profile Analysis & Strengths"
+            subtitle="A comprehensive overview of your personality type, work styles, and subject ratings."
+            accentColor="purple"
+          />
+          {profile?.riasec_scores && (
+            <button
+              className="ft-button-secondary"
+              onClick={() => { window.history.pushState({}, '', '/report'); window.dispatchEvent(new PopStateEvent('popstate')); }}
+              style={{ marginTop: 8 }}
+            >
+              View Full Report →
+            </button>
+          )}
+        </div>
+
+        {profileLoading && (
+          <div className="ft-glass-card" style={{
+            height: 280,
+            animation: 'ft-shimmer 1.6s infinite',
+            backgroundImage: 'linear-gradient(90deg, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.02) 75%)',
+            backgroundSize: '400% 100%',
+          }} />
+        )}
+
+        {profileError && (
+          <div className="ft-glass-card" style={{ borderLeft: '3px solid #ff006e' }}>
+            <p style={{ color: '#ff006e', margin: 0 }}>{profileError}</p>
           </div>
-          <p style={{ color: COLORS.muted, marginTop: '0.5rem', marginBottom: '2rem', fontSize: '1rem' }}>
-            A comprehensive overview of your personality type, work styles, and subject ratings.
-          </p>
+        )}
 
-          {profileLoading && (
-            <div style={{
-              height: 280,
-              borderRadius: 16,
-              backgroundImage: 'linear-gradient(90deg,#f1f5f9 25%,#e2e8f0 50%,#f1f5f9 75%)',
-              backgroundSize: '400% 100%',
-              animation: 'shimmer 1.6s infinite',
-            }} />
-          )}
+        {!profileLoading && !profileError && !hasProfileAnalytics && (
+          <GlassCard style={{ textAlign: 'center', padding: '3rem 2rem' }}>
+            <h3 style={{ color: 'rgba(255,255,255,0.9)', margin: '0 0 10px', fontSize: '1.15rem' }}>Your analytics will appear here</h3>
+            <p style={{ color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.6, maxWidth: 500, marginInline: 'auto' }}>
+              Complete the psychometric test to add your RIASEC personality scores. Your onboarding subject and work-style insights will be shown alongside them.
+            </p>
+          </GlassCard>
+        )}
 
-          {profileError && (
-            <div style={{ background: '#fff7ed', border: '1px solid #fed7aa', borderRadius: 12, padding: '1rem 1.25rem', color: '#9a3412' }}>
-              {profileError}
-            </div>
-          )}
+        {/* ── Charts Grid ── */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '1.5rem' }}>
 
-          {!profileLoading && !profileError && !hasProfileAnalytics && (
-            <div style={{ background: '#f8fafc', border: '1px solid rgba(44,84,146,0.12)', borderRadius: 16, padding: '2rem', textAlign: 'center' }}>
-              <h3 style={{ color: COLORS.navy, margin: '0 0 8px', fontSize: '1.15rem' }}>Your analytics will appear here</h3>
-              <p style={{ color: COLORS.muted, margin: 0, lineHeight: 1.6 }}>
-                Complete the psychometric test to add your RIASEC personality scores. Your onboarding subject and work-style insights will be shown alongside them.
+          {/* ── Holographic Radar Chart ── */}
+          {radarData && (
+            <GlassCard elevated className="ft-animate-in ft-delay-1">
+              <h3 style={{ color: 'rgba(255,255,255,0.95)', fontSize: '1.1rem', fontWeight: 800, margin: '0 0 6px 0' }}>
+                ✦ Personality & Work Style Alignment
+              </h3>
+              <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.45)', margin: '0 0 16px 0', lineHeight: 1.5 }}>
+                Overlay of your RIASEC psychometric scores and self-rated work styles.
               </p>
-            </div>
+              <div style={{ height: 340 }}>
+                <ResponsiveContainer width="100%" height="100%">
+                  <RadarChart cx="50%" cy="50%" outerRadius="70%" data={radarData}>
+                    <defs>
+                      <linearGradient id="radarCyanGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#00d4ff" stopOpacity={0.35} />
+                        <stop offset="100%" stopColor="#00d4ff" stopOpacity={0.05} />
+                      </linearGradient>
+                      <linearGradient id="radarMagentaGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#ff006e" stopOpacity={0.3} />
+                        <stop offset="100%" stopColor="#ff006e" stopOpacity={0.03} />
+                      </linearGradient>
+                      <filter id="glowCyan">
+                        <feGaussianBlur stdDeviation="2" result="blur" />
+                        <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+                      </filter>
+                      <filter id="glowMagenta">
+                        <feGaussianBlur stdDeviation="2" result="blur" />
+                        <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+                      </filter>
+                    </defs>
+                    <PolarGrid gridType="polygon" stroke="rgba(0,212,255,0.12)" />
+                    <PolarAngleAxis
+                      dataKey="dimension"
+                      tick={<FuturisticRadarTick />}
+                    />
+                    <PolarRadiusAxis
+                      angle={30}
+                      domain={[0, 100]}
+                      tick={{ fill: 'rgba(255,255,255,0.25)', fontSize: 10 }}
+                      tickCount={5}
+                      axisLine={false}
+                    />
+                    <Radar
+                      name="RIASEC Score"
+                      dataKey="riasec"
+                      stroke="#00d4ff"
+                      fill="url(#radarCyanGrad)"
+                      strokeWidth={2.5}
+                      dot={{ fill: '#00d4ff', r: 4, filter: 'url(#glowCyan)' }}
+                      style={{ filter: 'url(#glowCyan)' }}
+                    />
+                    <Radar
+                      name="Work Style"
+                      dataKey="workStyle"
+                      stroke="#ff006e"
+                      fill="url(#radarMagentaGrad)"
+                      strokeWidth={2}
+                      dot={{ fill: '#ff006e', r: 3, filter: 'url(#glowMagenta)' }}
+                      style={{ filter: 'url(#glowMagenta)' }}
+                    />
+                    <Legend
+                      formatter={v => <span style={{ color: 'rgba(255,255,255,0.75)', fontWeight: 600, fontSize: 12 }}>{v}</span>}
+                      iconType="circle"
+                    />
+                    <Tooltip content={<RadarTooltipContent />} />
+                  </RadarChart>
+                </ResponsiveContainer>
+              </div>
+            </GlassCard>
           )}
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '2rem' }}>
-            {/* Radar chart */}
-            {radarData && (
-              <div style={{ background: '#f8fafc', border: '1px solid rgba(44,84,146,0.12)', borderRadius: 16, padding: '1.5rem', boxShadow: '0 4px 14px rgba(44,84,146,0.06)' }}>
-                <h3 style={{ color: COLORS.navy, fontSize: '1.15rem', fontWeight: 800, margin: '0 0 8px 0' }}>
-                  Personality &amp; Work Style Alignment
-                </h3>
-                <p style={{ fontSize: '0.85rem', color: COLORS.muted, margin: '0 0 16px 0', lineHeight: 1.5 }}>
-                  Overlay of your RIASEC psychometric scores (blue) and self-rated onboarding work styles (teal).
-                </p>
-                <div style={{ height: 320 }}>
-                  <ResponsiveContainer width="100%" height="100%">
-                    <RadarChart cx="50%" cy="50%" outerRadius="70%" data={radarData}>
-                      <PolarGrid gridType="polygon" stroke="#cbd5e1" />
-                      <PolarAngleAxis
-                        dataKey="dimension"
-                        tick={{ fill: COLORS.navy, fontWeight: 700, fontSize: 11 }}
-                      />
-                      <PolarRadiusAxis
-                        angle={30}
-                        domain={[0, 100]}
-                        tick={{ fill: '#94a3b8', fontSize: 10 }}
-                        tickCount={5}
-                      />
-                      <Radar
-                        name="RIASEC Score"
-                        dataKey="riasec"
-                        stroke="#2C5492"
-                        fill="#2C5492"
-                        fillOpacity={0.18}
-                        strokeWidth={2}
-                        dot={{ fill: '#2C5492', r: 3 }}
-                      />
-                      <Radar
-                        name="Work Style"
-                        dataKey="workStyle"
-                        stroke="#14b8a6"
-                        fill="#14b8a6"
-                        fillOpacity={0.18}
-                        strokeWidth={2}
-                        dot={{ fill: '#14b8a6', r: 3 }}
-                      />
-                      <Legend
-                        formatter={v => <span style={{ color: '#374151', fontWeight: 600, fontSize: 12 }}>{v}</span>}
-                      />
-                      <Tooltip content={<RadarTooltipContent />} />
-                    </RadarChart>
-                  </ResponsiveContainer>
+          {/* ── Neon Subject Bar Chart ── */}
+          {subjectData && (
+            <GlassCard elevated className="ft-animate-in ft-delay-2" style={{ display: 'flex', flexDirection: 'column' }}>
+              <h3 style={{ color: 'rgba(255,255,255,0.95)', fontSize: '1.1rem', fontWeight: 800, margin: '0 0 6px 0' }}>
+                ✦ Subject Strength Profile
+              </h3>
+              <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.45)', margin: '0 0 16px 0', lineHeight: 1.5 }}>
+                Self-rated performance across subjects, from 1 (struggling) to 5 (favourite).
+              </p>
+              <div style={{ flex: 1, minHeight: 300, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <ResponsiveContainer width="100%" height={Math.max(220, subjectData.length * 48)}>
+                  <BarChart
+                    data={subjectData}
+                    layout="vertical"
+                    margin={{ top: 4, right: 30, left: 10, bottom: 4 }}
+                  >
+                    <defs>
+                      <linearGradient id="barCyanGrad" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0%" stopColor="#00d4ff" stopOpacity={0.8} />
+                        <stop offset="100%" stopColor="#00d4ff" stopOpacity={0.4} />
+                      </linearGradient>
+                      <linearGradient id="barPurpleGrad" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0%" stopColor="#8b5cf6" stopOpacity={0.7} />
+                        <stop offset="100%" stopColor="#8b5cf6" stopOpacity={0.35} />
+                      </linearGradient>
+                      <filter id="barGlow">
+                        <feGaussianBlur stdDeviation="2" />
+                        <feMerge><feMergeNode /><feMergeNode in="SourceGraphic" /></feMerge>
+                      </filter>
+                    </defs>
+                    <XAxis
+                      type="number"
+                      domain={[0, 5]}
+                      ticks={[1, 2, 3, 4, 5]}
+                      tick={{ fill: 'rgba(255,255,255,0.4)', fontSize: 11 }}
+                      tickFormatter={v => ['', '1', '2', '3', '4', '5'][v] || v}
+                      axisLine={{ stroke: 'rgba(255,255,255,0.06)' }}
+                      tickLine={false}
+                    />
+                    <YAxis
+                      type="category"
+                      dataKey="subject"
+                      width={120}
+                      tick={{ fill: 'rgba(255,255,255,0.8)', fontWeight: 600, fontSize: 12 }}
+                      axisLine={false}
+                      tickLine={false}
+                    />
+                    <Tooltip
+                      content={({ active, payload }) => {
+                        if (!active || !payload?.[0]) return null;
+                        const v = payload[0].value;
+                        const labels = ['','Struggling','Getting by','Comfortable','Really good','Favourite'];
+                        return (
+                          <div style={{
+                            background: 'rgba(13,19,51,0.95)', border: '1px solid rgba(0,212,255,0.2)',
+                            borderRadius: 10, padding: '10px 16px', boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+                            color: 'rgba(255,255,255,0.9)', fontSize: 13,
+                          }}>
+                            <div style={{ fontWeight: 700 }}>{payload[0].payload.subject}</div>
+                            <div style={{ color: '#00d4ff', marginTop: 4 }}>{v}/5 — {labels[v] || v}</div>
+                          </div>
+                        );
+                      }}
+                    />
+                    <Bar dataKey="rating" radius={[0, 8, 8, 0]} maxBarSize={22}>
+                      {subjectData.map((entry, i) => (
+                        <Cell
+                          key={i}
+                          fill={entry.rating >= 4 ? 'url(#barCyanGrad)' : entry.rating === 3 ? 'url(#barPurpleGrad)' : 'rgba(255,255,255,0.12)'}
+                          style={{ filter: entry.rating >= 4 ? 'url(#barGlow)' : undefined }}
+                        />
+                      ))}
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+                {/* Legend */}
+                <div style={{ display: 'flex', gap: 16, justifyContent: 'center', marginTop: 14, fontSize: 11 }}>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                    <span style={{ width: 10, height: 10, borderRadius: 3, background: '#00d4ff', boxShadow: '0 0 8px rgba(0,212,255,0.4)' }} />
+                    <span style={{ color: 'rgba(255,255,255,0.6)' }}>Strong (4–5)</span>
+                  </span>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                    <span style={{ width: 10, height: 10, borderRadius: 3, background: '#8b5cf6', boxShadow: '0 0 8px rgba(139,92,246,0.3)' }} />
+                    <span style={{ color: 'rgba(255,255,255,0.6)' }}>Average (3)</span>
+                  </span>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                    <span style={{ width: 10, height: 10, borderRadius: 3, background: 'rgba(255,255,255,0.15)' }} />
+                    <span style={{ color: 'rgba(255,255,255,0.6)' }}>Needs work (1–2)</span>
+                  </span>
                 </div>
               </div>
-            )}
+            </GlassCard>
+          )}
+        </div>
 
-            {/* Bar chart */}
-            {subjectData && (
-              <div style={{ background: '#f8fafc', border: '1px solid rgba(44,84,146,0.12)', borderRadius: 16, padding: '1.5rem', boxShadow: '0 4px 14px rgba(44,84,146,0.06)', display: 'flex', flexDirection: 'column' }}>
-                <h3 style={{ color: COLORS.navy, fontSize: '1.15rem', fontWeight: 800, margin: '0 0 8px 0' }}>
-                  Subject Strength Profile
-                </h3>
-                <p style={{ fontSize: '0.85rem', color: COLORS.muted, margin: '0 0 16px 0', lineHeight: 1.5 }}>
-                  Your self-rated performance across stream subjects, rated from 1 (struggling) to 5 (favourite).
-                </p>
-                <div style={{ flex: 1, minHeight: 300, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                  <ResponsiveContainer width="100%" height={Math.max(200, subjectData.length * 48)}>
-                    <BarChart
-                      data={subjectData}
-                      layout="vertical"
-                      margin={{ top: 4, right: 30, left: 10, bottom: 4 }}
-                    >
-                      <XAxis
-                        type="number"
-                        domain={[0, 5]}
-                        ticks={[1, 2, 3, 4, 5]}
-                        tick={{ fill: '#94a3b8', fontSize: 11 }}
-                        tickFormatter={v => ['', '😟', '😐', '🙂', '😄', '⭐'][v] || v}
-                        axisLine={false}
-                        tickLine={false}
-                      />
-                      <YAxis
-                        type="category"
-                        dataKey="subject"
-                        width={110}
-                        tick={{ fill: COLORS.navy, fontWeight: 700, fontSize: 12 }}
-                        axisLine={false}
-                        tickLine={false}
-                      />
-                      <Tooltip
-                        formatter={(val) => [`${val}/5 — ${['','Struggling','Getting by','Comfortable','Really good','Favourite'][val] || val}`, 'Rating']}
-                        contentStyle={{ borderRadius: 8, border: '1px solid #e5e7eb', fontSize: 12 }}
-                      />
-                      <Bar dataKey="rating" radius={[0, 6, 6, 0]} maxBarSize={22}>
-                        {subjectData.map((entry, i) => (
-                          <Cell
-                            key={i}
-                            fill={entry.rating >= 4 ? '#f59e0b' : entry.rating === 3 ? '#2C5492' : '#94a3b8'}
-                          />
-                        ))}
-                      </Bar>
-                    </BarChart>
-                  </ResponsiveContainer>
-                  <div style={{ display: 'flex', gap: 12, justifyContent: 'center', marginTop: 12, fontSize: 11, color: '#556d8f' }}>
-                    <span><span style={{ color: '#f59e0b', fontWeight: 800 }}>■</span> Strong (4–5)</span>
-                    <span><span style={{ color: '#2C5492', fontWeight: 800 }}>■</span> Average (3)</span>
-                    <span><span style={{ color: '#94a3b8', fontWeight: 800 }}>■</span> Needs work (1–2)</span>
-                  </div>
-                </div>
-              </div>
-            )}
+        {/* ── RIASEC Radial Gauge Cluster ── */}
+        {radarData && (
+          <div className="ft-animate-in ft-delay-3" style={{ marginTop: '2rem' }}>
+            <h3 style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1rem', fontWeight: 700, margin: '0 0 1.25rem', display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span style={{ width: 3, height: 20, background: 'linear-gradient(180deg, #00d4ff, #8b5cf6)', borderRadius: 2 }} />
+              RIASEC Score Breakdown
+            </h3>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1rem' }}>
+              {radarData.map((item) => {
+                const theme = RIASEC_THEME[item.dimension] || {};
+                return (
+                  <GlassCard key={item.dimension} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '1.25rem 0.75rem' }}>
+                    <RadialGauge
+                      value={item.riasec}
+                      max={100}
+                      label={theme.icon || ''}
+                      sublabel={item.dimension}
+                      color={theme.color || '#00d4ff'}
+                      size={110}
+                      strokeWidth={8}
+                    />
+                  </GlassCard>
+                );
+              })}
+            </div>
           </div>
+        )}
       </section>
 
-      {/* ─── CAREER MIND MAP ─── */}
+      {/* ═══════════════════════════════════════════════════════════════════
+          CAREER MIND MAP
+          ═══════════════════════════════════════════════════════════════════ */}
       {recs && recs.length > 0 && (
-        <section className="fade-up" style={{ maxWidth: 1100, margin: '0 auto', padding: '0 1rem 5rem' }}>
-          <div style={styles.sectionHeading}>
-            <div style={styles.headingAccent} />
-            <h2 style={styles.sectionTitle}>Your Career Mind Map</h2>
-          </div>
-          <p style={{ color: COLORS.muted, marginTop: '0.5rem', marginBottom: '1.75rem', fontSize: '1rem' }}>
-            A visual map of your top career matches and the traits that drive each recommendation.
-            Drag nodes to explore — zoom in with the controls on the left.
-          </p>
+        <section className="ft-animate-in ft-section" style={{ paddingBottom: '4rem' }}>
+          <SectionHeader
+            title="Your Career Mind Map"
+            subtitle="A visual map of your top career matches and the traits that drive each recommendation. Drag nodes to explore — zoom in with the controls on the left."
+            accentColor="amber"
+          />
           <CareerMindMap recs={recs} />
         </section>
       )}
 
-      <section className="fade-up" style={{ maxWidth: 1100, margin: '0 auto', padding: '5rem 1rem', background: COLORS.white }}>
-        <div style={styles.sectionHeading}>
-          <div style={styles.headingAccent} />
-          <h2 style={styles.sectionTitle}>Explore Careers</h2>
-        </div>
-        <p style={{ color: COLORS.muted, marginTop: '0.5rem', marginBottom: '2.5rem', fontSize: '1rem' }}>Browse careers across Science, Commerce, and Arts - find what suits you.</p>
+      {/* ═══════════════════════════════════════════════════════════════════
+          EXPLORE CAREERS
+          ═══════════════════════════════════════════════════════════════════ */}
+      <section className="ft-animate-in ft-section" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
+        <SectionHeader
+          title="Explore Careers"
+          subtitle="Browse careers across Science, Commerce, and Arts — find what suits you."
+          accentColor="cyan"
+        />
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', marginBottom: '2rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem', marginBottom: '2rem' }}>
           {[
-            { name: 'Software Engineer', stream: 'PCM', exam: 'JEE Main', salary: 'Rs 7-30 LPA' },
-            { name: 'Doctor (MBBS)', stream: 'PCB', exam: 'NEET', salary: 'Rs 6-25 LPA' },
-            { name: 'IAS Officer', stream: 'Arts/Any', exam: 'UPSC', salary: 'Rs 8-20 LPA' }
+            { name: 'Software Engineer', stream: 'PCM', exam: 'JEE Main', salary: '₹7-30 LPA', accent: '#00d4ff' },
+            { name: 'Doctor (MBBS)', stream: 'PCB', exam: 'NEET', salary: '₹6-25 LPA', accent: '#00ff88' },
+            { name: 'IAS Officer', stream: 'Arts/Any', exam: 'UPSC', salary: '₹8-20 LPA', accent: '#f59e0b' }
           ].map((career, i) => (
-            <div
+            <GlassCard
               key={i}
-              className="fade-up interactive-card"
+              className="ft-animate-in"
               style={{
-                background: COLORS.white,
-                border: `1px solid rgba(44,84,146,0.12)`,
-                borderRadius: 12,
-                padding: '1.5rem',
-                boxShadow: '0 6px 18px rgba(44,84,146,0.10)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                transitionDelay: `${i * 0.1}s`
+                borderTop: `2px solid ${career.accent}`,
+                cursor: 'pointer',
+                transitionDelay: `${i * 0.1}s`,
               }}
             >
-              <div>
-                <h3 style={{ color: COLORS.navy, margin: '0 0 0.75rem 0', fontSize: '1.05rem', fontWeight: 800 }}>
-                  {career.name}
-                </h3>
-                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
-                  <span style={{
-                    background: 'rgba(44,84,146,0.12)',
-                    color: COLORS.navy,
-                    padding: '0.3rem 0.6rem',
-                    borderRadius: 6,
-                    fontSize: '0.85rem',
-                    fontWeight: 600
-                  }}>
-                    {career.stream}
-                  </span>
-                  <span style={{
-                    background: 'rgba(44,84,146,0.12)',
-                    color: COLORS.navy,
-                    padding: '0.3rem 0.6rem',
-                    borderRadius: 6,
-                    fontSize: '0.85rem',
-                    fontWeight: 600
-                  }}>
-                    {career.exam}
-                  </span>
-                </div>
-                <div style={{ color: COLORS.muted, fontSize: '0.95rem', fontWeight: 600 }}>
-                  {career.salary}
-                </div>
+              <h3 style={{ color: 'rgba(255,255,255,0.95)', margin: '0 0 0.75rem 0', fontSize: '1.05rem', fontWeight: 800 }}>
+                {career.name}
+              </h3>
+              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
+                <span className="ft-tag ft-tag--cyan">{career.stream}</span>
+                <span className="ft-tag ft-tag--purple">{career.exam}</span>
               </div>
-              <div style={{ marginTop: '1rem', color: COLORS.navy, fontWeight: 700, cursor: 'pointer', opacity: 0.7 }}>
-                - Explore
+              <div style={{ color: '#00ff88', fontSize: '0.95rem', fontWeight: 700 }}>
+                {career.salary}
               </div>
-            </div>
+              <div style={{ marginTop: '1rem', color: '#00d4ff', fontWeight: 700, opacity: 0.8, fontSize: '0.9rem' }}>
+                Explore →
+              </div>
+            </GlassCard>
           ))}
         </div>
 
         <div style={{ textAlign: 'center' }}>
           <button
-            className="dashboard-button"
-            style={{
-              background: COLORS.navy,
-              color: COLORS.white,
-              border: 'none',
-              padding: '0.75rem 1.5rem',
-              borderRadius: 10,
-              fontWeight: 700,
-              fontSize: '0.95rem',
-              cursor: 'pointer',
-              boxShadow: '0 4px 12px rgba(44,84,146,0.22)'
-            }}
+            className="ft-button-primary"
             onClick={() => { window.history.pushState({}, '', '/careers'); window.dispatchEvent(new PopStateEvent('popstate')) }}
           >
             View All Careers
@@ -670,85 +821,51 @@ export default function Dashboard({ userName }) {
         </div>
       </section>
 
-      <section className="fade-up" style={{ maxWidth: 1100, margin: '0 auto', padding: '5rem 1rem', background: '#F8FAFF' }}>
-        <div style={styles.sectionHeading}>
-          <div style={styles.headingAccent} />
-          <h2 style={styles.sectionTitle}>Find Your Entrance Exam</h2>
-        </div>
-        <p style={{ color: COLORS.muted, marginTop: '0.5rem', marginBottom: '2.5rem', fontSize: '1rem' }}>Every major Indian entrance exam in one place - eligibility, dates, and what it leads to.</p>
+      {/* ═══════════════════════════════════════════════════════════════════
+          ENTRANCE EXAMS
+          ═══════════════════════════════════════════════════════════════════ */}
+      <section className="ft-animate-in ft-section" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
+        <SectionHeader
+          title="Find Your Entrance Exam"
+          subtitle="Every major Indian entrance exam in one place — eligibility, dates, and what it leads to."
+          accentColor="green"
+        />
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', marginBottom: '2rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem', marginBottom: '2rem' }}>
           {[
-            { name: 'JEE Main', stream: 'PCM', month: 'January & April', leads: 'NITs & IIITs' },
-            { name: 'NEET', stream: 'PCB', month: 'May', leads: 'MBBS & BDS' },
-            { name: 'CUET', stream: 'All Streams', month: 'May-June', leads: 'Central Universities' }
+            { name: 'JEE Main', stream: 'PCM', month: 'January & April', leads: 'NITs & IIITs', accent: '#00d4ff' },
+            { name: 'NEET', stream: 'PCB', month: 'May', leads: 'MBBS & BDS', accent: '#00ff88' },
+            { name: 'CUET', stream: 'All Streams', month: 'May-June', leads: 'Central Universities', accent: '#f59e0b' }
           ].map((exam, i) => (
-            <div
+            <GlassCard
               key={i}
-              className="fade-up interactive-card"
+              className="ft-animate-in"
               style={{
-                background: COLORS.white,
-                border: `1px solid rgba(44,84,146,0.12)`,
-                borderRadius: 12,
-                padding: '1.5rem',
-                boxShadow: '0 6px 18px rgba(44,84,146,0.10)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                transitionDelay: `${i * 0.1}s`
+                borderTop: `2px solid ${exam.accent}`,
+                cursor: 'pointer',
+                transitionDelay: `${i * 0.1}s`,
               }}
             >
-              <div>
-                <h3 style={{ color: COLORS.navy, margin: '0 0 0.75rem 0', fontSize: '1.05rem', fontWeight: 800 }}>
-                  {exam.name}
-                </h3>
-                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
-                  <span style={{
-                    background: 'rgba(44,84,146,0.12)',
-                    color: COLORS.navy,
-                    padding: '0.3rem 0.6rem',
-                    borderRadius: 6,
-                    fontSize: '0.85rem',
-                    fontWeight: 600
-                  }}>
-                    {exam.stream}
-                  </span>
-                  <span style={{
-                    background: 'rgba(44,84,146,0.12)',
-                    color: COLORS.navy,
-                    padding: '0.3rem 0.6rem',
-                    borderRadius: 6,
-                    fontSize: '0.85rem',
-                    fontWeight: 600
-                  }}>
-                    {exam.month}
-                  </span>
-                </div>
-                <div style={{ color: COLORS.muted, fontSize: '0.95rem', fontWeight: 600 }}>
-                  Leads to: {exam.leads}
-                </div>
+              <h3 style={{ color: 'rgba(255,255,255,0.95)', margin: '0 0 0.75rem 0', fontSize: '1.05rem', fontWeight: 800 }}>
+                {exam.name}
+              </h3>
+              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
+                <span className="ft-tag ft-tag--cyan">{exam.stream}</span>
+                <span className="ft-tag ft-tag--amber">{exam.month}</span>
               </div>
-              <div style={{ marginTop: '1rem', color: COLORS.navy, fontWeight: 700, cursor: 'pointer', opacity: 0.7 }}>
-                - Explore
+              <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.92rem', fontWeight: 600 }}>
+                Leads to: <span style={{ color: 'rgba(255,255,255,0.85)' }}>{exam.leads}</span>
               </div>
-            </div>
+              <div style={{ marginTop: '1rem', color: '#00d4ff', fontWeight: 700, opacity: 0.8, fontSize: '0.9rem' }}>
+                Explore →
+              </div>
+            </GlassCard>
           ))}
         </div>
 
         <div style={{ textAlign: 'center' }}>
           <button
-            className="dashboard-button"
-            style={{
-              background: COLORS.navy,
-              color: COLORS.white,
-              border: 'none',
-              padding: '0.75rem 1.5rem',
-              borderRadius: 10,
-              fontWeight: 700,
-              fontSize: '0.95rem',
-              cursor: 'pointer',
-              boxShadow: '0 4px 12px rgba(44,84,146,0.22)'
-            }}
+            className="ft-button-primary"
             onClick={() => { window.history.pushState({}, '', '/exams'); window.dispatchEvent(new PopStateEvent('popstate')) }}
           >
             View All Exams
@@ -756,97 +873,81 @@ export default function Dashboard({ userName }) {
         </div>
       </section>
 
+      {/* ─── Psychometric Test Section ─── */}
       <PsychometricTest hasResults={Boolean(profile?.riasec_scores)} />
 
-      <section className="fade-up" style={{ background: COLORS.white, padding: '5rem 1rem' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <div style={styles.sectionHeading}>
-            <div style={styles.headingAccent} />
-            <h2 style={{ ...styles.sectionTitle, textAlign: 'center' }}>Why Beacon</h2>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem' }}>
-            {[
-              {
-                title: 'AI-powered guidance',
-                desc: 'Personalised to your stream and goals'
-              },
-              {
-                title: 'Covers all major Indian exams',
-                desc: 'From JEE and NEET to CUET and UPSC'
-              },
-              {
-                title: 'Free psychometric test',
-                desc: 'Get a detailed personality report'
-              },
-              {
-                title: 'Available 24/7',
-                desc: 'No counsellor booking - instant guidance'
-              }
-            ].map((point, i) => (
-              <div
-                key={i}
-                className="fade-up interactive-card"
-                style={{
-                  background: COLORS.white,
-                  padding: '2rem',
-                  borderRadius: 12,
-                  boxShadow: '0 4px 12px rgba(44,84,146,0.08)',
-                  textAlign: 'center',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  gap: '0.75rem',
-                  transitionDelay: `${i * 0.08}s`
-                }}
-              >
-                <div style={{
-                  width: 56,
-                  height: 56,
-                  borderRadius: 12,
-                  background: COLORS.navy,
-                  color: COLORS.white,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontWeight: 800,
-                  fontSize: '1.5rem',
-                  marginBottom: '0.5rem'
-                }}>
-                  {i + 1}
-                </div>
-                <h3 style={{ color: COLORS.navy, margin: 0, fontSize: '1.1rem', fontWeight: 800 }}>
-                  {point.title}
-                </h3>
-                <p style={{ color: COLORS.muted, margin: '0.5rem 0 0 0', fontSize: '0.95rem' }}>
-                  {point.desc}
-                </p>
+      {/* ═══════════════════════════════════════════════════════════════════
+          WHY BEACON
+          ═══════════════════════════════════════════════════════════════════ */}
+      <section className="ft-animate-in ft-section" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
+        <SectionHeader
+          title="Why Beacon"
+          subtitle=""
+          accentColor="cyan"
+        />
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem' }}>
+          {[
+            { title: 'AI-powered guidance', desc: 'Personalised to your stream and goals', icon: '🤖', accent: '#00d4ff' },
+            { title: 'Covers all major Indian exams', desc: 'From JEE and NEET to CUET and UPSC', icon: '📝', accent: '#00ff88' },
+            { title: 'Free psychometric test', desc: 'Get a detailed personality report', icon: '🧠', accent: '#8b5cf6' },
+            { title: 'Available 24/7', desc: 'No counsellor booking — instant guidance', icon: '⚡', accent: '#f59e0b' }
+          ].map((point, i) => (
+            <GlassCard
+              key={i}
+              className="ft-animate-in"
+              style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem', transitionDelay: `${i * 0.08}s` }}
+            >
+              <div style={{
+                width: 56, height: 56, borderRadius: 14,
+                background: `${point.accent}15`,
+                border: `1px solid ${point.accent}30`,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: '1.5rem',
+                boxShadow: `0 0 20px ${point.accent}15`,
+              }}>
+                {point.icon}
               </div>
-            ))}
-          </div>
+              <h3 style={{ color: 'rgba(255,255,255,0.95)', margin: 0, fontSize: '1.05rem', fontWeight: 800 }}>
+                {point.title}
+              </h3>
+              <p style={{ color: 'rgba(255,255,255,0.55)', margin: 0, fontSize: '0.92rem' }}>
+                {point.desc}
+              </p>
+            </GlassCard>
+          ))}
         </div>
       </section>
 
-      <footer style={{ background: COLORS.lightNavy || COLORS.navy, color: '#fff', padding: '2rem 1rem', marginTop: 24 }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', display: 'flex', gap: 20, alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+      {/* ═══════════════════════════════════════════════════════════════════
+          FOOTER
+          ═══════════════════════════════════════════════════════════════════ */}
+      <footer style={{
+        background: 'rgba(8,12,36,0.8)',
+        borderTop: '1px solid rgba(255,255,255,0.06)',
+        color: 'rgba(255,255,255,0.85)',
+        padding: '2.5rem 1.5rem',
+        backdropFilter: 'blur(12px)',
+      }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', gap: 24, alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap' }}>
           <div style={{ flex: '0 0 260px' }}>
-            <div style={{ fontWeight: 800, fontSize: 18 }}>Beacon</div>
-            <div style={{ marginTop: 8, opacity: 0.9 }}>Helping Indian students find their path.</div>
+            <div style={{ fontWeight: 800, fontSize: 20, color: '#00d4ff', textShadow: '0 0 20px rgba(0,212,255,0.3)' }}>Beacon</div>
+            <div style={{ marginTop: 10, opacity: 0.7, fontSize: '0.9rem', lineHeight: 1.5 }}>Helping Indian students find their path.</div>
           </div>
 
-          <div style={{ display: 'flex', gap: 40, flex: 1, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: 48, flex: 1, justifyContent: 'center', flexWrap: 'wrap' }}>
             <div>
-              <div style={{ fontWeight: 800, marginBottom: 8 }}>Platform</div>
-              <div style={{ display: 'grid', gap: 6 }}>
-                <a onClick={() => { window.history.pushState({}, '', '/dashboard'); window.dispatchEvent(new PopStateEvent('popstate')) }} style={{ color: '#fff', opacity: 0.95, cursor: 'pointer' }}>Home</a>
-                <a onClick={() => { window.history.pushState({}, '', '/'); window.dispatchEvent(new PopStateEvent('popstate')) }} style={{ color: '#fff', opacity: 0.95, cursor: 'pointer' }}>How it Works</a>
-                <a onClick={() => { window.history.pushState({}, '', '/careers'); window.dispatchEvent(new PopStateEvent('popstate')) }} style={{ color: '#fff', opacity: 0.95, cursor: 'pointer' }}>Career Library</a>
-                <a onClick={() => { window.history.pushState({}, '', '/exams'); window.dispatchEvent(new PopStateEvent('popstate')) }} style={{ color: '#fff', opacity: 0.95, cursor: 'pointer' }}>Exam Explorer</a>
+              <div style={{ fontWeight: 800, marginBottom: 10, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#00d4ff' }}>Platform</div>
+              <div style={{ display: 'grid', gap: 8 }}>
+                <a onClick={() => { window.history.pushState({}, '', '/dashboard'); window.dispatchEvent(new PopStateEvent('popstate')) }} className="ft-nav-link" style={{ fontSize: '0.9rem' }}>Home</a>
+                <a onClick={() => { window.history.pushState({}, '', '/'); window.dispatchEvent(new PopStateEvent('popstate')) }} className="ft-nav-link" style={{ fontSize: '0.9rem' }}>How it Works</a>
+                <a onClick={() => { window.history.pushState({}, '', '/careers'); window.dispatchEvent(new PopStateEvent('popstate')) }} className="ft-nav-link" style={{ fontSize: '0.9rem' }}>Career Library</a>
+                <a onClick={() => { window.history.pushState({}, '', '/exams'); window.dispatchEvent(new PopStateEvent('popstate')) }} className="ft-nav-link" style={{ fontSize: '0.9rem' }}>Exam Explorer</a>
               </div>
             </div>
 
             <div>
-              <div style={{ fontWeight: 800, marginBottom: 8 }}>Resources</div>
-              <div style={{ display: 'grid', gap: 6 }}>
+              <div style={{ fontWeight: 800, marginBottom: 10, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#00d4ff' }}>Resources</div>
+              <div style={{ display: 'grid', gap: 8 }}>
                 <button
                   type="button"
                   onClick={() => {
@@ -857,27 +958,35 @@ export default function Dashboard({ userName }) {
                       : `http://localhost:3001?origin=${encodeURIComponent(origin)}`;
                     window.open(url, '_blank');
                   }}
-                  style={{ color: '#fff', opacity: 0.95, cursor: 'pointer', background: 'transparent', border: 'none', padding: 0, font: 'inherit', textAlign: 'left' }}
+                  className="ft-nav-link"
+                  style={{ background: 'transparent', border: 'none', padding: 0, font: 'inherit', textAlign: 'left', fontSize: '0.9rem' }}
                 >
                   Psychometric Test
                 </button>
-                <a onClick={() => { window.history.pushState({}, '', '/chat'); window.dispatchEvent(new PopStateEvent('popstate')) }} style={{ color: '#fff', opacity: 0.95, cursor: 'pointer' }}>Chat with AI</a>
-                <a onClick={() => { window.history.pushState({}, '', '/report'); window.dispatchEvent(new PopStateEvent('popstate')) }} style={{ color: '#fff', opacity: 0.95, cursor: 'pointer' }}>Download Report</a>
+                <a onClick={() => { window.history.pushState({}, '', '/chat'); window.dispatchEvent(new PopStateEvent('popstate')) }} className="ft-nav-link" style={{ fontSize: '0.9rem' }}>Chat with AI</a>
+                <a onClick={() => { window.history.pushState({}, '', '/report'); window.dispatchEvent(new PopStateEvent('popstate')) }} className="ft-nav-link" style={{ fontSize: '0.9rem' }}>Download Report</a>
               </div>
             </div>
 
             <div>
-              <div style={{ fontWeight: 800, marginBottom: 8 }}>About</div>
-              <div style={{ display: 'grid', gap: 6 }}>
-                <a href="#" style={{ color: '#fff', opacity: 0.95 }}>About Us</a>
-                <a href="#" style={{ color: '#fff', opacity: 0.95 }}>Privacy Policy</a>
-                <a href="https://github.com" target="_blank" rel="noreferrer" style={{ color: '#fff', opacity: 0.95 }}>GitHub</a>
+              <div style={{ fontWeight: 800, marginBottom: 10, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#00d4ff' }}>About</div>
+              <div style={{ display: 'grid', gap: 8 }}>
+                <a href="#" className="ft-nav-link" style={{ fontSize: '0.9rem' }}>About Us</a>
+                <a href="#" className="ft-nav-link" style={{ fontSize: '0.9rem' }}>Privacy Policy</a>
+                <a href="https://github.com" target="_blank" rel="noreferrer" className="ft-nav-link" style={{ fontSize: '0.9rem' }}>GitHub</a>
               </div>
             </div>
           </div>
         </div>
 
-        <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', marginTop: 18, paddingTop: 12, textAlign: 'center', opacity: 0.9 }}>
+        <div style={{
+          borderTop: '1px solid rgba(255,255,255,0.06)',
+          marginTop: 24,
+          paddingTop: 16,
+          textAlign: 'center',
+          color: 'rgba(255,255,255,0.4)',
+          fontSize: '0.82rem',
+        }}>
           2026 Beacon. All rights reserved.
         </div>
       </footer>

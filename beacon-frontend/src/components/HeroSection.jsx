@@ -1,90 +1,5 @@
 import React from 'react'
-import { ED_CIL_THEME } from '../theme.js'
-
-const COLORS = {
-  navy: ED_CIL_THEME.primary,
-  white: ED_CIL_THEME.surface,
-  muted: 'rgba(255,255,255,0.92)',
-  badgeBg: 'rgba(255,255,255,0.12)'
-}
-
-const styles = {
-  hero: {
-    background: ED_CIL_THEME.primary,
-    backgroundImage: 'radial-gradient(ellipse at top, rgba(44,84,146,0.22) 0%, transparent 70%)',
-    color: COLORS.white,
-    padding: '7rem 1rem',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  container: {
-    maxWidth: 980,
-    width: '100%',
-    textAlign: 'center',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  logoWrap: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginBottom: 32,
-    width: '100%'
-  },
-  logo: {
-    height: 'clamp(160px, 12vw, 224px)',
-    width: 'auto',
-    maxWidth: 360,
-    objectFit: 'contain'
-  },
-  title: {
-    fontSize: 'clamp(1.75rem, 4vw, 2.25rem)',
-    lineHeight: 1.05,
-    fontWeight: 800,
-    margin: 0,
-    letterSpacing: '-0.01em'
-  },
-  subtitle: {
-    marginTop: '0.75rem',
-    color: COLORS.muted,
-    fontSize: '1.05rem'
-  },
-  ctaWrap: {
-    marginTop: '1.5rem',
-    display: 'flex',
-    justifyContent: 'center',
-    gap: '0.75rem',
-    flexWrap: 'wrap'
-  },
-  cta: {
-    background: COLORS.white,
-    color: COLORS.navy,
-    border: 'none',
-    padding: '0.9rem 1.3rem',
-    fontSize: '1rem',
-    fontWeight: 700,
-    borderRadius: 10,
-    cursor: 'pointer',
-    boxShadow: '0 6px 18px rgba(44,84,146,0.22)'
-  },
-  badges: {
-    display: 'flex',
-    gap: '0.6rem',
-    justifyContent: 'center',
-    marginTop: '1.35rem',
-    padding: 0,
-    listStyle: 'none'
-  },
-  badge: {
-    background: COLORS.badgeBg,
-    color: COLORS.white,
-    padding: '0.45rem 0.85rem',
-    borderRadius: 999,
-    fontSize: '0.9rem',
-    fontWeight: 600
-  }
-}
+import '../styles/futuristic.css'
 
 export default function HeroSection({
   title = 'Career guidance simplified for students',
@@ -98,39 +13,113 @@ export default function HeroSection({
   children = null,
 }) {
   return (
-    <section style={styles.hero} aria-label="Beacon hero">
-      <div style={styles.container}>
-        {logoSrc ? (
-          <div style={styles.logoWrap}>
-            <img src={logoSrc} alt={logoAlt} style={styles.logo} />
+    <section
+      aria-label="Beacon hero"
+      style={{
+        background: 'linear-gradient(180deg, #0d1333 0%, #111842 40%, #161d55 100%)',
+        position: 'relative',
+        overflow: 'hidden',
+        color: 'rgba(255,255,255,0.95)',
+        padding: '7rem 1rem 6rem',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      {/* ── Decorative background grid + orbs ── */}
+      <div style={{
+        position: 'absolute', inset: 0, pointerEvents: 'none',
+        backgroundImage: 'repeating-linear-gradient(0deg, rgba(0,212,255,0.03) 0px, transparent 1px, transparent 60px), repeating-linear-gradient(90deg, rgba(0,212,255,0.03) 0px, transparent 1px, transparent 60px)',
+      }} />
+      {/* Orb top-right */}
+      <div style={{
+        position: 'absolute', top: -80, right: -60, width: 300, height: 300,
+        borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(0,212,255,0.12) 0%, transparent 70%)',
+        filter: 'blur(40px)',
+        animation: 'ft-float 6s ease-in-out infinite',
+        pointerEvents: 'none',
+      }} />
+      {/* Orb bottom-left */}
+      <div style={{
+        position: 'absolute', bottom: -60, left: -40, width: 250, height: 250,
+        borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%)',
+        filter: 'blur(40px)',
+        animation: 'ft-float 8s ease-in-out infinite reverse',
+        pointerEvents: 'none',
+      }} />
+
+      {/* ── Content ── */}
+      <div style={{
+        maxWidth: 980, width: '100%', textAlign: 'center',
+        display: 'flex', flexDirection: 'column', alignItems: 'center',
+        position: 'relative', zIndex: 1,
+      }}>
+        {logoSrc && (
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 32, width: '100%' }}>
+            <img
+              src={logoSrc}
+              alt={logoAlt}
+              style={{
+                height: 'clamp(140px, 12vw, 200px)',
+                width: 'auto',
+                maxWidth: 340,
+                objectFit: 'contain',
+                borderRadius: 16,
+                boxShadow: '0 8px 40px rgba(0,0,0,0.3)',
+              }}
+            />
           </div>
-        ) : null}
+        )}
 
-        <h1 style={styles.title}>{title}</h1>
-        <p style={styles.subtitle}>{subtitle}</p>
+        <h1 style={{
+          fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
+          lineHeight: 1.1,
+          fontWeight: 800,
+          margin: 0,
+          letterSpacing: '-0.02em',
+          fontFamily: 'Inter, system-ui, -apple-system, sans-serif',
+        }}>
+          {title}
+        </h1>
+        <p style={{
+          marginTop: '0.85rem',
+          color: 'rgba(255,255,255,0.65)',
+          fontSize: '1.08rem',
+          lineHeight: 1.5,
+          maxWidth: 580,
+        }}>
+          {subtitle}
+        </p>
 
-        <div style={styles.ctaWrap}>
-          {primaryText ? (
+        <div style={{
+          marginTop: '2rem',
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '0.85rem',
+          flexWrap: 'wrap',
+        }}>
+          {primaryText && (
             <button
               type="button"
-              className="dashboard-button"
-              style={styles.cta}
+              className="ft-button-primary"
               onClick={onPrimary || (() => window.open('http://localhost:3001', '_blank'))}
+              style={{ fontSize: '1rem', padding: '0.95rem 1.8rem' }}
             >
               {primaryText}
             </button>
-          ) : null}
-
-          {secondaryText ? (
+          )}
+          {secondaryText && (
             <button
               type="button"
-              className="dashboard-button secondary"
-              style={{ ...styles.cta, background: 'transparent', color: COLORS.white, border: '1px solid rgba(255,255,255,0.12)', boxShadow: 'none' }}
+              className="ft-button-secondary"
               onClick={onSecondary || (() => window.open('http://localhost:3001', '_blank'))}
+              style={{ fontSize: '1rem', padding: '0.95rem 1.8rem' }}
             >
               {secondaryText}
             </button>
-          ) : null}
+          )}
         </div>
 
         {children}

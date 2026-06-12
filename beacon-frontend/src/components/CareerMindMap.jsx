@@ -7,16 +7,17 @@ import ReactFlow, {
   useEdgesState,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
+import '../styles/futuristic.css';
 
-/* ─── Design tokens ─────────────────────────────────────────────── */
-const NAVY      = '#2C5492';
-const NAVY_LIGHT = '#5f7dd6';
-const NAVY_PALE  = '#e8eef9';
-const TEAL      = '#14b8a6';
-const AMBER     = '#f59e0b';
+/* ─── Futuristic Design tokens ───────────────────────────────────── */
+const BG_DARK     = '#0d1333';
+const GLASS_BG    = 'rgba(255,255,255,0.04)';
+const GLASS_BORDER = 'rgba(255,255,255,0.08)';
+const TEXT_PRIMARY = 'rgba(255,255,255,0.95)';
+const TEXT_MUTED   = 'rgba(255,255,255,0.5)';
 
-/* ─── Node rank → accent colour ──────────────────────────────────── */
-const RANK_COLORS = ['#2C5492', '#5f7dd6', '#8b5cf6', '#14b8a6', '#f59e0b'];
+/* ─── Node rank → neon accent colour ─────────────────────────────── */
+const RANK_COLORS = ['#00d4ff', '#8b5cf6', '#ff006e', '#00ff88', '#f59e0b'];
 
 /* ─── Extract 2-3 short trait phrases from the reason string ─────── */
 function extractTraits(reason = '', max = 3) {
@@ -34,45 +35,46 @@ function extractTraits(reason = '', max = 3) {
 /* ─── Layout constants ───────────────────────────────────────────── */
 const CX = 0;       // center x
 const CY = 0;       // center y
-const CAREER_X    = 340;  // x of career nodes
-const TRAIT_X     = 680;  // x of trait sub-nodes
-const ROW_HEIGHT  = 160;  // vertical gap between career rows
+const CAREER_X    = 380;  // x of career nodes
+const TRAIT_X     = 740;  // x of trait sub-nodes
+const ROW_HEIGHT  = 170;  // vertical gap between career rows
 
 /* ─── Build nodes + edges from recommendations array ─────────────── */
 function buildGraph(recs) {
   const nodes = [];
   const edges = [];
 
-  // ── Central node ──────────────────────────────────────────────────
+  // ── Central "Profile" node ── glowing orb style ────────────────
   nodes.push({
     id: 'center',
     type: 'default',
     position: { x: CX, y: CY + (recs.length - 1) * ROW_HEIGHT * 0.5 },
     data: { label: 'Your\nProfile' },
     style: {
-      background: NAVY,
+      background: 'linear-gradient(135deg, #00d4ff, #8b5cf6)',
       color: '#fff',
       border: 'none',
-      borderRadius: 16,
+      borderRadius: 20,
       fontWeight: 800,
       fontSize: 14,
-      width: 110,
-      height: 64,
+      width: 120,
+      height: 68,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       textAlign: 'center',
       whiteSpace: 'pre-line',
-      boxShadow: '0 6px 24px rgba(44,84,146,0.35)',
+      boxShadow: '0 0 30px rgba(0,212,255,0.4), 0 0 60px rgba(139,92,246,0.2), 0 8px 32px rgba(0,0,0,0.3)',
+      fontFamily: 'Inter, system-ui, sans-serif',
     },
   });
 
   recs.forEach((career, ci) => {
-    const color    = RANK_COLORS[ci] || NAVY;
+    const color    = RANK_COLORS[ci] || '#00d4ff';
     const careerY  = ci * ROW_HEIGHT;
     const careerId = `career-${ci}`;
 
-    // ── Career node ──────────────────────────────────────────────────
+    // ── Career node ── glassmorphism card with neon border ────────
     nodes.push({
       id: careerId,
       type: 'default',
@@ -86,17 +88,19 @@ function buildGraph(recs) {
               borderRadius: 6,
               fontSize: 11,
               fontWeight: 800,
-              padding: '1px 7px',
-              marginBottom: 4,
+              padding: '2px 8px',
+              marginBottom: 5,
               display: 'inline-block',
+              boxShadow: `0 0 10px ${color}40`,
+              letterSpacing: '0.03em',
             }}>
               #{career.rank}
             </div>
-            <div style={{ fontWeight: 800, color: NAVY, fontSize: 13, lineHeight: 1.3 }}>
+            <div style={{ fontWeight: 800, color: TEXT_PRIMARY, fontSize: 13, lineHeight: 1.3 }}>
               {career.title}
             </div>
             {career.salary && (
-              <div style={{ fontSize: 11, color: '#15803d', fontWeight: 700, marginTop: 3 }}>
+              <div style={{ fontSize: 11, color: '#00ff88', fontWeight: 700, marginTop: 4, textShadow: '0 0 8px rgba(0,255,136,0.3)' }}>
                 {career.salary}
               </div>
             )}
@@ -104,25 +108,27 @@ function buildGraph(recs) {
         ),
       },
       style: {
-        background: '#fff',
-        border: `2px solid ${color}`,
-        borderRadius: 12,
-        padding: '10px 14px',
-        width: 180,
-        boxShadow: '0 4px 14px rgba(44,84,146,0.14)',
+        background: GLASS_BG,
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
+        border: `1.5px solid ${color}40`,
+        borderRadius: 14,
+        padding: '12px 16px',
+        width: 190,
+        boxShadow: `0 4px 20px rgba(0,0,0,0.3), 0 0 15px ${color}15`,
       },
     });
 
-    // ── Edge: center → career ──────────────────────────────────────
+    // ── Edge: center → career ── animated glowing line ───────────
     edges.push({
       id: `e-center-${careerId}`,
       source: 'center',
       target: careerId,
-      animated: false,
+      animated: true,
       style: { stroke: color, strokeWidth: 2, opacity: 0.7 },
     });
 
-    // ── Trait sub-nodes ─────────────────────────────────────────────
+    // ── Trait sub-nodes ── small glassmorphism chips ─────────────
     const traits = extractTraits(career.reason, 2);
     traits.forEach((trait, ti) => {
       const traitId = `trait-${ci}-${ti}`;
@@ -134,16 +140,19 @@ function buildGraph(recs) {
         position: { x: TRAIT_X, y: traitY },
         data: { label: trait },
         style: {
-          background: NAVY_PALE,
-          color: NAVY,
-          border: `1px solid ${color}40`,
-          borderRadius: 8,
+          background: `${color}0a`,
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)',
+          color: TEXT_MUTED,
+          border: `1px solid ${color}20`,
+          borderRadius: 10,
           fontSize: 11,
           fontWeight: 600,
-          padding: '6px 10px',
-          width: 210,
+          padding: '7px 12px',
+          width: 220,
           lineHeight: 1.4,
-          boxShadow: '0 2px 6px rgba(44,84,146,0.07)',
+          boxShadow: `0 2px 10px rgba(0,0,0,0.2)`,
+          fontFamily: 'Inter, system-ui, sans-serif',
         },
       });
 
@@ -151,7 +160,7 @@ function buildGraph(recs) {
         id: `e-${careerId}-${traitId}`,
         source: careerId,
         target: traitId,
-        style: { stroke: color, strokeWidth: 1.5, opacity: 0.5, strokeDasharray: '4 3' },
+        style: { stroke: color, strokeWidth: 1.5, opacity: 0.35, strokeDasharray: '5 4' },
       });
     });
   });
@@ -172,7 +181,15 @@ export default function CareerMindMap({ recs }) {
   if (!recs || recs.length === 0) return null;
 
   return (
-    <div style={{ width: '100%', height: 520, borderRadius: 16, overflow: 'hidden', border: `1px solid ${NAVY_PALE}`, boxShadow: '0 4px 24px rgba(44,84,146,0.10)' }}>
+    <div style={{
+      width: '100%',
+      height: 560,
+      borderRadius: 20,
+      overflow: 'hidden',
+      border: '1px solid rgba(255,255,255,0.06)',
+      boxShadow: '0 8px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04)',
+      background: BG_DARK,
+    }}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -185,15 +202,33 @@ export default function CareerMindMap({ recs }) {
         elementsSelectable={false}
         proOptions={{ hideAttribution: true }}
       >
-        <Background color={NAVY_PALE} gap={20} size={1} />
+        <Background
+          color="rgba(0,212,255,0.06)"
+          gap={24}
+          size={1}
+          style={{ background: BG_DARK }}
+        />
         <Controls
-          style={{ background: '#fff', border: `1px solid ${NAVY_PALE}`, borderRadius: 8 }}
+          style={{
+            background: 'rgba(13,19,51,0.9)',
+            border: '1px solid rgba(255,255,255,0.08)',
+            borderRadius: 10,
+            boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
+          }}
           showInteractive={false}
         />
         <MiniMap
-          nodeColor={(n) => (n.id === 'center' ? NAVY : n.id.startsWith('career') ? NAVY_LIGHT : NAVY_PALE)}
-          style={{ background: '#fff', border: `1px solid ${NAVY_PALE}`, borderRadius: 8 }}
-          maskColor="rgba(44,84,146,0.05)"
+          nodeColor={(n) => {
+            if (n.id === 'center') return '#00d4ff';
+            if (n.id.startsWith('career')) return '#8b5cf6';
+            return 'rgba(255,255,255,0.15)';
+          }}
+          style={{
+            background: 'rgba(13,19,51,0.9)',
+            border: '1px solid rgba(255,255,255,0.08)',
+            borderRadius: 10,
+          }}
+          maskColor="rgba(0,0,0,0.4)"
         />
       </ReactFlow>
     </div>
