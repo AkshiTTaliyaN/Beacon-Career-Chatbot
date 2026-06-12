@@ -248,7 +248,7 @@ export function RadialGauge({
           cy={center}
           r={radius}
           fill="none"
-          stroke="rgba(255,255,255,0.06)"
+          stroke="var(--ft-border-subtle)"
           strokeWidth={strokeWidth}
           strokeDasharray={dashArray}
           strokeDashoffset={0}
@@ -282,7 +282,7 @@ export function RadialGauge({
           className="ft-radial-gauge__value"
           textAnchor="middle"
           dominantBaseline="central"
-          fill="rgba(255,255,255,0.95)"
+          fill="var(--ft-text-primary)"
           fontSize={size * 0.22}
           fontWeight="700"
           fontFamily="Inter, system-ui, sans-serif"
@@ -297,7 +297,7 @@ export function RadialGauge({
           className="ft-radial-gauge__label"
           textAnchor="middle"
           dominantBaseline="central"
-          fill="rgba(255,255,255,0.6)"
+          fill="var(--ft-text-secondary)"
           fontSize={size * 0.1}
           fontFamily="Inter, system-ui, sans-serif"
         >
@@ -312,7 +312,7 @@ export function RadialGauge({
             className="ft-radial-gauge__sublabel"
             textAnchor="middle"
             dominantBaseline="central"
-            fill="rgba(255,255,255,0.4)"
+            fill="var(--ft-text-muted)"
             fontSize={size * 0.075}
             fontFamily="Inter, system-ui, sans-serif"
           >

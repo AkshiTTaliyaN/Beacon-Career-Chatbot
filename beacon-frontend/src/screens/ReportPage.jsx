@@ -87,6 +87,45 @@ function RadarTooltipContent({ active, payload }) {
   );
 }
 
+/* ── Custom radar ticks to prevent overlaps ───────────────────────── */
+function ReportRadarTick({ x, y, cx, cy, payload }) {
+  const dx = x - cx;
+  const dy = y - cy;
+  const len = Math.sqrt(dx * dx + dy * dy);
+  
+  // Push outwards by 14px
+  const offset = 14;
+  const newX = len > 0 ? x + (dx / len) * offset : x;
+  const newY = len > 0 ? y + (dy / len) * offset : y;
+  
+  // Align text anchor based on position relative to center
+  let textAnchor = 'middle';
+  if (dx > 20) textAnchor = 'start';
+  else if (dx < -20) textAnchor = 'end';
+  
+  // Adjust dy to avoid vertical overlap
+  let adjustedDy = 4;
+  if (dy < -20) adjustedDy = -4; // above the dot
+  else if (dy > 20) adjustedDy = 12; // below the dot
+
+  return (
+    <g transform={`translate(${newX},${newY})`}>
+      <text
+        textAnchor={textAnchor}
+        dy={adjustedDy}
+        style={{
+          fill: '#2C5492', // NAVY
+          fontSize: 12,
+          fontWeight: 700,
+          fontFamily: 'Inter, system-ui, sans-serif',
+        }}
+      >
+        {payload.value}
+      </text>
+    </g>
+  );
+}
+
 /* ─────────────────────────────────────────────────────────────────── */
 export default function ReportPage() {
   const [profile, setProfile] = useState(null);
@@ -384,11 +423,11 @@ export default function ReportPage() {
                   />
                   <div style={{ background: '#f7f9fb', borderRadius: 16, padding: '1.5rem 1rem' }}>
                     <ResponsiveContainer width="100%" height={340}>
-                      <RadarChart cx="50%" cy="50%" outerRadius="72%" data={radarData}>
+                      <RadarChart cx="50%" cy="50%" outerRadius="60%" data={radarData}>
                         <PolarGrid gridType="polygon" stroke="#cbd5e1" />
                         <PolarAngleAxis
                           dataKey="dimension"
-                          tick={{ fill: NAVY, fontWeight: 700, fontSize: 13 }}
+                          tick={<ReportRadarTick />}
                         />
                         <PolarRadiusAxis
                           angle={30}

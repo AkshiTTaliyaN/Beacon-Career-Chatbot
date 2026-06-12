@@ -16,20 +16,21 @@ import {
 /* ─── Radar Tooltip ───────────────────────────────────────────────── */
 function RadarTooltipContent({ active, payload }) {
   if (!active || !payload || !payload.length) return null;
+  const isDark = !document.body.classList.contains('light-theme');
   return (
     <div style={{
-      background: 'rgba(13,19,51,0.95)',
-      border: '1px solid rgba(0,212,255,0.2)',
+      background: isDark ? 'rgba(13,19,51,0.95)' : '#ffffff',
+      border: isDark ? '1px solid rgba(0,212,255,0.2)' : '1px solid rgba(44, 84, 146, 0.12)',
       borderRadius: 10,
       padding: '10px 16px',
-      boxShadow: '0 8px 32px rgba(0,0,0,0.4), 0 0 20px rgba(0,212,255,0.1)',
+      boxShadow: isDark ? '0 8px 32px rgba(0,0,0,0.4), 0 0 20px rgba(0,212,255,0.1)' : '0 8px 24px rgba(0,0,0,0.08)',
       backdropFilter: 'blur(12px)',
       fontSize: 13,
     }}>
       {payload.map((p, i) => (
         <div key={i} style={{ color: p.color, fontWeight: 700, marginBottom: 3, display: 'flex', alignItems: 'center', gap: 8 }}>
           <span style={{ width: 8, height: 8, borderRadius: '50%', background: p.color, boxShadow: `0 0 6px ${p.color}` }} />
-          {p.name}: <span style={{ color: 'rgba(255,255,255,0.95)' }}>{p.value}</span>
+          {p.name}: <span style={{ color: isDark ? 'rgba(255,255,255,0.95)' : '#0f172a' }}>{p.value}</span>
         </div>
       ))}
     </div>
@@ -37,19 +38,49 @@ function RadarTooltipContent({ active, payload }) {
 }
 
 /* ─── Custom Radar Axis Tick ──────────────────────────────────────── */
-function FuturisticRadarTick({ x, y, payload }) {
+function FuturisticRadarTick({ x, y, cx, cy, payload }) {
   const theme = RIASEC_THEME[payload.value] || {};
+  const isDark = !document.body.classList.contains('light-theme');
+  
+  // Calculate vector from center to coordinate
+  const dx = x - cx;
+  const dy = y - cy;
+  const len = Math.sqrt(dx * dx + dy * dy);
+  
+  // Push outwards by 18px
+  const offset = 18;
+  const newX = len > 0 ? x + (dx / len) * offset : x;
+  const newY = len > 0 ? y + (dy / len) * offset : y;
+  
+  // Align text anchor based on position relative to center
+  let textAnchor = 'middle';
+  if (dx > 20) textAnchor = 'start';
+  else if (dx < -20) textAnchor = 'end';
+  
+  // Adjust dy to avoid vertical overlap
+  let adjustedDy = 4;
+  if (dy < -20) adjustedDy = -4; // above the dot
+  else if (dy > 20) adjustedDy = 12; // below the dot
+  
+  // Clean color for light theme readability
+  const textColor = isDark 
+    ? (theme.color || 'rgba(255,255,255,0.75)') 
+    : (theme.color || '#0f172a');
+  
+  // Glow filter only for dark theme
+  const textShadow = isDark ? `drop-shadow(0 0 4px ${theme.color || 'transparent'})` : 'none';
+
   return (
-    <g transform={`translate(${x},${y})`}>
+    <g transform={`translate(${newX},${newY})`}>
       <text
-        textAnchor="middle"
-        dy={3}
+        textAnchor={textAnchor}
+        dy={adjustedDy}
         style={{
-          fill: theme.color || 'rgba(255,255,255,0.7)',
+          fill: textColor,
           fontSize: 11,
           fontWeight: 700,
           fontFamily: 'Inter, system-ui, sans-serif',
-          filter: `drop-shadow(0 0 4px ${theme.color || 'transparent'})`,
+          filter: textShadow,
         }}
       >
         {theme.icon || ''} {payload.value}
@@ -148,9 +179,10 @@ function getProfileCompletion(profile) {
 
 /* ─── Subject Bar Colors (futuristic) ─────────────────────────────── */
 function getSubjectBarColor(rating) {
+  const isDark = !document.body.classList.contains('light-theme');
   if (rating >= 4) return '#00d4ff';
   if (rating === 3) return '#8b5cf6';
-  return 'rgba(255,255,255,0.25)';
+  return isDark ? 'rgba(255,255,255,0.25)' : 'rgba(15,23,42,0.15)';
 }
 
 export default function Dashboard({ userName }) {
@@ -161,6 +193,32 @@ export default function Dashboard({ userName }) {
   const name = userName || window.localStorage.getItem('userName') || ''
   const [navScrolled, setNavScrolled] = useState(false)
   const isReturning = window.localStorage.getItem('beaconReturning') === '1'
+
+  const [isDark, setIsDark] = useState(() => {
+    const saved = localStorage.getItem('beacon-theme');
+    return saved !== 'light';
+  });
+
+  useEffect(() => {
+    const saved = localStorage.getItem('beacon-theme');
+    if (saved === 'light') {
+      document.body.classList.add('light-theme');
+    } else {
+      document.body.classList.remove('light-theme');
+    }
+  }, []);
+
+  const handleThemeToggle = () => {
+    const newDark = !isDark;
+    setIsDark(newDark);
+    if (newDark) {
+      document.body.classList.remove('light-theme');
+      localStorage.setItem('beacon-theme', 'dark');
+    } else {
+      document.body.classList.add('light-theme');
+      localStorage.setItem('beacon-theme', 'light');
+    }
+  };
 
   // ── Career Recommendations state ───────────────────────────────────────────────────
   const [recs, setRecs] = useState(null)          // null=loading, []=empty
@@ -258,6 +316,28 @@ export default function Dashboard({ userName }) {
           {profile?.riasec_scores && (
             <a onClick={() => { window.history.pushState({}, '', '/report'); window.dispatchEvent(new PopStateEvent('popstate')) }} className="ft-nav-link">My Report</a>
           )}
+          <button
+            onClick={handleThemeToggle}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              fontSize: '1.25rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: 4,
+              color: 'var(--ft-neon-cyan)',
+              filter: 'drop-shadow(0 0 4px var(--ft-neon-cyan))',
+              transition: 'transform 0.3s ease',
+              marginRight: '0.5rem',
+            }}
+            aria-label="Toggle Theme"
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'rotate(20deg)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'rotate(0deg)'}
+          >
+            {isDark ? '☀️' : '🌙'}
+          </button>
           <div style={{
             width: 36, height: 36, borderRadius: 999,
             background: 'rgba(0,212,255,0.12)',
@@ -571,7 +651,7 @@ export default function Dashboard({ userName }) {
               </p>
               <div style={{ height: 340 }}>
                 <ResponsiveContainer width="100%" height="100%">
-                  <RadarChart cx="50%" cy="50%" outerRadius="70%" data={radarData}>
+                  <RadarChart cx="50%" cy="50%" outerRadius="60%" data={radarData}>
                     <defs>
                       <linearGradient id="radarCyanGrad" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="0%" stopColor="#00d4ff" stopOpacity={0.35} />
@@ -590,7 +670,7 @@ export default function Dashboard({ userName }) {
                         <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
                       </filter>
                     </defs>
-                    <PolarGrid gridType="polygon" stroke="rgba(0,212,255,0.12)" />
+                    <PolarGrid gridType="polygon" stroke={isDark ? "rgba(0,212,255,0.12)" : "rgba(15,23,42,0.12)"} />
                     <PolarAngleAxis
                       dataKey="dimension"
                       tick={<FuturisticRadarTick />}
@@ -598,7 +678,7 @@ export default function Dashboard({ userName }) {
                     <PolarRadiusAxis
                       angle={30}
                       domain={[0, 100]}
-                      tick={{ fill: 'rgba(255,255,255,0.25)', fontSize: 10 }}
+                      tick={{ fill: isDark ? 'rgba(255,255,255,0.25)' : 'rgba(15,23,42,0.45)', fontSize: 10 }}
                       tickCount={5}
                       axisLine={false}
                     />
@@ -621,7 +701,7 @@ export default function Dashboard({ userName }) {
                       style={{ filter: 'url(#glowMagenta)' }}
                     />
                     <Legend
-                      formatter={v => <span style={{ color: 'rgba(255,255,255,0.75)', fontWeight: 600, fontSize: 12 }}>{v}</span>}
+                      formatter={v => <span style={{ color: 'var(--ft-text-secondary)', fontWeight: 600, fontSize: 12 }}>{v}</span>}
                       iconType="circle"
                     />
                     <Tooltip content={<RadarTooltipContent />} />
@@ -665,16 +745,16 @@ export default function Dashboard({ userName }) {
                       type="number"
                       domain={[0, 5]}
                       ticks={[1, 2, 3, 4, 5]}
-                      tick={{ fill: 'rgba(255,255,255,0.4)', fontSize: 11 }}
+                      tick={{ fill: isDark ? 'rgba(255,255,255,0.4)' : 'rgba(15,23,42,0.5)', fontSize: 11 }}
                       tickFormatter={v => ['', '1', '2', '3', '4', '5'][v] || v}
-                      axisLine={{ stroke: 'rgba(255,255,255,0.06)' }}
+                      axisLine={{ stroke: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(15,23,42,0.08)' }}
                       tickLine={false}
                     />
                     <YAxis
                       type="category"
                       dataKey="subject"
                       width={120}
-                      tick={{ fill: 'rgba(255,255,255,0.8)', fontWeight: 600, fontSize: 12 }}
+                      tick={{ fill: isDark ? 'rgba(255,255,255,0.8)' : 'rgba(15,23,42,0.8)', fontWeight: 600, fontSize: 12 }}
                       axisLine={false}
                       tickLine={false}
                     />
@@ -683,11 +763,14 @@ export default function Dashboard({ userName }) {
                         if (!active || !payload?.[0]) return null;
                         const v = payload[0].value;
                         const labels = ['','Struggling','Getting by','Comfortable','Really good','Favourite'];
+                        const localIsDark = !document.body.classList.contains('light-theme');
                         return (
                           <div style={{
-                            background: 'rgba(13,19,51,0.95)', border: '1px solid rgba(0,212,255,0.2)',
-                            borderRadius: 10, padding: '10px 16px', boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
-                            color: 'rgba(255,255,255,0.9)', fontSize: 13,
+                            background: localIsDark ? 'rgba(13,19,51,0.95)' : '#ffffff',
+                            border: localIsDark ? '1px solid rgba(0,212,255,0.2)' : '1px solid rgba(44, 84, 146, 0.12)',
+                            borderRadius: 10, padding: '10px 16px',
+                            boxShadow: localIsDark ? '0 8px 32px rgba(0,0,0,0.4)' : '0 8px 20px rgba(0,0,0,0.08)',
+                            color: localIsDark ? 'rgba(255,255,255,0.9)' : '#0f172a', fontSize: 13,
                           }}>
                             <div style={{ fontWeight: 700 }}>{payload[0].payload.subject}</div>
                             <div style={{ color: '#00d4ff', marginTop: 4 }}>{v}/5 — {labels[v] || v}</div>
@@ -699,7 +782,7 @@ export default function Dashboard({ userName }) {
                       {subjectData.map((entry, i) => (
                         <Cell
                           key={i}
-                          fill={entry.rating >= 4 ? 'url(#barCyanGrad)' : entry.rating === 3 ? 'url(#barPurpleGrad)' : 'rgba(255,255,255,0.12)'}
+                          fill={entry.rating >= 4 ? 'url(#barCyanGrad)' : entry.rating === 3 ? 'url(#barPurpleGrad)' : (isDark ? 'rgba(255,255,255,0.12)' : 'rgba(15,23,42,0.08)')}
                           style={{ filter: entry.rating >= 4 ? 'url(#barGlow)' : undefined }}
                         />
                       ))}
@@ -710,15 +793,15 @@ export default function Dashboard({ userName }) {
                 <div style={{ display: 'flex', gap: 16, justifyContent: 'center', marginTop: 14, fontSize: 11 }}>
                   <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
                     <span style={{ width: 10, height: 10, borderRadius: 3, background: '#00d4ff', boxShadow: '0 0 8px rgba(0,212,255,0.4)' }} />
-                    <span style={{ color: 'rgba(255,255,255,0.6)' }}>Strong (4–5)</span>
+                    <span style={{ color: 'var(--ft-text-secondary)' }}>Strong (4–5)</span>
                   </span>
                   <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
                     <span style={{ width: 10, height: 10, borderRadius: 3, background: '#8b5cf6', boxShadow: '0 0 8px rgba(139,92,246,0.3)' }} />
-                    <span style={{ color: 'rgba(255,255,255,0.6)' }}>Average (3)</span>
+                    <span style={{ color: 'var(--ft-text-secondary)' }}>Average (3)</span>
                   </span>
                   <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                    <span style={{ width: 10, height: 10, borderRadius: 3, background: 'rgba(255,255,255,0.15)' }} />
-                    <span style={{ color: 'rgba(255,255,255,0.6)' }}>Needs work (1–2)</span>
+                    <span style={{ width: 10, height: 10, borderRadius: 3, background: 'var(--ft-border-light)' }} />
+                    <span style={{ color: 'var(--ft-text-secondary)' }}>Needs work (1–2)</span>
                   </span>
                 </div>
               </div>

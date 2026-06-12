@@ -10,11 +10,11 @@ import 'reactflow/dist/style.css';
 import '../styles/futuristic.css';
 
 /* ─── Futuristic Design tokens ───────────────────────────────────── */
-const BG_DARK     = '#0d1333';
-const GLASS_BG    = 'rgba(255,255,255,0.04)';
-const GLASS_BORDER = 'rgba(255,255,255,0.08)';
-const TEXT_PRIMARY = 'rgba(255,255,255,0.95)';
-const TEXT_MUTED   = 'rgba(255,255,255,0.5)';
+const GLASS_BG     = 'var(--ft-glass-bg)';
+const GLASS_BORDER = 'var(--ft-glass-border)';
+const TEXT_PRIMARY = 'var(--ft-text-primary)';
+const TEXT_MUTED   = 'var(--ft-text-secondary)';
+const BG_DARK      = 'var(--ft-bg-tertiary)';
 
 /* ─── Node rank → neon accent colour ─────────────────────────────── */
 const RANK_COLORS = ['#00d4ff', '#8b5cf6', '#ff006e', '#00ff88', '#f59e0b'];
@@ -186,8 +186,8 @@ export default function CareerMindMap({ recs }) {
       height: 560,
       borderRadius: 20,
       overflow: 'hidden',
-      border: '1px solid rgba(255,255,255,0.06)',
-      boxShadow: '0 8px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04)',
+      border: '1px solid var(--ft-glass-border)',
+      boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
       background: BG_DARK,
     }}>
       <ReactFlow
@@ -210,10 +210,10 @@ export default function CareerMindMap({ recs }) {
         />
         <Controls
           style={{
-            background: 'rgba(13,19,51,0.9)',
-            border: '1px solid rgba(255,255,255,0.08)',
+            background: 'var(--ft-bg-surface)',
+            border: '1px solid var(--ft-glass-border)',
             borderRadius: 10,
-            boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.1)',
           }}
           showInteractive={false}
         />
@@ -221,14 +221,14 @@ export default function CareerMindMap({ recs }) {
           nodeColor={(n) => {
             if (n.id === 'center') return '#00d4ff';
             if (n.id.startsWith('career')) return '#8b5cf6';
-            return 'rgba(255,255,255,0.15)';
+            return 'rgba(0,0,0,0.1)';
           }}
           style={{
-            background: 'rgba(13,19,51,0.9)',
-            border: '1px solid rgba(255,255,255,0.08)',
+            background: 'var(--ft-bg-surface)',
+            border: '1px solid var(--ft-glass-border)',
             borderRadius: 10,
           }}
-          maskColor="rgba(0,0,0,0.4)"
+          maskColor="rgba(0,0,0,0.15)"
         />
       </ReactFlow>
     </div>

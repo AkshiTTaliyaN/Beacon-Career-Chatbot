@@ -806,3 +806,45 @@
   .ft-glass-card--bordered::before { animation: none; }
   .ft-orb { animation: none; }
 }
+
+
+/* ============================================================
+   LIGHT THEME OVERRIDES
+   ============================================================ */
+body.light-theme,
+.light-theme {
+  /* Backgrounds */
+  --ft-bg-primary:   #f1f5f9;  /* slate-100 */
+  --ft-bg-secondary: #ffffff;  /* white */
+  --ft-bg-tertiary:  #f8fafc;  /* slate-50 */
+  --ft-bg-surface:   #e2e8f0;  /* slate-200 */
+
+  /* Glassmorphism */
+  --ft-glass-bg:       rgba(255, 255, 255, 0.7);
+  --ft-glass-bg-hover: rgba(255, 255, 255, 0.95);
+  --ft-glass-border:   rgba(44, 84, 146, 0.12);
+  --ft-glass-blur:     12px;
+
+  /* Text */
+  --ft-text-primary:   #0f172a;  /* slate-900 */
+  --ft-text-secondary: #334155;  /* slate-700 */
+  --ft-text-muted:     #64748b;  /* slate-500 */
+
+  /* Borders */
+  --ft-border-subtle: rgba(44, 84, 146, 0.08);
+  --ft-border-light:  rgba(44, 84, 146, 0.16);
+
+  /* Glow shadows - softer for light theme to look clean and legible */
+  --ft-glow-cyan:    0 4px 20px rgba(0, 180, 216, 0.12);
+  --ft-glow-magenta: 0 4px 20px rgba(219, 39, 119, 0.12);
+  --ft-glow-green:   0 4px 20px rgba(5, 150, 105, 0.12);
+  --ft-glow-amber:   0 4px 20px rgba(217, 119, 6, 0.12);
+  --ft-glow-purple:  0 4px 20px rgba(124, 58, 237, 0.12);
+}
+
+body.light-theme .ft-dashboard-bg::before {
+  background-image:
+    linear-gradient(rgba(44, 84, 146, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(44, 84, 146, 0.025) 1px, transparent 1px);
+}
+
