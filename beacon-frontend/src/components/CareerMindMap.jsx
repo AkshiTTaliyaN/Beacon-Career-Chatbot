@@ -108,9 +108,7 @@ function buildGraph(recs) {
         ),
       },
       style: {
-        background: GLASS_BG,
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
+        background: 'var(--ft-bg-secondary)',
         border: `1.5px solid ${color}40`,
         borderRadius: 14,
         padding: '12px 16px',
@@ -140,9 +138,7 @@ function buildGraph(recs) {
         position: { x: TRAIT_X, y: traitY },
         data: { label: trait },
         style: {
-          background: `${color}0a`,
-          backdropFilter: 'blur(8px)',
-          WebkitBackdropFilter: 'blur(8px)',
+          background: 'var(--ft-bg-tertiary)',
           color: TEXT_MUTED,
           border: `1px solid ${color}20`,
           borderRadius: 10,

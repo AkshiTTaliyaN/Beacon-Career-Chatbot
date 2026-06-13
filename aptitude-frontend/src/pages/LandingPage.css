@@ -80,6 +80,9 @@
   aspect-ratio: 4/5;
   background: var(--gray-light);
   box-shadow: 0 10px 40px rgba(15, 23, 42, 0.12);
+  max-width: 380px;
+  max-height: 480px;
+  justify-self: center;
 }
 
 .hero-image-wrap img {

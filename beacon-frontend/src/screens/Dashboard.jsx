@@ -585,6 +585,18 @@ export default function Dashboard({ userName }) {
                   <p style={{ margin: '12px 0 0', color: 'var(--ft-text-secondary)', fontSize: '0.87rem', lineHeight: 1.65, position: 'relative' }}>
                     {career.reason}
                   </p>
+                  <div style={{ marginTop: 16, display: 'flex', justifyContent: 'flex-end', position: 'relative', zIndex: 2 }}>
+                    <button
+                      className="ft-button-secondary"
+                      style={{ padding: '8px 16px', fontSize: '0.85rem', width: '100%', cursor: 'pointer' }}
+                      onClick={() => {
+                        window.history.pushState({}, '', `/expert?career=${encodeURIComponent(career.title)}`);
+                        window.dispatchEvent(new PopStateEvent('popstate'));
+                      }}
+                    >
+                      Consult Advisor →
+                    </button>
+                  </div>
                 </GlassCard>
               );
             })}

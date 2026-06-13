@@ -173,6 +173,77 @@ export async function sendChatChoice({ sessionId, choice, message }) {
   return res.json();
 }
 
+/** Consult expert system for a specific career */
+export async function consultExpert(careerTitle) {
+  if (DEMO_MODE) {
+    // Return a realistic demo response
+    return {
+      career_title: careerTitle,
+      compatibility_score: 78,
+      status: "green",
+      strengths: [
+        "Strong Foundation: Your academic profile aligns well with the core requirements of this career.",
+        "RIASEC Match: Your personality type is a strong fit for this career path.",
+      ],
+      warnings: [
+        "Study intensity may need to increase for competitive exam preparation.",
+      ],
+      action_checklist: [
+        "Begin focused preparation for relevant entrance examinations.",
+        "Gradually increase self-study hours to 3-4 hours daily.",
+        "Participate in relevant extracurricular activities to build your portfolio.",
+      ],
+      roadmap: [
+        { phase: "1", title: "Foundations (Class 9-10)", items: ["Focus on core school subjects", "Build logical reasoning", "Attend introductory workshops"] },
+        { phase: "2", title: "Core Academic Build (Class 11)", items: ["Master core syllabus", "Start entrance exam prep", "Join relevant clubs"] },
+        { phase: "3", title: "Intensive Prep (Class 12 — First Half)", items: ["Complete syllabus by Oct", "Start full-length mock tests", "Register for exams"] },
+        { phase: "4", title: "Revision & Testing (Class 12 — Second Half)", items: ["Revise formulas", "Balance board + entrance prep", "Attend counselling seminars"] },
+      ],
+      relevant_exams: [
+        { name: "JEE Main", timeline: "January & April", prep_focus: "Physics, Chemistry, Math — speed and accuracy", leads_to: "B.E./B.Tech at NITs, IIITs" },
+      ],
+      backup_careers: ["Software Engineer", "Data Scientist", "Research Scientist"],
+    };
+  }
+
+  const token = getToken();
+  if (!token) throw new Error("Not logged in. Please sign in again.");
+
+  const res = await fetch(`${API}/expert/consult`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ career_title: careerTitle }),
+  });
+  if (!res.ok) throw new Error(await parseError(res));
+  return res.json();
+}
+
+/** Get list of all careers for the expert consultant dropdown */
+export async function getExpertCareers() {
+  if (DEMO_MODE) {
+    return [
+      "AI / Machine Learning Engineer",
+      "Cybersecurity Analyst",
+      "Data Scientist",
+      "Software Engineer",
+    ];
+  }
+
+  const token = getToken();
+  if (!token) throw new Error("Not logged in. Please sign in again.");
+
+  const res = await fetch(`${API}/expert/careers`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!res.ok) throw new Error(await parseError(res));
+  return res.json();
+}
+
 export function clearSession() {
   localStorage.removeItem(STORAGE_KEYS.token);
   localStorage.removeItem(STORAGE_KEYS.email);

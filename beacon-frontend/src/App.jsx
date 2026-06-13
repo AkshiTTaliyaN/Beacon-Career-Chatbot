@@ -16,6 +16,7 @@ import ChatScreen from "./screens/ChatScreen";
 import ReportPage from "./screens/ReportPage";
 import CareerLibrary from "./screens/CareerLibrary";
 import ExamExplorer from "./screens/ExamExplorer";
+import ExpertSystemScreen from "./screens/ExpertSystemScreen";
 
 const STEP = {
   LOGIN: "login",
@@ -78,6 +79,7 @@ export default function App() {
   if (path === "/report") return <ReportPage />;
   if (path === "/careers") return <CareerLibrary />;
   if (path === "/exams") return <ExamExplorer />;
+  if (path === "/expert") return <ExpertSystemScreen />;
 
   // ─── Step-based onboarding flow ───
 

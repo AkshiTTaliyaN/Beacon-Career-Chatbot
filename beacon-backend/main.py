@@ -13,7 +13,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 
 from database import create_tables
-from routes import auth_router, profile_router, rec_router, chat_router
+from routes import auth_router, profile_router, rec_router, chat_router, expert_router
 
 app = FastAPI(
     title="Beacon API",
@@ -33,6 +33,7 @@ app.include_router(auth_router)
 app.include_router(profile_router)
 app.include_router(rec_router)
 app.include_router(chat_router)
+app.include_router(expert_router)
 
 
 @app.on_event("startup")

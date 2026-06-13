@@ -15,6 +15,11 @@
   --ft-bg-tertiary:  #111842;
   --ft-bg-surface:   #161d45;
 
+  /* Navbar Backgrounds */
+  --ft-navbar-bg: rgba(8, 12, 36, 0.75);
+  --ft-navbar-scrolled-bg: rgba(8, 12, 36, 0.92);
+  --ft-navbar-shadow: 0 4px 30px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(0, 212, 255, 0.1);
+
   /* Glassmorphism */
   --ft-glass-bg:       rgba(255, 255, 255, 0.04);
   --ft-glass-bg-hover: rgba(255, 255, 255, 0.08);
@@ -119,7 +124,7 @@
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
-  animation: ft-rotate-gradient 6s linear infinite;
+  /* animation: ft-rotate-gradient 6s linear infinite; */
 }
 
 
@@ -274,7 +279,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(8, 12, 36, 0.75);
+  background: var(--ft-navbar-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--ft-glass-border);
@@ -284,13 +289,13 @@
   align-items: center;
   justify-content: space-between;
   transition: box-shadow var(--ft-transition-base),
-              background var(--ft-transition-base);
+              background var(--ft-transition-base),
+              border-color var(--ft-transition-base);
 }
 
 .ft-navbar-scrolled {
-  background: rgba(8, 12, 36, 0.92);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4),
-              0 1px 0 rgba(0, 212, 255, 0.1);
+  background: var(--ft-navbar-scrolled-bg);
+  box-shadow: var(--ft-navbar-shadow);
 }
 
 .ft-nav-link {
@@ -818,6 +823,11 @@ body.light-theme,
   --ft-bg-secondary: #ffffff;  /* white */
   --ft-bg-tertiary:  #f8fafc;  /* slate-50 */
   --ft-bg-surface:   #e2e8f0;  /* slate-200 */
+
+  /* Navbar Backgrounds */
+  --ft-navbar-bg: rgba(255, 255, 255, 0.75);
+  --ft-navbar-scrolled-bg: rgba(255, 255, 255, 0.92);
+  --ft-navbar-shadow: 0 4px 30px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(44, 84, 146, 0.12);
 
   /* Glassmorphism */
   --ft-glass-bg:       rgba(255, 255, 255, 0.7);

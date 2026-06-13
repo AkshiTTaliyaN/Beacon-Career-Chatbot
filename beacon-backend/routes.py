@@ -297,6 +297,36 @@ def continue_chat(
     return _node_response(body.session_id, CHAT_TREE[next_id], profile, skipped)
 
 
+# ─── EXPERT SYSTEM ────────────────────────────────────────────────────────────
+
+expert_router = APIRouter(prefix="/expert", tags=["Expert System"])
+
+
+class ExpertConsultRequest(BaseModel):
+    career_title: str
+
+
+@expert_router.post("/consult")
+def consult_expert(
+    body: ExpertConsultRequest,
+    student_id: str = Depends(get_current_student_id),
+    db: Session = Depends(get_db)
+):
+    profile = _get_profile_for_student(student_id, db)
+    profile_data = _profile_to_response(profile, student_id)
+    
+    from expert_system import consult
+    return consult(body.career_title, profile_data)
+
+
+@expert_router.get("/careers")
+def get_expert_careers(
+    student_id: str = Depends(get_current_student_id)
+):
+    from career_catalog import CAREER_CATALOG
+    return sorted([c["title"] for c in CAREER_CATALOG])
+
+
 # ─── AUTH ─────────────────────────────────────────────────────────────────────
 
 auth_router = APIRouter(prefix="/auth", tags=["Authentication"])
