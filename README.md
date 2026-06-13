@@ -20,12 +20,25 @@ The portal features an 8-step dynamic onboarding profiling system:
 
 This detailed data populates the student profile, customizing their dashboard and the context used by the chatbot.
 
+### 3. Rule-Based AI Expert Career Consultation
+To provide deep academic matching, Beacon features a custom **FastAPI Rule Engine** (`expert_system.py`) integrated with an expanded database of **68 emerging professional careers** (`career_catalog.py`) and **11 national entrance examinations** (`exams_catalog.py`).
+* **Profile-to-Career Matcher**: Performs deterministic checks on stream eligibility (preventing invalid suggestions), academic strengths/gaps (detecting low self-ratings in critical subjects), study routine intensity, relocation constraints, and RIASEC personality alignment.
+* **Actionable Roadmaps**: Generates custom 4-phase preparation roadmaps spanning Classes 9 through 12.
+* **Backup Option Recommendation**: Computes backup career alternatives that share similar stream constraints and RIASEC profiles.
+
+### 4. Production Roadmap: RAG Database & Generative Chat
+To transition Beacon into a production platform for showcasing to senior administrators, the system is designed to support:
+* **RAG Ingestion Pipeline**: Ingest official syllabus brochures and scholarship PDF documents into a local **ChromaDB** vector store using Python's `pypdf` and `sentence-transformers` embedding models.
+* **Conversational AI Chat**: Connect a conversational LLM (such as Google Gemini API or OpenAI) to handle free-text student questions, injecting the student's profile context as hidden system prompt guidelines, and using RAG document retrieval to prevent hallucinations about exam dates and syllabus details.
+
 ---
 
 ## Features
 
+* **AI Expert Career Consultation** - Fully theme-aware diagnostic screen featuring a radial compatibility gauge (Green/Amber/Red), an interactive priority checklist, custom roadmaps, national exams, and clickable backup options.
+* **Printable Diagnostics Report** - Uses specialized print stylesheets to format the expert career consultation into a clean, professional PDF or printed report.
 * **Knowledge-Based Career Chatbot** - Integrated directly under the `/chat` route in the portal, offering bulletproof, context-aware career paths, exam explorer links, and counsel handoffs.
-* **Dynamic Student Dashboard** - Welcomes recurring users by name, summarizes their career choices, and provides one-click navigation to the Chatbot and the Psychometric Test.
+* **Dynamic Student Dashboard** - Welcomes recurring users by name, summarizes their career choices, and provides one-click navigation to the Chatbot, Psychometric Test, and the Expert Consultation advisor.
 * **RIASEC Psychometric Test** - A dedicated psychometric microservice that maps RIASEC codes (Realistic, Investigative, Artistic, Social, Enterprising, Conventional) to direct career options.
 * **Comprehensive Stream Coverage** - Tailored pathways for Science (PCM/PCB), Commerce, and Humanities.
 * **Professional PDF Reports** - Dynamically generates beautiful, downloadable career summaries that students can share with parents and teachers.
@@ -161,8 +174,12 @@ Isolated services for offline testing of the decision tree algorithm.
 
 ```text
 code/
-├── beacon-backend/       # Central FastAPI backend (login, user profiling, and integrated chatbot endpoints)
-├── beacon-frontend/      # Central React SPA portal (onboarding flow, dashboard, and unified /chat screen)
+├── beacon-backend/       # Central FastAPI backend (onboarding endpoints, user profiling, and expert consult rule engine)
+│   ├── career_catalog.py # Expanded registry of 68 professional careers with detailed weights
+│   ├── exams_catalog.py  # Structured guidelines database for 11 national entrance examinations
+│   ├── expert_system.py  # Deterministic compatibility logic and roadmap generation engine
+│   └── routes.py         # Registers /expert/consult & /expert/careers API routes
+├── beacon-frontend/      # Central React SPA portal (onboarding flow, dashboard, and unified /chat /expert screens)
 ├── aptitude-backend/     # FastAPI service for scoring psychometric tests and generating ReportLab PDFs
 ├── aptitude-frontend/    # React-based RIASEC psychometric test app
 ├── chatbot-backend/      # FastAPI chatbot node resolver sandbox
