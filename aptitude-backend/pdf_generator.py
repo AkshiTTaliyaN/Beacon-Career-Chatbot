@@ -103,7 +103,7 @@ def generate_pdf(result: dict) -> bytes:
     # ── RIASEC SCORE BARS ────────────────────────────────────────────────────
     story.append(Paragraph("RIASEC Scores", ParagraphStyle("ScoreHead", parent=styles["Normal"], fontSize=11, fontName="Helvetica-Bold", textColor=GRAY_TEXT, spaceAfter=6)))
 
-    for item in result["scores"]:
+    for item in result["riasec_scores"]:
         cat = item["category"]
         bar_color = CATEGORY_COLORS.get(cat, BLUE_PRIMARY)
         row = [[
@@ -125,7 +125,7 @@ def generate_pdf(result: dict) -> bytes:
     # ── TOP CAREER MATCHES ───────────────────────────────────────────────────
     story.append(Paragraph("Top 3 Career Matches", h2_style))
 
-    for i, career in enumerate(result["careers"]):
+    for i, career in enumerate(result["primary_careers"]):
         career_data = [[
             Paragraph(f"<b>{i+1}. {career['title']}</b>", ParagraphStyle("CareerTitle", parent=styles["Normal"], fontSize=12, textColor=DARK_NAVY)),
             Paragraph(f"<b>{career['salary']}</b>", ParagraphStyle("Salary", parent=styles["Normal"], fontSize=11, textColor=DARK_NAVY, alignment=TA_RIGHT)),

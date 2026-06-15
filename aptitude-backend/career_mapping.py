@@ -141,3 +141,184 @@ CAREER_MAP = {
         {"title": "Administrative Manager", "salary": "₹5 – 14 LPA", "reason": "Keeping systems and people organised is where you naturally excel.", "stream": "Commerce"},
     ],
 }
+
+
+# ---------------------------------------------------------------------------
+# HOBBY MAPPING
+# Maps each hobby to:
+#   - riasec: list of RIASEC codes it reinforces
+#   - domains: career domain tags used to find interest-aligned alternatives
+# ---------------------------------------------------------------------------
+HOBBY_MAP = {
+    # Creative
+    "Drawing/Painting":         {"riasec": ["A"],      "domains": ["design", "animation", "architecture"]},
+    "Photography":              {"riasec": ["A"],      "domains": ["media", "design", "journalism"]},
+    "Writing/Storytelling":     {"riasec": ["A", "I"], "domains": ["journalism", "literature", "content", "law"]},
+    "Music (playing instrument)":{"riasec": ["A"],     "domains": ["performing_arts", "music_production"]},
+    "Singing":                  {"riasec": ["A"],      "domains": ["performing_arts", "music_production"]},
+    "Dancing":                  {"riasec": ["A"],      "domains": ["performing_arts", "event_management"]},
+    "Acting/Theatre":           {"riasec": ["A", "S"], "domains": ["performing_arts", "media"]},
+    "Crafting/DIY":             {"riasec": ["R", "A"], "domains": ["design", "product_design", "interior_design"]},
+    "Fashion/Design":           {"riasec": ["A"],      "domains": ["design", "fashion", "product_design"]},
+    "Filmmaking/Editing":       {"riasec": ["A", "I"], "domains": ["media", "animation", "journalism"]},
+
+    # Physical
+    "Cricket":                  {"riasec": ["R", "E"], "domains": ["sports", "defence", "physiotherapy"]},
+    "Football":                 {"riasec": ["R", "E"], "domains": ["sports", "defence", "physiotherapy"]},
+    "Basketball":               {"riasec": ["R", "E"], "domains": ["sports", "physiotherapy"]},
+    "Swimming":                 {"riasec": ["R"],      "domains": ["sports", "physiotherapy", "defence"]},
+    "Athletics/Running":        {"riasec": ["R"],      "domains": ["sports", "defence", "physiotherapy"]},
+    "Martial Arts":             {"riasec": ["R", "E"], "domains": ["sports", "defence"]},
+    "Yoga/Fitness":             {"riasec": ["R", "S"], "domains": ["healthcare", "physiotherapy", "sports"]},
+    "Cycling":                  {"riasec": ["R"],      "domains": ["sports", "environmental_science"]},
+    "Hiking/Trekking":          {"riasec": ["R", "I"], "domains": ["geography", "environmental_science", "defence"]},
+
+    # Intellectual
+    "Reading":                  {"riasec": ["I", "E"], "domains": ["academia", "civil_services", "law", "literature"]},
+    "Debating":                 {"riasec": ["E", "I"], "domains": ["law", "civil_services", "journalism", "politics"]},
+    "Chess/Strategy Games":     {"riasec": ["I"],      "domains": ["engineering", "finance", "data_science"]},
+    "Quiz/Trivia":              {"riasec": ["I"],      "domains": ["academia", "civil_services", "journalism"]},
+    "Coding":                   {"riasec": ["R", "I"], "domains": ["software_engineering", "data_science", "engineering"]},
+    "Robotics/Electronics":     {"riasec": ["R", "I"], "domains": ["engineering", "software_engineering"]},
+    "Science Experiments":      {"riasec": ["I"],      "domains": ["research", "medicine", "biotechnology"]},
+    "Learning Languages":       {"riasec": ["A", "S"], "domains": ["linguistics", "foreign_services", "literature"]},
+
+    # Social/Service
+    "Volunteering":             {"riasec": ["S"],      "domains": ["social_work", "ngo", "healthcare"]},
+    "Teaching/Tutoring others": {"riasec": ["S", "I"], "domains": ["education", "academia", "social_work"]},
+    "Event Organisation":       {"riasec": ["E", "S"], "domains": ["event_management", "hr", "marketing"]},
+    "Public Speaking":          {"riasec": ["E", "S"], "domains": ["law", "politics", "media", "corporate"]},
+    "Animal Care":              {"riasec": ["S", "R"], "domains": ["veterinary", "environmental_science"]},
+
+    # Practical
+    "Cooking/Baking":           {"riasec": ["R", "A"], "domains": ["hospitality", "food_technology"]},
+    "Gardening":                {"riasec": ["R", "I"], "domains": ["agriculture", "environmental_science"]},
+    "Mechanics/Fixing things":  {"riasec": ["R"],      "domains": ["engineering", "automobile"]},
+    "Building models":          {"riasec": ["R", "I"], "domains": ["engineering", "architecture", "product_design"]},
+}
+
+
+# ---------------------------------------------------------------------------
+# DOMAIN TO CAREERS
+# Maps career domain tags to interest-aligned career suggestions.
+# These appear on the result page as "Based on your interests, you may also
+# want to explore..." — separate from the primary RIASEC recommendation.
+# ---------------------------------------------------------------------------
+DOMAIN_CAREERS = {
+    "design":               [{"title": "Graphic Designer", "salary": "₹4 – 15 LPA", "stream": "Humanities"},
+                             {"title": "UI/UX Designer", "salary": "₹6 – 22 LPA", "stream": "PCM/Humanities"}],
+    "animation":            [{"title": "Animator", "salary": "₹4 – 18 LPA", "stream": "Humanities"},
+                             {"title": "Visual Effects Artist", "salary": "₹5 – 20 LPA", "stream": "Humanities/PCM"}],
+    "architecture":         [{"title": "Architect", "salary": "₹5 – 20 LPA", "stream": "PCM"},
+                             {"title": "Interior Designer", "salary": "₹4 – 15 LPA", "stream": "Humanities"}],
+    "media":                [{"title": "Journalist", "salary": "₹3 – 12 LPA", "stream": "Humanities"},
+                             {"title": "Content Creator", "salary": "₹3 – 15 LPA", "stream": "Humanities"}],
+    "journalism":           [{"title": "Journalist", "salary": "₹3 – 12 LPA", "stream": "Humanities"},
+                             {"title": "News Anchor", "salary": "₹4 – 18 LPA", "stream": "Humanities"}],
+    "literature":           [{"title": "Writer / Author", "salary": "₹3 – 15 LPA", "stream": "Humanities"},
+                             {"title": "Editor", "salary": "₹4 – 14 LPA", "stream": "Humanities"}],
+    "content":              [{"title": "Content Strategist", "salary": "₹5 – 18 LPA", "stream": "Humanities/Commerce"},
+                             {"title": "Copywriter", "salary": "₹4 – 15 LPA", "stream": "Humanities"}],
+    "law":                  [{"title": "Lawyer", "salary": "₹5 – 30 LPA", "stream": "Humanities"},
+                             {"title": "Judge / Magistrate", "salary": "₹8 – 20 LPA", "stream": "Humanities"}],
+    "performing_arts":      [{"title": "Actor", "salary": "Variable", "stream": "Humanities"},
+                             {"title": "Music Producer", "salary": "₹5 – 25 LPA", "stream": "Humanities"}],
+    "music_production":     [{"title": "Music Producer", "salary": "₹5 – 25 LPA", "stream": "Humanities"},
+                             {"title": "Sound Engineer", "salary": "₹4 – 18 LPA", "stream": "Humanities/PCM"}],
+    "event_management":     [{"title": "Event Manager", "salary": "₹4 – 14 LPA", "stream": "Commerce/Humanities"},
+                             {"title": "Wedding Planner", "salary": "₹4 – 12 LPA", "stream": "Commerce"}],
+    "product_design":       [{"title": "Industrial Designer", "salary": "₹5 – 18 LPA", "stream": "PCM/Humanities"},
+                             {"title": "Product Designer", "salary": "₹8 – 24 LPA", "stream": "PCM/Humanities"}],
+    "interior_design":      [{"title": "Interior Designer", "salary": "₹4 – 15 LPA", "stream": "Humanities"},
+                             {"title": "Architect", "salary": "₹5 – 20 LPA", "stream": "PCM"}],
+    "fashion":              [{"title": "Fashion Designer", "salary": "₹4 – 20 LPA", "stream": "Humanities"},
+                             {"title": "Textile Designer", "salary": "₹3 – 12 LPA", "stream": "Humanities"}],
+    "sports":               [{"title": "Sports Coach", "salary": "₹3 – 15 LPA", "stream": "PCB/Humanities"},
+                             {"title": "Sports Manager", "salary": "₹5 – 18 LPA", "stream": "Commerce/Humanities"}],
+    "defence":              [{"title": "Indian Army Officer", "salary": "₹7 – 20 LPA", "stream": "PCM/Humanities"},
+                             {"title": "Police / IPS Officer", "salary": "₹6 – 18 LPA", "stream": "Humanities"}],
+    "physiotherapy":        [{"title": "Physiotherapist", "salary": "₹4 – 12 LPA", "stream": "PCB"},
+                             {"title": "Sports Medicine Doctor", "salary": "₹8 – 25 LPA", "stream": "PCB"}],
+    "healthcare":           [{"title": "Doctor (MBBS)", "salary": "₹8 – 30 LPA", "stream": "PCB"},
+                             {"title": "Nurse / Healthcare Worker", "salary": "₹3 – 10 LPA", "stream": "PCB"}],
+    "geography":            [{"title": "Geographer", "salary": "₹4 – 14 LPA", "stream": "Humanities"},
+                             {"title": "Town Planner", "salary": "₹5 – 16 LPA", "stream": "PCM/Humanities"}],
+    "environmental_science":[{"title": "Environmental Scientist", "salary": "₹5 – 15 LPA", "stream": "PCB"},
+                             {"title": "Wildlife Biologist", "salary": "₹4 – 14 LPA", "stream": "PCB"}],
+    "academia":             [{"title": "Professor / Lecturer", "salary": "₹5 – 18 LPA", "stream": "Any"},
+                             {"title": "Research Scholar", "salary": "₹4 – 14 LPA", "stream": "Any"}],
+    "civil_services":       [{"title": "IAS / IPS Officer", "salary": "₹8 – 20 LPA", "stream": "Any"},
+                             {"title": "State Government Officer", "salary": "₹6 – 16 LPA", "stream": "Any"}],
+    "politics":             [{"title": "Political Analyst", "salary": "₹5 – 18 LPA", "stream": "Humanities"},
+                             {"title": "Policy Researcher", "salary": "₹5 – 16 LPA", "stream": "Humanities"}],
+    "engineering":          [{"title": "Mechanical Engineer", "salary": "₹5 – 18 LPA", "stream": "PCM"},
+                             {"title": "Civil Engineer", "salary": "₹5 – 16 LPA", "stream": "PCM"}],
+    "software_engineering": [{"title": "Software Engineer", "salary": "₹7 – 30 LPA", "stream": "PCM"},
+                             {"title": "App Developer", "salary": "₹6 – 25 LPA", "stream": "PCM"}],
+    "data_science":         [{"title": "Data Scientist", "salary": "₹8 – 25 LPA", "stream": "PCM"},
+                             {"title": "Data Analyst", "salary": "₹5 – 18 LPA", "stream": "PCM"}],
+    "finance":              [{"title": "Financial Analyst", "salary": "₹7 – 22 LPA", "stream": "Commerce"},
+                             {"title": "Investment Banker", "salary": "₹12 – 40 LPA", "stream": "Commerce"}],
+    "research":             [{"title": "Research Scientist", "salary": "₹6 – 18 LPA", "stream": "PCM/PCB"},
+                             {"title": "Research Analyst", "salary": "₹5 – 16 LPA", "stream": "Any"}],
+    "medicine":             [{"title": "Doctor (MBBS)", "salary": "₹8 – 30 LPA", "stream": "PCB"},
+                             {"title": "Pharmacist", "salary": "₹4 – 14 LPA", "stream": "PCB"}],
+    "biotechnology":        [{"title": "Biotechnologist", "salary": "₹5 – 18 LPA", "stream": "PCB"},
+                             {"title": "Genetic Counsellor", "salary": "₹6 – 20 LPA", "stream": "PCB"}],
+    "linguistics":          [{"title": "Linguist", "salary": "₹4 – 14 LPA", "stream": "Humanities"},
+                             {"title": "Translator / Interpreter", "salary": "₹4 – 16 LPA", "stream": "Humanities"}],
+    "foreign_services":     [{"title": "IFS Officer", "salary": "₹8 – 20 LPA", "stream": "Humanities"},
+                             {"title": "International Relations Analyst", "salary": "₹6 – 18 LPA", "stream": "Humanities"}],
+    "social_work":          [{"title": "Social Worker", "salary": "₹3 – 10 LPA", "stream": "Humanities"},
+                             {"title": "NGO Program Manager", "salary": "₹5 – 15 LPA", "stream": "Humanities"}],
+    "ngo":                  [{"title": "NGO Program Manager", "salary": "₹5 – 15 LPA", "stream": "Humanities"},
+                             {"title": "Development Sector Consultant", "salary": "₹6 – 18 LPA", "stream": "Humanities"}],
+    "education":            [{"title": "Teacher / Educator", "salary": "₹3 – 12 LPA", "stream": "Humanities"},
+                             {"title": "School Counsellor", "salary": "₹4 – 12 LPA", "stream": "Humanities"}],
+    "hr":                   [{"title": "HR Manager", "salary": "₹6 – 18 LPA", "stream": "Commerce/Humanities"},
+                             {"title": "Talent Acquisition Specialist", "salary": "₹5 – 16 LPA", "stream": "Commerce"}],
+    "marketing":            [{"title": "Marketing Manager", "salary": "₹7 – 22 LPA", "stream": "Commerce/Humanities"},
+                             {"title": "Brand Strategist", "salary": "₹8 – 25 LPA", "stream": "Commerce"}],
+    "corporate":            [{"title": "Management Consultant", "salary": "₹10 – 35 LPA", "stream": "Commerce"},
+                             {"title": "Business Analyst", "salary": "₹7 – 22 LPA", "stream": "Commerce/PCM"}],
+    "veterinary":           [{"title": "Veterinarian", "salary": "₹4 – 14 LPA", "stream": "PCB"},
+                             {"title": "Animal Welfare Officer", "salary": "₹3 – 10 LPA", "stream": "PCB"}],
+    "hospitality":          [{"title": "Hotel Manager", "salary": "₹5 – 18 LPA", "stream": "Commerce/Humanities"},
+                             {"title": "Chef / Culinary Artist", "salary": "₹3 – 15 LPA", "stream": "Humanities"}],
+    "food_technology":      [{"title": "Food Technologist", "salary": "₹4 – 14 LPA", "stream": "PCB"},
+                             {"title": "Nutritionist / Dietitian", "salary": "₹4 – 12 LPA", "stream": "PCB"}],
+    "agriculture":          [{"title": "Agricultural Scientist", "salary": "₹4 – 14 LPA", "stream": "PCB"},
+                             {"title": "Agronomist", "salary": "₹4 – 12 LPA", "stream": "PCB"}],
+    "automobile":           [{"title": "Automobile Engineer", "salary": "₹5 – 18 LPA", "stream": "PCM"},
+                             {"title": "Automotive Designer", "salary": "₹6 – 20 LPA", "stream": "PCM"}],
+}
+
+
+
+APTITUDE_SKILLS = [
+    "english",        # Linguistic proficiency
+    "patterns",       # Pattern analysis
+    "logical",        # Logical comprehension
+    "maths",          # Quantitative reasoning
+    "visual",         # Visual spatial skills
+    "detail",         # Precision / detail analysis
+]
+
+APTITUDE_SKILL_LABELS = {
+    "english":  "English & Language Skills",
+    "patterns": "Finding Patterns & Sequences",
+    "logical":  "Logical Thinking",
+    "maths":    "Maths & Numbers",
+    "visual":   "Visualising & Drawing",
+    "detail":   "Attention to Detail",
+}
+
+# Which aptitude skills matter most for each RIASEC primary type
+RIASEC_APTITUDE_FIT = {
+    "R": ["maths", "visual", "detail"],
+    "I": ["logical", "maths", "patterns"],
+    "A": ["visual", "english", "detail"],
+    "S": ["english", "detail", "logical"],
+    "E": ["english", "logical", "patterns"],
+    "C": ["detail", "maths", "logical"],
+}
