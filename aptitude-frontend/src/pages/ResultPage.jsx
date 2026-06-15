@@ -1,4 +1,4 @@
-import { Download, Briefcase, GraduationCap, Target, Users, Compass, AlertTriangle, CheckCircle2, Calendar, MapPin, BookOpen, TrendingUp, Heart, FileText } from "lucide-react";
+import { Download, Briefcase, GraduationCap, Target, Users, Compass, AlertTriangle, CheckCircle2, Calendar, MapPin, BookOpen, TrendingUp, Heart, FileText, Sparkles, Brain } from "lucide-react";
 import { RIASEC_COLORS } from "../constants/riasecColors";
 import "./ResultPage.css";
 
@@ -40,16 +40,6 @@ const WORK_ENV = {
   Conventional: "You excel in structured, well-organised environments — banks, accounting firms, government offices, or large corporations with clear processes. You need clear expectations, defined roles, and environments where precision is valued.",
 };
 
-const AVOID_CAREERS = {
-  Investigative: ["Sales representative", "Event coordinator", "Professional entertainer", "Routine data entry clerk"],
-  Realistic: ["Professional counsellor", "Public relations manager", "Abstract researcher", "Fine arts professional"],
-  Artistic: ["Auditor or tax accountant", "Quality control inspector", "Routine administrative officer", "Assembly line supervisor"],
-  Social: ["Isolated research scientist", "Financial auditor", "Machine operator", "Independent technical analyst"],
-  Enterprising: ["Routine clerical worker", "Laboratory researcher", "Detailed financial analyst", "Assembly technician"],
-  Conventional: ["Professional artist", "Freelance creative", "Startup founder", "Abstract philosopher or theorist"],
-};
-
-// Feature 1 — Parent-Child Understanding section
 const PARENT_NOTES = {
   Investigative: "Your child is a deep thinker — naturally curious, analytical, and motivated by understanding how things work. They will do best in careers that reward intellectual depth and independent problem solving. Support them by encouraging questions, providing access to books, research articles, and projects. Avoid pushing them toward fast-paced sales or routine clerical roles — they will likely feel unfulfilled. Careers in science, research, technology, and medicine align with their natural strengths.",
   Realistic: "Your child is practical and hands-on — they learn best by doing, not by reading or theorising. They thrive when working with tools, systems, and tangible outcomes. Support them with workshops, technical hobbies, or mechanical projects. Engineering, technical fields, and applied sciences suit their personality. Avoid pressuring them into highly abstract or people-heavy roles unless they show genuine interest.",
@@ -59,7 +49,6 @@ const PARENT_NOTES = {
   Conventional: "Your child is precise, organised, and methodical — they excel at structure, accuracy, and consistency. They thrive in stable, well-defined environments. Support them by valuing their reliability and attention to detail. Careers in finance, accounting, administration, and data management align with their strengths. India has strong, secure career paths in these areas — your child is well-suited to them.",
 };
 
-// Feature 2 — International salary mapping
 const INTERNATIONAL_SALARY = {
   "Data Scientist": "$80,000 – $140,000 (US)",
   "Software Engineer": "$95,000 – $170,000 (US)",
@@ -125,7 +114,6 @@ const INTERNATIONAL_SALARY = {
   "Teacher": "$50,000 – $80,000 (US)",
 };
 
-// Feature 3 — Broader sector careers
 const BROADER_CAREERS = {
   Investigative: {
     Technology: ["Software Engineer", "Data Scientist", "AI/ML Engineer", "Cybersecurity Analyst"],
@@ -165,7 +153,6 @@ const BROADER_CAREERS = {
   },
 };
 
-// Feature 4 — Personalised Action Plan timeline
 const ACTION_PLAN = {
   Investigative: [
     { phase: "Class 11 (Now)", actions: ["Strengthen mathematics and analytical subjects", "Start learning Python or basic programming", "Read scientific articles and journals weekly", "Join science Olympiads or research clubs"] },
@@ -199,7 +186,6 @@ const ACTION_PLAN = {
   ],
 };
 
-// Feature 6 — Admission process guide
 const ADMISSION_PROCESS = {
   PCM: { timeline: "Class 12 final year — apply Oct–Mar; exams Jan–June; counselling June–Aug.", docs: "Class 10 & 12 marksheets, JEE scorecard, ID proof, photos, category certificate (if applicable).", cutoffs: "JEE Main: 90+ percentile for NITs, 95+ for IIITs. JEE Advanced: rank under 10,000 for IITs." },
   PCB: { timeline: "Class 12 final year — apply Dec–Feb; NEET in May; counselling July–Sep.", docs: "Class 10 & 12 marksheets, NEET scorecard, ID proof, photos, category certificate (if applicable).", cutoffs: "NEET: 600+ for government MBBS in most states, 720 for AIIMS Delhi." },
@@ -207,59 +193,71 @@ const ADMISSION_PROCESS = {
   Humanities: { timeline: "Class 12 final year — CUET in May, CLAT in Dec, NID/NIFT in Jan.", docs: "Class 10 & 12 marksheets, entrance exam scorecard, portfolio (for design), ID proof.", cutoffs: "CUET: 95+ percentile for top humanities colleges. CLAT: rank under 500 for NLU Bangalore." },
 };
 
+// Aptitude level colours
+const LEVEL_COLORS = { High: "#10b981", Medium: "#f59e0b", Low: "#ef4444" };
+const LEVEL_BG    = { High: "#f0fdf4", Medium: "#fffbeb", Low: "#fef2f2" };
+
 export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onRetake }) {
-  const primary = result.primary_type;
+  const primary      = result.primary_type;
   const primaryColor = getColor(primary);
-  const traits = TRAITS[primary] || [];
-  const strengths = STRENGTHS[primary] || [];
-  const challenges = CHALLENGES[primary] || [];
-  const workEnv = WORK_ENV[primary] || "";
-  const parentNote = PARENT_NOTES[primary] || "";
-  const actionPlan = ACTION_PLAN[primary] || [];
-  const admission = ADMISSION_PROCESS[result.stream] || ADMISSION_PROCESS["PCM"];
+  const traits       = TRAITS[primary] || [];
+  const strengths    = STRENGTHS[primary] || [];
+  const challenges   = CHALLENGES[primary] || [];
+  const workEnv      = WORK_ENV[primary] || "";
+  const parentNote   = PARENT_NOTES[primary] || "";
+  const actionPlan   = ACTION_PLAN[primary] || [];
+  const admission    = ADMISSION_PROCESS[result.stream] || ADMISSION_PROCESS["PCM"];
+  const broaderMap   = BROADER_CAREERS[primary] || {};
   const dashboardUrl = `${beaconOrigin || "http://localhost:5173"}/dashboard?scores_written=1`;
+
+  // New fields from updated backend
+  const primaryCareers   = result.primary_careers  || result.careers || [];
+  const interestCareers  = result.interest_careers || [];
+  const aptitudeScores   = result.aptitude_scores  || {};
+  const strongSkills     = result.strong_skills    || [];
+  const needsSupport     = result.needs_support    || [];
+  const aptitudeFitNote  = result.aptitude_fit_note || "";
+  const selectedHobbies  = result.selected_hobbies || [];
+
+  // riasec_scores field (renamed from scores in old backend)
+  const riasecScores = result.riasec_scores || result.scores || [];
 
   return (
     <div className="result-page">
       <header className="cc-header">
         <span className="cc-logo">Beacon</span>
         <div className="cc-header-center">
-          <h1>Beacon Personality &amp; Career Report</h1>
+          <h1>Beacon Career &amp; Personality Report</h1>
           <p>{result.name} • {result.class_level} • {result.stream}</p>
-          <p style={{fontSize:"12px", color:"#64748b"}}>{new Date().toISOString()}</p>
+          <p style={{ fontSize: "12px", color: "#64748b" }}>{new Date().toISOString()}</p>
         </div>
-        <button className="btn-outline" onClick={onDownloadPDF}><Download size={16}/> Download PDF</button>
+        <button className="btn-outline" onClick={onDownloadPDF}><Download size={16} /> Download PDF</button>
       </header>
 
       <div className="result-container">
+
+        {/* ── Celebration ── */}
         <section className="celebration-card" aria-label="Test completed">
           <div className="celebration-gif-wrap">
-            <img
-              className="celebration-gif"
+            <img className="celebration-gif"
               src="https://media.giphy.com/media/l4Ep2bPV5Uh2sVEqs/giphy-downsized.gif"
               alt="Celebration confetti"
-              onError={(event) => {
-                event.currentTarget.style.display = "none";
-                event.currentTarget.nextElementSibling.style.display = "flex";
-              }}
-            />
-            <div className="celebration-fallback" aria-hidden="true">
-              <span>Congratulations!</span>
-            </div>
+              onError={(e) => { e.currentTarget.style.display = "none"; e.currentTarget.nextElementSibling.style.display = "flex"; }} />
+            <div className="celebration-fallback" aria-hidden="true"><span>Congratulations!</span></div>
           </div>
           <div className="celebration-copy">
             <p className="celebration-kicker">Assessment complete</p>
             <h2>You did it, {result.name.split(" ")[0]}!</h2>
-            <p>Your complete RIASEC personality analysis is ready. Explore what your scores say about how you think, work, and learn.</p>
+            <p>Your complete career assessment is ready — personality, interests, and aptitude all in one place.</p>
           </div>
         </section>
 
-        {/* Personality Overview */}
+        {/* ── Personality Overview ── */}
         <section className="result-section">
           <h2 className="section-title">Personality Overview</h2>
           <div className="overview-layout">
             <div className="overview-left">
-              <span className="primary-type" style={{color: primaryColor}}>{primary}</span>
+              <span className="primary-type" style={{ color: primaryColor }}>{primary}</span>
               <p className="secondary-type">Secondary: <strong>{result.secondary_type}</strong></p>
               <div className="holland-code">
                 <span className="hc-label">Holland Code</span>
@@ -273,11 +271,11 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
 
           <div className="scores-section">
             <p className="scores-title">RIASEC Scores</p>
-            {result.scores.map(item => (
+            {riasecScores.map(item => (
               <div key={item.category} className="score-row">
                 <span className="score-label">{item.category}</span>
                 <div className="score-bar-wrap">
-                  <div className="score-bar-fill" style={{width:`${item.score}%`, background: getColor(item.category)}}/>
+                  <div className="score-bar-fill" style={{ width: `${item.score}%`, background: getColor(item.category) }} />
                 </div>
                 <span className="score-pct">{item.score}%</span>
               </div>
@@ -285,61 +283,199 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
           </div>
         </section>
 
-        <hr className="divider"/>
+        <hr className="divider" />
 
-        {/* Traits */}
+        {/* ── Primary Career Recommendations (RIASEC-driven) ── */}
+        <section className="result-section">
+          <h2 className="section-title">Your Primary Career Matches</h2>
+          <p className="section-sub">Based on your <strong>{result.holland_code}</strong> Holland Code — these careers align most closely with your personality type:</p>
+          <div className="careers-grid">
+            {primaryCareers.map((career, i) => (
+              <div key={i} className="career-card" style={{ borderTopColor: primaryColor }}>
+                <div className="career-card-header">
+                  <Briefcase size={16} style={{ color: primaryColor }} />
+                  <h4>{career.title}</h4>
+                </div>
+                <p className="career-reason">{career.reason}</p>
+                <div className="career-meta">
+                  <span className="career-salary">₹ {career.salary}</span>
+                  {INTERNATIONAL_SALARY[career.title] && (
+                    <span className="career-salary-intl">{INTERNATIONAL_SALARY[career.title]}</span>
+                  )}
+                  <span className="career-stream">{career.stream}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <hr className="divider" />
+
+        {/* ── Interest-Aligned Alternatives ── */}
+        {interestCareers.length > 0 && (
+          <>
+            <section className="result-section">
+              <h2 className="section-title">Based on Your Interests</h2>
+              <p className="section-sub">
+                You selected interests in <strong>{selectedHobbies.slice(0, 3).join(", ")}{selectedHobbies.length > 3 ? ` and ${selectedHobbies.length - 3} more` : ""}</strong>.
+                These careers align with what you genuinely enjoy — worth exploring alongside your primary matches:
+              </p>
+              <div className="careers-grid interest-careers-grid">
+                {interestCareers.map((career, i) => (
+                  <div key={i} className="career-card interest-career-card">
+                    <div className="career-card-header">
+                      <Sparkles size={16} style={{ color: "#7c3aed" }} />
+                      <h4>{career.title}</h4>
+                    </div>
+                    <div className="career-meta">
+                      <span className="career-salary">₹ {career.salary}</span>
+                      {INTERNATIONAL_SALARY[career.title] && (
+                        <span className="career-salary-intl">{INTERNATIONAL_SALARY[career.title]}</span>
+                      )}
+                      <span className="career-stream">{career.stream}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="interest-careers-note">
+                These are alternative paths — not replacements for your primary recommendations. If you feel strongly drawn to any of these, discuss them with a career counsellor.
+              </p>
+            </section>
+            <hr className="divider" />
+          </>
+        )}
+
+        {/* ── Aptitude Summary ── */}
+        {Object.keys(aptitudeScores).length > 0 && (
+          <>
+            <section className="result-section">
+              <h2 className="section-title">Your Aptitude Profile</h2>
+              <p className="section-sub">Based on your self-assessment across six skill areas — this shows where you feel most and least confident:</p>
+
+              <div className="aptitude-grid">
+                {Object.entries(aptitudeScores).map(([skill, data]) => (
+                  <div key={skill} className="aptitude-skill-card"
+                    style={{ background: LEVEL_BG[data.level], borderColor: LEVEL_COLORS[data.level] + "40" }}>
+                    <div className="aptitude-skill-header">
+                      <span className="aptitude-skill-label">{data.label}</span>
+                      <span className="aptitude-level-badge"
+                        style={{ background: LEVEL_COLORS[data.level] + "20", color: LEVEL_COLORS[data.level] }}>
+                        {data.level}
+                      </span>
+                    </div>
+                    <div className="aptitude-bar-wrap">
+                      <div className="aptitude-bar-fill"
+                        style={{ width: `${data.percentage}%`, background: LEVEL_COLORS[data.level] }} />
+                    </div>
+                    <span className="aptitude-pct">{data.percentage}%</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Aptitude fit note */}
+              <div className="aptitude-fit-note">
+                <Brain size={18} style={{ color: primaryColor, flexShrink: 0 }} />
+                <p>{aptitudeFitNote}</p>
+              </div>
+
+              {/* Strong skills */}
+              {strongSkills.length > 0 && (
+                <div className="aptitude-highlights">
+                  <div className="aptitude-highlight-block strength-block">
+                    <CheckCircle2 size={16} style={{ color: "#10b981" }} />
+                    <div>
+                      <p className="aptitude-highlight-title">You rated yourself highly in</p>
+                      <p className="aptitude-highlight-list">{strongSkills.join(", ")}</p>
+                    </div>
+                  </div>
+                  {needsSupport.length > 0 && (
+                    <div className="aptitude-highlight-block support-block">
+                      <AlertTriangle size={16} style={{ color: "#f59e0b" }} />
+                      <div>
+                        <p className="aptitude-highlight-title">Areas to focus on for your career path</p>
+                        <p className="aptitude-highlight-list">{needsSupport.join(", ")}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </section>
+            <hr className="divider" />
+          </>
+        )}
+
+        {/* ── Traits ── */}
         <section className="result-section">
           <h2 className="section-title">Your Personality Traits</h2>
           <p className="section-sub">People with a <strong>{primary}</strong> personality type typically show these characteristics:</p>
           <div className="traits-grid">
             {traits.map((trait, i) => (
               <div key={i} className="trait-chip">
-                <span className="trait-dot" style={{background: primaryColor}}/>
+                <span className="trait-dot" style={{ background: primaryColor }} />
                 {trait}
               </div>
             ))}
           </div>
         </section>
 
-        <hr className="divider"/>
+        <hr className="divider" />
 
-        {/* Strengths & Challenges */}
+        {/* ── Strengths & Challenges ── */}
         <section className="result-section">
           <h2 className="section-title">Strengths &amp; Challenges</h2>
           <div className="sc-layout">
-            <div className="sc-card strengths-card" style={{borderTopColor: primaryColor}}>
-              <h3><CheckCircle2 size={18}/> Your strengths</h3>
+            <div className="sc-card strengths-card" style={{ borderTopColor: primaryColor }}>
+              <h3><CheckCircle2 size={18} /> Your strengths</h3>
               <ul>{strengths.map((s, i) => <li key={i}>{s}</li>)}</ul>
             </div>
-            <div className="sc-card challenges-card" style={{borderTopColor: primaryColor}}>
-              <h3><AlertTriangle size={18}/> Potential challenges</h3>
+            <div className="sc-card challenges-card" style={{ borderTopColor: primaryColor }}>
+              <h3><AlertTriangle size={18} /> Potential challenges</h3>
               <ul>{challenges.map((c, i) => <li key={i}>{c}</li>)}</ul>
               <p className="challenge-note">These are natural tendencies, not fixed limitations. Awareness is the first step to growth.</p>
             </div>
           </div>
         </section>
 
-        <hr className="divider"/>
+        <hr className="divider" />
 
-        {/* Ideal Work Environment */}
+        {/* ── Ideal Work Environment ── */}
         <section className="result-section">
           <h2 className="section-title">Your Ideal Work Environment</h2>
           <div className="work-env-card">
-            <MapPin size={20} className="env-icon"/>
+            <MapPin size={20} className="env-icon" />
             <p>{workEnv}</p>
           </div>
         </section>
 
-        <hr className="divider"/>
+        <hr className="divider" />
 
-        {/* Entrance Exams */}
+        {/* ── Broader Careers ── */}
+        {Object.keys(broaderMap).length > 0 && (
+          <>
+            <section className="result-section">
+              <h2 className="section-title">Broader Career Landscape</h2>
+              <p className="section-sub">A wider view of where <strong>{primary}</strong> types can thrive — across different sectors:</p>
+              <div className="broader-grid">
+                {Object.entries(broaderMap).map(([sector, careers]) => (
+                  <div key={sector} className="broader-card">
+                    <h4 className="broader-sector">{sector.replace(/_/g, " ")}</h4>
+                    <ul>{careers.map((c, i) => <li key={i}>{c}</li>)}</ul>
+                  </div>
+                ))}
+              </div>
+            </section>
+            <hr className="divider" />
+          </>
+        )}
+
+        {/* ── Entrance Exams ── */}
         <section className="result-section">
           <h2 className="section-title">Entrance Exams to Target</h2>
           <p className="section-sub">Based on your stream ({result.stream}) and career direction, these are the key exams to prepare for:</p>
           <div className="exam-grid">
             {result.entrance_exams.map((exam, i) => (
               <div key={i} className="exam-card">
-                <Target size={18}/>
+                <Target size={18} />
                 <h4>{exam.name}</h4>
                 <p>{exam.desc}</p>
               </div>
@@ -347,31 +483,31 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
           </div>
         </section>
 
-        <hr className="divider"/>
+        <hr className="divider" />
 
-        {/* Admission Process Guide */}
+        {/* ── Admission Process ── */}
         <section className="result-section">
           <h2 className="section-title">Navigating the Admission Process</h2>
           <p className="section-sub">Here is what the admission journey looks like for your stream ({result.stream}):</p>
           <div className="admission-card">
             <div className="admission-block">
-              <h4><Calendar size={16}/> Timeline</h4>
+              <h4><Calendar size={16} /> Timeline</h4>
               <p>{admission.timeline}</p>
             </div>
             <div className="admission-block">
-              <h4><FileText size={16}/> Documents needed</h4>
+              <h4><FileText size={16} /> Documents needed</h4>
               <p>{admission.docs}</p>
             </div>
             <div className="admission-block">
-              <h4><TrendingUp size={16}/> Typical cutoffs</h4>
+              <h4><TrendingUp size={16} /> Typical cutoffs</h4>
               <p>{admission.cutoffs}</p>
             </div>
           </div>
         </section>
 
-        <hr className="divider"/>
+        <hr className="divider" />
 
-        {/* Personalised Action Plan */}
+        {/* ── Action Plan ── */}
         <section className="result-section">
           <h2 className="section-title">Your Personalised Action Plan</h2>
           <p className="section-sub">A step-by-step roadmap from now until college — built around your <strong>{primary}</strong> personality:</p>
@@ -379,27 +515,25 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
             {actionPlan.map((phase, i) => (
               <div key={i} className="phase-card">
                 <div className="phase-header">
-                  <Compass size={18}/>
+                  <Compass size={18} />
                   <h4>{phase.phase}</h4>
                 </div>
-                <ul>
-                  {phase.actions.map((action, j) => <li key={j}>{action}</li>)}
-                </ul>
+                <ul>{phase.actions.map((action, j) => <li key={j}>{action}</li>)}</ul>
               </div>
             ))}
           </div>
         </section>
 
-        <hr className="divider"/>
+        <hr className="divider" />
 
-        {/* Skills to build */}
+        {/* ── Skills to Build ── */}
         <section className="result-section">
           <h2 className="section-title">Skills to Build Now</h2>
           <p className="section-sub">Start developing these skills before Class 12 ends — they will strengthen both your applications and your confidence:</p>
           <div className="skills-grid">
             {result.skills_to_build.map((skill, i) => (
               <div key={i} className="skill-card">
-                <BookOpen size={16}/>
+                <BookOpen size={16} />
                 <h4>{skill.name}</h4>
                 <p>{skill.desc}</p>
               </div>
@@ -407,15 +541,15 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
           </div>
         </section>
 
-        <hr className="divider"/>
+        <hr className="divider" />
 
-        {/* Parent-Child Understanding */}
+        {/* ── Parent Section ── */}
         <section className="result-section">
           <h2 className="section-title">For Your Parents</h2>
           <p className="section-sub">A clear, jargon-free note to share with your parents — to help them understand your personality type and how to support you.</p>
-          <div className="parent-card" style={{borderLeftColor: primaryColor}}>
+          <div className="parent-card" style={{ borderLeftColor: primaryColor }}>
             <div className="parent-card-header">
-              <Heart size={20} style={{color: primaryColor}}/>
+              <Heart size={20} style={{ color: primaryColor }} />
               <h4>A note for parents of a <strong>{primary}</strong> child</h4>
             </div>
             <p>{parentNote}</p>
@@ -423,13 +557,13 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
           </div>
         </section>
 
-        <hr className="divider"/>
+        <hr className="divider" />
 
-        {/* Closing Note */}
+        {/* ── Closing Note ── */}
         <section className="result-section">
           <h2 className="section-title">A Note for You</h2>
           <div className="closing-card">
-            <div className="closing-accent" style={{background: primaryColor}}/>
+            <div className="closing-accent" style={{ background: primaryColor }} />
             <p className="closing-text">{result.closing_note}</p>
             <p className="closing-footer">Remember — this report is a starting point, not a verdict. Career paths are rarely straight lines. Use this as a guide to explore, ask questions, and make informed choices. You have time.</p>
           </div>
@@ -438,8 +572,11 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
         <div className="result-footer">
           <p>Beacon © 2026 — This report is an illustrative guide based on a psychometric assessment. For personalised counselling, contact a qualified career counsellor.</p>
           <div className="footer-actions">
-            <button className="btn-primary" style={{ background: '#10b981' }} onClick={() => { window.location.href = dashboardUrl; }}><Compass size={16}/> View Dashboard Analytics</button>
-            <button className="btn-primary" onClick={onDownloadPDF}><Download size={16}/> Download PDF Report</button>
+            <button className="btn-primary" style={{ background: "#10b981" }}
+              onClick={() => { window.location.href = dashboardUrl; }}>
+              <Compass size={16} /> View Dashboard Analytics
+            </button>
+            <button className="btn-primary" onClick={onDownloadPDF}><Download size={16} /> Download PDF Report</button>
             <button className="btn-ghost" onClick={onRetake}>Take Test Again</button>
           </div>
         </div>

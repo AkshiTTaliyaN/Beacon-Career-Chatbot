@@ -84,7 +84,7 @@ export default function App() {
       if (!res.ok) throw new Error(`Submission failed with status ${res.status}`);
 
       const json = await res.json();
-      if (json.scores) await writeScoresBack(json.scores);
+      if (json.riasec_scores) await writeScoresBack(json.riasec_scores);
 
       setResult(json);
       setPage("result");
