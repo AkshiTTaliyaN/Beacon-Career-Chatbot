@@ -265,7 +265,7 @@ WEIGHTS = {
 
 def score_careers(profile) -> list[dict]:
     """
-    Takes a StudentProfile ORM object and returns a ranked list of top 5 careers.
+    Takes a StudentProfile ORM object and returns a ranked list of top 10 careers.
     Each career dict has: rank, title, salary, stream, reason, total_score.
     """
     # Extract profile data
@@ -350,13 +350,13 @@ def score_careers(profile) -> list[dict]:
             "total_score": round(total, 4),
         })
 
-    # Sort descending and take top 5
+    # Sort descending and take top 10
     results.sort(key=lambda x: x["total_score"], reverse=True)
-    top5 = results[:5]
+    top10 = results[:10]
 
     # Add rank and strip internal score
-    for i, item in enumerate(top5, 1):
+    for i, item in enumerate(top10, 1):
         item["rank"] = i
         del item["total_score"]
 
-    return top5
+    return top10

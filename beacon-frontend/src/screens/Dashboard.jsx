@@ -555,7 +555,7 @@ export default function Dashboard({ userName }) {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px,1fr))', gap: '1.25rem' }}>
             {recs.map((career, i) => {
               const rankColors = ['#00d4ff', '#8b5cf6', '#ff006e', '#00ff88', '#f59e0b'];
-              const accent = rankColors[i] || '#00d4ff';
+              const accent = rankColors[i % rankColors.length];
               return (
                 <GlassCard key={i} style={{ borderLeft: `3px solid ${accent}`, position: 'relative', overflow: 'hidden' }}>
                   {/* Subtle glow overlay at top */}

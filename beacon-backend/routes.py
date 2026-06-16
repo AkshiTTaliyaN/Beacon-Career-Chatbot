@@ -634,7 +634,7 @@ def get_smart_recommendations(
     student_id: str = Depends(get_current_student_id),
     db: Session = Depends(get_db)
 ):
-    """Unified 5-signal career recommendation engine. Returns top 5 careers."""
+    """Unified 5-signal career recommendation engine. Returns top 10 careers."""
     student_uuid = UUID(student_id)
 
     # 1 — load profile
@@ -662,7 +662,7 @@ def get_smart_recommendations(
 
     if cached and cached.full_output:
         fo = cached.full_output
-        if fo.get("type") == "smart_v1":
+        if fo.get("type") == "smart_v1" and len(fo.get("recommendations", [])) == 10:
             generated_at_str = fo.get("smart_generated_at", "")
             if generated_at_str:
                 generated_at = datetime.datetime.fromisoformat(generated_at_str)

@@ -530,7 +530,7 @@ export default function ReportPage() {
                 </h3>
                 <p style={{ color: '#374151', margin: '0 0 16px 0', lineHeight: 1.6 }}>
                   Your RIASEC scores have been saved to your profile. Head back to the dashboard to see
-                  your top 5 career recommendations — matched using your personality, subjects, and goals.
+                  your top 10 career recommendations — matched using your personality, subjects, and goals.
                 </p>
                 <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                   <button
