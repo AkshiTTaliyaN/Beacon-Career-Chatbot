@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { ED_CIL_THEME } from '../theme.js'
+import { APTITUDE_URL } from '../config.js'
+
 
 const COLORS = {
   navy: ED_CIL_THEME.primary,
@@ -233,8 +235,8 @@ export default function PsychometricTest({ isEmbedded = false, hasResults = fals
               const token = localStorage.getItem('beacon_token');
               const origin = window.location.origin;
               const url = token
-                ? `http://localhost:3001?beacon_token=${encodeURIComponent(token)}&origin=${encodeURIComponent(origin)}`
-                : `http://localhost:3001?origin=${encodeURIComponent(origin)}`;
+                ? `${APTITUDE_URL}?beacon_token=${encodeURIComponent(token)}&origin=${encodeURIComponent(origin)}`
+                : `${APTITUDE_URL}?origin=${encodeURIComponent(origin)}`;
               window.open(url, '_blank');
             }}
             style={{

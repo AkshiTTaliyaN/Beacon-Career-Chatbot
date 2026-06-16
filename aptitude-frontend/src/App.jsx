@@ -4,7 +4,9 @@ import TestPage from "./pages/TestPage";
 import ResultPage from "./pages/ResultPage";
 import "./App.css";
 
-const BEACON_API = "http://127.0.0.1:8000";
+const BEACON_API = import.meta.env.VITE_BEACON_API_URL || "http://127.0.0.1:8000";
+const APTITUDE_API = import.meta.env.VITE_APTITUDE_API_URL || "http://127.0.0.1:8001";
+
 
 export default function App() {
   const [page, setPage] = useState("landing");
@@ -76,7 +78,7 @@ export default function App() {
     setFormData(data);
 
     try {
-      const res = await fetch("http://127.0.0.1:8001/api/submit", {
+      const res = await fetch(`${APTITUDE_API}/api/submit`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -90,7 +92,7 @@ export default function App() {
       setPage("result");
     } catch (err) {
       console.error("Submission error:", err);
-      alert("Could not connect to the server. Make sure the backend is running on port 8001.");
+      alert(`Could not connect to the server. Make sure the backend is running at ${APTITUDE_API}.`);
     }
   };
 
@@ -98,7 +100,7 @@ export default function App() {
     if (!formData) return;
 
     try {
-      const res = await fetch("http://127.0.0.1:8001/api/download-pdf", {
+      const res = await fetch(`${APTITUDE_API}/api/download-pdf`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

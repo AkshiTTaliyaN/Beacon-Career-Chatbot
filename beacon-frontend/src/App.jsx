@@ -191,7 +191,7 @@ export default function App() {
           form={form}
           setForm={setForm}
           onSuccess={handleProfileComplete}
-          onBack={() => setStep(STEP.WORK_STYLE)}
+          onBack={() => setStep(STEP.ACADEMICS)}
         />
       );
     default:

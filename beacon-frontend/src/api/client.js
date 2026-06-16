@@ -297,3 +297,21 @@ export async function updateRiasecScores(scores) {
   // Silently ignore errors — this is a background write
   return res.ok ? res.json() : null;
 }
+
+/** GET /recommendations/catalog — fetch complete list of careers and exams */
+export async function getCareerCatalog() {
+  if (DEMO_MODE) {
+    // Return a subset of careers for offline demo mode
+    return [
+      { name: "Software Engineer", stream: "Science", exam: "JEE/Main", salary: "₹7-30 LPA", description: "Design and build software systems and applications.", details: "Typically B.Tech/B.E. or BSc. Tips: Learn coding early." },
+      { name: "Data Scientist", stream: "Science", exam: "JEE/College tests", salary: "₹6-30 LPA", description: "Analyse data to build models and insights.", details: "Requires math, statistics, and programming. Tips: Learn Python." },
+      { name: "Chartered Accountant", stream: "Commerce", exam: "CA Foundation", salary: "₹6-30 LPA", description: "Manage accounts and audits.", details: "Highly qualified professional exam." },
+      { name: "IAS Officer", stream: "Arts", exam: "UPSC Civil Services", salary: "₹6-20 LPA", description: "Public administration and policy.", details: "Competitive exam; read newspapers daily." }
+    ];
+  }
+
+  const res = await fetch(`${API}/recommendations/catalog`);
+  if (!res.ok) throw new Error("Could not load career catalog");
+  return res.json();
+}
+

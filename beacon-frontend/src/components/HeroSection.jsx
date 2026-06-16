@@ -1,5 +1,7 @@
 import React from 'react'
 import '../styles/futuristic.css'
+import { APTITUDE_URL } from '../config.js'
+
 
 export default function HeroSection({
   title = 'Career guidance simplified for students',
@@ -104,7 +106,7 @@ export default function HeroSection({
             <button
               type="button"
               className="ft-button-primary"
-              onClick={onPrimary || (() => window.open('http://localhost:3001', '_blank'))}
+              onClick={onPrimary || (() => window.open(APTITUDE_URL, '_blank'))}
               style={{ fontSize: '1rem', padding: '0.95rem 1.8rem' }}
             >
               {primaryText}
@@ -114,7 +116,7 @@ export default function HeroSection({
             <button
               type="button"
               className="ft-button-secondary"
-              onClick={onSecondary || (() => window.open('http://localhost:3001', '_blank'))}
+              onClick={onSecondary || (() => window.open(APTITUDE_URL, '_blank'))}
               style={{ fontSize: '1rem', padding: '0.95rem 1.8rem' }}
             >
               {secondaryText}

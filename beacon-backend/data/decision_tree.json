@@ -1,0 +1,4638 @@
+[
+  {
+    "id": "Q1",
+    "question": "What are you looking for today?",
+    "type": "question",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Career Guidance",
+        "next": "Q2"
+      },
+      {
+        "letter": "B",
+        "text": "Exam Selection",
+        "next": "Q10"
+      },
+      {
+        "letter": "C",
+        "text": "College Guidance",
+        "next": "Q18"
+      },
+      {
+        "letter": "D",
+        "text": "I don't know where to start",
+        "next": "Q25"
+      }
+    ]
+  },
+  {
+    "id": "Q2",
+    "question": "Which class are you in?",
+    "type": "question",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Class 8 or 9",
+        "next": "Q3"
+      },
+      {
+        "letter": "B",
+        "text": "Class 10",
+        "next": "Q4"
+      },
+      {
+        "letter": "C",
+        "text": "Class 11 or 12",
+        "next": "Q5"
+      }
+    ]
+  },
+  {
+    "id": "Q3",
+    "question": "Great — it's early and that's an advantage. What subjects do you enjoy most right now?",
+    "type": "question",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Maths and Science",
+        "next": "Q6"
+      },
+      {
+        "letter": "B",
+        "text": "Arts and Literature",
+        "next": "Q7"
+      },
+      {
+        "letter": "C",
+        "text": "Commerce and Economics",
+        "next": "Q8"
+      },
+      {
+        "letter": "D",
+        "text": "I enjoy all equally / not sure",
+        "next": "Q9"
+      }
+    ]
+  },
+  {
+    "id": "Q4",
+    "question": "You're at a crucial stage. Have you chosen your stream for Class 11 yet?",
+    "type": "question",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Yes — Science",
+        "next": "Q5"
+      },
+      {
+        "letter": "B",
+        "text": "Yes — Commerce",
+        "next": "Q8"
+      },
+      {
+        "letter": "C",
+        "text": "Yes — Arts",
+        "next": "Q7"
+      },
+      {
+        "letter": "D",
+        "text": "No — still deciding",
+        "next": "Q9"
+      }
+    ]
+  },
+  {
+    "id": "Q5",
+    "question": "Which stream are you in?",
+    "type": "question",
+    "options": [
+      {
+        "letter": "A",
+        "text": "PCM (Physics Chemistry Maths)",
+        "next": "Q6"
+      },
+      {
+        "letter": "B",
+        "text": "PCB (Physics Chemistry Biology)",
+        "next": "Q7B"
+      },
+      {
+        "letter": "C",
+        "text": "PCMB (all four)",
+        "next": "Q6"
+      },
+      {
+        "letter": "D",
+        "text": "Commerce",
+        "next": "Q8"
+      },
+      {
+        "letter": "E",
+        "text": "Arts / Humanities",
+        "next": "Q7"
+      }
+    ]
+  },
+  {
+    "id": "Q6",
+    "question": "PCM opens many doors. What excites you more?",
+    "type": "question",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Building things — engineering, technology, architecture",
+        "next": "R_ENGINEERING_TECH"
+      },
+      {
+        "letter": "B",
+        "text": "Understanding how things work — physics, space, research",
+        "next": "R_RESEARCH_ISRO_IISER"
+      },
+      {
+        "letter": "C",
+        "text": "Working with data and computers",
+        "next": "R_CS_DATA_SCIENCE"
+      },
+      {
+        "letter": "D",
+        "text": "Design and creativity with a technical edge",
+        "next": "R_ARCHITECTURE_PRODUCT_DESIGN"
+      },
+      {
+        "letter": "E",
+        "text": "None of these feel right",
+        "next": "Q9"
+      }
+    ]
+  },
+  {
+    "id": "Q7",
+    "question": "Arts and Humanities path. What pulls you more?",
+    "type": "question",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Helping people and social change",
+        "next": "R_PSYCHOLOGY_SOCIAL_WORK"
+      },
+      {
+        "letter": "B",
+        "text": "Law and justice",
+        "next": "R_LAW_CLAT_NLU"
+      },
+      {
+        "letter": "C",
+        "text": "Government and public policy",
+        "next": "R_UPSC_CIVIL_SERVICES"
+      },
+      {
+        "letter": "D",
+        "text": "Writing, media, journalism",
+        "next": "R_MASS_COMM_JOURNALISM"
+      },
+      {
+        "letter": "E",
+        "text": "Design, film, performing arts",
+        "next": "R_DESIGN_FILM_PERFORMING_ARTS"
+      },
+      {
+        "letter": "F",
+        "text": "Not sure",
+        "next": "Q9"
+      }
+    ]
+  },
+  {
+    "id": "Q7B",
+    "question": "PCB opens medical and life science paths. What interests you more?",
+    "type": "question",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Treating patients directly",
+        "next": "R_MBBS_NEET"
+      },
+      {
+        "letter": "B",
+        "text": "Research and lab work",
+        "next": "R_BIOTECH_LIFE_SCIENCES"
+      },
+      {
+        "letter": "C",
+        "text": "Healthcare without MBBS",
+        "next": "R_PHARMACY_ALLIED_HEALTH"
+      },
+      {
+        "letter": "D",
+        "text": "Environmental or agricultural science",
+        "next": "R_ENVIRONMENTAL_SCIENCE_ICAR"
+      },
+      {
+        "letter": "E",
+        "text": "Not sure",
+        "next": "Q9"
+      }
+    ]
+  },
+  {
+    "id": "Q8",
+    "question": "Commerce path. Where do you see yourself?",
+    "type": "question",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Finance, banking, investments",
+        "next": "R_CA_CFA_INVESTMENT_BANKING"
+      },
+      {
+        "letter": "B",
+        "text": "Running a business or startup",
+        "next": "R_ENTREPRENEURSHIP_BBA_MBA"
+      },
+      {
+        "letter": "C",
+        "text": "Government jobs and stability",
+        "next": "R_IBPS_SSC_RBI"
+      },
+      {
+        "letter": "D",
+        "text": "Law from a commerce background",
+        "next": "R_CLAT_CORPORATE_LAW"
+      },
+      {
+        "letter": "E",
+        "text": "Not sure",
+        "next": "Q9"
+      }
+    ]
+  },
+  {
+    "id": "Q9",
+    "question": "No worries — let's figure it out together. Which of these sounds most like you?",
+    "type": "question",
+    "options": [
+      {
+        "letter": "A",
+        "text": "I like solving problems and puzzles",
+        "next": "Q6"
+      },
+      {
+        "letter": "B",
+        "text": "I like creating things — art, writing, music",
+        "next": "Q7"
+      },
+      {
+        "letter": "C",
+        "text": "I like working with and helping people",
+        "next": "Q7"
+      },
+      {
+        "letter": "D",
+        "text": "I like understanding how the world works",
+        "next": "Q7B"
+      },
+      {
+        "letter": "E",
+        "text": "I'm still completely unsure",
+        "next": "R_COUNSELLOR_HANDOFF"
+      }
+    ]
+  },
+  {
+    "id": "Q10",
+    "question": "Which stream are you in?",
+    "type": "question",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Science PCM",
+        "next": "Q11"
+      },
+      {
+        "letter": "B",
+        "text": "Science PCB",
+        "next": "Q12"
+      },
+      {
+        "letter": "C",
+        "text": "Commerce",
+        "next": "Q13"
+      },
+      {
+        "letter": "D",
+        "text": "Arts",
+        "next": "Q14"
+      },
+      {
+        "letter": "E",
+        "text": "Not decided yet",
+        "next": "Q4"
+      }
+    ]
+  },
+  {
+    "id": "Q11",
+    "question": "PCM — which career direction?",
+    "type": "question",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Engineering",
+        "next": "R_JEE_MAIN_ADVANCED"
+      },
+      {
+        "letter": "B",
+        "text": "Architecture",
+        "next": "R_NATA_JEE_PAPER_2"
+      },
+      {
+        "letter": "C",
+        "text": "Defence forces",
+        "next": "R_NDA"
+      },
+      {
+        "letter": "D",
+        "text": "Research and science",
+        "next": "R_KVPY_IISER"
+      },
+      {
+        "letter": "E",
+        "text": "Dual degree or private college",
+        "next": "R_BITSAT_STATE_CETS"
+      }
+    ]
+  },
+  {
+    "id": "Q12",
+    "question": "PCB — which direction?",
+    "type": "question",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Doctor MBBS/BDS",
+        "next": "R_NEET_UG"
+      },
+      {
+        "letter": "B",
+        "text": "Research and life sciences",
+        "next": "R_IISER_KVPY"
+      },
+      {
+        "letter": "C",
+        "text": "Agriculture",
+        "next": "R_ICAR_AIEEA"
+      },
+      {
+        "letter": "D",
+        "text": "Veterinary",
+        "next": "R_AIPVT"
+      },
+      {
+        "letter": "E",
+        "text": "Pharmacy or allied health",
+        "next": "R_STATE_PHARMACY_CETS"
+      }
+    ]
+  },
+  {
+    "id": "Q13",
+    "question": "Commerce — which direction?",
+    "type": "question",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Chartered Accountancy",
+        "next": "R_CA_FOUNDATION"
+      },
+      {
+        "letter": "B",
+        "text": "MBA or management",
+        "next": "R_CAT_CUET"
+      },
+      {
+        "letter": "C",
+        "text": "Banking and government",
+        "next": "R_IBPS_PO_SBI_PO"
+      },
+      {
+        "letter": "D",
+        "text": "Law",
+        "next": "R_CLAT"
+      },
+      {
+        "letter": "E",
+        "text": "Central university admission",
+        "next": "R_CUET_UG_CENTRAL"
+      }
+    ]
+  },
+  {
+    "id": "Q14",
+    "question": "Arts — which direction?",
+    "type": "question",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Civil Services IAS/IPS",
+        "next": "R_UPSC_CSE"
+      },
+      {
+        "letter": "B",
+        "text": "Law",
+        "next": "R_CLAT_AILET"
+      },
+      {
+        "letter": "C",
+        "text": "Design",
+        "next": "R_NID_DAT_NIFT"
+      },
+      {
+        "letter": "D",
+        "text": "Mass communication",
+        "next": "R_IIMC_ACJ"
+      },
+      {
+        "letter": "E",
+        "text": "Central university",
+        "next": "R_CUET_UG_ARTS"
+      }
+    ]
+  },
+  {
+    "id": "Q18",
+    "question": "What are you looking for in a college?",
+    "type": "question",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Top ranking government college — low fees",
+        "next": "Q19"
+      },
+      {
+        "letter": "B",
+        "text": "Private college — good placements",
+        "next": "Q20"
+      },
+      {
+        "letter": "C",
+        "text": "Research focused institute",
+        "next": "Q21"
+      },
+      {
+        "letter": "D",
+        "text": "Specific city or state",
+        "next": "Q22"
+      }
+    ]
+  },
+  {
+    "id": "Q19",
+    "question": "Which field?",
+    "type": "question",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Engineering",
+        "next": "R_IITS_NITS_VIA_JEE"
+      },
+      {
+        "letter": "B",
+        "text": "Medical",
+        "next": "R_AIIMS_JIPMER_VIA_NEET"
+      },
+      {
+        "letter": "C",
+        "text": "Science research",
+        "next": "R_IISc_IISER_KVPY"
+      },
+      {
+        "letter": "D",
+        "text": "Law",
+        "next": "R_NLUS_VIA_CLAT"
+      }
+    ]
+  },
+  {
+    "id": "Q20",
+    "question": "Which field?",
+    "type": "question",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Engineering",
+        "next": "R_BITS_VIT_MANIPAL_THAPAR"
+      },
+      {
+        "letter": "B",
+        "text": "Medical",
+        "next": "R_MANIPAL_CMC_KASTURBA"
+      },
+      {
+        "letter": "C",
+        "text": "Management",
+        "next": "R_NMIMS_CHRIST_SYMBIOSIS"
+      },
+      {
+        "letter": "D",
+        "text": "Design",
+        "next": "R_PEARL_WHISTLING_WOODS"
+      }
+    ]
+  },
+  {
+    "id": "Q21",
+    "question": "Stream?",
+    "type": "question",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Science",
+        "next": "R_IISc_TIFR_IISERs"
+      },
+      {
+        "letter": "B",
+        "text": "Social Science",
+        "next": "R_JNU_TISS_AU"
+      },
+      {
+        "letter": "C",
+        "text": "Technology",
+        "next": "R_IIT_IIIT_HYDERABAD"
+      }
+    ]
+  },
+  {
+    "id": "Q22",
+    "question": "Which state or region?",
+    "type": "question",
+    "options": [
+      {
+        "letter": "A",
+        "text": "North India",
+        "next": "R_DELHI_JNU_DU_IIT_DELHI_NLU_DELHI"
+      },
+      {
+        "letter": "B",
+        "text": "South India",
+        "next": "R_IIT_MADRAS_AIIMS_MANGALORE_NLU_BANGALORE"
+      },
+      {
+        "letter": "C",
+        "text": "West India",
+        "next": "R_IIT_BOMBAY_BITS_PILANI_SYMBIOSIS"
+      },
+      {
+        "letter": "D",
+        "text": "East India",
+        "next": "R_IIT_KHARAGPUR_JADAVPUR_CALCUTTA"
+      },
+      {
+        "letter": "E",
+        "text": "Open to anywhere",
+        "next": "Q19"
+      }
+    ]
+  },
+  {
+    "id": "Q25",
+    "question": "No problem at all. Let's start from scratch. How old are you?",
+    "type": "question",
+    "options": [
+      {
+        "letter": "A",
+        "text": "13 to 15 (Class 8-10)",
+        "next": "Q3"
+      },
+      {
+        "letter": "B",
+        "text": "16 to 18 (Class 11-12)",
+        "next": "Q5"
+      },
+      {
+        "letter": "C",
+        "text": "18+ (after Class 12)",
+        "next": "Q26"
+      }
+    ]
+  },
+  {
+    "id": "Q26",
+    "question": "Have you already passed Class 12?",
+    "type": "question",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Yes, looking for undergraduate options",
+        "next": "Q18"
+      },
+      {
+        "letter": "B",
+        "text": "Yes, took a gap year",
+        "next": "Q27"
+      },
+      {
+        "letter": "C",
+        "text": "No, appearing this year",
+        "next": "Q5"
+      }
+    ]
+  },
+  {
+    "id": "Q27",
+    "question": "What happened during the gap year?",
+    "type": "question",
+    "options": [
+      {
+        "letter": "A",
+        "text": "Preparing for JEE/NEET",
+        "next": "Q11"
+      },
+      {
+        "letter": "B",
+        "text": "Reconsidering my stream/career",
+        "next": "Q2"
+      },
+      {
+        "letter": "C",
+        "text": "Family or personal reasons",
+        "next": "R_COUNSELLOR_HANDOFF"
+      }
+    ]
+  },
+  {
+    "id": "R_ENGINEERING_TECH",
+    "question": "Engineering & Technology",
+    "type": "recommendation",
+    "title": "Engineering & Technology",
+    "description": [
+      "Your interest in building and design is a strong fit for engineering and technical careers.",
+      "This path leverages PCM strength and gives you practical, high-growth roles across multiple industries.",
+      "You can combine creativity with math, physics, and computing to solve real-world problems."
+    ],
+    "careers": [
+      {
+        "name": "Software Engineer",
+        "description": "Builds applications, platforms, and user-facing systems.",
+        "salary": "₹6-20 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Mechanical Engineer",
+        "description": "Designs machines, vehicles, and industrial equipment.",
+        "salary": "₹4-12 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Civil Engineer",
+        "description": "Plans and supervises construction of buildings and infrastructure.",
+        "salary": "₹4-10 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Architect",
+        "description": "Creates functional and beautiful built environments.",
+        "salary": "₹5-15 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Electrical Engineer",
+        "description": "Works on power systems, electronics and automation solutions.",
+        "salary": "₹5-14 LPA",
+        "stream": "PCM"
+      }
+    ],
+    "exams": [
+      {
+        "name": "JEE Main",
+        "full_form": "Joint Entrance Examination Main",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 with PCM",
+        "what_it_leads_to": "Admission to NITs, IIITs, and other engineering colleges",
+        "month": "April"
+      },
+      {
+        "name": "JEE Advanced",
+        "full_form": "Joint Entrance Examination Advanced",
+        "conducting_body": "IITs",
+        "eligibility": "Top JEE Main qualifiers",
+        "what_it_leads_to": "Admission to IITs and select engineering institutes",
+        "month": "May"
+      },
+      {
+        "name": "NATA",
+        "full_form": "National Aptitude Test in Architecture",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 with PCM/PCB/Arts",
+        "what_it_leads_to": "Admission to architecture colleges like CEPT and SPA",
+        "month": "April"
+      }
+    ],
+    "next_steps": [
+      "Start solving JEE Main level physics and maths problems for 30 minutes daily.",
+      "Explore basic CAD or design software to understand architectural and engineering workflows.",
+      "Join a weekend coding or robotics workshop to build hands-on design confidence.",
+      "Track college cutoffs for NITs, IIITs, and top architecture programs this year."
+    ],
+    "timeline": "Year 1: Build strong PCM fundamentals and take mock JEE/Main tests. Year 2: Focus on board exams, refine engineering interests, and apply to top institutes."
+  },
+  {
+    "id": "R_RESEARCH_ISRO_IISER",
+    "question": "Physics and Research Science",
+    "type": "recommendation",
+    "title": "Physics and Research Science",
+    "description": [
+      "You are drawn to deep understanding and exploration, which suits research-focused science careers.",
+      "This path builds on strong fundamentals in physics, maths, and critical thinking.",
+      "It is ideal for students who want to work in space science, labs, or national research institutes."
+    ],
+    "careers": [
+      {
+        "name": "Research Scientist",
+        "description": "Conducts advanced experiments and publishes scientific findings.",
+        "salary": "₹8-25 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Space Scientist",
+        "description": "Designs and analyzes missions for space agencies like ISRO.",
+        "salary": "₹7-22 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Data Analyst",
+        "description": "Interprets scientific data and builds predictive models.",
+        "salary": "₹6-18 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Laboratory Scientist",
+        "description": "Manages laboratory research and testing workflows.",
+        "salary": "₹5-14 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Science Communicator",
+        "description": "Explains research through writing, media, or public engagement.",
+        "salary": "₹4-10 LPA",
+        "stream": "PCM"
+      }
+    ],
+    "exams": [
+      {
+        "name": "KVPY",
+        "full_form": "Kishore Vaigyanik Protsahan Yojana",
+        "conducting_body": "DST",
+        "eligibility": "Class 11/12 science students",
+        "what_it_leads_to": "Scholarships and access to IISc/IISERs",
+        "month": "December"
+      },
+      {
+        "name": "IISER Aptitude Test",
+        "full_form": "Indian Institutes of Science Education and Research Aptitude Test",
+        "conducting_body": "IISERs",
+        "eligibility": "Class 12 science students",
+        "what_it_leads_to": "Admission to IISER undergraduate programs",
+        "month": "April"
+      },
+      {
+        "name": "JEE Advanced",
+        "full_form": "Joint Entrance Examination Advanced",
+        "conducting_body": "IITs",
+        "eligibility": "Top JEE Main qualifiers",
+        "what_it_leads_to": "Admission to IITs and research-oriented institutes",
+        "month": "May"
+      }
+    ],
+    "next_steps": [
+      "Read popular science books on physics and space to strengthen your curiosity.",
+      "Solve advanced physics problems and practice numerical reasoning every week.",
+      "Participate in science fairs or research internships to gain practical exposure.",
+      "Watch lectures from IIT and IISER faculty to understand research career paths."
+    ],
+    "timeline": "Year 1: Sharpen maths and physics foundations with advanced problems. Year 2: Prepare for KVPY/IISER and JEE Advanced, while applying for research internships."
+  },
+  {
+    "id": "R_CS_DATA_SCIENCE",
+    "question": "Computer Science & Data Science",
+    "type": "recommendation",
+    "title": "Computer Science & Data Science",
+    "description": [
+      "You enjoy working with computers and patterns, a strong sign for CS and data careers.",
+      "This pathway blends technical programming with analytics and applied math.",
+      "It is excellent for students who want high growth, creative problem solving, and industry-ready skillsets."
+    ],
+    "careers": [
+      {
+        "name": "Data Scientist",
+        "description": "Builds models that turn data into business insight.",
+        "salary": "₹8-30 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Software Developer",
+        "description": "Develops software applications and systems for users.",
+        "salary": "₹6-24 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Machine Learning Engineer",
+        "description": "Implements AI models for real-world products.",
+        "salary": "₹10-35 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Product Analyst",
+        "description": "Uses data to shape product decisions and growth.",
+        "salary": "₹7-20 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Cloud Architect",
+        "description": "Designs cloud services and scalable systems.",
+        "salary": "₹12-36 LPA",
+        "stream": "PCM"
+      }
+    ],
+    "exams": [
+      {
+        "name": "JEE Main",
+        "full_form": "Joint Entrance Examination Main",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 with PCM",
+        "what_it_leads_to": "Admission to engineering colleges with CS branches",
+        "month": "April"
+      },
+      {
+        "name": "JEE Advanced",
+        "full_form": "Joint Entrance Examination Advanced",
+        "conducting_body": "IITs",
+        "eligibility": "Top JEE Main qualifiers",
+        "what_it_leads_to": "Admission to IIT CS programs",
+        "month": "May"
+      },
+      {
+        "name": "BITSAT",
+        "full_form": "Birla Institute of Technology and Science Admission Test",
+        "conducting_body": "BITS Pilani",
+        "eligibility": "Class 12 with PCM",
+        "what_it_leads_to": "Admission to BITS campuses for CS/Data programs",
+        "month": "May"
+      }
+    ],
+    "next_steps": [
+      "Start learning Python and complete a small data or web project.",
+      "Practice logic and algorithms for 30 minutes every day.",
+      "Join an online data science challenge or hackathon to build a portfolio.",
+      "Research top CS programs at IITs, BITS, and IIITs and note their cutoffs."
+    ],
+    "timeline": "Year 1: Learn coding, data basics, and solve programming problems. Year 2: Focus on JEE/engineering entrance prep and create a portfolio of small projects."
+  },
+  {
+    "id": "R_ARCHITECTURE_PRODUCT_DESIGN",
+    "question": "Architecture & Product Design",
+    "type": "recommendation",
+    "title": "Architecture & Product Design",
+    "description": [
+      "Your mix of technical curiosity and creativity fits architecture and design well.",
+      "This path combines spatial thinking with aesthetics and practical engineering.",
+      "It prepares you for hands-on work in buildings, products, and user-focused design."
+    ],
+    "careers": [
+      {
+        "name": "Architect",
+        "description": "Designs functional, beautiful buildings and structures.",
+        "salary": "₹5-18 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Product Designer",
+        "description": "Creates digital and physical products with user experience focus.",
+        "salary": "₹8-25 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Interior Designer",
+        "description": "Plans attractive, functional interior spaces.",
+        "salary": "₹4-14 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Landscape Architect",
+        "description": "Designs outdoor environments and public spaces.",
+        "salary": "₹4-12 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Design Researcher",
+        "description": "Studies user needs to inform product design decisions.",
+        "salary": "₹6-16 LPA",
+        "stream": "PCM"
+      }
+    ],
+    "exams": [
+      {
+        "name": "NATA",
+        "full_form": "National Aptitude Test in Architecture",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 with PCM/PCB/Arts",
+        "what_it_leads_to": "Admission to architecture programs",
+        "month": "April"
+      },
+      {
+        "name": "JEE Paper 2",
+        "full_form": "Joint Entrance Examination Paper 2",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 with PCM",
+        "what_it_leads_to": "Admission to B.Arch programs in NITs and centrally funded colleges",
+        "month": "April"
+      },
+      {
+        "name": "UCEED",
+        "full_form": "Undergraduate Common Entrance Exam for Design",
+        "conducting_body": "IIT Bombay",
+        "eligibility": "Class 12 or equivalent",
+        "what_it_leads_to": "Admission to design programs at IITs and other institutes",
+        "month": "January"
+      }
+    ],
+    "next_steps": [
+      "Sketch designs, build simple models, and study architecture portfolios.",
+      "Visit local buildings or museums to observe form, function, and space.",
+      "Learn basic drafting or CAD tools like SketchUp or AutoCAD.",
+      "Review past NATA and UCEED question papers to understand exam patterns."
+    ],
+    "timeline": "Year 1: Build a portfolio of sketches and learn design software. Year 2: Prepare for NATA/UCEED and apply to architecture/design institutes."
+  },
+  {
+    "id": "R_PSYCHOLOGY_SOCIAL_WORK",
+    "question": "Psychology & Social Change",
+    "type": "recommendation",
+    "title": "Psychology & Social Change",
+    "description": [
+      "You are motivated by helping others and creating social impact.",
+      "This path suits students who care about people, community work, and social justice.",
+      "You can build a meaningful career in counseling, research, or NGO leadership."
+    ],
+    "careers": [
+      {
+        "name": "Clinical Psychologist",
+        "description": "Works with clients on mental health and therapy.",
+        "salary": "₹4-12 LPA",
+        "stream": "Arts/Science"
+      },
+      {
+        "name": "Social Worker",
+        "description": "Designs and runs community support programs.",
+        "salary": "₹3-9 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Counselor",
+        "description": "Provides guidance for education, career, and emotional health.",
+        "salary": "₹3-10 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "NGO Program Manager",
+        "description": "Leads projects that address social issues.",
+        "salary": "₹4-14 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Human Resources Specialist",
+        "description": "Supports employee wellbeing and organizational culture.",
+        "salary": "₹5-16 LPA",
+        "stream": "Arts/Commerce"
+      }
+    ],
+    "exams": [
+      {
+        "name": "CUET UG",
+        "full_form": "Common University Entrance Test Undergraduate",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to psychology and social science programs",
+        "month": "May"
+      },
+      {
+        "name": "IPU CET",
+        "full_form": "Indraprastha University Common Entrance Test",
+        "conducting_body": "GGSIPU",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to psychology and social work courses",
+        "month": "May"
+      },
+      {
+        "name": "NLSIU Admission Test",
+        "full_form": "N/A",
+        "conducting_body": "NLSIU",
+        "eligibility": "Graduation for social science research programs",
+        "what_it_leads_to": "Admission to specialized social science or policy courses",
+        "month": "June"
+      }
+    ],
+    "next_steps": [
+      "Volunteer with a local NGO or helpline to understand social issues firsthand.",
+      "Take an introductory psychology or sociology course online.",
+      "Read case studies on counseling and community development work.",
+      "Meet a counselor or social worker to learn day-to-day career realities."
+    ],
+    "timeline": "Year 1: Build empathy and social awareness through activities and coursework. Year 2: Apply to psychology or social science programs and pursue practical experience."
+  },
+  {
+    "id": "R_LAW_CLAT_NLU",
+    "question": "Law & Legal Studies",
+    "type": "recommendation",
+    "title": "Law & Legal Studies",
+    "description": [
+      "Your interest in justice and rules fits a career in law and tribunals.",
+      "This path works well if you enjoy debate, research, and structured argument.",
+      "A law degree opens multiple options including litigation, corporate, and policy work."
+    ],
+    "careers": [
+      {
+        "name": "Litigation Lawyer",
+        "description": "Represents clients in courts and legal disputes.",
+        "salary": "₹6-18 LPA",
+        "stream": "Arts/Commerce"
+      },
+      {
+        "name": "Corporate Lawyer",
+        "description": "Advises companies on contracts and compliance.",
+        "salary": "₹8-25 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Legal Researcher",
+        "description": "Produces legal analysis for policy and academics.",
+        "salary": "₹4-12 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Judicial Clerk",
+        "description": "Assists judges with case preparation and legal research.",
+        "salary": "₹4-10 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Public Policy Advisor",
+        "description": "Shapes law and regulation through policy work.",
+        "salary": "₹7-20 LPA",
+        "stream": "Arts"
+      }
+    ],
+    "exams": [
+      {
+        "name": "CLAT",
+        "full_form": "Common Law Admission Test",
+        "conducting_body": "NLU Consortium",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to NLUs and law programs",
+        "month": "May"
+      },
+      {
+        "name": "AILET",
+        "full_form": "All India Law Entrance Test",
+        "conducting_body": "NLSIU Bengaluru",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to NLSIU law programs",
+        "month": "May"
+      },
+      {
+        "name": "LSAT India",
+        "full_form": "Law School Admission Test India",
+        "conducting_body": "Pearson VUE",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to law colleges across India",
+        "month": "March"
+      }
+    ],
+    "next_steps": [
+      "Read about landmark court cases and legal reasoning.",
+      "Join a debate club or moot court activity.",
+      "Practice CLAT sample papers and legal aptitude questions.",
+      "Visit a law college campus or talk with a practicing lawyer."
+    ],
+    "timeline": "Year 1: Build reading, reasoning and current affairs habits. Year 2: Prepare for CLAT/AILET and begin law college applications."
+  },
+  {
+    "id": "R_UPSC_CIVIL_SERVICES",
+    "question": "Civil Services & Public Policy",
+    "type": "recommendation",
+    "title": "Civil Services & Public Policy",
+    "description": [
+      "You are motivated by leadership, governance, and public service.",
+      "UPSC is a long-term path requiring broad knowledge and disciplined study.",
+      "This route suits students who want to shape society through administration."
+    ],
+    "careers": [
+      {
+        "name": "IAS Officer",
+        "description": "Leads administration and district governance.",
+        "salary": "₹12-24 LPA",
+        "stream": "Any"
+      },
+      {
+        "name": "IPS Officer",
+        "description": "Leads policing and internal security operations.",
+        "salary": "₹12-24 LPA",
+        "stream": "Any"
+      },
+      {
+        "name": "IFS Officer",
+        "description": "Represents India in foreign service.",
+        "salary": "₹12-24 LPA",
+        "stream": "Any"
+      },
+      {
+        "name": "Policy Analyst",
+        "description": "Advises on government and development policy.",
+        "salary": "₹8-20 LPA",
+        "stream": "Any"
+      },
+      {
+        "name": "Development Manager",
+        "description": "Runs public or NGO development programs.",
+        "salary": "₹6-18 LPA",
+        "stream": "Any"
+      }
+    ],
+    "exams": [
+      {
+        "name": "UPSC CSE",
+        "full_form": "Union Public Service Commission Civil Services Examination",
+        "conducting_body": "UPSC",
+        "eligibility": "Graduation in any stream",
+        "what_it_leads_to": "Selection to IAS, IPS, IFS and other civil services",
+        "month": "May"
+      },
+      {
+        "name": "State PSC",
+        "full_form": "State Public Service Commission",
+        "conducting_body": "State PSCs",
+        "eligibility": "Graduation in any stream",
+        "what_it_leads_to": "State administrative services",
+        "month": "June-October"
+      },
+      {
+        "name": "SSC CGL",
+        "full_form": "Staff Selection Commission Combined Graduate Level",
+        "conducting_body": "SSC",
+        "eligibility": "Graduation in any stream",
+        "what_it_leads_to": "Central government group B and C posts",
+        "month": "December"
+      }
+    ],
+    "next_steps": [
+      "Start reading daily newspapers and build a current affairs notebook.",
+      "Practice essay writing and answer structuring regularly.",
+      "Study Indian polity, history and economy basics in a structured way.",
+      "Take a short online foundation course for civil services exam strategy."
+    ],
+    "timeline": "Year 1: Build strong general knowledge and writing habits. Year 2: Join a UPSC foundation program and start prelims/ mains preparation."
+  },
+  {
+    "id": "R_MASS_COMM_JOURNALISM",
+    "question": "Media & Journalism",
+    "type": "recommendation",
+    "title": "Media & Journalism",
+    "description": [
+      "You are drawn to storytelling and communicating ideas to an audience.",
+      "This path fits students who love writing, media, and current affairs.",
+      "It leads to careers in journalism, content, and media production."
+    ],
+    "careers": [
+      {
+        "name": "Journalist",
+        "description": "Reports news and produces stories for media outlets.",
+        "salary": "₹4-14 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Content Producer",
+        "description": "Creates video and digital content for brands.",
+        "salary": "₹4-12 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "PR Specialist",
+        "description": "Manages public image and communications for organizations.",
+        "salary": "₹5-16 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Social Media Manager",
+        "description": "Builds online presence and campaigns for audiences.",
+        "salary": "₹4-12 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Broadcast Producer",
+        "description": "Plans and executes TV or radio programs.",
+        "salary": "₹5-15 LPA",
+        "stream": "Arts"
+      }
+    ],
+    "exams": [
+      {
+        "name": "IIMC Entrance",
+        "full_form": "Indian Institute of Mass Communication Entrance",
+        "conducting_body": "IIMC",
+        "eligibility": "Graduation in any stream",
+        "what_it_leads_to": "Admission to journalism and mass communication programs",
+        "month": "May"
+      },
+      {
+        "name": "ACJ Entrance",
+        "full_form": "Asian College of Journalism Entrance",
+        "conducting_body": "ACJ",
+        "eligibility": "Graduation in any stream",
+        "what_it_leads_to": "Admission to journalism postgraduation courses",
+        "month": "April"
+      },
+      {
+        "name": "CUET UG",
+        "full_form": "Common University Entrance Test Undergraduate",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to media and communication courses at central universities",
+        "month": "May"
+      }
+    ],
+    "next_steps": [
+      "Write opinion pieces or start a blog on topics you care about.",
+      "Record short videos or podcasts to practice storytelling.",
+      "Follow leading journalists and media channels to learn styles.",
+      "Practice interview communication and media analysis."
+    ],
+    "timeline": "Year 1: Build writing and media skills through hands-on content. Year 2: Apply to journalism and communication colleges and build a portfolio."
+  },
+  {
+    "id": "R_DESIGN_FILM_PERFORMING_ARTS",
+    "question": "Design, Film & Performing Arts",
+    "type": "recommendation",
+    "title": "Design, Film & Performing Arts",
+    "description": [
+      "You are energized by creative expression and storytelling.",
+      "This path suits students who want careers in film, design, or performance.",
+      "It allows you to translate artistic ideas into real-world creative careers."
+    ],
+    "careers": [
+      {
+        "name": "Graphic Designer",
+        "description": "Creates visual designs for brands and media.",
+        "salary": "₹4-12 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Film Director",
+        "description": "Leads the creative vision for film and video projects.",
+        "salary": "₹6-20 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Stage Actor",
+        "description": "Performs in theatre, film, or television roles.",
+        "salary": "₹3-12 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Fashion Designer",
+        "description": "Designs clothing and lifestyle products.",
+        "salary": "₹4-14 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Creative Director",
+        "description": "Leads brand storytelling and creative campaigns.",
+        "salary": "₹10-30 LPA",
+        "stream": "Arts"
+      }
+    ],
+    "exams": [
+      {
+        "name": "NID DAT",
+        "full_form": "National Institute of Design Design Aptitude Test",
+        "conducting_body": "NID",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to design programs",
+        "month": "January"
+      },
+      {
+        "name": "NIFT",
+        "full_form": "National Institute of Fashion Technology Entrance Exam",
+        "conducting_body": "NIFT",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to fashion and design courses",
+        "month": "January"
+      },
+      {
+        "name": "FTII",
+        "full_form": "Film and Television Institute of India Entrance Exam",
+        "conducting_body": "FTII",
+        "eligibility": "Diploma/graduate in any stream",
+        "what_it_leads_to": "Admission to film and media production programs",
+        "month": "July"
+      }
+    ],
+    "next_steps": [
+      "Create a portfolio of sketches, short films, or performance clips.",
+      "Take workshops in design, photography or drama to test your interest.",
+      "Study creative directors and designers whose work you admire.",
+      "Apply to summer art camps or online creative courses."
+    ],
+    "timeline": "Year 1: Explore creative media and build a strong portfolio. Year 2: Prepare for NID/NIFT/FTII and apply to creative institutes."
+  },
+  {
+    "id": "R_IITS_NITS_VIA_JEE",
+    "question": "Top Engineering Colleges via JEE",
+    "type": "recommendation",
+    "title": "Top Engineering Colleges via JEE",
+    "description": [
+      "Your goal of a top government college matches JEE-ready engineering programs.",
+      "This path gives you strong placement potential and low-fee education.",
+      "It is suitable for students with a disciplined PCM study plan and long-term ambition."
+    ],
+    "careers": [
+      {
+        "name": "Computer Engineer",
+        "description": "Builds software solutions and systems.",
+        "salary": "₹8-25 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Electronics Engineer",
+        "description": "Designs circuits and embedded systems.",
+        "salary": "₹6-18 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Civil Engineer",
+        "description": "Helps create infrastructure and buildings.",
+        "salary": "₹4-12 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Aerospace Engineer",
+        "description": "Works on aircraft and spacecraft systems.",
+        "salary": "₹7-22 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Chemical Engineer",
+        "description": "Develops manufacturing and materials processes.",
+        "salary": "₹6-16 LPA",
+        "stream": "PCM"
+      }
+    ],
+    "exams": [
+      {
+        "name": "JEE Main",
+        "full_form": "Joint Entrance Examination Main",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 with PCM",
+        "what_it_leads_to": "Admission to NITs, IIITs, and other engineering colleges",
+        "month": "April"
+      },
+      {
+        "name": "JEE Advanced",
+        "full_form": "Joint Entrance Examination Advanced",
+        "conducting_body": "IITs",
+        "eligibility": "Top JEE Main qualifiers",
+        "what_it_leads_to": "Admission to IITs",
+        "month": "May"
+      },
+      {
+        "name": "BITSAT",
+        "full_form": "Birla Institute of Technology and Science Admission Test",
+        "conducting_body": "BITS Pilani",
+        "eligibility": "Class 12 with PCM",
+        "what_it_leads_to": "Admission to BITS campuses",
+        "month": "May"
+      }
+    ],
+    "next_steps": [
+      "Make a JEE Main study plan and take a full mock test this week.",
+      "Review previous year JEE Advanced questions for your weaker subjects.",
+      "Set up a revision schedule with boards and entrance prep balanced.",
+      "Check cutoffs for NITs and IIT branches you would like."
+    ],
+    "timeline": "Year 1: Focus on strength in PCM and complete syllabus. Year 2: Prioritize JEE Main/Advanced prep while maintaining board exam readiness."
+  },
+  {
+    "id": "R_AIIMS_JIPMER_VIA_NEET",
+    "question": "Top Medical Colleges via NEET",
+    "type": "recommendation",
+    "title": "Top Medical Colleges via NEET",
+    "description": [
+      "You want a government medical college and strong healthcare preparation.",
+      "This path is ideal for high-scoring PCB students with a long-term medical focus.",
+      "It offers rigorous training and excellent medical career opportunities."
+    ],
+    "careers": [
+      {
+        "name": "Doctor",
+        "description": "Provides patient care in hospitals and clinics.",
+        "salary": "₹10-30 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Surgeon",
+        "description": "Performs complex surgical procedures.",
+        "salary": "₹15-40 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Medical Researcher",
+        "description": "Conducts clinical research and trials.",
+        "salary": "₹8-25 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Public Health Specialist",
+        "description": "Works on health policy and community programs.",
+        "salary": "₹6-18 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Medical Educator",
+        "description": "Teaches future healthcare professionals.",
+        "salary": "₹7-20 LPA",
+        "stream": "PCB"
+      }
+    ],
+    "exams": [
+      {
+        "name": "NEET UG",
+        "full_form": "National Eligibility cum Entrance Test Undergraduate",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 with PCB",
+        "what_it_leads_to": "Admission to MBBS/BDS and allied health courses",
+        "month": "May"
+      },
+      {
+        "name": "AIIMS MBBS",
+        "full_form": "All India Institute of Medical Sciences MBBS Entrance",
+        "conducting_body": "AIIMS",
+        "eligibility": "Class 12 with PCB",
+        "what_it_leads_to": "Admission to AIIMS medical programs",
+        "month": "May"
+      },
+      {
+        "name": "JIPMER MBBS",
+        "full_form": "Jawaharlal Institute of Postgraduate Medical Education and Research MBBS Entrance",
+        "conducting_body": "JIPMER",
+        "eligibility": "Class 12 with PCB",
+        "what_it_leads_to": "Admission to JIPMER MBBS program",
+        "month": "May"
+      }
+    ],
+    "next_steps": [
+      "Create a daily study routine focused on biology, chemistry and physics.",
+      "Solve NEET previous year papers to improve exam strategy.",
+      "Attend a medical entrance coaching session for test-taking skills.",
+      "Practice full-length NEET mocks and revise high-weightage topics."
+    ],
+    "timeline": "Year 1: Cover PCB syllabus and practice MCQs daily. Year 2: Intensify NEET and AIIMS/JIPMER preparation while tracking your mock scores."
+  },
+  {
+    "id": "R_IISc_IISER_KVPY",
+    "question": "Science Research Colleges",
+    "type": "recommendation",
+    "title": "Science Research Colleges",
+    "description": [
+      "You aim for research-focused science institutes with strong fundamentals.",
+      "This path suits students who want deep scientific training and lab exposure.",
+      "It opens options in research, academics, and advanced science careers."
+    ],
+    "careers": [
+      {
+        "name": "Research Scientist",
+        "description": "Leads scientific discovery in labs or institutes.",
+        "salary": "₹8-25 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Academician",
+        "description": "Teaches and researches at universities.",
+        "salary": "₹6-18 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Biotech Specialist",
+        "description": "Develops biotech products and therapies.",
+        "salary": "₹7-20 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Laboratory Manager",
+        "description": "Oversees research lab operations.",
+        "salary": "₹5-14 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Data Analyst",
+        "description": "Analyzes scientific data for research insights.",
+        "salary": "₹6-18 LPA",
+        "stream": "PCM"
+      }
+    ],
+    "exams": [
+      {
+        "name": "KVPY",
+        "full_form": "Kishore Vaigyanik Protsahan Yojana",
+        "conducting_body": "DST",
+        "eligibility": "Class 11/12 science students",
+        "what_it_leads_to": "Scholarships and IISc/IISER admission support",
+        "month": "December"
+      },
+      {
+        "name": "IISER Aptitude Test",
+        "full_form": "Indian Institutes of Science Education and Research Aptitude Test",
+        "conducting_body": "IISERs",
+        "eligibility": "Class 12 science students",
+        "what_it_leads_to": "Admission to IISER programs",
+        "month": "April"
+      },
+      {
+        "name": "JEE Advanced",
+        "full_form": "Joint Entrance Examination Advanced",
+        "conducting_body": "IITs",
+        "eligibility": "Top JEE Main qualifiers",
+        "what_it_leads_to": "Admission to IITs and some research-oriented programs",
+        "month": "May"
+      }
+    ],
+    "next_steps": [
+      "Take advanced science electives and read research-based articles.",
+      "Practice aptitude questions for KVPY and IISER tests.",
+      "Speak with a science teacher about research career options.",
+      "Plan your board exam study schedule so you can also prepare for entrance tests."
+    ],
+    "timeline": "Year 1: Strengthen science fundamentals and academic reading. Year 2: Prepare for KVPY/IISER while applying to research-focused institutes."
+  },
+  {
+    "id": "R_NLUS_VIA_CLAT",
+    "question": "Top Law Colleges via CLAT",
+    "type": "recommendation",
+    "title": "Top Law Colleges via CLAT",
+    "description": [
+      "You want a top law school with strong placement and legal training.",
+      "This path fits students who enjoy debate, reasoning, and public affairs.",
+      "It offers excellent law career options in courts, corporate firms, and policy."
+    ],
+    "careers": [
+      {
+        "name": "Corporate Lawyer",
+        "description": "Advises companies on legal matters.",
+        "salary": "₹8-25 LPA",
+        "stream": "Arts/Commerce"
+      },
+      {
+        "name": "Litigation Lawyer",
+        "description": "Represents clients in legal disputes.",
+        "salary": "₹6-18 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Legal Consultant",
+        "description": "Provides expert legal advice to firms.",
+        "salary": "₹7-20 LPA",
+        "stream": "Arts/Commerce"
+      },
+      {
+        "name": "Policy Analyst",
+        "description": "Researches law and public policy outcomes.",
+        "salary": "₹6-16 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Academician",
+        "description": "Teaches law and publishes legal research.",
+        "salary": "₹5-15 LPA",
+        "stream": "Arts"
+      }
+    ],
+    "exams": [
+      {
+        "name": "CLAT",
+        "full_form": "Common Law Admission Test",
+        "conducting_body": "NLU Consortium",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to National Law Universities",
+        "month": "May"
+      },
+      {
+        "name": "AILET",
+        "full_form": "All India Law Entrance Test",
+        "conducting_body": "NLSIU Bengaluru",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to NLSIU law program",
+        "month": "May"
+      },
+      {
+        "name": "LSAT India",
+        "full_form": "Law School Admission Test India",
+        "conducting_body": "Pearson VUE",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to private law colleges",
+        "month": "March"
+      }
+    ],
+    "next_steps": [
+      "Practice logical reasoning and legal aptitude questions daily.",
+      "Read news and judgments to build legal awareness.",
+      "Join a debate or public speaking club to sharpen argumentation.",
+      "Study previous CLAT papers and timing techniques."
+    ],
+    "timeline": "Year 1: Build reading and reasoning skills. Year 2: Focus on CLAT/AILET preparation and application deadlines."
+  },
+  {
+    "id": "R_BITS_VIT_MANIPAL_THAPAR",
+    "question": "Private Engineering Colleges",
+    "type": "recommendation",
+    "title": "Private Engineering Colleges",
+    "description": [
+      "You prefer private colleges with strong campus placements and facilities.",
+      "This path suits students who want good engineering options beyond top government institutes.",
+      "It gives flexibility in branch selection and industry connections."
+    ],
+    "careers": [
+      {
+        "name": "Software Engineer",
+        "description": "Builds and maintains software products.",
+        "salary": "₹6-20 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Electronics Engineer",
+        "description": "Works with circuits and embedded systems.",
+        "salary": "₹5-14 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Data Engineer",
+        "description": "Builds data infrastructure for analytics.",
+        "salary": "₹7-22 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Mechanical Engineer",
+        "description": "Designs mechanical systems and devices.",
+        "salary": "₹5-14 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Product Manager",
+        "description": "Coordinates product strategy and delivery.",
+        "salary": "₹12-30 LPA",
+        "stream": "PCM"
+      }
+    ],
+    "exams": [
+      {
+        "name": "BITSAT",
+        "full_form": "Birla Institute of Technology and Science Admission Test",
+        "conducting_body": "BITS Pilani",
+        "eligibility": "Class 12 with PCM",
+        "what_it_leads_to": "Admission to BITS campuses",
+        "month": "May"
+      },
+      {
+        "name": "VITEEE",
+        "full_form": "Vellore Institute of Technology Engineering Entrance Exam",
+        "conducting_body": "VIT",
+        "eligibility": "Class 12 with PCM",
+        "what_it_leads_to": "Admission to VIT engineering programs",
+        "month": "April"
+      },
+      {
+        "name": "Manipal Entrance Test",
+        "full_form": "MET",
+        "conducting_body": "Manipal Academy of Higher Education",
+        "eligibility": "Class 12 with PCM",
+        "what_it_leads_to": "Admission to Manipal University engineering programs",
+        "month": "May"
+      }
+    ],
+    "next_steps": [
+      "Research BITS, VIT and Manipal branches and their placement records.",
+      "Take at least one private college entrance mock test this month.",
+      "Create a shortlist of campuses based on branch, location and fees.",
+      "Prepare a strong personal profile and documents for admissions."
+    ],
+    "timeline": "Year 1: Align your engineering interests with private college options. Year 2: Complete entrance prep, submit applications, and compare offers."
+  },
+  {
+    "id": "R_MANIPAL_CMC_KASTURBA",
+    "question": "Private Medical Colleges",
+    "type": "recommendation",
+    "title": "Private Medical Colleges",
+    "description": [
+      "You are focused on a private medical college path with strong healthcare training.",
+      "This route is suited to PCB students aiming for medical and allied health careers.",
+      "It offers options if government seats are not the sole target."
+    ],
+    "careers": [
+      {
+        "name": "Doctor",
+        "description": "Provides clinical care and patient treatment.",
+        "salary": "₹10-30 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Dentist",
+        "description": "Treats dental and oral health issues.",
+        "salary": "₹8-18 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Physiotherapist",
+        "description": "Helps patients recover physical function.",
+        "salary": "₹4-12 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Pharmacist",
+        "description": "Manages medicines and pharmacy services.",
+        "salary": "₹3-10 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Medical Researcher",
+        "description": "Contributes to biomedical research projects.",
+        "salary": "₹6-18 LPA",
+        "stream": "PCB"
+      }
+    ],
+    "exams": [
+      {
+        "name": "NEET UG",
+        "full_form": "National Eligibility cum Entrance Test Undergraduate",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 with PCB",
+        "what_it_leads_to": "Admission to MBBS/BDS and allied programs",
+        "month": "May"
+      },
+      {
+        "name": "MET",
+        "full_form": "Manipal Entrance Test",
+        "conducting_body": "MAHE",
+        "eligibility": "Class 12 with PCB",
+        "what_it_leads_to": "Admission to Manipal medical and health science courses",
+        "month": "May"
+      },
+      {
+        "name": "CMC Entrance",
+        "full_form": "Christian Medical College Entrance",
+        "conducting_body": "CMC Vellore",
+        "eligibility": "Class 12 with PCB",
+        "what_it_leads_to": "Admission to CMC medical programs",
+        "month": "May"
+      }
+    ],
+    "next_steps": [
+      "Prepare NEET UG with a focus on high-weightage PCB topics.",
+      "Explore private medical colleges and their fee structures.",
+      "Evaluate scholarships or loan options for private medical study.",
+      "Speak with current medical students to understand campus life."
+    ],
+    "timeline": "Year 1: Focus on NEET and PCB fundamentals. Year 2: Complete application requirements for private medical colleges and choose the best fit."
+  },
+  {
+    "id": "R_NMIMS_CHRIST_SYMBIOSIS",
+    "question": "Private Management & Commerce Colleges",
+    "type": "recommendation",
+    "title": "Private Management & Commerce Colleges",
+    "description": [
+      "You want a private college with strong placement and management exposure.",
+      "This path fits commerce-oriented students seeking business and management careers.",
+      "It offers practical programs with industry links and campus mentoring."
+    ],
+    "careers": [
+      {
+        "name": "Business Analyst",
+        "description": "Analyzes business data to drive decisions.",
+        "salary": "₹6-18 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Marketing Executive",
+        "description": "Creates campaigns to grow brand awareness.",
+        "salary": "₹4-14 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "HR Specialist",
+        "description": "Manages talent and employee initiatives.",
+        "salary": "₹5-16 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Finance Manager",
+        "description": "Oversees financial planning and budgets.",
+        "salary": "₹8-22 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Operations Manager",
+        "description": "Optimizes business processes and delivery.",
+        "salary": "₹7-20 LPA",
+        "stream": "Commerce"
+      }
+    ],
+    "exams": [
+      {
+        "name": "NPAT",
+        "full_form": "NMIMS Programs After Twelfth",
+        "conducting_body": "NMIMS",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to undergraduate management programs",
+        "month": "May"
+      },
+      {
+        "name": "Symbiosis SET",
+        "full_form": "Symbiosis Entrance Test",
+        "conducting_body": "Symbiosis",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to management and commerce courses",
+        "month": "April"
+      },
+      {
+        "name": "Christ Admission Test",
+        "full_form": "CAT",
+        "conducting_body": "Christ University",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to BBA/BCom programs",
+        "month": "April"
+      }
+    ],
+    "next_steps": [
+      "Research NMIMS, Christ and Symbiosis course specializations.",
+      "Prepare an impressive application with academic and extracurricular achievements.",
+      "Attend college webinars to understand placement and faculty support.",
+      "Review early admission deadlines and application requirements."
+    ],
+    "timeline": "Year 1: Build a strong academic profile and understand program options. Year 2: Apply to private management colleges and prepare for admission tests."
+  },
+  {
+    "id": "R_PEARL_WHISTLING_WOODS",
+    "question": "Private Design & Creative Institutes",
+    "type": "recommendation",
+    "title": "Private Design & Creative Institutes",
+    "description": [
+      "You want a campus focused on design, media, and creative careers.",
+      "This path suits students who value hands-on learning and industry exposure.",
+      "It offers strong creative networks and practical project experience."
+    ],
+    "careers": [
+      {
+        "name": "Fashion Designer",
+        "description": "Creates apparel and lifestyle collections.",
+        "salary": "₹4-14 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Film Producer",
+        "description": "Oversees media projects from concept to release.",
+        "salary": "₹7-20 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Graphic Designer",
+        "description": "Designs visual communication for brands.",
+        "salary": "₹4-12 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Creative Director",
+        "description": "Leads creative strategy for campaigns.",
+        "salary": "₹10-28 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Animator",
+        "description": "Produces motion graphics and animation content.",
+        "salary": "₹4-12 LPA",
+        "stream": "Arts"
+      }
+    ],
+    "exams": [
+      {
+        "name": "NID DAT",
+        "full_form": "National Institute of Design Design Aptitude Test",
+        "conducting_body": "NID",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to design programs",
+        "month": "January"
+      },
+      {
+        "name": "NIFT",
+        "full_form": "National Institute of Fashion Technology Entrance Exam",
+        "conducting_body": "NIFT",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to fashion and design courses",
+        "month": "January"
+      },
+      {
+        "name": "Pearl Academy Entrance",
+        "full_form": "Pearl Academy Entrance Exam",
+        "conducting_body": "Pearl Academy",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to design and media programs",
+        "month": "May"
+      }
+    ],
+    "next_steps": [
+      "Build a creative portfolio with visual and media samples.",
+      "Attend a design workshop or portfolio critique session.",
+      "Follow industry trends in fashion, film and creative media.",
+      "Prepare presentation and sketching materials for institute admissions."
+    ],
+    "timeline": "Year 1: Collect creative work and build a portfolio. Year 2: Apply to design colleges and complete entrance project briefs."
+  },
+  {
+    "id": "R_IISc_TIFR_IISERs",
+    "question": "Elite Research Institutes",
+    "type": "recommendation",
+    "title": "Elite Research Institutes",
+    "description": [
+      "You seek the highest research-focused science colleges in India.",
+      "This path is ideal for academically driven students with strong science interest.",
+      "It leads to rigorous science education and research careers."
+    ],
+    "careers": [
+      {
+        "name": "Research Scientist",
+        "description": "Leads science research in top labs.",
+        "salary": "₹10-30 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Theoretical Physicist",
+        "description": "Studies fundamental physics and models.",
+        "salary": "₹8-25 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Biotech Researcher",
+        "description": "Develops biotechnology solutions.",
+        "salary": "₹7-22 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Data Scientist",
+        "description": "Applies analytics to scientific problems.",
+        "salary": "₹9-28 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Science Faculty",
+        "description": "Teaches and mentors future scientists.",
+        "salary": "₹7-18 LPA",
+        "stream": "PCM"
+      }
+    ],
+    "exams": [
+      {
+        "name": "IISER Aptitude Test",
+        "full_form": "Indian Institutes of Science Education and Research Aptitude Test",
+        "conducting_body": "IISERs",
+        "eligibility": "Class 12 science students",
+        "what_it_leads_to": "Admission to IISERs",
+        "month": "April"
+      },
+      {
+        "name": "KVPY",
+        "full_form": "Kishore Vaigyanik Protsahan Yojana",
+        "conducting_body": "DST",
+        "eligibility": "Class 11/12 science students",
+        "what_it_leads_to": "Scholarships and research pathways",
+        "month": "December"
+      },
+      {
+        "name": "JEE Advanced",
+        "full_form": "Joint Entrance Examination Advanced",
+        "conducting_body": "IITs",
+        "eligibility": "Top JEE Main qualifiers",
+        "what_it_leads_to": "Admission to top engineering and research-friendly programs",
+        "month": "May"
+      }
+    ],
+    "next_steps": [
+      "Take advanced science courses in physics, chemistry and maths.",
+      "Start solving research aptitude and reasoning problems.",
+      "Attend science seminars or research talks when possible.",
+      "Plan your preparation for KVPY and IISER tests alongside boards."
+    ],
+    "timeline": "Year 1: Focus on science fundamentals and research aptitude. Year 2: Prepare for IISER and KVPY while applying to top science colleges."
+  },
+  {
+    "id": "R_JNU_TISS_AU",
+    "question": "Social Science & Humanities Institutes",
+    "type": "recommendation",
+    "title": "Social Science & Humanities Institutes",
+    "description": [
+      "You are drawn to social science study and interdisciplinary research.",
+      "These colleges suit students interested in public policy, arts, and humanities.",
+      "They offer a strong foundation for research, teaching, and social careers."
+    ],
+    "careers": [
+      {
+        "name": "Research Analyst",
+        "description": "Works on social policy and research projects.",
+        "salary": "₹6-16 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Public Policy Expert",
+        "description": "Advises organizations on policy design.",
+        "salary": "₹7-18 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Sociologist",
+        "description": "Studies social behavior and institutions.",
+        "salary": "₹5-14 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Journalist",
+        "description": "Reports on social issues and analysis.",
+        "salary": "₹4-12 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "International Relations Specialist",
+        "description": "Builds careers in diplomacy or global affairs.",
+        "salary": "₹7-20 LPA",
+        "stream": "Arts"
+      }
+    ],
+    "exams": [
+      {
+        "name": "CUET UG",
+        "full_form": "Common University Entrance Test Undergraduate",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to JNU, TISS, and other central university programs",
+        "month": "May"
+      },
+      {
+        "name": "TISS NET",
+        "full_form": "Tata Institute of Social Sciences National Entrance Test",
+        "conducting_body": "TISS",
+        "eligibility": "Graduation in relevant fields",
+        "what_it_leads_to": "Admission to TISS postgraduate programs",
+        "month": "January"
+      },
+      {
+        "name": "JNU Entrance Examination",
+        "full_form": "Jawaharlal Nehru University Entrance Examination",
+        "conducting_body": "JNU",
+        "eligibility": "Class 12 or equivalent",
+        "what_it_leads_to": "Admission to JNU undergraduate programs",
+        "month": "June"
+      }
+    ],
+    "next_steps": [
+      "Develop a reading habit around social science and public affairs.",
+      "Explore JNU and TISS program details and eligible subjects.",
+      "Practice essay writing on social issues and current affairs.",
+      "Attend webinars or open days from these institutes."
+    ],
+    "timeline": "Year 1: Research social science programs and build your profile. Year 2: Prepare for CUET and institute-specific tests while strengthening your subject choice."
+  },
+  {
+    "id": "R_IIT_IIIT_HYDERABAD",
+    "question": "Top Technology Institutes",
+    "type": "recommendation",
+    "title": "Top Technology Institutes",
+    "description": [
+      "You aim for elite technology institutes with strong research and placements.",
+      "This path is ideal for students with a technology and mathematics focus.",
+      "It leads to high-impact careers in engineering, CS, and innovation."
+    ],
+    "careers": [
+      {
+        "name": "Software Developer",
+        "description": "Builds scalable software applications.",
+        "salary": "₹8-28 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Data Scientist",
+        "description": "Uses data to solve complex problems.",
+        "salary": "₹9-30 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "AI Engineer",
+        "description": "Builds artificial intelligence systems.",
+        "salary": "₹12-35 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Product Manager",
+        "description": "Drives product direction and delivery.",
+        "salary": "₹12-36 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Cybersecurity Expert",
+        "description": "Secures systems and networks from threats.",
+        "salary": "₹10-30 LPA",
+        "stream": "PCM"
+      }
+    ],
+    "exams": [
+      {
+        "name": "JEE Advanced",
+        "full_form": "Joint Entrance Examination Advanced",
+        "conducting_body": "IITs",
+        "eligibility": "Top JEE Main qualifiers",
+        "what_it_leads_to": "Admission to IITs and top technology institutes",
+        "month": "May"
+      },
+      {
+        "name": "JEE Main",
+        "full_form": "Joint Entrance Examination Main",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 with PCM",
+        "what_it_leads_to": "Admission to IIITs and other engineering colleges",
+        "month": "April"
+      },
+      {
+        "name": "KVPY",
+        "full_form": "Kishore Vaigyanik Protsahan Yojana",
+        "conducting_body": "DST",
+        "eligibility": "Class 11/12 science students",
+        "what_it_leads_to": "Scholarships and research-focused programs",
+        "month": "December"
+      }
+    ],
+    "next_steps": [
+      "Start solving higher-level maths and physics problems daily.",
+      "Research IIIT Hyderabad admission and its unique programs.",
+      "Take at least one online coding or AI course to boost your profile.",
+      "Prepare a timetable that balances board exam and entrance test prep."
+    ],
+    "timeline": "Year 1: Strengthen your core PCM concepts and coding skills. Year 2: Focus on JEE Advanced and institute-specific preparation."
+  },
+  {
+    "id": "R_DELHI_JNU_DU_IIT_DELHI_NLU_DELHI",
+    "question": "Top Delhi Universities",
+    "type": "recommendation",
+    "title": "Top Delhi Universities",
+    "description": [
+      "You are looking for strong Delhi-based colleges across engineering, law, and arts.",
+      "This path suits students who want high-quality education and city exposure.",
+      "It gives access to vibrant campus life and excellent academic networks."
+    ],
+    "careers": [
+      {
+        "name": "Software Engineer",
+        "description": "Builds software at top Delhi tech firms.",
+        "salary": "₹7-22 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Lawyer",
+        "description": "Practices law with a top Delhi law degree.",
+        "salary": "₹6-18 LPA",
+        "stream": "Arts/Commerce"
+      },
+      {
+        "name": "Academic Researcher",
+        "description": "Studies and teaches at leading institutes.",
+        "salary": "₹6-18 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Policy Advisor",
+        "description": "Works on government or NGO policy teams.",
+        "salary": "₹8-20 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Data Analyst",
+        "description": "Analyzes business and social data.",
+        "salary": "₹7-18 LPA",
+        "stream": "PCM"
+      }
+    ],
+    "exams": [
+      {
+        "name": "CUET UG",
+        "full_form": "Common University Entrance Test Undergraduate",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to DU, JNU, and other central universities",
+        "month": "May"
+      },
+      {
+        "name": "JEE Main",
+        "full_form": "Joint Entrance Examination Main",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 with PCM",
+        "what_it_leads_to": "Admission to IIIT Delhi and some engineering programs",
+        "month": "April"
+      },
+      {
+        "name": "CLAT",
+        "full_form": "Common Law Admission Test",
+        "conducting_body": "NLU Consortium",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to NLU Delhi",
+        "month": "May"
+      }
+    ],
+    "next_steps": [
+      "Shortlist Delhi colleges by program, fees and campus culture.",
+      "Prepare for CUET and other entrance tests in parallel.",
+      "Visit college websites to understand admission criteria.",
+      "Build strong application essays or interviews for top universities."
+    ],
+    "timeline": "Year 1: Learn the Delhi college admission process and timelines. Year 2: Apply strategically to your chosen programs and prepare required exams."
+  },
+  {
+    "id": "R_IIT_MADRAS_AIIMS_MANGALORE_NLU_BANGALORE",
+    "question": "Top South India Institutes",
+    "type": "recommendation",
+    "title": "Top South India Institutes",
+    "description": [
+      "You are focused on premium South Indian colleges for engineering, medicine, or law.",
+      "This path suits students seeking excellent academics and campus strength.",
+      "It provides access to top recruiters and research opportunities."
+    ],
+    "careers": [
+      {
+        "name": "Software Engineer",
+        "description": "Works on technology products from top South Indian campuses.",
+        "salary": "₹8-26 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Doctor",
+        "description": "Graduates with high medical training from AIIMS or similar colleges.",
+        "salary": "₹10-30 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Legal Professional",
+        "description": "Practices law with a strong regional law school background.",
+        "salary": "₹6-18 LPA",
+        "stream": "Arts/Commerce"
+      },
+      {
+        "name": "Research Fellow",
+        "description": "Works in research labs and science centers.",
+        "salary": "₹7-18 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Product Manager",
+        "description": "Leads product initiatives with South Indian tech industry exposure.",
+        "salary": "₹12-32 LPA",
+        "stream": "PCM"
+      }
+    ],
+    "exams": [
+      {
+        "name": "JEE Advanced",
+        "full_form": "Joint Entrance Examination Advanced",
+        "conducting_body": "IITs",
+        "eligibility": "Top JEE Main qualifiers",
+        "what_it_leads_to": "Admission to IIT Madras and other top IITs",
+        "month": "May"
+      },
+      {
+        "name": "NEET UG",
+        "full_form": "National Eligibility cum Entrance Test Undergraduate",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 with PCB",
+        "what_it_leads_to": "Admission to AIIMS and other medical colleges",
+        "month": "May"
+      },
+      {
+        "name": "CLAT",
+        "full_form": "Common Law Admission Test",
+        "conducting_body": "NLU Consortium",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to NLU Bangalore",
+        "month": "May"
+      }
+    ],
+    "next_steps": [
+      "Review IIT Madras, AIIMS Mangalore, and NLU Bangalore admission criteria.",
+      "Create a state-wise shortlist and make a study timeline for exams.",
+      "Attend virtual open days or college sessions for South Indian institutes.",
+      "Start entrance test preparation and research campus culture."
+    ],
+    "timeline": "Year 1: Focus on exam readiness and college research. Year 2: Finalize applications and complete entrance tests for top South Indian institutes."
+  },
+  {
+    "id": "R_IIT_BOMBAY_BITS_PILANI_SYMBIOSIS",
+    "question": "Top West India Institutes",
+    "type": "recommendation",
+    "title": "Top West India Institutes",
+    "description": [
+      "You want strong West Indian colleges with excellent placements and academic reputation.",
+      "This path suits students who value industry connections and campus life.",
+      "It leads to careers in engineering, design, and business."
+    ],
+    "careers": [
+      {
+        "name": "Software Developer",
+        "description": "Builds digital products from leading West Indian campuses.",
+        "salary": "₹8-28 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Business Analyst",
+        "description": "Analyzes business data for corporate decisions.",
+        "salary": "₹6-18 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Design Professional",
+        "description": "Creates product and visual design solutions.",
+        "salary": "₹5-16 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Systems Engineer",
+        "description": "Develops and maintains technical infrastructure.",
+        "salary": "₹7-20 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Product Manager",
+        "description": "Defines product strategy and launches solutions.",
+        "salary": "₹12-32 LPA",
+        "stream": "PCM"
+      }
+    ],
+    "exams": [
+      {
+        "name": "JEE Advanced",
+        "full_form": "Joint Entrance Examination Advanced",
+        "conducting_body": "IITs",
+        "eligibility": "Top JEE Main qualifiers",
+        "what_it_leads_to": "Admission to IIT Bombay",
+        "month": "May"
+      },
+      {
+        "name": "BITSAT",
+        "full_form": "Birla Institute of Technology and Science Admission Test",
+        "conducting_body": "BITS Pilani",
+        "eligibility": "Class 12 with PCM",
+        "what_it_leads_to": "Admission to BITS Pilani",
+        "month": "May"
+      },
+      {
+        "name": "Symbiosis SET",
+        "full_form": "Symbiosis Entrance Test",
+        "conducting_body": "Symbiosis",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to Symbiosis programs",
+        "month": "April"
+      }
+    ],
+    "next_steps": [
+      "Research the academic strengths of IIT Bombay, BITS Pilani and Symbiosis.",
+      "Prepare for JEE Advanced and BITSAT with well-timed mocks.",
+      "Shortlist branches or programs that match your strengths.",
+      "Plan application deadlines and required documents."
+    ],
+    "timeline": "Year 1: Build a strong preparation plan for major entrance exams. Year 2: Apply to West India institutes and finalize your college choices."
+  },
+  {
+    "id": "R_IIT_KHARAGPUR_JADAVPUR_CALCUTTA",
+    "question": "Top East India Institutes",
+    "type": "recommendation",
+    "title": "Top East India Institutes",
+    "description": [
+      "You want strong academic colleges in East India for engineering and law.",
+      "This path suits students who prefer a mix of tradition and modern campus life.",
+      "It opens options in technology, research, and professional careers."
+    ],
+    "careers": [
+      {
+        "name": "Civil Engineer",
+        "description": "Works on infrastructure and urban development.",
+        "salary": "₹5-14 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Lawyer",
+        "description": "Practices law with prestigious East India degrees.",
+        "salary": "₹6-18 LPA",
+        "stream": "Arts/Commerce"
+      },
+      {
+        "name": "Research Scientist",
+        "description": "Pursues academic science research.",
+        "salary": "₹8-22 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Software Engineer",
+        "description": "Builds technology products in top technical institutes.",
+        "salary": "₹8-24 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Public Policy Analyst",
+        "description": "Supports government policy and development planning.",
+        "salary": "₹7-18 LPA",
+        "stream": "Arts"
+      }
+    ],
+    "exams": [
+      {
+        "name": "JEE Advanced",
+        "full_form": "Joint Entrance Examination Advanced",
+        "conducting_body": "IITs",
+        "eligibility": "Top JEE Main qualifiers",
+        "what_it_leads_to": "Admission to IIT Kharagpur",
+        "month": "May"
+      },
+      {
+        "name": "CLAT",
+        "full_form": "Common Law Admission Test",
+        "conducting_body": "NLU Consortium",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to NLU Kolkata",
+        "month": "May"
+      },
+      {
+        "name": "CUET UG",
+        "full_form": "Common University Entrance Test Undergraduate",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to central universities and colleges",
+        "month": "May"
+      }
+    ],
+    "next_steps": [
+      "Map East India college options against your preferred field.",
+      "Prepare for JEE/CLAT and review program deadlines.",
+      "Connect with current students or alumni from these institutes.",
+      "Visit virtual campus tours to get a feel for the colleges."
+    ],
+    "timeline": "Year 1: Explore East India institute options and entrance requirements. Year 2: Prepare for exams and apply to your top choices."
+  },
+  {
+    "id": "R_NDA",
+    "question": "Defence Forces",
+    "type": "recommendation",
+    "title": "Defence Forces",
+    "description": [
+      "You want a disciplined career serving the country, which is ideal for NDA.",
+      "This path suits students who enjoy physical, mental and leadership challenges.",
+      "It opens roles in the Army, Navy and Air Force with strong career stability."
+    ],
+    "careers": [
+      {
+        "name": "Army Officer",
+        "description": "Leads troops and operations in the Indian Army.",
+        "salary": "₹8-20 LPA",
+        "stream": "Any"
+      },
+      {
+        "name": "Naval Officer",
+        "description": "Commands naval vessels and maritime missions.",
+        "salary": "₹8-22 LPA",
+        "stream": "Any"
+      },
+      {
+        "name": "Air Force Officer",
+        "description": "Operates aircraft and leads aerospace missions.",
+        "salary": "₹8-24 LPA",
+        "stream": "Any"
+      },
+      {
+        "name": "Military Strategist",
+        "description": "Plans operations and defence strategy.",
+        "salary": "₹9-25 LPA",
+        "stream": "Any"
+      },
+      {
+        "name": "Defence Analyst",
+        "description": "Studies security and military trends.",
+        "salary": "₹7-18 LPA",
+        "stream": "Any"
+      }
+    ],
+    "exams": [
+      {
+        "name": "NDA",
+        "full_form": "National Defence Academy",
+        "conducting_body": "UPSC",
+        "eligibility": "Class 12 in any stream; age 16.5-19.5",
+        "what_it_leads_to": "Training for Army, Navy and Air Force officer careers",
+        "month": "April/September"
+      },
+      {
+        "name": "CDS",
+        "full_form": "Combined Defence Services",
+        "conducting_body": "UPSC",
+        "eligibility": "Graduation in any stream",
+        "what_it_leads_to": "Admission to officer training academies",
+        "month": "February/September"
+      },
+      {
+        "name": "AFCAT",
+        "full_form": "Air Force Common Admission Test",
+        "conducting_body": "Indian Air Force",
+        "eligibility": "Graduation in any stream",
+        "what_it_leads_to": "Shortlisting for Air Force officer recruitment",
+        "month": "February/August"
+      }
+    ],
+    "next_steps": [
+      "Start a physical fitness routine and teamwork activities.",
+      "Read about NDA selection stages and SSB interview process.",
+      "Practice general ability and mathematics papers for NDA.",
+      "Speak to an ex-serviceman or defence coach for guidance."
+    ],
+    "timeline": "Year 1: Build fitness, discipline and exam readiness. Year 2: Appear for NDA and prepare for SSB interviews to join the academy."
+  },
+  {
+    "id": "R_COUNSELLOR_HANDOFF",
+    "question": "It sounds like you'd benefit from a personalised conversation. Our counsellors can help you figure this out in 20 minutes. Choose how you'd like to connect:",
+    "type": "handoff",
+    "message": "It sounds like you'd benefit from a one-on-one conversation with our counsellors. They can help you get clarity in just 20 minutes — completely free.",
+    "contact_options": [
+      {
+        "type": "WhatsApp",
+        "label": "WhatsApp",
+        "value": "https://wa.me/91XXXXXXXXXX"
+      },
+      {
+        "type": "Call",
+        "label": "Call",
+        "value": "+91 12345 67890"
+      },
+      {
+        "type": "Email",
+        "label": "Email",
+        "value": "mailto:careersupport@example.com"
+      }
+    ]
+  },
+  {
+    "id": "R_MBBS_NEET",
+    "question": "Medical Careers via NEET",
+    "type": "recommendation",
+    "title": "Medical Careers via NEET",
+    "description": [
+      "You are focused on patient care and medical training, which is ideal for MBBS and related careers.",
+      "This path requires strong PCB knowledge and sustained exam preparation.",
+      "It prepares you for a respected healthcare career with long-term impact."
+    ],
+    "careers": [
+      {
+        "name": "MBBS Doctor",
+        "description": "Provides clinical healthcare and patient treatment.",
+        "salary": "₹10-30 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Surgeon",
+        "description": "Performs surgeries and advanced medical procedures.",
+        "salary": "₹15-40 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Medical Researcher",
+        "description": "Studies diseases and develops treatments.",
+        "salary": "₹8-25 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Clinical Pharmacologist",
+        "description": "Specializes in drug therapy and patient safety.",
+        "salary": "₹8-20 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Public Health Doctor",
+        "description": "Works on community health and preventive programs.",
+        "salary": "₹6-18 LPA",
+        "stream": "PCB"
+      }
+    ],
+    "exams": [
+      {
+        "name": "NEET UG",
+        "full_form": "National Eligibility cum Entrance Test Undergraduate",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 with PCB",
+        "what_it_leads_to": "MBBS/BDS and allied health admissions",
+        "month": "May"
+      },
+      {
+        "name": "AIIMS MBBS",
+        "full_form": "All India Institute of Medical Sciences MBBS Entrance",
+        "conducting_body": "AIIMS",
+        "eligibility": "Class 12 with PCB",
+        "what_it_leads_to": "AIIMS MBBS admission",
+        "month": "May"
+      },
+      {
+        "name": "JIPMER MBBS",
+        "full_form": "Jawaharlal Institute of Postgraduate Medical Education and Research MBBS Entrance",
+        "conducting_body": "JIPMER",
+        "eligibility": "Class 12 with PCB",
+        "what_it_leads_to": "JIPMER MBBS admission",
+        "month": "May"
+      }
+    ],
+    "next_steps": [
+      "Create a detailed NEET study schedule with weekly targets.",
+      "Focus on high-value PCB chapters such as Biology anatomy and Chemistry organic.",
+      "Solve at least one full NEET mock exam every two weeks.",
+      "Review AIIMS and JIPMER exam patterns alongside NEET practice."
+    ],
+    "timeline": "Year 1: Secure PCB fundamentals and build exam strategy. Year 2: Intensify NEET preparation and apply to medical colleges."
+  },
+  {
+    "id": "R_BIOTECH_LIFE_SCIENCES",
+    "question": "Biotechnology & Life Sciences",
+    "type": "recommendation",
+    "title": "Biotechnology & Life Sciences",
+    "description": [
+      "Your curiosity about biology and research suits biotechnology and life science careers.",
+      "This path mixes lab work with innovation in health and environment.",
+      "It is ideal for students who enjoy experiments and scientific discovery."
+    ],
+    "careers": [
+      {
+        "name": "Biotechnologist",
+        "description": "Develops biotech products and research solutions.",
+        "salary": "₹6-18 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Geneticist",
+        "description": "Studies genes and genetic disorders.",
+        "salary": "₹7-20 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Microbiologist",
+        "description": "Researches microorganisms and their applications.",
+        "salary": "₹5-15 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Lab Scientist",
+        "description": "Runs experiments and manages lab work.",
+        "salary": "₹4-12 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Bioprocess Engineer",
+        "description": "Designs processes for bio-based manufacturing.",
+        "salary": "₹6-16 LPA",
+        "stream": "PCB"
+      }
+    ],
+    "exams": [
+      {
+        "name": "IISER Aptitude Test",
+        "full_form": "Indian Institutes of Science Education and Research Aptitude Test",
+        "conducting_body": "IISERs",
+        "eligibility": "Class 12 science students",
+        "what_it_leads_to": "Admission to IISER programs",
+        "month": "April"
+      },
+      {
+        "name": "KVPY",
+        "full_form": "Kishore Vaigyanik Protsahan Yojana",
+        "conducting_body": "DST",
+        "eligibility": "Class 11/12 science students",
+        "what_it_leads_to": "Scholarships and research opportunities",
+        "month": "December"
+      },
+      {
+        "name": "NEET UG",
+        "full_form": "National Eligibility cum Entrance Test Undergraduate",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 with PCB",
+        "what_it_leads_to": "Admission to medical and life science courses",
+        "month": "May"
+      }
+    ],
+    "next_steps": [
+      "Explore life science topics through experiments or online biology projects.",
+      "Read research articles on biotech advances and their applications.",
+      "Join a science club or laboratory internship if possible.",
+      "Practice biology and chemistry concepts with application-based questions."
+    ],
+    "timeline": "Year 1: Strengthen PCB basics and gain lab exposure. Year 2: Prepare for KVPY/IISER and apply to life science programs."
+  },
+  {
+    "id": "R_PHARMACY_ALLIED_HEALTH",
+    "question": "Pharmacy & Allied Health",
+    "type": "recommendation",
+    "title": "Pharmacy & Allied Health",
+    "description": [
+      "You prefer healthcare work beyond MBBS, which makes allied health a strong fit.",
+      "This pathway offers stable, patient-facing roles and pharmaceutical science careers.",
+      "It is well-suited for students who enjoy biology and practical healthcare skills."
+    ],
+    "careers": [
+      {
+        "name": "Pharmacist",
+        "description": "Dispenses medicines and advises on drug use.",
+        "salary": "₹3-10 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Physiotherapist",
+        "description": "Helps patients regain movement and strength.",
+        "salary": "₹4-12 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Occupational Therapist",
+        "description": "Supports patients in daily living tasks.",
+        "salary": "₹4-11 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Medical Lab Technologist",
+        "description": "Works on diagnostic tests and lab equipment.",
+        "salary": "₹3-9 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Radiographer",
+        "description": "Operates imaging systems for diagnosis.",
+        "salary": "₹3-10 LPA",
+        "stream": "PCB"
+      }
+    ],
+    "exams": [
+      {
+        "name": "State Pharmacy CETs",
+        "full_form": "State Pharmacy Common Entrance Tests",
+        "conducting_body": "State Education Boards",
+        "eligibility": "Class 12 with PCB",
+        "what_it_leads_to": "Admission to pharmacy programs",
+        "month": "May-June"
+      },
+      {
+        "name": "NEET UG",
+        "full_form": "National Eligibility cum Entrance Test Undergraduate",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 with PCB",
+        "what_it_leads_to": "Pharmacy and allied health admissions",
+        "month": "May"
+      },
+      {
+        "name": "NPAT",
+        "full_form": "National Test for Pharmacy Admissions",
+        "conducting_body": "Private Institutes",
+        "eligibility": "Class 12 with PCB",
+        "what_it_leads_to": "Admission to private pharmacy colleges",
+        "month": "May"
+      }
+    ],
+    "next_steps": [
+      "Research local pharmacy and allied health colleges and their fees.",
+      "Shadow a pharmacist or physiotherapist to understand daily work.",
+      "Build a strong PCB study routine with lab observation practice.",
+      "Prepare entrance test samples for pharmacy and health programs."
+    ],
+    "timeline": "Year 1: Learn about allied health specializations and build PCB competence. Year 2: Apply to pharmacy/allied health courses and finalize college choices."
+  },
+  {
+    "id": "R_ENVIRONMENTAL_SCIENCE_ICAR",
+    "question": "Environmental & Agricultural Science",
+    "type": "recommendation",
+    "title": "Environmental & Agricultural Science",
+    "description": [
+      "You care about ecology and sustainability, making environmental science ideal.",
+      "This path combines biology, agriculture, and environmental management.",
+      "It is well-suited to students who want careers in conservation and food systems."
+    ],
+    "careers": [
+      {
+        "name": "Environmental Scientist",
+        "description": "Studies ecosystems and sustainability solutions.",
+        "salary": "₹5-15 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Agricultural Scientist",
+        "description": "Researches farming systems and crop improvement.",
+        "salary": "₹6-16 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Soil Scientist",
+        "description": "Analyzes soil for agriculture and land health.",
+        "salary": "₹4-12 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Forestry Officer",
+        "description": "Manages forest resources and conservation.",
+        "salary": "₹5-14 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Water Resource Specialist",
+        "description": "Develops sustainable water management plans.",
+        "salary": "₹5-13 LPA",
+        "stream": "PCB"
+      }
+    ],
+    "exams": [
+      {
+        "name": "ICAR AIEEA",
+        "full_form": "Indian Council of Agricultural Research All India Entrance Examination for Admission",
+        "conducting_body": "ICAR",
+        "eligibility": "Class 12 with PCB/PCM/Bio",
+        "what_it_leads_to": "Admission to agricultural science programs",
+        "month": "June"
+      },
+      {
+        "name": "NEET UG",
+        "full_form": "National Eligibility cum Entrance Test Undergraduate",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 with PCB",
+        "what_it_leads_to": "Agricultural and veterinary programs",
+        "month": "May"
+      },
+      {
+        "name": "CUET UG",
+        "full_form": "Common University Entrance Test Undergraduate",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to environmental and agricultural colleges",
+        "month": "May"
+      }
+    ],
+    "next_steps": [
+      "Read about climate science, agriculture technology, and sustainability careers.",
+      "Visit a farm or environmental research center if possible.",
+      "Study biology and chemistry with an emphasis on environmental applications.",
+      "Prepare for ICAR and CUET exam patterns through practice papers."
+    ],
+    "timeline": "Year 1: Explore environmental science interests and strengthen PCB knowledge. Year 2: Apply to ICAR and related programs with focused test prep."
+  },
+  {
+    "id": "R_CA_CFA_INVESTMENT_BANKING",
+    "question": "Finance, Accounting & Investment Banking",
+    "type": "recommendation",
+    "title": "Finance, Accounting & Investment Banking",
+    "description": [
+      "You are interested in numbers, markets, and financial strategy.",
+      "This path suits students who enjoy analytical work and business finance.",
+      "It offers high earning potential in accounting, banking and investment roles."
+    ],
+    "careers": [
+      {
+        "name": "Chartered Accountant",
+        "description": "Handles auditing, tax and financial reporting.",
+        "salary": "₹6-22 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Investment Banker",
+        "description": "Advises on deals and capital markets.",
+        "salary": "₹12-40 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Financial Analyst",
+        "description": "Analyzes business performance and forecasts.",
+        "salary": "₹6-20 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Risk Manager",
+        "description": "Manages financial risk for companies.",
+        "salary": "₹8-24 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Tax Consultant",
+        "description": "Advises on tax planning and compliance.",
+        "salary": "₹5-16 LPA",
+        "stream": "Commerce"
+      }
+    ],
+    "exams": [
+      {
+        "name": "CA Foundation",
+        "full_form": "Chartered Accountancy Foundation Course",
+        "conducting_body": "ICAI",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Start of the CA professional journey",
+        "month": "June/December"
+      },
+      {
+        "name": "CFA Level 1",
+        "full_form": "Chartered Financial Analyst Level 1",
+        "conducting_body": "CFA Institute",
+        "eligibility": "Class 12 plus work or graduation plans",
+        "what_it_leads_to": "Foundation for investment finance careers",
+        "month": "May/November"
+      },
+      {
+        "name": "NISM Certification",
+        "full_form": "National Institute of Securities Markets Certification",
+        "conducting_body": "NISM",
+        "eligibility": "Graduation in any stream or professional interest",
+        "what_it_leads_to": "Credentials for finance and banking jobs",
+        "month": "Year-round"
+      }
+    ],
+    "next_steps": [
+      "Learn basic financial accounting and business math concepts.",
+      "Study CA Foundation syllabus topics and practice sample papers.",
+      "Read finance and market news regularly to build business awareness.",
+      "Talk to a finance student or professional about career paths."
+    ],
+    "timeline": "Year 1: Build foundational accounting and finance knowledge. Year 2: Begin CA or CFA preparation and apply for internships in finance."
+  },
+  {
+    "id": "R_ENTREPRENEURSHIP_BBA_MBA",
+    "question": "Entrepreneurship & Business Management",
+    "type": "recommendation",
+    "title": "Entrepreneurship & Business Management",
+    "description": [
+      "You are drawn to building businesses and leading teams.",
+      "This path suits students who want a flexible, growth-focused career.",
+      "It combines business study with practical startup and management skills."
+    ],
+    "careers": [
+      {
+        "name": "Entrepreneur",
+        "description": "Starts and grows a business venture.",
+        "salary": "₹5-50+ LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Business Analyst",
+        "description": "Analyzes business operations to improve performance.",
+        "salary": "₹6-18 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Marketing Manager",
+        "description": "Leads campaigns and brand growth.",
+        "salary": "₹6-20 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Operations Manager",
+        "description": "Optimizes processes and business delivery.",
+        "salary": "₹7-22 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Startup Consultant",
+        "description": "Helps new businesses scale and execute strategy.",
+        "salary": "₹7-18 LPA",
+        "stream": "Commerce"
+      }
+    ],
+    "exams": [
+      {
+        "name": "CUET UG",
+        "full_form": "Common University Entrance Test Undergraduate",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to BBA and management programs",
+        "month": "May"
+      },
+      {
+        "name": "NPAT",
+        "full_form": "NMIMS Programs After Twelfth",
+        "conducting_body": "NMIMS",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to undergraduate management courses",
+        "month": "May"
+      },
+      {
+        "name": "NPAT BBA",
+        "full_form": "BBA Entrance Test",
+        "conducting_body": "Various private institutes",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to business management programs",
+        "month": "April-May"
+      }
+    ],
+    "next_steps": [
+      "Build a basic business idea or project to test your entrepreneurial interest.",
+      "Read about startups and management principles from business books.",
+      "Join a school business club or event to gain practical experience.",
+      "Prepare for BBA entrance tests and admission interviews."
+    ],
+    "timeline": "Year 1: Explore business ideas and build management knowledge. Year 2: Apply to BBA programs and continue developing practical skills."
+  },
+  {
+    "id": "R_IBPS_SSC_RBI",
+    "question": "Banking & Government Services",
+    "type": "recommendation",
+    "title": "Banking & Government Services",
+    "description": [
+      "You value stable government roles and a structured career path.",
+      "This route suits students who prefer secure positions and public sector work.",
+      "It leads to dependable service careers with defined growth ladders."
+    ],
+    "careers": [
+      {
+        "name": "Bank PO",
+        "description": "Manages banking operations and customer services.",
+        "salary": "₹5-12 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "SSC Officer",
+        "description": "Works in central government departments.",
+        "salary": "₹5-12 LPA",
+        "stream": "Any"
+      },
+      {
+        "name": "RBI Grade B Officer",
+        "description": "Handles policy and banking regulation.",
+        "salary": "₹12-24 LPA",
+        "stream": "Any"
+      },
+      {
+        "name": "Public Sector Executive",
+        "description": "Leads projects in government enterprises.",
+        "salary": "₹6-14 LPA",
+        "stream": "Any"
+      },
+      {
+        "name": "Government Auditor",
+        "description": "Reviews public accounts and compliance.",
+        "salary": "₹5-13 LPA",
+        "stream": "Commerce"
+      }
+    ],
+    "exams": [
+      {
+        "name": "IBPS PO",
+        "full_form": "Institute of Banking Personnel Selection Probationary Officer",
+        "conducting_body": "IBPS",
+        "eligibility": "Graduation in any stream",
+        "what_it_leads_to": "Probationary Officer jobs in banks",
+        "month": "September-October"
+      },
+      {
+        "name": "SSC CGL",
+        "full_form": "Staff Selection Commission Combined Graduate Level",
+        "conducting_body": "SSC",
+        "eligibility": "Graduation in any stream",
+        "what_it_leads_to": "Central government posts",
+        "month": "December"
+      },
+      {
+        "name": "RBI Grade B",
+        "full_form": "Reserve Bank of India Grade B Officer Exam",
+        "conducting_body": "RBI",
+        "eligibility": "Graduation in any stream",
+        "what_it_leads_to": "Officer roles at RBI",
+        "month": "June"
+      }
+    ],
+    "next_steps": [
+      "Register for a foundation course for banking and government exams.",
+      "Practice reasoning, quantitative aptitude, and general awareness daily.",
+      "Create a timeline for IBPS, SSC and RBI exam dates.",
+      "Review past papers and time your mock tests carefully."
+    ],
+    "timeline": "Year 1: Build strong aptitude and general knowledge. Year 2: Focus on exam-specific practice and applications."
+  },
+  {
+    "id": "R_CLAT_CORPORATE_LAW",
+    "question": "Law from Commerce Background",
+    "type": "recommendation",
+    "title": "Law from Commerce Background",
+    "description": [
+      "Your commerce background gives you an advantage in corporate law and business legal studies.",
+      "This route blends business understanding with legal reasoning.",
+      "It prepares you for law careers in corporate and commercial practice."
+    ],
+    "careers": [
+      {
+        "name": "Corporate Lawyer",
+        "description": "Advises companies on commercial and regulatory law.",
+        "salary": "₹8-25 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Legal Consultant",
+        "description": "Guides firms on contracts, compliance and deals.",
+        "salary": "₹7-20 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "In-house Counsel",
+        "description": "Handles legal matters within a company.",
+        "salary": "₹10-30 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Tax Lawyer",
+        "description": "Specializes in tax law and planning.",
+        "salary": "₹7-18 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Mergers & Acquisitions Analyst",
+        "description": "Supports corporate transactions with legal review.",
+        "salary": "₹9-22 LPA",
+        "stream": "Commerce"
+      }
+    ],
+    "exams": [
+      {
+        "name": "CLAT",
+        "full_form": "Common Law Admission Test",
+        "conducting_body": "NLU Consortium",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to NLUs and law colleges",
+        "month": "May"
+      },
+      {
+        "name": "AILET",
+        "full_form": "All India Law Entrance Test",
+        "conducting_body": "NLSIU Bengaluru",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to NLSIU law classes",
+        "month": "May"
+      },
+      {
+        "name": "LSAT India",
+        "full_form": "Law School Admission Test India",
+        "conducting_body": "Pearson VUE",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to law colleges across India",
+        "month": "March"
+      }
+    ],
+    "next_steps": [
+      "Study business law basics and corporate legal frameworks.",
+      "Prepare CLAT practice tests focused on logical reasoning and legal aptitude.",
+      "Read corporate law case studies and news articles.",
+      "Talk with a law student from a commerce background about their experience."
+    ],
+    "timeline": "Year 1: Build legal reasoning and business knowledge. Year 2: Focus on CLAT/AILET prep and applications."
+  },
+  {
+    "id": "R_CUET_UG_CENTRAL",
+    "question": "Central University Admissions",
+    "type": "recommendation",
+    "title": "Central University Admissions",
+    "description": [
+      "You want the flexibility of central university programs across streams.",
+      "This path gives access to national-level colleges with diverse specializations.",
+      "It works well for students who prefer strong academics without narrow specialization."
+    ],
+    "careers": [
+      {
+        "name": "Business Administrator",
+        "description": "Manages operations and projects across industries.",
+        "salary": "₹6-18 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Social Scientist",
+        "description": "Studies society and policy issues.",
+        "salary": "₹5-14 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Research Fellow",
+        "description": "Works on academic and lab research projects.",
+        "salary": "₹6-18 LPA",
+        "stream": "Science"
+      },
+      {
+        "name": "Law Professional",
+        "description": "Practices law after legal education.",
+        "salary": "₹6-18 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Human Resources Specialist",
+        "description": "Leads talent and people programs.",
+        "salary": "₹5-16 LPA",
+        "stream": "Commerce"
+      }
+    ],
+    "exams": [
+      {
+        "name": "CUET UG",
+        "full_form": "Common University Entrance Test Undergraduate",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to central university undergraduate courses",
+        "month": "May"
+      },
+      {
+        "name": "DUET",
+        "full_form": "Delhi University Entrance Test",
+        "conducting_body": "DU",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to DU programs",
+        "month": "June"
+      },
+      {
+        "name": "JNU Entrance Exam",
+        "full_form": "Jawaharlal Nehru University Entrance Examination",
+        "conducting_body": "JNU",
+        "eligibility": "Class 12 or equivalent",
+        "what_it_leads_to": "Admission to JNU programs",
+        "month": "June"
+      }
+    ],
+    "next_steps": [
+      "Research central university programs that match your interests.",
+      "Prepare for CUET with sample papers and sectional practice.",
+      "Compare college ranking, fees and placement statistics.",
+      "Complete your applications before CUET and DU deadlines."
+    ],
+    "timeline": "Year 1: Explore central university courses and prepare for CUET. Year 2: Apply to your chosen universities and complete exams."
+  },
+  {
+    "id": "R_JEE_MAIN_ADVANCED",
+    "question": "JEE Engineering Path",
+    "type": "recommendation",
+    "title": "JEE Engineering Path",
+    "description": [
+      "You are leaning toward engineering, making JEE the most direct path.",
+      "This requires strong PCM preparation and consistent exam practice.",
+      "It opens top engineering institutes with excellent placements."
+    ],
+    "careers": [
+      {
+        "name": "Software Engineer",
+        "description": "Develops software solutions across industries.",
+        "salary": "₹7-28 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Mechanical Engineer",
+        "description": "Designs machines and manufacturing systems.",
+        "salary": "₹5-16 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Civil Engineer",
+        "description": "Builds infrastructure and construction projects.",
+        "salary": "₹4-12 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Aerospace Engineer",
+        "description": "Works on aircraft and spacecraft technologies.",
+        "salary": "₹8-22 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Electronics Engineer",
+        "description": "Designs electronic systems and devices.",
+        "salary": "₹6-18 LPA",
+        "stream": "PCM"
+      }
+    ],
+    "exams": [
+      {
+        "name": "JEE Main",
+        "full_form": "Joint Entrance Examination Main",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 with PCM",
+        "what_it_leads_to": "Admission to NITs, IIITs and other engineering colleges",
+        "month": "April"
+      },
+      {
+        "name": "JEE Advanced",
+        "full_form": "Joint Entrance Examination Advanced",
+        "conducting_body": "IITs",
+        "eligibility": "Top JEE Main qualifiers",
+        "what_it_leads_to": "Admission to IITs",
+        "month": "May"
+      },
+      {
+        "name": "BITSAT",
+        "full_form": "Birla Institute of Technology and Science Admission Test",
+        "conducting_body": "BITS Pilani",
+        "eligibility": "Class 12 with PCM",
+        "what_it_leads_to": "Admission to BITS campuses",
+        "month": "May"
+      }
+    ],
+    "next_steps": [
+      "Finish your PCM syllabus and target weak topics first.",
+      "Solve at least three mock tests every month.",
+      "Track your performance and revise mistakes immediately.",
+      "Research branch preferences across top colleges for placements."
+    ],
+    "timeline": "Year 1: Complete PCM syllabus and practice rigorous mocks. Year 2: Focus on JEE Main/Advanced and finalize top institute choices."
+  },
+  {
+    "id": "R_NATA_JEE_PAPER_2",
+    "question": "Architecture Entrance Path",
+    "type": "recommendation",
+    "title": "Architecture Entrance Path",
+    "description": [
+      "Your design interest makes architecture a strong match.",
+      "This path blends creativity with technical spatial thinking.",
+      "It gives you access to architecture and design institutes."
+    ],
+    "careers": [
+      {
+        "name": "Architect",
+        "description": "Designs buildings and public spaces.",
+        "salary": "₹5-18 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Urban Planner",
+        "description": "Plans city infrastructure and land use.",
+        "salary": "₹6-16 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Interior Designer",
+        "description": "Creates functional and stylish interior spaces.",
+        "salary": "₹4-12 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Landscape Architect",
+        "description": "Designs outdoor and environmental spaces.",
+        "salary": "₹4-14 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Design Consultant",
+        "description": "Advises on architecture and spatial design projects.",
+        "salary": "₹6-18 LPA",
+        "stream": "PCM"
+      }
+    ],
+    "exams": [
+      {
+        "name": "NATA",
+        "full_form": "National Aptitude Test in Architecture",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 with PCM/PCB/Arts",
+        "what_it_leads_to": "Admission to architecture programs",
+        "month": "April"
+      },
+      {
+        "name": "JEE Paper 2",
+        "full_form": "Joint Entrance Examination Paper 2",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 with PCM",
+        "what_it_leads_to": "Admission to B.Arch programs",
+        "month": "April"
+      },
+      {
+        "name": "UCEED",
+        "full_form": "Undergraduate Common Entrance Exam for Design",
+        "conducting_body": "IIT Bombay",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to design programs",
+        "month": "January"
+      }
+    ],
+    "next_steps": [
+      "Compile a portfolio of sketches and design ideas.",
+      "Practice architecture aptitude and drawing tests regularly.",
+      "Visit buildings and design studios for inspiration.",
+      "Review NATA and JEE Paper 2 past papers."
+    ],
+    "timeline": "Year 1: Build a design portfolio and practice drawing tests. Year 2: Prepare for NATA/JEE Paper 2 and apply to architecture colleges."
+  },
+  {
+    "id": "R_KVPY_IISER",
+    "question": "Research & IISER Path",
+    "type": "recommendation",
+    "title": "Research & IISER Path",
+    "description": [
+      "You are strongly interested in scientific research and advanced academics.",
+      "This path is suited for students who want deep science training early.",
+      "It opens top institutes focused on research and science education."
+    ],
+    "careers": [
+      {
+        "name": "Research Scientist",
+        "description": "Works on scientific discovery and innovation.",
+        "salary": "₹8-25 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Academician",
+        "description": "Teaches and conducts research at universities.",
+        "salary": "₹7-18 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Biotech Researcher",
+        "description": "Develops biotech products and research solutions.",
+        "salary": "₹7-20 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Data Scientist",
+        "description": "Analyzes scientific data for insights.",
+        "salary": "₹9-28 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Laboratory Scientist",
+        "description": "Manages research labs and experiments.",
+        "salary": "₹5-14 LPA",
+        "stream": "PCM"
+      }
+    ],
+    "exams": [
+      {
+        "name": "KVPY",
+        "full_form": "Kishore Vaigyanik Protsahan Yojana",
+        "conducting_body": "DST",
+        "eligibility": "Class 11/12 science students",
+        "what_it_leads_to": "Scholarships and research opportunities",
+        "month": "December"
+      },
+      {
+        "name": "IISER Aptitude Test",
+        "full_form": "Indian Institutes of Science Education and Research Aptitude Test",
+        "conducting_body": "IISERs",
+        "eligibility": "Class 12 science students",
+        "what_it_leads_to": "Admission to IISER programs",
+        "month": "April"
+      },
+      {
+        "name": "JEE Advanced",
+        "full_form": "Joint Entrance Examination Advanced",
+        "conducting_body": "IITs",
+        "eligibility": "Top JEE Main qualifiers",
+        "what_it_leads_to": "Admission to IITs and research-oriented programs",
+        "month": "May"
+      }
+    ],
+    "next_steps": [
+      "Take deep science electives and explore research topics.",
+      "Solve KVPY and IISER-style aptitude questions.",
+      "Read scientific journals or research summaries in your field.",
+      "Seek mentorship from a science teacher or researcher."
+    ],
+    "timeline": "Year 1: Strengthen core science knowledge and research aptitude. Year 2: Prepare for KVPY/IISER and apply to research-focused institutes."
+  },
+  {
+    "id": "R_BITSAT_STATE_CETS",
+    "question": "Private & State Engineering Entry",
+    "type": "recommendation",
+    "title": "Private & State Engineering Entry",
+    "description": [
+      "You want strong engineering colleges through BITSAT and state exams.",
+      "This path offers alternatives if you prefer quality private or state options.",
+      "It is good for students who want flexibility in branch and campus choice."
+    ],
+    "careers": [
+      {
+        "name": "Computer Engineer",
+        "description": "Designs software and computing systems.",
+        "salary": "₹8-26 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Electronics Engineer",
+        "description": "Creates electronic systems and embedded devices.",
+        "salary": "₹6-18 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Data Engineer",
+        "description": "Builds systems to process and analyze data.",
+        "salary": "₹7-22 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Mechanical Engineer",
+        "description": "Designs machines and manufacturing systems.",
+        "salary": "₹5-15 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Civil Engineer",
+        "description": "Designs infrastructure and construction projects.",
+        "salary": "₹4-12 LPA",
+        "stream": "PCM"
+      }
+    ],
+    "exams": [
+      {
+        "name": "BITSAT",
+        "full_form": "Birla Institute of Technology and Science Admission Test",
+        "conducting_body": "BITS Pilani",
+        "eligibility": "Class 12 with PCM",
+        "what_it_leads_to": "Admission to BITS campuses",
+        "month": "May"
+      },
+      {
+        "name": "State CETs",
+        "full_form": "State Common Entrance Tests",
+        "conducting_body": "State Authorities",
+        "eligibility": "Class 12 with PCM",
+        "what_it_leads_to": "Admission to state engineering colleges",
+        "month": "May-June"
+      },
+      {
+        "name": "JEE Main",
+        "full_form": "Joint Entrance Examination Main",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 with PCM",
+        "what_it_leads_to": "Admission to NITs, IIITs and other colleges",
+        "month": "April"
+      }
+    ],
+    "next_steps": [
+      "Prepare for BITSAT and your state CET simultaneously.",
+      "Build a list of private and state engineering colleges you want.",
+      "Take entrance mock tests and review your performance weekly.",
+      "Study for boards while targeting entrance exam topics."
+    ],
+    "timeline": "Year 1: Research private and state engineering options. Year 2: Practice entrance exams and complete applications."
+  },
+  {
+    "id": "R_NEET_UG",
+    "question": "NEET Undergraduate Medical Path",
+    "type": "recommendation",
+    "title": "NEET Undergraduate Medical Path",
+    "description": [
+      "Your PCB strength maps well to NEET and medical education.",
+      "This path is rigorous but leads directly to medicine and healthcare.",
+      "It is suited for students committed to patient care and biology."
+    ],
+    "careers": [
+      {
+        "name": "Doctor",
+        "description": "Practices medicine in hospitals and clinics.",
+        "salary": "₹10-30 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Dentist",
+        "description": "Treats oral and dental health problems.",
+        "salary": "₹8-18 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Medical Laboratory Scientist",
+        "description": "Conducts diagnostic lab tests.",
+        "salary": "₹4-12 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Physiotherapist",
+        "description": "Helps patients regain movement and strength.",
+        "salary": "₹4-12 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Pharmacist",
+        "description": "Manages medication dispensing and counselling.",
+        "salary": "₹3-10 LPA",
+        "stream": "PCB"
+      }
+    ],
+    "exams": [
+      {
+        "name": "NEET UG",
+        "full_form": "National Eligibility cum Entrance Test Undergraduate",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 with PCB",
+        "what_it_leads_to": "Admission to medical and allied health programs",
+        "month": "May"
+      },
+      {
+        "name": "AIIMS MBBS",
+        "full_form": "All India Institute of Medical Sciences MBBS Entrance",
+        "conducting_body": "AIIMS",
+        "eligibility": "Class 12 with PCB",
+        "what_it_leads_to": "Admission to AIIMS medical programs",
+        "month": "May"
+      },
+      {
+        "name": "JIPMER MBBS",
+        "full_form": "Jawaharlal Institute of Postgraduate Medical Education and Research MBBS Entrance",
+        "conducting_body": "JIPMER",
+        "eligibility": "Class 12 with PCB",
+        "what_it_leads_to": "Admission to JIPMER MBBS program",
+        "month": "May"
+      }
+    ],
+    "next_steps": [
+      "Create a daily NEET study plan focusing on biology and chemistry.",
+      "Practice full-length NEET mock exams each week.",
+      "Review high-yield PCB topics with flashcards and summaries.",
+      "Speak with a medical student or mentor to understand the path."
+    ],
+    "timeline": "Year 1: Strengthen PCB fundamentals and start NEET preparation. Year 2: Focus on NEET mocks and medical college applications."
+  },
+  {
+    "id": "R_IISER_KVPY",
+    "question": "IISER & KVPY Research Path",
+    "type": "recommendation",
+    "title": "IISER & KVPY Research Path",
+    "description": [
+      "You enjoy science exploration, making IISER a great match.",
+      "This path supports students who want early research exposure and strong academics.",
+      "It opens doors to science careers at premier research institutes."
+    ],
+    "careers": [
+      {
+        "name": "Research Scientist",
+        "description": "Leads scientific research in labs.",
+        "salary": "₹8-25 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Biotech Scientist",
+        "description": "Develops biotech products and research solutions.",
+        "salary": "₹7-20 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Environmental Scientist",
+        "description": "Works on sustainability and ecology.",
+        "salary": "₹5-15 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Physics Researcher",
+        "description": "Studies fundamental physical phenomena.",
+        "salary": "₹8-24 LPA",
+        "stream": "PCM"
+      },
+      {
+        "name": "Science Educator",
+        "description": "Teaches science subjects and mentors students.",
+        "salary": "₹5-14 LPA",
+        "stream": "PCM"
+      }
+    ],
+    "exams": [
+      {
+        "name": "KVPY",
+        "full_form": "Kishore Vaigyanik Protsahan Yojana",
+        "conducting_body": "DST",
+        "eligibility": "Class 11/12 science students",
+        "what_it_leads_to": "Scholarships and research opportunities",
+        "month": "December"
+      },
+      {
+        "name": "IISER Aptitude Test",
+        "full_form": "Indian Institutes of Science Education and Research Aptitude Test",
+        "conducting_body": "IISERs",
+        "eligibility": "Class 12 science students",
+        "what_it_leads_to": "Admission to IISERs",
+        "month": "April"
+      },
+      {
+        "name": "JEE Advanced",
+        "full_form": "Joint Entrance Examination Advanced",
+        "conducting_body": "IITs",
+        "eligibility": "Top JEE Main qualifiers",
+        "what_it_leads_to": "Admission to IITs and research-oriented programs",
+        "month": "May"
+      }
+    ],
+    "next_steps": [
+      "Study advanced science problems and research aptitude questions.",
+      "Join a science club or lab project if available.",
+      "Read scientific journals or research summaries in your field.",
+      "Seek mentorship from a science teacher or researcher."
+    ],
+    "timeline": "Year 1: Build strong concept clarity in science subjects. Year 2: Prepare for KVPY/IISER and apply to research-focused institutes."
+  },
+  {
+    "id": "R_ICAR_AIEEA",
+    "question": "Agriculture Science Path",
+    "type": "recommendation",
+    "title": "Agriculture Science Path",
+    "description": [
+      "You have an interest in agriculture and food systems, which fits ICAR well.",
+      "This path is suited for students who care about sustainable farming and biotech.",
+      "It leads to careers in agriculture research and rural development."
+    ],
+    "careers": [
+      {
+        "name": "Agricultural Scientist",
+        "description": "Improves crop productivity and farm practices.",
+        "salary": "₹6-16 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Food Technologist",
+        "description": "Develops food products and quality systems.",
+        "salary": "₹5-14 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Soil Scientist",
+        "description": "Analyzes soil for farming efficiency.",
+        "salary": "₹4-12 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Plant Breeder",
+        "description": "Creates improved crop varieties.",
+        "salary": "₹5-15 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Agri-Extension Officer",
+        "description": "Advises farmers on better agricultural practices.",
+        "salary": "₹4-12 LPA",
+        "stream": "PCB"
+      }
+    ],
+    "exams": [
+      {
+        "name": "ICAR AIEEA",
+        "full_form": "Indian Council of Agricultural Research All India Entrance Examination for Admission",
+        "conducting_body": "ICAR",
+        "eligibility": "Class 12 with PCB",
+        "what_it_leads_to": "Admission to agricultural programs",
+        "month": "June"
+      },
+      {
+        "name": "NEET UG",
+        "full_form": "National Eligibility cum Entrance Test Undergraduate",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 with PCB",
+        "what_it_leads_to": "Admission to allied health and some agri programs",
+        "month": "May"
+      },
+      {
+        "name": "CUET UG",
+        "full_form": "Common University Entrance Test Undergraduate",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to agricultural and environment courses",
+        "month": "May"
+      }
+    ],
+    "next_steps": [
+      "Read about agricultural science and crop management techniques.",
+      "Visit a farm or agricultural institute to see practical work.",
+      "Study PCB topics with an emphasis on agriculture applications.",
+      "Prepare for ICAR by reviewing exam pattern and previous papers."
+    ],
+    "timeline": "Year 1: Learn agriculture science fundamentals and sustainable farming. Year 2: Apply for ICAR and related programs while gaining practical exposure."
+  },
+  {
+    "id": "R_AIPVT",
+    "question": "Veterinary Science & Animal Research",
+    "type": "recommendation",
+    "title": "Veterinary Science & Animal Research",
+    "description": [
+      "You are interested in animals and biology, making veterinary science strong for you.",
+      "This path combines medical care with animal health and research.",
+      "It offers a meaningful career working with animals and agriculture."
+    ],
+    "careers": [
+      {
+        "name": "Veterinarian",
+        "description": "Treats animals and oversees veterinary care.",
+        "salary": "₹6-18 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Animal Nutritionist",
+        "description": "Designs diets for livestock and pets.",
+        "salary": "₹5-13 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Wildlife Biologist",
+        "description": "Studies animals in natural habitats.",
+        "salary": "₹4-12 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Veterinary Researcher",
+        "description": "Works on animal health research.",
+        "salary": "₹6-16 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Livestock Officer",
+        "description": "Supports livestock development programs.",
+        "salary": "₹5-14 LPA",
+        "stream": "PCB"
+      }
+    ],
+    "exams": [
+      {
+        "name": "AIPVT",
+        "full_form": "All India Pre-Veterinary Test",
+        "conducting_body": "ICAR",
+        "eligibility": "Class 12 with PCB",
+        "what_it_leads_to": "Admission to veterinary science programs",
+        "month": "June"
+      },
+      {
+        "name": "NEET UG",
+        "full_form": "National Eligibility cum Entrance Test Undergraduate",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 with PCB",
+        "what_it_leads_to": "Admission to veterinary and allied health programs",
+        "month": "May"
+      },
+      {
+        "name": "CUET UG",
+        "full_form": "Common University Entrance Test Undergraduate",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to animal science and agriculture programs",
+        "month": "May"
+      }
+    ],
+    "next_steps": [
+      "Learn about veterinary care and animal biology through field visits.",
+      "Study PCB topics with a focus on animal sciences.",
+      "Connect with a veterinarian to understand the day-to-day role.",
+      "Prepare for AIPVT and NEET with targeted biology practice."
+    ],
+    "timeline": "Year 1: Build biology and animal science knowledge. Year 2: Apply to veterinary programs and prepare entrance exams."
+  },
+  {
+    "id": "R_STATE_PHARMACY_CETS",
+    "question": "State Pharmacy Entrance Path",
+    "type": "recommendation",
+    "title": "State Pharmacy Entrance Path",
+    "description": [
+      "You are interested in pharmacy and practical healthcare roles.",
+      "State pharmacy exams offer strong local and affordable entry options.",
+      "This path is suitable for students focused on healthcare science and patient support."
+    ],
+    "careers": [
+      {
+        "name": "Pharmacist",
+        "description": "Manages medicines and patient prescriptions.",
+        "salary": "₹3-10 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Clinical Research Associate",
+        "description": "Supports clinical trials and drug studies.",
+        "salary": "₹6-16 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Quality Control Analyst",
+        "description": "Ensures drug safety and quality standards.",
+        "salary": "₹4-12 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Regulatory Affairs Executive",
+        "description": "Helps pharma products meet legal requirements.",
+        "salary": "₹5-14 LPA",
+        "stream": "PCB"
+      },
+      {
+        "name": "Pharmacovigilance Specialist",
+        "description": "Monitors drug safety and adverse events.",
+        "salary": "₹5-15 LPA",
+        "stream": "PCB"
+      }
+    ],
+    "exams": [
+      {
+        "name": "State Pharmacy CETs",
+        "full_form": "State Pharmacy Common Entrance Tests",
+        "conducting_body": "State Authorities",
+        "eligibility": "Class 12 with PCB",
+        "what_it_leads_to": "Admission to pharmacy colleges",
+        "month": "May-June"
+      },
+      {
+        "name": "NEET UG",
+        "full_form": "National Eligibility cum Entrance Test Undergraduate",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 with PCB",
+        "what_it_leads_to": "Admission to pharmacy and allied courses",
+        "month": "May"
+      },
+      {
+        "name": "GPAT",
+        "full_form": "Graduate Pharmacy Aptitude Test",
+        "conducting_body": "NTA",
+        "eligibility": "BPharm graduate",
+        "what_it_leads_to": "Postgraduate pharmacy programs",
+        "month": "January"
+      }
+    ],
+    "next_steps": [
+      "Research state pharmacy exams and application timelines.",
+      "Practice PCB questions that appear in pharmacy entrance tests.",
+      "Learn about pharmacy course structure and career options.",
+      "Visit a pharmacy college or speak to current pharmacy students."
+    ],
+    "timeline": "Year 1: Focus on PCB strength and research pharmacy colleges. Year 2: Prepare for state pharmacy tests and complete admissions."
+  },
+  {
+    "id": "R_CA_FOUNDATION",
+    "question": "Chartered Accountancy Path",
+    "type": "recommendation",
+    "title": "Chartered Accountancy Path",
+    "description": [
+      "You are interested in accounting and finance, making CA a strong choice.",
+      "This path offers rigorous professional credentials and high career value.",
+      "It is suited for students who enjoy numbers and business reporting."
+    ],
+    "careers": [
+      {
+        "name": "Chartered Accountant",
+        "description": "Provides auditing, tax and financial advisory.",
+        "salary": "₹6-22 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Audit Manager",
+        "description": "Manages financial audits and compliance.",
+        "salary": "₹8-24 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Tax Consultant",
+        "description": "Advises clients on tax strategy and law.",
+        "salary": "₹6-18 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Corporate Finance Analyst",
+        "description": "Supports financial decision-making in companies.",
+        "salary": "₹7-20 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Forensic Accountant",
+        "description": "Investigates financial fraud and reports.",
+        "salary": "₹7-20 LPA",
+        "stream": "Commerce"
+      }
+    ],
+    "exams": [
+      {
+        "name": "CA Foundation",
+        "full_form": "Chartered Accountancy Foundation Course",
+        "conducting_body": "ICAI",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Entry to CA professional program",
+        "month": "June/December"
+      },
+      {
+        "name": "CA Intermediate",
+        "full_form": "Chartered Accountancy Intermediate",
+        "conducting_body": "ICAI",
+        "eligibility": "Pass CA Foundation or graduation",
+        "what_it_leads_to": "Second level of CA training",
+        "month": "May/November"
+      },
+      {
+        "name": "CMA Foundation",
+        "full_form": "Cost and Management Accountancy Foundation",
+        "conducting_body": "ICMAI",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Entry to CMA program",
+        "month": "June/December"
+      }
+    ],
+    "next_steps": [
+      "Start learning basic accounting concepts and financial statements.",
+      "Review CA Foundation syllabus and sample papers.",
+      "Develop strong practice habits for quantitative aptitude.",
+      "Talk to a CA student or mentor about professional articles and training."
+    ],
+    "timeline": "Year 1: Build accounting fundamentals and begin CA Foundation prep. Year 2: Sit for CA Foundation and continue toward the Intermediate level."
+  },
+  {
+    "id": "R_CAT_CUET",
+    "question": "MBA & Management Preparation",
+    "type": "recommendation",
+    "title": "MBA & Management Preparation",
+    "description": [
+      "You are aiming for management future, so MBA-oriented exams are useful.",
+      "This path works if you want business leadership and strategy careers.",
+      "It prepares you for top business programs and management jobs."
+    ],
+    "careers": [
+      {
+        "name": "Management Consultant",
+        "description": "Advises companies on growth strategy.",
+        "salary": "₹12-35 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Marketing Manager",
+        "description": "Leads marketing and brand strategy.",
+        "salary": "₹6-20 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Business Analyst",
+        "description": "Analyzes business processes and data.",
+        "salary": "₹6-18 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Operations Manager",
+        "description": "Optimizes processes and supply chains.",
+        "salary": "₹7-22 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "HR Manager",
+        "description": "Manages talent acquisition and HR strategy.",
+        "salary": "₹6-18 LPA",
+        "stream": "Commerce"
+      }
+    ],
+    "exams": [
+      {
+        "name": "CAT",
+        "full_form": "Common Admission Test",
+        "conducting_body": "IIMs",
+        "eligibility": "Graduation in any stream",
+        "what_it_leads_to": "Admission to premier MBA programs",
+        "month": "November"
+      },
+      {
+        "name": "CUET UG",
+        "full_form": "Common University Entrance Test Undergraduate",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to undergraduate management courses",
+        "month": "May"
+      },
+      {
+        "name": "NMAT",
+        "full_form": "NMIMS Management Aptitude Test",
+        "conducting_body": "GMAC",
+        "eligibility": "Graduation in any stream",
+        "what_it_leads_to": "Admission to management programs",
+        "month": "October-December"
+      }
+    ],
+    "next_steps": [
+      "Build business awareness and current affairs knowledge.",
+      "Practice quantitative aptitude and logical reasoning questions.",
+      "Explore management institutes and their MBA specializations.",
+      "Consider undergraduate business programs if you are in Class 12."
+    ],
+    "timeline": "Year 1: Strengthen business fundamentals and analytical skills. Year 2: Prepare for MBA entrance paths or apply to undergraduate management courses."
+  },
+  {
+    "id": "R_IBPS_PO_SBI_PO",
+    "question": "Banking Exam Path",
+    "type": "recommendation",
+    "title": "Banking Exam Path",
+    "description": [
+      "You are interested in stable banking careers with structured growth.",
+      "This path suits students who value disciplined government jobs.",
+      "It prepares you for bank officer roles and financial services."
+    ],
+    "careers": [
+      {
+        "name": "Bank PO",
+        "description": "Handles banking services and customer operations.",
+        "salary": "₹5-12 LPA",
+        "stream": "Any"
+      },
+      {
+        "name": "SBI PO",
+        "description": "Works as a probationary officer at SBI.",
+        "salary": "₹6-13 LPA",
+        "stream": "Any"
+      },
+      {
+        "name": "Credit Analyst",
+        "description": "Evaluates loan proposals and credit risk.",
+        "salary": "₹6-16 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Branch Manager",
+        "description": "Leads a bank branch and operations.",
+        "salary": "₹8-18 LPA",
+        "stream": "Any"
+      },
+      {
+        "name": "Compliance Officer",
+        "description": "Ensures regulatory adherence in banking.",
+        "salary": "₹7-18 LPA",
+        "stream": "Any"
+      }
+    ],
+    "exams": [
+      {
+        "name": "IBPS PO",
+        "full_form": "Institute of Banking Personnel Selection Probationary Officer",
+        "conducting_body": "IBPS",
+        "eligibility": "Graduation in any stream",
+        "what_it_leads_to": "PO jobs in public sector banks",
+        "month": "September-October"
+      },
+      {
+        "name": "SBI PO",
+        "full_form": "State Bank of India Probationary Officer",
+        "conducting_body": "SBI",
+        "eligibility": "Graduation in any stream",
+        "what_it_leads_to": "PO positions at SBI",
+        "month": "May-June"
+      },
+      {
+        "name": "SSC CGL",
+        "full_form": "Staff Selection Commission Combined Graduate Level",
+        "conducting_body": "SSC",
+        "eligibility": "Graduation in any stream",
+        "what_it_leads_to": "Central government officer roles",
+        "month": "December"
+      }
+    ],
+    "next_steps": [
+      "Practice quantitative aptitude and reasoning sections daily.",
+      "Read current affairs and banking news updates.",
+      "Make a mock-test schedule for IBPS and SBI exams.",
+      "Review past year papers and exam pattern carefully."
+    ],
+    "timeline": "Year 1: Build aptitude skills and general awareness. Year 2: Take banking entrance mocks and apply to multiple exams."
+  },
+  {
+    "id": "R_CLAT",
+    "question": "Law School via CLAT",
+    "type": "recommendation",
+    "title": "Law School via CLAT",
+    "description": [
+      "You are ready for a law career through national level law schools.",
+      "This path suits students who enjoy reasoning and legal thinking.",
+      "CLAT gives access to high-quality law programs and training."
+    ],
+    "careers": [
+      {
+        "name": "Lawyer",
+        "description": "Represents clients in legal matters.",
+        "salary": "₹6-18 LPA",
+        "stream": "Arts/Commerce"
+      },
+      {
+        "name": "Legal Advisor",
+        "description": "Offers legal guidance to organizations.",
+        "salary": "₹7-20 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Judicial Clerk",
+        "description": "Assists judges with legal research.",
+        "salary": "₹4-10 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Policy Analyst",
+        "description": "Analyzes legislation and policy impact.",
+        "salary": "₹6-16 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Corporate Counsel",
+        "description": "Handles legal issues within corporations.",
+        "salary": "₹9-22 LPA",
+        "stream": "Commerce"
+      }
+    ],
+    "exams": [
+      {
+        "name": "CLAT",
+        "full_form": "Common Law Admission Test",
+        "conducting_body": "NLU Consortium",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to NLUs and other law colleges",
+        "month": "May"
+      },
+      {
+        "name": "AILET",
+        "full_form": "All India Law Entrance Test",
+        "conducting_body": "NLSIU Bengaluru",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to NLSIU law program",
+        "month": "May"
+      },
+      {
+        "name": "LSAT India",
+        "full_form": "Law School Admission Test India",
+        "conducting_body": "Pearson VUE",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to a variety of law schools",
+        "month": "March"
+      }
+    ],
+    "next_steps": [
+      "Practice CLAT logical reasoning and English comprehension questions.",
+      "Read opinion pieces on law and current affairs.",
+      "Attend a law entrance preparation workshop if available.",
+      "Start building a strong vocabulary and reading habit."
+    ],
+    "timeline": "Year 1: Strengthen reasoning and legal reading skills. Year 2: Intensive CLAT practice and college applications."
+  },
+  {
+    "id": "R_CUET_UG_ARTS",
+    "question": "Central University Arts & Social Science",
+    "type": "recommendation",
+    "title": "Central University Arts & Social Science",
+    "description": [
+      "You want a broad arts or social science education with central university access.",
+      "This path suits students who value strong academics and national colleges.",
+      "It offers flexible career options in humanities and public service."
+    ],
+    "careers": [
+      {
+        "name": "Social Researcher",
+        "description": "Studies society and public issues.",
+        "salary": "₹5-14 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Writer/Editor",
+        "description": "Creates content for media and publications.",
+        "salary": "₹4-12 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Policy Officer",
+        "description": "Works on government or NGO policy programs.",
+        "salary": "₹6-18 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Educator",
+        "description": "Teaches humanities or social science subjects.",
+        "salary": "₹4-12 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Public Relations Specialist",
+        "description": "Manages communications and reputation.",
+        "salary": "₹5-15 LPA",
+        "stream": "Arts"
+      }
+    ],
+    "exams": [
+      {
+        "name": "CUET UG",
+        "full_form": "Common University Entrance Test Undergraduate",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to central university arts programs",
+        "month": "May"
+      },
+      {
+        "name": "JNU Entrance Exam",
+        "full_form": "Jawaharlal Nehru University Entrance Examination",
+        "conducting_body": "JNU",
+        "eligibility": "Class 12 or equivalent",
+        "what_it_leads_to": "Admission to JNU arts and social science programs",
+        "month": "June"
+      },
+      {
+        "name": "DUET",
+        "full_form": "Delhi University Entrance Test",
+        "conducting_body": "DU",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to DU arts courses",
+        "month": "June"
+      }
+    ],
+    "next_steps": [
+      "Explore arts and social science subjects that interest you most.",
+      "Prepare for CUET with reading and writing practice.",
+      "Research central university humanities programs and placements.",
+      "Attend open house events or college info sessions."
+    ],
+    "timeline": "Year 1: Clarify your arts interests and strengthen language skills. Year 2: Prepare for CUET and apply to central universities."
+  },
+  {
+    "id": "R_UPSC_CSE",
+    "question": "Union Public Service Commission",
+    "type": "recommendation",
+    "title": "Union Public Service Commission",
+    "description": [
+      "You are interested in administration and leadership, making UPSC a strong fit.",
+      "This path demands broad knowledge, discipline and long-term motivation.",
+      "It leads to prestigious civil service careers with societal impact."
+    ],
+    "careers": [
+      {
+        "name": "IAS Officer",
+        "description": "Leads administration and governance at district/state levels.",
+        "salary": "₹12-24 LPA",
+        "stream": "Any"
+      },
+      {
+        "name": "IPS Officer",
+        "description": "Leads policing and public safety initiatives.",
+        "salary": "₹12-24 LPA",
+        "stream": "Any"
+      },
+      {
+        "name": "IFS Officer",
+        "description": "Represents India in foreign relations.",
+        "salary": "₹12-24 LPA",
+        "stream": "Any"
+      },
+      {
+        "name": "Policy Analyst",
+        "description": "Advises on government policy and programs.",
+        "salary": "₹7-20 LPA",
+        "stream": "Any"
+      },
+      {
+        "name": "Development Manager",
+        "description": "Runs public welfare and development schemes.",
+        "salary": "₹6-18 LPA",
+        "stream": "Any"
+      }
+    ],
+    "exams": [
+      {
+        "name": "UPSC CSE",
+        "full_form": "Union Public Service Commission Civil Services Examination",
+        "conducting_body": "UPSC",
+        "eligibility": "Graduation in any stream",
+        "what_it_leads_to": "Selection to IAS, IPS, IFS and other services",
+        "month": "May"
+      },
+      {
+        "name": "State PSC",
+        "full_form": "State Public Service Commission",
+        "conducting_body": "State PSCs",
+        "eligibility": "Graduation in any stream",
+        "what_it_leads_to": "State administrative services",
+        "month": "Varies"
+      },
+      {
+        "name": "SSC CGL",
+        "full_form": "Staff Selection Commission Combined Graduate Level",
+        "conducting_body": "SSC",
+        "eligibility": "Graduation in any stream",
+        "what_it_leads_to": "Central government officer posts",
+        "month": "December"
+      }
+    ],
+    "next_steps": [
+      "Build a daily current affairs routine and note key issues.",
+      "Practice essay writing and answer structuring weekly.",
+      "Study polity, economy and general science in depth.",
+      "Take a UPSC foundation course if you need guided support."
+    ],
+    "timeline": "Year 1: Develop general knowledge and writing abilities. Year 2: Begin UPSC prelims and mains preparation while gaining clarity on service choices."
+  },
+  {
+    "id": "R_CLAT_AILET",
+    "question": "Law Entrance via CLAT/AILET",
+    "type": "recommendation",
+    "title": "Law Entrance via CLAT/AILET",
+    "description": [
+      "You want top law colleges through national entrance exams.",
+      "This path is ideal for students who enjoy legal reasoning and debate.",
+      "It provides strong entry into NLSIU or NLU-style law schools."
+    ],
+    "careers": [
+      {
+        "name": "Litigation Lawyer",
+        "description": "Represents clients in court cases.",
+        "salary": "₹6-18 LPA",
+        "stream": "Arts/Commerce"
+      },
+      {
+        "name": "Corporate Counsel",
+        "description": "Handles legal issues for businesses.",
+        "salary": "₹9-22 LPA",
+        "stream": "Commerce"
+      },
+      {
+        "name": "Legal Researcher",
+        "description": "Conducts research on law and policy.",
+        "salary": "₹5-14 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Judicial Clerk",
+        "description": "Supports judges with case law and drafts.",
+        "salary": "₹4-10 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Policy Advisor",
+        "description": "Works on law policy and governance issues.",
+        "salary": "₹7-18 LPA",
+        "stream": "Arts"
+      }
+    ],
+    "exams": [
+      {
+        "name": "CLAT",
+        "full_form": "Common Law Admission Test",
+        "conducting_body": "NLU Consortium",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to NLUs",
+        "month": "May"
+      },
+      {
+        "name": "AILET",
+        "full_form": "All India Law Entrance Test",
+        "conducting_body": "NLSIU Bengaluru",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to NLSIU",
+        "month": "May"
+      },
+      {
+        "name": "LSAT India",
+        "full_form": "Law School Admission Test India",
+        "conducting_body": "Pearson VUE",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to law colleges nationwide",
+        "month": "March"
+      }
+    ],
+    "next_steps": [
+      "Practice CLAT logical reasoning and English comprehension.",
+      "Read about courtroom procedures and landmark cases.",
+      "Attend law entrance coaching or workshops.",
+      "Start building a law-focused reading and vocabulary habit."
+    ],
+    "timeline": "Year 1: Strengthen legal reasoning and current affairs. Year 2: Prepare for CLAT/AILET and complete law admissions."
+  },
+  {
+    "id": "R_NID_DAT_NIFT",
+    "question": "Design & Creative Arts Entrance",
+    "type": "recommendation",
+    "title": "Design & Creative Arts Entrance",
+    "description": [
+      "You are drawn to creative design, film and performing arts.",
+      "This path suits students who want professional training in creative industries.",
+      "It leads to careers in design, media and artistic production."
+    ],
+    "careers": [
+      {
+        "name": "Graphic Designer",
+        "description": "Creates visual communication for brands.",
+        "salary": "₹4-12 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Fashion Designer",
+        "description": "Designs apparel and style trends.",
+        "salary": "₹4-14 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Film Maker",
+        "description": "Produces and directs film projects.",
+        "salary": "₹5-20 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Animator",
+        "description": "Builds motion graphics and animated stories.",
+        "salary": "₹4-12 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Interior Designer",
+        "description": "Crafts functional interior spaces.",
+        "salary": "₹4-12 LPA",
+        "stream": "Arts"
+      }
+    ],
+    "exams": [
+      {
+        "name": "NID DAT",
+        "full_form": "National Institute of Design Design Aptitude Test",
+        "conducting_body": "NID",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to NID design programs",
+        "month": "January"
+      },
+      {
+        "name": "NIFT",
+        "full_form": "National Institute of Fashion Technology Entrance Exam",
+        "conducting_body": "NIFT",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to fashion and design courses",
+        "month": "January"
+      },
+      {
+        "name": "FTII",
+        "full_form": "Film and Television Institute of India Entrance Exam",
+        "conducting_body": "FTII",
+        "eligibility": "Diploma/graduate in any stream",
+        "what_it_leads_to": "Admission to film and media programs",
+        "month": "July"
+      }
+    ],
+    "next_steps": [
+      "Create a strong creative portfolio of sketches, designs or film work.",
+      "Practice design aptitude and visual thinking exercises.",
+      "Visit design exhibitions or film festivals for inspiration.",
+      "Prepare the required portfolio documents for institute applications."
+    ],
+    "timeline": "Year 1: Build creative work and develop design skills. Year 2: Prepare for NID/NIFT/FTII and submit portfolio-based applications."
+  },
+  {
+    "id": "R_IIMC_ACJ",
+    "question": "Journalism & Mass Communication",
+    "type": "recommendation",
+    "title": "Journalism & Mass Communication",
+    "description": [
+      "You are passionate about media, storytelling and communication.",
+      "This path suits students who love writing, reporting and content creation.",
+      "It leads to careers in journalism, broadcasting and digital media."
+    ],
+    "careers": [
+      {
+        "name": "Journalist",
+        "description": "Reports news and writes stories for media platforms.",
+        "salary": "₹4-14 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Content Producer",
+        "description": "Creates media content for digital channels.",
+        "salary": "₹4-12 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Broadcast Journalist",
+        "description": "Delivers news on TV or radio.",
+        "salary": "₹5-14 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "PR Executive",
+        "description": "Manages public image and communications.",
+        "salary": "₹5-15 LPA",
+        "stream": "Arts"
+      },
+      {
+        "name": "Documentary Filmmaker",
+        "description": "Produces nonfiction film stories.",
+        "salary": "₹5-16 LPA",
+        "stream": "Arts"
+      }
+    ],
+    "exams": [
+      {
+        "name": "IIMC Entrance",
+        "full_form": "Indian Institute of Mass Communication Entrance",
+        "conducting_body": "IIMC",
+        "eligibility": "Graduation in any stream",
+        "what_it_leads_to": "Admission to journalism and mass communication courses",
+        "month": "May"
+      },
+      {
+        "name": "ACJ Entrance",
+        "full_form": "Asian College of Journalism Entrance",
+        "conducting_body": "ACJ",
+        "eligibility": "Graduation in any stream",
+        "what_it_leads_to": "Admission to journalism postgraduate programs",
+        "month": "April"
+      },
+      {
+        "name": "CUET UG",
+        "full_form": "Common University Entrance Test Undergraduate",
+        "conducting_body": "NTA",
+        "eligibility": "Class 12 in any stream",
+        "what_it_leads_to": "Admission to media and communication courses",
+        "month": "May"
+      }
+    ],
+    "next_steps": [
+      "Start a blog or social channel to practice storytelling.",
+      "Read and watch news critically to understand media styles.",
+      "Write sample news reports and feature stories each week.",
+      "Attend a media or journalism workshop if available."
+    ],
+    "timeline": "Year 1: Build strong writing and media practice. Year 2: Prepare for journalism entrance tests and create a portfolio of work."
+  }
+]

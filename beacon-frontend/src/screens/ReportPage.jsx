@@ -6,7 +6,7 @@ import {
 } from 'recharts';
 import { getCareerBannerImage } from '../utils/bannerImage';
 
-import { API as BEACON_API } from '../config';
+import { API as BEACON_API, APTITUDE_URL } from '../config';
 
 
 const RIASEC_COLORS = {
@@ -261,8 +261,8 @@ export default function ReportPage() {
                 const token = getToken();
                 const origin = window.location.origin;
                 const url = token
-                  ? `http://localhost:3001?beacon_token=${encodeURIComponent(token)}&origin=${encodeURIComponent(origin)}`
-                  : `http://localhost:3001?origin=${encodeURIComponent(origin)}`;
+                  ? `${APTITUDE_URL}?beacon_token=${encodeURIComponent(token)}&origin=${encodeURIComponent(origin)}`
+                  : `${APTITUDE_URL}?origin=${encodeURIComponent(origin)}`;
                 window.open(url, '_blank');
               }}
               style={{ background: NAVY, color: '#fff', border: 'none', padding: '0.9rem 2rem', borderRadius: 10, fontWeight: 700, fontSize: '1rem', cursor: 'pointer' }}

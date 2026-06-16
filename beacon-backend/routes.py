@@ -34,7 +34,10 @@ from career_scorer import score_careers
 
 # ─── CHATBOT ────────────────────────────────────────────────────────────────
 
-CHAT_TREE_PATH = Path(__file__).resolve().parent.parent / "chatbot-backend" / "decision_tree.json"
+SIBLING_TREE_PATH = Path(__file__).resolve().parent.parent / "chatbot-backend" / "decision_tree.json"
+LOCAL_TREE_PATH = Path(__file__).resolve().parent / "data" / "decision_tree.json"
+CHAT_TREE_PATH = SIBLING_TREE_PATH if SIBLING_TREE_PATH.exists() else LOCAL_TREE_PATH
+
 START_NODE_ID = "Q1"
 CHAT_SESSIONS: Dict[str, Dict[str, Any]] = {}
 
@@ -588,7 +591,42 @@ def update_profile(
 
 rec_router = APIRouter(prefix="/recommendations", tags=["Recommendations"])
 
+
+@rec_router.get("/catalog")
+def get_career_catalog():
+    from career_catalog import CAREER_CATALOG
+    from exams_catalog import EXAMS_CATALOG
+    
+    catalog_with_exams = []
+    for career in CAREER_CATALOG:
+        # Find relevant exams
+        exams = [exam["name"] for exam in EXAMS_CATALOG if career["title"] in exam.get("related_careers", [])]
+        exam_str = ", ".join(exams) if exams else "College-specific or merit-based"
+        
+        # Determine the primary stream display
+        streams = career.get("streams", [])
+        if any(s in ["pcm", "pcb", "pcmb"] for s in streams):
+            stream_display = "Science"
+        elif "comm" in streams:
+            stream_display = "Commerce"
+        elif "arts" in streams:
+            stream_display = "Arts"
+        else:
+            stream_display = "Any"
+            
+        catalog_with_exams.append({
+            "name": career["title"],
+            "stream": stream_display,
+            "exam": exam_str,
+            "salary": career["salary"],
+            "description": career["reason"],
+            "details": f"This career path typically starts with undergraduate study, internships, and progressive specialization. {career['reason']}",
+        })
+    return catalog_with_exams
+
+
 CACHE_TTL_HOURS = 24
+
 
 
 @rec_router.get("/smart")

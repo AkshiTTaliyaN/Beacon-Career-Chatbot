@@ -7,6 +7,7 @@ import { GlassCard, RadialGauge, KPICard, SectionHeader, FuturisticTooltip, Anim
 import { getSmartRecommendations, getMyProfile } from '../api/client.js'
 import EdCilLogo from '../assets/edcil.jpeg'
 import '../styles/futuristic.css'
+import { APTITUDE_URL } from '../config.js'
 import {
   RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
   BarChart, Bar, XAxis, YAxis, Tooltip, Legend, Cell,
@@ -384,8 +385,8 @@ export default function Dashboard({ userName }) {
           const token = localStorage.getItem('beacon_token');
           const origin = window.location.origin;
           const url = token
-            ? `http://localhost:3001?beacon_token=${encodeURIComponent(token)}&origin=${encodeURIComponent(origin)}`
-            : `http://localhost:3001?origin=${encodeURIComponent(origin)}`;
+            ? `${APTITUDE_URL}?beacon_token=${encodeURIComponent(token)}&origin=${encodeURIComponent(origin)}`
+            : `${APTITUDE_URL}?origin=${encodeURIComponent(origin)}`;
           window.open(url, '_blank');
         }}
       />
@@ -856,8 +857,8 @@ export default function Dashboard({ userName }) {
       {recs && recs.length > 0 && (
         <section className="ft-animate-in ft-section" style={{ paddingBottom: '4rem' }}>
           <SectionHeader
-            title="Your Career Mind Map"
-            subtitle="A visual map of your top career matches and the traits that drive each recommendation. Drag nodes to explore — zoom in with the controls on the left."
+            title="Your Career Galaxy"
+            subtitle="Your top career matches orbit as planets — hover to pause, click a planet to explore your personalised fit."
             accentColor="amber"
           />
           <CareerMindMap recs={recs} />
@@ -1049,8 +1050,8 @@ export default function Dashboard({ userName }) {
                     const token = localStorage.getItem('beacon_token');
                     const origin = window.location.origin;
                     const url = token
-                      ? `http://localhost:3001?beacon_token=${encodeURIComponent(token)}&origin=${encodeURIComponent(origin)}`
-                      : `http://localhost:3001?origin=${encodeURIComponent(origin)}`;
+                      ? `${APTITUDE_URL}?beacon_token=${encodeURIComponent(token)}&origin=${encodeURIComponent(origin)}`
+                      : `${APTITUDE_URL}?origin=${encodeURIComponent(origin)}`;
                     window.open(url, '_blank');
                   }}
                   className="ft-nav-link"
