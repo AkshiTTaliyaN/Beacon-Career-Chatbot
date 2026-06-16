@@ -4,10 +4,13 @@ Everything else (auth_router, profile_router, rec_router) is identical
 to the original. Replace the entire file.
 """
 import json
+import os
 import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 from uuid import UUID, uuid4
+from google import genai
+from google.genai import types as genai_types
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel, Field
@@ -75,6 +78,86 @@ def _load_chat_tree() -> Dict[str, Dict[str, Any]]:
 
 
 CHAT_TREE = _load_chat_tree()
+
+
+def _get_gemini_chat_response(message: str, profile_summary: dict, history: list[dict]) -> str:
+    api_key = os.getenv("GEMINI_API_KEY")
+    if not api_key:
+        return (
+            "I'd love to help, but my AI connection is not configured yet. "
+            "Please check the backend .env configuration for GEMINI_API_KEY."
+        )
+    
+    # Query ChromaDB for context
+    from rag_pipeline import retrieve_context
+    context_chunks = retrieve_context(message, k=3)
+    
+    context_str = ""
+    if context_chunks:
+        context_str = "\n".join(
+            f"Excerpt from {chunk['source']} (Page {chunk['page']}):\n{chunk['content']}"
+            for chunk in context_chunks
+        )
+    
+    # Build student profile context
+    profile_details = []
+    if profile_summary:
+        profile_details.append(f"Name: {profile_summary.get('name', 'Student')}")
+        profile_details.append(f"Class: {profile_summary.get('current_class', 'N/A')}")
+        profile_details.append(f"Board: {profile_summary.get('board', 'N/A')}")
+        profile_details.append(f"Stream: {profile_summary.get('stream', 'N/A')}")
+        profile_details.append(f"Strongest Subject: {profile_summary.get('strongest_subject', 'N/A')}")
+        profile_details.append(f"Weakest Subject: {profile_summary.get('weakest_subject', 'N/A')}")
+        profile_details.append(f"Target Career Sector: {profile_summary.get('target_sector', 'N/A')}")
+        profile_details.append(f"Cost constraints/Scholarships need: {profile_summary.get('cost_constraint', 'N/A')}")
+        profile_details.append(f"Relocation preference: {profile_summary.get('relocation_pref', 'N/A')}")
+        if profile_summary.get('enjoyed_subjects'):
+            profile_details.append(f"Enjoyed subjects: {', '.join(profile_summary['enjoyed_subjects'])}")
+    
+    profile_str = "\n".join(profile_details)
+
+    # Compile the system prompt
+    system_prompt = (
+        "You are Beacon, a highly supportive, professional AI Career Counsellor for Indian school students.\n\n"
+        "Here is the student's profiling context from onboarding:\n"
+        f"{profile_str}\n\n"
+        "Here is some relevant context retrieved from official syllabus, exam, and scholarship documents:\n"
+        f"{context_str or 'No specific document chunks found for this query.'}\n\n"
+        "INSTRUCTIONS:\n"
+        "1. Address the student warmly, using their name if available.\n"
+        "2. Personalize your advice to their class level, stream, and academic interests (e.g. if they are in Class 12 PCM, focus on engineering/PCM careers and exams like JEE).\n"
+        "3. Answer the student's question using the retrieved document context. When using information from the documents, mention the source file name (e.g. 'According to JEE_brochure.pdf...').\n"
+        "4. If the retrieved context doesn't contain the answer, answer to the best of your general knowledge but add a note suggesting they consult official sources or links.\n"
+        "5. **CRITICAL**: Do not hallucinate or make up exam dates, eligibility criteria, or cutoffs. If you are unsure, state so honestly.\n"
+        "6. Keep your answers concise, structured, and easy to read using bullet points. Avoid walls of text."
+    )
+
+    try:
+        client = genai.Client(api_key=api_key)
+
+        # Format history for new SDK
+        gemini_history = []
+        for msg in history[-10:]:  # limit to last 10 messages
+            role = "user" if msg["role"] == "user" else "model"
+            gemini_history.append(
+                genai_types.Content(role=role, parts=[genai_types.Part(text=msg["text"])])
+            )
+
+        chat = client.chats.create(
+            model="gemini-2.5-flash",
+            config=genai_types.GenerateContentConfig(
+                system_instruction=system_prompt
+            ),
+            history=gemini_history
+        )
+        response = chat.send_message(message)
+        return response.text
+    except Exception as e:
+        print(f"Error querying Gemini API: {e}")
+        return (
+            "I'm sorry, I encountered an issue connecting to my AI brain. "
+            "Please try again in a few moments."
+        )
 
 
 def _clean_text(value: Any) -> Any:
@@ -217,6 +300,7 @@ def _personalized_start_node(profile: StudentProfile, session_id: str) -> Dict[s
         "current_node_id": START_NODE_ID,
         "path_taken": [],
         "profile_snapshot": summary,
+        "history": [{"role": "bot", "text": question}],
     }
     return node
 
@@ -274,11 +358,43 @@ def continue_chat(
         node = _personalized_start_node(profile, body.session_id)
         return _node_response(body.session_id, node, profile)
 
+    # Handle Reset / Return to main menu choice
+    choice = (body.choice or "").strip().upper()
+    if choice == "R":
+        node = _personalized_start_node(profile, body.session_id)
+        return _node_response(body.session_id, node, profile)
+
+    # Handle free-text message
+    message = (body.message or "").strip()
+    if message and not choice:
+        if "history" not in session:
+            welcome_node = _personalized_start_node(profile, body.session_id)
+            session["history"] = [{"role": "bot", "text": welcome_node["question"]}]
+        
+        # Query Gemini
+        response_text = _get_gemini_chat_response(message, session.get("profile_snapshot"), session["history"])
+        
+        # Save to history
+        session["history"].append({"role": "user", "text": message})
+        session["history"].append({"role": "bot", "text": response_text})
+        
+        # Mark current node ID as LLM_NODE
+        session["current_node_id"] = "LLM_NODE"
+        
+        llm_node = {
+            "id": "LLM_NODE",
+            "question": response_text,
+            "type": "question",
+            "options": [
+                {"letter": "R", "text": "Reset to main menu", "next": "Q1"}
+            ]
+        }
+        return _node_response(body.session_id, llm_node, profile)
+
     current = CHAT_TREE.get(session["current_node_id"], CHAT_TREE[START_NODE_ID])
     if current.get("type") != "question":
         return _node_response(body.session_id, current, profile)
 
-    choice = (body.choice or "").strip().upper()
     if not choice:
         return _node_response(body.session_id, current, profile)
 
@@ -294,7 +410,17 @@ def continue_chat(
         "skipped_profile_questions": skipped,
     })
     session["current_node_id"] = next_id
-    return _node_response(body.session_id, CHAT_TREE[next_id], profile, skipped)
+    
+    # Track history for context
+    if "history" not in session:
+        welcome_node = _personalized_start_node(profile, body.session_id)
+        session["history"] = [{"role": "bot", "text": welcome_node["question"]}]
+    
+    session["history"].append({"role": "user", "text": f"{selected.get('letter')}. {selected.get('text')}"})
+    next_node = CHAT_TREE[next_id]
+    session["history"].append({"role": "bot", "text": next_node.get("question") or next_node.get("title") or ""})
+    
+    return _node_response(body.session_id, next_node, profile, skipped)
 
 
 # ─── EXPERT SYSTEM ────────────────────────────────────────────────────────────

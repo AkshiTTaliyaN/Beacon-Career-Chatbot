@@ -161,6 +161,7 @@ export default function ChatScreen() {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [textValue, setTextValue] = useState("");
   const messagesEndRef = useRef(null);
 
   const bootChat = useCallback(async () => {
@@ -216,6 +217,35 @@ export default function ChatScreen() {
     }
   }
 
+  async function handleSendText(e) {
+    e.preventDefault();
+    const trimmed = textValue.trim();
+    if (!trimmed || loading || !sessionId) return;
+
+    setLoading(true);
+    setError("");
+    setTextValue("");
+
+    setMessages((prev) => [
+      ...prev,
+      { id: crypto.randomUUID(), role: "user", text: trimmed },
+    ]);
+
+    try {
+      const data = await sendChatChoice({ sessionId, message: trimmed });
+      setCurrentNode(data);
+      setProfile(data.profile_summary);
+      setMessages((prev) => [
+        ...prev,
+        { id: crypto.randomUUID(), role: "bot", text: data.question },
+      ]);
+    } catch (err) {
+      setError(err.message || "Unable to send message.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <div className="chat-page">
       <header className="chat-topbar">
@@ -258,9 +288,23 @@ export default function ChatScreen() {
         <RecommendationPanel node={currentNode} onRestart={bootChat} />
       </main>
 
-      {currentNode?.type === "question" && (
-        <OptionBar options={currentNode.options} onSelect={handleSelect} loading={loading} />
-      )}
+      <div className="chat-controls">
+        {currentNode?.type === "question" && currentNode.options?.length > 0 && (
+          <OptionBar options={currentNode.options} onSelect={handleSelect} loading={loading} />
+        )}
+        <form className="chat-input-bar" onSubmit={handleSendText}>
+          <input
+            type="text"
+            value={textValue}
+            onChange={(e) => setTextValue(e.target.value)}
+            placeholder="Type your question here (e.g. 'tell me about JEE exams')..."
+            disabled={loading}
+          />
+          <button type="submit" className="btn-send" disabled={loading || !textValue.trim()}>
+            Send
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

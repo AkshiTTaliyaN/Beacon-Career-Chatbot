@@ -1,0 +1,137 @@
+================================================================================
+BEACON PLATFORM REFERENCE: NATIONAL ENTRANCE EXAMINATIONS GUIDE
+================================================================================
+
+This document serves as the official reference database for national entrance examinations in India.
+
+--------------------------------------------------------------------------------
+1. JEE MAIN (JOINT ENTRANCE EXAMINATION - MAIN)
+--------------------------------------------------------------------------------
+- Conducting Body: National Testing Agency (NTA).
+- Purpose: Admission to B.E./B.Tech and B.Arch programs at NITs, IIITs, CFTIs, and qualifying for JEE Advanced.
+- Eligibility Criteria:
+  * Subjects: Candidates must have passed Class 12 or equivalent with Physics, Chemistry, and Mathematics (PCM).
+  * Minimum Marks: 75% aggregate marks in Class 12 board exams (65% for SC/ST category) or be in the top 20 percentile.
+  * Age Limit: There is absolutely no age limit for candidates appearing in JEE Main.
+  * Maximum Attempts: Candidates can attempt JEE Main for 3 consecutive years from passing Class 12.
+- Examination Timeline: Conducted twice a year, in January (Session 1) and April (Session 2). The best of the two scores is considered.
+- Syllabus & Focus: Physics, Chemistry, and Mathematics of CBSE Class 11 and 12 levels. Focuses on speed, accuracy, and conceptual clarity.
+
+--------------------------------------------------------------------------------
+2. JEE ADVANCED (JOINT ENTRANCE EXAMINATION - ADVANCED)
+--------------------------------------------------------------------------------
+- Conducting Body: One of the seven zonal IITs (under the guidance of Joint Admission Board - JAB).
+- Purpose: Direct admission to undergraduate engineering, architecture, and science programs at the Indian Institutes of Technology (IITs).
+- Eligibility Criteria:
+  * Qualification: Candidates must be among the top 2,50,000 successful candidates in JEE Main Paper-1.
+  * Subjects: Physics, Chemistry, and Mathematics (PCM) in Class 12.
+  * Maximum Attempts: A candidate can attempt JEE Advanced a maximum of two times in consecutive years.
+- Examination Timeline: Conducted once a year, typically in late May or early June.
+- Syllabus & Focus: Deep, analytical problem-solving in Physics, Chemistry, and Mathematics. Focuses on multi-concept application and rigorous mathematical reasoning.
+
+--------------------------------------------------------------------------------
+3. NEET-UG (NATIONAL ELIGIBILITY CUM ENTRANCE TEST - UNDERGRADUATE)
+--------------------------------------------------------------------------------
+- Conducting Body: National Testing Agency (NTA).
+- Purpose: Admission to MBBS, BDS, AYUSH (BAMS, BHMS, etc.), Veterinary (BVSc & AH) courses in all medical colleges in India.
+- Eligibility Criteria:
+  * Subjects: Candidates must have passed Class 12 or equivalent with Physics, Chemistry, Biology/Biotechnology (PCB), and English.
+  * Minimum Marks: 50% aggregate in PCB in Class 12 (40% for SC/ST/OBC, 45% for Gen-PWD).
+  * Age Limit: Minimum age is 17 years as of December 31 of the year of admission. There is no upper age limit.
+- Examination Timeline: Conducted once a year, typically on the first Sunday of May.
+- Syllabus & Focus: Biology (Botany and Zoology), Chemistry, and Physics of Class 11 and 12 CBSE level. Biology accounts for 50% of total marks. Requires high retention and quick recall.
+
+--------------------------------------------------------------------------------
+4. CLAT (COMMON LAW ADMISSION TEST)
+--------------------------------------------------------------------------------
+- Conducting Body: Consortium of National Law Universities (NLUs).
+- Purpose: Admission to 5-year integrated Under-Graduate Law Programs (BA LLB, BBA LLB, BCom LLB) at 24 National Law Universities in India.
+- Eligibility Criteria:
+  * Minimum Marks: 45% aggregate in Class 12 or equivalent (40% for SC/ST categories).
+  * Age Limit: There is no upper age limit for appearing in CLAT.
+- Examination Timeline: Conducted once a year, typically in December (prior to the admission year) or January.
+- Syllabus & Focus: English Language, Current Affairs including General Knowledge, Legal Reasoning, Logical Reasoning, and Quantitative Techniques (Class 10 level math). Focuses on reading comprehension and critical reading speed.
+
+--------------------------------------------------------------------------------
+5. NID DAT (NATIONAL INSTITUTE OF DESIGN - DESIGN APTITUDE TEST)
+--------------------------------------------------------------------------------
+- Conducting Body: National Institute of Design (NID).
+- Purpose: Admission to Bachelor of Design (B.Des) programs at NID Ahmedabad, Gandhinagar, Bengaluru, Andhra Pradesh, Haryana, Madhya Pradesh, and Assam.
+- Eligibility Criteria:
+  * Streams: Candidates from all streams (Science, Commerce, Arts) are eligible.
+  * Age Limit: Upper age limit is 20 years as of July 1 of the admission year (relaxable by 3 years for reserved categories).
+- Examination Timeline: Conducted in two stages. DAT Prelims in December/January, and DAT Mains (studio test/portfolio) in April/May.
+- Syllabus & Focus: Visual Design, Drawing Skills, Creativity, Observation, Spatial Ability, Creative Writing, and Problem Solving.
+
+--------------------------------------------------------------------------------
+6. UPSC CSE (UNION PUBLIC SERVICE COMMISSION - CIVIL SERVICES EXAMINATION)
+--------------------------------------------------------------------------------
+- Conducting Body: Union Public Service Commission (UPSC).
+- Purpose: Recruitment to prestigious Indian Civil Services including IAS (Administrative), IPS (Police), IFS (Foreign), IRS (Revenue), and other central services.
+- Eligibility Criteria:
+  * Education: Graduation in any discipline from a recognized university. School students (Classes 8-12) prepare their foundation early.
+  * Age Limit: 21 to 32 years as of August 1 of the exam year (relaxable for OBC/SC/ST).
+  * Attempts Limit: 6 attempts for General category, 9 for OBC, unlimited for SC/ST.
+- Examination Timeline: Three stages spread across a year: Prelims (June), Mains (September/October), and Interview (February-April).
+- Syllabus & Focus: History, Geography, Polity, Economics, Environment, Science & Tech, Current Affairs, Essay Writing, and Optional Subject. Requires deep analytical writing, ethics, and vast general knowledge.
+
+--------------------------------------------------------------------------------
+7. NDA (NATIONAL DEFENCE ACADEMY ENTRANCE EXAM)
+--------------------------------------------------------------------------------
+- Conducting Body: Union Public Service Commission (UPSC).
+- Purpose: Admission to the Army, Navy, and Air Force wings of the NDA and Indian Naval Academy Course (INAC).
+- Eligibility Criteria:
+  * Gender & Marital Status: Unmarried male and female candidates.
+  * Age Limit: Only candidates born not earlier than 16.5 years and not later than 19.5 years are eligible.
+  * Educational Qualification:
+    - Army Wing: Class 12 pass in any stream.
+    - Air Force & Navy Wings: Class 12 pass with Physics and Mathematics (PCM).
+- Examination Timeline: Conducted twice a year, NDA I in April and NDA II in September.
+- Syllabus & Focus: Mathematics (Algebra, Trigonometry, Calculus, Probability) and General Ability Test (English, Physics, Chemistry, General Science, History, Geography, Current Affairs), followed by SSB Interview (intelligence and personality tests).
+
+--------------------------------------------------------------------------------
+8. IPMAT (INTEGRATED PROGRAM IN MANAGEMENT APTITUDE TEST)
+--------------------------------------------------------------------------------
+- Conducting Body: Indian Institute of Management (IIM) Indore (with similar tests by IIM Rohtak, Jammu, Bodh Gaya).
+- Purpose: Admission to the 5-Year Integrated Program in Management (IPM) combining BBA + MBA.
+- Eligibility Criteria:
+  * Minimum Marks: 60% aggregate in Class 10 and Class 12 (55% for SC/ST/PwD categories).
+  * Age Limit: Maximum 20 years of age as of July 31 of the exam year.
+- Examination Timeline: Conducted once a year, typically in May.
+- Syllabus & Focus: Quantitative Ability (Multiple Choice and Short Answer math questions) and Verbal Ability (English reading, grammar, vocabulary). Requires sharp quantitative skills and command over English.
+
+--------------------------------------------------------------------------------
+9. UCEED (UNDERGRADUATE COMMON ENTRANCE EXAMINATION FOR DESIGN)
+--------------------------------------------------------------------------------
+- Conducting Body: Indian Institute of Technology (IIT) Bombay.
+- Purpose: Admission to Bachelor of Design (B.Des) programs at IIT Bombay, IIT Delhi, IIT Guwahati, IIT Hyderabad, IIITDM Jabalpur, and other partner institutes.
+- Eligibility Criteria:
+  * Streams: Open to candidates from all streams (Science, Commerce, Arts/Humanities).
+  * Age Limit: Upper age limit is 25 years for general category (relaxable for SC/ST/PwD).
+  * Attempts: A candidate can attempt UCEED a maximum of two times in consecutive years.
+- Examination Timeline: Conducted once a year, typically in January.
+- Syllabus & Focus: Visualisation and Spatial Ability, Observation and Design Sensitivity, Environmental and Social Awareness, Analytical and Logical Reasoning, Language and Creativity, and Drawing.
+
+--------------------------------------------------------------------------------
+10. NIFT ENTRANCE EXAM
+--------------------------------------------------------------------------------
+- Conducting Body: National Institute of Fashion Technology (NIFT).
+- Purpose: Admission to Bachelor of Design (B.Des) and Bachelor of Fashion Technology (B.F.Tech) at NIFT campuses across India.
+- Eligibility Criteria:
+  * B.Des: Passed Class 12 in any stream.
+  * B.F.Tech: Passed Class 12 with Physics, Chemistry, and Mathematics (PCM).
+  * Age Limit: Upper age limit is 24 years as of August 1 of the admission year (relaxable by 5 years for SC/ST/PWD).
+- Examination Timeline: Conducted once a year. GAT (General Ability Test) and CAT (Creative Ability Test) in February, followed by Situation Test in April.
+- Syllabus & Focus: Creative Ability Test (design ability, color theory, sketch accuracy) and General Ability Test (quantitative, English, analytical, GK).
+
+--------------------------------------------------------------------------------
+11. CA FOUNDATION (CHARTERED ACCOUNTANCY FOUNDATION EXAM)
+--------------------------------------------------------------------------------
+- Conducting Body: Institute of Chartered Accountants of India (ICAI).
+- Purpose: First level entry exam to qualify for the Chartered Accountancy course in India.
+- Eligibility Criteria:
+  * Registration: Candidates can register after passing Class 10 but can appear in the exam only after appearing in the Class 12 board exams.
+  * Streams: Open to all streams, though Commerce (Accountancy, Business Studies, Math) is highly aligned.
+  * Age Limit: There is no upper age limit or restriction on attempts.
+- Examination Timeline: Conducted thrice a year, usually in June, September, and January.
+- Syllabus & Focus: Principles and Practice of Accounting, Business Laws, Quantitative Aptitude (Business Math, Logical Reasoning, Statistics), and Business Economics. Requires high precision in numerical compilation and understanding of legal syntax.

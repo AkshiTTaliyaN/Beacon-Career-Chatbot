@@ -1,0 +1,2 @@
+Drop your official PDF syllabus brochures, college lists, and scholarship guidelines here.
+The RAG pipeline script will scan this directory and ingest all PDF documents.

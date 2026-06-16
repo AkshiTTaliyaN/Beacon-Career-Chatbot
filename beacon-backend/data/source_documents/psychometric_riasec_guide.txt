@@ -1,0 +1,76 @@
+================================================================================
+BEACON PLATFORM REFERENCE: PSYCHOMETRIC RIASEC ASSESSMENT GUIDE
+================================================================================
+
+This document details the RIASEC personality framework used to match students to suitable career streams.
+
+--------------------------------------------------------------------------------
+1. OVERVIEW OF THE RIASEC FRAMEWORK
+--------------------------------------------------------------------------------
+The RIASEC model (developed by psychologist John L. Holland) classifies careers and people into six distinct personality types:
+- Realistic (R)
+- Investigative (I)
+- Artistic (A)
+- Social (S)
+- Enterprising (E)
+- Conventional (C)
+
+A student's RIASEC score profile is derived from the psychometric test. The highest scores (primary and secondary codes) are used to compute career compatibility.
+
+--------------------------------------------------------------------------------
+2. DETAILED RIASEC CODES & CAREER ALIGNMENTS
+--------------------------------------------------------------------------------
+
+A. REALISTIC (R) — "THE DOERS"
+- Personality Traits: Hands-on, practical, mechanical, outdoors-oriented. They prefer working with tools, microchips, machines, animals, or plants.
+- Key Workstyle: "Building" and creating physical/hardware items.
+- High-Alignment Careers:
+  * Aerospace Engineer, VLSI Semiconductor Engineer, Robotics Engineer.
+  * Mechanical, Electrical, Civil Engineers.
+  * Veterinary Doctor / Animal Surgeon, Wildlife Biologist.
+  * Blockchain Developer, Cybersecurity Analyst (network hardware focus).
+
+B. INVESTIGATIVE (I) — "THE THINKERS"
+- Personality Traits: Analytical, curious, research-driven, intellectual. They prefer solving complex mathematical equations, analyzing data, and exploring scientific theories.
+- Key Workstyle: "Researching" and analyzing statistics.
+- High-Alignment Careers:
+  * Data Scientist, AI/ML Engineer, Quantum Computing Scientist.
+  * Biomedical Engineer, Bioinformatics Specialist, Astrobiologist.
+  * Doctor (MBBS), Research Scientist (Physics/Chemistry), Marine Biologist.
+  * Public Policy Analyst, Forensic Psychologist, Actuarial Analyst.
+
+C. ARTISTIC (A) — "THE CREATORS"
+- Personality Traits: Expressive, creative, intuitive, non-conforming. They prefer designing layouts, writing storylines, creating animations, and visual communications.
+- Key Workstyle: "Creative" and designing.
+- High-Alignment Careers:
+  * UI/UX Designer, Game Designer, Fashion Designer.
+  * Animator / 3D Artist, Film Director / Content Creator.
+  * UX Researcher, Digital Marketing Strategist (ad design focus).
+  * Architect, Graphic Designer, Brand Manager.
+
+D. SOCIAL (S) — "THE HELPERS"
+- Personality Traits: Empathetic, supportive, teaching-oriented, communicative. They prefer instructing students, resolving psychological distress, or leading charity campaigns.
+- Key Workstyle: "Helping" and educating.
+- High-Alignment Careers:
+  * Teacher / Educator, Social Worker / NGO Manager.
+  * Clinical / Counselling Psychologist, Genetic Counsellor.
+  * Physiotherapist, Doctor (MBBS - patient care focus).
+  * HR Manager, International Relations Specialist.
+
+E. ENTERPRISING (E) — "THE PERSUADERS"
+- Personality Traits: Assertive, ambitious, leadership-oriented, risk-tolerant. They prefer pitching start-up ideas, managing operations, selling products, and making financial decisions.
+- Key Workstyle: "Leading" and presenting.
+- High-Alignment Careers:
+  * Entrepreneur, Product Manager, Brand Manager.
+  * Investment Banker, Stock Broker / Portfolio Manager.
+  * Management Consultant, Marketing Manager.
+  * IAS / Civil Services Officer, Corporate Lawyer, Sports Manager.
+
+F. CONVENTIONAL (C) — "THE ORGANIZERS"
+- Personality Traits: Methodical, structured, detail-oriented, organized. They prefer auditing bank records, organizing logistics, managing data tables, and ensuring legal compliance.
+- Key Workstyle: "Structured" and accounting.
+- High-Alignment Careers:
+  * Chartered Accountant (CA), Financial Risk Manager (FRM), Actuarial Analyst.
+  * Operations Manager, Supply Chain Manager.
+  * Forensic Accountant, Quality Assurance (QA) Analyst.
+  * Law (Legal Advisor/Corporate Compliance), Bank Manager.

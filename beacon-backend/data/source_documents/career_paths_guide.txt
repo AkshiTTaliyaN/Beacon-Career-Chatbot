@@ -1,0 +1,138 @@
+================================================================================
+BEACON PLATFORM REFERENCE: CAREERS REGISTRY & CAREER PATHS GUIDE
+================================================================================
+
+This document details the career options available to Indian students, organized by streams, subjects, salaries, and eligibility requirements.
+
+--------------------------------------------------------------------------------
+1. SCIENCE, ENGINEERING, & DYNAMIC TECH SECTORS
+--------------------------------------------------------------------------------
+A. Software & AI Engineering:
+- Software Engineer: Designs and writes code for systems, web apps, and databases.
+  * Streams: PCM or PCMB in Class 11-12. Key subjects: Math and Computer Science.
+  * Top Colleges: IITs, NITs, IIITs, BITS Pilani.
+  * Salary: ₹7–30 LPA starting.
+- AI / Machine Learning Engineer: Builds algorithms, neural networks, and LLMs.
+  * Streams: PCM/PCMB. Key subjects: Mathematics, Statistics, Computer Science.
+  * Top Colleges: IIT Madras, IIT Hyderabad, IIIT Bangalore, ISI Kolkata.
+  * Salary: ₹8–32 LPA starting.
+- Data Scientist & Data Analyst: Uses statistical models to clean and interpret data.
+  * Streams: PCM/PCMB. Key subjects: Math, CS, Statistics.
+  * Salary: ₹6–25 LPA starting.
+- Cybersecurity Analyst & Cloud Architect: Secures digital networks and builds cloud infrastructures.
+  * Streams: PCM/PCMB. Key subjects: Computer Science, Math, Networks.
+  * Salary: ₹6–24 LPA starting.
+- Blockchain Developer: Implements smart contracts and cryptographic ledgers.
+  * Streams: PCM/PCMB. Key subjects: Cryptography, CS, Math.
+  * Salary: ₹8–28 LPA starting.
+
+B. Hardware, Robotics, & Quantum Tech:
+- Quantum Computing Scientist: Researches quantum mechanics to build future computers.
+  * Streams: PCM/PCMB. Key subjects: Physics, Math, Quantum Mechanics.
+  * Top Colleges: IISc Bangalore, IIT Bombay, TIFR Mumbai.
+  * Salary: ₹10–35 LPA starting.
+- VLSI Design / Semiconductor Engineer: Designs electronic microchips and transistors.
+  * Streams: PCM/PCMB. Key subjects: Physics, Math, Electronics.
+  * Top Colleges: IITs, NIT Trichy, BITS Pilani.
+  * Salary: ₹8–26 LPA starting.
+- Robotics Engineer: Integrates software, sensors, and mechanical builds.
+  * Streams: PCM/PCMB. Key subjects: Math, Physics, Electronics, Mechanics.
+  * Top Colleges: IIT Kanpur, IIT Kharagpur, IIIT Hyderabad.
+  * Salary: ₹6–22 LPA starting.
+- Aerospace Engineer: Designs aircraft, satellites, and spacecraft propulsion systems.
+  * Streams: PCM/PCMB. Key subjects: Physics, Mathematics (Advanced Calculus).
+  * Top Colleges: IIT Madras, IIT Kanpur, IIST Thiruvananthapuram.
+  * Salary: ₹7–25 LPA starting.
+
+C. Physical Sciences & Ecology:
+- Research Scientist (Physics/Chemistry): Conducts experimental laboratory research.
+  * Streams: PCM/PCB/PCMB. Key subjects: Physics, Chemistry, Mathematics.
+  * Salary: ₹5–18 LPA starting.
+- Environmental Scientist & Renewable Energy Consultant: Researches eco-systems and carbon-credits.
+  * Streams: PCM/PCB/PCMB. Key subjects: Chemistry, Biology, Geography.
+  * Salary: ₹5–15 LPA starting.
+- Astrobiologist: Researches the possibility of life on other planets and space biology.
+  * Streams: PCMB/PCB. Key subjects: Biology, Physics, Astronomy, Chemistry.
+  * Top Colleges: IISERs, NISER, ISRO, IIA Bangalore.
+  * Salary: ₹6–20 LPA starting.
+- Marine Biologist & Wildlife Biologist: Studies aquatic ecosystems and wildlife habitats.
+  * Streams: PCB/PCMB. Key subjects: Biology, Ecology, Environmental Science.
+  * Salary: ₹4–14 LPA starting.
+
+--------------------------------------------------------------------------------
+2. MEDICINE, LIFE SCIENCES, & BIO-TECH SECTORS
+--------------------------------------------------------------------------------
+- Doctor (MBBS): Diagnoses and treats patient illnesses, performs surgeries.
+  * Streams: PCB or PCMB in Class 11-12. Key subjects: Biology, Chemistry, Physics.
+  * Top Colleges: AIIMS New Delhi, JIPMER, KGMU Lucknow, AFMC Pune.
+  * Salary: ₹9–24 LPA starting (increases post-specialization MD/MS).
+- Veterinary Doctor / Animal Surgeon: Diagnoses and treats animal illnesses.
+  * Streams: PCB/PCMB. Key subjects: Biology, Chemistry.
+  * Top Colleges: IVRI Izatnagar, NDRI Karnal.
+  * Salary: ₹5–16 LPA starting.
+- Physiotherapist & Genetic Counsellor: Restores physical mobility / advises on hereditary traits.
+  * Streams: PCB/PCMB. Key subjects: Biology, Anatomy, Chemistry.
+  * Salary: ₹4–12 LPA starting.
+- Bioinformatics Specialist: Uses computational tools to analyze DNA sequencing and genomics.
+  * Streams: PCMB/PCB. Key subjects: Biology, Mathematics, Computer Science.
+  * Top Colleges: IBAB Bangalore, IIT Delhi, JNU.
+  * Salary: ₹6–20 LPA starting.
+- Food Technologist: Researches food safety, preservation, and nutritional chemistry.
+  * Streams: PCB/PCMB. Key subjects: Chemistry, Biology, Physics.
+  * Salary: ₹4–12 LPA starting.
+
+--------------------------------------------------------------------------------
+3. COMMERCE, FINANCE, & CORPORATE MANAGEMENT
+--------------------------------------------------------------------------------
+- Chartered Accountant (CA): Handles taxation, financial audits, and accounts.
+  * Streams: Commerce (open to all). Key subjects: Accountancy, Business Studies, Math.
+  * Top Body: Institute of Chartered Accountants of India (ICAI).
+  * Salary: ₹8–22 LPA starting.
+- Investment Banker: Advises companies on raising capital, mergers, and acquisitions.
+  * Streams: Commerce/Science (with Math). Key subjects: Finance, Economics, Math.
+  * Top Colleges: SRCC Delhi, IIMs (post-grad), St. Stephen's.
+  * Salary: ₹10–35 LPA starting.
+- Actuarial Analyst: Evaluates risk and uncertainty using statistics and math (insurance focus).
+  * Streams: Commerce/Science. Key subjects: Mathematics, Statistics.
+  * Top Body: Institute of Actuaries of India (IAI).
+  * Salary: ₹8–25 LPA starting.
+- Financial Risk Manager (FRM) & Financial Analyst: Identifies risk models / analyzes stocks.
+  * Streams: Commerce/Science. Key subjects: Economics, Accounts, Mathematics.
+  * Salary: ₹6–20 LPA.
+- Operations Specialist & Supply Chain Manager: Coordinates logistics, shipping, and warehouses.
+  * Streams: Commerce/Arts/Science. Key subjects: Business Studies, Economics.
+  * Salary: ₹5–18 LPA.
+- HR Manager & HR Analytics Specialist: Manages recruitment and personnel data.
+  * Streams: Commerce/Arts/Science. Key subjects: Psychology, Business Studies.
+  * Salary: ₹5–16 LPA.
+- Brand Manager & Digital Marketing Strategist: Manages advertisement campaigns and SEO.
+  * Streams: Commerce/Arts/Science. Key subjects: Economics, Business Studies, Creative.
+  * Salary: ₹5–18 LPA.
+
+--------------------------------------------------------------------------------
+4. HUMANITIES, ARTS, DESIGN, & LEGAL PATHWAYS
+--------------------------------------------------------------------------------
+- IAS / Civil Services Officer: Runs districts and drafts public policy.
+  * Streams: Arts/Humanities/Science/Commerce (Open to all disciplines).
+  * Top Entry: Clear UPSC Civil Services Examination.
+  * Salary: ₹7–12 LPA (plus administrative housing and amenities).
+- Corporate Lawyer & Environmental Lawyer: Advises on business laws / environmental policies.
+  * Streams: Open to all. Key subjects: Political Science, Legal Studies, English.
+  * Top Colleges: NLSIU Bangalore, NALSAR Hyderabad, NUJS Kolkata.
+  * Salary: ₹6–24 LPA starting (especially corporate firms).
+- UI/UX Designer & UX Researcher: Designs user interfaces / conducts user tests.
+  * Streams: Arts/Science/Commerce. Key subjects: Design, Psychology, CS.
+  * Top Colleges: NID Ahmedabad, IIT Bombay, IDC.
+  * Salary: ₹6–20 LPA.
+- Graphic Designer & Animator/3D Artist: Creates visual marketing assets / character animations.
+  * Streams: Arts/Commerce/Science. Key subjects: Fine Arts, Design.
+  * Salary: ₹3.5–12 LPA.
+- Film Director & Content Creator: Coordinates movie sets / writes scripts.
+  * Streams: Arts/Humanities. Key subjects: Literature, History, Media Studies.
+  * Salary: Highly variable based on projects.
+- Public Policy Analyst: Evaluates government programs and advises on reforms.
+  * Streams: Arts/Humanities (Economics, Sociology, Political Science).
+  * Salary: ₹5–16 LPA.
+- Forensic Psychologist: Evaluates suspect behavior for criminal investigations.
+  * Streams: Arts/PCB (Psychology). Key subjects: Psychology, Biology.
+  * Salary: ₹4–12 LPA.
