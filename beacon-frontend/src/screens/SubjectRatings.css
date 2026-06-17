@@ -1,0 +1,36 @@
+.star-rating {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.star-row {
+  display: flex;
+  gap: 2px;
+}
+
+.star-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 2px 3px;
+  transition: transform 0.15s ease;
+}
+
+.star-btn.hover,
+.star-btn.active {
+  transform: scale(1.2);
+}
+
+.star-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #d1d5db;
+  min-height: 1rem;
+  transition: color 0.15s;
+}
+
+.star-label.active {
+  color: #f59e0b;
+}

@@ -199,6 +199,9 @@ const LEVEL_BG    = { High: "#f0fdf4", Medium: "#fffbeb", Low: "#fef2f2" };
 
 export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onRetake }) {
   const primary      = result.primary_type;
+  console.log("RESULT RECEIVED:", result);
+
+  const primary = result.primary_type;
   const primaryColor = getColor(primary);
   const traits       = TRAITS[primary] || [];
   const strengths    = STRENGTHS[primary] || [];
@@ -209,6 +212,9 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
   const admission    = ADMISSION_PROCESS[result.stream] || ADMISSION_PROCESS["PCM"];
   const broaderMap   = BROADER_CAREERS[primary] || {};
   const dashboardUrl = `${beaconOrigin || "http://localhost:5173"}/dashboard?scores_written=1`;
+  const riasecScores = result.riasec_scores ?? result.scores ?? [];
+  const entranceExams = result.entrance_exams ?? [];
+  const skillsToBuild = result.skills_to_build ?? [];
 
   // New fields from updated backend
   const primaryCareers   = result.primary_careers  || result.careers || [];
@@ -272,6 +278,7 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
           <div className="scores-section">
             <p className="scores-title">RIASEC Scores</p>
             {riasecScores.map(item => (
+            {(riasecScores || []).map(item => (
               <div key={item.category} className="score-row">
                 <span className="score-label">{item.category}</span>
                 <div className="score-bar-wrap">
@@ -409,7 +416,7 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
           <h2 className="section-title">Your Personality Traits</h2>
           <p className="section-sub">People with a <strong>{primary}</strong> personality type typically show these characteristics:</p>
           <div className="traits-grid">
-            {traits.map((trait, i) => (
+            {(traits || []).map((trait, i) => (
               <div key={i} className="trait-chip">
                 <span className="trait-dot" style={{ background: primaryColor }} />
                 {trait}
@@ -431,6 +438,13 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
             <div className="sc-card challenges-card" style={{ borderTopColor: primaryColor }}>
               <h3><AlertTriangle size={18} /> Potential challenges</h3>
               <ul>{challenges.map((c, i) => <li key={i}>{c}</li>)}</ul>
+            <div className="sc-card strengths-card" style={{borderTopColor: primaryColor}}>
+              <h3><CheckCircle2 size={18}/> Your strengths</h3>
+              <ul>{(strengths || []).map((s, i) => <li key={i}>{s}</li>)}</ul>
+            </div>
+            <div className="sc-card challenges-card" style={{borderTopColor: primaryColor}}>
+              <h3><AlertTriangle size={18}/> Potential challenges</h3>
+              <ul>{(challenges || []).map((c, i) => <li key={i}>{c}</li>)}</ul>
               <p className="challenge-note">These are natural tendencies, not fixed limitations. Awareness is the first step to growth.</p>
             </div>
           </div>
@@ -473,7 +487,7 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
           <h2 className="section-title">Entrance Exams to Target</h2>
           <p className="section-sub">Based on your stream ({result.stream}) and career direction, these are the key exams to prepare for:</p>
           <div className="exam-grid">
-            {result.entrance_exams.map((exam, i) => (
+            {(entranceExams || []).map((exam, i) => (
               <div key={i} className="exam-card">
                 <Target size={18} />
                 <h4>{exam.name}</h4>
@@ -512,13 +526,16 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
           <h2 className="section-title">Your Personalised Action Plan</h2>
           <p className="section-sub">A step-by-step roadmap from now until college — built around your <strong>{primary}</strong> personality:</p>
           <div className="action-timeline">
-            {actionPlan.map((phase, i) => (
+            {(actionPlan || []).map((phase, i) => (
               <div key={i} className="phase-card">
                 <div className="phase-header">
                   <Compass size={18} />
                   <h4>{phase.phase}</h4>
                 </div>
                 <ul>{phase.actions.map((action, j) => <li key={j}>{action}</li>)}</ul>
+                <ul>
+                  {(phase.actions || []).map((action, j) => <li key={j}>{action}</li>)}
+                </ul>
               </div>
             ))}
           </div>
@@ -531,7 +548,7 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
           <h2 className="section-title">Skills to Build Now</h2>
           <p className="section-sub">Start developing these skills before Class 12 ends — they will strengthen both your applications and your confidence:</p>
           <div className="skills-grid">
-            {result.skills_to_build.map((skill, i) => (
+            {(skillsToBuild || []).map((skill, i) => (
               <div key={i} className="skill-card">
                 <BookOpen size={16} />
                 <h4>{skill.name}</h4>

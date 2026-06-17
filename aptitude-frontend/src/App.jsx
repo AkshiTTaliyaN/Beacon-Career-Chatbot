@@ -75,13 +75,23 @@ export default function App() {
   }
 
   const handleSubmit = async (data) => {
-    setFormData(data);
+    const payload = {
+      name: data.name,
+      class_level: data.class_level,
+      stream: data.stream,
+      riasec_answers: data.riasec_answers ?? data.answers ?? [],
+      hobbies: data.hobbies ?? [],
+      aptitude_answers: data.aptitude_answers ?? [],
+    };
+    setFormData(payload);
 
     try {
       const res = await fetch(`${APTITUDE_API}/api/submit`, {
+      console.log("SUBMIT PAYLOAD", payload);
+      const res = await fetch("http://127.0.0.1:8001/api/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
       });
       if (!res.ok) throw new Error(`Submission failed with status ${res.status}`);
 

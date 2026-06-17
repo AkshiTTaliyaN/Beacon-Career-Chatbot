@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import Layout from "../components/Layout";
-
-const NAVY = '#2C5492';
+import AnimatedQuestionCard from "../components/onboarding/AnimatedQuestionCard";
 
 const PRIORITIES = [
   'High Salary',
@@ -11,6 +11,24 @@ const PRIORITIES = [
   'Intellectual Challenge',
   'Work Life Balance',
 ];
+
+const PRIORITY_DISPLAY = {
+  'High Salary': '💰 High Salary',
+  'Job Stability': '🛡️ Job Stability',
+  'Creative Freedom': '🎨 Creative Freedom',
+  'Social Impact': '🌍 Social Impact',
+  'Intellectual Challenge': '🧩 Intellectual Challenge',
+  'Work Life Balance': '⚖️ Work-Life Balance',
+};
+
+const WORK_LABELS = {
+  building: '🔧 Building & fixing things — models, machines, DIY',
+  researching: '🔍 Finding patterns & solving problems',
+  creative: '🎨 Creating — art, writing, design, music',
+  helping: '🤝 Helping & teaching people',
+  leading: '📣 Leading groups & pitching ideas',
+  structured: '📋 Organised work — plans, data, checklists',
+};
 
 export default function WorkStyle({ form, setForm, onNext, onBack }) {
   const [msg, setMsg] = useState('');
@@ -27,7 +45,7 @@ export default function WorkStyle({ form, setForm, onNext, onBack }) {
       return;
     }
     if ((arr || []).length >= 3) {
-      setMsg('You can only pick 3');
+      setMsg('Pick 3 max — tap one to swap.');
       return;
     }
     setForm((prev) => ({ ...prev, careerPriorities: [...arr, p] }));
@@ -45,11 +63,11 @@ export default function WorkStyle({ form, setForm, onNext, onBack }) {
   function handleNext(e) {
     e.preventDefault();
     if ((form.careerPriorities || []).length !== 3) {
-      setMsg('Please select exactly 3 priorities');
+      setMsg('Pick exactly 3 priorities.');
       return;
     }
     if (!form.workPreferences?.relocation) {
-      setMsg('Please indicate relocation preference');
+      setMsg('Let us know about relocating.');
       return;
     }
     setMsg('');
@@ -57,56 +75,97 @@ export default function WorkStyle({ form, setForm, onNext, onBack }) {
   }
 
   return (
-    <Layout step={5} totalSteps={9} title="What kind of work suits you" subtitle="This tells us how you like to work and what you want from a career.">
-      <form onSubmit={handleNext} className="form">
-        <div className="section">
-          <p className="section-title">Section A — Work style (rate 1–5)</p>
-          {['building','researching','creative','helping','leading','structured'].map((k) => (
-            <label key={k} className="field">
-              <span className="field-label">{k === 'building' ? 'Building or fixing physical things' : k === 'researching' ? 'Researching and analysing data' : k === 'creative' ? 'Creative work like art, writing or design' : k === 'helping' ? 'Helping or teaching other people' : k === 'leading' ? 'Leading teams or convincing others' : 'Following structured processes and systems'}</span>
+    <Layout
+      step={5}
+      totalSteps={9}
+      title="What kind of work fits you?"
+      subtitle="Slide to rate how much you'd enjoy each type — 1 = not my thing, 5 = love it."
+    >
+      <form onSubmit={handleNext} className="form onboard-form">
+
+        <AnimatedQuestionCard question="How much would you enjoy each of these?">
+          {['building','researching','creative','helping','leading','structured'].map((k, i) => (
+            <motion.label
+              key={k}
+              className="field slider-field"
+              initial={{ opacity: 0, x: -8 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: i * 0.04 }}
+            >
+              <span className="field-label" style={{ fontSize: "0.9rem" }}>{WORK_LABELS[k]}</span>
               <input type="range" min={1} max={5} value={form.workStyle?.[k] || 3} onChange={(e) => updateWorkStyle(k, e.target.value)} />
-            </label>
+              <div className="slider-labels"><span>1</span><span>5</span></div>
+            </motion.label>
           ))}
-        </div>
+        </AnimatedQuestionCard>
 
-        <hr className="divider" />
-
-        <div className="section">
-          <p className="section-title">Section B — Career priorities (pick exactly 3)</p>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-            {PRIORITIES.map((p) => {
+        <AnimatedQuestionCard question="🏆 Pick your top 3 career priorities" delay={0.05}>
+          <div className="priority-grid">
+            {PRIORITIES.map((p, i) => {
               const sel = (form.careerPriorities || []).includes(p);
               return (
-                <button key={p} type="button" onClick={() => togglePriority(p)} style={{ padding: '0.9rem', borderRadius: 8, border: sel ? `2px solid ${NAVY}` : '1px solid #e5e7eb', background: sel ? NAVY : '#fff', color: sel ? '#fff' : '#111', cursor: 'pointer' }}>{p}</button>
+                <motion.button
+                  key={p}
+                  type="button"
+                  onClick={() => togglePriority(p)}
+                  className={`priority-chip${sel ? " selected" : ""}`}
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.04 }}
+                >
+                  {PRIORITY_DISPLAY[p] || p}
+                </motion.button>
               );
             })}
           </div>
           {msg && <p className="field-error">{msg}</p>}
-        </div>
+        </AnimatedQuestionCard>
 
-        <hr className="divider" />
-
-        <div className="section">
-          <p className="section-title">Section C — Final questions</p>
-          <label className="field">
-            <span className="field-label">Do you prefer working alone or in a team?</span>
+        <AnimatedQuestionCard question="Do you prefer working solo or with a team?" delay={0.1}>
+          <label className="field slider-field">
             <input type="range" min={1} max={5} value={form.workPreferences?.soloTeam || 3} onChange={(e) => setSoloTeam(e.target.value)} />
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13 }}><span>Solo</span><span>Team</span></div>
+            <div className="slider-labels"><span>Mostly solo</span><span>Mostly team</span></div>
           </label>
 
-          <label className="field">
-            <span className="field-label">Are you open to relocating for work?</span>
-            <div style={{ display: 'flex', gap: 8 }}>
-              {['Yes','Maybe','No'].map((opt) => (
-                <button key={opt} type="button" onClick={() => setRelocation(opt)} style={{ padding: '0.45rem 0.85rem', borderRadius: 999, border: form.workPreferences?.relocation === opt ? `2px solid ${NAVY}` : '1px solid #e5e7eb', background: form.workPreferences?.relocation === opt ? NAVY : '#fff', color: form.workPreferences?.relocation === opt ? '#fff' : '#111', cursor: 'pointer' }}>{opt}</button>
+          <label className="field" style={{ marginTop: "1rem" }}>
+            <span className="question-heading" style={{ marginBottom: "0.75rem" }}>
+              ✈️ Would you move to another city for college or work?
+            </span>
+            <div className="reloc-pills">
+              {['Yes','Maybe','No'].map((opt, i) => (
+                <motion.button
+                  key={opt}
+                  type="button"
+                  onClick={() => setRelocation(opt)}
+                  className={`reloc-pill${form.workPreferences?.relocation === opt ? " selected" : ""}`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: i * 0.05 }}
+                >
+                  {opt}
+                </motion.button>
               ))}
             </div>
           </label>
-        </div>
+        </AnimatedQuestionCard>
 
         <div className="btn-row">
           <button type="button" className="btn btn-ghost" onClick={onBack}>Back</button>
-          <button type="submit" className="btn btn-primary" disabled={!form.workPreferences?.relocation || (form.careerPriorities || []).length !== 3} style={{ opacity: ((!form.workPreferences?.relocation || (form.careerPriorities || []).length !== 3) ? 0.5 : 1), cursor: ((!form.workPreferences?.relocation || (form.careerPriorities || []).length !== 3) ? 'not-allowed' : 'pointer') }}>Continue</button>
+          <button
+            type="submit"
+            className="btn btn-primary"
+            disabled={!form.workPreferences?.relocation || (form.careerPriorities || []).length !== 3}
+            style={{
+              opacity: ((!form.workPreferences?.relocation || (form.careerPriorities || []).length !== 3) ? 0.5 : 1),
+              cursor: ((!form.workPreferences?.relocation || (form.careerPriorities || []).length !== 3) ? 'not-allowed' : 'pointer'),
+            }}
+          >
+            Continue →
+          </button>
         </div>
       </form>
     </Layout>

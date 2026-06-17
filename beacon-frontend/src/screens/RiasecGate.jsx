@@ -56,12 +56,12 @@ export default function RiasecGate() {
 
         {/* Description */}
         <p style={{ margin: '0 0 8px 0', opacity: 0.85, lineHeight: 1.7, maxWidth: 540, fontSize: '0.95rem' }}>
-          Complete the free 60-question psychometric test based on the globally validated RIASEC model.
-          It takes 10–15 minutes and your results are saved to your profile automatically.
+          Take our free 60-question psychometric test based on the globally trusted RIASEC model.
+          It takes about 10–15 minutes, and your results are saved to your profile automatically.
         </p>
         <p style={{ margin: '0 0 28px 0', opacity: 0.7, fontSize: '0.88rem', lineHeight: 1.6 }}>
-          Your scores are then combined with your subject strengths, work preferences, and career goals
-          to rank careers specifically for you — not a generic list.
+          We then combine your scores with your subject strengths, work preferences, and career goals
+          to recommend careers built for you — not a generic list everyone gets.
         </p>
 
         {/* Features row */}
@@ -69,8 +69,8 @@ export default function RiasecGate() {
           {[
             { icon: '⏱', text: '10–15 minutes' },
             { icon: '🆓', text: 'Completely free' },
-            { icon: '💾', text: 'Scores saved to your profile' },
-            { icon: '🌍', text: 'Globally validated framework' },
+            { icon: '💾', text: 'Saved to your profile' },
+            { icon: '🌍', text: 'Globally trusted framework' },
           ].map(({ icon, text }) => (
             <div key={text} style={{
               display: 'flex', alignItems: 'center', gap: 8,
@@ -116,7 +116,7 @@ export default function RiasecGate() {
             onClick={() => { window.history.pushState({}, '', '/report'); window.dispatchEvent(new PopStateEvent('popstate')); }}
             style={{ opacity: 0.7, fontSize: '0.83rem', cursor: 'pointer', textDecoration: 'underline', color: '#fff' }}
           >
-            Already taken it? View your report →
+            Already done it? View your report →
           </span>
         </div>
       </div>

@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import Layout from "../components/Layout";
 import RadioCards from "../components/RadioCards";
+import AnimatedQuestionCard from "../components/onboarding/AnimatedQuestionCard";
+import { STREAM_ICONS } from "../constants/optionIcons";
 import {
   CLASSES,
   BOARDS,
@@ -32,7 +35,6 @@ export default function BasicInfoScreen({ form, setForm, onNext, onBack }) {
 
   function handleNext(e) {
     e.preventDefault();
-    // Validate name + the rest of basic info together
     const nameErrors = validateName(form);
     const basicErrors = validateBasicInfo(form);
     const allErrors = { ...nameErrors, ...basicErrors };
@@ -44,145 +46,151 @@ export default function BasicInfoScreen({ form, setForm, onNext, onBack }) {
     <Layout
       step={2}
       totalSteps={9}
-      title="Basic information"
-      subtitle="Let's start with your name and where you're studying."
+      title="Nice to meet you"
+      subtitle="A few quick details so we can tailor everything to your stage and location."
     >
-      <form onSubmit={handleNext} className="form">
+      <form onSubmit={handleNext} className="form onboard-form">
 
-        {/* ── B: Name — first field ── */}
-        <label className="field">
-          <span className="field-label">Your name *</span>
-          <input
-            type="text"
-            autoComplete="given-name"
-            placeholder="e.g. Aryan Sharma"
-            value={form.name}
-            onChange={(e) => update("name", e.target.value)}
-          />
-          {errors.name && <p className="field-error">{errors.name}</p>}
-        </label>
+        <AnimatedQuestionCard question="👋 What should we call you?" delay={0}>
+          <label className="field">
+            <input
+              type="text"
+              autoComplete="given-name"
+              placeholder="e.g. Aryan Sharma"
+              value={form.name}
+              onChange={(e) => update("name", e.target.value)}
+            />
+            {errors.name && <p className="field-error">{errors.name}</p>}
+          </label>
+        </AnimatedQuestionCard>
 
-        {/* ── Class ── */}
-        <fieldset className="fieldset">
-          <legend className="field-label">Current class *</legend>
-          <div className="pill-row">
-            {CLASSES.map((c) => (
-              <button
-                key={c}
-                type="button"
-                className={`pill ${Number(form.current_class) === c ? "selected" : ""}`}
-                onClick={() => {
-                  update("current_class", String(c));
-                  if (c < 10) update("stream", "none");
-                }}
-              >
-                Class {c}
-              </button>
-            ))}
-          </div>
-          {errors.current_class && (
-            <p className="field-error">{errors.current_class}</p>
-          )}
-        </fieldset>
+        <AnimatedQuestionCard question="🎓 Which class are you in right now?" delay={0.05}>
+          <fieldset className="fieldset">
+            <div className="pill-row">
+              {CLASSES.map((c, i) => (
+                <motion.button
+                  key={c}
+                  type="button"
+                  className={`pill ${Number(form.current_class) === c ? "selected" : ""}`}
+                  onClick={() => {
+                    update("current_class", String(c));
+                    if (c < 10) update("stream", "none");
+                  }}
+                  whileHover={{ scale: 1.04, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.03 }}
+                >
+                  Class {c}
+                </motion.button>
+              ))}
+            </div>
+            {errors.current_class && (
+              <p className="field-error">{errors.current_class}</p>
+            )}
+          </fieldset>
+        </AnimatedQuestionCard>
 
-        {/* ── Board ── */}
-        <label className="field">
-          <span className="field-label">Board *</span>
-          <select
-            value={form.board}
-            onChange={(e) => update("board", e.target.value)}
-          >
-            <option value="">Select board</option>
-            {BOARDS.map((b) => (
-              <option key={b.value} value={b.value}>
-                {b.label}
-              </option>
-            ))}
-          </select>
-          {errors.board && <p className="field-error">{errors.board}</p>}
-        </label>
+        <AnimatedQuestionCard question="📋 Which board are you studying under?" delay={0.1}>
+          <label className="field">
+            <select
+              value={form.board}
+              onChange={(e) => update("board", e.target.value)}
+            >
+              <option value="">Choose your board</option>
+              {BOARDS.map((b) => (
+                <option key={b.value} value={b.value}>
+                  {b.label}
+                </option>
+              ))}
+            </select>
+            {errors.board && <p className="field-error">{errors.board}</p>}
+          </label>
+        </AnimatedQuestionCard>
 
-        {/* ── Stream (Class 10+) ── */}
         {showStream && (
-          <div className="field">
-            <span className="field-label">Stream *</span>
+          <AnimatedQuestionCard
+            question="🔬 What's your stream — or what are you leaning towards?"
+            delay={0.15}
+          >
             <RadioCards
               name="stream"
               options={STREAMS}
               value={form.stream}
               onChange={(v) => update("stream", v)}
               error={errors.stream}
+              columns={2}
+              iconMap={STREAM_ICONS}
             />
-          </div>
+          </AnimatedQuestionCard>
         )}
 
-        {/* ── State ── */}
-        <label className="field">
-          <span className="field-label">State *</span>
-          <select
-            value={form.state}
-            onChange={(e) => handleStateChange(e.target.value)}
-          >
-            <option value="">Select state</option>
-            {INDIAN_STATES.map((s) => (
-              <option key={s} value={s}>
-                {s}
-              </option>
-            ))}
-          </select>
-          {errors.state && <p className="field-error">{errors.state}</p>}
-        </label>
-
-        {/* ── City ── */}
-        <label className="field">
-          <span className="field-label">City *</span>
-          {cityOptions.length > 0 ? (
+        <AnimatedQuestionCard question="📍 Where do you live?" delay={0.2}>
+          <label className="field">
             <select
-              value={form.city}
-              onChange={(e) => update("city", e.target.value)}
-              disabled={!form.state}
+              value={form.state}
+              onChange={(e) => handleStateChange(e.target.value)}
             >
-              <option value="">Select city</option>
-              {cityOptions.map((c) => (
-                <option key={c} value={c}>
-                  {c}
+              <option value="">State</option>
+              {INDIAN_STATES.map((s) => (
+                <option key={s} value={s}>
+                  {s}
                 </option>
               ))}
             </select>
-          ) : (
+            {errors.state && <p className="field-error">{errors.state}</p>}
+          </label>
+          <label className="field" style={{ marginTop: "0.75rem" }}>
+            {cityOptions.length > 0 ? (
+              <select
+                value={form.city}
+                onChange={(e) => update("city", e.target.value)}
+                disabled={!form.state}
+              >
+                <option value="">City</option>
+                {cityOptions.map((c) => (
+                  <option key={c} value={c}>{c}</option>
+                ))}
+              </select>
+            ) : (
+              <input
+                type="text"
+                placeholder={form.state ? "Type your city" : "Pick a state first"}
+                value={form.city}
+                disabled={!form.state}
+                onChange={(e) => update("city", e.target.value)}
+              />
+            )}
+            {errors.city && <p className="field-error">{errors.city}</p>}
+          </label>
+        </AnimatedQuestionCard>
+
+        <AnimatedQuestionCard
+          question={
+            <>
+              🏫 What&apos;s your school called?{" "}
+              <span className="optional">(optional)</span>
+            </>
+          }
+          delay={0.25}
+        >
+          <label className="field">
             <input
               type="text"
-              placeholder={form.state ? "Enter your city" : "Select a state first"}
-              value={form.city}
-              disabled={!form.state}
-              onChange={(e) => update("city", e.target.value)}
+              placeholder="e.g. Delhi Public School"
+              value={form.school_name}
+              onChange={(e) => update("school_name", e.target.value)}
             />
-          )}
-          {errors.city && <p className="field-error">{errors.city}</p>}
-          {!form.state && (
-            <p className="field-hint">Select your state above to see cities.</p>
-          )}
-        </label>
-
-        {/* ── School name (optional) ── */}
-        <label className="field">
-          <span className="field-label">
-            School name <span className="optional">(optional)</span>
-          </span>
-          <input
-            type="text"
-            placeholder="School name"
-            value={form.school_name}
-            onChange={(e) => update("school_name", e.target.value)}
-          />
-        </label>
+          </label>
+        </AnimatedQuestionCard>
 
         <div className="btn-row">
           <button type="button" className="btn btn-ghost" onClick={onBack}>
             Back
           </button>
           <button type="submit" className="btn btn-primary">
-            Continue
+            Continue →
           </button>
         </div>
       </form>

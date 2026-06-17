@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import Layout from "../components/Layout";
+import "./SubjectRatings.css";
 
 /* ─── Stream → subject map ─────────────────────────────────────── */
 const STREAM_SUBJECTS = {
@@ -38,7 +40,6 @@ const STREAM_SUBJECTS = {
     { label: "Economics",           key: "economics",         icon: "📈" },
     { label: "English & Literature",key: "englishLiterature", icon: "📖" },
   ],
-  // Class 9–10 or undecided stream
   none: [
     { label: "Mathematics",         key: "mathematics",       icon: "📐" },
     { label: "Science",             key: "science",           icon: "🔬" },
@@ -51,132 +52,75 @@ const STREAM_SUBJECTS = {
 
 function getSubjects(currentClass, stream) {
   const cls = Number(currentClass);
-  // Class 9 or 10 always gets the generic list
   if (cls <= 10) return STREAM_SUBJECTS["none"];
-  // Class 11–12: use stream if known, else generic
   const key = stream && STREAM_SUBJECTS[stream] ? stream : "none";
   return STREAM_SUBJECTS[key];
 }
 
-const MOOD_LABELS = ["", "Struggling 😟", "Getting by 😐", "Comfortable 🙂", "Really good 😄", "Favourite ⭐"];
+const MOOD_LABELS = ["", "Tough 😟", "Okay 😐", "Solid 🙂", "Strong 😄", "Love it ⭐"];
 
-/* ─── Premium Star rating component ─────────────────────────────── */
 function StarRating({ value, onChange }) {
   const [hovered, setHovered] = useState(0);
   const active = hovered || value;
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 4 }}>
-      <div style={{ display: "flex", gap: 2 }}>
+    <div className="star-rating">
+      <div className="star-row">
         {[1, 2, 3, 4, 5].map((n) => (
-          <button
+          <motion.button
             key={n}
             type="button"
             onMouseEnter={() => setHovered(n)}
             onMouseLeave={() => setHovered(0)}
             onClick={() => onChange(n)}
             aria-label={MOOD_LABELS[n]}
-            style={{
-              background: "transparent",
-              border: "none",
-              cursor: "pointer",
-              padding: "2px 3px",
-              transition: "transform 0.12s ease",
-              transform: hovered === n ? "scale(1.35)" : active >= n ? "scale(1.1)" : "scale(1)",
-            }}
+            className={`star-btn${active >= n ? " active" : ""}${hovered === n ? " hover" : ""}`}
+            whileHover={{ scale: 1.25 }}
+            whileTap={{ scale: 0.9 }}
           >
-            <svg
-              width="24" height="24" viewBox="0 0 24 24"
+            <svg width="26" height="26" viewBox="0 0 24 24"
               fill={active >= n ? "#f59e0b" : "none"}
               stroke={active >= n ? "#f59e0b" : "#d1d5db"}
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              style={{
-                filter: active >= n ? "drop-shadow(0 0 4px rgba(245,158,11,0.5))" : "none",
-                transition: "all 0.15s ease",
-              }}
-            >
+              strokeWidth="1.5">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
             </svg>
-          </button>
+          </motion.button>
         ))}
       </div>
-      <span style={{
-        fontSize: "0.72rem",
-        fontWeight: 600,
-        color: active ? "#f59e0b" : "#d1d5db",
-        minHeight: "1rem",
-        transition: "all 0.15s",
-        letterSpacing: "0.02em",
-      }}>
+      <span className={`star-label${active ? " active" : ""}`}>
         {active ? MOOD_LABELS[active] : "Tap to rate"}
       </span>
     </div>
   );
 }
 
-/* ─── Subject card ────────────────────────────────────────────── */
-function SubjectCard({ subject, rating, onChange }) {
+function SubjectCard({ subject, rating, onChange, index }) {
   const rated = rating > 0;
-
   return (
-    <div style={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      gap: 16,
-      padding: "1rem 1.2rem",
-      borderRadius: 14,
-      border: rated ? "1.5px solid #f59e0b" : "1.5px solid #e4e0db",
-      background: rated
-        ? "linear-gradient(135deg, #fffbeb 0%, #fff8e1 100%)"
-        : "linear-gradient(135deg, #fafafa 0%, #ffffff 100%)",
-      boxShadow: rated
-        ? "0 2px 16px rgba(245,158,11,0.12)"
-        : "0 1px 4px rgba(0,0,0,0.04)",
-      transition: "all 0.2s ease",
-    }}>
-      {/* Left: Icon + Label */}
-      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-        <div style={{
-          fontSize: "1.5rem",
-          width: 40,
-          height: 40,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: rated ? "rgba(245,158,11,0.12)" : "#f3f4f6",
-          borderRadius: 10,
-          transition: "all 0.2s",
-        }}>
-          {subject.icon}
-        </div>
-        <span style={{
-          fontWeight: 700,
-          fontSize: "0.95rem",
-          color: rated ? "#92400e" : "#374151",
-        }}>
-          {subject.label}
-        </span>
+    <motion.div
+      className={`subject-card${rated ? " rated" : ""}`}
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.06, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -3, transition: { duration: 0.2 } }}
+    >
+      <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+        <div className="subject-card-icon">{subject.icon}</div>
+        <span className="subject-card-label">{subject.label}</span>
       </div>
-
-      {/* Right: Stars */}
       <StarRating value={rating} onChange={onChange} />
-    </div>
+    </motion.div>
   );
 }
 
-/* ─── Main screen ─────────────────────────────────────────────── */
 export default function SubjectRatings({ form, setForm, onNext, onBack }) {
   const subjects = getSubjects(form.current_class, form.stream);
   const ratedCount = subjects.filter(s => (form.subjectRatings?.[s.key] || 0) > 0).length;
   const allRated = ratedCount === subjects.length;
 
-  // Determine a friendly stream label for the heading
   const streamLabels = {
     pcm: "Science (PCM)", pcb: "Science (PCB)", pcmb: "Science (PCMB)",
-    comm: "Commerce", arts: "Arts / Humanities", none: "your stream",
+    comm: "Commerce", arts: "Arts / Humanities", none: "your subjects",
   };
   const cls = Number(form.current_class);
   const streamLabel = cls <= 10
@@ -197,77 +141,56 @@ export default function SubjectRatings({ form, setForm, onNext, onBack }) {
   }
 
   return (
-    <Layout step={3} totalSteps={9} title="How are you with your subjects?" subtitle={`Rate each of ${streamLabel} honestly — this helps us personalise your career matches.`}>
-
-      {/* ─ Stream badge ─ */}
+    <Layout
+      step={3}
+      totalSteps={9}
+      title="How do you feel about your subjects?"
+      subtitle={`Be honest — 1 star means it's tough, 5 means you genuinely love it.`}
+    >
       {form.stream && form.stream !== "none" && cls >= 11 && (
-        <div style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: 6,
-          padding: "0.35rem 0.85rem",
-          borderRadius: 999,
-          fontSize: "0.8rem",
-          fontWeight: 700,
-          letterSpacing: "0.04em",
-          background: "linear-gradient(90deg, #2C5492 0%, #7b9ef7 100%)",
-          color: "#fff",
-          marginBottom: "1.25rem",
-          boxShadow: "0 2px 10px rgba(44,84,146,0.25)",
-          alignSelf: "flex-start",
-        }}>
-          ✦ {streamLabels[form.stream] || form.stream} stream
-        </div>
+        <motion.span
+          className="stream-badge"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+        >
+          ✦ {streamLabels[form.stream] || form.stream}
+        </motion.span>
       )}
 
-      <form onSubmit={handleNext} style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-
-        {/* Subject cards */}
-        {subjects.map((s) => (
+      <form onSubmit={handleNext} className="onboard-form">
+        {subjects.map((s, i) => (
           <SubjectCard
             key={s.key}
             subject={s}
             rating={form.subjectRatings?.[s.key] || 0}
             onChange={(val) => setRating(s.key, val)}
+            index={i}
           />
         ))}
 
-        {/* Progress indicator */}
-        <div style={{ marginTop: 8 }}>
-          <div style={{
-            display: "flex",
-            justifyContent: "space-between",
-            fontSize: "0.8rem",
-            color: "#556d8f",
-            marginBottom: 6,
-          }}>
-            <span style={{ fontWeight: 600 }}>
-              {allRated ? "✅ All subjects rated!" : `${ratedCount} of ${subjects.length} rated`}
+        <div className="rating-progress">
+          <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.82rem", color: "#556d8f", marginBottom: 6 }}>
+            <span style={{ fontWeight: 700 }}>
+              {allRated ? "All rated — nice work!" : `${ratedCount} / ${subjects.length} done`}
             </span>
-            {!allRated && (
-              <span style={{ color: "#9ca3af" }}>Rate all to continue</span>
-            )}
+            {!allRated && <span style={{ color: "#9ca3af" }}>Rate all to continue</span>}
           </div>
-          <div style={{
-            height: 5,
-            background: "#f3f4f6",
-            borderRadius: 999,
-            overflow: "hidden",
-          }}>
-            <div style={{
-              height: "100%",
-              width: `${(ratedCount / subjects.length) * 100}%`,
-              background: allRated
-                ? "linear-gradient(90deg, #10b981, #34d399)"
-                : "linear-gradient(90deg, #2C5492, #7b9ef7)",
-              borderRadius: 999,
-              transition: "width 0.3s ease",
-            }} />
+          <div className="rating-progress-bar">
+            <motion.div
+              className="rating-progress-fill"
+              initial={false}
+              animate={{ width: `${(ratedCount / subjects.length) * 100}%` }}
+              transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
+              style={{
+                background: allRated
+                  ? "linear-gradient(90deg, #10b981, #34d399)"
+                  : "linear-gradient(90deg, #2C5492, #7b9ef7)",
+              }}
+            />
           </div>
         </div>
 
-        {/* Buttons */}
-        <div className="btn-row" style={{ marginTop: 8 }}>
+        <div className="btn-row">
           <button type="button" className="btn btn-ghost" onClick={onBack}>Back</button>
           <button
             type="submit"

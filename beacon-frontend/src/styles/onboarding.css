@@ -1,0 +1,675 @@
+/* ─── Beacon Onboarding — premium guided journey (homepage aesthetic) ── */
+
+/* ─── Animated background ─────────────────────────────────────── */
+.onboard-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: linear-gradient(165deg, #0d1333 0%, #111842 38%, #1a2560 72%, #0f1a45 100%);
+}
+
+.onboard-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(0, 212, 255, 0.035) 0px, transparent 1px, transparent 56px),
+    repeating-linear-gradient(90deg, rgba(0, 212, 255, 0.035) 0px, transparent 1px, transparent 56px);
+}
+
+.onboard-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.55;
+}
+
+.onboard-orb--cyan {
+  width: 320px;
+  height: 320px;
+  top: -80px;
+  right: -60px;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.22) 0%, transparent 70%);
+}
+
+.onboard-orb--purple {
+  width: 280px;
+  height: 280px;
+  bottom: 10%;
+  left: -70px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.18) 0%, transparent 70%);
+}
+
+.onboard-orb--blue {
+  width: 220px;
+  height: 220px;
+  top: 45%;
+  right: 15%;
+  background: radial-gradient(circle, rgba(44, 84, 146, 0.35) 0%, transparent 70%);
+}
+
+/* ─── Body override when onboarding is active ───────────────────── */
+body:has(.onboard-layout) {
+  background: #0d1333;
+}
+
+/* ─── Layout shell overrides ────────────────────────────────────── */
+.layout.onboard-layout {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+.layout.onboard-layout .onboard-main {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2rem 1.25rem 3rem;
+  background: transparent;
+}
+
+.onboard-header {
+  position: relative;
+  z-index: 2;
+  background: rgba(13, 19, 51, 0.65);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.onboard-brand-name {
+  color: #fff !important;
+  text-shadow: 0 0 24px rgba(0, 212, 255, 0.25);
+}
+
+.onboard-brand-tag {
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+
+.onboard-demo-badge {
+  background: rgba(0, 212, 255, 0.15);
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+}
+
+.onboard-footer {
+  position: relative;
+  z-index: 2;
+  background: rgba(13, 19, 51, 0.8);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.onboard-footer p {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* ─── Glass panel (main card) ───────────────────────────────────── */
+.glass-panel {
+  width: 100%;
+  max-width: 680px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 24px;
+  padding: 2rem 1.85rem 2.25rem;
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(255, 255, 255, 0.12) inset,
+    0 0 80px rgba(0, 212, 255, 0.06);
+}
+
+.onboard-card-title {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.5rem, 3.5vw, 1.85rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: #102849;
+}
+
+.onboard-card-subtitle {
+  margin: 0 0 1.35rem;
+  color: #5f6b8d;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* ─── Form layout ───────────────────────────────────────────────── */
+.onboard-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+/* ─── Question cards ────────────────────────────────────────────── */
+.glass-card,
+.onboard-section {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(220, 228, 245, 0.9);
+  border-radius: 18px;
+  padding: 1.35rem 1.4rem;
+  box-shadow: 0 4px 20px rgba(44, 84, 146, 0.06);
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.glass-card:focus-within,
+.onboard-section:focus-within {
+  border-color: rgba(44, 84, 146, 0.45);
+  box-shadow: 0 8px 32px rgba(44, 84, 146, 0.12);
+}
+
+.question-heading {
+  display: block;
+  font-size: 1.08rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #102849;
+  margin: 0 0 1rem;
+  letter-spacing: -0.02em;
+}
+
+/* ─── Progress ──────────────────────────────────────────────────── */
+.onboard-progress {
+  margin-bottom: 1.5rem;
+}
+
+.onboard-progress-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.6rem;
+}
+
+.onboard-progress-step {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #2C5492;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.onboard-progress-pct {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #426FB1;
+}
+
+.onboard-progress-bar {
+  height: 12px;
+  background: rgba(44, 84, 146, 0.1);
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(16, 40, 73, 0.08);
+}
+
+.onboard-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #2C5492 0%, #426FB1 50%, #00d4ff 100%);
+  border-radius: 999px;
+  box-shadow: 0 0 16px rgba(0, 212, 255, 0.45);
+}
+
+/* ─── Option cards (premium radio) ──────────────────────────────── */
+.option-grid {
+  display: grid;
+  gap: 0.7rem;
+}
+
+@media (min-width: 520px) {
+  .option-grid--2col {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.option-card {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  border-radius: 16px;
+  border: 1.5px solid #dce4f5;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(16, 40, 73, 0.05);
+  transition: border-color 0.2s, box-shadow 0.25s, background 0.2s;
+}
+
+.option-card input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.option-card-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.95rem 1.1rem;
+}
+
+.option-card-icon {
+  font-size: 1.35rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.option-card-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.option-card-label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: #102849;
+  line-height: 1.35;
+}
+
+.option-card-desc {
+  display: block;
+  font-size: 0.76rem;
+  color: #5f6b8d;
+  margin-top: 0.15rem;
+  line-height: 1.3;
+}
+
+.option-card-check {
+  flex-shrink: 0;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2C5492, #426FB1);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 12px rgba(44, 84, 146, 0.4);
+}
+
+.option-card.selected {
+  border-color: #2C5492;
+  background: linear-gradient(135deg, rgba(234, 241, 251, 0.95) 0%, rgba(255, 255, 255, 0.98) 100%);
+  box-shadow:
+    0 0 0 1px rgba(44, 84, 146, 0.15),
+    0 8px 28px rgba(44, 84, 146, 0.16),
+    0 0 24px rgba(0, 212, 255, 0.08);
+}
+
+/* Legacy radio-card (fallback) */
+.radio-grid { display: grid; gap: 0.7rem; }
+.radio-grid--2col { grid-template-columns: 1fr 1fr; }
+
+/* ─── Pills ─────────────────────────────────────────────────────── */
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.pill {
+  padding: 0.62rem 1.15rem;
+  border-radius: 999px;
+  border: 1.5px solid #dce4f5;
+  background: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 6px rgba(16, 40, 73, 0.05);
+}
+
+.pill:hover {
+  border-color: #6A9AD4;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(44, 84, 146, 0.12);
+}
+
+.pill.selected {
+  background: linear-gradient(135deg, #2C5492 0%, #426FB1 100%);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 6px 20px rgba(44, 84, 146, 0.35);
+  transform: translateY(-2px);
+}
+
+/* ─── Inputs ────────────────────────────────────────────────────── */
+.onboard-section input[type="text"],
+.onboard-section input[type="email"],
+.onboard-section select,
+.onboard-section textarea,
+.glass-card input[type="text"],
+.glass-card input[type="email"],
+.glass-card select,
+.glass-card textarea {
+  width: 100%;
+  border-radius: 14px;
+  border: 1.5px solid #dce4f5;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  font-family: inherit;
+  background: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.onboard-section input:focus,
+.onboard-section select:focus,
+.onboard-section textarea:focus,
+.glass-card input:focus,
+.glass-card select:focus,
+.glass-card textarea:focus {
+  outline: none;
+  border-color: #2C5492;
+  box-shadow: 0 0 0 3px rgba(44, 84, 146, 0.14);
+}
+
+/* ─── Family section ────────────────────────────────────────────── */
+.family-section {
+  background: rgba(241, 245, 249, 0.65);
+  border: 1.5px dashed rgba(148, 163, 184, 0.7);
+  border-radius: 18px;
+  padding: 1.25rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.family-section-label {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+/* ─── Subject cards ─────────────────────────────────────────────── */
+.subject-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 1.15rem 1.3rem;
+  border-radius: 18px;
+  border: 1.5px solid #e4e0db;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.subject-card:hover {
+  border-color: #c4c8d0;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+  transform: translateY(-2px);
+}
+
+.subject-card.rated {
+  border-color: #f59e0b;
+  background: linear-gradient(135deg, #fffbeb 0%, #fff8e1 100%);
+  box-shadow: 0 8px 28px rgba(245, 158, 11, 0.22);
+  transform: scale(1.01);
+}
+
+.subject-card-icon {
+  font-size: 2rem;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f4f6;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.subject-card.rated .subject-card-icon {
+  background: rgba(245, 158, 11, 0.18);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+}
+
+.subject-card-label {
+  font-weight: 700;
+  font-size: 1.02rem;
+  color: #374151;
+}
+
+.subject-card.rated .subject-card-label {
+  color: #92400e;
+}
+
+.stream-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #2C5492, #5f7dd6);
+  color: #fff;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 16px rgba(44, 84, 146, 0.3);
+}
+
+.rating-progress-bar {
+  height: 8px;
+  background: rgba(44, 84, 146, 0.1);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.rating-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Deep dive ─────────────────────────────────────────────────── */
+.deep-dive-card {
+  border-radius: 18px;
+  border: 1.5px solid #e4e0db;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: all 0.28s ease;
+}
+
+.deep-dive-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(44, 84, 146, 0.1);
+}
+
+.deep-dive-card.selected {
+  border-color: #2C5492;
+  background: linear-gradient(135deg, #eef4fc 0%, #fff 100%);
+  box-shadow: 0 8px 28px rgba(44, 84, 146, 0.14);
+}
+
+.deep-dive-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.95rem 1.2rem 0.75rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.deep-dive-body {
+  padding: 0.8rem 1.2rem 1.1rem;
+}
+
+.deep-dive-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 14px;
+  border: 1.5px solid #dce4f5;
+  font-size: 0.92rem;
+  font-family: inherit;
+  background: #fff;
+  cursor: pointer;
+}
+
+/* ─── Sliders & chips ───────────────────────────────────────────── */
+.slider-field input[type="range"] {
+  width: 100%;
+  accent-color: #2C5492;
+  margin: 0.4rem 0;
+}
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.76rem;
+  color: #5f6b8d;
+  font-weight: 600;
+}
+
+.priority-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+}
+
+.priority-chip,
+.reloc-pill {
+  padding: 0.85rem 0.8rem;
+  border-radius: 14px;
+  border: 1.5px solid #dce4f5;
+  background: #fff;
+  color: #102849;
+  font-weight: 600;
+  font-size: 0.86rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  box-shadow: 0 2px 6px rgba(16, 40, 73, 0.04);
+}
+
+.reloc-pill {
+  padding: 0.55rem 1.15rem;
+  border-radius: 999px;
+}
+
+.priority-chip:hover,
+.reloc-pill:hover {
+  border-color: #6A9AD4;
+  transform: translateY(-2px);
+}
+
+.priority-chip.selected,
+.reloc-pill.selected {
+  border-color: #2C5492;
+  background: linear-gradient(135deg, #2C5492, #426FB1);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(44, 84, 146, 0.3);
+}
+
+.reloc-pills {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tip-banner {
+  padding: 0.9rem 1.1rem;
+  border-radius: 14px;
+  background: rgba(255, 251, 235, 0.9);
+  border: 1px solid #fde68a;
+  font-size: 0.88rem;
+  color: #92400e;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.locked-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.locked-chip {
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+/* ─── Buttons ───────────────────────────────────────────────────── */
+.layout.onboard-layout .btn-primary {
+  border-radius: 14px;
+  padding: 0.95rem 1.5rem;
+  background: linear-gradient(135deg, #2C5492 0%, #426FB1 100%);
+  box-shadow: 0 6px 24px rgba(44, 84, 146, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-weight: 700;
+}
+
+.layout.onboard-layout .btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px rgba(44, 84, 146, 0.42);
+}
+
+.layout.onboard-layout .btn-ghost {
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.layout.onboard-layout .link-btn {
+  color: #2C5492;
+}
+
+/* OTP on dark-ish card */
+.onboard-layout .otp-box {
+  border-radius: 12px;
+  border: 1.5px solid #dce4f5;
+  background: #fff;
+}
+
+.onboard-layout .otp-box:focus {
+  border-color: #2C5492;
+  box-shadow: 0 0 0 3px rgba(44, 84, 146, 0.15);
+}
+
+.otp-section {
+  text-align: center;
+}
+
+.otp-section .otp-row {
+  justify-content: center;
+}
+
+.rating-progress {
+  margin-top: 0.5rem;
+}
+
+/* ─── Responsive ────────────────────────────────────────────────── */
+@media (max-width: 720px) {
+  .glass-panel {
+    border-radius: 20px 20px 0 0;
+    padding: 1.65rem 1.25rem 2rem;
+    max-width: 100%;
+  }
+
+  .priority-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .onboard-main {
+    padding: 1.25rem 0 2rem;
+  }
+
+  .glass-panel {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+}

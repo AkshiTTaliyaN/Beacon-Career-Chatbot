@@ -1,24 +1,25 @@
-export default function RadioCards({ name, options, value, onChange, error }) {
+import OptionCard from "./onboarding/OptionCard";
+
+export default function RadioCards({ name, options, value, onChange, error, columns, iconMap = {} }) {
   return (
     <div>
-      <div className="radio-grid" role="radiogroup" aria-label={name}>
-        {options.map((opt) => (
-          <label
+      <div
+        className={`option-grid${columns === 2 ? " option-grid--2col" : ""}`}
+        role="radiogroup"
+        aria-label={name}
+      >
+        {options.map((opt, i) => (
+          <OptionCard
             key={opt.value}
-            className={`radio-card ${value === opt.value ? "selected" : ""}`}
-          >
-            <input
-              type="radio"
-              name={name}
-              value={opt.value}
-              checked={value === opt.value}
-              onChange={() => onChange(opt.value)}
-            />
-            <span className="radio-card-label">{opt.label}</span>
-            {opt.description && (
-              <span className="radio-card-desc">{opt.description}</span>
-            )}
-          </label>
+            name={name}
+            value={opt.value}
+            checked={value === opt.value}
+            onChange={() => onChange(opt.value)}
+            label={opt.label}
+            description={opt.description}
+            icon={iconMap[opt.value] || opt.icon}
+            index={i}
+          />
         ))}
       </div>
       {error && <p className="field-error">{error}</p>}

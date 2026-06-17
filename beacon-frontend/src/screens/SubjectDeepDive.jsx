@@ -1,35 +1,25 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import Layout from "../components/Layout";
 
-const COLORS = { muted: "#556d8f" };
-
-/* ─── Sub-topic options keyed by subject key ─────────────────── */
 const OPTIONS = {
-  // Science
   mathematics:      ["Calculus & Differential Equations", "Statistics & Probability", "Algebra & Matrices", "Geometry & Coordinate Maths", "Discrete Mathematics"],
   physics:          ["Mechanics & Motion", "Electricity & Magnetism", "Thermodynamics", "Optics & Waves", "Modern Physics & Quantum"],
   chemistry:        ["Organic Chemistry", "Inorganic Chemistry", "Physical Chemistry", "Biochemistry & Biomolecules", "Electrochemistry"],
   biology:          ["Genetics & Evolution", "Ecology & Environment", "Human Physiology", "Microbiology", "Plant Biology & Botany"],
   computerScience:  ["Programming & Data Structures", "Networking & Hardware", "AI & Machine Learning", "Cybersecurity", "Web Development"],
-
-  // Commerce
   accountancy:      ["Financial Accounting", "Partnership & Company Accounts", "Cash Flow Statements", "Auditing & Taxation", "Computerised Accounting"],
   businessStudies:  ["Principles of Management", "Business Environment", "Marketing Management", "Financial Markets", "Entrepreneurship"],
   economics:        ["Microeconomics (Demand & Supply)", "Macroeconomics (GDP, Inflation)", "Indian Economic Development", "Statistical Methods", "International Trade & Finance"],
-
-  // Arts / Humanities
   history:          ["Ancient & Medieval India", "Modern Indian History", "World History (French, Russian Revolutions)", "Art & Cultural History", "Colonial India & Freedom Movement"],
   geography:        ["Physical Geography & Landforms", "Human & Cultural Geography", "Map Work & GIS", "Resources & Sustainable Development", "Climate & Climatology"],
   politicalScience: ["Indian Constitution & Governance", "International Relations", "Political Theory & Ideologies", "Public Policy & Administration", "Electoral Politics"],
-
-  // Common / Class 9-10
   science:          ["Physics Concepts", "Chemistry Concepts", "Biology & Life Sciences", "Environmental Science", "Science & Technology in India"],
   socialScience:    ["History & Civics", "Geography & Economic Development", "Democratic Politics", "Disaster Management", "Economics Basics"],
   englishLiterature:["Fiction & Novel Analysis", "Poetry & Drama", "Writing & Grammar", "Mass Communication & Media", "Creative Writing"],
   hindi:            ["Hindi Grammar (Vyakaran)", "Hindi Literature (Sahitya)", "Writing & Comprehension", "Poetry (Kavita)", "Applied Hindi"],
 };
 
-/* ─── The same stream->subjects map as SubjectRatings ────────── */
 const STREAM_SUBJECT_KEYS = {
   pcm:  ["mathematics", "physics", "chemistry", "computerScience", "englishLiterature"],
   pcb:  ["physics", "chemistry", "biology", "computerScience", "englishLiterature"],
@@ -66,8 +56,6 @@ export default function SubjectDeepDive({ form, setForm, onNext, onBack }) {
   const [errors, setErrors] = useState({});
   const subjectKeys = getSubjectKeys(form.current_class, form.stream);
 
-  // Only show subjects that have OPTIONS defined and the user rated >= 3,
-  // but auto-unlock at least the highest-rated subject even if all < 3
   const ratings = form.subjectRatings || {};
   const ratedKeys = subjectKeys.filter(k => OPTIONS[k]);
 
@@ -89,9 +77,8 @@ export default function SubjectDeepDive({ form, setForm, onNext, onBack }) {
     const nextErrors = {};
     visibleKeys.forEach(k => {
       const val = form.subjectInterests?.[k];
-      // "none" = valid (student not interested), empty = invalid
       if (!val) {
-        nextErrors[k] = `Please pick an area or select "Not interested" for ${getLabel(k)}`;
+        nextErrors[k] = `Pick a topic or choose "None of these" for ${getLabel(k)}`;
       }
     });
     setErrors(nextErrors);
@@ -105,144 +92,97 @@ export default function SubjectDeepDive({ form, setForm, onNext, onBack }) {
     <Layout
       step={4}
       totalSteps={9}
-      title="What excites you most?"
-      subtitle="Pick the area that interests you within your strongest subjects — this sharpens your career recommendations."
+      title="What topics excite you?"
+      subtitle="For the subjects you enjoy most, pick the areas you'd actually want to explore."
     >
-      {/* Contextual tip */}
       {visibleKeys.length === 0 && (
-        <div style={{
-          padding: "0.85rem 1.1rem",
-          borderRadius: 12,
-          background: "#fffbeb",
-          border: "1px solid #fde68a",
-          fontSize: "0.88rem",
-          color: "#92400e",
-          marginBottom: "1rem",
-          fontWeight: 500,
-        }}>
-          💡 Rate your subjects higher in the previous step to unlock subject-area selection here.
-        </div>
+        <motion.div
+          className="tip-banner"
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          💡 Rate subjects 3★+ on the previous step to unlock topic picks here.
+        </motion.div>
       )}
 
-      <form onSubmit={handleNext} style={{ display: "flex", flexDirection: "column", gap: "0.85rem" }}>
-
-        {/* Unlocked subject cards */}
-        {visibleKeys.map(key => {
+      <form onSubmit={handleNext} className="onboard-form">
+        {visibleKeys.map((key, i) => {
           const opts = OPTIONS[key] || [];
           const selected = form.subjectInterests?.[key] || "";
           const rating = ratings[key] || 0;
 
           return (
-            <div key={key} style={{
-              borderRadius: 14,
-              border: selected ? "1.5px solid #2C5492" : "1.5px solid #e4e0db",
-              background: selected
-                ? "linear-gradient(135deg, #eef1fd 0%, #f7f8ff 100%)"
-                : "#ffffff",
-              boxShadow: selected
-                ? "0 2px 14px rgba(45,91,227,0.10)"
-                : "0 1px 4px rgba(0,0,0,0.04)",
-              overflow: "hidden",
-              transition: "all 0.2s ease",
-            }}>
-              {/* Card header */}
-              <div style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                padding: "0.8rem 1.1rem 0.6rem",
-                borderBottom: "1px solid",
-                borderColor: selected ? "rgba(45,91,227,0.12)" : "#f0f0f0",
-              }}>
+            <motion.div
+              key={key}
+              className={`deep-dive-card${selected ? " selected" : ""}`}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.06, duration: 0.35 }}
+              whileHover={{ y: -3 }}
+            >
+              <div className="deep-dive-header">
                 <span style={{ fontWeight: 700, fontSize: "0.95rem", color: "#1e293b" }}>
                   {streamIcon} {getLabel(key)}
                 </span>
-                {/* Star dots showing rating */}
                 <div style={{ display: "flex", gap: 3 }}>
                   {[1,2,3,4,5].map(n => (
                     <div key={n} style={{
-                      width: 7, height: 7,
-                      borderRadius: "50%",
+                      width: 7, height: 7, borderRadius: "50%",
                       background: n <= rating ? "#f59e0b" : "#e5e7eb",
                     }} />
                   ))}
                 </div>
               </div>
-
-              {/* Dropdown area */}
-              <div style={{ padding: "0.7rem 1.1rem 0.9rem" }}>
-                <label style={{ fontSize: "0.82rem", color: COLORS.muted, fontWeight: 600, marginBottom: 6, display: "block" }}>
-                  Which area within this subject interests you most?
+              <div className="deep-dive-body">
+                <label className="question-heading" style={{ fontSize: "0.92rem", marginBottom: "0.65rem" }}>
+                  ✨ In {getLabel(key)}, which topic would you most want to dive into?
                 </label>
                 <select
+                  className={`deep-dive-select${errors[key] ? " error" : ""}`}
                   value={selected}
                   onChange={e => update(key, e.target.value)}
-                  style={{
-                    width: "100%",
-                    padding: "0.6rem 0.85rem",
-                    borderRadius: 8,
-                    border: errors[key] ? "1.5px solid #ef4444" : "1.5px solid #e4e0db",
-                    fontSize: "0.92rem",
-                    fontFamily: "inherit",
-                    background: "#fff",
-                    color: selected ? "#1e293b" : COLORS.muted,
-                    cursor: "pointer",
-                    appearance: "auto",
-                  }}
+                  style={errors[key] ? { borderColor: "#ef4444" } : {}}
                 >
-                  <option value="">Select an area…</option>
-                  <option value="none">🚫 None / Not interested in this subject</option>
+                  <option value="">Choose a topic…</option>
+                  <option value="none">None of these interest me</option>
                   {opts.map(o => (
                     <option key={o} value={o}>{o}</option>
                   ))}
                 </select>
-                {selected === "none" && (
-                  <p style={{ margin: "4px 0 0", fontSize: "0.78rem", color: "#556d8f", fontStyle: "italic" }}>
-                    That's okay — we'll focus your recommendations on other subjects.
-                  </p>
-                )}
                 {errors[key] && (
-                  <p style={{ margin: "4px 0 0", fontSize: "0.8rem", color: "#ef4444" }}>
-                    {errors[key]}
-                  </p>
+                  <p className="field-error" style={{ marginTop: 4 }}>{errors[key]}</p>
                 )}
               </div>
-            </div>
+            </motion.div>
           );
         })}
 
-        {/* Locked subjects (rated low) */}
         {lockedKeys.length > 0 && (
-          <div style={{ marginTop: 4 }}>
-            <p style={{ fontSize: "0.8rem", color: "#9ca3af", fontWeight: 600, marginBottom: 8 }}>
-              Not unlocked (rated lower):
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            <p style={{ fontSize: "0.78rem", color: "#9ca3af", fontWeight: 600, marginBottom: 8 }}>
+              Rate higher to unlock:
             </p>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+            <div className="locked-chips">
               {lockedKeys.map(key => (
-                <div key={key} style={{
-                  padding: "0.4rem 0.9rem",
-                  borderRadius: 999,
-                  background: "#f9fafb",
-                  border: "1px solid #e5e7eb",
-                  fontSize: "0.82rem",
-                  color: "#9ca3af",
-                  fontWeight: 500,
-                }}>
+                <span key={key} className="locked-chip">
                   {getLabel(key)} · {ratings[key] || 0}★
-                </div>
+                </span>
               ))}
             </div>
-          </div>
+          </motion.div>
         )}
 
-        {/* If nothing to show */}
         {visibleKeys.length === 0 && ratedKeys.length === 0 && (
-          <p style={{ color: COLORS.muted, fontSize: "0.9rem", textAlign: "center", padding: "1rem" }}>
+          <p style={{ color: "#556d8f", fontSize: "0.9rem", textAlign: "center", padding: "1rem" }}>
             Go back and rate your subjects first.
           </p>
         )}
 
-        <div className="btn-row" style={{ marginTop: 8 }}>
+        <div className="btn-row">
           <button type="button" className="btn btn-ghost" onClick={onBack}>Back</button>
           <button type="submit" className="btn btn-primary">Continue →</button>
         </div>

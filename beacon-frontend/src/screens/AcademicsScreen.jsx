@@ -1,6 +1,14 @@
 import { useState } from "react";
 import Layout from "../components/Layout";
 import RadioCards from "../components/RadioCards";
+import AnimatedQuestionCard from "../components/onboarding/AnimatedQuestionCard";
+import {
+  PERFORMANCE_ICONS,
+  STUDY_HOURS_ICONS,
+  COACHING_ICONS,
+  CLARITY_ICONS,
+  LEARNING_ICONS,
+} from "../constants/optionIcons";
 import {
   PERFORMANCE_BANDS,
   INCOME_BRACKETS,
@@ -30,171 +38,166 @@ export default function AcademicsScreen({ form, setForm, onNext, onBack }) {
     <Layout
       step={6}
       totalSteps={9}
-      title="Academics & background"
-      subtitle="Help us understand how you study and where you're headed. Family fields are optional."
+      title="Your learning journey"
+      subtitle="How you study, what clicks for you, and where you're headed — keep it real."
     >
-      <form onSubmit={handleNext} className="form">
+      <form onSubmit={handleNext} className="form onboard-form">
 
-        {/* ── Performance band ── */}
-        <div className="field">
-          <span className="field-label">Overall performance band *</span>
+        <AnimatedQuestionCard question="📊 Which range best describes your marks or grades right now?">
           <RadioCards
             name="performance_band"
             options={PERFORMANCE_BANDS}
             value={form.performance_band}
             onChange={(v) => update("performance_band", v)}
             error={errors.performance_band}
+            columns={2}
+            iconMap={PERFORMANCE_ICONS}
           />
-        </div>
+        </AnimatedQuestionCard>
 
-        {/* ── A: Study hours per day ── */}
-        <div className="field">
-          <span className="field-label">
-            How many hours do you study outside school per day? *
-          </span>
+        <AnimatedQuestionCard
+          question="⏰ On a typical day, how much time do you spend learning outside regular school hours (homework, revision, coaching, self-study, etc.)?"
+          delay={0.05}
+        >
           <RadioCards
             name="study_hours"
             options={STUDY_HOURS}
             value={form.study_hours}
             onChange={(v) => update("study_hours", v)}
             error={errors.study_hours}
+            columns={2}
+            iconMap={STUDY_HOURS_ICONS}
           />
-        </div>
+        </AnimatedQuestionCard>
 
-        {/* ── A: Coaching / study setup ── */}
-        <div className="field">
-          <span className="field-label">How are you currently studying? *</span>
+        <AnimatedQuestionCard
+          question="📚 How do you usually prepare for exams?"
+          delay={0.1}
+        >
           <RadioCards
             name="coaching_status"
             options={COACHING_STATUS}
             value={form.coaching_status}
             onChange={(v) => update("coaching_status", v)}
             error={errors.coaching_status}
+            iconMap={COACHING_ICONS}
           />
-        </div>
+        </AnimatedQuestionCard>
 
-        {/* ── A: Career clarity ── */}
-        <div className="field">
-          <span className="field-label">
-            How clear are you about what career you want? *
-          </span>
+        <AnimatedQuestionCard
+          question="🎯 Right now, how clear do you feel about what you'd like to do after school? (It's completely okay if you're still figuring things out.)"
+          delay={0.15}
+        >
           <RadioCards
             name="career_clarity"
             options={CAREER_CLARITY}
             value={form.career_clarity}
             onChange={(v) => update("career_clarity", v)}
             error={errors.career_clarity}
+            columns={2}
+            iconMap={CLARITY_ICONS}
           />
-        </div>
+        </AnimatedQuestionCard>
 
-        {/* ── A: Learning style ── */}
-        <div className="field">
-          <span className="field-label">How do you learn best? *</span>
+        <AnimatedQuestionCard
+          question="🧠 When something new clicks for you, how does it usually happen?"
+          delay={0.2}
+        >
           <RadioCards
             name="learning_style"
             options={LEARNING_STYLES}
             value={form.learning_style}
             onChange={(v) => update("learning_style", v)}
             error={errors.learning_style}
+            iconMap={LEARNING_ICONS}
           />
+        </AnimatedQuestionCard>
+
+        <AnimatedQuestionCard
+          question={
+            <>
+              🎨 What do you enjoy outside school?{" "}
+              <span className="optional">(optional)</span>
+            </>
+          }
+          delay={0.25}
+        >
+          <label className="field">
+            <textarea
+              rows={2}
+              placeholder="e.g. cricket, coding, painting, volunteering"
+              value={form.extracurricular}
+              onChange={(e) => update("extracurricular", e.target.value)}
+            />
+          </label>
+        </AnimatedQuestionCard>
+
+        <div className="family-section">
+          <p className="family-section-label">👨‍👩‍👧 A bit about your family — all optional</p>
+
+          <label className="field">
+            <span className="field-label">💰 What's your family's approximate yearly income?</span>
+            <select
+              value={form.income_bracket}
+              onChange={(e) => update("income_bracket", e.target.value)}
+            >
+              <option value="">Prefer not to say</option>
+              {INCOME_BRACKETS.map((b) => (
+                <option key={b.value} value={b.value}>{b.label}</option>
+              ))}
+            </select>
+          </label>
+
+          <label className="field">
+            <span className="field-label">Father or guardian's occupation</span>
+            <select
+              value={form.father_occupation}
+              onChange={(e) => update("father_occupation", e.target.value)}
+            >
+              <option value="">Choose</option>
+              {OCCUPATIONS.map((o) => (
+                <option key={o} value={o}>{o}</option>
+              ))}
+            </select>
+          </label>
+
+          <label className="field">
+            <span className="field-label">Mother or guardian's occupation</span>
+            <select
+              value={form.mother_occupation}
+              onChange={(e) => update("mother_occupation", e.target.value)}
+            >
+              <option value="">Choose</option>
+              {OCCUPATIONS.map((o) => (
+                <option key={o} value={o}>{o}</option>
+              ))}
+            </select>
+          </label>
+
+          <label className="field">
+            <span className="field-label">Anyone in your family who inspired your career interests?</span>
+            <textarea
+              rows={2}
+              placeholder="e.g. sister in medicine, uncle who's an engineer"
+              value={form.relative_influence}
+              onChange={(e) => update("relative_influence", e.target.value)}
+            />
+          </label>
+
+          <label className="field">
+            <span className="field-label">Do your parents have any career preferences for you?</span>
+            <textarea
+              rows={2}
+              placeholder="e.g. they'd love me to try for IIT, or they're open to anything"
+              value={form.family_preference}
+              onChange={(e) => update("family_preference", e.target.value)}
+            />
+          </label>
         </div>
 
-        {/* ── A: Extracurricular (free text, optional) ── */}
-        <label className="field">
-          <span className="field-label">
-            Extracurricular activities or hobbies{" "}
-            <span className="optional">(optional)</span>
-          </span>
-          <textarea
-            rows={2}
-            placeholder="e.g. robotics club, painting, cricket, coding projects"
-            value={form.extracurricular}
-            onChange={(e) => update("extracurricular", e.target.value)}
-          />
-          <p className="field-hint">
-            These help us understand your interests beyond academics.
-          </p>
-        </label>
-
-        <hr className="divider" />
-        <p className="section-note">Family context — all optional</p>
-
-        <label className="field">
-          <span className="field-label">
-            Family income bracket <span className="optional">(optional)</span>
-          </span>
-          <select
-            value={form.income_bracket}
-            onChange={(e) => update("income_bracket", e.target.value)}
-          >
-            <option value="">Prefer not to say</option>
-            {INCOME_BRACKETS.map((b) => (
-              <option key={b.value} value={b.value}>{b.label}</option>
-            ))}
-          </select>
-        </label>
-
-        <label className="field">
-          <span className="field-label">
-            Father&apos;s occupation <span className="optional">(optional)</span>
-          </span>
-          <select
-            value={form.father_occupation}
-            onChange={(e) => update("father_occupation", e.target.value)}
-          >
-            <option value="">Select</option>
-            {OCCUPATIONS.map((o) => (
-              <option key={o} value={o}>{o}</option>
-            ))}
-          </select>
-        </label>
-
-        <label className="field">
-          <span className="field-label">
-            Mother&apos;s occupation <span className="optional">(optional)</span>
-          </span>
-          <select
-            value={form.mother_occupation}
-            onChange={(e) => update("mother_occupation", e.target.value)}
-          >
-            <option value="">Select</option>
-            {OCCUPATIONS.map((o) => (
-              <option key={o} value={o}>{o}</option>
-            ))}
-          </select>
-        </label>
-
-        <label className="field">
-          <span className="field-label">
-            Relative influence on career <span className="optional">(optional)</span>
-          </span>
-          <textarea
-            rows={2}
-            placeholder="e.g. uncle in engineering, cousin in civil services"
-            value={form.relative_influence}
-            onChange={(e) => update("relative_influence", e.target.value)}
-          />
-        </label>
-
-        <label className="field">
-          <span className="field-label">
-            Parental career preference <span className="optional">(optional)</span>
-          </span>
-          <textarea
-            rows={2}
-            placeholder="What your family hopes you pursue"
-            value={form.family_preference}
-            onChange={(e) => update("family_preference", e.target.value)}
-          />
-        </label>
-
         <div className="btn-row">
-          <button type="button" className="btn btn-ghost" onClick={onBack}>
-            Back
-          </button>
-          <button type="submit" className="btn btn-primary">
-            Continue
-          </button>
+          <button type="button" className="btn btn-ghost" onClick={onBack}>Back</button>
+          <button type="submit" className="btn btn-primary">Continue →</button>
         </div>
       </form>
     </Layout>

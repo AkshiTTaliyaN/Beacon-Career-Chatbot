@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Layout from "../components/Layout";
 import RadioCards from "../components/RadioCards";
+import AnimatedQuestionCard from "../components/onboarding/AnimatedQuestionCard";
+import { SECTOR_ICONS, RELOC_ICONS, COST_ICONS } from "../constants/optionIcons";
 import {
   TARGET_SECTORS,
   RELOCATION_PREFS,
@@ -41,63 +43,77 @@ export default function GoalsScreen({ form, setForm, onSuccess, onBack }) {
     <Layout
       step={7}
       totalSteps={9}
-      title="Your goals"
-      subtitle="Where you want to go — we use this to shape career paths."
+      title="Almost there"
+      subtitle="Last few questions about the future you're imagining."
     >
-      <form onSubmit={handleSubmit} className="form">
-        <div className="field">
-          <span className="field-label">Target sector *</span>
+      <form onSubmit={handleSubmit} className="form onboard-form">
+
+        <AnimatedQuestionCard question="🚀 After school, which path feels most exciting to you right now?">
           <RadioCards
             name="target_sector"
             options={TARGET_SECTORS}
             value={form.target_sector}
             onChange={(v) => update("target_sector", v)}
             error={errors.target_sector}
+            columns={2}
+            iconMap={SECTOR_ICONS}
           />
-        </div>
+        </AnimatedQuestionCard>
 
-        <div className="field">
-          <span className="field-label">Relocation preference *</span>
+        <AnimatedQuestionCard
+          question="✈️ Would you move to another city for the right college or job?"
+          delay={0.05}
+        >
           <RadioCards
             name="relocation_pref"
             options={RELOCATION_PREFS}
             value={form.relocation_pref}
             onChange={(v) => update("relocation_pref", v)}
             error={errors.relocation_pref}
+            columns={2}
+            iconMap={RELOC_ICONS}
           />
-        </div>
+        </AnimatedQuestionCard>
 
-        <div className="field">
-          <span className="field-label">Cost / fees constraint *</span>
+        <AnimatedQuestionCard
+          question="💳 How much does college cost matter for your family when you're choosing options?"
+          delay={0.1}
+        >
           <RadioCards
             name="cost_constraint"
             options={COST_CONSTRAINTS}
             value={form.cost_constraint}
             onChange={(v) => update("cost_constraint", v)}
             error={errors.cost_constraint}
+            iconMap={COST_ICONS}
           />
-        </div>
+        </AnimatedQuestionCard>
 
-        <label className="field">
-          <span className="field-label">
-            Additional notes <span className="optional">(optional)</span>
-          </span>
-          <textarea
-            rows={3}
-            placeholder="Anything else we should know"
-            value={form.additional_notes}
-            onChange={(e) => update("additional_notes", e.target.value)}
-          />
-        </label>
+        <AnimatedQuestionCard
+          question={
+            <>
+              💬 Anything else we should know?{" "}
+              <span className="optional">(optional)</span>
+            </>
+          }
+          delay={0.15}
+        >
+          <label className="field">
+            <textarea
+              rows={3}
+              placeholder="e.g. dream colleges, family expectations, careers you're curious about"
+              value={form.additional_notes}
+              onChange={(e) => update("additional_notes", e.target.value)}
+            />
+          </label>
+        </AnimatedQuestionCard>
 
         {submitError && <p className="field-error">{submitError}</p>}
 
         <div className="btn-row">
-          <button type="button" className="btn btn-ghost" onClick={onBack} disabled={loading}>
-            Back
-          </button>
+          <button type="button" className="btn btn-ghost" onClick={onBack} disabled={loading}>Back</button>
           <button type="submit" className="btn btn-primary" disabled={loading}>
-            {loading ? "Submitting…" : "Submit profile"}
+            {loading ? "Saving…" : "Finish — show my results →"}
           </button>
         </div>
       </form>

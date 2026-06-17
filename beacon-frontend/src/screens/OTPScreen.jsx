@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Layout from "../components/Layout";
+import AnimatedQuestionCard from "../components/onboarding/AnimatedQuestionCard";
 import OTPInput from "../components/OTPInput";
 import { DEMO_MODE } from "../config";
 import { requestOtp, verifyOtp } from "../api/client";
@@ -14,7 +15,7 @@ export default function OTPScreen({ email, onSuccess, onBack }) {
     e.preventDefault();
     setError("");
     if (otp.length !== 6) {
-      setError("Enter all 6 digits");
+      setError("Please enter all 6 digits");
       return;
     }
     setLoading(true);
@@ -33,7 +34,7 @@ export default function OTPScreen({ email, onSuccess, onBack }) {
     setError("");
     try {
       await requestOtp(email);
-      setResendMsg("A new code has been sent.");
+      setResendMsg("New code sent — check your inbox.");
     } catch (err) {
       setError(err.message || "Could not resend OTP");
     }
@@ -43,32 +44,37 @@ export default function OTPScreen({ email, onSuccess, onBack }) {
     <Layout
       step={1}
       totalSteps={9}
-      title="Verify OTP"
+      title="Check your inbox"
       subtitle={
         DEMO_MODE
-          ? `Demo: any 6-digit code works. We sent a code to ${email} in production.`
-          : `Enter the 6-digit code sent to ${email}`
+          ? `Demo: any 6-digit code works. We'd email ${email} in production.`
+          : `Pop in the 6-digit code we sent to ${email}.`
       }
     >
-      <form onSubmit={handleVerify} className="form">
-        <OTPInput value={otp} onChange={setOtp} disabled={loading} />
+      <form onSubmit={handleVerify} className="form onboard-form">
+        <AnimatedQuestionCard
+          question="🔐 Enter your 6-digit code"
+          className="otp-section"
+        >
+          <OTPInput value={otp} onChange={setOtp} disabled={loading} />
+        </AnimatedQuestionCard>
 
         {error && <p className="field-error center">{error}</p>}
         {resendMsg && <p className="field-hint center success">{resendMsg}</p>}
 
         <button type="submit" className="btn btn-primary" disabled={loading || otp.length !== 6}>
-          {loading ? "Verifying…" : "Verify & continue"}
+          {loading ? "Verifying…" : "Verify & continue →"}
         </button>
 
         <p className="center muted">
-          Didn&apos;t receive it?{" "}
+          Didn&apos;t get it?{" "}
           <button type="button" className="link-btn" onClick={handleResend}>
-            Resend OTP
+            Send again
           </button>
         </p>
 
         <button type="button" className="btn btn-ghost" onClick={onBack}>
-          ← Change email
+          ← Different email
         </button>
       </form>
     </Layout>

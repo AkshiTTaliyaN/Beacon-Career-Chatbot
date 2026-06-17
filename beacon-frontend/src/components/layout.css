@@ -1,0 +1,500 @@
+:root {
+  --cream: #f5efe6;
+  --paper: #faf8f5;
+  --white: #ffffff;
+  --black: #0a0a0a;
+  --muted: #6f6962;
+  --border: #d9d1c8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--black);
+  font-family: Inter, system-ui, sans-serif;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.beacon-layout {
+  min-height: 100vh;
+
+  background:
+    linear-gradient(rgba(10,10,10,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10,10,10,0.04) 1px, transparent 1px),
+    var(--cream);
+
+  background-size: 40px 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 3rem;
+}
+
+.beacon-card {
+  width: min(760px, 92vw);
+
+  background: var(--white);
+
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--black);
+
+  border-radius: 24px;
+
+  padding: 4rem 5rem;
+
+  box-shadow: 4px 4px 0 var(--black);
+}
+
+.beacon-tag {
+  display: inline-block;
+
+  border: 1px solid var(--black);
+
+  color: var(--black);
+
+  padding: 0.5rem 0.9rem;
+
+  margin-bottom: 2rem;
+
+  font-size: 0.75rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.08em;
+
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.beacon-title {
+  margin: 0 0 1rem;
+
+  font-family: Inter, system-ui, sans-serif;
+
+  font-size: clamp(2rem, 4vw, 3rem);
+
+  font-weight: 700;
+
+  line-height: 1;
+
+  letter-spacing: -0.03em;
+
+  color: var(--black);
+}
+
+.beacon-subtitle {
+  margin: 0 0 3rem;
+
+  max-width: 700px;
+
+  font-size: 1.15rem;
+
+  line-height: 1.8;
+
+  color: var(--muted);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field-label {
+  margin-bottom: 0.65rem;
+
+  color: var(--black);
+
+  font-size: 0.95rem;
+
+  font-weight: 600;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+
+  padding: 1rem 1.1rem;
+
+  background: var(--paper);
+
+  border: 1px solid var(--border);
+
+  font-size: 1rem;
+
+  color: var(--black);
+
+  font-family: Inter, system-ui, sans-serif;
+
+  transition: all 0.2s ease;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: #9d948a;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-radius: 12px;
+
+  outline: none;
+
+  background: white;
+
+  border-color: var(--black);
+}
+
+.field-error {
+  margin-top: 0.5rem;
+
+  color: #b42318;
+
+  font-size: 0.9rem;
+}
+
+.progress-wrap {
+  margin-bottom: 2.5rem;
+}
+
+.progress-bar {
+  height: 8px;
+
+  background: #ebe4da;
+
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+
+  background: var(--black);
+
+  transition: width 0.3s ease;
+}
+
+.progress-label {
+  margin-top: 0.75rem;
+
+  color: var(--muted);
+
+  font-size: 0.85rem;
+
+  font-weight: 500;
+}
+
+.btn {
+  border: none;
+
+  cursor: pointer;
+
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.btn-primary {
+  background: var(--black);
+
+  color: white;
+
+  padding: 1rem 1.5rem;
+
+  font-size: 1rem;
+
+  font-weight: 600;
+
+  transition: 0.2s ease;
+}
+
+.btn-primary:hover {
+  opacity: 0.92;
+}
+
+.action-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-top: 3rem;
+}
+
+.btn-secondary {
+  background: transparent;
+
+  border: none;
+
+  padding: 0;
+
+  color: var(--muted);
+
+  font-size: 1rem;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.btn-secondary:hover {
+  color: var(--black);
+}
+
+@media (max-width: 900px) {
+  .beacon-layout {
+    padding: 1.25rem;
+  }
+
+  .beacon-card {
+    width: 100%;
+
+    padding: 2rem;
+  }
+
+  .beacon-title {
+    font-size: 2.5rem;
+  }
+
+  .beacon-subtitle {
+    font-size: 1rem;
+  }
+}
+
+/* ===================================== */
+/* OTP */
+/* ===================================== */
+
+.otp-row {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+
+  margin: 1rem 0 2rem;
+}
+
+.otp-box {
+  width: 64px;
+  height: 64px;
+
+  border: 1px solid #d9d1c8;
+
+  background: #faf8f5;
+
+  text-align: center;
+
+  font-size: 1.5rem;
+
+  font-weight: 600;
+
+  font-family: inherit;
+
+  transition: 0.2s ease;
+}
+
+.otp-box:focus {
+  outline: none;
+
+  border-color: #111;
+
+  background: white;
+}
+
+/* ===================================== */
+/* BUTTONS */
+/* ===================================== */
+
+.btn {
+  height: 56px;
+
+  border: none;
+
+  padding: 0 24px;
+
+  cursor: pointer;
+
+  font-size: 0.95rem;
+
+  font-weight: 600;
+
+  font-family: inherit;
+
+  transition: 0.2s ease;
+}
+
+.btn-primary {
+  flex: 1;
+
+  background: linear-gradient(
+    135deg,
+    #0d1333 0%,
+    #161d55 100%
+  );
+
+  color: white;
+
+  border-radius: 12px;
+}
+
+.btn-primary:hover {
+  opacity: 0.92;
+}
+
+.btn-ghost {
+  width: 100%;
+
+  background: white;
+
+  border: 1px solid #d7d0c8;
+
+  border-radius: 12px;
+}
+
+.btn-ghost:hover {
+  background: #f7f4ef;
+}
+
+.btn-row {
+  display: flex;
+
+  gap: 16px;
+
+  margin-top: 2rem;
+}
+
+/* ===================================== */
+/* CLASS PILLS */
+/* ===================================== */
+
+.pill-row {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  margin-top: 1rem;
+}
+
+.pill {
+  height: 44px;
+
+  border: 1px solid #d9d1c8;
+
+  background: white;
+
+  padding: 0 18px;
+
+  font-size: 0.95rem;
+
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.pill:hover {
+  border-color: #111;
+}
+
+.pill.selected {
+  background: #111;
+
+  color: white;
+
+  border-color: #111;
+}
+
+/* ---------- OTP ---------- */
+
+.otp-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 2rem 0;
+}
+
+.otp-box {
+  width: 72px;
+  height: 72px;
+
+  border: 1px solid #d7d0c8;
+
+  background: #faf8f5;
+
+  font-size: 2rem;
+
+  font-weight: 700;
+
+  text-align: center;
+
+  font-family: inherit;
+
+  transition: 0.2s;
+}
+
+.otp-box:focus {
+  outline: none;
+
+  border-color: #111;
+
+  background: white;
+}
+
+.btn-row {
+  display: flex;
+  gap: 18px;
+  margin-top: 2rem;
+}
+
+.btn-row .btn {
+  flex: 1;
+}
+
+.link-btn {
+  background: transparent;
+
+  border: none;
+
+  font: inherit;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  text-decoration: underline;
+}
+
+.btn-ghost {
+  width: 100%;
+
+  background: transparent;
+
+  border: 1px solid #d7d0c8;
+
+  padding: 16px;
+
+  font-size: 1rem;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.btn-ghost:hover {
+  background: #f6f2ec;
+}
