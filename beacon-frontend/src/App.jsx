@@ -3,8 +3,15 @@ import "./App.css";
 import { INITIAL_FORM } from "./constants/formOptions";
 import { DEMO_MODE } from "./config";
 import { getMyProfile } from "./api/client";
-import LoginScreen from "./screens/LoginScreen";
-import OTPScreen from "./screens/OTPScreen";
+
+// ─── AUTH FROZEN — re-enable when mail IDs are available ──────────────────────
+// import LoginScreen from "./screens/LoginScreen";
+// import OTPScreen from "./screens/OTPScreen";
+// ──────────────────────────────────────────────────────────────────────────────
+
+// Homepage (drop-in: pull your designed file into src/screens/HomePage.jsx)
+import HomePage from "./screens/HomePage";
+
 import BasicInfoScreen from "./screens/BasicInfoScreen";
 import SubjectRatings from "./screens/SubjectRatings";
 import SubjectDeepDive from "./screens/SubjectDeepDive";
@@ -19,8 +26,9 @@ import ExamExplorer from "./screens/ExamExplorer";
 import ExpertSystemScreen from "./screens/ExpertSystemScreen";
 
 const STEP = {
-  LOGIN: "login",
-  OTP: "otp",
+  // LOGIN: "login",   // FROZEN
+  // OTP: "otp",       // FROZEN
+  HOME: "home",
   BASIC: "basic",
   SUBJECT_RATINGS: "subject_ratings",
   SUBJECT_DEEP_DIVE: "subject_deep_dive",
@@ -31,7 +39,7 @@ const STEP = {
 };
 
 export default function App() {
-  const [step, setStep] = useState(STEP.LOGIN);
+  const [step, setStep] = useState(STEP.HOME);
   const [email, setEmail] = useState("");
   const [form, setForm] = useState(INITIAL_FORM);
   const [booting, setBooting] = useState(true);
@@ -83,23 +91,23 @@ export default function App() {
 
   // ─── Step-based onboarding flow ───
 
-  function handleLoginSuccess(addr) {
-    setEmail(addr);
-    setStep(STEP.OTP);
-  }
+  // ─── AUTH FROZEN ──────────────────────────────────────────────────────────
+  // function handleLoginSuccess(addr) {
+  //   setEmail(addr);
+  //   setStep(STEP.OTP);
+  // }
 
-  function handleOtpSuccess(data) {
-    if (data.profile_complete) {
-      if (data.name) localStorage.setItem("userName", data.name);
-      // They already completed onboarding before → mark as returning
-      localStorage.setItem("beaconReturning", "1");
-      setStep(STEP.SUCCESS);
-    } else {
-      // Fresh user starting onboarding — clear any stale returning flag
-      localStorage.removeItem("beaconReturning");
-      setStep(STEP.BASIC);
-    }
-  }
+  // function handleOtpSuccess(data) {
+  //   if (data.profile_complete) {
+  //     if (data.name) localStorage.setItem("userName", data.name);
+  //     localStorage.setItem("beaconReturning", "1");
+  //     setStep(STEP.SUCCESS);
+  //   } else {
+  //     localStorage.removeItem("beaconReturning");
+  //     setStep(STEP.BASIC);
+  //   }
+  // }
+  // ──────────────────────────────────────────────────────────────────────────
 
   function handleProfileComplete() {
     // Store the user's name for the dashboard greeting
@@ -130,23 +138,27 @@ export default function App() {
   }
 
   switch (step) {
-    case STEP.LOGIN:
-      return <LoginScreen onSuccess={handleLoginSuccess} />;
-    case STEP.OTP:
-      return (
-        <OTPScreen
-          email={email}
-          onSuccess={handleOtpSuccess}
-          onBack={() => setStep(STEP.LOGIN)}
-        />
-      );
+    // ─── AUTH FROZEN ────────────────────────────────────────────────────────
+    // case STEP.LOGIN:
+    //   return <LoginScreen onSuccess={handleLoginSuccess} />;
+    // case STEP.OTP:
+    //   return (
+    //     <OTPScreen
+    //       email={email}
+    //       onSuccess={handleOtpSuccess}
+    //       onBack={() => setStep(STEP.LOGIN)}
+    //     />
+    //   );
+    // ────────────────────────────────────────────────────────────────────────
+    case STEP.HOME:
+      return <HomePage />;
     case STEP.BASIC:
       return (
         <BasicInfoScreen
           form={form}
           setForm={setForm}
           onNext={() => setStep(STEP.SUBJECT_RATINGS)}
-          onBack={() => setStep(STEP.OTP)}
+          onBack={() => setStep(STEP.HOME)}
         />
       );
     case STEP.SUBJECT_RATINGS:
@@ -195,6 +207,6 @@ export default function App() {
         />
       );
     default:
-      return <LoginScreen onSuccess={handleLoginSuccess} />;
+      return <HomePage />;
   }
 }

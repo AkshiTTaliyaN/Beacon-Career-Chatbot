@@ -23,7 +23,14 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origin_regex="https?://.*",
+    # Explicit origins — update VERCEL_URL once you deploy the frontend
+    allow_origins=[
+        "http://localhost:5173",          # local dev
+        "http://localhost:4173",          # vite preview
+        # "https://your-app.vercel.app",  # TODO: replace with your actual Vercel URL after deploy
+    ],
+    # Fallback regex covers Vercel preview deployments (random subdomain URLs)
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -94,7 +94,16 @@ def _load_fernet() -> Fernet:
 
 _fernet = _load_fernet()
 
-redis_client = redis.from_url(REDIS_URL, decode_responses=True)
+# ─── Redis — lazy connection (only connects when OTP functions are called) ─────
+# While auth is frozen, Redis is never touched. This lets the backend start
+# cleanly without a Redis server. Re-enable eager connection when auth is restored.
+_redis_client = None
+
+def _get_redis():
+    global _redis_client
+    if _redis_client is None:
+        _redis_client = redis.from_url(REDIS_URL, decode_responses=True)
+    return _redis_client
 
 bearer_scheme = HTTPBearer()
 
@@ -149,7 +158,7 @@ def store_otp(email: str, otp: str) -> None:
     Key: otp:<email_hash>   Value: OTP string
     """
     key = f"otp:{hash_email(email)}"
-    redis_client.setex(key, OTP_EXPIRE_MINUTES * 60, otp)
+    _get_redis().setex(key, OTP_EXPIRE_MINUTES * 60, otp)
 
 
 def verify_otp(email: str, otp: str) -> bool:
@@ -158,9 +167,9 @@ def verify_otp(email: str, otp: str) -> bool:
     so it cannot be reused.
     """
     key = f"otp:{hash_email(email)}"
-    stored = redis_client.get(key)
+    stored = _get_redis().get(key)
     if stored and stored == otp:
-        redis_client.delete(key)
+        _get_redis().delete(key)
         return True
     return False
 

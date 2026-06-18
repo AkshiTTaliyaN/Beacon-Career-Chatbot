@@ -1,82 +1,90 @@
-import { useState } from "react";
-import Layout from "../components/Layout";
-import AnimatedQuestionCard from "../components/onboarding/AnimatedQuestionCard";
-import OTPInput from "../components/OTPInput";
-import { DEMO_MODE } from "../config";
-import { requestOtp, verifyOtp } from "../api/client";
+// ─── FROZEN — Re-enable when mail IDs are available ───────────────────────────
+// To restore: un-comment everything below, remove this comment block,
+// and restore the OTPScreen import + STEP.OTP case in App.jsx.
+// ──────────────────────────────────────────────────────────────────────────────
 
-export default function OTPScreen({ email, onSuccess, onBack }) {
-  const [otp, setOtp] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [resendMsg, setResendMsg] = useState("");
+// import { useState } from "react";
+// import Layout from "../components/Layout";
+// import AnimatedQuestionCard from "../components/onboarding/AnimatedQuestionCard";
+// import OTPInput from "../components/OTPInput";
+// import { DEMO_MODE } from "../config";
+// import { requestOtp, verifyOtp } from "../api/client";
 
-  async function handleVerify(e) {
-    e.preventDefault();
-    setError("");
-    if (otp.length !== 6) {
-      setError("Please enter all 6 digits");
-      return;
-    }
-    setLoading(true);
-    try {
-      const data = await verifyOtp(email, otp);
-      onSuccess(data);
-    } catch (err) {
-      setError(err.message || "Verification failed");
-    } finally {
-      setLoading(false);
-    }
-  }
+// export default function OTPScreen({ email, onSuccess, onBack }) {
+//   const [otp, setOtp] = useState("");
+//   const [error, setError] = useState("");
+//   const [loading, setLoading] = useState(false);
+//   const [resendMsg, setResendMsg] = useState("");
 
-  async function handleResend() {
-    setResendMsg("");
-    setError("");
-    try {
-      await requestOtp(email);
-      setResendMsg("New code sent — check your inbox.");
-    } catch (err) {
-      setError(err.message || "Could not resend OTP");
-    }
-  }
+//   async function handleVerify(e) {
+//     e.preventDefault();
+//     setError("");
+//     if (otp.length !== 6) {
+//       setError("Please enter all 6 digits");
+//       return;
+//     }
+//     setLoading(true);
+//     try {
+//       const data = await verifyOtp(email, otp);
+//       onSuccess(data);
+//     } catch (err) {
+//       setError(err.message || "Verification failed");
+//     } finally {
+//       setLoading(false);
+//     }
+//   }
 
-  return (
-    <Layout
-      step={1}
-      totalSteps={9}
-      title="Check your inbox"
-      subtitle={
-        DEMO_MODE
-          ? `Demo: any 6-digit code works. We'd email ${email} in production.`
-          : `Pop in the 6-digit code we sent to ${email}.`
-      }
-    >
-      <form onSubmit={handleVerify} className="form onboard-form">
-        <AnimatedQuestionCard
-          question="🔐 Enter your 6-digit code"
-          className="otp-section"
-        >
-          <OTPInput value={otp} onChange={setOtp} disabled={loading} />
-        </AnimatedQuestionCard>
+//   async function handleResend() {
+//     setResendMsg("");
+//     setError("");
+//     try {
+//       await requestOtp(email);
+//       setResendMsg("New code sent — check your inbox.");
+//     } catch (err) {
+//       setError(err.message || "Could not resend OTP");
+//     }
+//   }
 
-        {error && <p className="field-error center">{error}</p>}
-        {resendMsg && <p className="field-hint center success">{resendMsg}</p>}
+//   return (
+//     <Layout
+//       step={1}
+//       totalSteps={9}
+//       title="Check your inbox"
+//       subtitle={
+//         DEMO_MODE
+//           ? `Demo: any 6-digit code works. We'd email ${email} in production.`
+//           : `Pop in the 6-digit code we sent to ${email}.`
+//       }
+//     >
+//       <form onSubmit={handleVerify} className="form onboard-form">
+//         <AnimatedQuestionCard
+//           question="🔐 Enter your 6-digit code"
+//           className="otp-section"
+//         >
+//           <OTPInput value={otp} onChange={setOtp} disabled={loading} />
+//         </AnimatedQuestionCard>
 
-        <button type="submit" className="btn btn-primary" disabled={loading || otp.length !== 6}>
-          {loading ? "Verifying…" : "Verify & continue →"}
-        </button>
+//         {error && <p className="field-error center">{error}</p>}
+//         {resendMsg && <p className="field-hint center success">{resendMsg}</p>}
 
-        <p className="center muted">
-          Didn&apos;t get it?{" "}
-          <button type="button" className="link-btn" onClick={handleResend}>
-            Send again
-          </button>
-        </p>
+//         <button type="submit" className="btn btn-primary" disabled={loading || otp.length !== 6}>
+//           {loading ? "Verifying…" : "Verify & continue →"}
+//         </button>
 
-        <button type="button" className="btn btn-ghost" onClick={onBack}>
-          ← Different email
-        </button>
-      </form>
-    </Layout>
-  );
-}
+//         <p className="center muted">
+//           Didn&apos;t get it?{" "}
+//           <button type="button" className="link-btn" onClick={handleResend}>
+//             Send again
+//           </button>
+//         </p>
+
+//         <button type="button" className="btn btn-ghost" onClick={onBack}>
+//           ← Different email
+//         </button>
+//       </form>
+//     </Layout>
+//   );
+// }
+
+// Temporary stub export so App.jsx doesn't break if import is accidentally un-commented
+export default function OTPScreen() { return null; }

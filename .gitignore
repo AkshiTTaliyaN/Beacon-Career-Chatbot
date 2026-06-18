@@ -38,6 +38,10 @@ check_result.txt
 *.db
 *.sqlite3
 
+# Override: allow ChromaDB persisted index to be committed (needed for Railway deploy)
+!beacon-backend/data/chroma_db/
+!beacon-backend/data/chroma_db/**
+
 # ─── Node / React frontend ────────────────────────────────────────────────
 node_modules/
 dist/

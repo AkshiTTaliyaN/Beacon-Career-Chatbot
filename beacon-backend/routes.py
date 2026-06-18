@@ -456,62 +456,65 @@ def get_expert_careers(
     return sorted([c["title"] for c in CAREER_CATALOG])
 
 
-# ─── AUTH ─────────────────────────────────────────────────────────────────────
+# ─── AUTH — FROZEN ────────────────────────────────────────────────────────────
+# Email/OTP login is disabled until mail IDs are available.
+# To re-enable: un-comment both route handlers below, make Redis eager in auth.py,
+# add a Redis service on Railway, set REDIS_URL env var, and restore App.jsx routing.
 
 auth_router = APIRouter(prefix="/auth", tags=["Authentication"])
 
 
-@auth_router.post("/request-otp", response_model=MessageResponse)
-def request_otp(body: OTPRequest, db: Session = Depends(get_db)):
-    otp = generate_otp()
-    store_otp(body.email, otp)
-    sent = send_otp_email(body.email, otp)
-    if not sent:
-        print(f"\n[DEV MODE] OTP for {body.email}: {otp}\n")
-    return {"message": f"OTP sent to {body.email}"}
+# @auth_router.post("/request-otp", response_model=MessageResponse)
+# def request_otp(body: OTPRequest, db: Session = Depends(get_db)):
+#     otp = generate_otp()
+#     store_otp(body.email, otp)
+#     sent = send_otp_email(body.email, otp)
+#     if not sent:
+#         print(f"\n[DEV MODE] OTP for {body.email}: {otp}\n")
+#     return {"message": f"OTP sent to {body.email}"}
 
 
-@auth_router.post("/verify-otp", response_model=TokenResponse)
-def verify_otp_route(body: OTPVerify, db: Session = Depends(get_db)):
-    if not verify_otp(body.email, body.otp):
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Incorrect or expired OTP. Please request a new one."
-        )
-
-    email_hash = hash_email(body.email)
-    student = db.query(Student).filter(Student.email_hash == email_hash).first()
-
-    is_new_user = False
-    profile_complete = False
-
-    if not student:
-        student = Student(
-            email_hash=email_hash,
-            email_encrypted=encrypt_email(body.email)
-        )
-        db.add(student)
-        db.commit()
-        db.refresh(student)
-        is_new_user = True
-    else:
-        profile = db.query(StudentProfile).filter(
-            StudentProfile.student_id == student.id
-        ).first()
-        profile_complete = profile.is_complete if profile else False
-
-    from datetime import datetime
-    student.last_login = datetime.utcnow()
-    db.commit()
-
-    token = create_access_token(str(student.id))
-    return {
-        "access_token": token,
-        "token_type": "bearer",
-        "student_id": str(student.id),
-        "is_new_user": is_new_user,
-        "profile_complete": profile_complete,
-    }
+# @auth_router.post("/verify-otp", response_model=TokenResponse)
+# def verify_otp_route(body: OTPVerify, db: Session = Depends(get_db)):
+#     if not verify_otp(body.email, body.otp):
+#         raise HTTPException(
+#             status_code=status.HTTP_400_BAD_REQUEST,
+#             detail="Incorrect or expired OTP. Please request a new one."
+#         )
+#
+#     email_hash = hash_email(body.email)
+#     student = db.query(Student).filter(Student.email_hash == email_hash).first()
+#
+#     is_new_user = False
+#     profile_complete = False
+#
+#     if not student:
+#         student = Student(
+#             email_hash=email_hash,
+#             email_encrypted=encrypt_email(body.email)
+#         )
+#         db.add(student)
+#         db.commit()
+#         db.refresh(student)
+#         is_new_user = True
+#     else:
+#         profile = db.query(StudentProfile).filter(
+#             StudentProfile.student_id == student.id
+#         ).first()
+#         profile_complete = profile.is_complete if profile else False
+#
+#     from datetime import datetime
+#     student.last_login = datetime.utcnow()
+#     db.commit()
+#
+#     token = create_access_token(str(student.id))
+#     return {
+#         "access_token": token,
+#         "token_type": "bearer",
+#         "student_id": str(student.id),
+#         "is_new_user": is_new_user,
+#         "profile_complete": profile_complete,
+#     }
 
 
 # ─── PROFILE ──────────────────────────────────────────────────────────────────
