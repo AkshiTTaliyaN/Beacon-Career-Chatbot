@@ -28,6 +28,7 @@ app.add_middleware(
         "http://localhost:5173",          # local dev
         "http://localhost:4173",          # vite preview
         # "https://your-app.vercel.app",  # TODO: replace with your actual Vercel URL after deploy
+        "https://manzil-career-counselling.vercel.app",  # Vercel frontend
     ],
     # Fallback regex covers Vercel preview deployments (random subdomain URLs)
     allow_origin_regex=r"https://.*\.vercel\.app",
