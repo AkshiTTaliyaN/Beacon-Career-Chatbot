@@ -96,13 +96,11 @@ export default function SubjectDeepDive({ form, setForm, onNext, onBack }) {
       subtitle="For the subjects you enjoy most, pick the areas you'd actually want to explore."
     >
       {visibleKeys.length === 0 && (
-        <motion.div
+        <div
           className="tip-banner"
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
         >
           💡 Rate subjects 3★+ on the previous step to unlock topic picks here.
-        </motion.div>
+        </div>
       )}
 
       <form onSubmit={handleNext} className="onboard-form">
@@ -112,13 +110,9 @@ export default function SubjectDeepDive({ form, setForm, onNext, onBack }) {
           const rating = ratings[key] || 0;
 
           return (
-            <motion.div
+            <div
               key={key}
               className={`deep-dive-card${selected ? " selected" : ""}`}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.06, duration: 0.35 }}
-              whileHover={{ y: -3 }}
             >
               <div className="deep-dive-header">
                 <span style={{ fontWeight: 700, fontSize: "0.95rem", color: "#1e293b" }}>
@@ -153,16 +147,12 @@ export default function SubjectDeepDive({ form, setForm, onNext, onBack }) {
                   <p className="field-error" style={{ marginTop: 4 }}>{errors[key]}</p>
                 )}
               </div>
-            </motion.div>
+            </div>
           );
         })}
 
         {lockedKeys.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-          >
+          <div>
             <p style={{ fontSize: "0.78rem", color: "#9ca3af", fontWeight: 600, marginBottom: 8 }}>
               Rate higher to unlock:
             </p>
@@ -173,7 +163,7 @@ export default function SubjectDeepDive({ form, setForm, onNext, onBack }) {
                 </span>
               ))}
             </div>
-          </motion.div>
+          </div>
         )}
 
         {visibleKeys.length === 0 && ratedKeys.length === 0 && (

@@ -234,7 +234,17 @@ body:has(.onboard-layout) {
   border: 1.5px solid #dce4f5;
   background: #fff;
   box-shadow: 0 2px 8px rgba(16, 40, 73, 0.05);
-  transition: border-color 0.2s, box-shadow 0.25s, background 0.2s;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.25s, background 0.2s;
+}
+
+.option-card:hover {
+  transform: scale(1.02) translateY(-2px);
+  border-color: rgba(44, 84, 146, 0.35);
+  box-shadow: 0 6px 16px rgba(44, 84, 146, 0.08);
+}
+
+.option-card:active {
+  transform: scale(0.98) translateY(0);
 }
 
 .option-card input {

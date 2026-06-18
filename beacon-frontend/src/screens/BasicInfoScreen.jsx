@@ -67,8 +67,8 @@ export default function BasicInfoScreen({ form, setForm, onNext, onBack }) {
         <AnimatedQuestionCard question="🎓 Which class are you in right now?" delay={0.05}>
           <fieldset className="fieldset">
             <div className="pill-row">
-              {CLASSES.map((c, i) => (
-                <motion.button
+              {CLASSES.map((c) => (
+                <button
                   key={c}
                   type="button"
                   className={`pill ${Number(form.current_class) === c ? "selected" : ""}`}
@@ -76,14 +76,9 @@ export default function BasicInfoScreen({ form, setForm, onNext, onBack }) {
                     update("current_class", String(c));
                     if (c < 10) update("stream", "none");
                   }}
-                  whileHover={{ scale: 1.04, y: -2 }}
-                  whileTap={{ scale: 0.97 }}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.03 }}
                 >
                   Class {c}
-                </motion.button>
+                </button>
               ))}
             </div>
             {errors.current_class && (

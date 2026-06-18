@@ -67,7 +67,7 @@ function StarRating({ value, onChange }) {
     <div className="star-rating">
       <div className="star-row">
         {[1, 2, 3, 4, 5].map((n) => (
-          <motion.button
+          <button
             key={n}
             type="button"
             onMouseEnter={() => setHovered(n)}
@@ -75,8 +75,7 @@ function StarRating({ value, onChange }) {
             onClick={() => onChange(n)}
             aria-label={MOOD_LABELS[n]}
             className={`star-btn${active >= n ? " active" : ""}${hovered === n ? " hover" : ""}`}
-            whileHover={{ scale: 1.25 }}
-            whileTap={{ scale: 0.9 }}
+            style={{ border: 'none', background: 'none', cursor: 'pointer', padding: 4 }}
           >
             <svg width="26" height="26" viewBox="0 0 24 24"
               fill={active >= n ? "#f59e0b" : "none"}
@@ -84,7 +83,7 @@ function StarRating({ value, onChange }) {
               strokeWidth="1.5">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
             </svg>
-          </motion.button>
+          </button>
         ))}
       </div>
       <span className={`star-label${active ? " active" : ""}`}>
@@ -97,19 +96,15 @@ function StarRating({ value, onChange }) {
 function SubjectCard({ subject, rating, onChange, index }) {
   const rated = rating > 0;
   return (
-    <motion.div
+    <div
       className={`subject-card${rated ? " rated" : ""}`}
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.06, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -3, transition: { duration: 0.2 } }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
         <div className="subject-card-icon">{subject.icon}</div>
         <span className="subject-card-label">{subject.label}</span>
       </div>
       <StarRating value={rating} onChange={onChange} />
-    </motion.div>
+    </div>
   );
 }
 
@@ -148,13 +143,11 @@ export default function SubjectRatings({ form, setForm, onNext, onBack }) {
       subtitle={`Be honest — 1 star means it's tough, 5 means you genuinely love it.`}
     >
       {form.stream && form.stream !== "none" && cls >= 11 && (
-        <motion.span
+        <span
           className="stream-badge"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
         >
           ✦ {streamLabels[form.stream] || form.stream}
-        </motion.span>
+        </span>
       )}
 
       <form onSubmit={handleNext} className="onboard-form">

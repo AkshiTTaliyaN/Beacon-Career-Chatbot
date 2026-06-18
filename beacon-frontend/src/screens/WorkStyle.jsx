@@ -85,17 +85,14 @@ export default function WorkStyle({ form, setForm, onNext, onBack }) {
 
         <AnimatedQuestionCard question="How much would you enjoy each of these?">
           {['building','researching','creative','helping','leading','structured'].map((k, i) => (
-            <motion.label
+            <label
               key={k}
               className="field slider-field"
-              initial={{ opacity: 0, x: -8 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: i * 0.04 }}
             >
               <span className="field-label" style={{ fontSize: "0.9rem" }}>{WORK_LABELS[k]}</span>
               <input type="range" min={1} max={5} value={form.workStyle?.[k] || 3} onChange={(e) => updateWorkStyle(k, e.target.value)} />
               <div className="slider-labels"><span>1</span><span>5</span></div>
-            </motion.label>
+            </label>
           ))}
         </AnimatedQuestionCard>
 
@@ -104,19 +101,14 @@ export default function WorkStyle({ form, setForm, onNext, onBack }) {
             {PRIORITIES.map((p, i) => {
               const sel = (form.careerPriorities || []).includes(p);
               return (
-                <motion.button
+                <button
                   key={p}
                   type="button"
                   onClick={() => togglePriority(p)}
                   className={`priority-chip${sel ? " selected" : ""}`}
-                  whileHover={{ scale: 1.03, y: -2 }}
-                  whileTap={{ scale: 0.97 }}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.04 }}
                 >
                   {PRIORITY_DISPLAY[p] || p}
-                </motion.button>
+                </button>
               );
             })}
           </div>
@@ -135,19 +127,14 @@ export default function WorkStyle({ form, setForm, onNext, onBack }) {
             </span>
             <div className="reloc-pills">
               {['Yes','Maybe','No'].map((opt, i) => (
-                <motion.button
+                <button
                   key={opt}
                   type="button"
                   onClick={() => setRelocation(opt)}
                   className={`reloc-pill${form.workPreferences?.relocation === opt ? " selected" : ""}`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: i * 0.05 }}
                 >
                   {opt}
-                </motion.button>
+                </button>
               ))}
             </div>
           </label>
