@@ -4,10 +4,14 @@ import FloatingBackground from "./onboarding/FloatingBackground";
 import ProgressHeader from "./onboarding/ProgressHeader";
 import "../styles/onboarding.css";
 
+// NOTE: opacity is intentionally kept at 1 in all initial states.
+// framer-motion v12 + React 19 does not reliably trigger opacity
+// transitions on mount — elements stay invisible until interaction.
+// Slide-only animations are used instead as a safe alternative.
 const contentVariants = {
-  initial: { opacity: 0, y: 24 },
+  initial: { opacity: 1, y: 16 },
   animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -16 },
+  exit:    { opacity: 1, y: -10 },
 };
 
 export default function Layout({ children, step, totalSteps, title, subtitle }) {
@@ -28,12 +32,8 @@ export default function Layout({ children, step, totalSteps, title, subtitle }) 
       </header>
 
       <main className="main onboard-main">
-        <motion.div
-          className="card glass-panel"
-          initial={{ opacity: 1, y: 16, scale: 0.99 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        >
+        {/* No opacity animation on outer card — always visible */}
+        <div className="card glass-panel">
           <AnimatePresence mode="wait">
             <motion.div
               key={`${step}-${title}`}
@@ -41,7 +41,7 @@ export default function Layout({ children, step, totalSteps, title, subtitle }) 
               initial="initial"
               animate="animate"
               exit="exit"
-              transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             >
               {title && <h1 className="card-title onboard-card-title">{title}</h1>}
               {subtitle && <p className="card-subtitle onboard-card-subtitle">{subtitle}</p>}
@@ -51,7 +51,7 @@ export default function Layout({ children, step, totalSteps, title, subtitle }) 
               {children}
             </motion.div>
           </AnimatePresence>
-        </motion.div>
+        </div>
       </main>
 
       <footer className="footer onboard-footer">
