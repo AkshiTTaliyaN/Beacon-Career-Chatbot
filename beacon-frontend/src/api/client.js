@@ -18,6 +18,16 @@ async function parseError(res) {
   }
 }
 
+/** Guest login — creates a real anonymous student and returns a JWT (no email needed) */
+export async function guestLogin() {
+  const res = await fetch(`${API}/auth/guest`, { method: "POST" });
+  if (!res.ok) throw new Error(await parseError(res));
+  const data = await res.json();
+  localStorage.setItem(STORAGE_KEYS.token, data.access_token);
+  localStorage.setItem(STORAGE_KEYS.email, "guest");
+  return data;
+}
+
 /** Step 1 — send OTP to email */
 export async function requestOtp(email) {
   if (DEMO_MODE) {

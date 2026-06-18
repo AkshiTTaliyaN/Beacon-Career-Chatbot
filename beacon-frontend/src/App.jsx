@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import { INITIAL_FORM } from "./constants/formOptions";
 import { DEMO_MODE } from "./config";
-import { getMyProfile } from "./api/client";
+import { getMyProfile, guestLogin } from "./api/client";
 
 // ─── AUTH FROZEN — re-enable when mail IDs are available ──────────────────────
 // import LoginScreen from "./screens/LoginScreen";
@@ -151,7 +151,18 @@ export default function App() {
     //   );
     // ────────────────────────────────────────────────────────────────────────
     case STEP.HOME:
-      return <HomePage onStart={() => setStep(STEP.BASIC)} />;
+      return (
+        <HomePage
+          onStart={async () => {
+            try {
+              await guestLogin();
+            } catch (e) {
+              console.error("Guest login failed:", e);
+            }
+            setStep(STEP.BASIC);
+          }}
+        />
+      );
     case STEP.BASIC:
       return (
         <BasicInfoScreen

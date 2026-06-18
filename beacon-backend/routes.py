@@ -517,7 +517,41 @@ auth_router = APIRouter(prefix="/auth", tags=["Authentication"])
 #     }
 
 
+# ─── GUEST LOGIN (no email required) ─────────────────────────────────────────
+# Creates a real anonymous student record in the database and returns a valid
+# JWT. Allows the full onboarding + recommendations + chat flow without email.
+
+@auth_router.post("/guest")
+def guest_login(db: Session = Depends(get_db)):
+    """
+    Create an anonymous guest student and return a JWT.
+    Each call generates a fresh unique student — no email required.
+    """
+    import uuid as _uuid
+
+    guest_uuid   = str(_uuid.uuid4())
+    guest_email  = f"guest_{guest_uuid}@manzil.internal"
+
+    student = Student(
+        email_hash      = hash_email(guest_email),
+        email_encrypted = encrypt_email(guest_email),
+    )
+    db.add(student)
+    db.commit()
+    db.refresh(student)
+
+    token = create_access_token(str(student.id))
+    return {
+        "access_token"    : token,
+        "token_type"      : "bearer",
+        "student_id"      : str(student.id),
+        "is_new_user"     : True,
+        "profile_complete": False,
+    }
+
+
 # ─── PROFILE ──────────────────────────────────────────────────────────────────
+
 
 profile_router = APIRouter(prefix="/profile", tags=["Profile"])
 
