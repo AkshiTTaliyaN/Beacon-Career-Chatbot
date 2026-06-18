@@ -4,7 +4,7 @@ export default function AnimatedQuestionCard({ question, children, delay = 0, cl
   return (
     <motion.div
       className={`onboard-section glass-card ${className}`.trim()}
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 1, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay, ease: [0.22, 1, 0.36, 1] }}
       whileHover={{ y: -2, transition: { duration: 0.2 } }}
