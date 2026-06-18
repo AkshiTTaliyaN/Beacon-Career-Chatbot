@@ -1,7 +1,7 @@
-.landing { min-height: 100vh; background: var(--bg); }
+.landing { min-height: 100vh; background: transparent; }
 
 .landing-nav { display: flex; gap: 32px; }
-.landing-nav a { color: #94a3b8; text-decoration: none; font-size: 15px; transition: color 0.2s; }
+.landing-nav a { color: #E5E7EB; text-decoration: none; font-size: 15px; transition: color 0.2s; font-weight: 700; }
 .landing-nav a:hover { color: white; }
 
 /* ── Wide section container ───────────────────────────────── */
@@ -61,11 +61,10 @@
 
 .hero-sub-light {
   font-size: 15px;
-  color: var(--gray);
-  line-height: 1.7;
+  color: #374151;
+  line-height: 1.8;
   margin-bottom: 32px;
   max-width: 580px;
-  opacity: 0.85;
 }
 
 .btn-large {
@@ -139,16 +138,21 @@
 }
 
 .type-pill {
+  display: block;
+  background: transparent;
+  border: none;
+  border-radius: 18px;
+  padding: 0;
+}
+
+.alt-bg .type-pill { background: transparent; }
+
+.type-pill-inner {
   display: flex;
   align-items: flex-start;
   gap: 14px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 10px;
   padding: 16px 18px;
 }
-
-.alt-bg .type-pill { background: var(--bg); }
 
 .type-code {
   font-size: 26px;
@@ -184,7 +188,7 @@
 
 .stat { padding: 8px 16px; flex: 1; min-width: 180px; }
 .stat strong { display: block; font-size: 24px; color: white; font-weight: 700; margin-bottom: 4px; }
-.stat span { font-size: 13px; color: #94a3b8; }
+.stat span { font-size: 13px; color: #E5E7EB; font-weight: 700; }
 .stat-divider { width: 1px; height: 48px; background: rgba(255,255,255,0.15); }
 
 /* ── Steps row ────────────────────────────────────────────── */
@@ -231,7 +235,7 @@
   margin-bottom: 12px;
 }
 
-.step-extra { font-style: italic; opacity: 0.85; margin-bottom: 0; }
+.step-extra { font-style: italic; color: #6B7280; margin-bottom: 0; }
 
 /* ── Report grid ──────────────────────────────────────────── */
 .report-grid {

@@ -166,7 +166,7 @@ export default function ExpertSystemScreen() {
         <div className="print-header" style={{ display: 'none' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid #ddd', paddingBottom: 15, marginBottom: 20 }}>
             <div>
-              <h2 style={{ margin: 0, color: '#0f172a' }}>BEACON CAREER PLATFORM</h2>
+              <h2 style={{ margin: 0, color: '#0f172a' }}>MANZIL CAREER PLATFORM</h2>
               <span style={{ fontSize: 12, color: '#64748b' }}>Ministry of Education Initiatives — EdCil India</span>
             </div>
             <img src={EdCilLogo} alt="EdCil" style={{ height: 40 }} />

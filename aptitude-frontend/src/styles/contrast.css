@@ -1,0 +1,145 @@
+/**
+ * Contrast utility classes — use based on background, not page.
+ */
+
+.text-on-dark {
+  color: #ffffff;
+}
+
+.text-on-dark-secondary {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.text-on-dark-label {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.text-on-dark-muted {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.text-on-light {
+  color: #111827;
+}
+
+.text-on-light-secondary {
+  color: #374151;
+}
+
+.text-on-light-muted {
+  color: #6b7280;
+}
+
+/* Report: section chrome on gradient / dark page background */
+.results-page .result-section > .section-title,
+.results-page .result-section > .section-title.text-on-dark {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  line-height: 1.15;
+}
+
+.results-page .result-section > .section-sub,
+.results-page .result-section > .section-sub.text-on-dark-secondary {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1.75;
+  margin-bottom: 28px;
+}
+
+.results-page .result-section > .section-sub strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.results-page .on-dark-surface .secondary-type strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* Content rendered directly on dark page background (not inside cards) */
+.results-page .on-dark-surface,
+.results-page .on-dark-surface .secondary-type,
+.results-page .on-dark-surface .description-text,
+.results-page .on-dark-surface .scores-title,
+.results-page .on-dark-surface .score-label,
+.results-page .on-dark-surface .score-pct,
+.results-page .on-dark-surface .hc-label {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.results-page .on-dark-surface .hc-value {
+  color: #ffffff;
+}
+
+.results-page .on-dark-surface .hc-label,
+.results-page .on-dark-surface .scores-title {
+  color: rgba(255, 255, 255, 0.85);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+}
+
+.results-page .result-footer,
+.results-page .result-footer p {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.results-page .divider {
+  border-top-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Light cards — always dark text regardless of page background */
+.results-page .apt-glass-card,
+.results-page .hero-report-card,
+.results-page .hero-personality-card,
+.results-page .pdf-download-card,
+.results-page .career-card,
+.results-page .trait-chip,
+.results-page .sc-card,
+.results-page .work-env-card,
+.results-page .exam-card,
+.results-page .admission-card,
+.results-page .skill-card,
+.results-page .parent-card,
+.results-page .closing-card,
+.results-page .broader-card,
+.results-page .apt-timeline-card,
+.results-page .aptitude-skill-card,
+.results-page .aptitude-fit-note,
+.results-page .aptitude-highlight-block,
+.results-page .interest-careers-note {
+  color: #111827;
+}
+
+.results-page .career-card .career-reason,
+.results-page .sc-card li,
+.results-page .exam-card p,
+.results-page .skill-card p,
+.results-page .parent-card p,
+.results-page .closing-text,
+.results-page .work-env-card p,
+.results-page .aptitude-fit-note p,
+.results-page .aptitude-highlight-list {
+  color: #374151;
+}
+
+.results-page .pdf-download-sub,
+.results-page .closing-footer,
+.results-page .challenge-note,
+.results-page .career-stream,
+.results-page .aptitude-pct {
+  color: #6b7280;
+}
+
+.results-page .career-card-header h4,
+.results-page .sc-card h3,
+.results-page .exam-card h4,
+.results-page .skill-card h4,
+.results-page .broader-sector,
+.results-page .apt-timeline-title {
+  color: #111827;
+}

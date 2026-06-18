@@ -142,7 +142,7 @@ export async function sendChatChoice({ sessionId, choice, message }) {
     return {
       session_id: sessionId,
       question_id: "R_DEMO",
-      question: "For the live personalized recommendation, run the Beacon backend and turn demo mode off.",
+      question: "For the live personalized recommendation, run the Manzil backend and turn demo mode off.",
       type: "recommendation",
       title: "Demo Chat",
       description: ["The production chat will use your saved onboarding profile to skip repeated questions."],

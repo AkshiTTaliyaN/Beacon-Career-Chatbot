@@ -1,6 +1,6 @@
 """
 expert_system.py
-Rule-based expert consultation engine for Beacon Career Chatbot.
+Rule-based expert consultation engine for Manzil Career Chatbot.
 
 Takes a career title and student profile, applies compatibility rules,
 and returns a structured consultation result with scores, warnings,

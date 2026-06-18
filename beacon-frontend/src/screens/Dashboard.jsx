@@ -310,7 +310,7 @@ export default function Dashboard({ userName }) {
     <div className="ft-dashboard-bg">
       {/* ─── Navbar ─── */}
       <header className={`ft-navbar ${navScrolled ? 'ft-navbar-scrolled' : ''}`}>
-        <div className="ft-nav-logo">Beacon</div>
+        <div className="ft-nav-logo">Manzil</div>
         <nav style={{ display: 'flex', gap: '1.25rem', alignItems: 'center' }} aria-label="Primary">
           <a onClick={() => { window.history.pushState({}, '', '/careers'); window.dispatchEvent(new PopStateEvent('popstate')) }} className="ft-nav-link">Career Library</a>
           <a onClick={() => { window.history.pushState({}, '', '/exams'); window.dispatchEvent(new PopStateEvent('popstate')) }} className="ft-nav-link">Exam Explorer</a>
@@ -973,11 +973,11 @@ export default function Dashboard({ userName }) {
       <PsychometricTest hasResults={Boolean(profile?.riasec_scores)} />
 
       {/* ═══════════════════════════════════════════════════════════════════
-          WHY BEACON
+          WHY MANZIL
           ═══════════════════════════════════════════════════════════════════ */}
       <section className="ft-animate-in ft-section" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
         <SectionHeader
-          title="Why Beacon"
+          title="Why Manzil"
           subtitle=""
           accentColor="cyan"
         />
@@ -1026,7 +1026,7 @@ export default function Dashboard({ userName }) {
       }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', gap: 24, alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap' }}>
           <div style={{ flex: '0 0 260px' }}>
-            <div style={{ fontWeight: 800, fontSize: 20, color: '#00d4ff', textShadow: '0 0 20px rgba(0,212,255,0.3)' }}>Beacon</div>
+            <div style={{ fontWeight: 800, fontSize: 20, color: '#00d4ff', textShadow: '0 0 20px rgba(0,212,255,0.3)' }}>Manzil</div>
             <div style={{ marginTop: 10, opacity: 0.7, fontSize: '0.9rem', lineHeight: 1.5 }}>Helping Indian students find their path.</div>
           </div>
 
@@ -1083,7 +1083,7 @@ export default function Dashboard({ userName }) {
           color: 'rgba(255,255,255,0.4)',
           fontSize: '0.82rem',
         }}>
-          2026 Beacon. All rights reserved.
+          2026 Manzil. All rights reserved.
         </div>
       </footer>
     </div>

@@ -2,6 +2,9 @@ import { Brain, BarChart3, Briefcase, FileText, Wrench, Download, Compass, Users
 import heroImage from "../assets/hero.jpg";
 import "./LandingPage.css";
 import { RIASEC_COLORS } from "../constants/riasecColors";
+import { motion } from "framer-motion";
+import HeroBanner from "../components/ui/HeroBanner";
+import GlassCard from "../components/ui/GlassCard";
 
 const RIASEC_TYPES = [
   { code: "R", name: "Realistic", desc: "Practical, hands-on, mechanical", color: RIASEC_COLORS.R },
@@ -27,7 +30,7 @@ export default function LandingPage({ onStart }) {
   return (
     <div className="landing">
       <header className="cc-header">
-        <span className="cc-logo">Beacon</span>
+        <span className="cc-logo">Manzil</span>
         <nav className="landing-nav">
           <a href="#">Home</a>
           <a href="#">About</a>
@@ -35,27 +38,29 @@ export default function LandingPage({ onStart }) {
         </nav>
       </header>
 
-      {/* HERO — full width split layout */}
-      <section className="hero-section">
-        <div className="hero-content">
-          <div className="hero-badges">
-            <span className="badge">Psychometric test with detailed report</span>
-            <span className="badge">No counsellor booking needed</span>
-            <span className="badge">Completely free</span>
-          </div>
-          <h1 className="hero-title">Find what career truly suits you.</h1>
-          <p className="hero-sub">
-            Answer 60 carefully designed questions based on the globally recognised RIASEC framework and discover your personality type, matching careers, entrance exams, and a personalised roadmap for your future.
-          </p>
+      {/* HERO — Manzil-style */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <HeroBanner
+          onStart={onStart}
+          title="Find what career truly suits you."
+          subtitle="Answer 60 carefully designed questions based on the globally recognised RIASEC framework and discover your personality type, matching careers, entrance exams, and a personalised roadmap."
+          badges={[
+            "Psychometric test with detailed report",
+            "No counsellor booking needed",
+            "Completely free",
+          ]}
+          imageSrc={heroImage}
+          ctaText="Take the Test →"
+        >
           <p className="hero-sub-light">
             Built on the same psychometric model used by universities, career counsellors, and platforms worldwide — including the US Department of Labor's O*NET system.
           </p>
-          <button className="btn-primary btn-large" onClick={onStart}>Take the Test →</button>
-        </div>
-        <div className="hero-image-wrap">
-          <img src={heroImage} alt="Student exploring career options" />
-        </div>
-      </section>
+        </HeroBanner>
+      </motion.div>
 
       {/* WHAT IS RIASEC — wider, left aligned */}
       <section className="content-section">
@@ -79,14 +84,16 @@ export default function LandingPage({ onStart }) {
               </p>
             </div>
             <div className="riasec-types-grid">
-              {RIASEC_TYPES.map(t => (
-                <div key={t.code} className="type-pill">
-                  <span className="type-code" style={{ color: t.color }}>{t.code}</span>
-                  <div>
-                    <strong>{t.name}</strong>
-                    <p>{t.desc}</p>
+              {RIASEC_TYPES.map((t) => (
+                <GlassCard key={t.code} className="type-pill apt-type-pill-glass" hover={false}>
+                  <div className="type-pill-inner">
+                    <span className="type-code" style={{ color: t.color }}>{t.code}</span>
+                    <div>
+                      <strong>{t.name}</strong>
+                      <p>{t.desc}</p>
+                    </div>
                   </div>
-                </div>
+                </GlassCard>
               ))}
             </div>
           </div>
@@ -178,7 +185,7 @@ export default function LandingPage({ onStart }) {
         <div className="section-wide">
           <div className="section-header-row">
             <h2 className="section-heading">Frequently asked questions</h2>
-            <p className="section-tagline">Everything students and parents commonly ask about Beacon.</p>
+            <p className="section-tagline">Everything students and parents commonly ask about Manzil.</p>
           </div>
           <div className="faq-grid">
             {FAQS.map((faq, i) => (
@@ -193,7 +200,7 @@ export default function LandingPage({ onStart }) {
 
       <footer className="landing-footer">
         <div className="section-wide">
-          <p>Beacon © 2026 — A psychometric career guidance platform for Indian students.</p>
+          <p>Manzil © 2026 — A psychometric career guidance platform for Indian students.</p>
         </div>
       </footer>
     </div>

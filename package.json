@@ -2,7 +2,7 @@
   "name": "beacon-platform",
   "version": "1.0.0",
   "private": true,
-  "description": "Beacon Career Counselling Platform — unified dev launcher",
+  "description": "Manzil Career Counselling Platform — unified dev launcher",
   "scripts": {
     "dev": "node -e \"const { spawnSync } = require('child_process'); const isWin = process.platform === 'win32'; const cmd = isWin ? 'npm run dev:windows' : 'npm run dev:mac'; const r = spawnSync(cmd, { stdio: 'inherit', shell: true }); process.exit(r.status);\"",
     "dev:windows": "concurrently -k -n BB,BF,CB,CF,AB,AF -c blue,cyan,green,yellow,magenta,red \"npm:dev:beacon-back\" \"npm:dev:beacon-front\" \"npm:dev:chatbot-back\" \"npm:dev:chatbot-front\" \"npm:dev:aptitude-back\" \"npm:dev:aptitude-front\"",

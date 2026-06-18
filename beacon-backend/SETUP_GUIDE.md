@@ -1,4 +1,4 @@
-# Beacon — Complete Setup Guide
+# Manzil — Complete Setup Guide
 
 ## What You Have Built
 
@@ -15,7 +15,7 @@ beacon-backend/
 ├── requirements.txt ← Python packages to install
 └── .env.example     ← Copy this to .env and fill it in
 
-beacon-frontend/   ← React app (Beacon onboarding) — npm run dev
+beacon-frontend/   ← React app (Manzil onboarding) — npm run dev
     └── See ../beacon-frontend/CONNECT_BACKEND.md
 ```
 
@@ -175,7 +175,7 @@ uvicorn main:app --reload
 You should see:
 ```
 Database tables created / verified
-Beacon API started
+Manzil API started
 INFO: Uvicorn running on http://127.0.0.1:8000
 ```
 
@@ -183,7 +183,7 @@ The `--reload` flag means the server restarts automatically whenever you save a 
 
 **Test it:** Open http://localhost:8000 in your browser. You should see:
 ```json
-{"status": "ok", "app": "Beacon API"}
+{"status": "ok", "app": "Manzil API"}
 ```
 
 **View all API endpoints:** Open http://localhost:8000/docs
@@ -319,7 +319,7 @@ The token is saved in `localStorage` so the student stays logged in across brows
 
 ```
 project/
-├── Beacon-backend/
+├── beacon-backend/
 │   ├── venv/               ← virtual environment (do not commit this)
 │   ├── main.py
 │   ├── database.py
@@ -331,8 +331,8 @@ project/
 │   ├── .env                ← your actual config (do not commit this)
 │   └── .env.example        ← safe to commit
 │
-└── Beacon-frontend/
-    └── (React — Beacon onboarding)
+└── beacon-frontend/
+    └── (React — Manzil onboarding)
 ```
 
 Add a `.gitignore` file:

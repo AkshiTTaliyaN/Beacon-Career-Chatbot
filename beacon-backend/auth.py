@@ -36,7 +36,7 @@ SMTP_PORT              = int(os.getenv("SMTP_PORT", 587))
 SMTP_USER              = os.getenv("SMTP_USER", "")
 SMTP_PASSWORD          = os.getenv("SMTP_PASSWORD", "")
 FROM_EMAIL             = os.getenv("FROM_EMAIL", "")
-FROM_NAME              = os.getenv("FROM_NAME", "Beacon")
+FROM_NAME              = os.getenv("FROM_NAME", "Manzil")
 
 _EMAIL_ENCRYPTION_KEY  = os.getenv("EMAIL_ENCRYPTION_KEY", "").strip()
 
@@ -174,17 +174,17 @@ def send_otp_email(email: str, otp: str) -> bool:
     """
     try:
         msg = MIMEMultipart("alternative")
-        msg["Subject"] = f"{otp} — Your Beacon login code"
+        msg["Subject"] = f"{otp} — Your Manzil login code"
         msg["From"]    = f"{FROM_NAME} <{FROM_EMAIL}>"
         msg["To"]      = email
 
         text = f"""
-Your Beacon login code is: {otp}
+Your Manzil login code is: {otp}
 
 This code expires in {OTP_EXPIRE_MINUTES} minutes.
 If you did not request this, ignore this email.
 
-— Beacon Team
+— Manzil Team
 """
 
         html = f"""
@@ -196,7 +196,7 @@ If you did not request this, ignore this email.
     If you did not request this, ignore this email.
   </p>
   <hr style="border:none;border-top:1px solid #E4E0DB;margin:24px 0"/>
-  <p style="font-size:12px;color:#A09B96">Beacon — Career Guidance Platform</p>
+  <p style="font-size:12px;color:#A09B96">Manzil — Career Guidance Platform</p>
 </body></html>
 """
         msg.attach(MIMEText(text, "plain"))

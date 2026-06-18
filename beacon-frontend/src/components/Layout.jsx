@@ -20,7 +20,7 @@ export default function Layout({ children, step, totalSteps, title, subtitle }) 
       <header className="header onboard-header">
         <div className="brand">
           <div className="brand-text">
-            <p className="brand-name onboard-brand-name">Beacon</p>
+            <p className="brand-name onboard-brand-name">Manzil</p>
             <p className="brand-tag onboard-brand-tag">Your career guidance companion</p>
           </div>
         </div>
@@ -55,7 +55,7 @@ export default function Layout({ children, step, totalSteps, title, subtitle }) 
       </main>
 
       <footer className="footer onboard-footer">
-        <p>© {new Date().getFullYear()} Beacon — helping students find careers that fit</p>
+        <p>© {new Date().getFullYear()} Manzil — helping students find careers that fit</p>
       </footer>
     </div>
   );

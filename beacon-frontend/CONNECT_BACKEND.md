@@ -1,4 +1,4 @@
-# Connect Beacon frontend to Beacon backend
+# Connect Manzil frontend to Manzil backend
 
 ## Are they connected right now?
 
@@ -79,7 +79,7 @@ uvicorn main:app --reload
 
 Check:
 
-- Browser: http://localhost:8000 → `{"status":"ok","app":"Beacon API"}`
+- Browser: http://localhost:8000 → `{"status":"ok","app":"Manzil API"}`
 - Docs: http://localhost:8000/docs
 
 ### Step 6 — Turn off demo mode in the frontend

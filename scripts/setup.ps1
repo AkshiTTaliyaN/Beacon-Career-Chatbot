@@ -1,5 +1,5 @@
 # -----------------------------------------------------------------
-# Beacon Platform -- First-Time Setup Script
+# Manzil Platform -- First-Time Setup Script
 # Run once after cloning: npm run setup
 # -----------------------------------------------------------------
 
@@ -8,7 +8,7 @@ $root = Split-Path -Parent $PSScriptRoot   # project root
 
 Write-Host ""
 Write-Host "========================================" -ForegroundColor Cyan
-Write-Host "  Beacon Platform -- First-Time Setup"    -ForegroundColor Cyan
+Write-Host "  Manzil Platform -- First-Time Setup"    -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host ""
 

@@ -77,7 +77,7 @@ function App() {
 
   const handleStart = async () => {
     setStarted(true);
-    setMessages([{ id: Date.now(), role: 'bot', text: 'Hello! I am Beacon Career Assistant.' }]);
+    setMessages([{ id: Date.now(), role: 'bot', text: 'Hello! I am Manzil Career Assistant.' }]);
     chatEngine.reset(SESSION_ID);
     await fetchQuestion();
   };
@@ -105,7 +105,7 @@ function App() {
         <div className="brand-group">
           <div className="brand-mark">🧭</div>
           <div className="brand-text">
-            <div className="brand-title">Beacon</div>
+            <div className="brand-title">Manzil</div>
             <div className="brand-subtitle">Career Assistant</div>
           </div>
         </div>

@@ -224,10 +224,10 @@ export default function ReportPage() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 2rem', background: NAVY, color: '#fff' }}>
         <div style={{ fontWeight: 800, fontSize: 18, cursor: 'pointer' }}
           onClick={() => { window.history.pushState({}, '', '/dashboard'); window.dispatchEvent(new PopStateEvent('popstate')); }}>
-          Beacon
+          Manzil
         </div>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: 18, fontWeight: 800 }}>Beacon Personality &amp; Career Report</div>
+          <div style={{ fontSize: 18, fontWeight: 800 }}>Manzil Personality &amp; Career Report</div>
           <div style={{ marginTop: 6, opacity: 0.9 }}>
             {studentName}{streamDisplay ? ` • ${streamDisplay}` : ''}
           </div>
@@ -584,7 +584,7 @@ export default function ReportPage() {
             </section>
 
             <footer style={{ color: '#9ca3af', fontSize: 13, textAlign: 'center', padding: '1rem 0 4rem 0' }}>
-              Beacon © 2026 — This report is based on the globally validated RIASEC psychometric model.
+              Manzil © 2026 — This report is based on the globally validated RIASEC psychometric model.
               For personalised counselling contact our team.
             </footer>
           </>

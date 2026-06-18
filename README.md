@@ -1,13 +1,13 @@
-# Beacon Career Counselling Platform
+# Manzil Career Counselling Platform
 
-A modern, comprehensive web-based career counselling platform designed for Indian school students (Classes 8–12) across Science (PCM/PCB), Commerce, and Arts/Humanities streams. Beacon helps students navigate their post-school career choices through an integrated multi-step onboarding profiling system, a RIASEC personality psychometric test, and a personalized, knowledge-based career chatbot.
+A modern, comprehensive web-based career counselling platform designed for Indian school students (Classes 8–12) across Science (PCM/PCB), Commerce, and Arts/Humanities streams. Manzil helps students navigate their post-school career choices through an integrated multi-step onboarding profiling system, a RIASEC personality psychometric test, and a personalized, knowledge-based career chatbot.
 
 ---
 
 ## Technical Architecture & Core Approach
 
 ### 1. Unified Knowledge-Based Chatbot (Integrated)
-Rather than using a hallucination-prone, expensive, and non-deterministic LLM-based chatbot, **Beacon integrates a robust, fully deterministic knowledge-based career chatbot** directly inside the main portal.
+Rather than using a hallucination-prone, expensive, and non-deterministic LLM-based chatbot, **Manzil integrates a robust, fully deterministic knowledge-based career chatbot** directly inside the main portal.
 
 * **Expert-Curated Decision Tree**: Powered by a structural JSON decision tree (`decision_tree.json`), the chatbot provides reliable, structured guidance on stream choices, professional careers, top colleges, and critical entrance examinations.
 * **Context-Aware Skipping**: The chatbot is fully integrated with the main backend and frontend. When a student initiates a chat, the system pulls their completed profile from onboarding (e.g. Class, Stream, enjoyed subjects). It welcomes them by name, lists their known profile details, and **automatically skips matching questions** in the decision tree so they never have to re-answer redundant questions.
@@ -21,13 +21,13 @@ The portal features an 8-step dynamic onboarding profiling system:
 This detailed data populates the student profile, customizing their dashboard and the context used by the chatbot.
 
 ### 3. Rule-Based AI Expert Career Consultation
-To provide deep academic matching, Beacon features a custom **FastAPI Rule Engine** (`expert_system.py`) integrated with an expanded database of **68 emerging professional careers** (`career_catalog.py`) and **11 national entrance examinations** (`exams_catalog.py`).
+To provide deep academic matching, Manzil features a custom **FastAPI Rule Engine** (`expert_system.py`) integrated with an expanded database of **68 emerging professional careers** (`career_catalog.py`) and **11 national entrance examinations** (`exams_catalog.py`).
 * **Profile-to-Career Matcher**: Performs deterministic checks on stream eligibility (preventing invalid suggestions), academic strengths/gaps (detecting low self-ratings in critical subjects), study routine intensity, relocation constraints, and RIASEC personality alignment.
 * **Actionable Roadmaps**: Generates custom 4-phase preparation roadmaps spanning Classes 9 through 12.
 * **Backup Option Recommendation**: Computes backup career alternatives that share similar stream constraints and RIASEC profiles.
 
 ### 4. Production Roadmap: RAG Database & Generative Chat
-To transition Beacon into a production platform for showcasing to senior administrators, the system is designed to support:
+To transition Manzil into a production platform for showcasing to senior administrators, the system is designed to support:
 * **RAG Ingestion Pipeline**: Ingest official syllabus brochures and scholarship PDF documents into a local **ChromaDB** vector store using Python's `pypdf` and `sentence-transformers` embedding models.
 * **Conversational AI Chat**: Connect a conversational LLM (such as Google Gemini API or OpenAI) to handle free-text student questions, injecting the student's profile context as hidden system prompt guidelines, and using RAG document retrieval to prevent hallucinations about exam dates and syllabus details.
 
@@ -69,7 +69,7 @@ To transition Beacon into a production platform for showcasing to senior adminis
 
 ### Quick Start (Launch All Services)
 
-Beacon utilizes a unified dev runner to start all 6 services simultaneously with color-coded log outputs.
+Manzil utilizes a unified dev runner to start all 6 services simultaneously with color-coded log outputs.
 
 1. **One-Time Setup**: Setup python virtual environments and install all dependencies (npm & pip) for all 6 directories automatically:
    ```powershell
@@ -84,8 +84,8 @@ All microservices will spin up under the following local endpoints:
 
 | Label | Service | URL |
 | :--- | :--- | :--- |
-| `BF` | Main Beacon Portal Frontend | `http://localhost:5173` |
-| `BB` | Main Beacon Portal Backend | `http://localhost:8000` |
+| `BF` | Main Manzil Portal Frontend | `http://localhost:5173` |
+| `BB` | Main Manzil Portal Backend | `http://localhost:8000` |
 | `AF` | Psychometric Test Frontend | `http://localhost:3001` |
 | `AB` | Psychometric Test Backend | `http://localhost:8001` |
 | `CF` | Sandbox Chatbot Frontend | `http://localhost:5174` |
@@ -99,7 +99,7 @@ All microservices will spin up under the following local endpoints:
 
 If you prefer running specific parts of the platform in separate terminal windows:
 
-### 1. Main Beacon App (Integrated Portal)
+### 1. Main Manzil App (Integrated Portal)
 The central experience that ties the onboarding flow, dashboard, and knowledge chatbot together.
 
 * **Frontend** (Runs on `http://localhost:5173`):
@@ -195,7 +195,7 @@ code/
 
 ## Educational Data Sources
 
-Beacon is pre-configured with free, publicly accessible resources tailored to the Indian educational landscape:
+Manzil is pre-configured with free, publicly accessible resources tailored to the Indian educational landscape:
 * **NIRF Rankings** - [nirfindia.org](https://www.nirfindia.org) (Top Indian Universities & Colleges)
 * **JEE / NEET Cutoffs** - [josaa.nic.in](https://josaa.nic.in) / [mcc.nic.in](https://mcc.nic.in) (Engineering & Medical admissions)
 * **National Scholarship Portal** - [scholarships.gov.in](https://scholarships.gov.in)

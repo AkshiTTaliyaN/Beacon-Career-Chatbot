@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import QUESTIONS from "../data/questions";
 import APTITUDE_QUESTIONS from "../data/aptitude_questions";
 import { HOBBY_CATEGORIES } from "../data/hobbies";
 import { RIASEC_COLORS } from "../constants/riasecColors";
 import "./TestPage.css";
+import FloatingBackground from "../components/ui/FloatingBackground";
+import ProgressWidget from "../components/ui/ProgressWidget";
+import AgreeScale from "../components/ui/AgreeScale";
 
 const CATEGORY_LABELS = { R: "Realistic", I: "Investigative", A: "Artistic", S: "Social", E: "Enterprising", C: "Conventional" };
 
@@ -271,9 +275,10 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
   // ── RENDER: Details ───────────────────────────────────────────────────────
   if (step === "details") {
     return (
-      <div className="test-page">
+      <div className="test-page aptitude-page assessment-page apt-floating-shell">
+        <FloatingBackground />
         <header className="cc-header">
-          <span className="cc-logo">Beacon</span>
+          <span className="cc-logo">Manzil</span>
           <button className="btn-outline" onClick={onBack}>← Back</button>
         </header>
         <div className="details-container">
@@ -284,7 +289,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
             <p>Be honest — there are no right or wrong answers. Choose what genuinely reflects you.</p>
             <div className="intro-stats">
               <div><strong>3</strong><span>Sections</span></div>
-              <div><strong>78</strong><span>Questions</span></div>
+              <div><strong>60</strong><span>Questions</span></div>
               <div><strong>15–20 min</strong><span>Estimated time</span></div>
               <div><strong>Instant</strong><span>Results</span></div>
             </div>
@@ -294,8 +299,8 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
             <p className="form-sub" style={profileData?.name ? { color: "#10b981", fontWeight: 600 } : {}}>
               {profileData?.name
                 ? details.stream
-                  ? "✓ Your details are pre-filled from your Beacon profile."
-                  : "✓ Name pre-filled from your Beacon profile. Please select your stream below."
+                  ? "✓ Your details are pre-filled from your Manzil profile."
+                  : "✓ Name pre-filled from your Manzil profile. Please select your stream below."
                 : "Your details appear on your personalised report. They are not stored anywhere."}
             </p>
             <div className="form-group">
@@ -340,9 +345,10 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
   // ── RENDER: RIASEC Questions ──────────────────────────────────────────────
   if (step === "questions") {
     return (
-      <div className="test-page">
+      <div className="test-page aptitude-page assessment-page apt-floating-shell">
+        <FloatingBackground />
         <header className="cc-header">
-          <span className="cc-logo">Beacon</span>
+          <span className="cc-logo">Manzil</span>
           <div className="cc-header-center">
             <h1>Section 1 of 3 — Personality</h1>
             <p>{details.name} • {details.class_level} • {details.stream}</p>
@@ -364,17 +370,16 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
               const isActive = cat === currentCat;
               const isDone = answered === 10;
               return (
-                <div key={cat} className={`sidebar-cat ${isActive ? "active" : ""} ${isDone ? "done" : ""}`}>
-                  <div className="sidebar-cat-header">
-                    <span className="sidebar-code" style={{ color: CATEGORY_INFO[cat].color }}>{cat}</span>
-                    <span className="sidebar-name">{CATEGORY_LABELS[cat]}</span>
-                    <span className="sidebar-count">{answered}/10</span>
-                  </div>
-                  <div className="sidebar-bar">
-                    <div className="sidebar-bar-fill"
-                      style={{ width: `${(answered / 10) * 100}%`, background: CATEGORY_INFO[cat].color }} />
-                  </div>
-                </div>
+                <ProgressWidget
+                  key={cat}
+                  code={cat}
+                  label={CATEGORY_LABELS[cat]}
+                  color={CATEGORY_INFO[cat].color}
+                  completed={answered}
+                  total={10}
+                  active={isActive}
+                  done={isDone}
+                />
               );
             })}
           </aside>
@@ -388,33 +393,28 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
               <p>{CATEGORY_MOTTOS[currentCat]}</p>
             </div>
 
-            <div className="question-card">
-              <p className="q-number">Question {current + 1} of 60</p>
-              <h2 className="q-text">{q.text}</h2>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={current}
+                className="question-card"
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <p className="q-number">Question {current + 1} of 60</p>
+                <h2 className="q-text">{q.text}</h2>
 
-              <div className="scale-legend">
-                1 = Strongly Disagree &nbsp;·&nbsp; 3 = Neutral &nbsp;·&nbsp; 5 = Strongly Agree
-              </div>
+                <AgreeScale items={RIASEC_SCALE} value={selected} onChange={setSelected} color={info.color} />
 
-              <div className="scale-options">
-                {RIASEC_SCALE.map((opt) => (
-                  <button key={opt.value}
-                    className={`scale-btn ${selected === opt.value ? "selected" : ""}`}
-                    onClick={() => setSelected(opt.value)}
-                    style={selected === opt.value ? { background: info.color, borderColor: info.color } : {}}>
-                    <span className="scale-num">{opt.value}</span>
-                    <span className="scale-label">{opt.label}</span>
+                <div className="q-nav">
+                  <button className="btn-ghost" onClick={handlePrev} disabled={current === 0}>← Previous</button>
+                  <button className="btn-primary" onClick={handleNext} style={{ background: info.color }}>
+                    {current === 59 ? "Next Section →" : "Next →"}
                   </button>
-                ))}
-              </div>
-
-              <div className="q-nav">
-                <button className="btn-ghost" onClick={handlePrev} disabled={current === 0}>← Previous</button>
-                <button className="btn-primary" onClick={handleNext} style={{ background: info.color }}>
-                  {current === 59 ? "Next Section →" : "Next →"}
-                </button>
-              </div>
-            </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </main>
 
           {/* Right info panel */}
@@ -463,9 +463,10 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
   // ── RENDER: Hobbies ───────────────────────────────────────────────────────
   if (step === "hobbies") {
     return (
-      <div className="test-page">
+      <div className="test-page aptitude-page assessment-page apt-floating-shell">
+        <FloatingBackground />
         <header className="cc-header">
-          <span className="cc-logo">Beacon</span>
+          <span className="cc-logo">Manzil</span>
           <div className="cc-header-center">
             <h1>Section 2 of 3 — Interests</h1>
             <p>{details.name} • {details.class_level} • {details.stream}</p>
@@ -527,9 +528,10 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
   // ── RENDER: Aptitude ──────────────────────────────────────────────────────
   if (step === "aptitude") {
     return (
-      <div className="test-page">
+      <div className="test-page aptitude-page assessment-page apt-floating-shell">
+        <FloatingBackground />
         <header className="cc-header">
-          <span className="cc-logo">Beacon</span>
+          <span className="cc-logo">Manzil</span>
           <div className="cc-header-center">
             <h1>Section 3 of 3 — Aptitude</h1>
             <p>{details.name} • {details.class_level} • {details.stream}</p>
@@ -552,16 +554,16 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
               const isActive = aq?.skill === skill;
               const isDone = answered === 3;
               return (
-                <div key={skill} className={`sidebar-cat ${isActive ? "active" : ""} ${isDone ? "done" : ""}`}>
-                  <div className="sidebar-cat-header">
-                    <span className="sidebar-name">{info.label}</span>
-                    <span className="sidebar-count">{answered}/3</span>
-                  </div>
-                  <div className="sidebar-bar">
-                    <div className="sidebar-bar-fill"
-                      style={{ width: `${(answered / 3) * 100}%`, background: APTITUDE_COLORS[skill] }} />
-                  </div>
-                </div>
+                <ProgressWidget
+                  key={skill}
+                  code={String(i + 1)}
+                  label={info.label}
+                  color={APTITUDE_COLORS[skill]}
+                  completed={answered}
+                  total={3}
+                  active={isActive}
+                  done={isDone}
+                />
               );
             })}
           </aside>
@@ -576,35 +578,28 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
               <p>{aptitudeSkillInfo?.about}</p>
             </div>
 
-            <div className="question-card">
-              <p className="q-number">Question {aptitudeCurrent + 1} of 18</p>
-              <h2 className="q-text">{aq?.text}</h2>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={aptitudeCurrent}
+                className="question-card"
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <p className="q-number">Question {aptitudeCurrent + 1} of 18</p>
+                <h2 className="q-text">{aq?.text}</h2>
 
-              <div className="scale-legend">
-                1 = Never &nbsp;·&nbsp; 3 = Sometimes &nbsp;·&nbsp; 5 = Always
-              </div>
+                <AgreeScale items={APTITUDE_SCALE} value={aptitudeSelected} onChange={setAptitudeSelected} color={aptitudeColor} />
 
-              <div className="scale-options">
-                {APTITUDE_SCALE.map((opt) => (
-                  <button key={opt.value}
-                    className={`scale-btn ${aptitudeSelected === opt.value ? "selected" : ""}`}
-                    onClick={() => setAptitudeSelected(opt.value)}
-                    style={aptitudeSelected === opt.value
-                      ? { background: aptitudeColor, borderColor: aptitudeColor } : {}}>
-                    <span className="scale-num">{opt.value}</span>
-                    <span className="scale-label">{opt.label}</span>
+                <div className="q-nav">
+                  <button className="btn-ghost" onClick={handleAptitudePrev}>← Previous</button>
+                  <button className="btn-primary" onClick={handleAptitudeNext} style={{ background: aptitudeColor }}>
+                    {aptitudeCurrent === 17 ? "Submit Test ✓" : "Next →"}
                   </button>
-                ))}
-              </div>
-
-              <div className="q-nav">
-                <button className="btn-ghost" onClick={handleAptitudePrev}>← Previous</button>
-                <button className="btn-primary" onClick={handleAptitudeNext}
-                  style={{ background: aptitudeColor }}>
-                  {aptitudeCurrent === 17 ? "Submit Test ✓" : "Next →"}
-                </button>
-              </div>
-            </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </main>
 
           {/* Right info panel */}

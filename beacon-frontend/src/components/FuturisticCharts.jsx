@@ -1,7 +1,7 @@
 /**
  * FuturisticCharts.jsx
  * ════════════════════════════════════════════════════════════════════
- * Reusable visualization component library for the Beacon Career
+ * Reusable visualization component library for the Manzil Career
  * Dashboard's futuristic dark-themed UI.
  *
  * Design language:

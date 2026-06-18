@@ -1,5 +1,5 @@
 # -----------------------------------------------------------------
-# Beacon Platform -- Reinstall All Dependencies
+# Manzil Platform -- Reinstall All Dependencies
 # Run when deps change: npm run install:all
 # -----------------------------------------------------------------
 

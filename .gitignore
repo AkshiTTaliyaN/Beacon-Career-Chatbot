@@ -75,6 +75,10 @@ Desktop.ini
 # Gemini / Antigravity local state
 .gemini/
 
+# Generated career avatars (cached per career title)
+aptitude-backend/data/career_avatar_cache/
+
+
 # ─── Diagnostic / one-off scripts ─────────────────────────────────────────
 check_postgres.py
 check_setup.py

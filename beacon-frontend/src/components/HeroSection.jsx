@@ -16,7 +16,7 @@ export default function HeroSection({
 }) {
   return (
     <section
-      aria-label="Beacon hero"
+      aria-label="Manzil hero"
       style={{
         background: 'linear-gradient(180deg, #0d1333 0%, #111842 40%, #161d55 100%)',
         position: 'relative',

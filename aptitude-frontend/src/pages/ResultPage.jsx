@@ -1,6 +1,12 @@
 import { Download, Briefcase, GraduationCap, Target, Users, Compass, AlertTriangle, CheckCircle2, Calendar, MapPin, BookOpen, TrendingUp, Heart, FileText, Sparkles, Brain } from "lucide-react";
 import { RIASEC_COLORS } from "../constants/riasecColors";
 import "./ResultPage.css";
+import { AnimatePresence, motion } from "framer-motion";
+import FloatingBackground from "../components/ui/FloatingBackground";
+import GlassCard from "../components/ui/GlassCard";
+import ConfettiBurst from "../components/ui/ConfettiBurst";
+import TimelineCard from "../components/ui/TimelineCard";
+import CareerAvatar from "../components/ui/CareerAvatar";
 
 const getColor = (category) => RIASEC_COLORS[category?.[0]] || "#2C5492";
 
@@ -197,11 +203,16 @@ const ADMISSION_PROCESS = {
 const LEVEL_COLORS = { High: "#10b981", Medium: "#f59e0b", Low: "#ef4444" };
 const LEVEL_BG    = { High: "#f0fdf4", Medium: "#fffbeb", Low: "#fef2f2" };
 
-export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onRetake }) {
-  const primary      = result.primary_type;
+export default function ResultPage({
+  result,
+  beaconOrigin,
+  onDownloadPDF,
+  onRetake
+}) {
   console.log("RESULT RECEIVED:", result);
 
   const primary = result.primary_type;
+
   const primaryColor = getColor(primary);
   const traits       = TRAITS[primary] || [];
   const strengths    = STRENGTHS[primary] || [];
@@ -218,6 +229,7 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
 
   // New fields from updated backend
   const primaryCareers   = result.primary_careers  || result.careers || [];
+  const topCareerMatch   = primaryCareers[0]?.title || primary;
   const interestCareers  = result.interest_careers || [];
   const aptitudeScores   = result.aptitude_scores  || {};
   const strongSkills     = result.strong_skills    || [];
@@ -225,43 +237,108 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
   const aptitudeFitNote  = result.aptitude_fit_note || "";
   const selectedHobbies  = result.selected_hobbies || [];
 
-  // riasec_scores field (renamed from scores in old backend)
-  const riasecScores = result.riasec_scores || result.scores || [];
+ 
+  
 
   return (
-    <div className="result-page">
+    <div className="result-page report-page results-page apt-floating-shell">
+      <FloatingBackground />
       <header className="cc-header">
-        <span className="cc-logo">Beacon</span>
+        <span className="cc-logo">Manzil</span>
         <div className="cc-header-center">
-          <h1>Beacon Career &amp; Personality Report</h1>
+          <h1>Manzil Career &amp; Personality Report</h1>
           <p>{result.name} • {result.class_level} • {result.stream}</p>
-          <p style={{ fontSize: "12px", color: "#64748b" }}>{new Date().toISOString()}</p>
+          <p style={{ fontSize: "12px", color: "#E5E7EB", fontWeight: 700 }}>{new Date().toISOString()}</p>
         </div>
         <button className="btn-outline" onClick={onDownloadPDF}><Download size={16} /> Download PDF</button>
       </header>
 
       <div className="result-container">
 
-        {/* ── Celebration ── */}
-        <section className="celebration-card" aria-label="Test completed">
-          <div className="celebration-gif-wrap">
-            <img className="celebration-gif"
-              src="https://media.giphy.com/media/l4Ep2bPV5Uh2sVEqs/giphy-downsized.gif"
-              alt="Celebration confetti"
-              onError={(e) => { e.currentTarget.style.display = "none"; e.currentTarget.nextElementSibling.style.display = "flex"; }} />
-            <div className="celebration-fallback" aria-hidden="true"><span>Congratulations!</span></div>
+        {/* ── Premium Report Hero ── */}
+        <GlassCard className="hero-report-card hero-personality-card">
+          <div className="hero-report-accent" style={{ background: `linear-gradient(90deg, ${primaryColor} 0%, #00d4ff 100%)` }} />
+          <ConfettiBurst />
+
+          <div className="hero-report-inner">
+            <div className="hero-report-visual">
+              <CareerAvatar
+                careerName={topCareerMatch}
+                accentColor={primaryColor}
+                variant="hero"
+                showCaption={false}
+              />
+            </div>
+
+            <div className="hero-report-content">
+              <div className="hero-report-meta">
+                <span className="hero-report-kicker">Assessment Complete</span>
+                <span className="hero-report-stamp">Personalised for you</span>
+              </div>
+
+              <p className="hero-report-prepared">
+                Prepared exclusively for <strong>{result.name}</strong>
+              </p>
+              <h2 className="hero-report-greeting">
+                Congratulations, {result.name.split(" ")[0]}!
+              </h2>
+
+              <div className="hero-report-career-block">
+                <span className="hero-report-career-label">Your Top Career Match</span>
+                <h3 className="hero-report-career-title">{topCareerMatch}</h3>
+              </div>
+
+              <div className="hero-report-badges">
+                <span
+                  className="hero-personality-badge hero-personality-badge--primary"
+                  style={{ color: primaryColor, borderColor: `${primaryColor}55`, background: `${primaryColor}12` }}
+                >
+                  <span className="hero-personality-badge-key">Primary</span>
+                  <span className="hero-personality-badge-val">{primary}</span>
+                </span>
+                <span className="hero-personality-badge hero-personality-badge--secondary">
+                  <span className="hero-personality-badge-key">Secondary</span>
+                  <span className="hero-personality-badge-val">{result.secondary_type}</span>
+                </span>
+              </div>
+
+              <div
+                className="hero-holland-highlight"
+                style={{ borderColor: `${primaryColor}44`, background: `linear-gradient(135deg, ${primaryColor}10 0%, rgba(0,212,255,0.08) 100%)` }}
+              >
+                <span className="hero-holland-label">Holland Code</span>
+                <span className="hero-holland-value" style={{ color: primaryColor }}>{result.holland_code}</span>
+              </div>
+
+              <div className="hero-report-summary">
+                <div className="hero-report-summary-label">
+                  <Brain size={18} style={{ color: primaryColor }} />
+                  <span>Summary</span>
+                </div>
+                <p className="hero-report-summary-text">{result.description}</p>
+              </div>
+            </div>
           </div>
-          <div className="celebration-copy">
-            <p className="celebration-kicker">Assessment complete</p>
-            <h2>You did it, {result.name.split(" ")[0]}!</h2>
-            <p>Your complete career assessment is ready — personality, interests, and aptitude all in one place.</p>
+        </GlassCard>
+
+        {/* ── PDF Download Section ── */}
+        <GlassCard className="pdf-download-card">
+          <div className="pdf-download-inner">
+            <Download size={18} style={{ color: primaryColor }} />
+            <div className="pdf-download-text">
+              <div className="pdf-download-title">Download your report</div>
+              <div className="pdf-download-sub">Save it for school, parents, and future planning.</div>
+            </div>
+            <button type="button" className="btn-primary pdf-download-btn" onClick={onDownloadPDF} style={{ background: primaryColor }}>
+              Download PDF
+            </button>
           </div>
-        </section>
+        </GlassCard>
 
         {/* ── Personality Overview ── */}
         <section className="result-section">
-          <h2 className="section-title">Personality Overview</h2>
-          <div className="overview-layout">
+          <h2 className="section-title text-on-dark">Personality Overview</h2>
+          <div className="overview-layout on-dark-surface">
             <div className="overview-left">
               <span className="primary-type" style={{ color: primaryColor }}>{primary}</span>
               <p className="secondary-type">Secondary: <strong>{result.secondary_type}</strong></p>
@@ -275,9 +352,8 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
             </div>
           </div>
 
-          <div className="scores-section">
+          <div className="scores-section on-dark-surface">
             <p className="scores-title">RIASEC Scores</p>
-            {riasecScores.map(item => (
             {(riasecScores || []).map(item => (
               <div key={item.category} className="score-row">
                 <span className="score-label">{item.category}</span>
@@ -294,11 +370,19 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
 
         {/* ── Primary Career Recommendations (RIASEC-driven) ── */}
         <section className="result-section">
-          <h2 className="section-title">Your Primary Career Matches</h2>
-          <p className="section-sub">Based on your <strong>{result.holland_code}</strong> Holland Code — these careers align most closely with your personality type:</p>
+          <h2 className="section-title text-on-dark">Your Primary Career Matches</h2>
+          <p className="section-sub text-on-dark-secondary">Based on your <strong>{result.holland_code}</strong> Holland Code — these careers align most closely with your personality type:</p>
           <div className="careers-grid">
             {primaryCareers.map((career, i) => (
-              <div key={i} className="career-card" style={{ borderTopColor: primaryColor }}>
+              <motion.div
+                key={i}
+                className="career-card"
+                style={{ borderTopColor: primaryColor }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.35, delay: i * 0.04 }}
+                whileHover={{ y: -4, scale: 1.01 }}
+              >
                 <div className="career-card-header">
                   <Briefcase size={16} style={{ color: primaryColor }} />
                   <h4>{career.title}</h4>
@@ -311,7 +395,7 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
                   )}
                   <span className="career-stream">{career.stream}</span>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </section>
@@ -322,14 +406,21 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
         {interestCareers.length > 0 && (
           <>
             <section className="result-section">
-              <h2 className="section-title">Based on Your Interests</h2>
-              <p className="section-sub">
+              <h2 className="section-title text-on-dark">Based on Your Interests</h2>
+              <p className="section-sub text-on-dark-secondary">
                 You selected interests in <strong>{selectedHobbies.slice(0, 3).join(", ")}{selectedHobbies.length > 3 ? ` and ${selectedHobbies.length - 3} more` : ""}</strong>.
                 These careers align with what you genuinely enjoy — worth exploring alongside your primary matches:
               </p>
               <div className="careers-grid interest-careers-grid">
                 {interestCareers.map((career, i) => (
-                  <div key={i} className="career-card interest-career-card">
+                  <motion.div
+                    key={i}
+                    className="career-card interest-career-card"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35, delay: i * 0.04 }}
+                    whileHover={{ y: -4, scale: 1.01 }}
+                  >
                     <div className="career-card-header">
                       <Sparkles size={16} style={{ color: "#7c3aed" }} />
                       <h4>{career.title}</h4>
@@ -341,7 +432,7 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
                       )}
                       <span className="career-stream">{career.stream}</span>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
               <p className="interest-careers-note">
@@ -356,13 +447,16 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
         {Object.keys(aptitudeScores).length > 0 && (
           <>
             <section className="result-section">
-              <h2 className="section-title">Your Aptitude Profile</h2>
-              <p className="section-sub">Based on your self-assessment across six skill areas — this shows where you feel most and least confident:</p>
+              <h2 className="section-title text-on-dark">Your Aptitude Profile</h2>
+              <p className="section-sub text-on-dark-secondary">Based on your self-assessment across six skill areas — this shows where you feel most and least confident:</p>
 
               <div className="aptitude-grid">
                 {Object.entries(aptitudeScores).map(([skill, data]) => (
                   <div key={skill} className="aptitude-skill-card"
-                    style={{ background: LEVEL_BG[data.level], borderColor: LEVEL_COLORS[data.level] + "40" }}>
+                    style={{
+                      background: LEVEL_BG[data.level],
+                      borderColor: LEVEL_COLORS[data.level] + "40"
+                    }}>
                     <div className="aptitude-skill-header">
                       <span className="aptitude-skill-label">{data.label}</span>
                       <span className="aptitude-level-badge"
@@ -413,8 +507,8 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
 
         {/* ── Traits ── */}
         <section className="result-section">
-          <h2 className="section-title">Your Personality Traits</h2>
-          <p className="section-sub">People with a <strong>{primary}</strong> personality type typically show these characteristics:</p>
+          <h2 className="section-title text-on-dark">Your Personality Traits</h2>
+          <p className="section-sub text-on-dark-secondary">People with a <strong>{primary}</strong> personality type typically show these characteristics:</p>
           <div className="traits-grid">
             {(traits || []).map((trait, i) => (
               <div key={i} className="trait-chip">
@@ -429,7 +523,7 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
 
         {/* ── Strengths & Challenges ── */}
         <section className="result-section">
-          <h2 className="section-title">Strengths &amp; Challenges</h2>
+          <h2 className="section-title text-on-dark">Strengths &amp; Challenges</h2>
           <div className="sc-layout">
             <div className="sc-card strengths-card" style={{ borderTopColor: primaryColor }}>
               <h3><CheckCircle2 size={18} /> Your strengths</h3>
@@ -438,13 +532,6 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
             <div className="sc-card challenges-card" style={{ borderTopColor: primaryColor }}>
               <h3><AlertTriangle size={18} /> Potential challenges</h3>
               <ul>{challenges.map((c, i) => <li key={i}>{c}</li>)}</ul>
-            <div className="sc-card strengths-card" style={{borderTopColor: primaryColor}}>
-              <h3><CheckCircle2 size={18}/> Your strengths</h3>
-              <ul>{(strengths || []).map((s, i) => <li key={i}>{s}</li>)}</ul>
-            </div>
-            <div className="sc-card challenges-card" style={{borderTopColor: primaryColor}}>
-              <h3><AlertTriangle size={18}/> Potential challenges</h3>
-              <ul>{(challenges || []).map((c, i) => <li key={i}>{c}</li>)}</ul>
               <p className="challenge-note">These are natural tendencies, not fixed limitations. Awareness is the first step to growth.</p>
             </div>
           </div>
@@ -454,7 +541,7 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
 
         {/* ── Ideal Work Environment ── */}
         <section className="result-section">
-          <h2 className="section-title">Your Ideal Work Environment</h2>
+          <h2 className="section-title text-on-dark">Your Ideal Work Environment</h2>
           <div className="work-env-card">
             <MapPin size={20} className="env-icon" />
             <p>{workEnv}</p>
@@ -467,8 +554,8 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
         {Object.keys(broaderMap).length > 0 && (
           <>
             <section className="result-section">
-              <h2 className="section-title">Broader Career Landscape</h2>
-              <p className="section-sub">A wider view of where <strong>{primary}</strong> types can thrive — across different sectors:</p>
+              <h2 className="section-title text-on-dark">Broader Career Landscape</h2>
+              <p className="section-sub text-on-dark-secondary">A wider view of where <strong>{primary}</strong> types can thrive — across different sectors:</p>
               <div className="broader-grid">
                 {Object.entries(broaderMap).map(([sector, careers]) => (
                   <div key={sector} className="broader-card">
@@ -484,8 +571,8 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
 
         {/* ── Entrance Exams ── */}
         <section className="result-section">
-          <h2 className="section-title">Entrance Exams to Target</h2>
-          <p className="section-sub">Based on your stream ({result.stream}) and career direction, these are the key exams to prepare for:</p>
+          <h2 className="section-title text-on-dark">Entrance Exams to Target</h2>
+          <p className="section-sub text-on-dark-secondary">Based on your stream ({result.stream}) and career direction, these are the key exams to prepare for:</p>
           <div className="exam-grid">
             {(entranceExams || []).map((exam, i) => (
               <div key={i} className="exam-card">
@@ -501,8 +588,8 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
 
         {/* ── Admission Process ── */}
         <section className="result-section">
-          <h2 className="section-title">Navigating the Admission Process</h2>
-          <p className="section-sub">Here is what the admission journey looks like for your stream ({result.stream}):</p>
+          <h2 className="section-title text-on-dark">Navigating the Admission Process</h2>
+          <p className="section-sub text-on-dark-secondary">Here is what the admission journey looks like for your stream ({result.stream}):</p>
           <div className="admission-card">
             <div className="admission-block">
               <h4><Calendar size={16} /> Timeline</h4>
@@ -523,20 +610,17 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
 
         {/* ── Action Plan ── */}
         <section className="result-section">
-          <h2 className="section-title">Your Personalised Action Plan</h2>
-          <p className="section-sub">A step-by-step roadmap from now until college — built around your <strong>{primary}</strong> personality:</p>
+          <h2 className="section-title text-on-dark">Your Personalised Action Plan</h2>
+          <p className="section-sub text-on-dark-secondary">A step-by-step roadmap from now until college — built around your <strong>{primary}</strong> personality:</p>
           <div className="action-timeline">
             {(actionPlan || []).map((phase, i) => (
-              <div key={i} className="phase-card">
-                <div className="phase-header">
-                  <Compass size={18} />
-                  <h4>{phase.phase}</h4>
-                </div>
-                <ul>{phase.actions.map((action, j) => <li key={j}>{action}</li>)}</ul>
-                <ul>
-                  {(phase.actions || []).map((action, j) => <li key={j}>{action}</li>)}
-                </ul>
-              </div>
+              <TimelineCard
+                key={i}
+                icon={<Compass size={18} style={{ color: primaryColor }} />}
+                phaseTitle={phase.phase}
+                items={phase.actions}
+                accentColor={primaryColor}
+              />
             ))}
           </div>
         </section>
@@ -545,8 +629,8 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
 
         {/* ── Skills to Build ── */}
         <section className="result-section">
-          <h2 className="section-title">Skills to Build Now</h2>
-          <p className="section-sub">Start developing these skills before Class 12 ends — they will strengthen both your applications and your confidence:</p>
+          <h2 className="section-title text-on-dark">Skills to Build Now</h2>
+          <p className="section-sub text-on-dark-secondary">Start developing these skills before Class 12 ends — they will strengthen both your applications and your confidence:</p>
           <div className="skills-grid">
             {(skillsToBuild || []).map((skill, i) => (
               <div key={i} className="skill-card">
@@ -562,8 +646,8 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
 
         {/* ── Parent Section ── */}
         <section className="result-section">
-          <h2 className="section-title">For Your Parents</h2>
-          <p className="section-sub">A clear, jargon-free note to share with your parents — to help them understand your personality type and how to support you.</p>
+          <h2 className="section-title text-on-dark">For Your Parents</h2>
+          <p className="section-sub text-on-dark-secondary">A clear, jargon-free note to share with your parents — to help them understand your personality type and how to support you.</p>
           <div className="parent-card" style={{ borderLeftColor: primaryColor }}>
             <div className="parent-card-header">
               <Heart size={20} style={{ color: primaryColor }} />
@@ -578,7 +662,7 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
 
         {/* ── Closing Note ── */}
         <section className="result-section">
-          <h2 className="section-title">A Note for You</h2>
+          <h2 className="section-title text-on-dark">A Note for You</h2>
           <div className="closing-card">
             <div className="closing-accent" style={{ background: primaryColor }} />
             <p className="closing-text">{result.closing_note}</p>
@@ -587,7 +671,7 @@ export default function ResultPage({ result, beaconOrigin, onDownloadPDF, onReta
         </section>
 
         <div className="result-footer">
-          <p>Beacon © 2026 — This report is an illustrative guide based on a psychometric assessment. For personalised counselling, contact a qualified career counsellor.</p>
+          <p>Manzil © 2026 — This report is an illustrative guide based on a psychometric assessment. For personalised counselling, contact a qualified career counsellor.</p>
           <div className="footer-actions">
             <button className="btn-primary" style={{ background: "#10b981" }}
               onClick={() => { window.location.href = dashboardUrl; }}>

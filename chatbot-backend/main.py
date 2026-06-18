@@ -26,7 +26,7 @@ if not os.path.exists(DATA_DIR):
 
 @app.get("/")
 async def root():
-    return {"message": "Beacon Career Assistant backend is running. Use POST /chat."}
+    return {"message": "Manzil Career Assistant backend is running. Use POST /chat."}
 
 class Option(BaseModel):
     letter: str

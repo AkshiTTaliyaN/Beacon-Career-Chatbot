@@ -3,6 +3,8 @@ import LandingPage from "./pages/LandingPage";
 import TestPage from "./pages/TestPage";
 import ResultPage from "./pages/ResultPage";
 import "./App.css";
+import "./styles/contrast.css";
+import "./styles/readability.css";
 
 const BEACON_API = import.meta.env.VITE_BEACON_API_URL || "http://127.0.0.1:8000";
 const APTITUDE_API = import.meta.env.VITE_APTITUDE_API_URL || "http://127.0.0.1:8001";
@@ -86,13 +88,13 @@ export default function App() {
     setFormData(payload);
 
     try {
-      const res = await fetch(`${APTITUDE_API}/api/submit`, {
-      console.log("SUBMIT PAYLOAD", payload);
-      const res = await fetch("http://127.0.0.1:8001/api/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+  console.log("SUBMIT PAYLOAD", payload);
+
+  const res = await fetch(`${APTITUDE_API}/api/submit`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
       if (!res.ok) throw new Error(`Submission failed with status ${res.status}`);
 
       const json = await res.json();
@@ -121,7 +123,7 @@ export default function App() {
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `Beacon_Report_${formData.name.replace(/\s+/g, "_")}.pdf`;
+      a.download = `Manzil_Report_${formData.name.replace(/\s+/g, "_")}.pdf`;
       a.click();
       URL.revokeObjectURL(url);
     } catch (err) {

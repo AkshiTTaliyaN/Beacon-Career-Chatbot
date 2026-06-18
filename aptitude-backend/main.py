@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
@@ -12,8 +12,9 @@ from scoring import (
     synthesise_result,
 )
 from pdf_generator import generate_pdf
+from career_avatar_service import get_career_avatar
 
-app = FastAPI(title="Beacon Aptitude API")
+app = FastAPI(title="Manzil Aptitude API")
 
 LOCAL_DEV_ORIGINS = [
     "http://localhost:3001",
@@ -53,6 +54,10 @@ class PDFRequest(BaseModel):
     riasec_answers: List[int]
     hobbies: List[str]
     aptitude_answers: List[int]
+
+
+class CareerAvatarRequest(BaseModel):
+    career_name: str
 
 
 # ---------------------------------------------------------------------------
@@ -97,9 +102,17 @@ def download_pdf(req: PDFRequest):
         io.BytesIO(pdf_bytes),
         media_type="application/pdf",
         headers={
-            "Content-Disposition": f"attachment; filename=Beacon_Report_{req.name.replace(' ', '_')}.pdf"
+            "Content-Disposition": f"attachment; filename=Manzil_Report_{req.name.replace(' ', '_')}.pdf"
         },
     )
+
+
+@app.post("/api/career-avatar")
+def career_avatar(req: CareerAvatarRequest):
+    """Generate or return a cached cartoon career avatar for any career title."""
+    if not req.career_name or not req.career_name.strip():
+        raise HTTPException(status_code=400, detail="career_name is required")
+    return get_career_avatar(req.career_name.strip())
 
 
 @app.get("/health")

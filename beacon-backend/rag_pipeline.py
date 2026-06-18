@@ -1,6 +1,6 @@
 """
 rag_pipeline.py
-Retrieval-Augmented Generation pipeline for Beacon Career Counselling Portal.
+Retrieval-Augmented Generation pipeline for Manzil Career Counselling Portal.
 Handles document extraction, chunking, Gemini embedding, local ChromaDB indexing, and query retrieval.
 """
 

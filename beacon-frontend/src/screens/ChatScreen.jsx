@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { sendChatChoice, startChat } from "../api/client";
+import ChatMarkdown from "../components/ChatMarkdown";
 import "./ChatScreen.css";
 
 function navigate(path) {
@@ -7,35 +9,107 @@ function navigate(path) {
   window.dispatchEvent(new PopStateEvent("popstate"));
 }
 
-function MessageBubble({ role, text }) {
+const QUICK_ACTIONS = [
+  { id: "career", icon: "🎯", label: "Career Guidance", message: "I want personalised career guidance for my stream." },
+  { id: "exams", icon: "📝", label: "Exam Selection", message: "Help me understand which entrance exams I should target." },
+  { id: "college", icon: "🎓", label: "College Guidance", message: "I need guidance on colleges and courses that fit me." },
+  { id: "start", icon: "✨", label: "Not Sure Where To Start", message: "I'm not sure where to start with my career planning." },
+];
+
+function ManzilAvatar() {
   return (
-    <div className={`chat-message ${role}`}>
-      {role === "bot" && <div className="chat-avatar">B</div>}
-      <div className="chat-bubble">{text}</div>
+    <div className="chat-avatar" aria-hidden="true">
+      <span>M</span>
     </div>
   );
 }
 
-function ProfileStrip({ profile }) {
+function MessageBubble({ role, text }) {
+  return (
+    <motion.div
+      className={`chat-message ${role}`}
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {role === "bot" && <ManzilAvatar />}
+      <div className="chat-bubble">
+        {role === "bot" && <div className="chat-bubble-label">Manzil AI</div>}
+        {role === "bot" ? (
+          <ChatMarkdown content={text} />
+        ) : (
+          <p className="chat-plain-text">{text}</p>
+        )}
+      </div>
+    </motion.div>
+  );
+}
+
+function ProfileChips({ profile }) {
   const chips = useMemo(() => {
     if (!profile) return [];
     return [
-      profile.current_class ? `Class ${profile.current_class}` : null,
-      profile.stream && profile.stream !== "none" ? profile.stream.toUpperCase() : null,
-      profile.city || null,
-      profile.career_clarity ? `Clarity: ${profile.career_clarity.replaceAll("_", " ")}` : null,
-      profile.has_riasec_scores ? "RIASEC ready" : null,
+      profile.current_class
+        ? { icon: "🎓", label: "Class", value: `Class ${profile.current_class}` }
+        : null,
+      profile.city
+        ? { icon: "📍", label: "Location", value: profile.city }
+        : null,
+      profile.has_riasec_scores
+        ? { icon: "🧠", label: "RIASEC Status", value: "Assessment complete" }
+        : { icon: "🧠", label: "RIASEC Status", value: "Not taken yet" },
+      profile.career_clarity
+        ? { icon: "🎯", label: "Career Clarity", value: profile.career_clarity.replaceAll("_", " ") }
+        : null,
+      profile.stream && profile.stream !== "none"
+        ? { icon: "📚", label: "Stream", value: profile.stream.toUpperCase() }
+        : null,
     ].filter(Boolean);
   }, [profile]);
 
   if (!chips.length) return null;
 
   return (
-    <div className="profile-strip" aria-label="Profile context used by chat">
-      <span>Using saved profile</span>
-      {chips.map((chip) => (
-        <strong key={chip}>{chip}</strong>
-      ))}
+    <div className="profile-chips" aria-label="Profile context used by chat">
+      <span className="profile-chips-kicker">Your profile</span>
+      <div className="profile-chips-row">
+        {chips.map((chip) => (
+          <div key={`${chip.label}-${chip.value}`} className="profile-chip">
+            <span className="profile-chip-icon" aria-hidden="true">{chip.icon}</span>
+            <div className="profile-chip-copy">
+              <span className="profile-chip-label">{chip.label}</span>
+              <strong className="profile-chip-value">{chip.value}</strong>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function QuickActionBar({ onSelect, loading, visible }) {
+  if (!visible) return null;
+
+  return (
+    <div className="quick-actions" aria-label="Quick actions">
+      <p className="quick-actions-title">Quick actions</p>
+      <div className="quick-actions-grid">
+        {QUICK_ACTIONS.map((action) => (
+          <motion.button
+            key={action.id}
+            type="button"
+            className="quick-action-card"
+            disabled={loading}
+            onClick={() => onSelect(action.message)}
+            whileHover={{ y: -3 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ duration: 0.18 }}
+          >
+            <span className="quick-action-icon" aria-hidden="true">{action.icon}</span>
+            <span className="quick-action-label">{action.label}</span>
+          </motion.button>
+        ))}
+      </div>
     </div>
   );
 }
@@ -44,19 +118,25 @@ function OptionBar({ options, onSelect, loading }) {
   if (!options?.length) return null;
 
   return (
-    <div className="chat-options" aria-label="Chat choices">
-      {options.map((option) => (
-        <button
-          key={option.letter}
-          type="button"
-          className="chat-option"
-          disabled={loading}
-          onClick={() => onSelect(option)}
-        >
-          <span>{option.letter}</span>
-          <em>{option.text}</em>
-        </button>
-      ))}
+    <div className="chat-suggestions" aria-label="Suggested replies">
+      <p className="chat-suggestions-title">Suggested replies</p>
+      <div className="chat-options">
+        {options.map((option) => (
+          <motion.button
+            key={option.letter}
+            type="button"
+            className="chat-option"
+            disabled={loading}
+            onClick={() => onSelect(option)}
+            whileHover={{ y: -3 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ duration: 0.18 }}
+          >
+            <span>{option.letter}</span>
+            <em>{option.text}</em>
+          </motion.button>
+        ))}
+      </div>
     </div>
   );
 }
@@ -66,9 +146,14 @@ function RecommendationPanel({ node, onRestart }) {
 
   if (node.type === "handoff") {
     return (
-      <section className="chat-result">
+      <motion.section
+        className="chat-result"
+        initial={{ opacity: 0, y: 14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35 }}
+      >
         <div className="chat-result-header">
-          <span>Handoff</span>
+          <span className="section-badge">Handoff</span>
           <h2>Talk to a counsellor</h2>
         </div>
         <p>{node.handoff_message || node.question}</p>
@@ -79,14 +164,19 @@ function RecommendationPanel({ node, onRestart }) {
             </a>
           ))}
         </div>
-      </section>
+      </motion.section>
     );
   }
 
   return (
-    <section className="chat-result">
+    <motion.section
+      className="chat-result"
+      initial={{ opacity: 0, y: 14 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35 }}
+    >
       <div className="chat-result-header">
-        <span>Recommended path</span>
+        <span className="section-badge">Recommended path</span>
         <h2>{node.title || node.question}</h2>
       </div>
 
@@ -150,7 +240,7 @@ function RecommendationPanel({ node, onRestart }) {
           Back to dashboard
         </button>
       </div>
-    </section>
+    </motion.section>
   );
 }
 
@@ -190,6 +280,35 @@ export default function ChatScreen() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [messages, loading, currentNode]);
 
+  const sendUserMessage = useCallback(async (trimmed) => {
+    if (!trimmed || loading || !sessionId) return;
+
+    setLoading(true);
+    setError("");
+
+    setMessages((prev) => [
+      ...prev,
+      { id: crypto.randomUUID(), role: "user", text: trimmed },
+    ]);
+
+    try {
+      const data = await sendChatChoice({ sessionId, message: trimmed });
+      setCurrentNode(data);
+      setProfile(data.profile_summary);
+      const skipNote = data.skipped_profile_questions?.length
+        ? " I used your saved profile to skip questions you already answered."
+        : "";
+      setMessages((prev) => [
+        ...prev,
+        { id: crypto.randomUUID(), role: "bot", text: `${data.question}${skipNote}` },
+      ]);
+    } catch (err) {
+      setError(err.message || "Unable to send message.");
+    } finally {
+      setLoading(false);
+    }
+  }, [loading, sessionId]);
+
   async function handleSelect(option) {
     if (!sessionId || loading) return;
     setLoading(true);
@@ -220,90 +339,104 @@ export default function ChatScreen() {
   async function handleSendText(e) {
     e.preventDefault();
     const trimmed = textValue.trim();
-    if (!trimmed || loading || !sessionId) return;
-
-    setLoading(true);
-    setError("");
+    if (!trimmed) return;
     setTextValue("");
-
-    setMessages((prev) => [
-      ...prev,
-      { id: crypto.randomUUID(), role: "user", text: trimmed },
-    ]);
-
-    try {
-      const data = await sendChatChoice({ sessionId, message: trimmed });
-      setCurrentNode(data);
-      setProfile(data.profile_summary);
-      setMessages((prev) => [
-        ...prev,
-        { id: crypto.randomUUID(), role: "bot", text: data.question },
-      ]);
-    } catch (err) {
-      setError(err.message || "Unable to send message.");
-    } finally {
-      setLoading(false);
-    }
+    await sendUserMessage(trimmed);
   }
+
+  const showQuickActions =
+    !loading &&
+    !error &&
+    currentNode?.type === "question" &&
+    messages.length <= 2;
+
+  const showSuggestions =
+    currentNode?.type === "question" &&
+    currentNode.options?.length > 0;
 
   return (
     <div className="chat-page">
-      <header className="chat-topbar">
-        <button type="button" className="back-button" onClick={() => navigate("/dashboard")}>
-          Back
-        </button>
-        <div>
-          <p>Beacon</p>
-          <h1>AI Career Counsellor</h1>
+      <header className="chat-header">
+        <div className="chat-header-inner">
+          <button type="button" className="chat-back-btn" onClick={() => navigate("/dashboard")}>
+            ← Dashboard
+          </button>
+
+          <div className="chat-header-brand">
+            <div className="chat-header-logo">M</div>
+            <div>
+              <p className="chat-header-kicker">Manzil</p>
+              <h1>Manzil AI Counsellor</h1>
+              <p className="chat-header-sub">Get personalised career, college and exam guidance.</p>
+            </div>
+          </div>
+
+          <button type="button" className="chat-restart-btn" onClick={bootChat} disabled={loading}>
+            Restart
+          </button>
         </div>
-        <button type="button" className="restart-button" onClick={bootChat} disabled={loading}>
-          Restart
-        </button>
       </header>
 
-      <ProfileStrip profile={profile} />
+      <div className="chat-shell">
+        <ProfileChips profile={profile} />
 
-      <main className="chat-main">
-        <section className="message-panel" aria-live="polite">
-          {messages.map((message) => (
-            <MessageBubble key={message.id} role={message.role} text={message.text} />
-          ))}
-          {loading && (
-            <div className="typing-row">
-              <span />
-              <span />
-              <span />
-            </div>
-          )}
-          {error && (
-            <div className="chat-error">
-              <strong>Chat unavailable</strong>
-              <p>{error}</p>
-              <button type="button" onClick={bootChat}>Try again</button>
-            </div>
-          )}
-          <div ref={messagesEndRef} />
-        </section>
+        <main className="chat-main">
+          <section className="message-panel" aria-live="polite">
+            <AnimatePresence initial={false}>
+              {messages.map((message) => (
+                <MessageBubble key={message.id} role={message.role} text={message.text} />
+              ))}
+            </AnimatePresence>
 
-        <RecommendationPanel node={currentNode} onRestart={bootChat} />
-      </main>
+            {loading && (
+              <div className="typing-row" aria-label="Manzil AI is typing">
+                <ManzilAvatar />
+                <div className="typing-bubble">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+              </div>
+            )}
 
-      <div className="chat-controls">
-        {currentNode?.type === "question" && currentNode.options?.length > 0 && (
-          <OptionBar options={currentNode.options} onSelect={handleSelect} loading={loading} />
-        )}
-        <form className="chat-input-bar" onSubmit={handleSendText}>
-          <input
-            type="text"
-            value={textValue}
-            onChange={(e) => setTextValue(e.target.value)}
-            placeholder="Type your question here (e.g. 'tell me about JEE exams')..."
-            disabled={loading}
+            {error && (
+              <div className="chat-error">
+                <strong>Chat unavailable</strong>
+                <p>{error}</p>
+                <button type="button" onClick={bootChat}>Try again</button>
+              </div>
+            )}
+
+            <RecommendationPanel node={currentNode} onRestart={bootChat} />
+            <div ref={messagesEndRef} />
+          </section>
+
+          <QuickActionBar
+            visible={showQuickActions}
+            loading={loading}
+            onSelect={sendUserMessage}
           />
-          <button type="submit" className="btn-send" disabled={loading || !textValue.trim()}>
-            Send
-          </button>
-        </form>
+
+          {showSuggestions && (
+            <OptionBar options={currentNode.options} onSelect={handleSelect} loading={loading} />
+          )}
+
+          <form className="chat-input-bar" onSubmit={handleSendText}>
+            <input
+              type="text"
+              value={textValue}
+              onChange={(e) => setTextValue(e.target.value)}
+              placeholder="Ask anything about careers, colleges, streams, exams, or your future..."
+              disabled={loading}
+              aria-label="Message Manzil AI Counsellor"
+            />
+            <button type="submit" className="btn-send" disabled={loading || !textValue.trim()} aria-label="Send message">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+          </form>
+        </main>
       </div>
     </div>
   );
