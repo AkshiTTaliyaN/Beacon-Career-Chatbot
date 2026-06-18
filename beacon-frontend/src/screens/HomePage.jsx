@@ -158,7 +158,7 @@ function StepCard({ num, title, desc, color, delay = 0 }) {
 }
 
 /* ── Main HomePage ─────────────────────────────────────────────────────────── */
-export default function HomePage() {
+export default function HomePage({ onStart }) {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -339,16 +339,16 @@ export default function HomePage() {
           <button
             className="ft-button-primary"
             style={{ fontSize: '1rem', padding: '0.9rem 2rem', borderRadius: 999 }}
-            onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={onStart}
           >
-            Learn How It Works ↓
+            Start Counselling →
           </button>
           <button
             className="ft-button-secondary"
             style={{ fontSize: '1rem', padding: '0.85rem 2rem', borderRadius: 999 }}
-            onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            Explore Features
+            How It Works ↓
           </button>
         </motion.div>
 
@@ -461,28 +461,43 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      {/* ── Coming Soon notice ─────────────────────────────────────────── */}
+      {/* ── CTA Section ────────────────────────────────────────────────── */}
       <section style={{ padding: '2rem 1.5rem 4rem', position: 'relative', zIndex: 1 }}>
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           style={{
-            maxWidth: 600, margin: '0 auto', textAlign: 'center',
-            padding: '2rem',
-            background: 'rgba(0,255,136,0.04)',
-            border: '1px solid rgba(0,255,136,0.15)',
-            borderRadius: 20,
-            backdropFilter: 'blur(12px)',
+            maxWidth: 700, margin: '0 auto', textAlign: 'center',
+            padding: '3rem 2rem',
+            background: 'linear-gradient(135deg, rgba(0,212,255,0.07), rgba(139,92,246,0.07))',
+            border: '1px solid rgba(0,212,255,0.18)',
+            borderRadius: 24,
+            backdropFilter: 'blur(16px)',
+            boxShadow: '0 0 60px rgba(0,212,255,0.06)',
+            position: 'relative',
+            overflow: 'hidden',
           }}
         >
-          <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>🚀</div>
-          <h3 style={{ margin: '0 0 0.5rem', fontSize: '1.15rem', fontWeight: 700, color: 'rgba(255,255,255,0.9)' }}>
-            Launching Soon
-          </h3>
-          <p style={{ margin: 0, color: 'rgba(255,255,255,0.45)', fontSize: '0.875rem', lineHeight: 1.65 }}>
-            Manzil is currently in its final stages of preparation. Access will be made available to students shortly. Stay tuned for the official launch.
+          {/* bg orb */}
+          <div style={{ position: 'absolute', top: '-40%', right: '-10%', width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(circle, rgba(139,92,246,0.12) 0%, transparent 70%)', filter: 'blur(40px)', pointerEvents: 'none' }} />
+          <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>🎯</div>
+          <h2 style={{ margin: '0 0 0.75rem', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, letterSpacing: '-0.03em', color: 'rgba(255,255,255,0.95)' }}>
+            Ready to find your path?
+          </h2>
+          <p style={{ margin: '0 auto 2rem', color: 'rgba(255,255,255,0.5)', fontSize: '1rem', lineHeight: 1.65, maxWidth: 480 }}>
+            Complete your profile in under 5 minutes and get personalised career recommendations built around who you actually are.
+          </p>
+          <button
+            className="ft-button-primary"
+            style={{ fontSize: '1.05rem', padding: '1rem 2.5rem', borderRadius: 999, boxShadow: '0 0 30px rgba(0,212,255,0.25)' }}
+            onClick={onStart}
+          >
+            Start Counselling →
+          </button>
+          <p style={{ marginTop: '1rem', color: 'rgba(255,255,255,0.25)', fontSize: '0.8rem' }}>
+            Free · No login required to explore
           </p>
         </motion.div>
       </section>

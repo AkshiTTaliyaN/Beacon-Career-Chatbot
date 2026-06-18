@@ -151,7 +151,7 @@ export default function App() {
     //   );
     // ────────────────────────────────────────────────────────────────────────
     case STEP.HOME:
-      return <HomePage />;
+      return <HomePage onStart={() => setStep(STEP.BASIC)} />;
     case STEP.BASIC:
       return (
         <BasicInfoScreen
