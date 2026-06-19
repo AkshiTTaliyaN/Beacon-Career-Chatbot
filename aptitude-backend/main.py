@@ -4,6 +4,7 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from typing import List
 import io
+import os
 
 from scoring import (
     calculate_riasec_scores,
@@ -25,9 +26,15 @@ LOCAL_DEV_ORIGINS = [
     "http://127.0.0.1:5174",
 ]
 
+allowed_origins = LOCAL_DEV_ORIGINS.copy()
+env_origins = os.getenv("ALLOWED_ORIGINS")
+if env_origins:
+    additional = [o.strip() for o in env_origins.split(",") if o.strip()]
+    allowed_origins.extend(additional)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=LOCAL_DEV_ORIGINS,
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

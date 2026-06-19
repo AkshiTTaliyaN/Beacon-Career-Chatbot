@@ -56,18 +56,10 @@ export default function WorkStyle({ form, setForm, onNext, onBack }) {
     setForm((prev) => ({ ...prev, workPreferences: { ...(prev.workPreferences || {}), soloTeam: Number(v) } }));
   }
 
-  function setRelocation(val) {
-    setForm((prev) => ({ ...prev, workPreferences: { ...(prev.workPreferences || {}), relocation: val } }));
-  }
-
   function handleNext(e) {
     e.preventDefault();
     if ((form.careerPriorities || []).length !== 3) {
       setMsg('Pick exactly 3 priorities.');
-      return;
-    }
-    if (!form.workPreferences?.relocation) {
-      setMsg('Let us know about relocating.');
       return;
     }
     setMsg('');
@@ -120,24 +112,6 @@ export default function WorkStyle({ form, setForm, onNext, onBack }) {
             <input type="range" min={1} max={5} value={form.workPreferences?.soloTeam || 3} onChange={(e) => setSoloTeam(e.target.value)} />
             <div className="slider-labels"><span>Mostly solo</span><span>Mostly team</span></div>
           </label>
-
-          <label className="field" style={{ marginTop: "1rem" }}>
-            <span className="question-heading" style={{ marginBottom: "0.75rem" }}>
-              ✈️ Would you move to another city for college or work?
-            </span>
-            <div className="reloc-pills">
-              {['Yes','Maybe','No'].map((opt, i) => (
-                <button
-                  key={opt}
-                  type="button"
-                  onClick={() => setRelocation(opt)}
-                  className={`reloc-pill${form.workPreferences?.relocation === opt ? " selected" : ""}`}
-                >
-                  {opt}
-                </button>
-              ))}
-            </div>
-          </label>
         </AnimatedQuestionCard>
 
         <div className="btn-row">
@@ -145,10 +119,10 @@ export default function WorkStyle({ form, setForm, onNext, onBack }) {
           <button
             type="submit"
             className="btn btn-primary"
-            disabled={!form.workPreferences?.relocation || (form.careerPriorities || []).length !== 3}
+            disabled={(form.careerPriorities || []).length !== 3}
             style={{
-              opacity: ((!form.workPreferences?.relocation || (form.careerPriorities || []).length !== 3) ? 0.5 : 1),
-              cursor: ((!form.workPreferences?.relocation || (form.careerPriorities || []).length !== 3) ? 'not-allowed' : 'pointer'),
+              opacity: (((form.careerPriorities || []).length !== 3) ? 0.5 : 1),
+              cursor: (((form.careerPriorities || []).length !== 3) ? 'not-allowed' : 'pointer'),
             }}
           >
             Continue →
