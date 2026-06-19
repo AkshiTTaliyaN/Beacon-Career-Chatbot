@@ -5,6 +5,7 @@ Handles document extraction, chunking, Gemini embedding, local ChromaDB indexing
 """
 
 import os
+import time
 from pathlib import Path
 import pypdf
 import chromadb
@@ -81,16 +82,32 @@ def ingest_documents():
             return
         print(f"[INFO] Generating embeddings for {len(documents)} chunks from {source_name}...")
         embeddings = []
-        batch_size = 100
+        batch_size = 50  # Smaller batch size to prevent hitting request quota limits at once
         for i in range(0, len(documents), batch_size):
             end_idx = min(i + batch_size, len(documents))
             batch_docs = documents[i:end_idx]
-            response = genai_client.models.embed_content(
-                model="gemini-embedding-001",
-                contents=batch_docs,
-                config={"task_type": "RETRIEVAL_DOCUMENT"}
-            )
-            embeddings.extend([e.values for e in response.embeddings])
+            
+            # Retry loop with backoff
+            retries = 5
+            backoff_delay = 10
+            for attempt in range(retries):
+                try:
+                    response = genai_client.models.embed_content(
+                        model="gemini-embedding-001",
+                        contents=batch_docs,
+                        config={"task_type": "RETRIEVAL_DOCUMENT"}
+                    )
+                    embeddings.extend([e.values for e in response.embeddings])
+                    # Add a small delay between batches to respect rate limits
+                    time.sleep(2)
+                    break
+                except Exception as e:
+                    if "429" in str(e) and attempt < retries - 1:
+                        print(f"[WARNING] Rate limit hit (429). Retrying batch {i//batch_size + 1} in {backoff_delay} seconds...")
+                        time.sleep(backoff_delay)
+                        backoff_delay *= 2
+                    else:
+                        raise e
 
         print(f"[INFO] Saving {len(documents)} chunks to vector database...")
         for i in range(0, len(documents), batch_size):

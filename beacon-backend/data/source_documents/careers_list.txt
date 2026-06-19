@@ -1,0 +1,2635 @@
+MANZIL CAREER COUNSELLING PORTAL - OFFICIAL CAREERS CATALOG
+This file contains the complete list of careers supported by the Manzil Portal.
+
+=== CAREER 1: Data Scientist ===
+Title: Data Scientist
+Expected Salary Range: ₹8–25 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: R
+Compatible High School Streams: pcm, pcmb
+Key Academic Subjects: mathematics (weight: 0.9), computerScience (weight: 0.85), physics (weight: 0.5), statistics (weight: 0.7)
+Workstyle Traits: researching (weight: 0.9), building (weight: 0.4), structured (weight: 0.5)
+Aligned Priorities: Intellectual Challenge, High Salary
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Your analytical nature and curiosity are exactly what data science rewards. Data Scientists spend their days finding patterns in complex datasets and building models that power real decisions — the kind of deep, focused problem-solving your profile points toward.
+
+=== CAREER 2: Software Engineer ===
+Title: Software Engineer
+Expected Salary Range: ₹7–30 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: R
+Compatible High School Streams: pcm, pcmb
+Key Academic Subjects: mathematics (weight: 0.85), computerScience (weight: 0.95), physics (weight: 0.4)
+Workstyle Traits: researching (weight: 0.6), building (weight: 0.8), structured (weight: 0.6)
+Aligned Priorities: High Salary, Intellectual Challenge, Work Life Balance
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Logical problem solving is the daily currency of software engineering. Engineers design systems, debug complex issues, and build tools that millions of people use — a career that rewards the kind of structured analytical thinking your profile shows.
+
+=== CAREER 3: Research Scientist ===
+Title: Research Scientist
+Expected Salary Range: ₹6–18 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: I
+Compatible High School Streams: pcm, pcb, pcmb
+Key Academic Subjects: physics (weight: 0.8), chemistry (weight: 0.8), biology (weight: 0.7), mathematics (weight: 0.7)
+Workstyle Traits: researching (weight: 0.95), building (weight: 0.3), structured (weight: 0.5)
+Aligned Priorities: Intellectual Challenge, Social Impact
+Employment Sector: study
+Education Cost Level: low
+Requires Relocation: Yes
+Description and Matching Reason: Your curiosity and drive to understand how things work are the defining traits of a research scientist. Research Scientists spend years exploring unknowns — running experiments, publishing findings, and pushing the boundaries of human knowledge.
+
+=== CAREER 4: Data Analyst ===
+Title: Data Analyst
+Expected Salary Range: ₹5–18 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: C
+Compatible High School Streams: pcm, pcmb, comm
+Key Academic Subjects: mathematics (weight: 0.85), computerScience (weight: 0.7), economics (weight: 0.6), accountancy (weight: 0.4)
+Workstyle Traits: researching (weight: 0.8), structured (weight: 0.7), building (weight: 0.3)
+Aligned Priorities: Intellectual Challenge, Job Stability
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Turning raw numbers into actionable business insights is the core of data analysis. Data Analysts work at the intersection of logic and communication — finding the story inside data that organisations use to make better decisions.
+
+=== CAREER 5: Biomedical Engineer ===
+Title: Biomedical Engineer
+Expected Salary Range: ₹6–20 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: R
+Compatible High School Streams: pcb, pcmb
+Key Academic Subjects: biology (weight: 0.85), chemistry (weight: 0.75), physics (weight: 0.7), mathematics (weight: 0.6)
+Workstyle Traits: researching (weight: 0.8), building (weight: 0.7), structured (weight: 0.5)
+Aligned Priorities: Social Impact, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Combining engineering principles with medical science to solve real healthcare problems is the heart of biomedical engineering. Biomedical Engineers design medical devices, prosthetics, and diagnostic tools that improve and save lives.
+
+=== CAREER 6: Environmental Scientist ===
+Title: Environmental Scientist
+Expected Salary Range: ₹5–15 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: R
+Compatible High School Streams: pcb, pcmb
+Key Academic Subjects: biology (weight: 0.85), chemistry (weight: 0.8), geography (weight: 0.6), physics (weight: 0.4)
+Workstyle Traits: researching (weight: 0.85), building (weight: 0.4), helping (weight: 0.5)
+Aligned Priorities: Social Impact, Intellectual Challenge
+Employment Sector: govt
+Education Cost Level: low
+Requires Relocation: Yes
+Description and Matching Reason: Studying how ecosystems function and how human activity affects them is at the core of environmental science. Environmental Scientists gather field data, analyse pollution and climate patterns, and inform the policies that protect our planet.
+
+=== CAREER 7: Psychologist ===
+Title: Psychologist
+Expected Salary Range: ₹4–18 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: S
+Compatible High School Streams: pcb, arts
+Key Academic Subjects: biology (weight: 0.6), history (weight: 0.5), politicalScience (weight: 0.4)
+Workstyle Traits: researching (weight: 0.75), helping (weight: 0.85), creative (weight: 0.4)
+Aligned Priorities: Social Impact, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Understanding how the mind works and helping people navigate mental and emotional challenges defines the psychologist's work. Psychologists apply evidence-based methods to assess, diagnose, and support people through clinical, educational, or research settings.
+
+=== CAREER 8: UX Researcher ===
+Title: UX Researcher
+Expected Salary Range: ₹7–22 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: A
+Compatible High School Streams: pcm, pcmb, arts, comm
+Key Academic Subjects: computerScience (weight: 0.6), mathematics (weight: 0.5), history (weight: 0.3)
+Workstyle Traits: researching (weight: 0.85), creative (weight: 0.7), helping (weight: 0.6)
+Aligned Priorities: Intellectual Challenge, Creative Freedom
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: UX Research sits at the intersection of analytical thinking and human empathy. UX Researchers design studies, conduct user interviews, and synthesise findings to make digital products intuitive — combining rigorous method with creative insight.
+
+=== CAREER 9: Mechanical Engineer ===
+Title: Mechanical Engineer
+Expected Salary Range: ₹5–18 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: I
+Compatible High School Streams: pcm, pcmb
+Key Academic Subjects: physics (weight: 0.9), mathematics (weight: 0.85), chemistry (weight: 0.5)
+Workstyle Traits: building (weight: 0.9), researching (weight: 0.5), structured (weight: 0.6)
+Aligned Priorities: Job Stability, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Designing, analysing, and manufacturing physical systems is what mechanical engineers do every day. This career rewards practical intelligence and the ability to turn abstract physics into machines, engines, and systems that actually work in the real world.
+
+=== CAREER 10: Civil Engineer ===
+Title: Civil Engineer
+Expected Salary Range: ₹5–16 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: I
+Compatible High School Streams: pcm, pcmb
+Key Academic Subjects: mathematics (weight: 0.85), physics (weight: 0.8), geography (weight: 0.4)
+Workstyle Traits: building (weight: 0.9), structured (weight: 0.7), researching (weight: 0.4)
+Aligned Priorities: Job Stability, Social Impact
+Employment Sector: govt
+Education Cost Level: low
+Requires Relocation: Yes
+Description and Matching Reason: Bridges, dams, roads, and buildings — civil engineers design and oversee the infrastructure that holds society together. This career combines spatial reasoning, mathematics, and hands-on site management to create lasting physical structures.
+
+=== CAREER 11: Electrical Engineer ===
+Title: Electrical Engineer
+Expected Salary Range: ₹4–20 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: I
+Compatible High School Streams: pcm, pcmb
+Key Academic Subjects: physics (weight: 0.9), mathematics (weight: 0.85), computerScience (weight: 0.5)
+Workstyle Traits: building (weight: 0.85), researching (weight: 0.5), structured (weight: 0.6)
+Aligned Priorities: Job Stability, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Designing electrical systems, circuits, and power infrastructure that keep the modern world running is the electrical engineer's core work. From power grids to embedded electronics, this field rewards technical precision and hands-on problem solving.
+
+=== CAREER 12: Architect ===
+Title: Architect
+Expected Salary Range: ₹5–20 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: A
+Compatible High School Streams: pcm, pcmb
+Key Academic Subjects: mathematics (weight: 0.8), physics (weight: 0.6)
+Workstyle Traits: building (weight: 0.8), creative (weight: 0.85), structured (weight: 0.5)
+Aligned Priorities: Creative Freedom, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: high
+Requires Relocation: No
+Description and Matching Reason: Architecture is where design meets engineering — creating spaces that are both structurally sound and aesthetically powerful. Architects design buildings from initial concept through construction, balancing artistic vision with practical constraints.
+
+=== CAREER 13: Doctor (MBBS) ===
+Title: Doctor (MBBS)
+Expected Salary Range: ₹6–25 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: S
+Compatible High School Streams: pcb, pcmb
+Key Academic Subjects: biology (weight: 0.95), chemistry (weight: 0.9), physics (weight: 0.5)
+Workstyle Traits: helping (weight: 0.9), building (weight: 0.5), researching (weight: 0.5)
+Aligned Priorities: Social Impact, Job Stability, High Salary
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Medicine combines deep scientific knowledge with direct human impact. Doctors diagnose illness, treat patients, and make critical decisions daily — a career for those who want rigorous intellectual challenge and the profound satisfaction of helping people heal.
+
+=== CAREER 14: Physiotherapist ===
+Title: Physiotherapist
+Expected Salary Range: ₹4–12 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: S
+Compatible High School Streams: pcb, pcmb
+Key Academic Subjects: biology (weight: 0.9), chemistry (weight: 0.6), physics (weight: 0.5)
+Workstyle Traits: helping (weight: 0.9), building (weight: 0.6), structured (weight: 0.5)
+Aligned Priorities: Social Impact, Work Life Balance
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Physiotherapists help patients recover movement and manage pain using evidence-based physical techniques. It is a career that combines biological knowledge with hands-on therapeutic skill and the genuine satisfaction of watching people regain their mobility.
+
+=== CAREER 15: UI/UX Designer ===
+Title: UI/UX Designer
+Expected Salary Range: ₹6–22 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: I
+Compatible High School Streams: pcm, pcmb, arts, comm
+Key Academic Subjects: computerScience (weight: 0.7), mathematics (weight: 0.4)
+Workstyle Traits: creative (weight: 0.9), researching (weight: 0.6), building (weight: 0.5)
+Aligned Priorities: Creative Freedom, Intellectual Challenge, High Salary
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: UI/UX Design is where aesthetic sensibility meets user psychology. Designers craft the visual and interactive experience of apps and websites — solving real problems with creative solutions that make digital products feel intuitive and beautiful.
+
+=== CAREER 16: Graphic Designer ===
+Title: Graphic Designer
+Expected Salary Range: ₹4–15 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: E
+Compatible High School Streams: arts, pcm, comm
+Key Academic Subjects: computerScience (weight: 0.4)
+Workstyle Traits: creative (weight: 0.95), building (weight: 0.5), leading (weight: 0.3)
+Aligned Priorities: Creative Freedom, Work Life Balance
+Employment Sector: private
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Graphic designers communicate ideas visually — through logos, layouts, illustrations, and brand identities. This is a career for people who think in images, have a strong sense of composition and colour, and want their creativity to drive their work.
+
+=== CAREER 17: Film Director / Content Creator ===
+Title: Film Director / Content Creator
+Expected Salary Range: ₹6–30 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: E
+Compatible High School Streams: arts, comm
+Key Academic Subjects: history (weight: 0.4), politicalScience (weight: 0.3)
+Workstyle Traits: creative (weight: 0.95), leading (weight: 0.7), helping (weight: 0.4)
+Aligned Priorities: Creative Freedom, Social Impact
+Employment Sector: entrepreneur
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Film direction and content creation are about bringing stories and ideas to life for an audience. Directors and creators lead teams, make hundreds of decisions every day, and translate creative vision into compelling visual narratives.
+
+=== CAREER 18: Journalist ===
+Title: Journalist
+Expected Salary Range: ₹3–12 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: S
+Compatible High School Streams: arts, comm
+Key Academic Subjects: history (weight: 0.6), politicalScience (weight: 0.7), geography (weight: 0.4)
+Workstyle Traits: creative (weight: 0.8), researching (weight: 0.7), helping (weight: 0.5)
+Aligned Priorities: Social Impact, Creative Freedom
+Employment Sector: private
+Education Cost Level: low
+Requires Relocation: Yes
+Description and Matching Reason: Journalism is about finding truth and telling it clearly to the public. Journalists investigate, interview, research, and write — serving as the link between events and the citizens who need to understand them.
+
+=== CAREER 19: Game Designer ===
+Title: Game Designer
+Expected Salary Range: ₹6–22 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: I
+Compatible High School Streams: pcm, pcmb, arts
+Key Academic Subjects: computerScience (weight: 0.8), mathematics (weight: 0.6)
+Workstyle Traits: creative (weight: 0.9), building (weight: 0.7), researching (weight: 0.5)
+Aligned Priorities: Creative Freedom, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Game design combines technical building, creative world-making, and deep understanding of player psychology. Game Designers craft interactive experiences that millions of people choose to spend time in — one of the most creative and technically demanding careers in technology.
+
+=== CAREER 20: Teacher / Educator ===
+Title: Teacher / Educator
+Expected Salary Range: ₹3–12 LPA
+RIASEC Primary Trait: S
+RIASEC Secondary Trait: A
+Compatible High School Streams: pcm, pcb, pcmb, arts, comm
+Key Academic Subjects: history (weight: 0.5), biology (weight: 0.4), mathematics (weight: 0.4), politicalScience (weight: 0.4)
+Workstyle Traits: helping (weight: 0.95), creative (weight: 0.5), leading (weight: 0.5)
+Aligned Priorities: Social Impact, Work Life Balance, Job Stability
+Employment Sector: govt
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Teaching is one of the most directly impactful careers a person can choose — shaping how young minds understand the world. Educators combine deep subject knowledge with the ability to explain, inspire, and guide students through their most formative years.
+
+=== CAREER 21: Social Worker / NGO Manager ===
+Title: Social Worker / NGO Manager
+Expected Salary Range: ₹3–15 LPA
+RIASEC Primary Trait: S
+RIASEC Secondary Trait: E
+Compatible High School Streams: arts, comm
+Key Academic Subjects: politicalScience (weight: 0.7), history (weight: 0.5), geography (weight: 0.4)
+Workstyle Traits: helping (weight: 0.95), leading (weight: 0.6), researching (weight: 0.4)
+Aligned Priorities: Social Impact, Work Life Balance
+Employment Sector: govt
+Education Cost Level: low
+Requires Relocation: Yes
+Description and Matching Reason: Social work is driven by the belief that systemic change and individual support can improve lives. Social workers and NGO managers design programs, advocate for communities, and directly support people navigating poverty, health challenges, and inequality.
+
+=== CAREER 22: HR Manager ===
+Title: HR Manager
+Expected Salary Range: ₹6–18 LPA
+RIASEC Primary Trait: S
+RIASEC Secondary Trait: E
+Compatible High School Streams: comm, arts
+Key Academic Subjects: economics (weight: 0.5), politicalScience (weight: 0.4), businessStudies (weight: 0.6)
+Workstyle Traits: helping (weight: 0.85), leading (weight: 0.7), structured (weight: 0.6)
+Aligned Priorities: Work Life Balance, Job Stability, Social Impact
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Human Resources is about building and maintaining the environment where people do their best work. HR Managers handle hiring, culture, conflict resolution, and employee development — making them the people who hold organisations together from the inside.
+
+=== CAREER 23: Clinical / Counselling Psychologist ===
+Title: Clinical / Counselling Psychologist
+Expected Salary Range: ₹5–18 LPA
+RIASEC Primary Trait: S
+RIASEC Secondary Trait: I
+Compatible High School Streams: pcb, arts
+Key Academic Subjects: biology (weight: 0.6), history (weight: 0.4)
+Workstyle Traits: helping (weight: 0.95), researching (weight: 0.6), creative (weight: 0.4)
+Aligned Priorities: Social Impact, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Clinical and counselling psychologists help people understand and manage their mental and emotional lives. It is a career that demands both scientific rigour (evidence-based therapy methods) and deep human empathy — working with some of the most complex challenges people face.
+
+=== CAREER 24: Management Consultant ===
+Title: Management Consultant
+Expected Salary Range: ₹10–35 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: I
+Compatible High School Streams: comm, pcm, pcmb
+Key Academic Subjects: mathematics (weight: 0.7), economics (weight: 0.85), businessStudies (weight: 0.8), accountancy (weight: 0.5)
+Workstyle Traits: leading (weight: 0.85), researching (weight: 0.7), structured (weight: 0.6)
+Aligned Priorities: High Salary, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: high
+Requires Relocation: Yes
+Description and Matching Reason: Management consultants solve complex business problems for organisations across industries. They analyse data, identify inefficiencies, and recommend strategic changes — a career that rewards ambitious analytical thinkers who can also communicate and influence.
+
+=== CAREER 25: Investment Banker ===
+Title: Investment Banker
+Expected Salary Range: ₹12–40 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: C
+Compatible High School Streams: comm, pcm
+Key Academic Subjects: mathematics (weight: 0.85), economics (weight: 0.9), accountancy (weight: 0.8), businessStudies (weight: 0.7)
+Workstyle Traits: leading (weight: 0.8), researching (weight: 0.6), structured (weight: 0.7)
+Aligned Priorities: High Salary, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: high
+Requires Relocation: Yes
+Description and Matching Reason: Investment bankers advise companies on raising capital, mergers, and major financial decisions. It is one of the highest-pressure and highest-reward careers in finance — demanding sharp analytical skills, resilience, and the ability to manage complex deals.
+
+=== CAREER 26: Entrepreneur ===
+Title: Entrepreneur
+Expected Salary Range: Variable
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: I
+Compatible High School Streams: pcm, pcmb, comm, arts
+Key Academic Subjects: mathematics (weight: 0.5), economics (weight: 0.6), businessStudies (weight: 0.6)
+Workstyle Traits: leading (weight: 0.9), building (weight: 0.7), creative (weight: 0.6)
+Aligned Priorities: Creative Freedom, High Salary, Intellectual Challenge
+Employment Sector: entrepreneur
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Entrepreneurship is building something from nothing — identifying a problem, assembling a team, and executing relentlessly under uncertainty. It is the career path that rewards the most diverse skill set: vision, execution, resilience, and the ability to lead.
+
+=== CAREER 27: Marketing Manager ===
+Title: Marketing Manager
+Expected Salary Range: ₹7–22 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: A
+Compatible High School Streams: comm, arts
+Key Academic Subjects: economics (weight: 0.7), businessStudies (weight: 0.8), accountancy (weight: 0.4)
+Workstyle Traits: leading (weight: 0.8), creative (weight: 0.75), researching (weight: 0.5)
+Aligned Priorities: Creative Freedom, High Salary
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Marketing managers create campaigns and strategies that connect products with people. They combine creative storytelling, data-driven targeting, and business understanding to influence how brands are perceived — and to drive real revenue growth.
+
+=== CAREER 28: IAS / Civil Services Officer ===
+Title: IAS / Civil Services Officer
+Expected Salary Range: ₹8–20 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: S
+Compatible High School Streams: arts, comm, pcm, pcb, pcmb
+Key Academic Subjects: history (weight: 0.8), geography (weight: 0.8), politicalScience (weight: 0.85), economics (weight: 0.7)
+Workstyle Traits: leading (weight: 0.9), helping (weight: 0.7), structured (weight: 0.6)
+Aligned Priorities: Social Impact, Job Stability
+Employment Sector: govt
+Education Cost Level: low
+Requires Relocation: Yes
+Description and Matching Reason: Civil Services officers lead the implementation of government policy at district, state, and national levels. The IAS and allied services offer the rare combination of authority, social impact, and intellectual challenge — solving real problems that affect millions of people.
+
+=== CAREER 29: Lawyer / Legal Advisor ===
+Title: Lawyer / Legal Advisor
+Expected Salary Range: ₹5–30 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: I
+Compatible High School Streams: arts, comm
+Key Academic Subjects: history (weight: 0.6), politicalScience (weight: 0.85), economics (weight: 0.5)
+Workstyle Traits: leading (weight: 0.85), researching (weight: 0.7), helping (weight: 0.5)
+Aligned Priorities: Intellectual Challenge, High Salary
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Law is about constructing arguments, navigating complex systems, and advocating for outcomes — whether in a courtroom, a boardroom, or a policy chamber. Lawyers combine deep analytical thinking with persuasive communication to represent and advise clients.
+
+=== CAREER 30: Chartered Accountant ===
+Title: Chartered Accountant
+Expected Salary Range: ₹8–25 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: E
+Compatible High School Streams: comm
+Key Academic Subjects: accountancy (weight: 0.95), mathematics (weight: 0.85), economics (weight: 0.7), businessStudies (weight: 0.6)
+Workstyle Traits: structured (weight: 0.9), researching (weight: 0.5), leading (weight: 0.4)
+Aligned Priorities: High Salary, Job Stability
+Employment Sector: private
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Chartered Accountants are the financial backbone of organisations — auditing accounts, managing tax compliance, and providing strategic financial advice. It is one of India's most respected and financially rewarding professional qualifications.
+
+=== CAREER 31: Financial Analyst ===
+Title: Financial Analyst
+Expected Salary Range: ₹7–22 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: I
+Compatible High School Streams: comm, pcm
+Key Academic Subjects: mathematics (weight: 0.9), accountancy (weight: 0.8), economics (weight: 0.85)
+Workstyle Traits: structured (weight: 0.85), researching (weight: 0.7), leading (weight: 0.3)
+Aligned Priorities: High Salary, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Financial analysts evaluate investment opportunities, model company performance, and advise on financial strategy. This career rewards precision, numerical fluency, and the ability to synthesise complex financial data into clear recommendations.
+
+=== CAREER 32: Operations Manager ===
+Title: Operations Manager
+Expected Salary Range: ₹8–20 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: E
+Compatible High School Streams: comm, pcm
+Key Academic Subjects: mathematics (weight: 0.7), businessStudies (weight: 0.8), economics (weight: 0.6)
+Workstyle Traits: structured (weight: 0.85), leading (weight: 0.75), building (weight: 0.4)
+Aligned Priorities: Job Stability, High Salary
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Operations managers keep organisations running efficiently — coordinating logistics, managing teams, and optimising processes. It is a career that combines systematic thinking with leadership, and rewards people who find satisfaction in making complex systems work smoothly.
+
+=== CAREER 33: Supply Chain Manager ===
+Title: Supply Chain Manager
+Expected Salary Range: ₹7–22 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: R
+Compatible High School Streams: comm, pcm
+Key Academic Subjects: mathematics (weight: 0.75), businessStudies (weight: 0.7), economics (weight: 0.65)
+Workstyle Traits: structured (weight: 0.85), building (weight: 0.5), researching (weight: 0.5)
+Aligned Priorities: Job Stability, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Supply chain managers coordinate the flow of goods from supplier to customer — balancing cost, speed, and reliability across complex global networks. This is a career for systematic thinkers who enjoy optimising large, moving systems.
+
+=== CAREER 34: Quality Assurance Analyst ===
+Title: Quality Assurance Analyst
+Expected Salary Range: ₹5–15 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: R
+Compatible High School Streams: pcm, pcmb, comm
+Key Academic Subjects: mathematics (weight: 0.7), computerScience (weight: 0.6), chemistry (weight: 0.4)
+Workstyle Traits: structured (weight: 0.9), building (weight: 0.5), researching (weight: 0.5)
+Aligned Priorities: Job Stability, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: QA Analysts ensure that software, products, and processes meet defined quality standards — finding errors before they reach end users. This career rewards methodical thinking, attention to detail, and a systematic approach to testing and verification.
+
+=== CAREER 35: Bank Manager / Finance Officer ===
+Title: Bank Manager / Finance Officer
+Expected Salary Range: ₹8–18 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: S
+Compatible High School Streams: comm
+Key Academic Subjects: accountancy (weight: 0.8), economics (weight: 0.8), mathematics (weight: 0.7), businessStudies (weight: 0.6)
+Workstyle Traits: structured (weight: 0.85), helping (weight: 0.6), leading (weight: 0.5)
+Aligned Priorities: Job Stability, High Salary
+Employment Sector: govt
+Education Cost Level: low
+Requires Relocation: Yes
+Description and Matching Reason: Banking and finance officers manage accounts, evaluate loan applications, and serve as the financial hub for individuals and businesses. Government bank roles in India offer strong job security, structured growth, and wide social reach.
+
+=== CAREER 36: AI / Machine Learning Engineer ===
+Title: AI / Machine Learning Engineer
+Expected Salary Range: ₹8–30 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: R
+Compatible High School Streams: pcm
+Key Academic Subjects: mathematics (weight: 0.95), computerScience (weight: 0.95), physics (weight: 0.5)
+Workstyle Traits: researching (weight: 0.9), building (weight: 0.85), structured (weight: 0.5), creative (weight: 0.4)
+Aligned Priorities: High Salary, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: AI/ML Engineers design intelligent systems that learn from data — from recommendation engines to self-driving algorithms. If you enjoy mathematics, coding, and pushing the boundaries of what machines can do, this career channels that curiosity into one of the fastest-growing fields in technology.
+
+=== CAREER 37: Cybersecurity Analyst ===
+Title: Cybersecurity Analyst
+Expected Salary Range: ₹6–20 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: C
+Compatible High School Streams: pcm
+Key Academic Subjects: computerScience (weight: 0.95), mathematics (weight: 0.7), physics (weight: 0.3)
+Workstyle Traits: researching (weight: 0.85), structured (weight: 0.8), building (weight: 0.4)
+Aligned Priorities: Job Stability, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Cybersecurity Analysts act as digital guardians, detecting threats and fortifying systems against increasingly sophisticated attacks. This career suits methodical thinkers who enjoy investigative problem-solving and want a role where demand consistently outstrips supply.
+
+=== CAREER 38: Cloud Architect ===
+Title: Cloud Architect
+Expected Salary Range: ₹7–25 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: I
+Compatible High School Streams: pcm
+Key Academic Subjects: computerScience (weight: 0.95), mathematics (weight: 0.6), physics (weight: 0.3)
+Workstyle Traits: building (weight: 0.9), structured (weight: 0.7), researching (weight: 0.5), leading (weight: 0.4)
+Aligned Priorities: High Salary, Job Stability
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Cloud Architects design the large-scale infrastructure that powers modern applications — selecting services, ensuring scalability, and keeping costs under control. If you like building robust, well-engineered systems and enjoy staying current with rapidly evolving platforms, this career offers both strong pay and creative engineering challenges.
+
+=== CAREER 39: Robotics Engineer ===
+Title: Robotics Engineer
+Expected Salary Range: ₹6–22 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: I
+Compatible High School Streams: pcm
+Key Academic Subjects: mathematics (weight: 0.85), physics (weight: 0.9), computerScience (weight: 0.8)
+Workstyle Traits: building (weight: 0.95), researching (weight: 0.7), fieldwork (weight: 0.4), creative (weight: 0.3)
+Aligned Priorities: Intellectual Challenge, Creativity
+Employment Sector: private
+Education Cost Level: high
+Requires Relocation: Yes
+Description and Matching Reason: Robotics Engineers bring machines to life — designing, programming, and testing robots for manufacturing, healthcare, and exploration. This career is ideal for hands-on builders who love integrating mechanical design, electronics, and software into tangible working systems.
+
+=== CAREER 40: Aerospace Engineer ===
+Title: Aerospace Engineer
+Expected Salary Range: ₹7–24 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: I
+Compatible High School Streams: pcm
+Key Academic Subjects: physics (weight: 0.95), mathematics (weight: 0.9), computerScience (weight: 0.5), chemistry (weight: 0.3)
+Workstyle Traits: building (weight: 0.85), researching (weight: 0.8), structured (weight: 0.6), fieldwork (weight: 0.3)
+Aligned Priorities: Intellectual Challenge, High Salary
+Employment Sector: private
+Education Cost Level: high
+Requires Relocation: Yes
+Description and Matching Reason: Aerospace Engineers design aircraft, spacecraft, and satellite systems — tackling some of humanity's most complex engineering challenges. If physics and mathematics excite you and you dream of contributing to aviation or space exploration, this career puts that passion to work.
+
+=== CAREER 41: Quantum Computing Scientist ===
+Title: Quantum Computing Scientist
+Expected Salary Range: ₹10–35 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: R
+Compatible High School Streams: pcm
+Key Academic Subjects: physics (weight: 0.95), mathematics (weight: 0.95), computerScience (weight: 0.7)
+Workstyle Traits: researching (weight: 0.95), building (weight: 0.4), structured (weight: 0.3), creative (weight: 0.3)
+Aligned Priorities: Intellectual Challenge, High Salary
+Employment Sector: study
+Education Cost Level: high
+Requires Relocation: Yes
+Description and Matching Reason: Quantum Computing Scientists work at the frontier of physics and computer science, developing algorithms that exploit quantum mechanics to solve previously intractable problems. This deeply research-oriented career is perfect for someone who thrives on abstract theory, advanced mathematics, and the thrill of pioneering new science.
+
+=== CAREER 42: VLSI Design / Semiconductor Engineer ===
+Title: VLSI Design / Semiconductor Engineer
+Expected Salary Range: ₹7–25 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: I
+Compatible High School Streams: pcm
+Key Academic Subjects: physics (weight: 0.9), mathematics (weight: 0.8), computerScience (weight: 0.7)
+Workstyle Traits: building (weight: 0.9), structured (weight: 0.7), researching (weight: 0.6)
+Aligned Priorities: High Salary, Job Stability
+Employment Sector: private
+Education Cost Level: high
+Requires Relocation: Yes
+Description and Matching Reason: VLSI and semiconductor engineers design the chips that power everything from smartphones to supercomputers, working at the nanometer scale where physics meets logic. If you enjoy physics, digital electronics, and meticulous design work, this career places you at the heart of the global technology supply chain.
+
+=== CAREER 43: Bioinformatics Specialist ===
+Title: Bioinformatics Specialist
+Expected Salary Range: ₹5–18 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: R
+Compatible High School Streams: pcb, pcmb
+Key Academic Subjects: biology (weight: 0.85), mathematics (weight: 0.7), computerScience (weight: 0.8), chemistry (weight: 0.4)
+Workstyle Traits: researching (weight: 0.9), building (weight: 0.5), structured (weight: 0.5)
+Aligned Priorities: Intellectual Challenge, Creativity
+Employment Sector: private
+Education Cost Level: high
+Requires Relocation: Yes
+Description and Matching Reason: Bioinformatics Specialists decode biological data using computational tools — analysing genomes, protein structures, and drug interactions. This interdisciplinary career is tailor-made for someone who loves both biology and programming and wants to accelerate discoveries in medicine and life sciences.
+
+=== CAREER 44: Genetic Counsellor ===
+Title: Genetic Counsellor
+Expected Salary Range: ₹5–16 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: S
+Compatible High School Streams: pcb
+Key Academic Subjects: biology (weight: 0.95), chemistry (weight: 0.5), psychology (weight: 0.6)
+Workstyle Traits: researching (weight: 0.7), helping (weight: 0.85), structured (weight: 0.4)
+Aligned Priorities: Social Impact, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: high
+Requires Relocation: Yes
+Description and Matching Reason: Genetic Counsellors help individuals and families understand inherited conditions, interpret genetic test results, and make informed health decisions. If you are drawn to biology and also care deeply about people's well-being, this career combines scientific expertise with compassionate patient guidance.
+
+=== CAREER 45: Food Technologist ===
+Title: Food Technologist
+Expected Salary Range: ₹4–12 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: I
+Compatible High School Streams: pcb, pcmb
+Key Academic Subjects: chemistry (weight: 0.85), biology (weight: 0.8), physics (weight: 0.3)
+Workstyle Traits: building (weight: 0.7), researching (weight: 0.7), fieldwork (weight: 0.5), structured (weight: 0.4)
+Aligned Priorities: Job Stability, Social Impact
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Food Technologists develop, test, and improve food products — ensuring safety, nutrition, and taste at industrial scale. This hands-on career suits science students who enjoy lab work and want to see their innovations reach millions of consumers.
+
+=== CAREER 46: Astrobiologist ===
+Title: Astrobiologist
+Expected Salary Range: ₹6–20 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: R
+Compatible High School Streams: pcb, pcmb
+Key Academic Subjects: biology (weight: 0.9), physics (weight: 0.7), chemistry (weight: 0.7), mathematics (weight: 0.4)
+Workstyle Traits: researching (weight: 0.95), fieldwork (weight: 0.5), creative (weight: 0.3)
+Aligned Priorities: Intellectual Challenge, Creativity
+Employment Sector: study
+Education Cost Level: high
+Requires Relocation: Yes
+Description and Matching Reason: Astrobiologists investigate the possibility of life beyond Earth, studying extreme environments and planetary chemistry. This highly research-driven career is perfect for deeply curious minds who want to tackle one of science's most profound questions.
+
+=== CAREER 47: Marine Biologist ===
+Title: Marine Biologist
+Expected Salary Range: ₹4–14 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: R
+Compatible High School Streams: pcb
+Key Academic Subjects: biology (weight: 0.95), chemistry (weight: 0.5), geography (weight: 0.4)
+Workstyle Traits: researching (weight: 0.85), fieldwork (weight: 0.8), creative (weight: 0.2)
+Aligned Priorities: Intellectual Challenge, Social Impact
+Employment Sector: study
+Education Cost Level: high
+Requires Relocation: Yes
+Description and Matching Reason: Marine Biologists study ocean ecosystems, coral reefs, and aquatic species — often spending time on field expeditions and in coastal labs. If you love biology and the natural world and don't mind outdoor fieldwork, this career lets you contribute to ocean conservation and discovery.
+
+=== CAREER 48: Veterinary Doctor / Animal Surgeon ===
+Title: Veterinary Doctor / Animal Surgeon
+Expected Salary Range: ₹5–18 LPA
+RIASEC Primary Trait: S
+RIASEC Secondary Trait: I
+Compatible High School Streams: pcb
+Key Academic Subjects: biology (weight: 0.95), chemistry (weight: 0.7), physics (weight: 0.3)
+Workstyle Traits: helping (weight: 0.9), researching (weight: 0.5), fieldwork (weight: 0.6), building (weight: 0.3)
+Aligned Priorities: Social Impact, Job Stability
+Employment Sector: private
+Education Cost Level: high
+Requires Relocation: Yes
+Description and Matching Reason: Veterinary Doctors diagnose and treat animals, perform surgeries, and safeguard public health through disease control. This career is ideal for compassionate biology students who feel a calling to care for animals and are willing to invest in an intensive professional degree.
+
+=== CAREER 49: Renewable Energy Consultant ===
+Title: Renewable Energy Consultant
+Expected Salary Range: ₹5–15 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: E
+Compatible High School Streams: pcm
+Key Academic Subjects: physics (weight: 0.85), mathematics (weight: 0.6), chemistry (weight: 0.5)
+Workstyle Traits: researching (weight: 0.7), fieldwork (weight: 0.6), leading (weight: 0.5), structured (weight: 0.4)
+Aligned Priorities: Social Impact, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Renewable Energy Consultants advise organisations on transitioning to solar, wind, and other clean energy sources — combining engineering knowledge with business strategy. If you care about climate change and enjoy applied physics, this career lets you make a measurable environmental impact.
+
+=== CAREER 50: Blockchain Developer ===
+Title: Blockchain Developer
+Expected Salary Range: ₹8–28 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: R
+Compatible High School Streams: pcm
+Key Academic Subjects: computerScience (weight: 0.95), mathematics (weight: 0.8), physics (weight: 0.2)
+Workstyle Traits: building (weight: 0.9), researching (weight: 0.7), structured (weight: 0.5), creative (weight: 0.3)
+Aligned Priorities: High Salary, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Blockchain Developers build decentralised applications, smart contracts, and cryptographic protocols that underpin Web3 and digital finance. If you enjoy deep coding, cryptography, and working in a fast-evolving ecosystem, this high-demand role offers exceptional earning potential.
+
+=== CAREER 51: Financial Risk Manager (FRM) ===
+Title: Financial Risk Manager (FRM)
+Expected Salary Range: ₹7–24 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: I
+Compatible High School Streams: comm
+Key Academic Subjects: mathematics (weight: 0.85), economics (weight: 0.8), accountancy (weight: 0.7), businessStudies (weight: 0.4)
+Workstyle Traits: structured (weight: 0.9), researching (weight: 0.7), leading (weight: 0.3)
+Aligned Priorities: High Salary, Job Stability
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Financial Risk Managers identify, quantify, and mitigate risks that could threaten an organisation's financial health — from market volatility to credit defaults. This career rewards strong quantitative skills and meticulous analysis, offering stability and high compensation in the banking and financial services sector.
+
+=== CAREER 52: Actuarial Analyst ===
+Title: Actuarial Analyst
+Expected Salary Range: ₹8–35 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: I
+Compatible High School Streams: comm, pcm
+Key Academic Subjects: mathematics (weight: 0.95), economics (weight: 0.6), accountancy (weight: 0.5), computerScience (weight: 0.4)
+Workstyle Traits: structured (weight: 0.9), researching (weight: 0.8), building (weight: 0.3)
+Aligned Priorities: High Salary, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Actuarial Analysts use advanced mathematics and statistics to model financial risk for insurance, pensions, and investment firms. If you have exceptional quantitative ability and enjoy structured, detail-oriented work, this profession is among the highest-paid and most respected in the finance world.
+
+=== CAREER 53: Stock Broker / Portfolio Manager ===
+Title: Stock Broker / Portfolio Manager
+Expected Salary Range: ₹6–22 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: C
+Compatible High School Streams: comm
+Key Academic Subjects: economics (weight: 0.85), accountancy (weight: 0.7), mathematics (weight: 0.7), businessStudies (weight: 0.5)
+Workstyle Traits: leading (weight: 0.8), structured (weight: 0.6), researching (weight: 0.6)
+Aligned Priorities: High Salary, Leadership
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Stock Brokers and Portfolio Managers analyse markets, manage investment portfolios, and make high-stakes decisions that directly affect wealth creation. This fast-paced career is ideal for confident, enterprising individuals who thrive under pressure and have a strong grasp of economics and financial markets.
+
+=== CAREER 54: Forensic Accountant ===
+Title: Forensic Accountant
+Expected Salary Range: ₹5–18 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: I
+Compatible High School Streams: comm
+Key Academic Subjects: accountancy (weight: 0.95), economics (weight: 0.5), mathematics (weight: 0.6), businessStudies (weight: 0.4)
+Workstyle Traits: structured (weight: 0.9), researching (weight: 0.8), helping (weight: 0.2)
+Aligned Priorities: Job Stability, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Forensic Accountants investigate financial fraud, embezzlement, and white-collar crime by tracing money trails through complex accounts. If you have a sharp eye for detail, enjoy detective-style work, and love accounting, this niche career combines investigative thinking with financial expertise.
+
+=== CAREER 55: E-commerce Operations Specialist ===
+Title: E-commerce Operations Specialist
+Expected Salary Range: ₹4–12 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: E
+Compatible High School Streams: comm
+Key Academic Subjects: businessStudies (weight: 0.8), economics (weight: 0.5), mathematics (weight: 0.5), computerScience (weight: 0.4)
+Workstyle Traits: structured (weight: 0.8), leading (weight: 0.5), building (weight: 0.4)
+Aligned Priorities: Job Stability, Work Life Balance
+Employment Sector: private
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: E-commerce Operations Specialists manage product listings, logistics coordination, and fulfilment pipelines for online retail platforms. This career suits organised, process-driven individuals who enjoy optimising workflows and keeping digital storefronts running smoothly.
+
+=== CAREER 56: Corporate Lawyer ===
+Title: Corporate Lawyer
+Expected Salary Range: ₹6–28 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: C
+Compatible High School Streams: arts, comm
+Key Academic Subjects: english (weight: 0.85), politicalScience (weight: 0.7), economics (weight: 0.5), history (weight: 0.4)
+Workstyle Traits: leading (weight: 0.8), structured (weight: 0.7), researching (weight: 0.6)
+Aligned Priorities: High Salary, Leadership
+Employment Sector: private
+Education Cost Level: high
+Requires Relocation: Yes
+Description and Matching Reason: Corporate Lawyers advise businesses on mergers, contracts, compliance, and intellectual property — combining sharp legal reasoning with commercial acumen. If you are articulate, persuasive, and enjoy navigating complex regulations, this high-stakes career offers strong financial rewards and professional prestige.
+
+=== CAREER 57: Environmental Lawyer ===
+Title: Environmental Lawyer
+Expected Salary Range: ₹5–20 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: I
+Compatible High School Streams: arts, pcm, pcb, pcmb
+Key Academic Subjects: english (weight: 0.8), politicalScience (weight: 0.7), geography (weight: 0.6), biology (weight: 0.4)
+Workstyle Traits: leading (weight: 0.7), researching (weight: 0.7), helping (weight: 0.5), fieldwork (weight: 0.3)
+Aligned Priorities: Social Impact, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: high
+Requires Relocation: Yes
+Description and Matching Reason: Environmental Lawyers advocate for ecological protection, represent communities affected by pollution, and shape green policy through litigation and regulation. This career is ideal for someone passionate about both law and the environment who wants to drive systemic change.
+
+=== CAREER 58: Public Policy Analyst ===
+Title: Public Policy Analyst
+Expected Salary Range: ₹5–18 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: S
+Compatible High School Streams: arts
+Key Academic Subjects: politicalScience (weight: 0.9), economics (weight: 0.7), english (weight: 0.6), history (weight: 0.5), sociology (weight: 0.5)
+Workstyle Traits: researching (weight: 0.9), structured (weight: 0.5), helping (weight: 0.5), leading (weight: 0.3)
+Aligned Priorities: Social Impact, Intellectual Challenge
+Employment Sector: govt
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Public Policy Analysts research societal issues, evaluate government programmes, and draft evidence-based recommendations that influence legislation and public spending. If you care about social justice and enjoy rigorous analysis of political and economic systems, this career puts your intellect to work for the public good.
+
+=== CAREER 59: Forensic Psychologist ===
+Title: Forensic Psychologist
+Expected Salary Range: ₹4–16 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: S
+Compatible High School Streams: arts, pcb, pcmb
+Key Academic Subjects: psychology (weight: 0.95), biology (weight: 0.4), sociology (weight: 0.5), english (weight: 0.4)
+Workstyle Traits: researching (weight: 0.8), helping (weight: 0.7), structured (weight: 0.4), fieldwork (weight: 0.3)
+Aligned Priorities: Intellectual Challenge, Social Impact
+Employment Sector: private
+Education Cost Level: high
+Requires Relocation: Yes
+Description and Matching Reason: Forensic Psychologists apply psychological science to the legal system — profiling offenders, assessing witness credibility, and aiding criminal investigations. This career suits deeply analytical individuals who are fascinated by human behaviour and want to contribute to justice and rehabilitation.
+
+=== CAREER 60: Digital Marketing Strategist ===
+Title: Digital Marketing Strategist
+Expected Salary Range: ₹5–18 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: A
+Compatible High School Streams: arts, comm
+Key Academic Subjects: english (weight: 0.7), businessStudies (weight: 0.7), economics (weight: 0.4), psychology (weight: 0.4)
+Workstyle Traits: creative (weight: 0.8), leading (weight: 0.7), researching (weight: 0.5), structured (weight: 0.3)
+Aligned Priorities: Creativity, High Salary
+Employment Sector: private
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Digital Marketing Strategists plan and execute online campaigns — leveraging SEO, social media, and data analytics to grow brands and drive revenue. If you are creative, persuasive, and enjoy blending storytelling with data, this career offers rapid growth in the booming digital economy.
+
+=== CAREER 61: Brand Manager ===
+Title: Brand Manager
+Expected Salary Range: ₹7–22 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: A
+Compatible High School Streams: comm, arts
+Key Academic Subjects: businessStudies (weight: 0.85), economics (weight: 0.5), english (weight: 0.6), psychology (weight: 0.4)
+Workstyle Traits: leading (weight: 0.85), creative (weight: 0.7), researching (weight: 0.5), structured (weight: 0.3)
+Aligned Priorities: Leadership, Creativity
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Brand Managers own the identity and market positioning of products — orchestrating advertising, packaging, pricing, and consumer research. This career rewards enterprising leaders with a creative streak who can translate consumer insights into compelling brand strategies.
+
+=== CAREER 62: Sports Manager ===
+Title: Sports Manager
+Expected Salary Range: ₹4–15 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: S
+Compatible High School Streams: arts, comm
+Key Academic Subjects: businessStudies (weight: 0.7), english (weight: 0.5), economics (weight: 0.4), psychology (weight: 0.3)
+Workstyle Traits: leading (weight: 0.85), helping (weight: 0.5), fieldwork (weight: 0.6), creative (weight: 0.3)
+Aligned Priorities: Leadership, Work Life Balance
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Sports Managers handle athlete representation, event logistics, and franchise operations — serving as the business backbone of the sports industry. If you are a natural leader with a love for sports and strong organisational skills, this career lets you turn that passion into a profession.
+
+=== CAREER 63: HR Analytics Specialist ===
+Title: HR Analytics Specialist
+Expected Salary Range: ₹5–16 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: S
+Compatible High School Streams: comm, arts
+Key Academic Subjects: mathematics (weight: 0.6), businessStudies (weight: 0.7), psychology (weight: 0.6), economics (weight: 0.4)
+Workstyle Traits: structured (weight: 0.8), researching (weight: 0.7), helping (weight: 0.5)
+Aligned Priorities: Work Life Balance, Job Stability
+Employment Sector: private
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: HR Analytics Specialists use data to improve hiring, retention, and employee engagement — translating workforce patterns into actionable strategies. If you enjoy working with people-centric data and want a structured yet impactful corporate role, this career blends human resources expertise with analytical rigour.
+
+=== CAREER 64: Product Manager ===
+Title: Product Manager
+Expected Salary Range: ₹8–26 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: I
+Compatible High School Streams: comm, pcm
+Key Academic Subjects: businessStudies (weight: 0.8), mathematics (weight: 0.5), computerScience (weight: 0.5), economics (weight: 0.5), english (weight: 0.4)
+Workstyle Traits: leading (weight: 0.9), creative (weight: 0.6), researching (weight: 0.6), structured (weight: 0.4)
+Aligned Priorities: Leadership, High Salary
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Product Managers define what gets built, prioritise features, and align engineering, design, and business teams around a shared vision. If you enjoy leading without formal authority, making data-informed decisions, and shaping products that users love, this career combines strategic thinking with hands-on execution.
+
+=== CAREER 65: Wildlife Biologist ===
+Title: Wildlife Biologist
+Expected Salary Range: ₹4–12 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: R
+Compatible High School Streams: pcb
+Key Academic Subjects: biology (weight: 0.95), geography (weight: 0.5), chemistry (weight: 0.4)
+Workstyle Traits: researching (weight: 0.85), fieldwork (weight: 0.9), helping (weight: 0.3)
+Aligned Priorities: Social Impact, Intellectual Challenge
+Employment Sector: govt
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Wildlife Biologists study animal behaviour, track populations, and design conservation strategies — often working in forests, wetlands, and national parks. If you love nature, enjoy outdoor fieldwork, and want to protect biodiversity, this career turns your passion for the living world into meaningful conservation action.
+
+=== CAREER 66: Fashion Designer ===
+Title: Fashion Designer
+Expected Salary Range: ₹4–18 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: E
+Compatible High School Streams: arts, pcm, pcb, pcmb, comm
+Key Academic Subjects: fineArts (weight: 0.95), english (weight: 0.4), businessStudies (weight: 0.3)
+Workstyle Traits: creative (weight: 0.95), building (weight: 0.6), leading (weight: 0.3), fieldwork (weight: 0.2)
+Aligned Priorities: Creativity, High Salary
+Employment Sector: private
+Education Cost Level: high
+Requires Relocation: Yes
+Description and Matching Reason: Fashion Designers conceptualise garments, select fabrics, and create collections that reflect cultural trends and personal artistic vision. If you have a strong aesthetic sense, love sketching and colour, and dream of seeing your designs on people, this career channels artistic talent into a vibrant industry.
+
+=== CAREER 67: Animator / 3D Artist ===
+Title: Animator / 3D Artist
+Expected Salary Range: ₹4–15 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: R
+Compatible High School Streams: arts, pcm, pcb, pcmb, comm
+Key Academic Subjects: fineArts (weight: 0.9), computerScience (weight: 0.6), physics (weight: 0.3)
+Workstyle Traits: creative (weight: 0.95), building (weight: 0.7), researching (weight: 0.3)
+Aligned Priorities: Creativity, Work Life Balance
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Animators and 3D Artists bring characters, worlds, and visual effects to life for films, games, and advertising. If you have artistic talent, enjoy digital tools, and want a career where imagination is your primary raw material, animation offers a creatively fulfilling path with growing global demand.
+
+=== CAREER 68: International Relations Specialist ===
+Title: International Relations Specialist
+Expected Salary Range: ₹5–20 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: E
+Compatible High School Streams: arts
+Key Academic Subjects: politicalScience (weight: 0.9), history (weight: 0.7), english (weight: 0.7), economics (weight: 0.5), geography (weight: 0.4)
+Workstyle Traits: researching (weight: 0.8), leading (weight: 0.6), structured (weight: 0.4), helping (weight: 0.3)
+Aligned Priorities: Intellectual Challenge, Social Impact
+Employment Sector: govt
+Education Cost Level: high
+Requires Relocation: Yes
+Description and Matching Reason: International Relations Specialists analyse geopolitical trends, advise on foreign policy, and represent national interests in diplomacy and multilateral organisations. If you are fascinated by global affairs, enjoy research and persuasion, and aspire to shape how nations interact, this career offers intellectual depth and significant societal influence.
+
+=== CAREER 69: DJ / Electronic Music Producer ===
+Title: DJ / Electronic Music Producer
+Expected Salary Range: ₹3–15 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: A
+Compatible High School Streams: arts, pcm, pcb, pcmb, comm
+Key Academic Subjects: computerScience (weight: 0.5)
+Workstyle Traits: creative (weight: 0.9), building (weight: 0.7), leading (weight: 0.4)
+Aligned Priorities: Creative Freedom, Work Life Balance
+Employment Sector: entrepreneur
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: You love working with physical sound gear and software tools to craft experiences. Mixing, beat-making, and performing combine your technical execution with deep artistic expression.
+
+=== CAREER 70: Tattoo Artist ===
+Title: Tattoo Artist
+Expected Salary Range: ₹3–12 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: A
+Compatible High School Streams: arts, pcm, pcb, pcmb, comm
+Key Academic Subjects: fineArts (weight: 0.9)
+Workstyle Traits: creative (weight: 0.9), building (weight: 0.8)
+Aligned Priorities: Creative Freedom, Work Life Balance
+Employment Sector: entrepreneur
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: This career turns hand-eye coordination and visual style into a tactile, permanent craft. If you love fine sketching and working directly with tools on a skin canvas, tattoo artistry offers immense independence.
+
+=== CAREER 71: Esports Athlete / Pro Gamer ===
+Title: Esports Athlete / Pro Gamer
+Expected Salary Range: ₹4–25 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: I
+Compatible High School Streams: arts, pcm, pcb, pcmb, comm
+Key Academic Subjects: computerScience (weight: 0.4)
+Workstyle Traits: structured (weight: 0.8), researching (weight: 0.6), building (weight: 0.5)
+Aligned Priorities: High Salary, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Professional gaming requires lightning reflex controls, precise muscle memory, and deep tactical analysis of game states, suitable for those who love hands-on challenges and digital combat systems.
+
+=== CAREER 72: Drone Pilot / Aerial Photographer ===
+Title: Drone Pilot / Aerial Photographer
+Expected Salary Range: ₹4–15 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: E
+Compatible High School Streams: arts, pcm, pcb, pcmb, comm
+Key Academic Subjects: physics (weight: 0.4), computerScience (weight: 0.4)
+Workstyle Traits: building (weight: 0.8), creative (weight: 0.6), fieldwork (weight: 0.7)
+Aligned Priorities: Creative Freedom, Work Life Balance
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Operating unmanned aerial vehicles (UAVs) for cinematography, real estate, or agricultural mapping combines physical piloting coordination with visual flair and technical hardware maintenance.
+
+=== CAREER 73: Sneaker Restorer / Customizer ===
+Title: Sneaker Restorer / Customizer
+Expected Salary Range: ₹2–8 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: A
+Compatible High School Streams: arts, pcm, pcb, pcmb, comm
+Key Academic Subjects: fineArts (weight: 0.7)
+Workstyle Traits: building (weight: 0.9), creative (weight: 0.8)
+Aligned Priorities: Creative Freedom, Work Life Balance
+Employment Sector: entrepreneur
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Merging streetwear culture with craft, restorers use paints, solvents, stitching tools, and texture design to refurbish or redesign high-end sneakers for collectors and fans.
+
+=== CAREER 74: Audio Engineer / Podcast Producer ===
+Title: Audio Engineer / Podcast Producer
+Expected Salary Range: ₹4–18 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: C
+Compatible High School Streams: arts, pcm, pcb, pcmb, comm
+Key Academic Subjects: physics (weight: 0.5), computerScience (weight: 0.6)
+Workstyle Traits: building (weight: 0.8), structured (weight: 0.7), creative (weight: 0.5)
+Aligned Priorities: Work Life Balance, Creative Freedom
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Audio engineers manage sound boards, record vocal sessions, clean background noise, and mix channels for podcasts, commercials, and audiobooks, combining structured software edits with acoustic physics.
+
+=== CAREER 75: Custom PC Builder / Modder ===
+Title: Custom PC Builder / Modder
+Expected Salary Range: ₹3–10 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: C
+Compatible High School Streams: pcm, comm, arts
+Key Academic Subjects: computerScience (weight: 0.8), physics (weight: 0.3)
+Workstyle Traits: building (weight: 0.95), structured (weight: 0.6)
+Aligned Priorities: Creative Freedom, Job Stability
+Employment Sector: entrepreneur
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Assembling high-performance liquid-cooled rigs, customizing chassis cases, and testing hardware voltages is a dream path for those who love manual computer hardware assembly and clean electronics setup.
+
+=== CAREER 76: Sound Designer (Gaming/Film) ===
+Title: Sound Designer (Gaming/Film)
+Expected Salary Range: ₹5–20 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: A
+Compatible High School Streams: arts, pcm, comm
+Key Academic Subjects: computerScience (weight: 0.7), physics (weight: 0.4)
+Workstyle Traits: creative (weight: 0.9), building (weight: 0.8), researching (weight: 0.4)
+Aligned Priorities: Creative Freedom, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Creating ambient noise, monster growls, weapon sound effects, and UI feedback sounds for games or films. It bridges physical foley recording with digital synthesis and audio coding.
+
+=== CAREER 77: Special Effects (SFX) Makeup Artist ===
+Title: Special Effects (SFX) Makeup Artist
+Expected Salary Range: ₹4–15 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: A
+Compatible High School Streams: arts, pcb, pcmb
+Key Academic Subjects: fineArts (weight: 0.8), biology (weight: 0.4)
+Workstyle Traits: building (weight: 0.9), creative (weight: 0.9)
+Aligned Priorities: Creative Freedom, Social Impact
+Employment Sector: private
+Education Cost Level: high
+Requires Relocation: Yes
+Description and Matching Reason: Molding prosthetics, painting wounds, and applying silicone structures for film and theater production. This hands-on craft blends chemistry, sculpting, and storytelling aesthetics.
+
+=== CAREER 78: Smart Home Integrator ===
+Title: Smart Home Integrator
+Expected Salary Range: ₹4–12 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: C
+Compatible High School Streams: pcm, comm
+Key Academic Subjects: computerScience (weight: 0.7), physics (weight: 0.4)
+Workstyle Traits: building (weight: 0.9), structured (weight: 0.7)
+Aligned Priorities: Job Stability, Work Life Balance
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Wiring, configuring, and troubleshooting interconnected smart thermostats, security cameras, smart lights, and voice hubs for high-end modern residential homes.
+
+=== CAREER 79: Electric Vehicle (EV) Systems Installer ===
+Title: Electric Vehicle (EV) Systems Installer
+Expected Salary Range: ₹5–14 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: C
+Compatible High School Streams: pcm
+Key Academic Subjects: physics (weight: 0.8), computerScience (weight: 0.5)
+Workstyle Traits: building (weight: 0.9), structured (weight: 0.6)
+Aligned Priorities: Job Stability, Social Impact
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Installing high-voltage battery modules, electric drive motors, and vehicle charging systems, ensuring green transportation technology runs safely and reliably.
+
+=== CAREER 80: Solar Energy Technician ===
+Title: Solar Energy Technician
+Expected Salary Range: ₹3–9 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: I
+Compatible High School Streams: pcm, arts, comm
+Key Academic Subjects: physics (weight: 0.6)
+Workstyle Traits: building (weight: 0.9), fieldwork (weight: 0.8)
+Aligned Priorities: Job Stability, Social Impact
+Employment Sector: private
+Education Cost Level: low
+Requires Relocation: Yes
+Description and Matching Reason: Assembling solar panels, calibrating photovoltaic grids, and installing solar microgrids in urban homes or remote rural locations to power green energy transitions.
+
+=== CAREER 81: Barista Trainer / Coffee Roaster ===
+Title: Barista Trainer / Coffee Roaster
+Expected Salary Range: ₹2.5–8 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: S
+Compatible High School Streams: arts, comm, pcb, pcmb
+Key Academic Subjects: chemistry (weight: 0.4)
+Workstyle Traits: building (weight: 0.8), helping (weight: 0.6), creative (weight: 0.4)
+Aligned Priorities: Work Life Balance, Creative Freedom
+Employment Sector: private
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Operating specialized espresso machinery, sourcing single-origin beans, and profile roasting coffee while training others in the science and craft of specialty coffee curation.
+
+=== CAREER 82: Craft Brewer / Fermentation Specialist ===
+Title: Craft Brewer / Fermentation Specialist
+Expected Salary Range: ₹4–15 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: I
+Compatible High School Streams: pcb, pcmb, pcm
+Key Academic Subjects: chemistry (weight: 0.8), biology (weight: 0.6)
+Workstyle Traits: building (weight: 0.8), researching (weight: 0.6)
+Aligned Priorities: Creative Freedom, High Salary
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Managing yeast microbiology, temperature controllers, and sanitization cycles in microbreweries to craft recipes, combining biochemistry skills with tactile labor.
+
+=== CAREER 83: Urban Farmer / Hydroponics Setup Specialist ===
+Title: Urban Farmer / Hydroponics Setup Specialist
+Expected Salary Range: ₹3–10 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: I
+Compatible High School Streams: pcb, pcmb, arts, comm
+Key Academic Subjects: biology (weight: 0.7), chemistry (weight: 0.4)
+Workstyle Traits: building (weight: 0.8), researching (weight: 0.6), fieldwork (weight: 0.9)
+Aligned Priorities: Social Impact, Work Life Balance
+Employment Sector: entrepreneur
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Designing soil-less growing chambers, nutrient delivery piping, and vertical LED farming grids in city buildings to produce local organic crops.
+
+=== CAREER 84: Bicycle Frame Builder / Mechanic ===
+Title: Bicycle Frame Builder / Mechanic
+Expected Salary Range: ₹2–7 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: A
+Compatible High School Streams: arts, pcm, comm
+Key Academic Subjects: physics (weight: 0.4), fineArts (weight: 0.4)
+Workstyle Traits: building (weight: 0.95), creative (weight: 0.5)
+Aligned Priorities: Creative Freedom, Work Life Balance
+Employment Sector: entrepreneur
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Welding customized steel/carbon frames, wheel building, and calibrating gear ratios for performance cycling enthusiasts, perfect for a hands-on mechanical mind.
+
+=== CAREER 85: Sustainable Building Installer ===
+Title: Sustainable Building Installer
+Expected Salary Range: ₹4–11 LPA
+RIASEC Primary Trait: R
+RIASEC Secondary Trait: C
+Compatible High School Streams: pcm, comm
+Key Academic Subjects: physics (weight: 0.5)
+Workstyle Traits: building (weight: 0.9), structured (weight: 0.6)
+Aligned Priorities: Job Stability, Social Impact
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Installing green insulation, rainwater harvesting setups, and low-energy heating systems to convert buildings into climate-friendly architectures.
+
+=== CAREER 86: Game AI Programmer ===
+Title: Game AI Programmer
+Expected Salary Range: ₹6–24 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: R
+Compatible High School Streams: pcm, pcmb
+Key Academic Subjects: computerScience (weight: 0.9), mathematics (weight: 0.8)
+Workstyle Traits: researching (weight: 0.8), building (weight: 0.7), structured (weight: 0.5)
+Aligned Priorities: Intellectual Challenge, High Salary
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Coding intelligent agent behaviors, pathfinding trees, and procedural animation systems that make game characters respond dynamically to player decisions.
+
+=== CAREER 87: Ethical Hacker / Penetration Tester ===
+Title: Ethical Hacker / Penetration Tester
+Expected Salary Range: ₹5–22 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: C
+Compatible High School Streams: pcm, comm
+Key Academic Subjects: computerScience (weight: 0.9), mathematics (weight: 0.6)
+Workstyle Traits: researching (weight: 0.9), structured (weight: 0.7), building (weight: 0.4)
+Aligned Priorities: Intellectual Challenge, High Salary
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Authorized network intrusion, security exploit reporting, and firewall vulnerability testing, requiring a deep, analytical problem-solving mind and meticulous investigation.
+
+=== CAREER 88: Blockchain Auditor ===
+Title: Blockchain Auditor
+Expected Salary Range: ₹8–30 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: C
+Compatible High School Streams: pcm, comm
+Key Academic Subjects: computerScience (weight: 0.95), mathematics (weight: 0.7)
+Workstyle Traits: researching (weight: 0.9), structured (weight: 0.8)
+Aligned Priorities: High Salary, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Reviewing decentralized smart contract scripts for logical vulnerabilities, financial backdoors, and flash loan exploits before deployment to major blockchain networks.
+
+=== CAREER 89: Quantitative Trader ===
+Title: Quantitative Trader
+Expected Salary Range: ₹12–40 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: C
+Compatible High School Streams: pcm
+Key Academic Subjects: mathematics (weight: 0.95), statistics (weight: 0.9), computerScience (weight: 0.7)
+Workstyle Traits: researching (weight: 0.9), structured (weight: 0.8)
+Aligned Priorities: High Salary, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: high
+Requires Relocation: Yes
+Description and Matching Reason: Developing mathematical algorithms and high-frequency code models to identify and execute market arbitrage, demanding mathematical excellence and programming skills.
+
+=== CAREER 90: AR/VR Developer ===
+Title: AR/VR Developer
+Expected Salary Range: ₹5–20 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: R
+Compatible High School Streams: pcm
+Key Academic Subjects: computerScience (weight: 0.9), mathematics (weight: 0.7), physics (weight: 0.4)
+Workstyle Traits: building (weight: 0.8), researching (weight: 0.7), creative (weight: 0.6)
+Aligned Priorities: Intellectual Challenge, Creative Freedom
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Coding virtual environment software, implementing motion-tracking triggers, and optimizing 3D spatial render engines for VR headsets and smart glasses.
+
+=== CAREER 91: AI Prompt Engineer ===
+Title: AI Prompt Engineer
+Expected Salary Range: ₹6–22 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: A
+Compatible High School Streams: arts, pcm, comm, pcb, pcmb
+Key Academic Subjects: english (weight: 0.8), computerScience (weight: 0.6)
+Workstyle Traits: researching (weight: 0.8), creative (weight: 0.7), structured (weight: 0.5)
+Aligned Priorities: Creative Freedom, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Designing linguistic templates, context payloads, and constraint strings to coax high-quality, structured generation out of Large Language Models (LLMs).
+
+=== CAREER 92: AI Ethics & Safety Auditor ===
+Title: AI Ethics & Safety Auditor
+Expected Salary Range: ₹6–20 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: S
+Compatible High School Streams: arts, pcm, comm
+Key Academic Subjects: computerScience (weight: 0.7), english (weight: 0.6)
+Workstyle Traits: researching (weight: 0.9), helping (weight: 0.5), structured (weight: 0.6)
+Aligned Priorities: Social Impact, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Investigating automated decision engines for systemic demographic bias, toxic outputs, or hallucination risks, ensuring AI technologies are safe for society.
+
+=== CAREER 93: Cloud DevOps Specialist ===
+Title: Cloud DevOps Specialist
+Expected Salary Range: ₹6–24 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: C
+Compatible High School Streams: pcm
+Key Academic Subjects: computerScience (weight: 0.9), mathematics (weight: 0.5)
+Workstyle Traits: structured (weight: 0.8), building (weight: 0.7), researching (weight: 0.6)
+Aligned Priorities: High Salary, Job Stability
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Designing automated software deployment pipelines, managing container orchestration, and optimizing server loads to ensure websites and apps never crash.
+
+=== CAREER 94: Cybersecurity Digital Forensics Analyst ===
+Title: Cybersecurity Digital Forensics Analyst
+Expected Salary Range: ₹5–18 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: C
+Compatible High School Streams: pcm, comm
+Key Academic Subjects: computerScience (weight: 0.8), mathematics (weight: 0.5)
+Workstyle Traits: researching (weight: 0.95), structured (weight: 0.8)
+Aligned Priorities: Intellectual Challenge, Job Stability
+Employment Sector: govt
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Tracing data breaches, recovering encrypted metadata, and reconstructing hacker activity timeline patterns to assist law enforcement in solving cybercrimes.
+
+=== CAREER 95: Bioinformatics Analyst ===
+Title: Bioinformatics Analyst
+Expected Salary Range: ₹5–16 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: C
+Compatible High School Streams: pcmb, pcb, pcm
+Key Academic Subjects: biology (weight: 0.85), computerScience (weight: 0.8), mathematics (weight: 0.6)
+Workstyle Traits: researching (weight: 0.9), structured (weight: 0.7)
+Aligned Priorities: Intellectual Challenge, Social Impact
+Employment Sector: study
+Education Cost Level: high
+Requires Relocation: Yes
+Description and Matching Reason: Writing software algorithms to analyze raw genomic sequencing arrays, helping discover targeted pharmaceutical formulas for cancer and genetic diseases.
+
+=== CAREER 96: Climate Risk Modeller ===
+Title: Climate Risk Modeller
+Expected Salary Range: ₹5–15 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: C
+Compatible High School Streams: pcm, arts, pcmb
+Key Academic Subjects: mathematics (weight: 0.8), physics (weight: 0.7), geography (weight: 0.6)
+Workstyle Traits: researching (weight: 0.9), structured (weight: 0.7)
+Aligned Priorities: Social Impact, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Building statistical software models to forecast how rising sea levels and weather disasters impact regional economies and corporate real estate portfolios.
+
+=== CAREER 97: Data Journalist ===
+Title: Data Journalist
+Expected Salary Range: ₹4–12 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: A
+Compatible High School Streams: arts, comm, pcm
+Key Academic Subjects: english (weight: 0.8), mathematics (weight: 0.6), computerScience (weight: 0.5)
+Workstyle Traits: researching (weight: 0.9), creative (weight: 0.7)
+Aligned Priorities: Social Impact, Creative Freedom
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Mining public census data databases and visualising data trends to write investigative stories, revealing facts through charts and statistics.
+
+=== CAREER 98: Medical Illustrator ===
+Title: Medical Illustrator
+Expected Salary Range: ₹4–12 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: A
+Compatible High School Streams: pcb, pcmb, arts
+Key Academic Subjects: biology (weight: 0.85), fineArts (weight: 0.85)
+Workstyle Traits: creative (weight: 0.9), researching (weight: 0.7)
+Aligned Priorities: Creative Freedom, Work Life Balance
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Creating high-accuracy 3D models and digital paintings of human anatomical systems for medical textbooks, surgical manuals, and educational animations.
+
+=== CAREER 99: Perfumer / Scent Chemist ===
+Title: Perfumer / Scent Chemist
+Expected Salary Range: ₹5–18 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: A
+Compatible High School Streams: pcb, pcmb, pcm
+Key Academic Subjects: chemistry (weight: 0.9), biology (weight: 0.4)
+Workstyle Traits: creative (weight: 0.8), researching (weight: 0.8)
+Aligned Priorities: Creative Freedom, High Salary
+Employment Sector: private
+Education Cost Level: high
+Requires Relocation: Yes
+Description and Matching Reason: Formulating chemical fragrance molecule combinations to design unique scents for fine perfumes, cosmetics, and lifestyle products, combining laboratory science with sensory art.
+
+=== CAREER 100: Acoustician / Acoustic Consultant ===
+Title: Acoustician / Acoustic Consultant
+Expected Salary Range: ₹5–15 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: R
+Compatible High School Streams: pcm
+Key Academic Subjects: physics (weight: 0.85), mathematics (weight: 0.7)
+Workstyle Traits: researching (weight: 0.8), building (weight: 0.6)
+Aligned Priorities: Intellectual Challenge, Job Stability
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Analyzing sound propagation, vibrations, and noise dampening to design concert halls, recording studios, and noise barriers, combining physical physics with construction.
+
+=== CAREER 101: Volcanologist / Geological Researcher ===
+Title: Volcanologist / Geological Researcher
+Expected Salary Range: ₹4–12 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: R
+Compatible High School Streams: pcm, pcb, pcmb, arts
+Key Academic Subjects: geography (weight: 0.7), physics (weight: 0.6), chemistry (weight: 0.6)
+Workstyle Traits: researching (weight: 0.9), fieldwork (weight: 0.95)
+Aligned Priorities: Intellectual Challenge, Social Impact
+Employment Sector: govt
+Education Cost Level: high
+Requires Relocation: Yes
+Description and Matching Reason: Studying volcanic activity, tectonic movements, and magma patterns through physical sampling and computational modeling to forecast eruptions and save lives.
+
+=== CAREER 102: Urban Sociologist ===
+Title: Urban Sociologist
+Expected Salary Range: ₹3.5–10 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: S
+Compatible High School Streams: arts
+Key Academic Subjects: history (weight: 0.7), politicalScience (weight: 0.7), english (weight: 0.5)
+Workstyle Traits: researching (weight: 0.9), helping (weight: 0.5)
+Aligned Priorities: Social Impact, Intellectual Challenge
+Employment Sector: study
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Investigating how metropolitan structures, transit patterns, and community layouts affect human behavior, demographic migration, and public resource equity.
+
+=== CAREER 103: Travel Vlogger / Video Creator ===
+Title: Travel Vlogger / Video Creator
+Expected Salary Range: ₹3–25 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: E
+Compatible High School Streams: arts, comm, pcm, pcb, pcmb
+Key Academic Subjects: english (weight: 0.6)
+Workstyle Traits: creative (weight: 0.95), leading (weight: 0.7), fieldwork (weight: 0.9)
+Aligned Priorities: Creative Freedom, Work Life Balance
+Employment Sector: entrepreneur
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Scripting, filming, and presenting travel adventures on platforms. This path lets you turn curiosity, cultural exploration, and cinematic edits into an independent business.
+
+=== CAREER 104: Concept Artist (Games/Films) ===
+Title: Concept Artist (Games/Films)
+Expected Salary Range: ₹4–18 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: R
+Compatible High School Streams: arts, comm, pcm, pcb, pcmb
+Key Academic Subjects: fineArts (weight: 0.95)
+Workstyle Traits: creative (weight: 0.95), building (weight: 0.6)
+Aligned Priorities: Creative Freedom, Work Life Balance
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Sketching and digitally painting characters, creature designs, futuristic weaponry, and environments that serve as the blueprint for production pipelines.
+
+=== CAREER 105: Digital Illustrator / Webtoon Creator ===
+Title: Digital Illustrator / Webtoon Creator
+Expected Salary Range: ₹3–12 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: C
+Compatible High School Streams: arts, comm, pcm, pcb, pcmb
+Key Academic Subjects: fineArts (weight: 0.95)
+Workstyle Traits: creative (weight: 0.95), structured (weight: 0.6)
+Aligned Priorities: Creative Freedom, Work Life Balance
+Employment Sector: entrepreneur
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Creating serial comic storylines and high-fidelity panel art for digital webtoon hosting platforms, merging graphic style with publishing schedules.
+
+=== CAREER 106: Creative Copywriter ===
+Title: Creative Copywriter
+Expected Salary Range: ₹4–15 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: E
+Compatible High School Streams: arts, comm, pcm
+Key Academic Subjects: english (weight: 0.9)
+Workstyle Traits: creative (weight: 0.9), leading (weight: 0.5)
+Aligned Priorities: Creative Freedom, Work Life Balance
+Employment Sector: private
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Drafting catchy marketing slogans, website headlines, and video ad concepts that hook attention and build brand voices for consumer products.
+
+=== CAREER 107: VFX Motion Graphics Designer ===
+Title: VFX Motion Graphics Designer
+Expected Salary Range: ₹4–16 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: R
+Compatible High School Streams: arts, pcm, comm
+Key Academic Subjects: fineArts (weight: 0.8), computerScience (weight: 0.6)
+Workstyle Traits: creative (weight: 0.9), building (weight: 0.7), structured (weight: 0.4)
+Aligned Priorities: Creative Freedom, High Salary
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Animating kinetic typography, HUD interfaces, and overlay animations for gaming streams, esports broadcasts, and music video trailers.
+
+=== CAREER 108: Fashion Stylist ===
+Title: Fashion Stylist
+Expected Salary Range: ₹3–15 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: E
+Compatible High School Streams: arts, comm
+Key Academic Subjects: fineArts (weight: 0.7)
+Workstyle Traits: creative (weight: 0.9), leading (weight: 0.6)
+Aligned Priorities: Creative Freedom, Work Life Balance
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Curating clothing collections, defining style rules, and advising models, celebrities, or brands on visual apparel setups for video shoots and public events.
+
+=== CAREER 109: Stand-up Comedian / Writer ===
+Title: Stand-up Comedian / Writer
+Expected Salary Range: ₹2–18 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: E
+Compatible High School Streams: arts, comm, pcm, pcb, pcmb
+Key Academic Subjects: english (weight: 0.7)
+Workstyle Traits: creative (weight: 0.95), leading (weight: 0.7)
+Aligned Priorities: Creative Freedom, Work Life Balance
+Employment Sector: entrepreneur
+Education Cost Level: low
+Requires Relocation: Yes
+Description and Matching Reason: Writing observational comedy sets, rehearsing voice delivery, and performing on stage to trigger laughter, requiring sharp social logic and performance bravery.
+
+=== CAREER 110: Footwear Designer ===
+Title: Footwear Designer
+Expected Salary Range: ₹4–18 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: R
+Compatible High School Streams: arts, comm, pcm
+Key Academic Subjects: fineArts (weight: 0.85), physics (weight: 0.3)
+Workstyle Traits: creative (weight: 0.9), building (weight: 0.7)
+Aligned Priorities: Creative Freedom, High Salary
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Designing athletic shoes or high-fashion boots, combining silhouette sketches, material science, and foot biomechanics to create comfortable sneakers.
+
+=== CAREER 111: Food Stylist / Content Creator ===
+Title: Food Stylist / Content Creator
+Expected Salary Range: ₹3–12 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: C
+Compatible High School Streams: arts, comm, pcb, pcmb
+Key Academic Subjects: fineArts (weight: 0.7)
+Workstyle Traits: creative (weight: 0.9), structured (weight: 0.6)
+Aligned Priorities: Creative Freedom, Work Life Balance
+Employment Sector: entrepreneur
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Arranging plating layouts, choosing lighting angles, and using visual tricks to make dishes look stunningly delicious for billboard advertisements and video reels.
+
+=== CAREER 112: Typography & Font Designer ===
+Title: Typography & Font Designer
+Expected Salary Range: ₹3–10 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: C
+Compatible High School Streams: arts, comm, pcm
+Key Academic Subjects: fineArts (weight: 0.8), computerScience (weight: 0.4)
+Workstyle Traits: creative (weight: 0.9), structured (weight: 0.8)
+Aligned Priorities: Creative Freedom, Work Life Balance
+Employment Sector: private
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Creating custom digital vector fonts, managing geometric letter spacing, and designing typefaces to express distinct brand feelings.
+
+=== CAREER 113: Toy Designer ===
+Title: Toy Designer
+Expected Salary Range: ₹4–14 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: R
+Compatible High School Streams: pcm, arts, comm
+Key Academic Subjects: fineArts (weight: 0.8), physics (weight: 0.4)
+Workstyle Traits: creative (weight: 0.9), building (weight: 0.8)
+Aligned Priorities: Creative Freedom, Job Stability
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Designing action figures, board games, or educational building blocks, combining physical prototyping, character art, and child play logic.
+
+=== CAREER 114: Exhibition / Museum Curator ===
+Title: Exhibition / Museum Curator
+Expected Salary Range: ₹3.5–12 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: I
+Compatible High School Streams: arts
+Key Academic Subjects: history (weight: 0.9), english (weight: 0.6)
+Workstyle Traits: creative (weight: 0.8), researching (weight: 0.8), structured (weight: 0.6)
+Aligned Priorities: Creative Freedom, Social Impact
+Employment Sector: govt
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Researching historical collections, acquiring rare art prints, and design-spacing galleries to tell stories to museum visitors.
+
+=== CAREER 115: Choreographer ===
+Title: Choreographer
+Expected Salary Range: ₹3–18 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: S
+Compatible High School Streams: arts, comm
+Key Academic Subjects: fineArts (weight: 0.6)
+Workstyle Traits: creative (weight: 0.95), helping (weight: 0.7), leading (weight: 0.6)
+Aligned Priorities: Creative Freedom, Work Life Balance
+Employment Sector: entrepreneur
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Designing physical movement sequences, training backup dancers, and directing music videos, translating audio beats into visual physical expression.
+
+=== CAREER 116: Voice Actor / Dubbing Artist ===
+Title: Voice Actor / Dubbing Artist
+Expected Salary Range: ₹3–15 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: S
+Compatible High School Streams: arts, comm, pcm, pcb, pcmb
+Key Academic Subjects: english (weight: 0.8)
+Workstyle Traits: creative (weight: 0.9), helping (weight: 0.5)
+Aligned Priorities: Creative Freedom, Work Life Balance
+Employment Sector: entrepreneur
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Providing cartoon character voicing, foreign film dubbing, or audio narration, utilizing vocal range, accents, and emotional acting.
+
+=== CAREER 117: Architectural Visualizer ===
+Title: Architectural Visualizer
+Expected Salary Range: ₹4–12 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: R
+Compatible High School Streams: pcm, arts
+Key Academic Subjects: fineArts (weight: 0.85), computerScience (weight: 0.7), physics (weight: 0.3)
+Workstyle Traits: creative (weight: 0.9), building (weight: 0.7)
+Aligned Priorities: Creative Freedom, Job Stability
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Converting 2D CAD architectural blue sketches into hyper-realistic 3D walkthrough animations and lighting renders for real estate branding.
+
+=== CAREER 118: Landscape Designer ===
+Title: Landscape Designer
+Expected Salary Range: ₹4–13 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: R
+Compatible High School Streams: arts, pcm, pcb, pcmb
+Key Academic Subjects: fineArts (weight: 0.8), geography (weight: 0.5), biology (weight: 0.4)
+Workstyle Traits: creative (weight: 0.9), fieldwork (weight: 0.7)
+Aligned Priorities: Creative Freedom, Social Impact
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Designing public parks, urban botanical gardens, and private rooftops, combining aesthetic sketch layouts with plant ecology and water management.
+
+=== CAREER 119: Creative Writer / Novelist ===
+Title: Creative Writer / Novelist
+Expected Salary Range: ₹2–12 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: I
+Compatible High School Streams: arts, comm, pcm, pcb, pcmb
+Key Academic Subjects: english (weight: 0.95)
+Workstyle Traits: creative (weight: 0.95), researching (weight: 0.7)
+Aligned Priorities: Creative Freedom, Work Life Balance
+Employment Sector: entrepreneur
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Drafting long-form fiction, character arcs, and world structures for books, digital publications, or television shows.
+
+=== CAREER 120: Career Coach / Mentor ===
+Title: Career Coach / Mentor
+Expected Salary Range: ₹4–15 LPA
+RIASEC Primary Trait: S
+RIASEC Secondary Trait: E
+Compatible High School Streams: arts, comm, pcm, pcb, pcmb
+Key Academic Subjects: english (weight: 0.7)
+Workstyle Traits: helping (weight: 0.9), leading (weight: 0.7)
+Aligned Priorities: Social Impact, Work Life Balance
+Employment Sector: entrepreneur
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Guiding students and professionals on job navigation, resumes, and interviews, combining empathetic counseling with career paths knowledge.
+
+=== CAREER 121: Fitness Trainer / Calisthenics Coach ===
+Title: Fitness Trainer / Calisthenics Coach
+Expected Salary Range: ₹3–12 LPA
+RIASEC Primary Trait: S
+RIASEC Secondary Trait: R
+Compatible High School Streams: arts, comm, pcb, pcmb
+Key Academic Subjects: biology (weight: 0.6)
+Workstyle Traits: helping (weight: 0.9), building (weight: 0.7), fieldwork (weight: 0.8)
+Aligned Priorities: Social Impact, Work Life Balance
+Employment Sector: entrepreneur
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Designing customized physical workouts, advising on form posture, and keeping clients motivated, helping them build healthy physical lifestyles.
+
+=== CAREER 122: Mindfulness / Wellness Coach ===
+Title: Mindfulness / Wellness Coach
+Expected Salary Range: ₹3–10 LPA
+RIASEC Primary Trait: S
+RIASEC Secondary Trait: I
+Compatible High School Streams: arts, pcb, pcmb
+Key Academic Subjects: biology (weight: 0.5), english (weight: 0.5)
+Workstyle Traits: helping (weight: 0.9), researching (weight: 0.5)
+Aligned Priorities: Social Impact, Work Life Balance
+Employment Sector: entrepreneur
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Teaching deep breathing, meditation styles, and emotional regulation hacks to reduce corporate stress, helping people find mental peace.
+
+=== CAREER 123: Esports Team Coach / Manager ===
+Title: Esports Team Coach / Manager
+Expected Salary Range: ₹5–18 LPA
+RIASEC Primary Trait: S
+RIASEC Secondary Trait: E
+Compatible High School Streams: arts, comm, pcm, pcb, pcmb
+Key Academic Subjects: computerScience (weight: 0.4)
+Workstyle Traits: helping (weight: 0.8), leading (weight: 0.8), structured (weight: 0.6)
+Aligned Priorities: Work Life Balance, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Analyzing team logs, coordinating team matches, and resolving inter-player conflict to keep esports rosters operating in peak competitive state.
+
+=== CAREER 124: Community Manager (Gaming/Web3) ===
+Title: Community Manager (Gaming/Web3)
+Expected Salary Range: ₹4–14 LPA
+RIASEC Primary Trait: S
+RIASEC Secondary Trait: E
+Compatible High School Streams: arts, comm, pcm
+Key Academic Subjects: english (weight: 0.8)
+Workstyle Traits: helping (weight: 0.8), leading (weight: 0.7), creative (weight: 0.5)
+Aligned Priorities: Work Life Balance, Creative Freedom
+Employment Sector: private
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Moderating online chat channels, hosting interactive digital events, and gathering product feedback, linking creators directly to their fanbases.
+
+=== CAREER 125: Art Therapist ===
+Title: Art Therapist
+Expected Salary Range: ₹3.5–10 LPA
+RIASEC Primary Trait: S
+RIASEC Secondary Trait: A
+Compatible High School Streams: arts, pcb, pcmb
+Key Academic Subjects: fineArts (weight: 0.8), biology (weight: 0.5)
+Workstyle Traits: helping (weight: 0.95), creative (weight: 0.7)
+Aligned Priorities: Social Impact, Work Life Balance
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Utilizing sketching, painting, and sculpting activities to help patients express emotions and process trauma, merging therapy with art.
+
+=== CAREER 126: Music Therapist ===
+Title: Music Therapist
+Expected Salary Range: ₹3.5–10 LPA
+RIASEC Primary Trait: S
+RIASEC Secondary Trait: A
+Compatible High School Streams: arts, pcb, pcmb
+Key Academic Subjects: biology (weight: 0.5)
+Workstyle Traits: helping (weight: 0.95), creative (weight: 0.7)
+Aligned Priorities: Social Impact, Work Life Balance
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Using sound exercises, acoustic listening, and vocal rhythm practices to lower heart rates and aid patient healing, merging medicine with music.
+
+=== CAREER 127: Special Education Teacher ===
+Title: Special Education Teacher
+Expected Salary Range: ₹3–9 LPA
+RIASEC Primary Trait: S
+RIASEC Secondary Trait: C
+Compatible High School Streams: arts, pcb, pcmb, comm
+Key Academic Subjects: english (weight: 0.7)
+Workstyle Traits: helping (weight: 0.95), structured (weight: 0.7)
+Aligned Priorities: Social Impact, Job Stability
+Employment Sector: govt
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Crafting customized lesson structures and using sensory tools to teach kids with learning differences, requiring massive empathy and structural focus.
+
+=== CAREER 128: Speech & Language Therapist ===
+Title: Speech & Language Therapist
+Expected Salary Range: ₹4–11 LPA
+RIASEC Primary Trait: S
+RIASEC Secondary Trait: I
+Compatible High School Streams: pcb, pcmb
+Key Academic Subjects: biology (weight: 0.8), english (weight: 0.7)
+Workstyle Traits: helping (weight: 0.95), researching (weight: 0.6)
+Aligned Priorities: Social Impact, Job Stability
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Diagnosing speech issues and executing physical vocal training workouts to help patients overcome speech impediments and accents.
+
+=== CAREER 129: Animal Behaviourist / Dog Trainer ===
+Title: Animal Behaviourist / Dog Trainer
+Expected Salary Range: ₹2.5–9 LPA
+RIASEC Primary Trait: S
+RIASEC Secondary Trait: R
+Compatible High School Streams: pcb, pcmb, arts, comm
+Key Academic Subjects: biology (weight: 0.6)
+Workstyle Traits: helping (weight: 0.8), building (weight: 0.6), fieldwork (weight: 0.9)
+Aligned Priorities: Work Life Balance, Creative Freedom
+Employment Sector: entrepreneur
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Analyzing animal stress cues and executing reward training methods to socialize dogs and correct destructive behaviors, requiring calm animal communication.
+
+=== CAREER 130: Customer Experience Specialist ===
+Title: Customer Experience Specialist
+Expected Salary Range: ₹3.5–12 LPA
+RIASEC Primary Trait: S
+RIASEC Secondary Trait: C
+Compatible High School Streams: comm, arts, pcm
+Key Academic Subjects: english (weight: 0.8)
+Workstyle Traits: helping (weight: 0.9), structured (weight: 0.6)
+Aligned Priorities: Job Stability, Work Life Balance
+Employment Sector: private
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Addressing customer software complaints, tracking support logs, and optimizing help documentation to ensure high client satisfaction.
+
+=== CAREER 131: Sports Nutritionist ===
+Title: Sports Nutritionist
+Expected Salary Range: ₹4–12 LPA
+RIASEC Primary Trait: S
+RIASEC Secondary Trait: I
+Compatible High School Streams: pcb, pcmb
+Key Academic Subjects: biology (weight: 0.85), chemistry (weight: 0.7)
+Workstyle Traits: helping (weight: 0.9), researching (weight: 0.6)
+Aligned Priorities: Social Impact, Work Life Balance
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Calculating calorie targets, tracking micronutrients, and designing meal schedules for competitive athletes to maximize athletic energy.
+
+=== CAREER 132: Community Organizer / Campaigner ===
+Title: Community Organizer / Campaigner
+Expected Salary Range: ₹3–8 LPA
+RIASEC Primary Trait: S
+RIASEC Secondary Trait: E
+Compatible High School Streams: arts, comm
+Key Academic Subjects: politicalScience (weight: 0.8), english (weight: 0.6)
+Workstyle Traits: helping (weight: 0.9), leading (weight: 0.8)
+Aligned Priorities: Social Impact, Creative Freedom
+Employment Sector: govt
+Education Cost Level: low
+Requires Relocation: Yes
+Description and Matching Reason: Coordinating local town meetings, organizing petitions, and managing social media campaigns to advocate for environmental or safety policies.
+
+=== CAREER 133: Patient Advocate ===
+Title: Patient Advocate
+Expected Salary Range: ₹3.5–9 LPA
+RIASEC Primary Trait: S
+RIASEC Secondary Trait: C
+Compatible High School Streams: arts, pcb, pcmb
+Key Academic Subjects: biology (weight: 0.5), english (weight: 0.6)
+Workstyle Traits: helping (weight: 0.95), structured (weight: 0.6)
+Aligned Priorities: Social Impact, Job Stability
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Translating medical jargon, managing insurance appeals, and coordinating doctor visits for elderly or disabled patients to ensure quality healthcare.
+
+=== CAREER 134: Volunteer Coordinator ===
+Title: Volunteer Coordinator
+Expected Salary Range: ₹2.5–7 LPA
+RIASEC Primary Trait: S
+RIASEC Secondary Trait: C
+Compatible High School Streams: arts, comm
+Key Academic Subjects: english (weight: 0.6)
+Workstyle Traits: helping (weight: 0.9), structured (weight: 0.7), leading (weight: 0.5)
+Aligned Priorities: Social Impact, Work Life Balance
+Employment Sector: govt
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Onboarding civic volunteers, scheduling shifts for relief events, and tracking task charts for charitable organizations.
+
+=== CAREER 135: Youth Counsellor ===
+Title: Youth Counsellor
+Expected Salary Range: ₹3–9 LPA
+RIASEC Primary Trait: S
+RIASEC Secondary Trait: I
+Compatible High School Streams: arts, pcb, pcmb
+Key Academic Subjects: history (weight: 0.4), english (weight: 0.6)
+Workstyle Traits: helping (weight: 0.95), researching (weight: 0.5)
+Aligned Priorities: Social Impact, Work Life Balance
+Employment Sector: govt
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Counseling adolescents through academic stress, social struggles, and self-esteem issues, helping them build emotional strength.
+
+=== CAREER 136: Recreation Therapist ===
+Title: Recreation Therapist
+Expected Salary Range: ₹3–8 LPA
+RIASEC Primary Trait: S
+RIASEC Secondary Trait: A
+Compatible High School Streams: arts, comm
+Key Academic Subjects: english (weight: 0.5)
+Workstyle Traits: helping (weight: 0.9), creative (weight: 0.6), fieldwork (weight: 0.7)
+Aligned Priorities: Social Impact, Work Life Balance
+Employment Sector: govt
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Designing drama exercises, physical games, and community field trips to aid rehabilitation for hospitalized patients or senior citizens.
+
+=== CAREER 137: Startup Incubator Manager ===
+Title: Startup Incubator Manager
+Expected Salary Range: ₹6–20 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: S
+Compatible High School Streams: comm, pcm, arts
+Key Academic Subjects: businessStudies (weight: 0.8), economics (weight: 0.6)
+Workstyle Traits: leading (weight: 0.9), helping (weight: 0.7), structured (weight: 0.5)
+Aligned Priorities: High Salary, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Coaching early startup founders, scheduling pitch review sessions, and linking tech teams with venture capital networks.
+
+=== CAREER 138: E-commerce Growth Specialist ===
+Title: E-commerce Growth Specialist
+Expected Salary Range: ₹5–18 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: C
+Compatible High School Streams: comm, pcm
+Key Academic Subjects: businessStudies (weight: 0.8), mathematics (weight: 0.6), economics (weight: 0.6)
+Workstyle Traits: leading (weight: 0.8), structured (weight: 0.7), researching (weight: 0.6)
+Aligned Priorities: High Salary, Work Life Balance
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Running digital retargeting ads, managing online checkout conversion funnels, and optimizing product catalogs to scale retail sales.
+
+=== CAREER 139: Creator Talent Agent ===
+Title: Creator Talent Agent
+Expected Salary Range: ₹4–20 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: A
+Compatible High School Streams: arts, comm
+Key Academic Subjects: english (weight: 0.8), businessStudies (weight: 0.6)
+Workstyle Traits: leading (weight: 0.9), creative (weight: 0.5)
+Aligned Priorities: High Salary, Creative Freedom
+Employment Sector: private
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Representing vloggers, streamers, and writers in brand deal negotiation campaigns, managing their contract terms and commercial careers.
+
+=== CAREER 140: Brand Strategist / Consultant ===
+Title: Brand Strategist / Consultant
+Expected Salary Range: ₹6–22 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: A
+Compatible High School Streams: comm, arts, pcm
+Key Academic Subjects: businessStudies (weight: 0.9), economics (weight: 0.6), english (weight: 0.6)
+Workstyle Traits: leading (weight: 0.8), creative (weight: 0.8), researching (weight: 0.5)
+Aligned Priorities: High Salary, Creative Freedom
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Defining brand positioning profiles, designing style guidelines, and structuring advertising launch campaigns for consumer startups.
+
+=== CAREER 141: Venture Capital Analyst ===
+Title: Venture Capital Analyst
+Expected Salary Range: ₹8–30 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: I
+Compatible High School Streams: comm, pcm
+Key Academic Subjects: economics (weight: 0.8), mathematics (weight: 0.7), businessStudies (weight: 0.7)
+Workstyle Traits: researching (weight: 0.8), leading (weight: 0.7)
+Aligned Priorities: High Salary, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: high
+Requires Relocation: Yes
+Description and Matching Reason: Analyzing startup metrics, reviewing cap tables, and evaluating technological feasibility to write investment proposals for venture funds.
+
+=== CAREER 142: Event Producer (Music/Concerts) ===
+Title: Event Producer (Music/Concerts)
+Expected Salary Range: ₹4–18 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: R
+Compatible High School Streams: comm, arts
+Key Academic Subjects: businessStudies (weight: 0.7)
+Workstyle Traits: leading (weight: 0.9), building (weight: 0.6), structured (weight: 0.6), fieldwork (weight: 0.8)
+Aligned Priorities: Creative Freedom, High Salary
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Managing concert venue leases, booking artist schedules, and supervising sound/lighting rigging setups, converting logistics into massive musical events.
+
+=== CAREER 143: Esports Event Producer ===
+Title: Esports Event Producer
+Expected Salary Range: ₹4–16 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: R
+Compatible High School Streams: comm, pcm, arts
+Key Academic Subjects: computerScience (weight: 0.6), businessStudies (weight: 0.5)
+Workstyle Traits: leading (weight: 0.8), building (weight: 0.7), structured (weight: 0.7)
+Aligned Priorities: Creative Freedom, High Salary
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Supervising multi-camera stream layouts, managing live gaming server setups, and coordinating team schedules for professional gaming tournaments.
+
+=== CAREER 144: Co-Working Space Entrepreneur ===
+Title: Co-Working Space Entrepreneur
+Expected Salary Range: ₹5–15 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: S
+Compatible High School Streams: comm, arts
+Key Academic Subjects: businessStudies (weight: 0.8), economics (weight: 0.5)
+Workstyle Traits: leading (weight: 0.8), helping (weight: 0.6), structured (weight: 0.6)
+Aligned Priorities: Creative Freedom, Work Life Balance
+Employment Sector: entrepreneur
+Education Cost Level: high
+Requires Relocation: No
+Description and Matching Reason: Leasing real estate properties, designing interior shared desks, and hosting networking meetups to sell memberships to freelancers.
+
+=== CAREER 145: Growth Hacker ===
+Title: Growth Hacker
+Expected Salary Range: ₹6–24 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: I
+Compatible High School Streams: comm, pcm
+Key Academic Subjects: businessStudies (weight: 0.8), computerScience (weight: 0.6), mathematics (weight: 0.5)
+Workstyle Traits: leading (weight: 0.8), researching (weight: 0.8), creative (weight: 0.6)
+Aligned Priorities: High Salary, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Analyzing metric logs and executing low-cost product tests (like viral invite programs) to quickly scale app user acquisition.
+
+=== CAREER 146: Public Relations (PR) Manager ===
+Title: Public Relations (PR) Manager
+Expected Salary Range: ₹4–15 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: A
+Compatible High School Streams: arts, comm
+Key Academic Subjects: english (weight: 0.85), politicalScience (weight: 0.6)
+Workstyle Traits: leading (weight: 0.9), creative (weight: 0.6)
+Aligned Priorities: Work Life Balance, Creative Freedom
+Employment Sector: private
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Writing press releases, managing crisis communication, and coordinating newspaper interviews to build a positive public brand image.
+
+=== CAREER 147: Product Marketing Manager ===
+Title: Product Marketing Manager
+Expected Salary Range: ₹6–22 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: C
+Compatible High School Streams: comm, pcm
+Key Academic Subjects: businessStudies (weight: 0.85), economics (weight: 0.6)
+Workstyle Traits: leading (weight: 0.8), structured (weight: 0.7), researching (weight: 0.5)
+Aligned Priorities: High Salary, Job Stability
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Designing software rollout campaigns, structuring product tier pricing, and directing advertising messaging to maximize market sales.
+
+=== CAREER 148: Real Estate Broker / Consultant ===
+Title: Real Estate Broker / Consultant
+Expected Salary Range: ₹5–25 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: S
+Compatible High School Streams: comm, arts
+Key Academic Subjects: businessStudies (weight: 0.7), economics (weight: 0.5)
+Workstyle Traits: leading (weight: 0.9), helping (weight: 0.5), fieldwork (weight: 0.8)
+Aligned Priorities: High Salary, Work Life Balance
+Employment Sector: entrepreneur
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Showing real estate properties to buyers, analyzing market pricing trends, and negotiating deal structures, earning high commissions through sales.
+
+=== CAREER 149: Merchandising Manager ===
+Title: Merchandising Manager
+Expected Salary Range: ₹4–14 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: C
+Compatible High School Streams: comm, arts
+Key Academic Subjects: businessStudies (weight: 0.8), economics (weight: 0.5)
+Workstyle Traits: leading (weight: 0.7), structured (weight: 0.8)
+Aligned Priorities: Job Stability, Work Life Balance
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Sourcing pop-culture apparel designs, managing supply store stocks, and arranging product shelf layouts to maximize retail purchasing.
+
+=== CAREER 150: E-sports Tournament Director ===
+Title: E-sports Tournament Director
+Expected Salary Range: ₹5–18 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: C
+Compatible High School Streams: comm, pcm, arts
+Key Academic Subjects: computerScience (weight: 0.5), businessStudies (weight: 0.7)
+Workstyle Traits: leading (weight: 0.8), structured (weight: 0.8)
+Aligned Priorities: High Salary, Creative Freedom
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Enforcing competitive game rules, managing tournament bracket logs, and resolving team prize disputes for professional leagues.
+
+=== CAREER 151: Sales Development Rep ===
+Title: Sales Development Rep
+Expected Salary Range: ₹4–12 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: S
+Compatible High School Streams: comm, arts
+Key Academic Subjects: businessStudies (weight: 0.8), english (weight: 0.7)
+Workstyle Traits: leading (weight: 0.9), helping (weight: 0.5)
+Aligned Priorities: High Salary, Job Stability
+Employment Sector: private
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Making cold outreach calls, pitching software features, and scheduling product demonstration sessions for business prospects.
+
+=== CAREER 152: Retail Store Franchisee ===
+Title: Retail Store Franchisee
+Expected Salary Range: ₹5–20 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: C
+Compatible High School Streams: comm, arts
+Key Academic Subjects: businessStudies (weight: 0.8), accountancy (weight: 0.6)
+Workstyle Traits: leading (weight: 0.8), structured (weight: 0.8)
+Aligned Priorities: Job Stability, High Salary
+Employment Sector: entrepreneur
+Education Cost Level: high
+Requires Relocation: No
+Description and Matching Reason: Managing local franchises of food or clothing brands, supervising retail staff shifts, and tracking sales accounting logs.
+
+=== CAREER 153: Social Media Talent Director ===
+Title: Social Media Talent Director
+Expected Salary Range: ₹5–16 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: A
+Compatible High School Streams: arts, comm
+Key Academic Subjects: english (weight: 0.7), businessStudies (weight: 0.6)
+Workstyle Traits: leading (weight: 0.8), creative (weight: 0.6)
+Aligned Priorities: Creative Freedom, High Salary
+Employment Sector: private
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Scouting growing creators on video platforms, signing agency agreements, and pitching creators for corporate sponsor advertisements.
+
+=== CAREER 154: SEO Specialist / Analyst ===
+Title: SEO Specialist / Analyst
+Expected Salary Range: ₹3.5–12 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: I
+Compatible High School Streams: comm, arts, pcm
+Key Academic Subjects: computerScience (weight: 0.6), english (weight: 0.6)
+Workstyle Traits: structured (weight: 0.9), researching (weight: 0.7)
+Aligned Priorities: Job Stability, Work Life Balance
+Employment Sector: private
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Analyzing web search keyword metrics, optimizing article metadata structure, and tracking site indexing rankings to grow organic traffic.
+
+=== CAREER 155: Blockchain Ledger Auditor ===
+Title: Blockchain Ledger Auditor
+Expected Salary Range: ₹6–20 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: I
+Compatible High School Streams: comm, pcm
+Key Academic Subjects: accountancy (weight: 0.8), computerScience (weight: 0.7), mathematics (weight: 0.6)
+Workstyle Traits: structured (weight: 0.95), researching (weight: 0.7)
+Aligned Priorities: Job Stability, High Salary
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Reviewing decentralized block transactions, tracing multi-signature wallet addresses, and verifying accounting compliance for crypto-financial firms.
+
+=== CAREER 156: Data Privacy & Compliance Officer ===
+Title: Data Privacy & Compliance Officer
+Expected Salary Range: ₹5–18 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: I
+Compatible High School Streams: comm, pcm, arts
+Key Academic Subjects: computerScience (weight: 0.7), politicalScience (weight: 0.5), english (weight: 0.5)
+Workstyle Traits: structured (weight: 0.95), researching (weight: 0.6)
+Aligned Priorities: Job Stability, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Enforcing data protection policies, checking user consent databases, and auditing security logs to ensure compliance with privacy laws.
+
+=== CAREER 157: E-commerce Operations Manager ===
+Title: E-commerce Operations Manager
+Expected Salary Range: ₹4.5–15 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: E
+Compatible High School Streams: comm, pcm
+Key Academic Subjects: businessStudies (weight: 0.7), accountancy (weight: 0.6)
+Workstyle Traits: structured (weight: 0.9), leading (weight: 0.5)
+Aligned Priorities: Job Stability, Work Life Balance
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Coordinating parcel packing workflows, resolving courier delivery delays, and auditing inventory databases to keep store stocks running.
+
+=== CAREER 158: Technical Documentation Writer ===
+Title: Technical Documentation Writer
+Expected Salary Range: ₹4–14 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: A
+Compatible High School Streams: pcm, comm, arts
+Key Academic Subjects: computerScience (weight: 0.7), english (weight: 0.9)
+Workstyle Traits: structured (weight: 0.9), creative (weight: 0.5)
+Aligned Priorities: Work Life Balance, Job Stability
+Employment Sector: private
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Writing software API setup instructions and developer reference guides, converting complex technical code into clean structured reading.
+
+=== CAREER 159: Virtual Assistant Agency Manager ===
+Title: Virtual Assistant Agency Manager
+Expected Salary Range: ₹3–10 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: S
+Compatible High School Streams: comm, arts
+Key Academic Subjects: english (weight: 0.7), businessStudies (weight: 0.6)
+Workstyle Traits: structured (weight: 0.9), helping (weight: 0.7), leading (weight: 0.5)
+Aligned Priorities: Work Life Balance, Creative Freedom
+Employment Sector: entrepreneur
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Scheduling virtual assistant shifts, auditing client task reports, and managing email payloads for busy corporate executives.
+
+=== CAREER 160: Supply Chain Coordinator ===
+Title: Supply Chain Coordinator
+Expected Salary Range: ₹4–12 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: E
+Compatible High School Streams: comm, pcm
+Key Academic Subjects: businessStudies (weight: 0.7), mathematics (weight: 0.5)
+Workstyle Traits: structured (weight: 0.9), leading (weight: 0.5)
+Aligned Priorities: Job Stability, Work Life Balance
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Tracking raw material cargo coordinates, auditing carrier shipping rates, and managing customs form filing lists to avoid transport delays.
+
+=== CAREER 161: Database Administrator ===
+Title: Database Administrator
+Expected Salary Range: ₹5–16 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: I
+Compatible High School Streams: pcm
+Key Academic Subjects: computerScience (weight: 0.9), mathematics (weight: 0.5)
+Workstyle Traits: structured (weight: 0.9), researching (weight: 0.5)
+Aligned Priorities: Job Stability, Work Life Balance
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Configuring SQL database permissions, scheduling data backups, and optimizing data query index parameters to ensure server speed.
+
+=== CAREER 162: Tax Compliance Consultant ===
+Title: Tax Compliance Consultant
+Expected Salary Range: ₹5–18 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: E
+Compatible High School Streams: comm
+Key Academic Subjects: accountancy (weight: 0.9), businessStudies (weight: 0.6), economics (weight: 0.5)
+Workstyle Traits: structured (weight: 0.95), leading (weight: 0.4)
+Aligned Priorities: Job Stability, High Salary
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Auditing financial statements, tracking dynamic tax law updates, and compiling client tax return reports, ensuring compliance and tax savings.
+
+=== CAREER 163: Esports Tournament Administrator ===
+Title: Esports Tournament Administrator
+Expected Salary Range: ₹3–9 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: R
+Compatible High School Streams: comm, pcm, arts
+Key Academic Subjects: computerScience (weight: 0.5)
+Workstyle Traits: structured (weight: 0.95), building (weight: 0.4)
+Aligned Priorities: Work Life Balance, Creative Freedom
+Employment Sector: private
+Education Cost Level: low
+Requires Relocation: Yes
+Description and Matching Reason: Setting up match lobby servers, verifying player hardware settings, and recording match score logs to ensure tournament rule compliance.
+
+=== CAREER 164: Digital Asset Cataloguer ===
+Title: Digital Asset Cataloguer
+Expected Salary Range: ₹3.5–9 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: A
+Compatible High School Streams: arts, comm, pcm
+Key Academic Subjects: computerScience (weight: 0.6), fineArts (weight: 0.5)
+Workstyle Traits: structured (weight: 0.95), creative (weight: 0.4)
+Aligned Priorities: Work Life Balance, Job Stability
+Employment Sector: private
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Structuring file folder trees, tagging image files with SEO keywords, and managing copyright permissions for media studios.
+
+=== CAREER 165: Traffic Flow Analyst ===
+Title: Traffic Flow Analyst
+Expected Salary Range: ₹4–11 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: I
+Compatible High School Streams: pcm, arts
+Key Academic Subjects: mathematics (weight: 0.7), geography (weight: 0.5)
+Workstyle Traits: structured (weight: 0.9), researching (weight: 0.7)
+Aligned Priorities: Job Stability, Social Impact
+Employment Sector: govt
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Analyzing street camera data and editing signal light timer charts to optimize metropolitan traffic flow.
+
+=== CAREER 166: Underwriter (Insurance) ===
+Title: Underwriter (Insurance)
+Expected Salary Range: ₹4.5–14 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: I
+Compatible High School Streams: comm, pcm
+Key Academic Subjects: accountancy (weight: 0.8), economics (weight: 0.6), mathematics (weight: 0.6)
+Workstyle Traits: structured (weight: 0.95), researching (weight: 0.5)
+Aligned Priorities: Job Stability, Work Life Balance
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Evaluating policy application forms, assessing client credit profiles, and setting policy premium fees according to risk calculations.
+
+=== CAREER 167: Customs Compliance Specialist ===
+Title: Customs Compliance Specialist
+Expected Salary Range: ₹4–11 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: E
+Compatible High School Streams: comm, arts
+Key Academic Subjects: businessStudies (weight: 0.7), english (weight: 0.5)
+Workstyle Traits: structured (weight: 0.95), leading (weight: 0.4)
+Aligned Priorities: Job Stability, Work Life Balance
+Employment Sector: govt
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Reviewing import invoices, checking product tariff codes, and managing legal customs form audits for trade logistics.
+
+=== CAREER 168: Hospital Records Administrator ===
+Title: Hospital Records Administrator
+Expected Salary Range: ₹3–8 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: S
+Compatible High School Streams: arts, comm, pcb, pcmb
+Key Academic Subjects: biology (weight: 0.4), english (weight: 0.5)
+Workstyle Traits: structured (weight: 0.95), helping (weight: 0.5)
+Aligned Priorities: Job Stability, Social Impact
+Employment Sector: govt
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Maintaining digital patient histories, updating billing forms, and ensuring strict healthcare data security regulations.
+
+=== CAREER 169: Environmental Compliance Auditor ===
+Title: Environmental Compliance Auditor
+Expected Salary Range: ₹4.5–12 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: I
+Compatible High School Streams: pcb, pcmb, pcm, arts
+Key Academic Subjects: biology (weight: 0.6), chemistry (weight: 0.5), geography (weight: 0.5)
+Workstyle Traits: structured (weight: 0.9), researching (weight: 0.7), fieldwork (weight: 0.7)
+Aligned Priorities: Social Impact, Job Stability
+Employment Sector: govt
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Auditing factory exhaust levels, checking waste dumps, and verifying corporate operations match governmental environmental laws.
+
+=== CAREER 170: Payroll Administrator ===
+Title: Payroll Administrator
+Expected Salary Range: ₹3–9 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: S
+Compatible High School Streams: comm
+Key Academic Subjects: accountancy (weight: 0.8), businessStudies (weight: 0.5)
+Workstyle Traits: structured (weight: 0.95), helping (weight: 0.4)
+Aligned Priorities: Job Stability, Work Life Balance
+Employment Sector: private
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Calculating monthly employee salaries, auditing overtime logs, and filing tax withholdings to ensure timely corporate payroll.
+
+=== CAREER 171: UI/UX Designer ===
+Title: UI/UX Designer
+Expected Salary Range: ₹5–22 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: C
+Compatible High School Streams: arts, comm, pcm, pcb, pcmb
+Key Academic Subjects: computerScience (weight: 0.6), fineArts (weight: 0.8)
+Workstyle Traits: creative (weight: 0.9), structured (weight: 0.7), researching (weight: 0.6)
+Aligned Priorities: Creative Freedom, High Salary
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Designing layout frames and wire prototypes for apps, blending visual aesthetic style with structured user psychology.
+
+=== CAREER 172: Game Designer ===
+Title: Game Designer
+Expected Salary Range: ₹5–20 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: I
+Compatible High School Streams: arts, pcm, comm
+Key Academic Subjects: computerScience (weight: 0.6), fineArts (weight: 0.6)
+Workstyle Traits: creative (weight: 0.9), researching (weight: 0.7), structured (weight: 0.6)
+Aligned Priorities: Creative Freedom, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Designing leveling flow mechanics, economy systems, and narrative rule sets that make video games fun and addictive.
+
+=== CAREER 173: UX Researcher ===
+Title: UX Researcher
+Expected Salary Range: ₹5–18 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: S
+Compatible High School Streams: arts, comm, pcm
+Key Academic Subjects: english (weight: 0.7)
+Workstyle Traits: researching (weight: 0.9), helping (weight: 0.7)
+Aligned Priorities: Intellectual Challenge, Work Life Balance
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Conducting user interviews and testing prototypes, analyzing psychological friction to help product engineers build easier app flows.
+
+=== CAREER 174: Digital Illustrator / Concept Artist ===
+Title: Digital Illustrator / Concept Artist
+Expected Salary Range: ₹4–15 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: R
+Compatible High School Streams: arts, comm, pcm, pcb, pcmb
+Key Academic Subjects: fineArts (weight: 0.95)
+Workstyle Traits: creative (weight: 0.95), building (weight: 0.6)
+Aligned Priorities: Creative Freedom, Work Life Balance
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Creating production layouts, character styles, and background scenery blocks for movies and animation studios.
+
+=== CAREER 175: Film Director / Content Creator ===
+Title: Film Director / Content Creator
+Expected Salary Range: ₹4–25 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: E
+Compatible High School Streams: arts, comm, pcm, pcb, pcmb
+Key Academic Subjects: english (weight: 0.7), fineArts (weight: 0.7)
+Workstyle Traits: creative (weight: 0.95), leading (weight: 0.8)
+Aligned Priorities: Creative Freedom, High Salary
+Employment Sector: entrepreneur
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Pitching stories, directing camera shots, and managing crew budgets to produce cinematic movies or online video assets.
+
+=== CAREER 176: Product Manager ===
+Title: Product Manager
+Expected Salary Range: ₹8–30 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: C
+Compatible High School Streams: comm, pcm, arts
+Key Academic Subjects: businessStudies (weight: 0.8), computerScience (weight: 0.5)
+Workstyle Traits: leading (weight: 0.9), structured (weight: 0.8), helping (weight: 0.5)
+Aligned Priorities: High Salary, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Bridging engineering, design, and commercial business departments to direct the feature roadmap of software products.
+
+=== CAREER 177: Digital Marketing Manager ===
+Title: Digital Marketing Manager
+Expected Salary Range: ₹5–18 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: A
+Compatible High School Streams: comm, arts, pcm
+Key Academic Subjects: businessStudies (weight: 0.8), economics (weight: 0.5)
+Workstyle Traits: leading (weight: 0.8), creative (weight: 0.7), structured (weight: 0.6)
+Aligned Priorities: High Salary, Work Life Balance
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Directing influencer sponsorships, ad campaigns, and social media platforms to scale customer acquisition.
+
+=== CAREER 178: Urban Planner ===
+Title: Urban Planner
+Expected Salary Range: ₹5–16 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: C
+Compatible High School Streams: pcm, arts
+Key Academic Subjects: geography (weight: 0.8), physics (weight: 0.5), mathematics (weight: 0.5)
+Workstyle Traits: researching (weight: 0.8), structured (weight: 0.8)
+Aligned Priorities: Social Impact, Job Stability
+Employment Sector: govt
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Analyzing land maps, zoning laws, and traffic charts to design transit grids and public residential expansions.
+
+=== CAREER 179: Landscape Architect ===
+Title: Landscape Architect
+Expected Salary Range: ₹4–14 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: R
+Compatible High School Streams: pcm, arts, pcb, pcmb
+Key Academic Subjects: fineArts (weight: 0.8), physics (weight: 0.4), geography (weight: 0.4)
+Workstyle Traits: creative (weight: 0.9), building (weight: 0.6), fieldwork (weight: 0.7)
+Aligned Priorities: Creative Freedom, Social Impact
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Designing outdoor environments like city plazas, corporate campuses, and residential parks, combining aesthetics with plant setups.
+
+=== CAREER 180: Sustainability Director ===
+Title: Sustainability Director
+Expected Salary Range: ₹8–28 LPA
+RIASEC Primary Trait: E
+RIASEC Secondary Trait: I
+Compatible High School Streams: comm, pcm, pcb, pcmb, arts
+Key Academic Subjects: businessStudies (weight: 0.7), geography (weight: 0.5)
+Workstyle Traits: leading (weight: 0.9), researching (weight: 0.7), structured (weight: 0.6)
+Aligned Priorities: Social Impact, High Salary
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Directing corporate ESG goals, sourcing eco-friendly raw packaging, and auditing supply chains to cut carbon emissions.
+
+=== CAREER 181: VFX Compositor ===
+Title: VFX Compositor
+Expected Salary Range: ₹4.5–18 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: R
+Compatible High School Streams: arts, pcm
+Key Academic Subjects: fineArts (weight: 0.8), computerScience (weight: 0.6), physics (weight: 0.3)
+Workstyle Traits: creative (weight: 0.95), building (weight: 0.7)
+Aligned Priorities: Creative Freedom, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Merging live footage actors with CGI assets, color matching background lighting, and rendering special effects elements.
+
+=== CAREER 182: 3D Animator ===
+Title: 3D Animator
+Expected Salary Range: ₹4–15 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: R
+Compatible High School Streams: arts, pcm, comm
+Key Academic Subjects: fineArts (weight: 0.9), computerScience (weight: 0.5)
+Workstyle Traits: creative (weight: 0.95), building (weight: 0.6)
+Aligned Priorities: Creative Freedom, Work Life Balance
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Posing character rigs, editing animation frame curves, and creating mechanical motion sequences for games or films.
+
+=== CAREER 183: 2D Animator ===
+Title: 2D Animator
+Expected Salary Range: ₹3.5–12 LPA
+RIASEC Primary Trait: A
+RIASEC Secondary Trait: A
+Compatible High School Streams: arts, comm, pcm, pcb, pcmb
+Key Academic Subjects: fineArts (weight: 0.95)
+Workstyle Traits: creative (weight: 0.95), structured (weight: 0.5)
+Aligned Priorities: Creative Freedom, Work Life Balance
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Drawing motion sequences frame-by-frame, creating key poses, and timing character expressions.
+
+=== CAREER 184: Special Effects Technical Director ===
+Title: Special Effects Technical Director
+Expected Salary Range: ₹6–22 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: R
+Compatible High School Streams: pcm
+Key Academic Subjects: computerScience (weight: 0.85), physics (weight: 0.7), mathematics (weight: 0.6)
+Workstyle Traits: researching (weight: 0.8), building (weight: 0.7), creative (weight: 0.5)
+Aligned Priorities: High Salary, Intellectual Challenge
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: No
+Description and Matching Reason: Coding complex physical simulations like fire, explosions, and clothing movement for high-end cinematic software projects.
+
+=== CAREER 185: Climate Change Analyst ===
+Title: Climate Change Analyst
+Expected Salary Range: ₹5–14 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: S
+Compatible High School Streams: pcb, pcmb, arts, pcm
+Key Academic Subjects: biology (weight: 0.7), geography (weight: 0.8), chemistry (weight: 0.5)
+Workstyle Traits: researching (weight: 0.95), helping (weight: 0.5)
+Aligned Priorities: Social Impact, Intellectual Challenge
+Employment Sector: study
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Analyzing global temperature logs, ocean acidity metrics, and emission records to write policy advice papers.
+
+=== CAREER 186: Technical Writer ===
+Title: Technical Writer
+Expected Salary Range: ₹4–13 LPA
+RIASEC Primary Trait: C
+RIASEC Secondary Trait: I
+Compatible High School Streams: pcm, comm, arts
+Key Academic Subjects: computerScience (weight: 0.6), english (weight: 0.85)
+Workstyle Traits: structured (weight: 0.9), researching (weight: 0.6)
+Aligned Priorities: Job Stability, Work Life Balance
+Employment Sector: private
+Education Cost Level: low
+Requires Relocation: No
+Description and Matching Reason: Writing software API setup instructions and developer reference guides, translating codebase files into clean structured descriptions.
+
+=== CAREER 187: Quantum Computing Scientist ===
+Title: Quantum Computing Scientist
+Expected Salary Range: ₹10–35 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: R
+Compatible High School Streams: pcm
+Key Academic Subjects: physics (weight: 0.95), mathematics (weight: 0.9), computerScience (weight: 0.7)
+Workstyle Traits: researching (weight: 0.95), building (weight: 0.5)
+Aligned Priorities: High Salary, Intellectual Challenge
+Employment Sector: study
+Education Cost Level: high
+Requires Relocation: Yes
+Description and Matching Reason: Designing quantum gates, cooling experimental qubit circuits, and testing quantum algorithm formulas in specialized laboratory grids.
+
+=== CAREER 188: Food Technologist ===
+Title: Food Technologist
+Expected Salary Range: ₹3.5–11 LPA
+RIASEC Primary Trait: I
+RIASEC Secondary Trait: C
+Compatible High School Streams: pcb, pcmb, pcm
+Key Academic Subjects: chemistry (weight: 0.85), biology (weight: 0.8), mathematics (weight: 0.4)
+Workstyle Traits: structured (weight: 0.85), researching (weight: 0.7)
+Aligned Priorities: Job Stability, Social Impact
+Employment Sector: private
+Education Cost Level: medium
+Requires Relocation: Yes
+Description and Matching Reason: Testing food preservation methods, optimizing packaging chemistry, and auditing production hygiene checklists for commercial products.
+
