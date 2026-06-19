@@ -161,6 +161,14 @@ HOBBY_MAP = {
     "Crafting/DIY":             {"riasec": ["R", "A"], "domains": ["design", "product_design", "interior_design"]},
     "Fashion/Design":           {"riasec": ["A"],      "domains": ["design", "fashion", "product_design"]},
     "Filmmaking/Editing":       {"riasec": ["A", "I"], "domains": ["media", "animation", "journalism"]},
+    "Graphic Design/Digital Art":{"riasec": ["A"],      "domains": ["design", "product_design"]},
+    "Video Editing":            {"riasec": ["A", "R"], "domains": ["media", "animation"]},
+    "Content Creation/Social Media":{"riasec": ["A", "E"], "domains": ["media", "content"]},
+    "DJing/Music Production":   {"riasec": ["A"],      "domains": ["performing_arts", "music_production"]},
+    "Podcasting":               {"riasec": ["A", "S"], "domains": ["media", "content", "journalism"]},
+    "3D Modelling/Animation":   {"riasec": ["A", "R"], "domains": ["design", "animation", "product_design"]},
+    "Creative Writing":         {"riasec": ["A", "I"], "domains": ["literature", "content"]},
+    "Stand-up Comedy":          {"riasec": ["A", "E"], "domains": ["performing_arts", "media"]},
 
     # Physical
     "Cricket":                  {"riasec": ["R", "E"], "domains": ["sports", "defence", "physiotherapy"]},
@@ -172,6 +180,13 @@ HOBBY_MAP = {
     "Yoga/Fitness":             {"riasec": ["R", "S"], "domains": ["healthcare", "physiotherapy", "sports"]},
     "Cycling":                  {"riasec": ["R"],      "domains": ["sports", "environmental_science"]},
     "Hiking/Trekking":          {"riasec": ["R", "I"], "domains": ["geography", "environmental_science", "defence"]},
+    "Badminton":                {"riasec": ["R", "E"], "domains": ["sports", "physiotherapy"]},
+    "Table Tennis":             {"riasec": ["R", "E"], "domains": ["sports", "physiotherapy"]},
+    "Lawn Tennis":              {"riasec": ["R", "E"], "domains": ["sports", "physiotherapy"]},
+    "Volleyball":               {"riasec": ["R", "E"], "domains": ["sports", "physiotherapy"]},
+    "Gym/Weightlifting":        {"riasec": ["R"],      "domains": ["sports", "physiotherapy", "healthcare"]},
+    "E-sports/Competitive Gaming":{"riasec": ["I", "R"], "domains": ["software_engineering", "sports"]},
+    "Skateboarding":            {"riasec": ["R"],      "domains": ["sports"]},
 
     # Intellectual
     "Reading":                  {"riasec": ["I", "E"], "domains": ["academia", "civil_services", "law", "literature"]},
