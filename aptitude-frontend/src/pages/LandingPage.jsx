@@ -1,5 +1,5 @@
 import { Brain, BarChart3, Briefcase, FileText, Wrench, Download, Compass, Users, Lightbulb, MapPin } from "lucide-react";
-import heroImage from "../assets/hero.jpg";
+import heroImage from "../assets/hero.webp";
 import "./LandingPage.css";
 import { RIASEC_COLORS } from "../constants/riasecColors";
 import { motion } from "framer-motion";
