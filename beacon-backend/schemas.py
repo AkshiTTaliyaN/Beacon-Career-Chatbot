@@ -163,6 +163,8 @@ class ProfileResponse(BaseModel):
 class ProfileUpdate(BaseModel):
     """Partial update — used by chatbot / aptitude-frontend to write data back."""
     riasec_scores: Optional[dict] = None
+    hobbies: Optional[list] = None
+    aptitude_scores: Optional[dict] = None
     interests_summary: Optional[str] = None
     stream: Optional[StreamEnum] = None
     current_class: Optional[int] = None

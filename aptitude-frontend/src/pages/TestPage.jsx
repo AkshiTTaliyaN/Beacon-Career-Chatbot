@@ -201,14 +201,6 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
     } else {
       // RIASEC done — move to hobbies
       setStep("hobbies");
-      onSubmit({
-        name: details.name.trim(),
-        class_level: details.class_level,
-        stream: details.stream,
-        riasec_answers: newAnswers,
-        hobbies: [],
-        aptitude_answers: Array(18).fill(3),
-      });
     }
   };
 

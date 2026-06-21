@@ -263,7 +263,7 @@ export default function ResultPage({
           <div className="hero-report-inner">
             <div className="hero-report-visual">
               <CareerAvatar
-                careerName={topCareerMatch}
+                careerName={`${primary} professional`}
                 accentColor={primaryColor}
                 variant="hero"
                 showCaption={false}
@@ -284,8 +284,8 @@ export default function ResultPage({
               </h2>
 
               <div className="hero-report-career-block">
-                <span className="hero-report-career-label">Your Top Career Match</span>
-                <h3 className="hero-report-career-title">{topCareerMatch}</h3>
+                <span className="hero-report-career-label">Primary Personality Type</span>
+                <h3 className="hero-report-career-title">{primary}</h3>
               </div>
 
               <div className="hero-report-badges">
@@ -368,80 +368,29 @@ export default function ResultPage({
 
         <hr className="divider" />
 
-        {/* ── Primary Career Recommendations (RIASEC-driven) ── */}
-        <section className="result-section">
-          <h2 className="section-title text-on-dark">Your Primary Career Matches</h2>
-          <p className="section-sub text-on-dark-secondary">Based on your <strong>{result.holland_code}</strong> Holland Code — these careers align most closely with your personality type:</p>
-          <div className="careers-grid">
-            {primaryCareers.map((career, i) => (
-              <motion.div
-                key={i}
-                className="career-card"
-                style={{ borderTopColor: primaryColor }}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.35, delay: i * 0.04 }}
-                whileHover={{ y: -4, scale: 1.01 }}
-              >
-                <div className="career-card-header">
-                  <Briefcase size={16} style={{ color: primaryColor }} />
-                  <h4>{career.title}</h4>
-                </div>
-                <p className="career-reason">{career.reason}</p>
-                <div className="career-meta">
-                  <span className="career-salary">₹ {career.salary}</span>
-                  {INTERNATIONAL_SALARY[career.title] && (
-                    <span className="career-salary-intl">{INTERNATIONAL_SALARY[career.title]}</span>
-                  )}
-                  <span className="career-stream">{career.stream}</span>
-                </div>
-              </motion.div>
-            ))}
+        {/* ── Dashboard Career Matches CTA ── */}
+        <section className="result-section dashboard-cta-section">
+          <div className="dashboard-cta-card" style={{ borderLeftColor: "#10b981", background: "rgba(16, 185, 129, 0.06)", padding: "30px", borderRadius: "12px", borderLeft: "5px solid #10b981" }}>
+            <div style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
+              <Compass size={32} style={{ color: "#10b981", marginTop: "4px" }} />
+              <div>
+                <h3 className="section-title text-on-dark" style={{ margin: "0 0 10px 0", fontSize: "20px", textAlign: "left" }}>
+                  Your Personalized Career Matches Are Ready!
+                </h3>
+                <p className="section-sub text-on-dark-secondary" style={{ margin: "0 0 20px 0", fontSize: "14px", lineHeight: "1.6", color: "#9ca3af" }}>
+                  We have combined your <strong>onboarding academic profile</strong>, <strong>subject ratings</strong>, <strong>RIASEC personality scores</strong>, and <strong>passions/hobbies</strong> to generate your final career recommendations. 
+                  Go to your main dashboard to view your fully integrated, stream-aligned, and passion-oriented career roadmaps.
+                </p>
+                <button className="btn-primary" style={{ background: "linear-gradient(135deg, #10b981 0%, #059669 100%)", padding: "12px 24px", fontSize: "15px", fontWeight: "bold" }}
+                  onClick={() => { window.location.href = dashboardUrl; }}>
+                  View My Career Matches on Dashboard →
+                </button>
+              </div>
+            </div>
           </div>
         </section>
 
         <hr className="divider" />
-
-        {/* ── Interest-Aligned Alternatives ── */}
-        {interestCareers.length > 0 && (
-          <>
-            <section className="result-section">
-              <h2 className="section-title text-on-dark">Based on Your Interests</h2>
-              <p className="section-sub text-on-dark-secondary">
-                You selected interests in <strong>{selectedHobbies.slice(0, 3).join(", ")}{selectedHobbies.length > 3 ? ` and ${selectedHobbies.length - 3} more` : ""}</strong>.
-                These careers align with what you genuinely enjoy — worth exploring alongside your primary matches:
-              </p>
-              <div className="careers-grid interest-careers-grid">
-                {interestCareers.map((career, i) => (
-                  <motion.div
-                    key={i}
-                    className="career-card interest-career-card"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.35, delay: i * 0.04 }}
-                    whileHover={{ y: -4, scale: 1.01 }}
-                  >
-                    <div className="career-card-header">
-                      <Sparkles size={16} style={{ color: "#7c3aed" }} />
-                      <h4>{career.title}</h4>
-                    </div>
-                    <div className="career-meta">
-                      <span className="career-salary">₹ {career.salary}</span>
-                      {INTERNATIONAL_SALARY[career.title] && (
-                        <span className="career-salary-intl">{INTERNATIONAL_SALARY[career.title]}</span>
-                      )}
-                      <span className="career-stream">{career.stream}</span>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-              <p className="interest-careers-note">
-                These are alternative paths — not replacements for your primary recommendations. If you feel strongly drawn to any of these, discuss them with a career counsellor.
-              </p>
-            </section>
-            <hr className="divider" />
-          </>
-        )}
 
         {/* ── Aptitude Summary ── */}
         {Object.keys(aptitudeScores).length > 0 && (
@@ -550,24 +499,7 @@ export default function ResultPage({
 
         <hr className="divider" />
 
-        {/* ── Broader Careers ── */}
-        {Object.keys(broaderMap).length > 0 && (
-          <>
-            <section className="result-section">
-              <h2 className="section-title text-on-dark">Broader Career Landscape</h2>
-              <p className="section-sub text-on-dark-secondary">A wider view of where <strong>{primary}</strong> types can thrive — across different sectors:</p>
-              <div className="broader-grid">
-                {Object.entries(broaderMap).map(([sector, careers]) => (
-                  <div key={sector} className="broader-card">
-                    <h4 className="broader-sector">{sector.replace(/_/g, " ")}</h4>
-                    <ul>{careers.map((c, i) => <li key={i}>{c}</li>)}</ul>
-                  </div>
-                ))}
-              </div>
-            </section>
-            <hr className="divider" />
-          </>
-        )}
+
 
         {/* ── Entrance Exams ── */}
         <section className="result-section">
@@ -675,7 +607,7 @@ export default function ResultPage({
           <div className="footer-actions">
             <button className="btn-primary" style={{ background: "#10b981" }}
               onClick={() => { window.location.href = dashboardUrl; }}>
-              <Compass size={16} /> View Dashboard Analytics
+               <Compass size={16} /> View My Recommended Careers
             </button>
             <button className="btn-primary" onClick={onDownloadPDF}><Download size={16} /> Download PDF Report</button>
             <button className="btn-ghost" onClick={onRetake}>Take Test Again</button>

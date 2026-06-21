@@ -55,7 +55,7 @@ export default function App() {
 
   const handleStartTest = () => setPage("test");
 
-  async function writeScoresBack(scoreList) {
+  async function writeTestResultsBack(scoreList, hobbies, aptitudeScores) {
     if (!beaconToken.current) return;
 
     try {
@@ -69,7 +69,11 @@ export default function App() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${beaconToken.current}`,
         },
-        body: JSON.stringify({ riasec_scores: scores }),
+        body: JSON.stringify({
+          riasec_scores: scores,
+          hobbies: hobbies,
+          aptitude_scores: aptitudeScores,
+        }),
       });
     } catch {
       // Result rendering should not be blocked by a background profile update.
@@ -98,7 +102,13 @@ export default function App() {
       if (!res.ok) throw new Error(`Submission failed with status ${res.status}`);
 
       const json = await res.json();
-      if (json.riasec_scores) await writeScoresBack(json.riasec_scores);
+      if (json.riasec_scores) {
+        await writeTestResultsBack(
+          json.riasec_scores,
+          json.selected_hobbies || payload.hobbies,
+          json.aptitude_scores
+        );
+      }
 
       setResult(json);
       setPage("result");

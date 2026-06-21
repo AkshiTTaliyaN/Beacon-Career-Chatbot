@@ -1,36 +1,201 @@
 """
 career_scorer.py
-Five-component unified career scoring engine.
-Weights: RIASEC 35% | Subject 25% | WorkStyle 20% | Priorities 12% | Feasibility 8%
+Seven-component unified career scoring engine.
+Weights: RIASEC 25% | Passion 15% | Aptitude 15% | Subject 20% | WorkStyle 15% | Priorities 5% | Feasibility 5%
 """
 
-from typing import Optional
+from typing import Optional, List, Dict
 from career_catalog import CAREER_CATALOG
 
+HARD_FILTER_EXCLUDE = "EXCLUDE"
 
-# ─── Component 1 — RIASEC Match (35%) ─────────────────────────────────────────
+# ─── Mapping Data ─────────────────────────────────────────────────────────────
+
+HOBBY_MAP = {
+    # Creative
+    "Drawing/Painting":         {"riasec": ["A"],      "domains": ["design", "animation", "architecture"]},
+    "Photography":              {"riasec": ["A"],      "domains": ["media", "design", "journalism"]},
+    "Writing/Storytelling":     {"riasec": ["A", "I"], "domains": ["journalism", "literature", "content", "law"]},
+    "Music (playing instrument)":{"riasec": ["A"],     "domains": ["performing_arts", "music_production"]},
+    "Singing":                  {"riasec": ["A"],      "domains": ["performing_arts", "music_production"]},
+    "Dancing":                  {"riasec": ["A"],      "domains": ["performing_arts", "event_management"]},
+    "Acting/Theatre":           {"riasec": ["A", "S"], "domains": ["performing_arts", "media"]},
+    "Crafting/DIY":             {"riasec": ["R", "A"], "domains": ["design", "product_design", "interior_design"]},
+    "Fashion/Design":           {"riasec": ["A"],      "domains": ["design", "fashion", "product_design"]},
+    "Filmmaking/Editing":       {"riasec": ["A", "I"], "domains": ["media", "animation", "journalism"]},
+    "Graphic Design/Digital Art":{"riasec": ["A"],      "domains": ["design", "product_design"]},
+    "Video Editing":            {"riasec": ["A", "R"], "domains": ["media", "animation"]},
+    "Content Creation/Social Media":{"riasec": ["A", "E"], "domains": ["media", "content"]},
+    "DJing/Music Production":   {"riasec": ["A"],      "domains": ["performing_arts", "music_production"]},
+    "Podcasting":               {"riasec": ["A", "S"], "domains": ["media", "content", "journalism"]},
+    "3D Modelling/Animation":   {"riasec": ["A", "R"], "domains": ["design", "animation", "product_design"]},
+    "Creative Writing":         {"riasec": ["A", "I"], "domains": ["literature", "content"]},
+    "Stand-up Comedy":          {"riasec": ["A", "E"], "domains": ["performing_arts", "media"]},
+
+    # Physical
+    "Cricket":                  {"riasec": ["R", "E"], "domains": ["sports", "defence", "physiotherapy"]},
+    "Football":                 {"riasec": ["R", "E"], "domains": ["sports", "defence", "physiotherapy"]},
+    "Basketball":               {"riasec": ["R", "E"], "domains": ["sports", "physiotherapy"]},
+    "Swimming":                 {"riasec": ["R"],      "domains": ["sports", "physiotherapy", "defence"]},
+    "Athletics/Running":        {"riasec": ["R"],      "domains": ["sports", "defence", "physiotherapy"]},
+    "Martial Arts":             {"riasec": ["R", "E"], "domains": ["sports", "defence"]},
+    "Yoga/Fitness":             {"riasec": ["R", "S"], "domains": ["healthcare", "physiotherapy", "sports"]},
+    "Cycling":                  {"riasec": ["R"],      "domains": ["sports", "environmental_science"]},
+    "Hiking/Trekking":          {"riasec": ["R", "I"], "domains": ["geography", "environmental_science", "defence"]},
+    "Badminton":                {"riasec": ["R", "E"], "domains": ["sports", "physiotherapy"]},
+    "Table Tennis":             {"riasec": ["R", "E"], "domains": ["sports", "physiotherapy"]},
+    "Lawn Tennis":              {"riasec": ["R", "E"], "domains": ["sports", "physiotherapy"]},
+    "Volleyball":               {"riasec": ["R", "E"], "domains": ["sports", "physiotherapy"]},
+    "Gym/Weightlifting":        {"riasec": ["R"],      "domains": ["sports", "physiotherapy", "healthcare"]},
+    "E-sports/Competitive Gaming":{"riasec": ["I", "R"], "domains": ["software_engineering", "sports"]},
+    "Skateboarding":            {"riasec": ["R"],      "domains": ["sports"]},
+
+    # Intellectual
+    "Reading":                  {"riasec": ["I", "E"], "domains": ["academia", "civil_services", "law", "literature"]},
+    "Debating":                 {"riasec": ["E", "I"], "domains": ["law", "civil_services", "journalism", "politics"]},
+    "Chess/Strategy Games":     {"riasec": ["I"],      "domains": ["engineering", "finance", "data_science"]},
+    "Quiz/Trivia":              {"riasec": ["I"],      "domains": ["academia", "civil_services", "journalism"]},
+    "Coding":                   {"riasec": ["R", "I"], "domains": ["software_engineering", "data_science", "engineering"]},
+    "Robotics/Electronics":     {"riasec": ["R", "I"], "domains": ["engineering", "software_engineering"]},
+    "Science Experiments":      {"riasec": ["I"],      "domains": ["research", "medicine", "biotechnology"]},
+    "Learning Languages":       {"riasec": ["A", "S"], "domains": ["linguistics", "foreign_services", "literature"]},
+
+    # Social/Service
+    "Volunteering":             {"riasec": ["S"],      "domains": ["social_work", "ngo", "healthcare"]},
+    "Teaching/Tutoring others": {"riasec": ["S", "I"], "domains": ["education", "academia", "social_work"]},
+    "Event Organisation":       {"riasec": ["E", "S"], "domains": ["event_management", "hr", "marketing"]},
+    "Public Speaking":          {"riasec": ["E", "S"], "domains": ["law", "politics", "media", "corporate"]},
+    "Animal Care":              {"riasec": ["S", "R"], "domains": ["veterinary", "environmental_science"]},
+
+    # Practical
+    "Cooking/Baking":           {"riasec": ["R", "A"], "domains": ["hospitality", "food_technology"]},
+    "Gardening":                {"riasec": ["R", "I"], "domains": ["agriculture", "environmental_science"]},
+    "Mechanics/Fixing things":  {"riasec": ["R"],      "domains": ["engineering", "automobile"]},
+    "Building models":          {"riasec": ["R", "I"], "domains": ["engineering", "architecture", "product_design"]},
+}
+
+DOMAIN_CAREERS = {
+    "design":               [{"title": "Graphic Designer"}, {"title": "UI/UX Designer"}],
+    "animation":            [{"title": "Animator"}, {"title": "Visual Effects Artist"}],
+    "architecture":         [{"title": "Architect"}, {"title": "Interior Designer"}],
+    "media":                [{"title": "Journalist"}, {"title": "Content Creator"}],
+    "journalism":           [{"title": "Journalist"}, {"title": "News Anchor"}],
+    "literature":           [{"title": "Writer / Author"}, {"title": "Editor"}],
+    "content":              [{"title": "Content Strategist"}, {"title": "Copywriter"}],
+    "law":                  [{"title": "Lawyer"}, {"title": "Judge / Magistrate"}],
+    "performing_arts":      [{"title": "Actor"}, {"title": "Music Producer"}],
+    "music_production":     [{"title": "Music Producer"}, {"title": "Sound Engineer"}],
+    "event_management":     [{"title": "Event Manager"}, {"title": "Wedding Planner"}],
+    "product_design":       [{"title": "Industrial Designer"}, {"title": "Product Designer"}],
+    "interior_design":      [{"title": "Interior Designer"}, {"title": "Architect"}],
+    "fashion":              [{"title": "Fashion Designer"}, {"title": "Textile Designer"}],
+    "sports":               [{"title": "Sports Coach"}, {"title": "Sports Manager"}],
+    "defence":              [{"title": "Indian Army Officer"}, {"title": "Police / IPS Officer"}],
+    "physiotherapy":        [{"title": "Physiotherapist"}, {"title": "Sports Medicine Doctor"}],
+    "healthcare":           [{"title": "Doctor (MBBS)"}, {"title": "Nurse / Healthcare Worker"}],
+    "geography":            [{"title": "Geographer"}, {"title": "Town Planner"}],
+    "environmental_science":[{"title": "Environmental Scientist"}, {"title": "Wildlife Biologist"}],
+    "academia":             [{"title": "Professor / Lecturer"}, {"title": "Research Scholar"}],
+    "civil_services":       [{"title": "IAS / IPS Officer"}, {"title": "State Government Officer"}],
+    "politics":             [{"title": "Political Analyst"}, {"title": "Policy Researcher"}],
+    "engineering":          [{"title": "Mechanical Engineer"}, {"title": "Civil Engineer"}],
+    "software_engineering": [{"title": "Software Engineer"}, {"title": "App Developer"}],
+    "data_science":         [{"title": "Data Scientist"}, {"title": "Data Analyst"}],
+    "finance":              [{"title": "Financial Analyst"}, {"title": "Investment Banker"}],
+    "research":             [{"title": "Research Scientist"}, {"title": "Research Analyst"}],
+    "medicine":             [{"title": "Doctor (MBBS)"}, {"title": "Pharmacist"}],
+    "biotechnology":        [{"title": "Biotechnologist"}, {"title": "Genetic Counsellor"}],
+    "linguistics":          [{"title": "Linguist"}, {"title": "Translator / Interpreter"}],
+    "foreign_services":     [{"title": "IFS Officer"}, {"title": "International Relations Analyst"}],
+    "social_work":          [{"title": "Social Worker"}, {"title": "NGO Program Manager"}],
+    "ngo":                  [{"title": "NGO Program Manager"}, {"title": "Development Sector Consultant"}],
+    "education":            [{"title": "Teacher / Educator"}, {"title": "School Counsellor"}],
+    "hr":                   [{"title": "HR Manager"}, {"title": "Talent Acquisition Specialist"}],
+    "marketing":            [{"title": "Marketing Manager"}, {"title": "Brand Strategist"}],
+    "corporate":            [{"title": "Management Consultant"}, {"title": "Business Analyst"}],
+    "veterinary":           [{"title": "Veterinarian"}, {"title": "Animal Welfare Officer"}],
+    "hospitality":          [{"title": "Hotel Manager"}, {"title": "Chef / Culinary Artist"}],
+    "food_technology":      [{"title": "Food Technologist"}, {"title": "Nutritionist / Dietitian"}],
+    "agriculture":          [{"title": "Agricultural Scientist"}, {"title": "Agronomist"}],
+    "automobile":           [{"title": "Automobile Engineer"}, {"title": "Automotive Designer"}],
+}
+
+RIASEC_APTITUDE_FIT = {
+    "R": ["maths", "visual", "detail"],
+    "I": ["logical", "maths", "patterns"],
+    "A": ["visual", "english", "detail"],
+    "S": ["english", "detail", "logical"],
+    "E": ["english", "logical", "patterns"],
+    "C": ["detail", "maths", "logical"],
+}
+
+RIASEC_LABELS = {
+    "I": "Investigative",
+    "R": "Realistic",
+    "A": "Artistic",
+    "S": "Social",
+    "E": "Enterprising",
+    "C": "Conventional",
+}
+
+# ─── Component Functions ──────────────────────────────────────────────────────
 
 def _riasec_score(student_scores: dict, career: dict) -> float:
-    """
-    Primary type contributes 70%, secondary 30%.
-    student_scores: {"R": 72, "I": 89, "A": 45, "S": 38, "E": 55, "C": 61}
-    Returns normalised 0–1.
-    """
+    """Primary type contributes 70%, secondary 30%."""
     primary = career["riasec_primary"]
     secondary = career["riasec_secondary"]
     p = student_scores.get(primary, 50)
     s = student_scores.get(secondary, 50)
-    return (p * 0.7 + s * 0.3) / 100
+    return (p * 0.7 + s * 0.3) / 100.0
 
 
-# ─── Component 2 — Subject Strength (25%) ─────────────────────────────────────
+def _passion_score(student_hobbies: list, career_title: str) -> float:
+    """Check if the student has selected hobbies mapping to this career's domains."""
+    if not student_hobbies:
+        return 0.5
+    student_domains = set()
+    for hobby in student_hobbies:
+        mapping = HOBBY_MAP.get(hobby)
+        if mapping:
+            student_domains.update(mapping["domains"])
+    
+    career_domains = set()
+    for domain, careers in DOMAIN_CAREERS.items():
+        if any(c["title"].lower().strip() == career_title.lower().strip() for c in careers):
+            career_domains.add(domain)
+            
+    if not career_domains:
+        return 0.5
+        
+    overlap = student_domains & career_domains
+    if overlap:
+        return 1.0  # match found
+    return 0.0
+
+
+def _aptitude_score(student_aptitude_scores: dict, career: dict) -> float:
+    """Match the student's tested aptitude strengths against key skills for this RIASEC type."""
+    if not student_aptitude_scores:
+        return 0.5
+    primary = career.get("riasec_primary", "I")
+    relevant_skills = RIASEC_APTITUDE_FIT.get(primary, ["maths", "logical", "english"])
+    
+    numerator = 0.0
+    count = 0
+    for skill in relevant_skills:
+        skill_data = student_aptitude_scores.get(skill)
+        if skill_data:
+            pct = skill_data.get("pct") if isinstance(skill_data, dict) else skill_data
+            if pct is not None:
+                numerator += (pct / 100.0)
+                count += 1
+    if count == 0:
+        return 0.5
+    return numerator / count
+
 
 def _subject_score(student_ratings: dict, career: dict) -> float:
-    """
-    student_ratings: {"mathematics": 4, "computerScience": 5, ...} (1–5 scale)
-    career subject_weights: {"mathematics": 0.9, "computerScience": 0.8, ...}
-    Returns 0–1, or 0.5 (neutral) if no relevant subjects present.
-    """
+    """Compare self-rated subjects with career weights."""
     weights = career.get("subject_weights", {})
     if not weights:
         return 0.5
@@ -44,18 +209,11 @@ def _subject_score(student_ratings: dict, career: dict) -> float:
             denominator += weight
 
     if denominator == 0:
-        return 0.5  # no matching subjects — neutral score
+        return 0.5
     return numerator / denominator
 
 
-# ─── Component 3 — Work Style Alignment (20%) ─────────────────────────────────
-
 def _workstyle_score(student_workstyle: dict, career: dict) -> float:
-    """
-    student_workstyle: {"building": 2, "researching": 5, ...} (1–5 scale)
-    career workstyle_weights: {"researching": 0.9, ...}
-    Returns 0–1, or 0.5 if no workstyle data.
-    """
     weights = career.get("workstyle_weights", {})
     if not weights or not student_workstyle:
         return 0.5
@@ -73,15 +231,7 @@ def _workstyle_score(student_workstyle: dict, career: dict) -> float:
     return numerator / denominator
 
 
-# ─── Component 4 — Career Priorities (12%) ────────────────────────────────────
-
 def _priority_score(student_priorities: list, career: dict) -> float:
-    """
-    student_priorities: ["Intellectual Challenge", "High Salary", "Work Life Balance"]
-    career priority_alignment: ["Intellectual Challenge", "High Salary"]
-    Score = matched / 3 (since student always picks exactly 3).
-    Returns 0–1, or 0.5 if no priority data.
-    """
     if not student_priorities:
         return 0.5
     alignment = set(career.get("priority_alignment", []))
@@ -90,30 +240,30 @@ def _priority_score(student_priorities: list, career: dict) -> float:
     return matches / 3.0
 
 
-# ─── Component 5 — Feasibility (8%) ───────────────────────────────────────────
-
-HARD_FILTER_EXCLUDE = "EXCLUDE"
-
-def _feasibility_score(profile_data: dict, career: dict) -> str | float:
+def _feasibility_score(profile_data: dict, career: dict, riasec_score: float = 0.5, passion_score: float = 0.5) -> str | float:
     """
     Returns HARD_FILTER_EXCLUDE if career fails hard filters.
     Otherwise returns 0–1 soft feasibility score.
     """
-    student_stream = profile_data.get("stream")        # e.g. "pcm"
-    cost_constraint = profile_data.get("cost_constraint")  # "yes" | "scholarship" | "moderate" | "no"
-    target_sector = profile_data.get("target_sector")  # "govt" | "private" | "study" | "entrepreneur" | "open"
-    relocation_pref = profile_data.get("relocation_pref")  # "yes" | "state" | "no" | "unsure"
+    student_stream = profile_data.get("stream")
+    cost_constraint = profile_data.get("cost_constraint")
+    target_sector = profile_data.get("target_sector")
+    relocation_pref = profile_data.get("relocation_pref")
 
-    # ── Hard filter 1: stream must match ──────────────────────────────────────
+    # ── Hard filter 1: stream must match (with passion bypass) ────────────────
     career_streams = career.get("streams", [])
     if student_stream and student_stream != "none" and career_streams and student_stream not in career_streams:
-        return HARD_FILTER_EXCLUDE
+        # Passion bypass: if student has strongly aligned RIASEC (personality) and hobbies (passion), bypass!
+        if riasec_score >= 0.70 and passion_score >= 0.70:
+            pass
+        else:
+            return HARD_FILTER_EXCLUDE
 
-    # ── Hard filter 2: cost — student needs low cost, career is high cost ─────
+    # ── Hard filter 2: cost ───────────────────────────────────────────────────
     if cost_constraint == "yes" and career.get("cost_level") == "high":
         return HARD_FILTER_EXCLUDE
 
-    # ── Soft feasibility score ────────────────────────────────────────────────
+    # ── Soft feasibility ──────────────────────────────────────────────────────
     score = 0.0
 
     # Sector match (0.5)
@@ -121,15 +271,14 @@ def _feasibility_score(profile_data: dict, career: dict) -> str | float:
     if target_sector == "open" or not target_sector or career_sector == target_sector:
         score += 0.5
     elif target_sector == "study" and career_sector in ("study", "private"):
-        score += 0.3  # partial — research/study paths partially compatible with private
+        score += 0.3
 
     # Relocation (0.3)
     requires_relocation = career.get("requires_relocation", False)
     if not requires_relocation:
-        score += 0.3  # doesn't require relocation → always feasible
+        score += 0.3
     elif relocation_pref in ("yes", "state", "unsure") or not relocation_pref:
-        score += 0.3  # student open to it
-    # else: career requires relocation, student won't → 0 pts
+        score += 0.3
 
     # Cost compatibility (0.2)
     career_cost = career.get("cost_level", "medium")
@@ -149,34 +298,20 @@ def _feasibility_score(profile_data: dict, career: dict) -> str | float:
 
 # ─── Reason Generator ─────────────────────────────────────────────────────────
 
-RIASEC_LABELS = {
-    "I": "Investigative",
-    "R": "Realistic",
-    "A": "Artistic",
-    "S": "Social",
-    "E": "Enterprising",
-    "C": "Conventional",
-}
-
 def _generate_reason(
     career: dict,
     component_scores: dict,
     student_data: dict,
 ) -> str:
-    """
-    Identifies the top 2 contributing components and generates a 2-sentence reason.
-    component_scores: {"riasec": (score, weight), "subject": ..., ...}
-    """
-    # Compute weighted contributions
+    """Identifies the top 2 contributing components and generates a 2-sentence reason."""
     contributions = {
         k: v[0] * v[1]
         for k, v in component_scores.items()
-        if k != "feasibility"  # feasibility is a filter, not a reason
+        if k != "feasibility"
     }
     ranked = sorted(contributions.items(), key=lambda x: x[1], reverse=True)
     top1, top2 = ranked[0][0], ranked[1][0]
 
-    # Build first sentence from top signals
     primary_label = RIASEC_LABELS.get(career["riasec_primary"], career["riasec_primary"])
     subject_ratings = student_data.get("subject_ratings") or {}
     top_subject = ""
@@ -188,66 +323,37 @@ def _generate_reason(
                                   .replace("politicalScience", "Political Science")
             top_subject = top_subject[0].upper() + top_subject[1:]
 
-    # Sentence templates per signal combination
-    if top1 == "riasec" and top2 == "subject":
+    # Sentence templates
+    if top1 == "passion":
+        intro = f"Your personal passions/hobbies are highly aligned with the core domains of this field."
+    elif top1 == "aptitude":
+        intro = f"Your tested aptitude strengths indicate that you have the key skills required for this role."
+    elif top1 == "riasec" and top2 == "subject":
         if top_subject:
-            intro = (
-                f"Your {primary_label} personality score and your strong performance in {top_subject} "
-                f"make this a well-matched career for you."
-            )
+            intro = f"Your {primary_label} personality score and your strong performance in {top_subject} make this a well-matched career."
         else:
-            intro = (
-                f"Your {primary_label} personality score is the strongest signal here — "
-                f"this career is built for the way you naturally think and work."
-            )
+            intro = f"Your {primary_label} personality score shows that this career is built for the way you naturally think."
     elif top1 == "riasec" and top2 == "workstyle":
-        intro = (
-            f"Your {primary_label} personality score and the way you described your preferred work style "
-            f"both point strongly toward this career."
-        )
+        intro = f"Your {primary_label} personality score and your preferred work style both point strongly toward this path."
     elif top1 == "riasec" and top2 == "priorities":
-        intro = (
-            f"Your {primary_label} personality score and the career priorities you selected "
-            f"align closely with what this path offers."
-        )
+        intro = f"Your {primary_label} personality score and career priorities align closely with what this path offers."
     elif top1 == "subject" and top2 == "riasec":
         if top_subject:
-            intro = (
-                f"Your strength in {top_subject} and your {primary_label} personality type "
-                f"together make this a strong academic and personality fit."
-            )
+            intro = f"Your strength in {top_subject} and your {primary_label} personality type make this a great fit."
         else:
-            intro = (
-                f"Your subject profile and {primary_label} personality type "
-                f"together point to this career."
-            )
+            intro = f"Your subject profile and {primary_label} personality type together point to this career."
     elif top1 == "subject" and top2 == "workstyle":
         if top_subject:
-            intro = (
-                f"Your academic strength in {top_subject} and your preferred work style "
-                f"are both well-matched to what this career demands day-to-day."
-            )
+            intro = f"Your academic strength in {top_subject} and preferred work style match what this career demands."
         else:
-            intro = (
-                f"Your academic profile and preferred work style are both well-aligned with this career."
-            )
+            intro = f"Your academic profile and preferred work style are both well-aligned with this career."
     elif top1 == "workstyle" and top2 == "riasec":
-        intro = (
-            f"The way you described how you like to work, and your {primary_label} personality score, "
-            f"are both strong matches for this career."
-        )
+        intro = f"The way you like to work, and your {primary_label} personality score, are both strong matches."
     elif top1 == "priorities" and top2 == "riasec":
-        intro = (
-            f"The career priorities you selected and your {primary_label} personality type "
-            f"align well with what this path delivers."
-        )
+        intro = f"The career priorities you selected and your {primary_label} personality type align well."
     else:
-        intro = (
-            f"Your profile — including your {primary_label} personality score and overall preferences — "
-            f"points toward this as a well-suited career."
-        )
+        intro = f"Your profile — including your {primary_label} personality score and overall preferences — points toward this career."
 
-    # Second sentence: career's own day-to-day reason from catalog
     detail = career.get("reason", "")
     return f"{intro} {detail}"
 
@@ -255,24 +361,26 @@ def _generate_reason(
 # ─── Main Scoring Function ────────────────────────────────────────────────────
 
 WEIGHTS = {
-    "riasec": 0.35,
-    "subject": 0.25,
-    "workstyle": 0.20,
-    "priorities": 0.12,
-    "feasibility": 0.08,
+    "riasec": 0.25,
+    "passion": 0.15,
+    "aptitude": 0.15,
+    "subject": 0.20,
+    "workstyle": 0.15,
+    "priorities": 0.05,
+    "feasibility": 0.05,
 }
-
 
 def score_careers(profile) -> list[dict]:
     """
     Takes a StudentProfile ORM object and returns a ranked list of top 10 careers.
-    Each career dict has: rank, title, salary, stream, reason, total_score.
+    Integrates onboarding signals, RIASEC personality, Hobbies/Passion, and Aptitude tests.
     """
-    # Extract profile data
     riasec = profile.riasec_scores or {}
     subject_ratings = profile.subject_ratings or {}
     work_style = profile.work_style or {}
     career_priorities = profile.career_priorities or []
+    hobbies = profile.hobbies or []
+    aptitude_scores = profile.aptitude_scores or {}
 
     profile_data = {
         "stream": profile.stream.value if profile.stream else None,
@@ -280,43 +388,67 @@ def score_careers(profile) -> list[dict]:
         "target_sector": profile.target_sector.value if profile.target_sector else None,
         "relocation_pref": profile.relocation_pref.value if profile.relocation_pref else None,
         "subject_ratings": subject_ratings,
+        "hobbies": hobbies,
+        "aptitude_scores": aptitude_scores,
     }
 
-    # Determine if each component has real data (for weight redistribution)
     has_riasec = bool(riasec)
+    has_hobbies = bool(hobbies)
+    has_aptitude = bool(aptitude_scores)
     has_subjects = bool(subject_ratings)
     has_workstyle = bool(work_style)
     has_priorities = bool(career_priorities)
 
     # Compute effective weights with graceful degradation
     effective_weights = dict(WEIGHTS)
+    
+    if not has_riasec:
+        effective_weights["subject"] += effective_weights["riasec"]
+        effective_weights["riasec"] = 0.0
+    if not has_hobbies:
+        target = "riasec" if has_riasec else "subject"
+        effective_weights[target] += effective_weights["passion"]
+        effective_weights["passion"] = 0.0
+    if not has_aptitude:
+        target = "riasec" if has_riasec else "subject"
+        effective_weights[target] += effective_weights["aptitude"]
+        effective_weights["aptitude"] = 0.0
+        
     if not has_subjects:
-        # Redistribute subject weight to RIASEC
-        effective_weights["riasec"] += effective_weights["subject"]
+        target = "riasec" if has_riasec else "workstyle"
+        effective_weights[target] += effective_weights["subject"]
         effective_weights["subject"] = 0.0
     if not has_workstyle:
-        effective_weights["riasec"] += effective_weights["workstyle"]
+        target = "riasec" if has_riasec else "subject"
+        effective_weights[target] += effective_weights["workstyle"]
         effective_weights["workstyle"] = 0.0
     if not has_priorities:
-        effective_weights["riasec"] += effective_weights["priorities"]
+        target = "riasec" if has_riasec else "subject"
+        effective_weights[target] += effective_weights["priorities"]
         effective_weights["priorities"] = 0.0
 
     results = []
 
     for career in CAREER_CATALOG:
-        # ── Feasibility first (may exclude) ───────────────────────────────────
-        feas = _feasibility_score(profile_data, career)
+        # Calculate RIASEC & Passion first for feasibility bypass check
+        r_score = _riasec_score(riasec, career) if has_riasec else 0.5
+        pass_score = _passion_score(hobbies, career["title"]) if has_hobbies else 0.5
+        
+        # ── Feasibility check (with passion stream-bypass) ───────────────────
+        feas = _feasibility_score(profile_data, career, riasec_score=r_score, passion_score=pass_score)
         if feas == HARD_FILTER_EXCLUDE:
             continue
 
-        # ── Component scores ──────────────────────────────────────────────────
-        r_score = _riasec_score(riasec, career) if has_riasec else 0.5
+        # ── Other Component scores ────────────────────────────────────────────
+        apt_score = _aptitude_score(aptitude_scores, career) if has_aptitude else 0.5
         s_score = _subject_score(subject_ratings, career) if has_subjects else 0.5
         w_score = _workstyle_score(work_style, career) if has_workstyle else 0.5
         p_score = _priority_score(career_priorities, career) if has_priorities else 0.5
 
         component_scores = {
             "riasec": (r_score, effective_weights["riasec"]),
+            "passion": (pass_score, effective_weights["passion"]),
+            "aptitude": (apt_score, effective_weights["aptitude"]),
             "subject": (s_score, effective_weights["subject"]),
             "workstyle": (w_score, effective_weights["workstyle"]),
             "priorities": (p_score, effective_weights["priorities"]),
@@ -325,16 +457,17 @@ def score_careers(profile) -> list[dict]:
 
         total = (
             r_score * effective_weights["riasec"] +
+            pass_score * effective_weights["passion"] +
+            apt_score * effective_weights["aptitude"] +
             s_score * effective_weights["subject"] +
             w_score * effective_weights["workstyle"] +
             p_score * effective_weights["priorities"] +
             feas * effective_weights["feasibility"]
         )
 
-        # ── Generate reason ───────────────────────────────────────────────────
         reason = _generate_reason(career, component_scores, profile_data)
 
-        # ── Stream display ────────────────────────────────────────────────────
+        # ── Stream Display Label ──────────────────────────────────────────────
         stream_display_map = {
             "pcm": "PCM", "pcb": "PCB", "pcmb": "PCM/PCB",
             "comm": "Commerce", "arts": "Arts",
@@ -354,7 +487,7 @@ def score_careers(profile) -> list[dict]:
     results.sort(key=lambda x: x["total_score"], reverse=True)
     top10 = results[:10]
 
-    # Add rank and strip internal score
+    # Add rank and strip score
     for i, item in enumerate(top10, 1):
         item["rank"] = i
         del item["total_score"]

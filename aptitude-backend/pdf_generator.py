@@ -122,39 +122,18 @@ def generate_pdf(result: dict) -> bytes:
     story.append(HRFlowable(width="100%", thickness=1, color=BORDER_COLOR))
     story.append(Spacer(1, 0.4*cm))
 
-    # ── TOP CAREER MATCHES ───────────────────────────────────────────────────
-    story.append(Paragraph("Top 3 Career Matches", h2_style))
-
-    for i, career in enumerate(result["primary_careers"]):
-        career_data = [[
-            Paragraph(f"<b>{i+1}. {career['title']}</b>", ParagraphStyle("CareerTitle", parent=styles["Normal"], fontSize=12, textColor=DARK_NAVY)),
-            Paragraph(f"<b>{career['salary']}</b>", ParagraphStyle("Salary", parent=styles["Normal"], fontSize=11, textColor=DARK_NAVY, alignment=TA_RIGHT)),
-        ]]
-        career_table = Table(career_data, colWidths=[10*cm, 6.5*cm])
-        career_table.setStyle(TableStyle([
-            ("LEFTPADDING", (0, 0), (0, 0), 10),
-            ("RIGHTPADDING", (-1, -1), (-1, -1), 10),
-            ("TOPPADDING", (0, 0), (-1, -1), 8),
-            ("BACKGROUND", (0, 0), (-1, -1), LIGHT_BG),
-        ]))
-
-        reason_para = Paragraph(career["reason"], ParagraphStyle("Reason", parent=styles["Normal"], fontSize=9, leading=14, textColor=GRAY_TEXT, leftIndent=10, rightIndent=10))
-        stream_para = Paragraph(f"<font color='#3b82f6'><b>{career['stream']}</b></font>",
-                                ParagraphStyle("Stream", parent=styles["Normal"], fontSize=9, leftIndent=10, spaceBefore=4, spaceAfter=8))
-
-        block_data = [[career_table], [reason_para], [stream_para]]
-        block = Table(block_data, colWidths=[16.5*cm])
-        block.setStyle(TableStyle([
-            ("BOX", (0, 0), (-1, -1), 1, BORDER_COLOR),
-            ("LEFTPADDING", (0, 0), (-1, -1), 0),
-            ("RIGHTPADDING", (0, 0), (-1, -1), 0),
-            ("TOPPADDING", (0, 0), (-1, -1), 0),
-            ("BOTTOMPADDING", (0, 0), (-1, -1), 0),
-        ]))
-        story.append(block)
-        story.append(Spacer(1, 0.3*cm))
-
-    story.append(Spacer(1, 0.3*cm))
+    # ── DETAILED RECOMMENDATIONS CTA ──────────────────────────────────────────
+    story.append(Paragraph("Your Personalized Career Recommendations", h2_style))
+    story.append(Spacer(1, 0.2*cm))
+    cta_text = (
+        "We have combined your onboarding academic profile, subject ratings, "
+        "RIASEC personality scores, and passions/hobbies to generate your final "
+        "career recommendations. <b>To view your unified, stream-aligned, and "
+        "interest-aligned career matches with detailed roadmaps, please log in "
+        "to the Manzil Platform and check your Student Dashboard.</b>"
+    )
+    story.append(Paragraph(cta_text, ParagraphStyle("CTA", parent=styles["Normal"], fontSize=10, leading=16, textColor=DARK_NAVY)))
+    story.append(Spacer(1, 0.6*cm))
     story.append(HRFlowable(width="100%", thickness=1, color=BORDER_COLOR))
     story.append(Spacer(1, 0.4*cm))
 

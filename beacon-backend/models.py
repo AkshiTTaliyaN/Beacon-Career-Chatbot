@@ -152,6 +152,8 @@ class StudentProfile(Base):
 
     # ── RIASEC + chatbot ──────────────────────────────────────────────────────
     riasec_scores     = Column(JSON, nullable=True)
+    hobbies           = Column(JSON, nullable=True)
+    aptitude_scores   = Column(JSON, nullable=True)
     interests_summary = Column(Text, nullable=True)
 
     # ── Scoring engine inputs (from onboarding) ───────────────────────────────
