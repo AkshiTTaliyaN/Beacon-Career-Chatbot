@@ -305,7 +305,7 @@ export default function HomePage({ onStart }) {
             position: 'relative', zIndex: 1,
           }}
         >
-          AI-powered career counselling, psychometric profiling, and personalised roadmaps for Class 8–12 students across India. No fees. No bias. Just clear direction.
+          AI-powered career counselling, psychometric profiling, and personalised roadmaps for Class 9–12 students across India. No fees. No bias. Just clear direction.
         </motion.p>
 
         {/* CTA */}
@@ -347,7 +347,7 @@ export default function HomePage({ onStart }) {
         <div style={{ maxWidth: 900, margin: '0 auto', display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
           <StatCard value={100}  suffix="+"  label="Career Paths"       color="#00d4ff" delay={0}    />
           <StatCard value={50}   suffix="+"  label="Entrance Exams"     color="#8b5cf6" delay={0.1}  />
-          <StatCard value={8}    suffix=""   label="Classes Supported"  color="#00ff88" delay={0.2}  />
+          <StatCard value={4}    suffix=""   label="Classes Supported"  color="#00ff88" delay={0.2}  />
           <StatCard value={6}    suffix=""   label="RIASEC Types Mapped" color="#f59e0b" delay={0.3}  />
         </div>
       </section>

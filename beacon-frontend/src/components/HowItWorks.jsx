@@ -53,7 +53,7 @@ function Icon({ name }) {
 
 export default function HowItWorks() {
   const steps = [
-    { num: 1, icon: 'test', title: 'Take the free psychometric test', desc: 'Quick, research-backed questionnaire tailored for Class 8–12.' },
+    { num: 1, icon: 'test', title: 'Take the free psychometric test', desc: 'Quick, research-backed questionnaire tailored for Class 9–12.' },
     { num: 2, icon: 'report', title: 'Get your personality report', desc: 'Receive a clear report highlighting strengths and suitable career clusters.' },
     { num: 3, icon: 'chat', title: 'Chat with the AI counsellor', desc: 'Discuss results and next steps with an AI-guided conversation.' },
     { num: 4, icon: 'download', title: 'Download your career PDF', desc: 'Save a professional PDF summary you can share with parents or mentors.' },

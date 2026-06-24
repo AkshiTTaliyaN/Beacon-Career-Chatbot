@@ -158,7 +158,7 @@ export default function CareerLibrary() {
             <div style={{ color: 'var(--ft-text-muted)', fontSize: '0.92rem', lineHeight: 1.6 }}>
               <p style={{ marginTop: 0 }}>{selected.details}</p>
               <p style={{ marginTop: 10 }}>Career path: Typically starts with undergraduate study, internships, and progressive specialization — followed by higher studies or professional certifications depending on the field.</p>
-              <p style={{ marginTop: 10 }}><strong>Tip:</strong> For students in Class 8–12: {selected.description} Start small: work on simple projects, read related books, and join clubs to explore interest.</p>
+              <p style={{ marginTop: 10 }}><strong>Tip:</strong> For students in Class 9–12: {selected.description} Start small: work on simple projects, read related books, and join clubs to explore interest.</p>
             </div>
           </div>
         </div>

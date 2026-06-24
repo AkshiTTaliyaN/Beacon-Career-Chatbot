@@ -238,7 +238,7 @@ export default function ExamExplorer() {
 
         {/* Class Filters */}
         <div style={{ display: 'flex', gap: 10, marginBottom: 24, flexWrap: 'wrap' }}>
-          {['All', 'Class 8-9', 'Class 10', 'Class 11-12'].map(k => (
+          {['All', 'Class 9', 'Class 10', 'Class 11-12'].map(k => (
             <button
               key={k}
               onClick={() => setKlass(k)}

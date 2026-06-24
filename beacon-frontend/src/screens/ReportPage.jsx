@@ -4,8 +4,8 @@ import {
   BarChart, Bar, XAxis, YAxis, Tooltip, Legend, Cell,
   ResponsiveContainer,
 } from 'recharts';
-import { getCareerBannerImage } from '../utils/bannerImage';
 import ManzilHeader from '../components/ManzilHeader';
+import { GlassCard } from '../components/FuturisticCharts'; 2efc1e5 (update cohort range to Class 9-12 and modernize ReportPage styling)
 
 import { API as BEACON_API, APTITUDE_URL } from '../config';
 
@@ -45,15 +45,15 @@ function ScoreBar({ label, value, color }) {
   return (
     <div style={{ marginBottom: 14 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
-        <span style={{ color: '#102849', fontWeight: 700, fontSize: '0.95rem' }}>{label}</span>
-        <span style={{ color: '#374151', fontWeight: 600 }}>{pct}%</span>
+        <span style={{ color: 'rgba(255, 255, 255, 0.95)', fontWeight: 700, fontSize: '0.95rem' }}>{label}</span>
+        <span style={{ color: 'rgba(255, 255, 255, 0.65)', fontWeight: 600 }}>{pct}%</span>
       </div>
-      <div style={{ background: '#e6eef9', borderRadius: 8, height: 12, overflow: 'hidden' }}>
+      <div style={{ background: 'rgba(255, 255, 255, 0.08)', borderRadius: 8, height: 12, overflow: 'hidden' }}>
         <div
           style={{
             width: `${pct}%`,
             height: '100%',
-            background: color || '#2C5492',
+            background: color || '#00d4ff',
             borderRadius: 8,
             transition: 'width 0.8s ease',
           }}
@@ -65,11 +65,10 @@ function ScoreBar({ label, value, color }) {
 
 /* ── Section heading helper ──────────────────────────────────────── */
 function SectionHeading({ title, subtitle }) {
-  const NAVY = '#2C5492';
   return (
     <div style={{ marginBottom: 20 }}>
-      <h2 style={{ color: NAVY, margin: '0 0 6px 0', fontSize: '1.35rem', fontWeight: 800 }}>{title}</h2>
-      {subtitle && <p style={{ margin: 0, color: '#556d8f', fontSize: '0.9rem' }}>{subtitle}</p>}
+      <h2 style={{ color: '#00d4ff', margin: '0 0 6px 0', fontSize: '1.4rem', fontWeight: 800 }}>{title}</h2>
+      {subtitle && <p style={{ margin: 0, color: 'rgba(255, 255, 255, 0.6)', fontSize: '0.92rem', lineHeight: 1.5 }}>{subtitle}</p>}
     </div>
   );
 }
@@ -78,7 +77,7 @@ function SectionHeading({ title, subtitle }) {
 function RadarTooltipContent({ active, payload }) {
   if (!active || !payload || !payload.length) return null;
   return (
-    <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 8, padding: '8px 14px', boxShadow: '0 4px 12px rgba(0,0,0,0.12)', fontSize: 13 }}>
+    <div style={{ background: '#080c24', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 8, padding: '8px 14px', boxShadow: '0 4px 20px rgba(0,0,0,0.5)', fontSize: 13 }}>
       {payload.map((p, i) => (
         <div key={i} style={{ color: p.color, fontWeight: 700, marginBottom: 2 }}>
           {p.name}: {p.value}
@@ -115,7 +114,7 @@ function ReportRadarTick({ x, y, cx, cy, payload }) {
         textAnchor={textAnchor}
         dy={adjustedDy}
         style={{
-          fill: '#2C5492', // NAVY
+          fill: '#00d4ff',
           fontSize: 12,
           fontWeight: 700,
           fontFamily: 'Inter, system-ui, sans-serif',
@@ -219,38 +218,59 @@ export default function ReportPage() {
   const primaryColor = RIASEC_COLORS[primaryName] || NAVY;
 
   return (
-    <div style={{ background: '#fff', color: '#111827', minHeight: '100vh', fontFamily: 'Inter, system-ui, -apple-system, Roboto, sans-serif' }}>
+    <div className="ft-dashboard-bg" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', color: 'var(--ft-text-primary)', fontFamily: 'Inter, system-ui, sans-serif' }}>
 
-      <ManzilHeader
-        title="Manzil"
-        center={(
-          <div>
-            <h1>Manzil Personality &amp; Career Report</h1>
-            <p>{studentName}{streamDisplay ? ` • ${streamDisplay}` : ''}</p>
-            <p style={{ fontSize: "0.75rem", fontWeight: 600, color: "#6b7280" }}>
-              {new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })}
-            </p>
-          </div>
-        )}
-        right={(
+      {/* Header */}
+      <header className="ft-navbar ft-navbar-scrolled" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 24px', height: 70 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <button
+            onClick={() => { window.history.pushState({}, '', '/dashboard'); window.dispatchEvent(new PopStateEvent('popstate')); }}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              color: 'var(--ft-neon-cyan)',
+              fontWeight: 800,
+              fontSize: 14,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 4
+            }}
+          >
+            ← Back
+          </button>
+          <h1 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: 'var(--ft-text-primary)' }}>Manzil Career Report</h1>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+>>>>>>> 2efc1e5 (update cohort range to Class 9-12 and modernize ReportPage styling)
           <button
             type="button"
             className="manzil-header-btn"
             onClick={() => window.print()}
+<<<<<<< HEAD
           >
             ⬇ Download PDF
           </button>
         )}
       />
+=======
+            className="ft-button-primary"
+            style={{ padding: '0.5rem 1.2rem', fontSize: '0.85rem' }}
+          >
+            ⬇ Download PDF
+          </button>
+        </div>
+      </header>
+>>>>>>> 2efc1e5 (update cohort range to Class 9-12 and modernize ReportPage styling)
 
-      <div style={{ maxWidth: 960, margin: '2rem auto', padding: '0 1rem' }}>
+      <div style={{ maxWidth: 960, margin: '2rem auto', padding: '0 1rem', width: '100%' }}>
 
         {!hasScores ? (
           /* ── No scores state ──────────────────────────────────────── */
-          <div style={{ textAlign: 'center', padding: '4rem 2rem' }}>
-            <div style={{ fontSize: 48, marginBottom: 16 }}>🧪</div>
-            <h2 style={{ color: NAVY, marginBottom: 12 }}>No test results yet</h2>
-            <p style={{ color: '#374151', marginBottom: 24, maxWidth: 420, margin: '0 auto 24px' }}>
+          <GlassCard elevated style={{ textAlign: 'center', padding: '4rem 2rem', maxWidth: 600, margin: '4rem auto' }}>
+            <div style={{ fontSize: 48, marginBottom: 16 }}>🧠</div>
+            <h2 style={{ color: 'var(--ft-neon-cyan)', marginBottom: 12 }}>No test results yet</h2>
+            <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: 24, maxWidth: 420, margin: '0 auto 24px', lineHeight: 1.6 }}>
               Take the psychometric test to generate your personalised RIASEC report.
               It takes 10–15 minutes and your results are saved to your profile.
             </p>
@@ -263,11 +283,12 @@ export default function ReportPage() {
                   : `${APTITUDE_URL}?origin=${encodeURIComponent(origin)}`;
                 window.open(url, '_blank');
               }}
-              style={{ background: NAVY, color: '#fff', border: 'none', padding: '0.9rem 2rem', borderRadius: 10, fontWeight: 700, fontSize: '1rem', cursor: 'pointer' }}
+              className="ft-button-primary"
+              style={{ padding: '0.9rem 2rem', borderRadius: 999, fontSize: '1rem', cursor: 'pointer' }}
             >
               Take the Psychometric Test →
             </button>
-          </div>
+          </GlassCard>
         ) : (
           <>
             {/* ── Fresh-test congratulatory banner ─────────────────────── */}
@@ -376,37 +397,37 @@ export default function ReportPage() {
             {/* ── Personality Overview ─────────────────────────────────── */}
             <section style={{ marginBottom: 32 }}>
               <SectionHeading title="Personality Overview" />
-              <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start', flexWrap: 'wrap' }}>
-                <div style={{ flex: '0 0 160px' }}>
-                  <div style={{ background: primaryColor + '18', color: primaryColor, padding: '1.2rem', borderRadius: 12, textAlign: 'center', fontWeight: 800, fontSize: '1.3rem', border: `2px solid ${primaryColor}30` }}>
+              <GlassCard elevated style={{ display: 'flex', gap: 24, alignItems: 'flex-start', flexWrap: 'wrap', padding: '2rem' }}>
+                <div style={{ flex: '0 0 170px' }}>
+                  <div style={{ background: primaryColor + '20', color: '#fff', padding: '1.2rem', borderRadius: 12, textAlign: 'center', fontWeight: 800, fontSize: '1.3rem', border: `2px solid ${primaryColor}55`, textShadow: `0 0 10px ${primaryColor}aa` }}>
                     {primaryName}
                   </div>
-                  <div style={{ marginTop: 10, color: '#374151', fontSize: '0.9rem' }}>
-                    Secondary: <strong style={{ color: NAVY }}>{secondaryName}</strong>
+                  <div style={{ marginTop: 14, color: 'rgba(255, 255, 255, 0.75)', fontSize: '0.92rem' }}>
+                    Secondary: <strong style={{ color: '#00d4ff' }}>{secondaryName}</strong>
                   </div>
-                  <div style={{ marginTop: 8, fontSize: '0.85rem', color: '#556d8f' }}>
-                    Holland Code: <strong style={{ color: NAVY }}>{sortedScores.slice(0, 3).map(s => s.code).join('')}</strong>
+                  <div style={{ marginTop: 8, fontSize: '0.88rem', color: 'rgba(255, 255, 255, 0.55)' }}>
+                    Holland Code: <strong style={{ color: '#00d4ff' }}>{sortedScores.slice(0, 3).map(s => s.code).join('')}</strong>
                   </div>
                 </div>
                 <div style={{ flex: 1, minWidth: 220 }}>
-                  <p style={{ marginTop: 0, color: '#374151', lineHeight: 1.7, fontSize: '0.95rem' }}>
+                  <p style={{ marginTop: 0, color: 'rgba(255, 255, 255, 0.85)', lineHeight: 1.75, fontSize: '0.98rem' }}>
                     {PERSONALITY_DESCS[primaryName] || ''}
                   </p>
-                  <div style={{ marginTop: 16 }}>
-                    <h4 style={{ margin: '0 0 12px 0', color: NAVY, fontSize: '0.95rem' }}>RIASEC Scores</h4>
-                    <div style={{ background: '#f7f9fb', padding: 16, borderRadius: 10 }}>
+                  <div style={{ marginTop: 20 }}>
+                    <h4 style={{ margin: '0 0 12px 0', color: '#00d4ff', fontSize: '1rem', fontWeight: 800 }}>RIASEC Scores</h4>
+                    <div style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: 20, borderRadius: 12 }}>
                       {sortedScores.map(item => (
                         <ScoreBar
                           key={item.code}
                           label={item.name}
                           value={item.value}
-                          color={RIASEC_COLORS[item.name] || NAVY}
+                          color={RIASEC_COLORS[item.name] || '#00d4ff'}
                         />
                       ))}
                     </div>
                   </div>
                 </div>
-              </div>
+              </GlassCard>
             </section>
 
             <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '2rem 0' }} />
@@ -419,45 +440,45 @@ export default function ReportPage() {
                     title="Personality vs Work Style Alignment"
                     subtitle="The blue area shows your RIASEC test scores. The teal area shows how you rated each work activity during onboarding. Closer overlap = stronger alignment."
                   />
-                  <div style={{ background: '#f7f9fb', borderRadius: 16, padding: '1.5rem 1rem' }}>
+                  <GlassCard elevated style={{ padding: '2rem' }}>
                     <ResponsiveContainer width="100%" height={340}>
-                      <RadarChart cx="50%" cy="50%" outerRadius="60%" data={radarData}>
-                        <PolarGrid gridType="polygon" stroke="#cbd5e1" />
-                        <PolarAngleAxis
-                          dataKey="dimension"
-                          tick={<ReportRadarTick />}
-                        />
-                        <PolarRadiusAxis
-                          angle={30}
-                          domain={[0, 100]}
-                          tick={{ fill: '#94a3b8', fontSize: 11 }}
-                          tickCount={5}
-                        />
-                        <Radar
-                          name="RIASEC Score"
-                          dataKey="riasec"
-                          stroke="#2C5492"
-                          fill="#2C5492"
-                          fillOpacity={0.22}
-                          strokeWidth={2}
-                          dot={{ fill: '#2C5492', r: 4 }}
-                        />
-                        <Radar
-                          name="Work Style"
-                          dataKey="workStyle"
-                          stroke="#14b8a6"
-                          fill="#14b8a6"
-                          fillOpacity={0.22}
-                          strokeWidth={2}
-                          dot={{ fill: '#14b8a6', r: 4 }}
-                        />
-                        <Legend
-                          formatter={v => <span style={{ color: '#374151', fontWeight: 600, fontSize: 13 }}>{v}</span>}
-                        />
-                        <Tooltip content={<RadarTooltipContent />} />
-                      </RadarChart>
+                       <RadarChart cx="50%" cy="50%" outerRadius="60%" data={radarData}>
+                        <PolarGrid gridType="polygon" stroke="rgba(255, 255, 255, 0.15)" />
+                         <PolarAngleAxis
+                           dataKey="dimension"
+                           tick={<ReportRadarTick />}
+                         />
+                         <PolarRadiusAxis
+                           angle={30}
+                           domain={[0, 100]}
+                           tick={{ fill: 'rgba(255, 255, 255, 0.45)', fontSize: 11 }}
+                           tickCount={5}
+                         />
+                         <Radar
+                           name="RIASEC Score"
+                           dataKey="riasec"
+                           stroke="#8b5cf6"
+                           fill="#8b5cf6"
+                           fillOpacity={0.25}
+                           strokeWidth={2}
+                           dot={{ fill: '#8b5cf6', r: 4 }}
+                         />
+                         <Radar
+                           name="Work Style"
+                           dataKey="workStyle"
+                           stroke="#14b8a6"
+                           fill="#14b8a6"
+                           fillOpacity={0.25}
+                           strokeWidth={2}
+                           dot={{ fill: '#14b8a6', r: 4 }}
+                         />
+                         <Legend
+                           formatter={v => <span style={{ color: 'rgba(255, 255, 255, 0.85)', fontWeight: 600, fontSize: 13 }}>{v}</span>}
+                         />
+                         <Tooltip content={<RadarTooltipContent />} />
+                       </RadarChart>
                     </ResponsiveContainer>
-                  </div>
+                  </GlassCard>
                 </section>
                 <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '2rem 0' }} />
               </>
@@ -471,7 +492,7 @@ export default function ReportPage() {
                     title="Subject Strength Profile"
                     subtitle="Your self-rated comfort level with each subject — 1 (struggling) to 5 (favourite)."
                   />
-                  <div style={{ background: '#f7f9fb', borderRadius: 16, padding: '1.5rem 1rem' }}>
+                  <GlassCard elevated style={{ padding: '2rem' }}>
                     <ResponsiveContainer width="100%" height={Math.max(200, subjectData.length * 52)}>
                       <BarChart
                         data={subjectData}
@@ -482,7 +503,7 @@ export default function ReportPage() {
                           type="number"
                           domain={[0, 5]}
                           ticks={[1, 2, 3, 4, 5]}
-                          tick={{ fill: '#94a3b8', fontSize: 12 }}
+                          tick={{ fill: 'rgba(255, 255, 255, 0.45)', fontSize: 12 }}
                           tickFormatter={v => ['', '😟', '😐', '🙂', '😄', '⭐'][v] || v}
                           axisLine={false}
                           tickLine={false}
@@ -491,30 +512,30 @@ export default function ReportPage() {
                           type="category"
                           dataKey="subject"
                           width={130}
-                          tick={{ fill: NAVY, fontWeight: 700, fontSize: 13 }}
+                          tick={{ fill: '#00d4ff', fontWeight: 700, fontSize: 13 }}
                           axisLine={false}
                           tickLine={false}
                         />
                         <Tooltip
                           formatter={(val) => [`${val}/5 — ${['','Struggling','Getting by','Comfortable','Really good','Favourite'][val] || val}`, 'Rating']}
-                          contentStyle={{ borderRadius: 8, border: '1px solid #e5e7eb', fontSize: 13 }}
+                          contentStyle={{ borderRadius: 8, border: '1px solid rgba(255,255,255,0.15)', background: '#080c24', color: '#fff', fontSize: 13 }}
                         />
                         <Bar dataKey="rating" radius={[0, 8, 8, 0]} maxBarSize={28}>
                           {subjectData.map((entry, i) => (
                             <Cell
                               key={i}
-                              fill={entry.rating >= 4 ? '#f59e0b' : entry.rating === 3 ? '#2C5492' : '#94a3b8'}
+                              fill={entry.rating >= 4 ? '#f59e0b' : entry.rating === 3 ? '#00d4ff' : 'rgba(255, 255, 255, 0.15)'}
                             />
                           ))}
                         </Bar>
                       </BarChart>
                     </ResponsiveContainer>
-                    <div style={{ display: 'flex', gap: 16, justifyContent: 'center', marginTop: 12, fontSize: 12, color: '#556d8f' }}>
+                    <div style={{ display: 'flex', gap: 16, justifyContent: 'center', marginTop: 12, fontSize: 12, color: 'rgba(255, 255, 255, 0.55)' }}>
                       <span><span style={{ color: '#f59e0b', fontWeight: 800 }}>■</span> Strong (4–5)</span>
-                      <span><span style={{ color: '#2C5492', fontWeight: 800 }}>■</span> Average (3)</span>
-                      <span><span style={{ color: '#94a3b8', fontWeight: 800 }}>■</span> Needs work (1–2)</span>
+                      <span><span style={{ color: '#00d4ff', fontWeight: 800 }}>■</span> Average (3)</span>
+                      <span><span style={{ color: 'rgba(255, 255, 255, 0.3)', fontWeight: 800 }}>■</span> Needs work (1–2)</span>
                     </div>
-                  </div>
+                  </GlassCard>
                 </section>
                 <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '2rem 0' }} />
               </>
@@ -522,66 +543,69 @@ export default function ReportPage() {
 
             {/* ── Next steps nudge ─────────────────────────────────────── */}
             <section style={{ marginBottom: 32 }}>
-              <div style={{ background: primaryColor + '0d', border: `1px solid ${primaryColor}30`, borderRadius: 12, padding: '1.5rem 2rem' }}>
-                <h3 style={{ color: NAVY, margin: '0 0 8px 0', fontSize: '1.1rem', fontWeight: 800 }}>
+              <GlassCard elevated style={{ borderLeft: `4px solid ${primaryColor}`, background: 'rgba(255, 255, 255, 0.02)', padding: '2rem' }}>
+                <h3 style={{ color: '#00d4ff', margin: '0 0 8px 0', fontSize: '1.25rem', fontWeight: 800 }}>
                   ✨ See your personalised career matches
                 </h3>
-                <p style={{ color: '#374151', margin: '0 0 16px 0', lineHeight: 1.6 }}>
+                <p style={{ color: 'rgba(255, 255, 255, 0.8)', margin: '0 0 16px 0', lineHeight: 1.65 }}>
                   Your RIASEC scores have been saved to your profile. Head back to the dashboard to see
                   your top 10 career recommendations — matched using your personality, subjects, and goals.
                 </p>
                 <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                   <button
                     onClick={() => { window.history.pushState({}, '', '/recommendations'); window.dispatchEvent(new PopStateEvent('popstate')); }}
-                    style={{ background: NAVY, color: '#fff', border: 'none', padding: '0.75rem 1.5rem', borderRadius: 9, fontWeight: 700, cursor: 'pointer', fontSize: '0.95rem' }}
+                    className="ft-button-primary"
+                    style={{ padding: '0.75rem 1.5rem', borderRadius: 9, fontWeight: 700, cursor: 'pointer', fontSize: '0.95rem' }}
                   >
                     View career matches →
                   </button>
                   <button
                     onClick={() => { window.history.pushState({}, '', '/dashboard'); window.dispatchEvent(new PopStateEvent('popstate')); }}
-                    style={{ background: 'transparent', color: NAVY, border: `1.5px solid ${NAVY}`, padding: '0.75rem 1.5rem', borderRadius: 9, fontWeight: 700, cursor: 'pointer', fontSize: '0.95rem' }}
+                    className="ft-button-secondary"
+                    style={{ padding: '0.75rem 1.5rem', borderRadius: 9, fontWeight: 700, cursor: 'pointer', fontSize: '0.95rem' }}
                   >
                     Go to Dashboard
                   </button>
                 </div>
-              </div>
+              </GlassCard>
             </section>
 
-            <hr style={{ border: 'none', borderTop: '1px solid #e5e7eb', margin: '2rem 0' }} />
+            <hr style={{ border: 'none', borderTop: '1px solid rgba(255, 255, 255, 0.08)', margin: '2rem 0' }} />
 
             {/* ── Full score breakdown cards ────────────────────────────── */}
             <section style={{ marginBottom: 32 }}>
-              <h2 style={{ color: NAVY, margin: '0 0 16px 0', fontSize: '1.4rem', fontWeight: 800 }}>Your Full Score Breakdown</h2>
+              <h2 style={{ color: '#00d4ff', margin: '0 0 16px 0', fontSize: '1.4rem', fontWeight: 800 }}>Your Full Score Breakdown</h2>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 12 }}>
                 {sortedScores.map((item, i) => (
                   <div key={item.code} style={{
-                    background: '#fff',
-                    border: `1px solid ${i === 0 ? item.color || primaryColor : '#e5e7eb'}`,
+                    background: 'rgba(255, 255, 255, 0.04)',
+                    border: `1px solid ${i === 0 ? (item.color || primaryColor) + '77' : 'rgba(255, 255, 255, 0.08)'}`,
                     borderTop: `3px solid ${RIASEC_COLORS[item.name] || '#94a3b8'}`,
                     borderRadius: 10,
-                    padding: '1rem 1.2rem',
-                    boxShadow: '0 2px 8px rgba(44,84,146,0.08)',
+                    padding: '1.2rem',
+                    backdropFilter: 'blur(12px)',
+                    WebkitBackdropFilter: 'blur(12px)',
                   }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div>
-                        <div style={{ fontWeight: 800, color: NAVY, fontSize: '1rem' }}>{item.name}</div>
-                        <div style={{ fontSize: '0.8rem', color: '#556d8f', marginTop: 2 }}>{item.code}</div>
+                        <div style={{ fontWeight: 800, color: 'rgba(255, 255, 255, 0.95)', fontSize: '1.05rem' }}>{item.name}</div>
+                        <div style={{ fontSize: '0.82rem', color: 'rgba(255, 255, 255, 0.55)', marginTop: 2 }}>{item.code}</div>
                       </div>
-                      <div style={{ fontSize: '1.8rem', fontWeight: 800, color: RIASEC_COLORS[item.name] || '#556d8f' }}>
+                      <div style={{ fontSize: '1.8rem', fontWeight: 800, color: RIASEC_COLORS[item.name] || 'rgba(255, 255, 255, 0.85)' }}>
                         {item.value}%
                       </div>
                     </div>
-                    <div style={{ marginTop: 10, background: '#f1f5f9', borderRadius: 6, height: 8, overflow: 'hidden' }}>
-                      <div style={{ width: `${item.value}%`, height: '100%', background: RIASEC_COLORS[item.name] || NAVY, borderRadius: 6 }} />
+                    <div style={{ marginTop: 12, background: 'rgba(255, 255, 255, 0.08)', borderRadius: 6, height: 8, overflow: 'hidden' }}>
+                      <div style={{ width: `${item.value}%`, height: '100%', background: RIASEC_COLORS[item.name] || '#00d4ff', borderRadius: 6 }} />
                     </div>
-                    {i === 0 && <div style={{ marginTop: 8, fontSize: '0.78rem', color: primaryColor, fontWeight: 600 }}>Primary type</div>}
-                    {i === 1 && <div style={{ marginTop: 8, fontSize: '0.78rem', color: '#556d8f', fontWeight: 600 }}>Secondary type</div>}
+                    {i === 0 && <div style={{ marginTop: 10, fontSize: '0.8rem', color: primaryColor, fontWeight: 700 }}>Primary type</div>}
+                    {i === 1 && <div style={{ marginTop: 10, fontSize: '0.8rem', color: 'rgba(255, 255, 255, 0.5)', fontWeight: 700 }}>Secondary type</div>}
                   </div>
                 ))}
               </div>
             </section>
 
-            <footer style={{ color: '#9ca3af', fontSize: 13, textAlign: 'center', padding: '1rem 0 4rem 0' }}>
+            <footer style={{ color: 'rgba(255, 255, 255, 0.45)', fontSize: 13, textAlign: 'center', padding: '1rem 0 4rem 0' }}>
               Manzil © 2026 — This report is based on the globally validated RIASEC psychometric model.
               For personalised counselling contact our team.
             </footer>
@@ -589,7 +613,29 @@ export default function ReportPage() {
         )}
       </div>
 
-      <style>{`@media print { button { display:none } }`}</style>
+      <style>{`
+        @media print {
+          body, .ft-dashboard-bg {
+            background: #ffffff !important;
+            color: #000000 !important;
+          }
+          header, button, footer, hr {
+            display: none !important;
+          }
+          .glass-card, [style*="background"] {
+            background: #ffffff !important;
+            color: #000000 !important;
+            border: 1px solid #cccccc !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+          }
+          h2, h3, h4, span, div, p {
+            color: #000000 !important;
+            text-shadow: none !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }
