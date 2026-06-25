@@ -214,6 +214,48 @@ export default function ExpertSystemScreen() {
           return (
             <div className="consultation-result">
               
+              {/* Career Profile / What it entails */}
+              <GlassCard glowColor="cyan" style={{ marginBottom: 24, padding: 24 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 20 }}>
+                  <div style={{ flex: 1, minWidth: 280 }}>
+                    <h2 style={{ margin: '0 0 12px', fontSize: 22, fontWeight: 800, background: 'linear-gradient(135deg, var(--ft-neon-cyan), var(--ft-neon-purple))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', display: 'inline-block' }}>
+                      About {consultation.career_title}
+                    </h2>
+                    <p style={{ margin: 0, color: 'var(--ft-text-primary)', fontSize: '0.92rem', lineHeight: 1.65 }}>
+                      {consultation.reason}
+                    </p>
+                  </div>
+                  <div style={{ 
+                    display: 'grid', 
+                    gridTemplateColumns: '1fr 1fr', 
+                    gap: '12px 24px', 
+                    background: 'rgba(255, 255, 255, 0.02)', 
+                    border: '1.5px solid var(--ft-glass-border)', 
+                    padding: '16px 20px', 
+                    borderRadius: 12, 
+                    minWidth: 280,
+                    boxShadow: 'inset 0 0 12px rgba(255,255,255,0.01)'
+                  }}>
+                    <div>
+                      <span style={{ fontSize: 10, textTransform: 'uppercase', color: 'var(--ft-text-secondary)', opacity: 0.6, fontWeight: 700, display: 'block', marginBottom: 2 }}>Average Salary</span>
+                      <strong style={{ color: '#00ff88', fontSize: 13.5 }}>{consultation.salary}</strong>
+                    </div>
+                    <div>
+                      <span style={{ fontSize: 10, textTransform: 'uppercase', color: 'var(--ft-text-secondary)', opacity: 0.6, fontWeight: 700, display: 'block', marginBottom: 2 }}>Entry Cost</span>
+                      <strong style={{ color: 'var(--ft-neon-cyan)', fontSize: 13.5, textTransform: 'capitalize' }}>{consultation.cost_level}</strong>
+                    </div>
+                    <div>
+                      <span style={{ fontSize: 10, textTransform: 'uppercase', color: 'var(--ft-text-secondary)', opacity: 0.6, fontWeight: 700, display: 'block', marginBottom: 2 }}>Streams</span>
+                      <strong style={{ color: 'var(--ft-neon-purple)', fontSize: 13.5 }}>{consultation.streams?.map(s => s.toUpperCase()).join(', ')}</strong>
+                    </div>
+                    <div>
+                      <span style={{ fontSize: 10, textTransform: 'uppercase', color: 'var(--ft-text-secondary)', opacity: 0.6, fontWeight: 700, display: 'block', marginBottom: 2 }}>Relocation</span>
+                      <strong style={{ color: '#f59e0b', fontSize: 13.5 }}>{consultation.requires_relocation ? 'Yes' : 'No'}</strong>
+                    </div>
+                  </div>
+                </div>
+              </GlassCard>
+
               {/* Row 1: Gauge + Strengths & Warnings */}
               <div className="expert-grid">
                 
@@ -348,7 +390,7 @@ export default function ExpertSystemScreen() {
                   <div className="roadmap-timeline">
                     {consultation.roadmap.map((phase) => (
                       <div key={phase.phase} className="roadmap-phase-node">
-                        <div className="phase-circle">P{phase.phase}</div>
+                        <div className="phase-circle">{phase.phase}</div>
                         <GlassCard className="phase-content-card" style={{ flex: 1 }}>
                           <h4 style={{ margin: '0 0 10px', fontSize: 15, fontWeight: 700, color: 'var(--ft-neon-purple)' }}>
                             {phase.title}

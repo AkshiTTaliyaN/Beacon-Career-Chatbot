@@ -11,6 +11,7 @@ from typing import Any
 
 from career_catalog import CAREER_CATALOG
 from exams_catalog import EXAMS_CATALOG
+from career_scorer import get_career_domains
 
 
 # ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -234,81 +235,239 @@ def _match_exams(career: dict, profile: dict) -> list[dict]:
 # ─── Roadmap Generation ──────────────────────────────────────────────────────
 
 
-_PHASE_TEMPLATES: list[dict[str, Any]] = [
-    {
-        "phase": "Phase 1",
-        "title": "Foundations (Class 9–10)",
-        "class_range": (9, 10),
-        "base_items": [
-            "Build strong fundamentals in core subjects.",
-            "Explore interests through projects, competitions, and reading.",
-            "Start developing good study habits and time-management skills.",
-        ],
-    },
-    {
-        "phase": "Phase 2",
-        "title": "Core Academic Build (Class 11)",
-        "class_range": (11, 11),
-        "base_items": [
-            "Choose the right stream and optional subjects aligned with your career goal.",
-            "Begin structured preparation for relevant entrance exams.",
-            "Join coaching / online courses if needed and build a study schedule.",
-        ],
-    },
-    {
-        "phase": "Phase 3",
-        "title": "Intensive Prep (Class 12 — First Half)",
-        "class_range": (12, 12),
-        "base_items": [
-            "Intensify entrance-exam preparation with timed mock tests.",
-            "Complete the Class 12 syllabus alongside exam prep.",
-            "Apply for exam registrations and keep documents ready.",
-        ],
-    },
-    {
-        "phase": "Phase 4",
-        "title": "Revision & Testing (Class 12 — Second Half)",
-        "class_range": (13, 99),  # effectively 12 second half and beyond
-        "base_items": [
-            "Full-length mock tests and previous-year paper practice.",
-            "Revise weak areas identified in mocks.",
-            "Board exam preparation and final entrance exam attempts.",
-        ],
-    },
-]
-
-
 def _generate_roadmap(career: dict, profile: dict) -> list[dict]:
-    """Build a 4-phase roadmap, skipping phases below the student's class."""
+    """Build a 4-phase career-specific roadmap, skipping phases below the student's class."""
     current_class = profile.get("current_class", 9)
+    title = career["title"]
+    domains = get_career_domains(title)
+    
+    # Classify domain to category
+    category = "general"
+    if any(d in domains for d in ["software_engineering", "data_science"]):
+        category = "tech"
+    elif any(d in domains for d in ["design", "animation", "architecture", "interior_design", "product_design", "fashion"]):
+        category = "design"
+    elif any(d in domains for d in ["research", "biotechnology", "healthcare", "medicine", "environmental_science", "veterinary", "food_technology"]):
+        category = "science"
+    elif any(d in domains for d in ["corporate", "finance", "marketing", "hr", "hospitality", "event_management"]):
+        category = "business"
+    elif any(d in domains for d in ["law", "media", "journalism", "literature", "content", "linguistics", "social_work", "ngo", "education", "academia"]):
+        category = "humanities"
+    elif any(d in domains for d in ["defence", "civil_services", "foreign_services", "politics", "geography"]):
+        category = "public_service"
+    elif any(d in domains for d in ["sports", "physiotherapy"]):
+        category = "sports"
+
+    # Action items database
+    phase_items_db = {
+        "tech": {
+            1: [
+                "Build basic computational thinking through puzzle-solving or Scratch coding.",
+                "Participate in science fairs or computer clubs at school.",
+                "Read beginner technology articles or watch educational tech videos."
+            ],
+            2: [
+                "Start learning a core language like Python or Java through online tutorials.",
+                "Build a simple personal project (like a calculator, text game, or portfolio page).",
+                "Learn the basics of Web Development (HTML/CSS) or Data Analysis (spreadsheets)."
+            ],
+            3: [
+                "Practice basic algorithms on platforms like LeetCode, HackerRank, or GeeksForGeeks.",
+                "Focus on getting a high score in school exams and prepare for JEE Main or CUET if applicable.",
+                "Start a GitHub account and push your small programming projects there."
+            ],
+            4: [
+                "Attempt mock papers and timed practice tests for competitive entrance exams.",
+                "Build one final portfolio project (e.g. a simple mobile app or data dashboard).",
+                "Review college admission processes and finalise your target institutions."
+            ]
+        },
+        "design": {
+            1: [
+                "Maintain a daily sketchbook to build visual representation and hand-eye coordination.",
+                "Explore hobbies like photography, crafting, or building physical models.",
+                "Read design blogs or study the visual style of products and apps you love."
+            ],
+            2: [
+                "Learn the basics of digital design tools (Figma, Canva, or Adobe Photoshop).",
+                "Explore specific domains (e.g., UI/UX, 3D modelling, interior sketches, or fashion illustration).",
+                "Take introductory courses in art history, typography, or color theory."
+            ],
+            3: [
+                "Begin structured preparation for design school entrance exams (UCEED, NID, NIFT).",
+                "Start compiling your best designs into a clean digital portfolio (e.g., on Behance or Dribbble).",
+                "Do small freelance or volunteer design work for school events or local clubs."
+            ],
+            4: [
+                "Attempt previous years' design exam papers and timed sketching mock tests.",
+                "Finalise your digital portfolio with 4-5 well-documented design case studies.",
+                "Prepare for design school portfolio reviews and personal interview rounds."
+            ]
+        },
+        "science": {
+            1: [
+                "Participate in school science fairs, science Olympiads, and lab activities.",
+                "Read popular science publications (e.g., Scientific American, National Geographic).",
+                "Build solid fundamentals in basic mathematics, physics, chemistry, and biology."
+            ],
+            2: [
+                "Shadow or volunteer at a local clinic, laboratory, veterinary centre, or environmental NGO.",
+                "Conduct small home science experiments or learn basic data logging/Excel.",
+                "Explore specific scientific areas like genetics, bio-tech, botany, or pathology."
+            ],
+            3: [
+                "Start serious preparation for medical or science entrance exams (NEET, JEE, IISER Aptitude Test).",
+                "Read scientific papers or introductory textbooks to build a researcher's vocabulary.",
+                "Focus heavily on strengthening core theory in Chemistry, Physics, and Biology."
+            ],
+            4: [
+                "Solve full-length NEET/IISER mock papers to master speed and accuracy under pressure.",
+                "Keep academic records, project files, and documents ready for board exams.",
+                "Research central universities, research institutes (like IISER, IISc), and top medical colleges."
+            ]
+        },
+        "business": {
+            1: [
+                "Develop strong public speaking and communication skills through debates or MUNs.",
+                "Read business biographies and introductory economics/personal finance books.",
+                "Take leadership roles in school clubs, group projects, or sports teams."
+            ],
+            2: [
+                "Master spreadsheet tools (Excel/Google Sheets) and learn basic bookkeeping.",
+                "Read business newspapers (Economic Times, Mint) to follow national business trends.",
+                "Start a micro-enterprise or project (e.g., organizing a charity drive or selling handmade goods)."
+            ],
+            3: [
+                "Begin preparing for management entrance exams like IPMAT (IIM) or CUET.",
+                "Build a strong CV highlighting school leadership, event organization, and academic achievements.",
+                "Follow case studies of successful startups to understand strategy, marketing, and finance."
+            ],
+            4: [
+                "Attempt timed mock tests for business and economics undergraduate entrance programs.",
+                "Research undergraduate business degrees (BBA, BCom, BBM) and target universities.",
+                "Practice presentation and group discussion skills for university admission rounds."
+            ]
+        },
+        "humanities": {
+            1: [
+                "Read high-quality national newspapers and editorial columns daily to build general knowledge.",
+                "Join debate clubs, writing competitions, or language classes to hone your expression.",
+                "Volunteer for community welfare, teaching underprivileged kids, or local NGOs."
+            ],
+            2: [
+                "Start a personal blog or write regular opinion pieces/essays on topics you care about.",
+                "Take introductory courses in sociology, political science, psychology, or creative writing.",
+                "Engage in model UNs, youth parliaments, or peer counseling activities."
+            ],
+            3: [
+                "Prepare for humanities entrance exams (CUET) or law exams (CLAT) if pursuing corporate law.",
+                "Read landmark books and journals related to your field (legal history, social policy, etc.).",
+                "Draft writing samples, research essays, or build your volunteering track record."
+            ],
+            4: [
+                "Solve timed mock tests for CLAT/CUET and review logical reasoning and English comprehension.",
+                "Finalise college applications, statement of purpose documents, and letters of recommendation.",
+                "Prepare for group discussions or interviews required for private/central humanities universities."
+            ]
+        },
+        "public_service": {
+            1: [
+                "Focus on physical fitness, playing team sports, and outdoor activities like trekking/hiking.",
+                "Join youth organizations like NCC, NSS, Scouts & Guides, or school student council.",
+                "Read biographies of civil servants, national leaders, and defense officers."
+            ],
+            2: [
+                "Build strong general knowledge by studying national geography, history, and civic systems.",
+                "Follow international affairs, national security topics, and public policy updates.",
+                "Participate in physical drills, athletics, or adventure sports to build endurance."
+            ],
+            3: [
+                "For Defense: Begin structured preparation for the NDA entrance examination.",
+                "For Civil Services: Focus on building a broad general studies foundation in history, polity, and economics.",
+                "Solve logical reasoning, quantitative aptitude, and general mental ability question papers."
+            ],
+            4: [
+                "For NDA: Practice timed NDA mock papers and start daily physical conditioning (running, push-ups).",
+                "For Civil Services: Research target undergraduate degrees (such as BA History/Polity or BSc Geography).",
+                "Practice mental toughness, communication, and situational awareness exercises."
+            ]
+        },
+        "sports": {
+            1: [
+                "Train regularly in your primary sport under a qualified coach.",
+                "Participate in school, district, and state-level sports tournaments.",
+                "Focus on general fitness: flexibility, strength training, and cardiovascular health."
+            ],
+            2: [
+                "Study the basics of human anatomy, sports nutrition, and physical therapy.",
+                "Volunteer to assist coach training sessions or referee school sports matches.",
+                "Keep a detailed log of your athletic performance, workout routines, and fitness milestones."
+            ],
+            3: [
+                "Prepare for sports university entrance tests or physical education degrees.",
+                "Participate in national or open-level tournaments to build your athletic profile.",
+                "Learn about sports medicine, kinesiology, or athletic training fundamentals."
+            ],
+            4: [
+                "Review admission criteria for physical education and sports sciences courses.",
+                "Maintain peak physical condition and prepare for physical fitness admission tests.",
+                "Compile your athletic certificates, video reels, and achievements portfolio."
+            ]
+        },
+        "general": {
+            1: [
+                "Build strong fundamentals in core subjects like mathematics, languages, and science.",
+                "Explore various interests through group projects, hobby workshops, and online videos.",
+                "Start developing good study discipline, reading habits, and time-management skills."
+            ],
+            2: [
+                "Choose the right academic stream (PCM, PCB, Commerce, Arts) aligned with your strengths.",
+                "Learn practical digital skills like spreadsheets, document editing, and basic slide design.",
+                "Research different career pathways, speak to mentors, and read career guides."
+            ],
+            3: [
+                "Identify central universities, local colleges, and professional courses for your goals.",
+                "Begin structured preparation for relevant undergraduate entrance examinations (like CUET).",
+                "Participate in extracurricular activities that build communication, teamwork, and confidence."
+            ],
+            4: [
+                "Solve timed mock tests and previous-year exam papers for target colleges.",
+                "Complete class board exam syllabi alongside entrance preparation.",
+                "Prepare required documents, transcripts, and application profiles for target institutions."
+            ]
+        }
+    }
+
+    # Stream & Exam customization info
+    related_exams = _match_exams(career, profile)
+    exam_names = [e["name"] for e in related_exams]
     subject_weights = career.get("subject_weights", {})
     top_subjects = sorted(subject_weights, key=subject_weights.get, reverse=True)[:3]  # type: ignore[arg-type]
 
-    related_exams = _match_exams(career, profile)
-    exam_names = [e["name"] for e in related_exams]
+    roadmap_templates = [
+        {"phase": "1", "title": "Foundations (Class 9–10)", "class_range": (9, 10)},
+        {"phase": "2", "title": "Core Academic Build (Class 11)", "class_range": (11, 11)},
+        {"phase": "3", "title": "Intensive Prep (Class 12 — First Half)", "class_range": (12, 12)},
+        {"phase": "4", "title": "Revision & Testing (Class 12 — Second Half)", "class_range": (13, 99)},
+    ]
 
-    roadmap: list[dict] = []
+    roadmap = []
+    category_db = phase_items_db.get(category, phase_items_db["general"])
 
-    for template in _PHASE_TEMPLATES:
+    for template in roadmap_templates:
         lo, hi = template["class_range"]
-
         # Skip phases the student has already passed
         if current_class > hi:
             continue
 
-        items = list(template["base_items"])
+        phase_num = int(template["phase"])
+        items = list(category_db.get(phase_num, []))
 
-        # Customise with career-specific subjects
+        # Add custom exam references if present in later phases
+        if phase_num >= 2 and exam_names:
+            items.append(f"Structured target exams: {', '.join(exam_names)}.")
         if top_subjects:
-            items.append(
-                f"Focus especially on: {', '.join(top_subjects)}."
-            )
-
-        # Customise with exam info
-        if exam_names:
-            items.append(
-                f"Target exams: {', '.join(exam_names)}."
-            )
+            items.append(f"Prioritise studying key subjects: {', '.join(top_subjects)}.")
 
         roadmap.append({
             "phase": template["phase"],
@@ -456,4 +615,13 @@ def consult(career_title: str, profile_data: dict) -> dict:
         "roadmap": roadmap,
         "relevant_exams": relevant_exams,
         "backup_careers": backup_careers,
+        "salary": career.get("salary", "₹6-15 LPA"),
+        "streams": career.get("streams", []),
+        "cost_level": career.get("cost_level", "medium"),
+        "requires_relocation": career.get("requires_relocation", False),
+        "riasec_primary": career.get("riasec_primary", ""),
+        "riasec_secondary": career.get("riasec_secondary", ""),
+        "reason": career.get("reason", ""),
+        "sector": career.get("sector", ""),
+        "priority_alignment": career.get("priority_alignment", []),
     }

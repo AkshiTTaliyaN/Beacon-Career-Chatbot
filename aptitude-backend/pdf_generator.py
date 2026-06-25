@@ -9,6 +9,11 @@ from reportlab.graphics import renderPDF
 from io import BytesIO
 from datetime import datetime
 
+def safe_html(v):
+    if v is None:
+        return ""
+    return str(v).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
 DARK_NAVY = colors.HexColor("#0f172a")
 BLUE_PRIMARY = colors.HexColor("#3b82f6")
 LIGHT_BG = colors.HexColor("#f8fafc")
@@ -50,15 +55,23 @@ def generate_pdf(result: dict) -> bytes:
         bottomMargin=2*cm
     )
 
+
     styles = getSampleStyleSheet()
     story = []
+
+    res_name = safe_html(result.get('name', ''))
+    res_class = safe_html(result.get('class_level', ''))
+    res_stream = safe_html(result.get('stream', ''))
+    res_primary = safe_html(result.get('primary_type', ''))
+    res_secondary = safe_html(result.get('secondary_type', ''))
+    res_desc = safe_html(result.get('description', ''))
 
     # ── HEADER BANNER ──────────────────────────────────────────────────────────
     header_data = [[
         Paragraph("<font color='white' size='16'><b>Manzil</b></font>", styles["Normal"]),
         Paragraph(
             f"<font color='white' size='14'><b>Manzil Personality &amp; Career Report</b></font><br/>"
-            f"<font color='#94a3b8' size='10'>{result['name']} • {result['class_level']} • {result['stream']}</font><br/>"
+            f"<font color='#94a3b8' size='10'>{res_name} • {res_class} • {res_stream}</font><br/>"
             f"<font color='#94a3b8' size='9'>{datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')}</font>",
             styles["Normal"]
         ),
@@ -85,11 +98,11 @@ def generate_pdf(result: dict) -> bytes:
 
     overview_data = [[
         [
-            Paragraph(result["primary_type"], label_style),
+            Paragraph(res_primary, label_style),
             Spacer(1, 4),
-            Paragraph(f"Secondary: <b>{result['secondary_type']}</b>", secondary_style),
+            Paragraph(f"Secondary: <b>{res_secondary}</b>", secondary_style),
         ],
-        Paragraph(result["description"], body_style),
+        Paragraph(res_desc, body_style),
     ]]
     overview_table = Table(overview_data, colWidths=[4.5*cm, 12*cm])
     overview_table.setStyle(TableStyle([
@@ -122,6 +135,49 @@ def generate_pdf(result: dict) -> bytes:
     story.append(HRFlowable(width="100%", thickness=1, color=BORDER_COLOR))
     story.append(Spacer(1, 0.4*cm))
 
+    # ── TOP CAREER MATCHES ───────────────────────────────────────────────────
+    if result.get("primary_careers"):
+        story.append(Paragraph("Top 3 Career Matches", h2_style))
+        story.append(Spacer(1, 0.2*cm))
+
+        for i, career in enumerate(result["primary_careers"][:3]):
+            c_title = safe_html(career.get("title", ""))
+            c_salary = safe_html(career.get("salary", ""))
+            c_reason = safe_html(career.get("reason", ""))
+            c_stream = safe_html(career.get("stream", ""))
+
+            career_data = [[
+                Paragraph(f"<b>{i+1}. {c_title}</b>", ParagraphStyle("CareerTitle", parent=styles["Normal"], fontSize=12, textColor=DARK_NAVY)),
+                Paragraph(f"<b>{c_salary}</b>", ParagraphStyle("Salary", parent=styles["Normal"], fontSize=11, textColor=DARK_NAVY, alignment=TA_RIGHT)),
+            ]]
+            career_table = Table(career_data, colWidths=[10*cm, 6.5*cm])
+            career_table.setStyle(TableStyle([
+                ("LEFTPADDING", (0, 0), (0, 0), 10),
+                ("RIGHTPADDING", (-1, -1), (-1, -1), 10),
+                ("TOPPADDING", (0, 0), (-1, -1), 8),
+                ("BACKGROUND", (0, 0), (-1, -1), LIGHT_BG),
+            ]))
+
+            reason_para = Paragraph(c_reason, ParagraphStyle("Reason", parent=styles["Normal"], fontSize=9, leading=14, textColor=GRAY_TEXT, leftIndent=10, rightIndent=10))
+            stream_para = Paragraph(f"<font color='#3b82f6'><b>{c_stream}</b></font>",
+                                    ParagraphStyle("Stream", parent=styles["Normal"], fontSize=9, leftIndent=10, spaceBefore=4, spaceAfter=8))
+
+            block_data = [[career_table], [reason_para], [stream_para]]
+            block = Table(block_data, colWidths=[16.5*cm])
+            block.setStyle(TableStyle([
+                ("BOX", (0, 0), (-1, -1), 1, BORDER_COLOR),
+                ("LEFTPADDING", (0, 0), (-1, -1), 0),
+                ("RIGHTPADDING", (0, 0), (-1, -1), 0),
+                ("TOPPADDING", (0, 0), (-1, -1), 0),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 0),
+            ]))
+            story.append(block)
+            story.append(Spacer(1, 0.3*cm))
+
+        story.append(Spacer(1, 0.3*cm))
+        story.append(HRFlowable(width="100%", thickness=1, color=BORDER_COLOR))
+        story.append(Spacer(1, 0.4*cm))
+
     # ── DETAILED RECOMMENDATIONS CTA ──────────────────────────────────────────
     story.append(Paragraph("Your Personalized Career Recommendations", h2_style))
     story.append(Spacer(1, 0.2*cm))
@@ -139,8 +195,10 @@ def generate_pdf(result: dict) -> bytes:
 
     # ── ENTRANCE EXAMS ───────────────────────────────────────────────────────
     story.append(Paragraph("Entrance Exams to Target", h2_style))
-    for exam in result["entrance_exams"]:
-        story.append(Paragraph(f"• <b>{exam['name']}</b> — {exam['desc']}", body_style))
+    for exam in result.get("entrance_exams", []):
+        ex_name = safe_html(exam.get("name", ""))
+        ex_desc = safe_html(exam.get("desc", ""))
+        story.append(Paragraph(f"• <b>{ex_name}</b> — {ex_desc}", body_style))
         story.append(Spacer(1, 3))
 
     story.append(Spacer(1, 0.4*cm))
@@ -150,7 +208,7 @@ def generate_pdf(result: dict) -> bytes:
     # ── SKILLS TO BUILD ──────────────────────────────────────────────────────
     story.append(Paragraph("Skills to Build Now", h2_style))
 
-    skills = result["skills_to_build"]
+    skills = result.get("skills_to_build", [])
     # 3 column grid
     rows = []
     for i in range(0, len(skills), 3):
@@ -162,11 +220,13 @@ def generate_pdf(result: dict) -> bytes:
     for row in rows:
         cells = []
         for skill in row:
-            if skill["name"]:
+            if skill.get("name"):
+                sk_name = safe_html(skill["name"])
+                sk_desc = safe_html(skill["desc"])
                 cell = [
-                    Paragraph(f"<b>{skill['name']}</b>", ParagraphStyle("SkillTitle", parent=styles["Normal"], fontSize=10, textColor=DARK_NAVY, spaceBefore=0)),
+                    Paragraph(f"<b>{sk_name}</b>", ParagraphStyle("SkillTitle", parent=styles["Normal"], fontSize=10, textColor=DARK_NAVY, spaceBefore=0)),
                     Spacer(1, 3),
-                    Paragraph(skill["desc"], ParagraphStyle("SkillDesc", parent=styles["Normal"], fontSize=9, leading=13, textColor=GRAY_TEXT)),
+                    Paragraph(sk_desc, ParagraphStyle("SkillDesc", parent=styles["Normal"], fontSize=9, leading=13, textColor=GRAY_TEXT)),
                 ]
             else:
                 cell = [Paragraph("", styles["Normal"])]
@@ -187,7 +247,8 @@ def generate_pdf(result: dict) -> bytes:
 
     # ── CLOSING NOTE ─────────────────────────────────────────────────────────
     story.append(Paragraph("Closing Note", h2_style))
-    story.append(Paragraph(result["closing_note"], ParagraphStyle("Closing", parent=styles["Normal"], fontSize=10, leading=16, textColor=GRAY_TEXT)))
+    closing = safe_html(result.get("closing_note", ""))
+    story.append(Paragraph(closing, ParagraphStyle("Closing", parent=styles["Normal"], fontSize=10, leading=16, textColor=GRAY_TEXT)))
 
     story.append(Spacer(1, 1*cm))
 

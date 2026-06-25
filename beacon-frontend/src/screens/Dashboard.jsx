@@ -226,6 +226,7 @@ export default function Dashboard({ userName }) {
   const [recs, setRecs] = useState(null)          // null=loading, []=empty
   const [recsGated, setRecsGated] = useState(false)   // show gate screen
   const [recsError, setRecsError] = useState(null)
+  const [expandedCards, setExpandedCards] = useState({})
   const [profile, setProfile] = useState(null)
   const [profileLoading, setProfileLoading] = useState(hasProfileToken)
   const [profileError, setProfileError] = useState(null)
@@ -552,7 +553,7 @@ export default function Dashboard({ userName }) {
               const rankColors = ['#00d4ff', '#8b5cf6', '#ff006e', '#00ff88', '#f59e0b'];
               const accent = rankColors[i % rankColors.length];
               return (
-                <GlassCard key={i} style={{ borderLeft: `3px solid ${accent}`, position: 'relative', overflow: 'hidden' }}>
+                 <GlassCard key={i} style={{ borderLeft: `3px solid ${accent}`, position: 'relative', overflow: 'hidden' }}>
                   {/* Subtle glow overlay at top */}
                   <div style={{
                     position: 'absolute', top: 0, left: 0, right: 0, height: 60,
@@ -581,10 +582,17 @@ export default function Dashboard({ userName }) {
                   <p style={{ margin: '12px 0 0', color: 'var(--ft-text-secondary)', fontSize: '0.87rem', lineHeight: 1.65, position: 'relative' }}>
                     {career.reason}
                   </p>
-                  <div style={{ marginTop: 16, display: 'flex', justifyContent: 'flex-end', position: 'relative', zIndex: 2 }}>
+                  <div style={{ marginTop: 16, display: 'flex', gap: 10, position: 'relative', zIndex: 2 }}>
                     <button
                       className="ft-button-secondary"
-                      style={{ padding: '8px 16px', fontSize: '0.85rem', width: '100%', cursor: 'pointer' }}
+                      style={{ padding: '8px 12px', fontSize: '0.82rem', flex: 1, cursor: 'pointer' }}
+                      onClick={() => setExpandedCards(prev => ({ ...prev, [i]: !prev[i] }))}
+                    >
+                      {expandedCards[i] ? 'Hide Info ▲' : 'About Career ▼'}
+                    </button>
+                    <button
+                      className="ft-button-primary"
+                      style={{ padding: '8px 12px', fontSize: '0.82rem', flex: 1.2, cursor: 'pointer' }}
                       onClick={() => {
                         window.history.pushState({}, '', `/expert?career=${encodeURIComponent(career.title)}`);
                         window.dispatchEvent(new PopStateEvent('popstate'));
@@ -593,6 +601,41 @@ export default function Dashboard({ userName }) {
                       Consult Advisor →
                     </button>
                   </div>
+                  {expandedCards[i] && (
+                    <div style={{ 
+                      marginTop: 16, 
+                      padding: 12, 
+                      borderRadius: 8, 
+                      background: 'rgba(255,255,255,0.02)', 
+                      border: '1.5px solid var(--ft-glass-border)',
+                      fontSize: '0.8rem',
+                      animation: 'ft-fade-in 0.3s ease'
+                    }}>
+                      <div style={{ marginBottom: 8, color: 'var(--ft-text-primary)', lineHeight: 1.45 }}>
+                        <strong>About the Role:</strong> {career.description || career.reason}
+                      </div>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px 12px', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 8, marginTop: 8 }}>
+                        <div>
+                          <span style={{ color: 'var(--ft-text-secondary)', opacity: 0.6, fontSize: '0.7rem', display: 'block' }}>Personality Type</span>
+                          <span style={{ color: 'var(--ft-neon-cyan)', fontWeight: 700 }}>
+                            {career.riasec_primary ? `${career.riasec_primary} / ${career.riasec_secondary}` : 'Standard'}
+                          </span>
+                        </div>
+                        <div>
+                          <span style={{ color: 'var(--ft-text-secondary)', opacity: 0.6, fontSize: '0.7rem', display: 'block' }}>Sector Type</span>
+                          <span style={{ color: '#00ff88', fontWeight: 700, textTransform: 'capitalize' }}>{career.sector || 'Private/Public'}</span>
+                        </div>
+                        <div>
+                          <span style={{ color: 'var(--ft-text-secondary)', opacity: 0.6, fontSize: '0.7rem', display: 'block' }}>Relocation Required</span>
+                          <span style={{ color: '#f59e0b', fontWeight: 700 }}>{career.requires_relocation ? 'Yes' : 'No'}</span>
+                        </div>
+                        <div>
+                          <span style={{ color: 'var(--ft-text-secondary)', opacity: 0.6, fontSize: '0.7rem', display: 'block' }}>Education Cost</span>
+                          <span style={{ color: 'var(--ft-neon-purple)', fontWeight: 700, textTransform: 'capitalize' }}>{career.cost_level || 'Medium'}</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </GlassCard>
               );
             })}

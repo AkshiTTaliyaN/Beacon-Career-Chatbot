@@ -5,7 +5,26 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import ManzilHeader from '../components/ManzilHeader';
-import { GlassCard } from '../components/FuturisticCharts'; 2efc1e5 (update cohort range to Class 9-12 and modernize ReportPage styling)
+import { getCareerBannerImage } from '../utils/bannerImage';
+import { GlassCard } from '../components/FuturisticCharts';
+import {
+  Download,
+  Briefcase,
+  GraduationCap,
+  Target,
+  Users,
+  Compass,
+  AlertTriangle,
+  CheckCircle2,
+  Calendar,
+  MapPin,
+  BookOpen,
+  TrendingUp,
+  Heart,
+  FileText,
+  Sparkles,
+  Brain,
+} from "lucide-react";
 
 import { API as BEACON_API, APTITUDE_URL } from '../config';
 
@@ -34,6 +53,198 @@ const PERSONALITY_DESCS = {
 };
 
 
+
+const TRAITS = {
+  Investigative: ["Deeply analytical and logical", "Naturally curious about how things work", "Prefers working independently on complex problems", "Drawn to research, data, and evidence", "Thinks carefully before acting", "Values knowledge and intellectual challenge"],
+  Realistic: ["Practical and results-oriented", "Prefers hands-on work over theory", "Mechanically and spatially aware", "Reliable and straightforward", "Comfortable working with tools and systems", "Values concrete, tangible outcomes"],
+  Artistic: ["Highly imaginative and original", "Expresses ideas through creative mediums", "Thrives with freedom and minimal structure", "Emotionally perceptive and sensitive", "Drawn to aesthetics, design, and storytelling", "Values self-expression and creativity"],
+  Social: ["Empathetic and people-oriented", "Natural communicator and listener", "Motivated by helping and supporting others", "Works well in teams and collaborative settings", "Values relationships and human connection", "Finds meaning in making a difference"],
+  Enterprising: ["Ambitious and goal-driven", "Natural leader and persuader", "Comfortable taking initiative and risks", "Energised by competition and challenge", "Strong communicator and negotiator", "Values achievement, influence, and growth"],
+  Conventional: ["Detail-oriented and precise", "Thrives in structured, organised environments", "Reliable, consistent, and methodical", "Strong with numbers, data, and systems", "Follows through on commitments", "Values accuracy, order, and efficiency"],
+};
+
+const STRENGTHS = {
+  Investigative: ["Deep focus and concentration", "Strong problem-solving ability", "Independent thinking and self-direction"],
+  Realistic: ["Practical execution and follow-through", "Technical and mechanical aptitude", "Dependability and consistency"],
+  Artistic: ["Original thinking and creative vision", "Strong aesthetic sensibility", "Ability to communicate ideas vividly"],
+  Social: ["Emotional intelligence and empathy", "Strong interpersonal communication", "Natural ability to motivate and support others"],
+  Enterprising: ["Leadership and decisiveness", "Persuasion and influencing ability", "High drive and resilience under pressure"],
+  Conventional: ["Precision and attention to detail", "Strong organisational ability", "Consistency and reliability in execution"],
+};
+
+const CHALLENGES = {
+  Investigative: ["Can overthink decisions", "May struggle with routine or repetitive tasks"],
+  Realistic: ["May find abstract or theoretical tasks frustrating", "Can be resistant to change or new ideas"],
+  Artistic: ["Unstructured environments can lead to inconsistency", "May find highly rigid or rule-bound work draining"],
+  Social: ["Can take on too much for others at personal cost", "May avoid necessary conflict or difficult decisions"],
+  Enterprising: ["Risk of moving too fast without enough analysis", "Can struggle with patience in slow-moving environments"],
+  Conventional: ["May resist ambiguity or open-ended tasks", "Can find highly creative or unstructured roles uncomfortable"],
+};
+
+const WORK_ENV = {
+  Investigative: "You thrive in environments that reward curiosity and independent thinking — research labs, tech companies, universities, or data-driven organisations. You need intellectual challenge, freedom to explore ideas, and colleagues who value depth over speed.",
+  Realistic: "You perform best in structured, practical environments — engineering firms, workshops, construction, manufacturing, or field-based roles. You need clear outcomes, hands-on work, and environments where you can see the results of your effort.",
+  Artistic: "You flourish in creative, flexible environments — design studios, media companies, startups, or cultural organisations. You need autonomy, creative freedom, and space to experiment without excessive bureaucracy.",
+  Social: "You do best in people-centred environments — schools, hospitals, NGOs, counselling centres, or community organisations. You need meaningful human interaction, collaborative teams, and a sense that your work is making a real difference.",
+  Enterprising: "You are energised by fast-paced, goal-oriented environments — startups, sales organisations, consulting firms, or leadership roles in any sector. You need challenge, autonomy, and the ability to influence decisions.",
+  Conventional: "You excel in structured, well-organised environments — banks, accounting firms, government offices, or large corporations with clear processes. You need clear expectations, defined roles, and environments where precision is valued.",
+};
+
+const PARENT_NOTES = {
+  Investigative: "Your child is a deep thinker — naturally curious, analytical, and motivated by understanding how things work. They will do best in careers that reward intellectual depth and independent problem solving. Support them by encouraging questions, providing access to books, research articles, and projects. Avoid pushing them toward fast-paced sales or routine clerical roles — they will likely feel unfulfilled. Careers in science, research, technology, and medicine align with their natural strengths.",
+  Realistic: "Your child is practical and hands-on — they learn best by doing, not by reading or theorising. They thrive when working with tools, systems, and tangible outcomes. Support them with workshops, technical hobbies, or mechanical projects. Engineering, technical fields, and applied sciences suit their personality. Avoid pressuring them into highly abstract or people-heavy roles unless they show genuine interest.",
+  Artistic: "Your child is creative and expressive — they need freedom to imagine, design, and create. Rigid structures and rule-bound environments will drain them. Support them by encouraging creative outlets and respecting their need for self-expression. Careers in design, media, architecture, and creative technology suit them well. India's creative economy is growing rapidly — this is a legitimate, financially viable path.",
+  Social: "Your child is empathetic and people-oriented — they are energised by helping others and building relationships. They will find meaning in careers that involve teaching, healing, counselling, or community work. Support them by valuing emotional intelligence as a real skill. Careers in education, healthcare, psychology, and social work suit them deeply. They may need encouragement to also pursue their own goals, not just others'.",
+  Enterprising: "Your child is ambitious and naturally driven to lead. They thrive in challenging, fast-paced environments where they can take initiative and influence others. Support them by encouraging leadership roles, public speaking, and business thinking. Careers in business, law, entrepreneurship, and management suit them. They may take risks — guide them, but resist the urge to over-control their decisions.",
+  Conventional: "Your child is precise, organised, and methodical — they excel at structure, accuracy, and consistency. They thrive in stable, well-defined environments. Support them by valuing their reliability and attention to detail. Careers in finance, accounting, administration, and data management align with their strengths. India has strong, secure career paths in these areas — your child is well-suited to them.",
+};
+
+const ACTION_PLAN = {
+  Investigative: [
+    { phase: "Class 11 (Now)", actions: ["Strengthen mathematics and analytical subjects", "Start learning Python or basic programming", "Read scientific articles and journals weekly", "Join science Olympiads or research clubs"] },
+    { phase: "Class 12", actions: ["Begin JEE/NEET/IISER prep alongside boards", "Build small data or research projects", "Apply for summer research programs (KVPI, IISER, IIT internships)", "Strengthen English for international applications"] },
+    { phase: "After Class 12", actions: ["Pursue B.Tech, BSc Research, or MBBS based on stream", "Engage in research from year one of college", "Consider international research opportunities", "Build a profile of papers, projects, or internships"] },
+  ],
+  Realistic: [
+    { phase: "Class 11 (Now)", actions: ["Focus on physics, mathematics, and applied subjects", "Take up hands-on hobbies (electronics, mechanics, building)", "Visit workshops, factories, or engineering exhibitions", "Try AutoCAD or basic CAD software"] },
+    { phase: "Class 12", actions: ["Start JEE preparation seriously", "Build small physical or technical projects", "Visit IITs/NITs on open day if possible", "Develop strong drawing and spatial reasoning"] },
+    { phase: "After Class 12", actions: ["Pursue B.Tech, Diploma, or applied engineering", "Take internships at engineering firms", "Build a portfolio of completed technical projects", "Consider specialisations like robotics, automotive, or aerospace"] },
+  ],
+  Artistic: [
+    { phase: "Class 11 (Now)", actions: ["Build a portfolio of your creative work", "Learn one design tool (Figma, Photoshop, or Canva)", "Take art, music, writing, or photography classes", "Follow creative professionals on social media for inspiration"] },
+    { phase: "Class 12", actions: ["Prepare for NID, NIFT, or other design entrance exams", "Build a strong, organised digital portfolio", "Attempt small creative freelance projects", "Read design and creative industry publications"] },
+    { phase: "After Class 12", actions: ["Pursue B.Des, BFA, or Mass Communication degrees", "Build a professional online portfolio (Behance, Dribbble)", "Take internships at creative studios or media houses", "Develop a strong personal brand and online presence"] },
+  ],
+  Social: [
+    { phase: "Class 11 (Now)", actions: ["Volunteer with a local NGO or community group", "Develop public speaking and communication skills", "Read introductory psychology or sociology books", "Join debate, MUN, or peer counselling activities"] },
+    { phase: "Class 12", actions: ["Prepare for CUET if pursuing humanities", "Begin shadowing teachers, doctors, or counsellors", "Maintain a journal of your volunteering experiences", "Apply for leadership roles in school"] },
+    { phase: "After Class 12", actions: ["Pursue Psychology, Education, Social Work, or Medicine", "Complete internships in counselling or NGO settings", "Build a track record of impact in community work", "Consider higher studies in clinical or counselling psychology"] },
+  ],
+  Enterprising: [
+    { phase: "Class 11 (Now)", actions: ["Read business case studies and entrepreneur biographies", "Take leadership roles in school clubs or events", "Develop public speaking and presentation skills", "Start a small project — selling, organising, or building"] },
+    { phase: "Class 12", actions: ["Prepare for IPM, CLAT, or commerce entrance exams", "Build a strong CV with leadership experience", "Start a small entrepreneurial side project", "Develop financial literacy and business reading"] },
+    { phase: "After Class 12", actions: ["Pursue BBA, B.Com, LLB, or related fields", "Join entrepreneurship cells and business clubs", "Take internships at startups or consulting firms", "Build your network early through LinkedIn and events"] },
+  ],
+  Conventional: [
+    { phase: "Class 11 (Now)", actions: ["Strengthen mathematics, accounting, and economics", "Master MS Excel and basic spreadsheet skills", "Develop strong organisational and time-management habits", "Read business newspapers (Mint, Economic Times)"] },
+    { phase: "Class 12", actions: ["Prepare for CA Foundation or commerce entrance exams", "Build accuracy in numerical and analytical work", "Develop typing speed and digital literacy", "Maintain strong academic discipline"] },
+    { phase: "After Class 12", actions: ["Pursue B.Com, CA, CFA, or BBA in Finance", "Take internships at audit firms or banks", "Build certifications in finance and data analysis", "Aim for stable, professional career tracks early"] },
+  ],
+};
+
+const ADMISSION_PROCESS = {
+  PCM: { timeline: "Class 12 final year — apply Oct–Mar; exams Jan–June; counselling June–Aug.", docs: "Class 10 & 12 marksheets, JEE scorecard, ID proof, photos, category certificate (if applicable).", cutoffs: "JEE Main: 90+ percentile for NITs, 95+ for IIITs. JEE Advanced: rank under 10,000 for IITs." },
+  PCB: { timeline: "Class 12 final year — apply Dec–Feb; NEET in May; counselling July–Sep.", docs: "Class 10 & 12 marksheets, NEET scorecard, ID proof, photos, category certificate (if applicable).", cutoffs: "NEET: 600+ for government MBBS in most states, 720 for AIIMS Delhi." },
+  Commerce: { timeline: "Class 12 final year — CUET in May, CA Foundation in May/Nov, IPMAT in May.", docs: "Class 10 & 12 marksheets, entrance exam scorecard, ID proof, photos.", cutoffs: "CUET: 95+ percentile for top DU colleges. CA Foundation: 50% aggregate, 40% per subject." },
+  Humanities: { timeline: "Class 12 final year — CUET in May, CLAT in Dec, NID/NIFT in Jan.", docs: "Class 10 & 12 marksheets, entrance exam scorecard, portfolio (for design), ID proof.", cutoffs: "CUET: 95+ percentile for top humanities colleges. CLAT: rank under 500 for NLU Bangalore." },
+};
+
+function getExams(stream, primaryCode) {
+  const examMap = {
+    PCM: [
+      { name: "JEE Main", desc: "NITs and IIITs for engineering" },
+      { name: "JEE Advanced", desc: "IITs" },
+      { name: "BITSAT", desc: "BITS Pilani" },
+      { name: "IISER Aptitude Test", desc: "Research-focused BSc / MSc programs" },
+    ],
+    PCB: [
+      { name: "NEET UG", desc: "MBBS, BDS, BAMS across India" },
+      { name: "AIIMS", desc: "Top medical institutions" },
+      { name: "JIPMER", desc: "Government medical college, Puducherry" },
+      { name: "IISER Aptitude Test", desc: "Research-focused BSc / MSc programs" },
+    ],
+    Commerce: [
+      { name: "CA Foundation", desc: "Chartered Accountancy pathway" },
+      { name: "CLAT", desc: "Law colleges for commerce+law combo" },
+      { name: "CUET", desc: "Central Universities for BCom, BBA" },
+      { name: "IPM (IIM)", desc: "Integrated MBA program at IIMs" },
+    ],
+    Humanities: [
+      { name: "CLAT", desc: "National Law Schools" },
+      { name: "CUET", desc: "Central Universities for BA programs" },
+      { name: "NID DAT", desc: "National Institute of Design" },
+      { name: "NIFT Entrance", desc: "Fashion and design colleges" },
+    ],
+  };
+  let normalizedStream = "PCM";
+  const lower = (stream || "").toLowerCase();
+  if (lower.includes("pcb")) normalizedStream = "PCB";
+  else if (lower.includes("pcm")) normalizedStream = "PCM";
+  else if (lower.includes("comm") || lower.includes("commerce")) normalizedStream = "Commerce";
+  else if (lower.includes("arts") || lower.includes("humanities") || lower.includes("liberal")) normalizedStream = "Humanities";
+
+  return examMap[normalizedStream] || examMap["PCM"];
+}
+
+function getSkills(primaryCode, secondaryCode) {
+  const skillMap = {
+    I: [
+      { name: "Python programming", desc: "Start with NPTEL or Coursera beginner course and build small projects." },
+      { name: "Mathematics", desc: "Strengthen calculus and statistics; focus on Class 12 topics and problem solving." },
+      { name: "Logical reasoning", desc: "Practice previous year JEE problems and timed reasoning tests." },
+      { name: "Data analysis basics", desc: "Try Google Sheets or Excel projects with real datasets." },
+      { name: "Scientific reading", desc: "Read one article per week on ArXiv, ScienceDaily, or popular science outlets." },
+    ],
+    R: [
+      { name: "CAD / Technical drawing", desc: "Learn AutoCAD basics or use free tools like TinkerCAD." },
+      { name: "Basic electronics", desc: "Explore Arduino or Raspberry Pi for hands-on projects." },
+      { name: "Physics applications", desc: "Focus on mechanics, electricity, and real-world problem sets." },
+      { name: "Workshop skills", desc: "Join a maker space or school lab to build physical projects." },
+      { name: "Mathematics", desc: "Build strong algebra and trigonometry foundations." },
+    ],
+    A: [
+      { name: "Design tools", desc: "Start with Canva, then move to Figma or Adobe XD for UI/UX." },
+      { name: "Creative writing", desc: "Write short stories or opinion pieces to develop voice and clarity." },
+      { name: "Digital art", desc: "Explore Procreate or Krita for digital illustration fundamentals." },
+      { name: "Photography basics", desc: "Study composition, lighting, and editing using free tools." },
+      { name: "Portfolio building", desc: "Maintain a digital portfolio of your best creative work." },
+    ],
+    S: [
+      { name: "Communication skills", desc: "Join a debate club or practise public speaking regularly." },
+      { name: "Psychology basics", desc: "Read introductory texts on human behaviour and motivation." },
+      { name: "Volunteering", desc: "Engage in community service to build empathy and leadership." },
+      { name: "Active listening", desc: "Practise reflective listening in conversations and group settings." },
+      { name: "Education tools", desc: "Explore tutoring peers to develop teaching skills early." },
+    ],
+    E: [
+      { name: "Business basics", desc: "Read case studies on Indian startups and entrepreneurs." },
+      { name: "Public speaking", desc: "Join MUN, debate, or school council to build leadership." },
+      { name: "Negotiation skills", desc: "Practise decision-making through business simulations and games." },
+      { name: "Financial literacy", desc: "Learn personal finance basics: budgeting, savings, and investing." },
+      { name: "Networking", desc: "Connect with mentors and professionals on LinkedIn." },
+    ],
+    C: [
+      { name: "MS Excel / Spreadsheets", desc: "Master formulas, pivot tables, and data organisation." },
+      { name: "Accounting basics", desc: "Study debit/credit, balance sheets, and financial statements." },
+      { name: "Typing and organisation", desc: "Build fast, accurate typing and strong file management habits." },
+      { name: "Data entry tools", desc: "Learn database fundamentals using Airtable or Google Sheets." },
+      { name: "Attention to detail", desc: "Practise proofreading documents and spotting errors in data." },
+    ],
+  };
+  const primary = primaryCode || "I";
+  const secondary = secondaryCode || "R";
+  const skills = [...(skillMap[primary] || skillMap["I"])].slice(0, 3);
+  const secondarySkills = skillMap[secondary] || [];
+  if (secondarySkills.length > 0) {
+    skills.push(secondarySkills[0]);
+    if (secondarySkills.length > 3) {
+      skills.push(secondarySkills[3]);
+    }
+  }
+  return skills.slice(0, 5);
+}
+
+function getClosingNote(primaryName) {
+  const notes = {
+    Investigative: "Your Investigative personality means you thrive when given complex problems to solve. The careers ahead of you are intellectually rich and financially rewarding. Start building your analytical skills now — learn Python, strengthen your mathematics, and practise real-world data projects. With steady focus and curiosity, the right path will become clear. Share this report with your parents and teachers to plan the next steps together.",
+    Realistic: "Your Realistic nature means you are built to create, build, and solve with your hands and mind. Careers in engineering and technology reward exactly the kind of focused, practical thinking you bring. Start with hands-on projects, build your technical foundation, and explore workshops or labs near you. Share this report with your parents and teachers to plan together.",
+    Artistic: "Your Artistic personality is a genuine strength in today's creative economy. Design, media, and content careers are growing fast in India. Start building a portfolio now — even small projects matter. Share this report with your teachers and parents so they understand the exciting paths available to you.",
+    Social: "Your Social personality is your superpower. People-focused careers in education, counselling, healthcare, and social work are both meaningful and in demand. Start practising communication and leadership skills today. Share this report with your parents and teachers to explore the best pathway for you.",
+    Enterprising: "Your Enterprising nature means you are made to lead, influence, and build. Business and law careers reward the ambition and drive you naturally have. Start practising leadership and financial thinking today. Share this report with your parents and teachers to map out your journey.",
+    Conventional: "Your Conventional strength means you excel at organisation, accuracy, and structured thinking. Finance, accounting, and administrative careers value exactly these qualities. Start building your spreadsheet and numeracy skills today. Share this report with your parents and teachers to plan your path forward.",
+  };
+  return notes[primaryName] || "Your personality profile points toward a strong and rewarding career path. Share this report with your parents and teachers to plan the next steps together.";
+}
 
 function getToken() {
   return localStorage.getItem('beacon_token');
@@ -242,18 +453,10 @@ export default function ReportPage() {
           <h1 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: 'var(--ft-text-primary)' }}>Manzil Career Report</h1>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
->>>>>>> 2efc1e5 (update cohort range to Class 9-12 and modernize ReportPage styling)
           <button
             type="button"
             className="manzil-header-btn"
             onClick={() => window.print()}
-<<<<<<< HEAD
-          >
-            ⬇ Download PDF
-          </button>
-        )}
-      />
-=======
             className="ft-button-primary"
             style={{ padding: '0.5rem 1.2rem', fontSize: '0.85rem' }}
           >
@@ -261,7 +464,6 @@ export default function ReportPage() {
           </button>
         </div>
       </header>
->>>>>>> 2efc1e5 (update cohort range to Class 9-12 and modernize ReportPage styling)
 
       <div style={{ maxWidth: 960, margin: '2rem auto', padding: '0 1rem', width: '100%' }}>
 
@@ -541,32 +743,194 @@ export default function ReportPage() {
               </>
             )}
 
-            {/* ── Next steps nudge ─────────────────────────────────────── */}
+            {/* ── Personality Traits ── */}
             <section style={{ marginBottom: 32 }}>
-              <GlassCard elevated style={{ borderLeft: `4px solid ${primaryColor}`, background: 'rgba(255, 255, 255, 0.02)', padding: '2rem' }}>
-                <h3 style={{ color: '#00d4ff', margin: '0 0 8px 0', fontSize: '1.25rem', fontWeight: 800 }}>
-                  ✨ See your personalised career matches
-                </h3>
-                <p style={{ color: 'rgba(255, 255, 255, 0.8)', margin: '0 0 16px 0', lineHeight: 1.65 }}>
-                  Your RIASEC scores have been saved to your profile. Head back to the dashboard to see
-                  your top 10 career recommendations — matched using your personality, subjects, and goals.
+              <SectionHeading title="Your Personality Traits" subtitle={`People with a ${primaryName} personality type typically show these characteristics:`} />
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+                {(TRAITS[primaryName] || []).map((trait, i) => (
+                  <div key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 18px', borderRadius: 30, background: 'rgba(255,255,255,0.03)', border: '1.5px solid var(--ft-glass-border)', fontSize: '0.85rem', color: 'var(--ft-text-primary)' }}>
+                    <span style={{ width: 8, height: 8, borderRadius: '50%', background: primaryColor }} />
+                    {trait}
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <hr style={{ border: 'none', borderTop: '1px solid rgba(255, 255, 255, 0.08)', margin: '2rem 0' }} />
+
+            {/* ── Strengths & Challenges ── */}
+            <section style={{ marginBottom: 32 }}>
+              <SectionHeading title="Strengths & Challenges" />
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
+                <GlassCard glowColor="green" style={{ padding: 20, borderTop: `3px solid ${primaryColor}` }}>
+                  <h3 style={{ margin: '0 0 16px', fontSize: '1.05rem', display: 'flex', alignItems: 'center', gap: 8, color: 'var(--ft-text-primary)' }}>
+                    <CheckCircle2 size={18} style={{ color: '#00ff88' }} /> Your Strengths
+                  </h3>
+                  <ul style={{ paddingLeft: 20, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                    {(STRENGTHS[primaryName] || []).map((s, i) => <li key={i} style={{ color: 'var(--ft-text-secondary)', fontSize: '0.87rem' }}>{s}</li>)}
+                  </ul>
+                </GlassCard>
+                <GlassCard glowColor="magenta" style={{ padding: 20, borderTop: `3px solid ${primaryColor}` }}>
+                  <h3 style={{ margin: '0 0 16px', fontSize: '1.05rem', display: 'flex', alignItems: 'center', gap: 8, color: 'var(--ft-text-primary)' }}>
+                    <AlertTriangle size={18} style={{ color: '#ff006e' }} /> Potential Challenges
+                  </h3>
+                  <ul style={{ paddingLeft: 20, margin: 0, display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 12 }}>
+                    {(CHALLENGES[primaryName] || []).map((c, i) => <li key={i} style={{ color: 'var(--ft-text-secondary)', fontSize: '0.87rem' }}>{c}</li>)}
+                  </ul>
+                  <p style={{ margin: 0, color: 'var(--ft-text-muted)', fontSize: '0.78rem', fontStyle: 'italic', lineHeight: 1.4 }}>
+                    These are natural tendencies, not fixed limitations. Awareness is the first step to growth.
+                  </p>
+                </GlassCard>
+              </div>
+            </section>
+
+            <hr style={{ border: 'none', borderTop: '1px solid rgba(255, 255, 255, 0.08)', margin: '2rem 0' }} />
+
+            {/* ── Ideal Work Environment ── */}
+            <section style={{ marginBottom: 32 }}>
+              <SectionHeading title="Ideal Work Environment" />
+              <GlassCard glowColor="cyan" style={{ padding: '20px 24px', display: 'flex', alignItems: 'flex-start', gap: 14 }}>
+                <MapPin size={22} style={{ color: 'var(--ft-neon-cyan)', marginTop: 2, flexShrink: 0 }} />
+                <p style={{ margin: 0, color: 'var(--ft-text-secondary)', fontSize: '0.92rem', lineHeight: 1.6 }}>
+                  {WORK_ENV[primaryName] || ""}
                 </p>
-                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                  <button
-                    onClick={() => { window.history.pushState({}, '', '/recommendations'); window.dispatchEvent(new PopStateEvent('popstate')); }}
-                    className="ft-button-primary"
-                    style={{ padding: '0.75rem 1.5rem', borderRadius: 9, fontWeight: 700, cursor: 'pointer', fontSize: '0.95rem' }}
-                  >
-                    View career matches →
-                  </button>
-                  <button
-                    onClick={() => { window.history.pushState({}, '', '/dashboard'); window.dispatchEvent(new PopStateEvent('popstate')); }}
-                    className="ft-button-secondary"
-                    style={{ padding: '0.75rem 1.5rem', borderRadius: 9, fontWeight: 700, cursor: 'pointer', fontSize: '0.95rem' }}
-                  >
-                    Go to Dashboard
-                  </button>
+              </GlassCard>
+            </section>
+
+            <hr style={{ border: 'none', borderTop: '1px solid rgba(255, 255, 255, 0.08)', margin: '2rem 0' }} />
+
+            {/* ── Entrance Exams ── */}
+            <section style={{ marginBottom: 32 }}>
+              <SectionHeading title="Entrance Exams to Target" subtitle={`Based on your stream (${profile?.stream?.toUpperCase() || 'Science'}) and career direction, these are the key exams to prepare for:`} />
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16 }}>
+                {(getExams(profile?.stream || 'pcm', sortedScores[0]?.code) || []).map((exam, i) => (
+                  <GlassCard key={i} glowColor="cyan" style={{ padding: 18, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--ft-neon-cyan)' }}>
+                      <Target size={16} />
+                      <h4 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 800 }}>{exam.name}</h4>
+                    </div>
+                    <p style={{ margin: 0, color: 'var(--ft-text-secondary)', fontSize: '0.82rem', lineHeight: 1.5 }}>{exam.desc}</p>
+                  </GlassCard>
+                ))}
+              </div>
+            </section>
+
+            <hr style={{ border: 'none', borderTop: '1px solid rgba(255, 255, 255, 0.08)', margin: '2rem 0' }} />
+
+            {/* ── Admission Process ── */}
+            <section style={{ marginBottom: 32 }}>
+              <SectionHeading title="Navigating the Admission Process" subtitle={`Here is what the admission journey looks like for your stream:`} />
+              <GlassCard glowColor="purple" style={{ padding: 22 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+                  <div>
+                    <h4 style={{ margin: '0 0 6px', fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: 8, color: 'var(--ft-text-primary)' }}>
+                      <Calendar size={16} style={{ color: 'var(--ft-neon-purple)' }} /> Timeline
+                    </h4>
+                    <p style={{ margin: 0, color: 'var(--ft-text-secondary)', fontSize: '0.88rem', lineHeight: 1.5 }}>
+                      {(ADMISSION_PROCESS[profile?.stream?.toUpperCase()] || ADMISSION_PROCESS["PCM"]).timeline}
+                    </p>
+                  </div>
+                  <div>
+                    <h4 style={{ margin: '0 0 6px', fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: 8, color: 'var(--ft-text-primary)' }}>
+                      <FileText size={16} style={{ color: 'var(--ft-neon-purple)' }} /> Documents Needed
+                    </h4>
+                    <p style={{ margin: 0, color: 'var(--ft-text-secondary)', fontSize: '0.88rem', lineHeight: 1.5 }}>
+                      {(ADMISSION_PROCESS[profile?.stream?.toUpperCase()] || ADMISSION_PROCESS["PCM"]).docs}
+                    </p>
+                  </div>
+                  <div>
+                    <h4 style={{ margin: '0 0 6px', fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: 8, color: 'var(--ft-text-primary)' }}>
+                      <TrendingUp size={16} style={{ color: 'var(--ft-neon-purple)' }} /> Typical Cutoffs
+                    </h4>
+                    <p style={{ margin: 0, color: 'var(--ft-text-secondary)', fontSize: '0.88rem', lineHeight: 1.5 }}>
+                      {(ADMISSION_PROCESS[profile?.stream?.toUpperCase()] || ADMISSION_PROCESS["PCM"]).cutoffs}
+                    </p>
+                  </div>
                 </div>
+              </GlassCard>
+            </section>
+
+            <hr style={{ border: 'none', borderTop: '1px solid rgba(255, 255, 255, 0.08)', margin: '2rem 0' }} />
+
+            {/* ── Action Plan ── */}
+            <section style={{ marginBottom: 32 }}>
+              <SectionHeading title="Your Personalised Action Plan" subtitle={`A step-by-step roadmap from now until college — built around your ${primaryName} personality:`} />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                {(ACTION_PLAN[primaryName] || []).map((phase, i) => (
+                  <GlassCard
+                    key={i}
+                    glowColor="cyan"
+                    style={{ padding: 18 }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, borderBottom: '1px solid rgba(255, 255, 255, 0.08)', paddingBottom: 10, marginBottom: 12 }}>
+                      <Compass size={18} style={{ color: primaryColor }} />
+                      <h4 style={{ margin: 0, fontSize: 15, fontWeight: 800, color: 'var(--ft-text-primary)' }}>{phase.phase}</h4>
+                    </div>
+                    <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                      {(phase.actions || []).map((it, idx) => (
+                        <li key={idx} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                          <span style={{ width: 8, height: 8, borderRadius: '50%', background: primaryColor, marginTop: 6, flexShrink: 0 }} />
+                          <span style={{ fontSize: 13.5, color: 'var(--ft-text-secondary)', lineHeight: 1.5 }}>{it}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </GlassCard>
+                ))}
+              </div>
+            </section>
+
+            <hr style={{ border: 'none', borderTop: '1px solid rgba(255, 255, 255, 0.08)', margin: '2rem 0' }} />
+
+            {/* ── Skills to Build ── */}
+            <section style={{ marginBottom: 32 }}>
+              <SectionHeading title="Skills to Build Now" subtitle="Start developing these skills before Class 12 ends — they will strengthen both your applications and your confidence:" />
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
+                {(getSkills(sortedScores[0]?.code, sortedScores[1]?.code) || []).map((skill, i) => (
+                  <GlassCard key={i} glowColor="purple" style={{ padding: 18, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--ft-neon-purple)' }}>
+                      <BookOpen size={16} />
+                      <h4 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 800 }}>{skill.name}</h4>
+                    </div>
+                    <p style={{ margin: 0, color: 'var(--ft-text-secondary)', fontSize: '0.82rem', lineHeight: 1.5 }}>{skill.desc}</p>
+                  </GlassCard>
+                ))}
+              </div>
+            </section>
+
+            <hr style={{ border: 'none', borderTop: '1px solid rgba(255, 255, 255, 0.08)', margin: '2rem 0' }} />
+
+            {/* ── Parent Section ── */}
+            <section style={{ marginBottom: 32 }}>
+              <SectionHeading title="For Your Parents" subtitle="A clear, jargon-free note to share with your parents — to help them understand your personality type and how to support you." />
+              <GlassCard glowColor="green" style={{ padding: 22, borderLeft: `4px solid ${primaryColor}` }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+                  <Heart size={20} style={{ color: primaryColor }} />
+                  <h4 style={{ margin: 0, fontSize: '1rem', fontWeight: 800, color: 'var(--ft-text-primary)' }}>
+                    A note for parents of a <strong>{primaryName}</strong> child
+                  </h4>
+                </div>
+                <p style={{ color: 'var(--ft-text-secondary)', fontSize: '0.9rem', lineHeight: 1.6, margin: '0 0 16px 0' }}>
+                  {PARENT_NOTES[primaryName] || ""}
+                </p>
+                <p style={{ margin: 0, color: 'var(--ft-text-muted)', fontSize: '0.78rem', fontStyle: 'italic', borderTop: '1px solid rgba(255, 255, 255, 0.06)', paddingTop: 12 }}>
+                  Share this report openly with your parents. A career decision works best when student, parents, and teachers are aligned on a path that fits the child's authentic personality.
+                </p>
+              </GlassCard>
+            </section>
+
+            <hr style={{ border: 'none', borderTop: '1px solid rgba(255, 255, 255, 0.08)', margin: '2rem 0' }} />
+
+            {/* ── Closing Note ── */}
+            <section style={{ marginBottom: 32 }}>
+              <SectionHeading title="A Note for You" />
+              <GlassCard glowColor="cyan" style={{ padding: 22, position: 'relative', overflow: 'hidden' }}>
+                <div style={{ position: 'absolute', top: 0, left: 0, bottom: 0, width: 4, background: primaryColor }} />
+                <p style={{ margin: '0 0 14px 0', color: 'var(--ft-text-secondary)', fontSize: '0.92rem', lineHeight: 1.65 }}>
+                  {getClosingNote(primaryName)}
+                </p>
+                <p style={{ margin: 0, color: 'var(--ft-text-muted)', fontSize: '0.78rem', fontStyle: 'italic' }}>
+                  Remember — this report is a starting point, not a verdict. Career paths are rarely straight lines. Use this as a guide to explore, ask questions, and make informed choices. You have time.
+                </p>
               </GlassCard>
             </section>
 

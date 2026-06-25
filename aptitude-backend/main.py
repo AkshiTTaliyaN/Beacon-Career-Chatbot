@@ -61,6 +61,7 @@ class PDFRequest(BaseModel):
     riasec_answers: List[int]
     hobbies: List[str]
     aptitude_answers: List[int]
+    recommendations: List[dict] = None
 
 
 class CareerAvatarRequest(BaseModel):
@@ -103,6 +104,9 @@ def download_pdf(req: PDFRequest):
     print("\n=== RESULT RECEIVED ===")
     print(result)
     print("=======================\n")
+
+    if req.recommendations:
+        result["primary_careers"] = req.recommendations
     
     pdf_bytes = generate_pdf(result)
     return StreamingResponse(
