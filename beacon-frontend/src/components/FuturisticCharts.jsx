@@ -19,6 +19,7 @@
 
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import '../styles/futuristic.css';
+import BilingualText from './BilingualText.jsx';
 
 /* ═══════════════════════════════════════════════════════════════════
    RIASEC_THEME — colour & icon map for Holland / RIASEC types
@@ -383,17 +384,21 @@ export function KPICard({
       </div>
 
       {/* Animated value */}
-      <div className="ft-kpi-card__value" style={{ color: accentHex }}>
-        {displayValue}
+      <div className="ft-kpi-card__value" style={{ color: accentHex, fontSize: isText ? '1.15rem' : undefined, lineHeight: isText ? 1.25 : undefined }}>
+        {isText ? <BilingualText text={displayValue} /> : displayValue}
         {suffix && <span className="ft-kpi-card__suffix">{suffix}</span>}
       </div>
 
       {/* Label */}
-      <div className="ft-kpi-card__label">{label}</div>
+      <div className="ft-kpi-card__label">
+        <BilingualText text={label} />
+      </div>
 
       {/* Subtitle */}
       {subtitle && (
-        <div className="ft-kpi-card__subtitle">{subtitle}</div>
+        <div className="ft-kpi-card__subtitle">
+          <BilingualText text={subtitle} />
+        </div>
       )}
     </GlassCard>
   );
@@ -496,10 +501,12 @@ export function SectionHeader({
         />
 
         <div>
-          <h2 className="ft-heading-lg ft-section-header__title">{title}</h2>
+          <h2 className="ft-heading-lg ft-section-header__title">
+            <BilingualText text={title} />
+          </h2>
           {subtitle && (
             <p className="ft-text-muted ft-section-header__subtitle">
-              {subtitle}
+              <BilingualText text={subtitle} />
             </p>
           )}
         </div>

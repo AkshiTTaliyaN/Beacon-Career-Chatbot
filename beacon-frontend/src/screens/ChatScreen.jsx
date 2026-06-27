@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { sendChatChoice, startChat } from "../api/client";
 import ChatMarkdown from "../components/ChatMarkdown";
 import ManzilHeader from "../components/ManzilHeader";
+import LanguageToggle from "../components/LanguageToggle.jsx";
+import BilingualText from "../components/BilingualText.jsx";
 import "./ChatScreen.css";
 
 function navigate(path) {
@@ -39,7 +41,7 @@ function MessageBubble({ role, text }) {
         {role === "bot" ? (
           <ChatMarkdown content={text} />
         ) : (
-          <p className="chat-plain-text">{text}</p>
+          <p className="chat-plain-text"><BilingualText text={text} /></p>
         )}
       </div>
     </motion.div>
@@ -93,7 +95,7 @@ function QuickActionBar({ onSelect, loading, visible }) {
 
   return (
     <div className="quick-actions" aria-label="Quick actions">
-      <p className="quick-actions-title">Quick actions</p>
+      <p className="quick-actions-title"><BilingualText text="Quick actions" /></p>
       <div className="quick-actions-grid">
         {QUICK_ACTIONS.map((action) => (
           <motion.button
@@ -107,7 +109,7 @@ function QuickActionBar({ onSelect, loading, visible }) {
             transition={{ duration: 0.18 }}
           >
             <span className="quick-action-icon" aria-hidden="true">{action.icon}</span>
-            <span className="quick-action-label">{action.label}</span>
+            <span className="quick-action-label"><BilingualText text={action.label} /></span>
           </motion.button>
         ))}
       </div>
@@ -120,7 +122,7 @@ function OptionBar({ options, onSelect, loading }) {
 
   return (
     <div className="chat-suggestions" aria-label="Suggested replies">
-      <p className="chat-suggestions-title">Suggested replies</p>
+      <p className="chat-suggestions-title"><BilingualText text="Suggested replies" /></p>
       <div className="chat-options">
         {options.map((option) => (
           <motion.button
@@ -134,7 +136,7 @@ function OptionBar({ options, onSelect, loading }) {
             transition={{ duration: 0.18 }}
           >
             <span>{option.letter}</span>
-            <em>{option.text}</em>
+            <em><BilingualText text={option.text} /></em>
           </motion.button>
         ))}
       </div>
@@ -154,14 +156,14 @@ function RecommendationPanel({ node, onRestart }) {
         transition={{ duration: 0.35 }}
       >
         <div className="chat-result-header">
-          <span className="section-badge">Handoff</span>
-          <h2>Talk to a counsellor</h2>
+          <span className="section-badge"><BilingualText text="Handoff" /></span>
+          <h2><BilingualText text="Talk to a counsellor" /></h2>
         </div>
-        <p>{node.handoff_message || node.question}</p>
+        <p><BilingualText text={node.handoff_message || node.question} /></p>
         <div className="handoff-actions">
           {(node.contact_options || []).map((item) => (
             <a key={item.type} href={item.value} target="_blank" rel="noreferrer">
-              {item.label}
+              <BilingualText text={item.label} />
             </a>
           ))}
         </div>
@@ -177,31 +179,31 @@ function RecommendationPanel({ node, onRestart }) {
       transition={{ duration: 0.35 }}
     >
       <div className="chat-result-header">
-        <span className="section-badge">Recommended path</span>
-        <h2>{node.title || node.question}</h2>
+        <span className="section-badge"><BilingualText text="Recommended path" /></span>
+        <h2><BilingualText text={node.title || node.question} /></h2>
       </div>
 
       {!!node.description?.length && (
         <div className="fit-notes">
           {node.description.slice(0, 3).map((line) => (
-            <p key={line}>{line}</p>
+            <p key={line}><BilingualText text={line} /></p>
           ))}
         </div>
       )}
 
       {!!node.careers?.length && (
         <div className="result-section">
-          <h3>Suggested careers</h3>
+          <h3><BilingualText text="Suggested careers" /></h3>
           <div className="career-grid">
             {node.careers.slice(0, 5).map((career) => (
               <article key={career.name} className="career-tile">
                 <div>
-                  <h4>{career.name}</h4>
-                  <p>{career.description}</p>
+                  <h4><BilingualText text={career.name} /></h4>
+                  <p><BilingualText text={career.description} /></p>
                 </div>
                 <div className="tile-tags">
-                  <span>{career.stream || "Any"}</span>
-                  <span>{career.salary || "Salary varies"}</span>
+                  <span><BilingualText text={career.stream || "Any"} /></span>
+                  <span><BilingualText text={career.salary || "Salary varies"} /></span>
                 </div>
               </article>
             ))}
@@ -211,13 +213,13 @@ function RecommendationPanel({ node, onRestart }) {
 
       {!!node.exams?.length && (
         <div className="result-section">
-          <h3>Relevant exams</h3>
+          <h3><BilingualText text="Relevant exams" /></h3>
           <div className="exam-list">
             {node.exams.slice(0, 5).map((exam) => (
               <article key={exam.name}>
-                <strong>{exam.name}</strong>
-                <span>{exam.month || exam.conducting_body || "Timeline varies"}</span>
-                <p>{exam.what_it_leads_to || exam.eligibility}</p>
+                <strong><BilingualText text={exam.name} /></strong>
+                <span><BilingualText text={exam.month || exam.conducting_body || "Timeline varies"} /></span>
+                <p><BilingualText text={exam.what_it_leads_to || exam.eligibility} /></p>
               </article>
             ))}
           </div>
@@ -226,19 +228,19 @@ function RecommendationPanel({ node, onRestart }) {
 
       {!!node.next_steps?.length && (
         <div className="result-section">
-          <h3>Next steps</h3>
+          <h3><BilingualText text="Next steps" /></h3>
           <ol className="next-steps">
             {node.next_steps.slice(0, 4).map((step) => (
-              <li key={step}>{step}</li>
+              <li key={step}><BilingualText text={step} /></li>
             ))}
           </ol>
         </div>
       )}
 
       <div className="result-actions">
-        <button type="button" onClick={onRestart}>Start another chat</button>
+        <button type="button" onClick={onRestart}><BilingualText text="Start another chat" /></button>
         <button type="button" className="secondary" onClick={() => navigate("/dashboard")}>
-          Back to dashboard
+          <BilingualText text="Back to dashboard" />
         </button>
       </div>
     </motion.section>
@@ -357,7 +359,7 @@ export default function ChatScreen() {
 
   return (
     <div className="chat-page">
-      <ManzilHeader
+<ManzilHeader
         title="Manzil AI Counsellor"
         subtitle="Career · College · Exam guidance"
         right={(
@@ -371,6 +373,29 @@ export default function ChatScreen() {
           </>
         )}
       />
+<header className="chat-header">
+        <div className="chat-header-inner">
+          <button type="button" className="chat-back-btn" onClick={() => navigate("/dashboard")}>
+            ← Dashboard
+          </button>
+
+          <div className="chat-header-brand">
+            <div className="chat-header-logo">M</div>
+            <div>
+              <p className="chat-header-kicker">Manzil</p>
+              <h1>Manzil AI Counsellor</h1>
+              <p className="chat-header-sub">Get personalised career, college and exam guidance.</p>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <LanguageToggle />
+            <button type="button" className="chat-restart-btn" onClick={bootChat} disabled={loading}>
+              Restart
+            </button>
+          </div>
+        </div>
+      </header>
 
       <div className="chat-shell">
         <ProfileChips profile={profile} />

@@ -1,6 +1,7 @@
 import React from 'react'
 import '../styles/futuristic.css'
 import { APTITUDE_URL } from '../config.js'
+import BilingualText from './BilingualText.jsx'
 
 
 export default function HeroSection({
@@ -83,7 +84,7 @@ export default function HeroSection({
           letterSpacing: '-0.02em',
           fontFamily: 'Inter, system-ui, -apple-system, sans-serif',
         }}>
-          {title}
+          <BilingualText text={title} />
         </h1>
         <p style={{
           marginTop: '0.85rem',
@@ -92,7 +93,7 @@ export default function HeroSection({
           lineHeight: 1.5,
           maxWidth: 580,
         }}>
-          {subtitle}
+          <BilingualText text={subtitle} />
         </p>
 
         <div style={{

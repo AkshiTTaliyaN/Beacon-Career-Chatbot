@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/futuristic.css';
 import ManzilHeader from '../components/ManzilHeader';
+import LanguageToggle from '../components/LanguageToggle.jsx';
 
 export default function ExamExplorer() {
   const [stream, setStream] = useState('All');
@@ -191,7 +192,7 @@ export default function ExamExplorer() {
   return (
     <div className="ft-dashboard-bg" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       {/* ─── Navbar ─── */}
-      <ManzilHeader
+<ManzilHeader
         title="Exam Explorer"
         right={(
           <>
@@ -209,6 +210,45 @@ export default function ExamExplorer() {
           </>
         )}
       />
+<header className="ft-navbar ft-navbar-scrolled" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 24px', height: 70 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <button
+            onClick={() => { window.history.pushState({}, '', '/dashboard'); window.dispatchEvent(new PopStateEvent('popstate')); }}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              color: 'var(--ft-neon-cyan)',
+              fontWeight: 800,
+              fontSize: 14,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 4
+            }}
+          >
+            ← Back
+          </button>
+          <h1 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: 'var(--ft-text-primary)' }}>Exam Explorer</h1>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <LanguageToggle />
+          <button
+            onClick={handleThemeToggle}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              fontSize: '1.25rem',
+              color: 'var(--ft-neon-cyan)',
+              filter: 'drop-shadow(0 0 4px var(--ft-neon-cyan))',
+              transition: 'transform 0.3s ease',
+            }}
+            aria-label="Toggle Theme"
+          >
+            {isDark ? '☀️' : '🌙'}
+          </button>
+        </div>
+      </header>
 
       {/* ─── Main Content ─── */}
       <main className="ft-section" style={{ flex: 1, marginTop: '2rem', paddingBottom: '3rem' }}>

@@ -3,6 +3,7 @@ import { GlassCard, RadialGauge } from '../components/FuturisticCharts.jsx';
 import { consultExpert, getExpertCareers } from '../api/client.js';
 import ManzilHeader from '../components/ManzilHeader';
 import EdCilLogo from '../assets/edcil.jpeg';
+import LanguageToggle from '../components/LanguageToggle.jsx';
 import '../styles/futuristic.css';
 import './ExpertSystemScreen.css';
 
@@ -120,7 +121,7 @@ export default function ExpertSystemScreen() {
     <div className="ft-dashboard-bg" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       
       {/* ─── Navbar ─── */}
-      <ManzilHeader
+<ManzilHeader
         title="AI Expert Consultation"
         className="no-print"
         right={(
@@ -139,6 +140,46 @@ export default function ExpertSystemScreen() {
           </>
         )}
       />
+<header className="ft-navbar ft-navbar-scrolled no-print" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 24px', height: 70 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <button
+            onClick={navigateToDashboard}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              color: 'var(--ft-neon-cyan)',
+              fontWeight: 800,
+              fontSize: 14,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 4
+            }}
+          >
+            ← Dashboard
+          </button>
+          <img src={EdCilLogo} alt="EdCil Logo" style={{ height: 35, borderRadius: 4, objectFit: 'cover' }} />
+        </div>
+        
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <LanguageToggle className="no-print" />
+          <button
+            onClick={handleThemeToggle}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              fontSize: '1.25rem',
+              color: 'var(--ft-neon-cyan)',
+              filter: 'drop-shadow(0 0 4px var(--ft-neon-cyan))',
+              transition: 'transform 0.3s ease',
+            }}
+            aria-label="Toggle Theme"
+          >
+            {isDark ? '☀️' : '🌙'}
+          </button>
+        </div>
+      </header>
 
       {/* ─── Main Content ─── */}
       <main className="expert-screen ft-section" style={{ flex: 1 }}>
