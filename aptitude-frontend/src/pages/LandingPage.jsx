@@ -5,6 +5,7 @@ import { RIASEC_COLORS } from "../constants/riasecColors";
 import { motion } from "framer-motion";
 import HeroBanner from "../components/ui/HeroBanner";
 import GlassCard from "../components/ui/GlassCard";
+import ManzilHeader from "../components/ManzilHeader";
 
 const RIASEC_TYPES = [
   { code: "R", name: "Realistic", desc: "Practical, hands-on, mechanical", color: RIASEC_COLORS.R },
@@ -29,14 +30,17 @@ const FAQS = [
 export default function LandingPage({ onStart }) {
   return (
     <div className="landing">
-      <header className="cc-header">
-        <span className="cc-logo">Manzil</span>
-        <nav className="landing-nav">
-          <a href="#">Home</a>
-          <a href="#">About</a>
-          <a href="#">Contact</a>
-        </nav>
-      </header>
+      <ManzilHeader
+        title="Manzil"
+        subtitle="Career Assessment"
+        right={(
+          <nav className="landing-nav" aria-label="Landing navigation">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+          </nav>
+        )}
+      />
 
       {/* HERO — Manzil-style */}
       <motion.div

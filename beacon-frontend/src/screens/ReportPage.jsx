@@ -5,6 +5,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { getCareerBannerImage } from '../utils/bannerImage';
+import ManzilHeader from '../components/ManzilHeader';
 
 import { API as BEACON_API, APTITUDE_URL } from '../config';
 
@@ -220,30 +221,27 @@ export default function ReportPage() {
   return (
     <div style={{ background: '#fff', color: '#111827', minHeight: '100vh', fontFamily: 'Inter, system-ui, -apple-system, Roboto, sans-serif' }}>
 
-      {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 2rem', background: NAVY, color: '#fff' }}>
-        <div style={{ fontWeight: 800, fontSize: 18, cursor: 'pointer' }}
-          onClick={() => { window.history.pushState({}, '', '/dashboard'); window.dispatchEvent(new PopStateEvent('popstate')); }}>
-          Manzil
-        </div>
-        <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: 18, fontWeight: 800 }}>Manzil Personality &amp; Career Report</div>
-          <div style={{ marginTop: 6, opacity: 0.9 }}>
-            {studentName}{streamDisplay ? ` • ${streamDisplay}` : ''}
+      <ManzilHeader
+        title="Manzil"
+        center={(
+          <div>
+            <h1>Manzil Personality &amp; Career Report</h1>
+            <p>{studentName}{streamDisplay ? ` • ${streamDisplay}` : ''}</p>
+            <p style={{ fontSize: "0.75rem", fontWeight: 600, color: "#6b7280" }}>
+              {new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </p>
           </div>
-          <div style={{ marginTop: 4, fontSize: 13, opacity: 0.75 }}>
-            {new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })}
-          </div>
-        </div>
-        <div>
+        )}
+        right={(
           <button
+            type="button"
+            className="manzil-header-btn"
             onClick={() => window.print()}
-            style={{ background: '#fff', color: NAVY, border: 'none', padding: '0.5rem 0.9rem', borderRadius: 8, fontWeight: 700, cursor: 'pointer' }}
           >
             ⬇ Download PDF
           </button>
-        </div>
-      </div>
+        )}
+      />
 
       <div style={{ maxWidth: 960, margin: '2rem auto', padding: '0 1rem' }}>
 

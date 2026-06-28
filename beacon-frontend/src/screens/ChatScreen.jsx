@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { sendChatChoice, startChat } from "../api/client";
 import ChatMarkdown from "../components/ChatMarkdown";
+import ManzilHeader from "../components/ManzilHeader";
 import "./ChatScreen.css";
 
 function navigate(path) {
@@ -356,26 +357,20 @@ export default function ChatScreen() {
 
   return (
     <div className="chat-page">
-      <header className="chat-header">
-        <div className="chat-header-inner">
-          <button type="button" className="chat-back-btn" onClick={() => navigate("/dashboard")}>
-            ← Dashboard
-          </button>
-
-          <div className="chat-header-brand">
-            <div className="chat-header-logo">M</div>
-            <div>
-              <p className="chat-header-kicker">Manzil</p>
-              <h1>Manzil AI Counsellor</h1>
-              <p className="chat-header-sub">Get personalised career, college and exam guidance.</p>
-            </div>
-          </div>
-
-          <button type="button" className="chat-restart-btn" onClick={bootChat} disabled={loading}>
-            Restart
-          </button>
-        </div>
-      </header>
+      <ManzilHeader
+        title="Manzil AI Counsellor"
+        subtitle="Career · College · Exam guidance"
+        right={(
+          <>
+            <button type="button" className="manzil-header-btn" onClick={() => navigate("/dashboard")}>
+              ← Dashboard
+            </button>
+            <button type="button" className="manzil-header-btn" onClick={bootChat} disabled={loading}>
+              Restart
+            </button>
+          </>
+        )}
+      />
 
       <div className="chat-shell">
         <ProfileChips profile={profile} />

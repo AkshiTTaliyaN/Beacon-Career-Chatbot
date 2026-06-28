@@ -1,0 +1,135 @@
+.manzil-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 64px;
+  padding: 0.65rem clamp(1rem, 3vw, 2rem);
+  background: #ffffff;
+  border-bottom: 1px solid #e8edf5;
+  box-shadow: 0 1px 8px rgba(16, 40, 73, 0.06);
+  color: #102849;
+}
+
+.manzil-header--sticky {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.manzil-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+.manzil-header-logo {
+  height: clamp(40px, 5vw, 56px);
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.manzil-header-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.manzil-header-title {
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #102849;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.manzil-header-subtitle {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #5f6b8d;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.manzil-header-center {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  color: #102849;
+}
+
+.manzil-header-center h1 {
+  margin: 0;
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  font-weight: 700;
+  color: #102849;
+}
+
+.manzil-header-center p {
+  margin: 0.15rem 0 0;
+  font-size: 0.82rem;
+  color: #4b5563;
+  font-weight: 600;
+}
+
+.manzil-header-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.manzil-header-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #2c5492;
+  background: #ffffff;
+  border: 1.5px solid #dce4f5;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.manzil-header-btn:hover {
+  background: #f5f8ff;
+  border-color: #b8c9e8;
+}
+
+.manzil-header-counter {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #2c5492;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .manzil-header {
+    flex-wrap: wrap;
+    min-height: auto;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .manzil-header-center {
+    order: 3;
+    flex-basis: 100%;
+    text-align: left;
+    padding-top: 0.25rem;
+  }
+
+  .manzil-header-brand {
+    display: none;
+  }
+}

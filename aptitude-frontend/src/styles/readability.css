@@ -382,23 +382,23 @@
   color: #ffffff;
 }
 
-/* Preserve dark header text on navy background */
-.report-page .cc-header,
-.report-page .cc-header *,
-.results-page .cc-header,
-.results-page .cc-header *,
-.assessment-page .cc-header,
-.assessment-page .cc-header *,
-.aptitude-page .cc-header,
-.aptitude-page .cc-header * {
-  color: #ffffff;
+/* Branded white header on assessment/report pages */
+.report-page .manzil-header,
+.report-page .manzil-header *,
+.results-page .manzil-header,
+.results-page .manzil-header *,
+.assessment-page .manzil-header,
+.assessment-page .manzil-header *,
+.aptitude-page .manzil-header,
+.aptitude-page .manzil-header * {
+  color: #102849;
 }
 
-.report-page .cc-header-center p,
-.results-page .cc-header-center p,
-.assessment-page .cc-header-center p,
-.aptitude-page .cc-header-center p {
-  color: #E5E7EB;
+.report-page .manzil-header-center p,
+.results-page .manzil-header-center p,
+.assessment-page .manzil-header-center p,
+.aptitude-page .manzil-header-center p {
+  color: #4b5563;
 }
 
 /* Buttons keep their own colors */

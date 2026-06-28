@@ -1,4 +1,5 @@
 import { DEMO_MODE } from "../config";
+import ManzilHeader from "./ManzilHeader";
 import FloatingBackground from "./onboarding/FloatingBackground";
 import ProgressHeader from "./onboarding/ProgressHeader";
 import "../styles/onboarding.css";
@@ -10,15 +11,11 @@ export default function Layout({ children, step, totalSteps, title, subtitle }) 
     <div className="layout onboard-layout">
       <FloatingBackground />
 
-      <header className="header onboard-header">
-        <div className="brand">
-          <div className="brand-text">
-            <p className="brand-name onboard-brand-name">Manzil</p>
-            <p className="brand-tag onboard-brand-tag">Your career guidance companion</p>
-          </div>
-        </div>
-        {DEMO_MODE && <span className="demo-badge onboard-demo-badge">Demo mode</span>}
-      </header>
+      <ManzilHeader
+        title="Manzil"
+        subtitle="Your career guidance companion"
+        right={DEMO_MODE ? <span className="demo-badge onboard-demo-badge">Demo mode</span> : null}
+      />
 
       <main className="main onboard-main">
         {/* No opacity animation on outer card — always visible */}

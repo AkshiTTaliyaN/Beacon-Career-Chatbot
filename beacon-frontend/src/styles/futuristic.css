@@ -8,69 +8,67 @@
    1. CSS CUSTOM PROPERTIES (Design Tokens)
    ──────────────────────────────────────────────────────────── */
 
-:root {
-  /* Backgrounds */
-  --ft-bg-primary:   #080c24;
-  --ft-bg-secondary: #0d1333;
-  --ft-bg-tertiary:  #111842;
-  --ft-bg-surface:   #161d45;
-
-  /* Navbar Backgrounds */
-  --ft-navbar-bg: rgba(8, 12, 36, 0.75);
-  --ft-navbar-scrolled-bg: rgba(8, 12, 36, 0.92);
-  --ft-navbar-shadow: 0 4px 30px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(0, 212, 255, 0.1);
-
-  /* Glassmorphism */
-  --ft-glass-bg:       rgba(255, 255, 255, 0.04);
-  --ft-glass-bg-hover: rgba(255, 255, 255, 0.08);
-  --ft-glass-border:   rgba(255, 255, 255, 0.08);
-  --ft-glass-blur:     16px;
-
-  /* Neon accents */
-  --ft-neon-cyan:    #00d4ff;
-  --ft-neon-magenta: #ff006e;
-  --ft-neon-green:   #00ff88;
-  --ft-neon-amber:   #f59e0b;
-  --ft-neon-purple:  #8b5cf6;
-
-  /* Brand */
-  --ft-brand-navy:       #2C5492;
-  --ft-brand-navy-light: #5f7dd6;
-  --ft-brand-teal:       #14b8a6;
-
-  /* Text */
-  --ft-text-primary:   rgba(255, 255, 255, 0.95);
-  --ft-text-secondary: rgba(255, 255, 255, 0.7);
-  --ft-text-muted:     rgba(255, 255, 255, 0.45);
-
-  /* Borders */
-  --ft-border-subtle: rgba(255, 255, 255, 0.06);
-  --ft-border-light:  rgba(255, 255, 255, 0.12);
-
-  /* Glow shadows */
-  --ft-glow-cyan:    0 0 20px rgba(0, 212, 255, 0.35), 0 0 60px rgba(0, 212, 255, 0.12);
-  --ft-glow-magenta: 0 0 20px rgba(255, 0, 110, 0.35), 0 0 60px rgba(255, 0, 110, 0.12);
-  --ft-glow-green:   0 0 20px rgba(0, 255, 136, 0.35), 0 0 60px rgba(0, 255, 136, 0.12);
-  --ft-glow-amber:   0 0 20px rgba(245, 158, 11, 0.35), 0 0 60px rgba(245, 158, 11, 0.12);
-  --ft-glow-purple:  0 0 20px rgba(139, 92, 246, 0.35), 0 0 60px rgba(139, 92, 246, 0.12);
-
-  /* Transitions */
-  --ft-transition-fast:   0.15s ease;
-  --ft-transition-base:   0.3s ease;
-  --ft-transition-slow:   0.5s ease;
-  --ft-transition-spring: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-
-  /* Radii */
-  --ft-radius-sm:  8px;
-  --ft-radius-md:  14px;
-  --ft-radius-lg:  20px;
-  --ft-radius-xl:  28px;
-  --ft-radius-pill: 9999px;
-
-  /* Font stack */
-  --ft-font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-}
-
+   :root {
+    /* Backgrounds */
+    --ft-bg-primary: #ffffff;
+    --ft-bg-secondary: #ffffff;
+    --ft-bg-tertiary: #f8fbff;
+    --ft-bg-surface: #ffffff;
+  
+    /* Navbar */
+    --ft-navbar-bg: rgba(255,255,255,.92);
+    --ft-navbar-scrolled-bg: rgba(255,255,255,.98);
+    --ft-navbar-shadow: 0 4px 18px rgba(44,84,146,.08);
+  
+    /* Glass */
+    --ft-glass-bg: rgba(255,255,255,.92);
+    --ft-glass-bg-hover: #ffffff;
+    --ft-glass-border: #e2e8f0;
+    --ft-glass-blur: 14px;
+  
+    /* Brand */
+    --ft-brand-navy: #2C5492;
+    --ft-brand-navy-light: #426FB1;
+    --ft-brand-teal: #14b8a6;
+  
+    /* Accent colours */
+    --ft-neon-cyan: #2C5492;
+    --ft-neon-magenta: #8B5CF6;
+    --ft-neon-green: #16A34A;
+    --ft-neon-amber: #D97706;
+    --ft-neon-purple: #7C3AED;
+  
+    /* TEXT */
+    --ft-text-primary: #102849;
+    --ft-text-secondary: #374151;
+    --ft-text-muted: #6B7280;
+  
+    /* Borders */
+    --ft-border-subtle: #E5E7EB;
+    --ft-border-light: #CBD5E1;
+  
+    /* Shadows */
+    --ft-glow-cyan: 0 4px 18px rgba(44,84,146,.10);
+    --ft-glow-magenta: 0 4px 18px rgba(139,92,246,.10);
+    --ft-glow-green: 0 4px 18px rgba(34,197,94,.10);
+    --ft-glow-amber: 0 4px 18px rgba(245,158,11,.10);
+    --ft-glow-purple: 0 4px 18px rgba(124,58,237,.10);
+  
+    /* Transitions */
+    --ft-transition-fast: .15s ease;
+    --ft-transition-base: .3s ease;
+    --ft-transition-slow: .5s ease;
+    --ft-transition-spring: .4s cubic-bezier(.34,1.56,.64,1);
+  
+    /* Radius */
+    --ft-radius-sm: 8px;
+    --ft-radius-md: 14px;
+    --ft-radius-lg: 20px;
+    --ft-radius-xl: 28px;
+    --ft-radius-pill: 9999px;
+  
+    --ft-font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
 
 /* ────────────────────────────────────────────────────────────
    2. GLASSMORPHISM CARDS
@@ -813,48 +811,21 @@
 }
 
 
-/* ============================================================
-   LIGHT THEME OVERRIDES
-   ============================================================ */
-body.light-theme,
-.light-theme {
-  /* Backgrounds */
-  --ft-bg-primary:   #f1f5f9;  /* slate-100 */
-  --ft-bg-secondary: #ffffff;  /* white */
-  --ft-bg-tertiary:  #f8fafc;  /* slate-50 */
-  --ft-bg-surface:   #e2e8f0;  /* slate-200 */
+/* ---------- Footer links ---------- */
 
-  /* Navbar Backgrounds */
-  --ft-navbar-bg: rgba(255, 255, 255, 0.75);
-  --ft-navbar-scrolled-bg: rgba(255, 255, 255, 0.92);
-  --ft-navbar-shadow: 0 4px 30px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(44, 84, 146, 0.12);
-
-  /* Glassmorphism */
-  --ft-glass-bg:       rgba(255, 255, 255, 0.7);
-  --ft-glass-bg-hover: rgba(255, 255, 255, 0.95);
-  --ft-glass-border:   rgba(44, 84, 146, 0.12);
-  --ft-glass-blur:     12px;
-
-  /* Text */
-  --ft-text-primary:   #0f172a;  /* slate-900 */
-  --ft-text-secondary: #334155;  /* slate-700 */
-  --ft-text-muted:     #64748b;  /* slate-500 */
-
-  /* Borders */
-  --ft-border-subtle: rgba(44, 84, 146, 0.08);
-  --ft-border-light:  rgba(44, 84, 146, 0.16);
-
-  /* Glow shadows - softer for light theme to look clean and legible */
-  --ft-glow-cyan:    0 4px 20px rgba(0, 180, 216, 0.12);
-  --ft-glow-magenta: 0 4px 20px rgba(219, 39, 119, 0.12);
-  --ft-glow-green:   0 4px 20px rgba(5, 150, 105, 0.12);
-  --ft-glow-amber:   0 4px 20px rgba(217, 119, 6, 0.12);
-  --ft-glow-purple:  0 4px 20px rgba(124, 58, 237, 0.12);
+footer .ft-nav-link,
+footer .ft-nav-link:visited,
+footer button.ft-nav-link {
+  color: rgba(255,255,255,0.82) !important;
+  text-decoration: none;
 }
 
-body.light-theme .ft-dashboard-bg::before {
-  background-image:
-    linear-gradient(rgba(44, 84, 146, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(44, 84, 146, 0.025) 1px, transparent 1px);
+footer .ft-nav-link:hover,
+footer button.ft-nav-link:hover {
+  color: #ffffff !important;
 }
 
+footer .ft-nav-link::after {
+  background: #ffffff !important;
+  box-shadow: none !important;
+}

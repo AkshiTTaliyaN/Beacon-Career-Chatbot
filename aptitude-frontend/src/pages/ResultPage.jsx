@@ -7,6 +7,7 @@ import GlassCard from "../components/ui/GlassCard";
 import ConfettiBurst from "../components/ui/ConfettiBurst";
 import TimelineCard from "../components/ui/TimelineCard";
 import CareerAvatar from "../components/ui/CareerAvatar";
+import ManzilHeader from "../components/ManzilHeader";
 
 const getColor = (category) => RIASEC_COLORS[category?.[0]] || "#2C5492";
 
@@ -243,15 +244,23 @@ export default function ResultPage({
   return (
     <div className="result-page report-page results-page apt-floating-shell">
       <FloatingBackground />
-      <header className="cc-header">
-        <span className="cc-logo">Manzil</span>
-        <div className="cc-header-center">
-          <h1>Manzil Career &amp; Personality Report</h1>
-          <p>{result.name} • {result.class_level} • {result.stream}</p>
-          <p style={{ fontSize: "12px", color: "#E5E7EB", fontWeight: 700 }}>{new Date().toISOString()}</p>
-        </div>
-        <button className="btn-outline" onClick={onDownloadPDF}><Download size={16} /> Download PDF</button>
-      </header>
+      <ManzilHeader
+        title="Manzil"
+        center={(
+          <div>
+            <h1>Manzil Career &amp; Personality Report</h1>
+            <p>{result.name} • {result.class_level} • {result.stream}</p>
+            <p style={{ fontSize: "0.75rem", fontWeight: 600, color: "#6b7280" }}>
+              {new Date().toLocaleDateString("en-IN", { year: "numeric", month: "long", day: "numeric" })}
+            </p>
+          </div>
+        )}
+        right={(
+          <button type="button" className="manzil-header-btn" onClick={onDownloadPDF}>
+            <Download size={16} /> Download PDF
+          </button>
+        )}
+      />
 
       <div className="result-container">
 

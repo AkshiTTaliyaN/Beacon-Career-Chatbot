@@ -6,6 +6,7 @@ import { HOBBY_CATEGORIES } from "../data/hobbies";
 import { RIASEC_COLORS } from "../constants/riasecColors";
 import "./TestPage.css";
 import FloatingBackground from "../components/ui/FloatingBackground";
+import ManzilHeader from "../components/ManzilHeader";
 import ProgressWidget from "../components/ui/ProgressWidget";
 import AgreeScale from "../components/ui/AgreeScale";
 
@@ -269,10 +270,10 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
     return (
       <div className="test-page aptitude-page assessment-page apt-floating-shell">
         <FloatingBackground />
-        <header className="cc-header">
-          <span className="cc-logo">Manzil</span>
-          <button className="btn-outline" onClick={onBack}>← Back</button>
-        </header>
+        <ManzilHeader
+          title="Career Aptitude Test"
+          right={<button type="button" className="manzil-header-btn" onClick={onBack}>← Back</button>}
+        />
         <div className="details-container">
           <div className="intro-card">
             <div className="intro-badge">Psychometric + Aptitude Assessment</div>
@@ -339,14 +340,16 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
     return (
       <div className="test-page aptitude-page assessment-page apt-floating-shell">
         <FloatingBackground />
-        <header className="cc-header">
-          <span className="cc-logo">Manzil</span>
-          <div className="cc-header-center">
-            <h1>Section 1 of 3 — Personality</h1>
-            <p>{details.name} • {details.class_level} • {details.stream}</p>
-          </div>
-          <span className="q-counter-header">Question {current + 1} of 60</span>
-        </header>
+        <ManzilHeader
+          title="Manzil"
+          center={(
+            <div>
+              <h1>Section 1 of 3 — Personality</h1>
+              <p>{details.name} • {details.class_level} • {details.stream}</p>
+            </div>
+          )}
+          right={<span className="manzil-header-counter">Question {current + 1} of 60</span>}
+        />
 
         <div className="progress-bar-wrap">
           <div className="progress-bar-fill" style={{ width: `${progress}%` }} />
@@ -457,14 +460,16 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
     return (
       <div className="test-page aptitude-page assessment-page apt-floating-shell">
         <FloatingBackground />
-        <header className="cc-header">
-          <span className="cc-logo">Manzil</span>
-          <div className="cc-header-center">
-            <h1>Section 2 of 3 — Interests</h1>
-            <p>{details.name} • {details.class_level} • {details.stream}</p>
-          </div>
-          <span className="q-counter-header">{selectedHobbies.length} selected</span>
-        </header>
+        <ManzilHeader
+          title="Manzil"
+          center={(
+            <div>
+              <h1>Section 2 of 3 — Interests</h1>
+              <p>{details.name} • {details.class_level} • {details.stream}</p>
+            </div>
+          )}
+          right={<span className="manzil-header-counter">{selectedHobbies.length} selected</span>}
+        />
 
         <div className="progress-bar-wrap">
           <div className="progress-bar-fill" style={{ width: "66%" }} />
@@ -522,14 +527,16 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
     return (
       <div className="test-page aptitude-page assessment-page apt-floating-shell">
         <FloatingBackground />
-        <header className="cc-header">
-          <span className="cc-logo">Manzil</span>
-          <div className="cc-header-center">
-            <h1>Section 3 of 3 — Aptitude</h1>
-            <p>{details.name} • {details.class_level} • {details.stream}</p>
-          </div>
-          <span className="q-counter-header">Question {aptitudeCurrent + 1} of 18</span>
-        </header>
+        <ManzilHeader
+          title="Manzil"
+          center={(
+            <div>
+              <h1>Section 3 of 3 — Aptitude</h1>
+              <p>{details.name} • {details.class_level} • {details.stream}</p>
+            </div>
+          )}
+          right={<span className="manzil-header-counter">Question {aptitudeCurrent + 1} of 18</span>}
+        />
 
         <div className="progress-bar-wrap">
           <div className="progress-bar-fill"

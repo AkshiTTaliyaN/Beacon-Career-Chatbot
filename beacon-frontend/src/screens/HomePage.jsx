@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import EdCilLogo from '../assets/edcil.jpeg'
+import ManzilHeader from '../components/ManzilHeader'
 import '../styles/futuristic.css'
 
 /* ── helpers ─────────────────────────────────────────────────────────────── */
@@ -32,7 +33,7 @@ function StatCard({ value, suffix = '', label, color, delay = 0 }) {
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay }}
       style={{
-        background: 'rgba(255,255,255,0.04)',
+        background: '#ffffff',
         border: `1px solid ${color}33`,
         borderRadius: 16,
         padding: '1.5rem 1.25rem',
@@ -53,7 +54,7 @@ function StatCard({ value, suffix = '', label, color, delay = 0 }) {
       }}>
         {count}{suffix}
       </div>
-      <div style={{ marginTop: '0.5rem', color: 'rgba(255,255,255,0.55)', fontSize: '0.82rem', fontWeight: 500, letterSpacing: '0.02em' }}>
+      <div style={{ marginTop: '0.5rem', color: '#5f6b8d', fontSize: '0.82rem', fontWeight: 500, letterSpacing: '0.02em' }}>
         {label}
       </div>
     </motion.div>
@@ -71,8 +72,8 @@ function FeatureCard({ icon, title, desc, color, delay = 0 }) {
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.55, delay }}
       style={{
-        background: 'rgba(255,255,255,0.04)',
-        border: '1px solid rgba(255,255,255,0.08)',
+        background: '#ffffff',
+        border: '1px solid #e8edf5',
         borderRadius: 18,
         padding: '1.75rem 1.5rem',
         backdropFilter: 'blur(16px)',
@@ -98,10 +99,10 @@ function FeatureCard({ icon, title, desc, color, delay = 0 }) {
       }}>
         {icon}
       </div>
-      <h3 style={{ margin: '0 0 0.5rem', fontSize: '1.05rem', fontWeight: 700, color: 'rgba(255,255,255,0.95)', letterSpacing: '-0.01em' }}>
+      <h3 style={{ margin: '0 0 0.5rem', fontSize: '1.05rem', fontWeight: 700, color: '#102849', letterSpacing: '-0.01em' }}>
         {title}
       </h3>
-      <p style={{ margin: 0, color: 'rgba(255,255,255,0.5)', fontSize: '0.875rem', lineHeight: 1.65 }}>
+      <p style={{ margin: 0, color: '#5f6b8d', fontSize: '0.875rem', lineHeight: 1.65 }}>
         {desc}
       </p>
       {/* Corner accent */}
@@ -129,8 +130,8 @@ function StepCard({ num, title, desc, color, delay = 0 }) {
       style={{
         display: 'flex', gap: '1.25rem', alignItems: 'flex-start',
         padding: '1.25rem 1.5rem',
-        background: 'rgba(255,255,255,0.03)',
-        border: '1px solid rgba(255,255,255,0.07)',
+        background: '#f8fbff',
+        border: '1px solid #e8edf5',
         borderRadius: 16,
         backdropFilter: 'blur(10px)',
       }}
@@ -146,10 +147,10 @@ function StepCard({ num, title, desc, color, delay = 0 }) {
         {num}
       </div>
       <div>
-        <div style={{ fontWeight: 700, fontSize: '0.95rem', color: 'rgba(255,255,255,0.9)', marginBottom: '0.3rem' }}>
+        <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#102849', marginBottom: '0.3rem' }}>
           {title}
         </div>
-        <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.85rem', lineHeight: 1.6 }}>
+        <div style={{ color: '#5f6b8d', fontSize: '0.85rem', lineHeight: 1.6 }}>
           {desc}
         </div>
       </div>
@@ -159,20 +160,12 @@ function StepCard({ num, title, desc, color, delay = 0 }) {
 
 /* ── Main HomePage ─────────────────────────────────────────────────────────── */
 export default function HomePage({ onStart }) {
-  const [scrolled, setScrolled] = useState(false)
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
   const features = [
     {
       icon: '🧠',
       title: 'AI Career Counsellor',
       desc: 'Chat with Manzil — an AI counsellor trained on Indian career paths, entrance exams, and scholarships. Get personalised guidance anytime.',
-      color: '#00d4ff',
+      color: '#2c5492',
     },
     {
       icon: '🎯',
@@ -207,7 +200,7 @@ export default function HomePage({ onStart }) {
   ]
 
   const steps = [
-    { num: 1, title: 'Complete your profile', desc: 'Tell us your class, stream, subjects, interests, and goals. Takes under 5 minutes.', color: '#00d4ff' },
+    { num: 1, title: 'Complete your profile', desc: 'Tell us your class, stream, subjects, interests, and goals. Takes under 5 minutes.', color: '#2c5492' },
     { num: 2, title: 'Take the psychometric test', desc: 'Answer a research-backed RIASEC questionnaire to map your personality type.', color: '#8b5cf6' },
     { num: 3, title: 'Get your recommendations', desc: 'Receive ranked career matches with detailed roadmaps tailored to your profile.', color: '#00ff88' },
     { num: 4, title: 'Chat and explore', desc: 'Discuss your results with the AI counsellor, explore exams, and download your report.', color: '#f59e0b' },
@@ -216,34 +209,20 @@ export default function HomePage({ onStart }) {
   return (
     <div className="ft-dashboard-bg" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif' }}>
 
-      {/* ── Navbar ─────────────────────────────────────────────────────── */}
-      <nav
-        className={`ft-navbar ${scrolled ? 'ft-navbar-scrolled' : ''}`}
-        style={{ justifyContent: 'space-between' }}
-      >
-        {/* Left: logo + name */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <img
-            src={EdCilLogo}
-            alt="EdCIL Logo"
-            style={{ height: 36, width: 36, objectFit: 'cover', borderRadius: 8, border: '1px solid rgba(0,212,255,0.2)' }}
-          />
-          <div>
-            <div className="ft-nav-logo" style={{ lineHeight: 1 }}>Manzil</div>
-            <div style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>by EdCIL</div>
-          </div>
-        </div>
-
-        {/* Right: badge */}
-        <div style={{
-          fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase',
-          padding: '0.35rem 0.85rem', borderRadius: 999,
-          background: 'rgba(0,212,255,0.1)', border: '1px solid rgba(0,212,255,0.25)',
-          color: '#00d4ff',
-        }}>
-          🇮🇳 Government Initiative
-        </div>
-      </nav>
+      <ManzilHeader
+        title="Manzil"
+        subtitle="by EdCIL"
+        right={(
+          <span style={{
+            fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase',
+            padding: '0.35rem 0.85rem', borderRadius: 999,
+            background: '#eaf1fb', border: '1px solid #dce4f5',
+            color: '#2c5492',
+          }}>
+            🇮🇳 Government Initiative
+          </span>
+        )}
+      />
 
       {/* ── Hero ───────────────────────────────────────────────────────── */}
       <section style={{
@@ -270,7 +249,7 @@ export default function HomePage({ onStart }) {
             boxShadow: '0 0 40px rgba(0,212,255,0.15), 0 0 80px rgba(0,212,255,0.06)',
             margin: '0 auto',
           }}>
-            <img src={EdCilLogo} alt="EdCIL" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <img src={EdCilLogo} alt="EdCIL" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </div>
         </motion.div>
 
@@ -283,7 +262,7 @@ export default function HomePage({ onStart }) {
             display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
             padding: '0.4rem 1rem', borderRadius: 999, marginBottom: '1.5rem',
             background: 'rgba(0,212,255,0.08)', border: '1px solid rgba(0,212,255,0.2)',
-            fontSize: '0.78rem', fontWeight: 600, color: '#00d4ff', letterSpacing: '0.05em',
+            fontSize: '0.78rem', fontWeight: 600, color: '#2c5492', letterSpacing: '0.05em',
             position: 'relative', zIndex: 1,
           }}
         >
@@ -300,7 +279,7 @@ export default function HomePage({ onStart }) {
             fontSize: 'clamp(2.25rem, 5.5vw, 4rem)',
             fontWeight: 900, lineHeight: 1.08, letterSpacing: '-0.04em',
             margin: '0 0 1.25rem', maxWidth: 820,
-            color: 'rgba(255,255,255,0.96)',
+            color: '#102849',
             position: 'relative', zIndex: 1,
           }}
         >
@@ -321,7 +300,7 @@ export default function HomePage({ onStart }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.3 }}
           style={{
-            fontSize: 'clamp(1rem, 2vw, 1.2rem)', color: 'rgba(255,255,255,0.55)',
+            fontSize: 'clamp(1rem, 2vw, 1.2rem)', color: '#5f6b8d',
             maxWidth: 620, lineHeight: 1.65, margin: '0 0 2.5rem',
             position: 'relative', zIndex: 1,
           }}
@@ -357,7 +336,7 @@ export default function HomePage({ onStart }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 0.8 }}
-          style={{ marginTop: '3.5rem', color: 'rgba(255,255,255,0.2)', fontSize: '0.75rem', letterSpacing: '0.1em', position: 'relative', zIndex: 1 }}
+          style={{ marginTop: '3.5rem', color: '#9ca3af', fontSize: '0.75rem', letterSpacing: '0.1em', position: 'relative', zIndex: 1 }}
         >
           <div style={{ animation: 'ft-float 2s ease-in-out infinite' }}>▼</div>
         </motion.div>
@@ -379,10 +358,10 @@ export default function HomePage({ onStart }) {
           {/* Section header */}
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
             <span className="ft-section-label">Platform Features</span>
-            <h2 style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', fontWeight: 800, letterSpacing: '-0.03em', color: 'rgba(255,255,255,0.95)', margin: '0 0 0.75rem' }}>
+            <h2 style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', fontWeight: 800, letterSpacing: '-0.03em', color: '#102849', margin: '0 0 0.75rem' }}>
               Everything a student needs
             </h2>
-            <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '1rem', maxWidth: 520, margin: '0 auto', lineHeight: 1.65 }}>
+            <p style={{ color: '#5f6b8d', fontSize: '1rem', maxWidth: 520, margin: '0 auto', lineHeight: 1.65 }}>
               From personality profiling to AI counselling — all tools in one platform, designed specifically for the Indian education system.
             </p>
           </div>
@@ -408,10 +387,10 @@ export default function HomePage({ onStart }) {
         <div style={{ maxWidth: 760, margin: '0 auto', position: 'relative' }}>
           <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
             <span className="ft-section-label">How It Works</span>
-            <h2 style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', fontWeight: 800, letterSpacing: '-0.03em', color: 'rgba(255,255,255,0.95)', margin: '0 0 0.75rem' }}>
+            <h2 style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', fontWeight: 800, letterSpacing: '-0.03em', color: '#102849', margin: '0 0 0.75rem' }}>
               From profile to roadmap
             </h2>
-            <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '1rem', lineHeight: 1.65, margin: 0 }}>
+            <p style={{ color: '#5f6b8d', fontSize: '1rem', lineHeight: 1.65, margin: 0 }}>
               Four simple steps to a clear career direction.
             </p>
           </div>
@@ -433,8 +412,8 @@ export default function HomePage({ onStart }) {
           transition={{ duration: 0.6 }}
           style={{
             maxWidth: 900, margin: '0 auto',
-            background: 'rgba(255,255,255,0.04)',
-            border: '1px solid rgba(0,212,255,0.15)',
+            background: '#ffffff',
+            border: '1px solid #dce4f5',
             borderRadius: 24,
             padding: 'clamp(2rem, 4vw, 3rem)',
             backdropFilter: 'blur(16px)',
@@ -448,13 +427,13 @@ export default function HomePage({ onStart }) {
             style={{ width: 80, height: 80, objectFit: 'cover', borderRadius: 16, border: '1px solid rgba(0,212,255,0.2)', flexShrink: 0 }}
           />
           <div style={{ flex: 1, minWidth: 240 }}>
-            <div style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#00d4ff', marginBottom: '0.4rem' }}>
+            <div style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#2c5492', marginBottom: '0.4rem' }}>
               About EdCIL
             </div>
-            <h3 style={{ margin: '0 0 0.6rem', fontSize: '1.2rem', fontWeight: 700, color: 'rgba(255,255,255,0.95)' }}>
+            <h3 style={{ margin: '0 0 0.6rem', fontSize: '1.2rem', fontWeight: 700, color: '#102849' }}>
               A Government of India Enterprise
             </h3>
-            <p style={{ margin: 0, color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem', lineHeight: 1.7 }}>
+            <p style={{ margin: 0, color: '#5f6b8d', fontSize: '0.9rem', lineHeight: 1.7 }}>
               EdCIL (India) Limited is a Mini Ratna enterprise under the Ministry of Education, Government of India. Manzil is EdCIL's initiative to democratise career guidance for every student across India — free, unbiased, and built around the Indian education ecosystem.
             </p>
           </div>
@@ -471,8 +450,8 @@ export default function HomePage({ onStart }) {
           style={{
             maxWidth: 700, margin: '0 auto', textAlign: 'center',
             padding: '3rem 2rem',
-            background: 'linear-gradient(135deg, rgba(0,212,255,0.07), rgba(139,92,246,0.07))',
-            border: '1px solid rgba(0,212,255,0.18)',
+            background: '#f0f4ff',
+            border: '1px solid #dce4f5',
             borderRadius: 24,
             backdropFilter: 'blur(16px)',
             boxShadow: '0 0 60px rgba(0,212,255,0.06)',
@@ -483,10 +462,10 @@ export default function HomePage({ onStart }) {
           {/* bg orb */}
           <div style={{ position: 'absolute', top: '-40%', right: '-10%', width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(circle, rgba(139,92,246,0.12) 0%, transparent 70%)', filter: 'blur(40px)', pointerEvents: 'none' }} />
           <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>🎯</div>
-          <h2 style={{ margin: '0 0 0.75rem', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, letterSpacing: '-0.03em', color: 'rgba(255,255,255,0.95)' }}>
+          <h2 style={{ margin: '0 0 0.75rem', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, letterSpacing: '-0.03em', color: '#102849' }}>
             Ready to find your path?
           </h2>
-          <p style={{ margin: '0 auto 2rem', color: 'rgba(255,255,255,0.5)', fontSize: '1rem', lineHeight: 1.65, maxWidth: 480 }}>
+          <p style={{ margin: '0 auto 2rem', color: '#5f6b8d', fontSize: '1rem', lineHeight: 1.65, maxWidth: 480 }}>
             Complete your profile in under 5 minutes and get personalised career recommendations built around who you actually are.
           </p>
           <button
@@ -496,7 +475,7 @@ export default function HomePage({ onStart }) {
           >
             Start Counselling →
           </button>
-          <p style={{ marginTop: '1rem', color: 'rgba(255,255,255,0.25)', fontSize: '0.8rem' }}>
+          <p style={{ marginTop: '1rem', color: '#9ca3af', fontSize: '0.8rem' }}>
             Free · No login required to explore
           </p>
         </motion.div>
@@ -504,10 +483,10 @@ export default function HomePage({ onStart }) {
 
       {/* ── Footer ─────────────────────────────────────────────────────── */}
       <footer style={{
-        borderTop: '1px solid rgba(255,255,255,0.06)',
+        borderTop: '1px solid #e8edf5',
         padding: '2rem 1.5rem',
         textAlign: 'center',
-        color: 'rgba(255,255,255,0.25)',
+        color: '#9ca3af',
         fontSize: '0.8rem',
         position: 'relative', zIndex: 1,
       }}>

@@ -1,0 +1,200 @@
+.manzil-landing {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: #102849;
+  background: #ffffff;
+}
+
+.manzil-landing-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.manzil-landing-orb {
+  display: none;
+}
+
+.manzil-landing-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(44, 84, 146, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(44, 84, 146, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.manzil-landing-header,
+.manzil-landing-main,
+.manzil-landing-footer {
+  position: relative;
+  z-index: 1;
+}
+
+.manzil-landing-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem clamp(1.25rem, 4vw, 3rem);
+  border-bottom: 1px solid #e8edf5;
+  background: #ffffff;
+}
+
+.manzil-landing-logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #102849;
+}
+
+.manzil-landing-tag {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #5f6b8d;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.manzil-landing-main {
+  flex: 1;
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 4rem) clamp(1.25rem, 4vw, 2rem) 3rem;
+}
+
+.manzil-landing-hero {
+  max-width: 720px;
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+.manzil-landing-kicker {
+  display: inline-block;
+  margin: 0 0 1rem;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #2c5492;
+  background: rgba(44, 84, 146, 0.07);
+  border: 1px solid rgba(44, 84, 146, 0.15);
+  border-radius: 999px;
+}
+
+.manzil-landing-title {
+  margin: 0 0 1.25rem;
+  font-size: clamp(2.1rem, 5vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: #102849;
+}
+
+.manzil-landing-title span {
+  display: block;
+  color: #2c5492;
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+}
+
+.manzil-landing-desc {
+  margin: 0 0 2rem;
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  line-height: 1.75;
+  color: #4b5563;
+  max-width: 640px;
+}
+
+.manzil-landing-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.95rem 1.75rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  background: #2c5492;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(44, 84, 146, 0.22);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.manzil-landing-cta:hover {
+  background: #233a72;
+  box-shadow: 0 12px 32px rgba(44, 84, 146, 0.3);
+}
+
+.manzil-landing-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.manzil-feature-card {
+  padding: 1.5rem 1.35rem;
+  background: #ffffff;
+  border: 1px solid #e8edf5;
+  border-top: 2px solid #2c5492;
+  border-radius: 0;
+  box-shadow: 0 4px 16px rgba(44, 84, 146, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.manzil-feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(44, 84, 146, 0.12);
+}
+
+.manzil-feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  background: rgba(44, 84, 146, 0.07);
+  border-radius: 10px;
+  border: 1px solid rgba(44, 84, 146, 0.1);
+}
+
+.manzil-feature-card h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #102849;
+}
+
+.manzil-feature-card p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: #5f6b8d;
+}
+
+.manzil-landing-footer {
+  padding: 1.25rem clamp(1.25rem, 4vw, 3rem);
+  text-align: center;
+  border-top: 1px solid #e8edf5;
+  background: #ffffff;
+}
+
+.manzil-landing-footer p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+@media (max-width: 640px) {
+  .manzil-landing-cta {
+    width: 100%;
+    justify-content: center;
+  }
+}

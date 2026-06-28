@@ -8,6 +8,7 @@ import { getSmartRecommendations, getMyProfile } from '../api/client.js'
 import EdCilLogo from '../assets/edcil.jpeg'
 import '../styles/futuristic.css'
 import { APTITUDE_URL } from '../config.js'
+import ManzilHeader from '../components/ManzilHeader'
 import {
   RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
   BarChart, Bar, XAxis, YAxis, Tooltip, Legend, Cell,
@@ -309,45 +310,39 @@ export default function Dashboard({ userName }) {
   return (
     <div className="ft-dashboard-bg">
       {/* ─── Navbar ─── */}
-      <header className={`ft-navbar ${navScrolled ? 'ft-navbar-scrolled' : ''}`}>
-        <div className="ft-nav-logo">Manzil</div>
-        <nav style={{ display: 'flex', gap: '1.25rem', alignItems: 'center' }} aria-label="Primary">
-          <a onClick={() => { window.history.pushState({}, '', '/careers'); window.dispatchEvent(new PopStateEvent('popstate')) }} className="ft-nav-link">Career Library</a>
-          <a onClick={() => { window.history.pushState({}, '', '/exams'); window.dispatchEvent(new PopStateEvent('popstate')) }} className="ft-nav-link">Exam Explorer</a>
-          {profile?.riasec_scores && (
-            <a onClick={() => { window.history.pushState({}, '', '/report'); window.dispatchEvent(new PopStateEvent('popstate')) }} className="ft-nav-link">My Report</a>
-          )}
-          <button
-            onClick={handleThemeToggle}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              cursor: 'pointer',
-              fontSize: '1.25rem',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: 4,
-              color: 'var(--ft-neon-cyan)',
-              filter: 'drop-shadow(0 0 4px var(--ft-neon-cyan))',
-              transition: 'transform 0.3s ease',
-              marginRight: '0.5rem',
-            }}
-            aria-label="Toggle Theme"
-            onMouseEnter={(e) => e.currentTarget.style.transform = 'rotate(20deg)'}
-            onMouseLeave={(e) => e.currentTarget.style.transform = 'rotate(0deg)'}
-          >
-            {isDark ? '☀️' : '🌙'}
-          </button>
-          <div style={{
-            width: 36, height: 36, borderRadius: 999,
-            background: 'rgba(0,212,255,0.12)',
-            border: '1px solid rgba(0,212,255,0.2)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            color: '#00d4ff', fontWeight: 700, fontSize: 14,
-          }} title={name || 'Profile'}>{(name && name[0]) || 'P'}</div>
-        </nav>
-      </header>
+      <ManzilHeader
+        title="Manzil"
+        right={(
+          <nav className="manzil-header-nav" aria-label="Primary">
+            <button type="button" className="manzil-header-link" onClick={() => { window.history.pushState({}, '', '/careers'); window.dispatchEvent(new PopStateEvent('popstate')) }}>Career Library</button>
+            <button type="button" className="manzil-header-link" onClick={() => { window.history.pushState({}, '', '/exams'); window.dispatchEvent(new PopStateEvent('popstate')) }}>Exam Explorer</button>
+            {profile?.riasec_scores && (
+              <button type="button" className="manzil-header-link" onClick={() => { window.history.pushState({}, '', '/report'); window.dispatchEvent(new PopStateEvent('popstate')) }}>My Report</button>
+            )}
+            <button
+              type="button"
+              onClick={handleThemeToggle}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                fontSize: '1.15rem',
+                padding: 4,
+              }}
+              aria-label="Toggle Theme"
+            >
+              {isDark ? '☀️' : '🌙'}
+            </button>
+            <div style={{
+              width: 36, height: 36, borderRadius: 999,
+              background: '#eaf1fb',
+              border: '1px solid #dce4f5',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              color: '#2c5492', fontWeight: 700, fontSize: 14,
+            }} title={name || 'Profile'}>{(name && name[0]) || 'P'}</div>
+          </nav>
+        )}
+      />
 
       {/* ─── Fresh Test Banner ─── */}
       {freshTest && (
@@ -1018,16 +1013,20 @@ export default function Dashboard({ userName }) {
           FOOTER
           ═══════════════════════════════════════════════════════════════════ */}
       <footer style={{
-        background: 'rgba(8,12,36,0.8)',
-        borderTop: '1px solid rgba(255,255,255,0.06)',
-        color: 'rgba(255,255,255,0.85)',
+        background: '#102849',
+        borderTop: '1px solid #23406d',
+        color: '#ffffff',
         padding: '2.5rem 1.5rem',
-        backdropFilter: 'blur(12px)',
-      }}>
+}}>
         <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', gap: 24, alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap' }}>
           <div style={{ flex: '0 0 260px' }}>
             <div style={{ fontWeight: 800, fontSize: 20, color: '#00d4ff', textShadow: '0 0 20px rgba(0,212,255,0.3)' }}>Manzil</div>
-            <div style={{ marginTop: 10, opacity: 0.7, fontSize: '0.9rem', lineHeight: 1.5 }}>Helping Indian students find their path.</div>
+            <div style={{
+              marginTop: 10,
+              color: 'rgba(255,255,255,0.82)',
+              fontSize: '0.9rem',
+              lineHeight: 1.5
+              }}>Helping Indian students find their path.</div>
           </div>
 
           <div style={{ display: 'flex', gap: 48, flex: 1, justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -1080,7 +1079,7 @@ export default function Dashboard({ userName }) {
           marginTop: 24,
           paddingTop: 16,
           textAlign: 'center',
-          color: 'rgba(255,255,255,0.4)',
+          color: 'rgba(255,255,255,0.72)',
           fontSize: '0.82rem',
         }}>
           2026 Manzil. All rights reserved.
