@@ -432,40 +432,22 @@ export default function ReportPage() {
   return (
     <div className="ft-dashboard-bg" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', color: 'var(--ft-text-primary)', fontFamily: 'Inter, system-ui, sans-serif' }}>
 
-      {/* Header */}
-      <header className="ft-navbar ft-navbar-scrolled" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 24px', height: 70 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <button
-            onClick={() => { window.history.pushState({}, '', '/dashboard'); window.dispatchEvent(new PopStateEvent('popstate')); }}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              cursor: 'pointer',
-              color: 'var(--ft-neon-cyan)',
-              fontWeight: 800,
-              fontSize: 14,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 4
-            }}
-          >
-            ← Back
-          </button>
-          <h1 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: 'var(--ft-text-primary)' }}>Manzil Career Report</h1>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <LanguageToggle className="no-print" />
-          <button
-            type="button"
-            className="manzil-header-btn"
-            onClick={() => window.print()}
-            className="ft-button-primary"
-            style={{ padding: '0.5rem 1.2rem', fontSize: '0.85rem' }}
-          >
-            ⬇ Download PDF
-          </button>
-        </div>
-      </header>
+      <ManzilHeader
+        title="Career Report"
+        right={(
+          <>
+            <LanguageToggle className="no-print" />
+            <button
+              type="button"
+              className="manzil-header-btn"
+              onClick={() => window.print()}
+              style={{ padding: '0.5rem 1.2rem', fontSize: '0.85rem' }}
+            >
+              ⬇ Download PDF
+            </button>
+          </>
+        )}
+      />
 
       <div style={{ maxWidth: 960, margin: '2rem auto', padding: '0 1rem', width: '100%' }}>
 

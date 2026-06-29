@@ -5,7 +5,7 @@ import RiasecGate from './RiasecGate.jsx'
 import CareerMindMap from '../components/CareerMindMap.jsx'
 import { GlassCard, RadialGauge, KPICard, SectionHeader, FuturisticTooltip, AnimatedBar, GradientDefs, RIASEC_THEME } from '../components/FuturisticCharts.jsx'
 import { getSmartRecommendations, getMyProfile } from '../api/client.js'
-import EdCilLogo from '../assets/edcil.jpeg'
+import EdCilLogo from '../assets/edcil-logo.png'
 import '../styles/futuristic.css'
 import { APTITUDE_URL } from '../config.js'
 import ManzilHeader from '../components/ManzilHeader'
@@ -345,46 +345,6 @@ export default function Dashboard({ userName }) {
           </nav>
         )}
       />
-<header className={`ft-navbar ${navScrolled ? 'ft-navbar-scrolled' : ''}`}>
-        <div className="ft-nav-logo">Manzil</div>
-        <nav style={{ display: 'flex', gap: '1.25rem', alignItems: 'center' }} aria-label="Primary">
-          <a onClick={() => { window.history.pushState({}, '', '/careers'); window.dispatchEvent(new PopStateEvent('popstate')) }} className="ft-nav-link">Career Library</a>
-          <a onClick={() => { window.history.pushState({}, '', '/exams'); window.dispatchEvent(new PopStateEvent('popstate')) }} className="ft-nav-link">Exam Explorer</a>
-          {profile?.riasec_scores && (
-            <a onClick={() => { window.history.pushState({}, '', '/report'); window.dispatchEvent(new PopStateEvent('popstate')) }} className="ft-nav-link">My Report</a>
-          )}
-          <LanguageToggle style={{ marginRight: '0.5rem' }} />
-          <button
-            onClick={handleThemeToggle}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              cursor: 'pointer',
-              fontSize: '1.25rem',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: 4,
-              color: 'var(--ft-neon-cyan)',
-              filter: 'drop-shadow(0 0 4px var(--ft-neon-cyan))',
-              transition: 'transform 0.3s ease',
-              marginRight: '0.5rem',
-            }}
-            aria-label="Toggle Theme"
-            onMouseEnter={(e) => e.currentTarget.style.transform = 'rotate(20deg)'}
-            onMouseLeave={(e) => e.currentTarget.style.transform = 'rotate(0deg)'}
-          >
-            {isDark ? '☀️' : '🌙'}
-          </button>
-          <div style={{
-            width: 36, height: 36, borderRadius: 999,
-            background: 'rgba(0,212,255,0.12)',
-            border: '1px solid rgba(0,212,255,0.2)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            color: '#00d4ff', fontWeight: 700, fontSize: 14,
-          }} title={name || 'Profile'}>{(name && name[0]) || 'P'}</div>
-        </nav>
-      </header>
 
       {/* ─── Fresh Test Banner ─── */}
       {freshTest && (
@@ -409,10 +369,20 @@ export default function Dashboard({ userName }) {
         </div>
       )}
 
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '2rem', marginBottom: '1rem' }}>
+        <img
+          src={EdCilLogo}
+          alt="EdCIL Logo"
+          style={{
+            height: 90,
+            width: 90,
+            objectFit: 'contain',
+          }}
+        />
+      </div>
+
       {/* ─── Hero Section ─── */}
       <HeroSection
-        logoSrc={EdCilLogo}
-        logoAlt="EdCIL Logo"
         title={heading}
         subtitle={heroSubtitle}
         primaryText={'Chat with AI'}
