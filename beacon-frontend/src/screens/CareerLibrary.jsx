@@ -38,6 +38,18 @@ export default function CareerLibrary() {
     };
   }, []);
 
+  // Animate cards into view when they become visible
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      }),
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll('.ft-animate-in:not(.visible)').forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [careersData, filter]);
+
   const filtered = careersData.filter(c => filter === 'All' ? true : c.stream === filter);
 
   return (

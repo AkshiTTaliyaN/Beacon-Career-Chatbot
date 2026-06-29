@@ -159,6 +159,18 @@ export default function ExamExplorer() {
     }
   ];
 
+  // Animate cards into view when they become visible
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      }),
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll('.ft-animate-in:not(.visible)').forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [stream, klass]);
+
   const visible = examsData.filter(e => {
     const streamOk = stream === 'All' ? true : e.stream === stream;
     const classOk = klass === 'All' ? true : (e.eligibleClasses || []).includes(klass);

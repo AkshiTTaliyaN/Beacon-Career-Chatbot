@@ -36,8 +36,6 @@ export default function LandingPage({ onStart }) {
         right={(
           <nav className="landing-nav" aria-label="Landing navigation">
             <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
           </nav>
         )}
       />
