@@ -1,11 +1,10 @@
-import { Download, Briefcase, GraduationCap, Target, Users, Compass, AlertTriangle, CheckCircle2, Calendar, MapPin, BookOpen, TrendingUp, Heart, FileText, Sparkles, Brain } from "lucide-react";
+import { Download, Briefcase, GraduationCap, Users, Compass, AlertTriangle, CheckCircle2, MapPin, BookOpen, Heart, Sparkles, Brain } from "lucide-react";
 import { RIASEC_COLORS } from "../constants/riasecColors";
 import "./ResultPage.css";
 import { AnimatePresence, motion } from "framer-motion";
 import FloatingBackground from "../components/ui/FloatingBackground";
 import GlassCard from "../components/ui/GlassCard";
 import ConfettiBurst from "../components/ui/ConfettiBurst";
-import TimelineCard from "../components/ui/TimelineCard";
 import CareerAvatar from "../components/ui/CareerAvatar";
 import ManzilHeader from "../components/ManzilHeader";
 
@@ -220,12 +219,9 @@ export default function ResultPage({
   const challenges   = CHALLENGES[primary] || [];
   const workEnv      = WORK_ENV[primary] || "";
   const parentNote   = PARENT_NOTES[primary] || "";
-  const actionPlan   = ACTION_PLAN[primary] || [];
-  const admission    = ADMISSION_PROCESS[result.stream] || ADMISSION_PROCESS["PCM"];
   const broaderMap   = BROADER_CAREERS[primary] || {};
   const dashboardUrl = `${beaconOrigin || "http://localhost:5173"}/dashboard?scores_written=1`;
   const riasecScores = result.riasec_scores ?? result.scores ?? [];
-  const entranceExams = result.entrance_exams ?? [];
   const skillsToBuild = result.skills_to_build ?? [];
 
   // New fields from updated backend
@@ -503,66 +499,6 @@ export default function ResultPage({
           <div className="work-env-card">
             <MapPin size={20} className="env-icon" />
             <p>{workEnv}</p>
-          </div>
-        </section>
-
-        <hr className="divider" />
-
-
-
-        {/* ── Entrance Exams ── */}
-        <section className="result-section">
-          <h2 className="section-title" style={{ color: "#102849" }}>Entrance Exams to Target</h2>
-          <p className="section-sub" style={{ color: "#5F6B8D" }}>Based on your stream ({result.stream}) and career direction, these are the key exams to prepare for:</p>
-          <div className="exam-grid">
-            {(entranceExams || []).map((exam, i) => (
-              <div key={i} className="exam-card">
-                <Target size={18} />
-                <h4>{exam.name}</h4>
-                <p>{exam.desc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <hr className="divider" />
-
-        {/* ── Admission Process ── */}
-        <section className="result-section">
-          <h2 className="section-title" style={{ color: "#102849" }}>Navigating the Admission Process</h2>
-          <p className="section-sub" style={{ color: "#5F6B8D" }}>Here is what the admission journey looks like for your stream ({result.stream}):</p>
-          <div className="admission-card">
-            <div className="admission-block">
-              <h4><Calendar size={16} /> Timeline</h4>
-              <p>{admission.timeline}</p>
-            </div>
-            <div className="admission-block">
-              <h4><FileText size={16} /> Documents needed</h4>
-              <p>{admission.docs}</p>
-            </div>
-            <div className="admission-block">
-              <h4><TrendingUp size={16} /> Typical cutoffs</h4>
-              <p>{admission.cutoffs}</p>
-            </div>
-          </div>
-        </section>
-
-        <hr className="divider" />
-
-        {/* ── Action Plan ── */}
-        <section className="result-section">
-          <h2 className="section-title" style={{ color: "#102849" }}>Your Personalised Action Plan</h2>
-          <p className="section-sub" style={{ color: "#5F6B8D" }}>A step-by-step roadmap from now until college — built around your <strong>{primary}</strong> personality:</p>
-          <div className="action-timeline">
-            {(actionPlan || []).map((phase, i) => (
-              <TimelineCard
-                key={i}
-                icon={<Compass size={18} style={{ color: primaryColor }} />}
-                phaseTitle={phase.phase}
-                items={phase.actions}
-                accentColor={primaryColor}
-              />
-            ))}
           </div>
         </section>
 

@@ -193,17 +193,6 @@ def generate_pdf(result: dict) -> bytes:
     story.append(HRFlowable(width="100%", thickness=1, color=BORDER_COLOR))
     story.append(Spacer(1, 0.4*cm))
 
-    # ── ENTRANCE EXAMS ───────────────────────────────────────────────────────
-    story.append(Paragraph("Entrance Exams to Target", h2_style))
-    for exam in result.get("entrance_exams", []):
-        ex_name = safe_html(exam.get("name", ""))
-        ex_desc = safe_html(exam.get("desc", ""))
-        story.append(Paragraph(f"• <b>{ex_name}</b> — {ex_desc}", body_style))
-        story.append(Spacer(1, 3))
-
-    story.append(Spacer(1, 0.4*cm))
-    story.append(HRFlowable(width="100%", thickness=1, color=BORDER_COLOR))
-    story.append(Spacer(1, 0.4*cm))
 
     # ── SKILLS TO BUILD ──────────────────────────────────────────────────────
     story.append(Paragraph("Skills to Build Now", h2_style))

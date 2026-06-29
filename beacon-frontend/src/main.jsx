@@ -5,9 +5,13 @@ import App from "./App.jsx";
 import Dashboard from "./screens/Dashboard.jsx";
 import { LanguageProvider } from "./context/LanguageContext.jsx";
 
+let root = null;
+
 function renderApp() {
   const path = window.location.pathname || '/';
-  const root = createRoot(document.getElementById("root"));
+  if (!root) {
+    root = createRoot(document.getElementById("root"));
+  }
 
   if (path === '/dashboard' || path.startsWith('/dashboard')) {
     root.render(

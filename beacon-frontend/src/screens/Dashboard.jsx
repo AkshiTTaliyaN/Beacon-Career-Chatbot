@@ -1,15 +1,14 @@
-import { useEffect, useState, useRef, useCallback } from 'react'
+import { useEffect, useState } from 'react'
 import HeroSection from '../components/HeroSection.jsx'
 import PsychometricTest from '../components/PsychometricTest.jsx'
 import RiasecGate from './RiasecGate.jsx'
 import CareerMindMap from '../components/CareerMindMap.jsx'
-import { GlassCard, RadialGauge, KPICard, SectionHeader, FuturisticTooltip, AnimatedBar, GradientDefs, RIASEC_THEME } from '../components/FuturisticCharts.jsx'
+import { GlassCard, RadialGauge, KPICard, SectionHeader, RIASEC_THEME } from '../components/FuturisticCharts.jsx'
 import { getSmartRecommendations, getMyProfile } from '../api/client.js'
 import ManzilLogo from '../assets/manzil-logo.png'
 import '../styles/futuristic.css'
 import { APTITUDE_URL } from '../config.js'
 import ManzilHeader from '../components/ManzilHeader'
-import LanguageToggle from '../components/LanguageToggle.jsx'
 import {
   RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
   BarChart, Bar, XAxis, YAxis, Tooltip, Legend, Cell,
@@ -180,13 +179,6 @@ function getProfileCompletion(profile) {
   return Math.round((filled.length / fields.length) * 100);
 }
 
-/* ─── Subject Bar Colors (futuristic) ─────────────────────────────── */
-function getSubjectBarColor(rating) {
-  const isDark = !document.body.classList.contains('light-theme');
-  if (rating >= 4) return '#00d4ff';
-  if (rating === 3) return '#8b5cf6';
-  return isDark ? 'rgba(255,255,255,0.25)' : 'rgba(15,23,42,0.15)';
-}
 
 export default function Dashboard({ userName }) {
   const urlParams = new URLSearchParams(window.location.search)
@@ -194,13 +186,7 @@ export default function Dashboard({ userName }) {
   const hasProfileToken = Boolean(localStorage.getItem('beacon_token'))
 
   const name = userName || window.localStorage.getItem('userName') || ''
-  const [navScrolled, setNavScrolled] = useState(false)
   const isReturning = window.localStorage.getItem('beaconReturning') === '1'
-
-  const [isDark, setIsDark] = useState(() => {
-    const saved = localStorage.getItem('beacon-theme');
-    return saved !== 'light';
-  });
 
   useEffect(() => {
     const saved = localStorage.getItem('beacon-theme');
@@ -210,18 +196,6 @@ export default function Dashboard({ userName }) {
       document.body.classList.remove('light-theme');
     }
   }, []);
-
-  const handleThemeToggle = () => {
-    const newDark = !isDark;
-    setIsDark(newDark);
-    if (newDark) {
-      document.body.classList.remove('light-theme');
-      localStorage.setItem('beacon-theme', 'dark');
-    } else {
-      document.body.classList.add('light-theme');
-      localStorage.setItem('beacon-theme', 'light');
-    }
-  };
 
   // ── Career Recommendations state ───────────────────────────────────────────────────
   const [recs, setRecs] = useState(null)          // null=loading, []=empty
@@ -255,8 +229,6 @@ export default function Dashboard({ userName }) {
   }, [freshTest])
 
   useEffect(() => {
-    const handleScroll = () => setNavScrolled(window.scrollY > 8)
-
     const observer = new IntersectionObserver(
       (entries, obs) => {
         entries.forEach((entry) => {
@@ -276,13 +248,10 @@ export default function Dashboard({ userName }) {
     const mutationObserver = new MutationObserver(observeFadeUps)
     observeFadeUps()
     mutationObserver.observe(document.body, { childList: true, subtree: true })
-    handleScroll()
-    window.addEventListener('scroll', handleScroll)
 
     return () => {
       observer.disconnect()
       mutationObserver.disconnect()
-      window.removeEventListener('scroll', handleScroll)
     }
   }, [])
 

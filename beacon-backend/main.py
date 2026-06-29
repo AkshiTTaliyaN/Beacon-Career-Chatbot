@@ -21,16 +21,24 @@ app = FastAPI(
     version="1.0.0"
 )
 
+allowed_origins = [
+    "http://localhost:5173",          # local dev
+    "http://127.0.0.1:5173",
+    "http://localhost:3001",          # aptitude-frontend
+    "http://127.0.0.1:3001",
+    "http://localhost:5174",          # chatbot-frontend
+    "http://127.0.0.1:5174",
+    "http://localhost:4173",          # vite preview
+    "https://manzil-career-counselling.vercel.app",  # Vercel frontend
+]
+env_origins = os.getenv("ALLOWED_ORIGINS")
+if env_origins:
+    additional = [o.strip() for o in env_origins.split(",") if o.strip()]
+    allowed_origins.extend(additional)
+
 app.add_middleware(
     CORSMiddleware,
-    # Explicit origins — update VERCEL_URL once you deploy the frontend
-    allow_origins=[
-        "http://localhost:5173",          # local dev
-        "http://localhost:4173",          # vite preview
-        # "https://your-app.vercel.app",  # TODO: replace with your actual Vercel URL after deploy
-        "https://manzil-career-counselling.vercel.app",  # Vercel frontend
-    ],
-    # Fallback regex covers Vercel preview deployments (random subdomain URLs)
+    allow_origins=allowed_origins,
     allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
