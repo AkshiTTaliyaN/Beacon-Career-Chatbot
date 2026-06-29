@@ -70,20 +70,34 @@ export default function ExpertSystemScreen() {
   useEffect(() => {
     if (!selectedCareer) return;
 
-    setLoading(true);
-    setError(null);
-    setCheckedItems({}); // reset checklist
+    let active = true;
+    const fetchConsultation = async () => {
+      await Promise.resolve();
+      if (!active) return;
 
-    consultExpert(selectedCareer)
-      .then((res) => {
-        setConsultation(res);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error('Failed to run consultation:', err);
-        setError('Could not compile the expert diagnostic. Make sure your onboarding profile is complete.');
-        setLoading(false);
-      });
+      setLoading(true);
+      setError(null);
+      setCheckedItems({}); // reset checklist
+
+      try {
+        const res = await consultExpert(selectedCareer);
+        if (active) {
+          setConsultation(res);
+          setLoading(false);
+        }
+      } catch (err) {
+        if (active) {
+          console.error('Failed to run consultation:', err);
+          setError('Could not compile the expert diagnostic. Make sure your onboarding profile is complete.');
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchConsultation();
+    return () => {
+      active = false;
+    };
   }, [selectedCareer]);
 
   // Handle dropdown or backup career click
@@ -149,7 +163,7 @@ export default function ExpertSystemScreen() {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid #ddd', paddingBottom: 15, marginBottom: 20 }}>
             <div>
               <h2 style={{ margin: 0, color: '#0f172a' }}>MANZIL CAREER PLATFORM</h2>
-              <span style={{ fontSize: 12, color: '#64748b' }}>Ministry of Education Initiatives — EdCil India</span>
+              <span style={{ fontSize: 12, color: '#64748b' }}>Ministry of Education Initiatives — EdCil</span>
             </div>
             <img src={EdCilLogo} alt="EdCil" style={{ height: 40 }} />
           </div>

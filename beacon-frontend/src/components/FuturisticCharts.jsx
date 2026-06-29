@@ -74,14 +74,14 @@ export function useCountUp(target, duration = 1200) {
   useEffect(() => {
     // Guard: nothing to animate
     if (target == null || target === 0) {
-      setValue(0);
-      return;
+      const timer = setTimeout(() => setValue(0), 0);
+      return () => clearTimeout(timer);
     }
 
     const numericTarget = Number(target);
     if (Number.isNaN(numericTarget)) {
-      setValue(0);
-      return;
+      const timer = setTimeout(() => setValue(0), 0);
+      return () => clearTimeout(timer);
     }
 
     startTimeRef.current = null;

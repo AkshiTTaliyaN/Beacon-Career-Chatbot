@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { ED_CIL_THEME } from '../theme.js'
 import { APTITUDE_URL } from '../config.js'
+import BilingualText from './BilingualText.jsx'
 
 
 const COLORS = {
@@ -61,11 +62,11 @@ function ScaleInput({ value, onChange }) {
         </button>
       ))}
       <div style={{ marginLeft: '0.5rem', fontSize: '0.8rem', color: COLORS.lightMuted, display: 'flex', alignItems: 'center' }}>
-        {value === 1 && 'Not interested'}
-        {value === 2 && 'Somewhat'}
-        {value === 3 && 'Neutral'}
-        {value === 4 && 'Interested'}
-        {value === 5 && 'Very interested'}
+        {value === 1 && <BilingualText text="Not interested" />}
+        {value === 2 && <BilingualText text="Somewhat" />}
+        {value === 3 && <BilingualText text="Neutral" />}
+        {value === 4 && <BilingualText text="Interested" />}
+        {value === 5 && <BilingualText text="Very interested" />}
       </div>
     </div>
   )
@@ -120,16 +121,24 @@ export default function PsychometricTest({ isEmbedded = false, hasResults = fals
       <section style={{ maxWidth: 1100, margin: '2rem auto', padding: '0 1rem' }}>
         <div style={{ background: COLORS.white, borderRadius: 12, padding: '2rem', boxShadow: '0 6px 18px rgba(44,84,146,0.06)', border: `1px solid ${ED_CIL_THEME.border}` }}>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '3rem', fontWeight: 800, color: COLORS.navy, marginBottom: '0.5rem' }}>{topType}</div>
-            <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: COLORS.navy, margin: 0 }}>{result.name} Type</h2>
-            <p style={{ marginTop: '1rem', color: COLORS.muted, lineHeight: 1.6, maxWidth: 600, margin: '1rem auto' }}>{result.desc}</p>
+            <div style={{ fontSize: '3rem', fontWeight: 800, color: COLORS.navy, marginBottom: '0.5rem' }}>
+              <BilingualText text={topType} />
+            </div>
+            <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: COLORS.navy, margin: 0 }}>
+              <BilingualText text={result.name} /> <BilingualText text="Type" />
+            </h2>
+            <p style={{ marginTop: '1rem', color: COLORS.muted, lineHeight: 1.6, maxWidth: 600, margin: '1rem auto' }}>
+              <BilingualText text={result.desc} />
+            </p>
 
             <div style={{ marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: `1px solid rgba(44,84,146,0.15)` }}>
-              <h3 style={{ color: COLORS.navy, fontWeight: 700, marginBottom: '1rem' }}>Careers that match your type</h3>
+              <h3 style={{ color: COLORS.navy, fontWeight: 700, marginBottom: '1rem' }}>
+                <BilingualText text="Careers that match your type" />
+              </h3>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1rem' }}>
                 {result.careers.map((career, idx) => (
                   <div key={idx} style={{ padding: '0.75rem', borderRadius: 8, background: 'rgba(44,84,146,0.08)', color: COLORS.navy, fontWeight: 600, textAlign: 'center' }}>
-                    {career}
+                    <BilingualText text={career} />
                   </div>
                 ))}
               </div>
@@ -144,7 +153,7 @@ export default function PsychometricTest({ isEmbedded = false, hasResults = fals
               }}
               style={{ marginTop: '1.5rem', padding: '0.75rem 1.25rem', borderRadius: 10, border: 'none', background: COLORS.navy, color: COLORS.white, fontWeight: 700, cursor: 'pointer' }}
             >
-              Take Test Again
+              <BilingualText text="Take Test Again" />
             </button>
           </div>
         </div>
@@ -156,18 +165,22 @@ export default function PsychometricTest({ isEmbedded = false, hasResults = fals
     return (
       <section style={{ maxWidth: 1100, margin: '2rem auto', padding: '0 1rem' }}>
         <button onClick={() => setTestStarted(false)} style={{ marginBottom: '1rem', padding: '0.5rem 1rem', borderRadius: 8, border: 'none', background: COLORS.lightMuted, color: COLORS.white, fontWeight: 600, cursor: 'pointer' }}>
-          ← Back
+          ← <BilingualText text="Back" />
         </button>
 
         <div style={{ background: COLORS.white, borderRadius: 12, padding: '1.5rem', boxShadow: '0 6px 18px rgba(44,84,146,0.06)' }}>
-          <h2 style={{ color: COLORS.navy, fontWeight: 800, marginBottom: '0.5rem' }}>Manzil Personality Test</h2>
-          <p style={{ color: COLORS.muted, fontSize: '0.95rem', marginBottom: '1.5rem' }}>Answer each question on a scale of 1 (Not interested) to 5 (Very interested)</p>
+          <h2 style={{ color: COLORS.navy, fontWeight: 800, marginBottom: '0.5rem' }}>
+            <BilingualText text="Manzil Personality Test" />
+          </h2>
+          <p style={{ color: COLORS.muted, fontSize: '0.95rem', marginBottom: '1.5rem' }}>
+            <BilingualText text="Answer each question on a scale of 1 (Not interested) to 5 (Very interested)" />
+          </p>
 
           <div style={{ marginBottom: '2rem' }}>
             {QUESTIONS.map((q, idx) => (
               <div key={q.id} style={{ marginBottom: '1.5rem', paddingBottom: '1.5rem', borderBottom: idx < QUESTIONS.length - 1 ? `1px solid rgba(44,84,146,0.12)` : 'none' }}>
                 <div style={{ fontWeight: 600, color: COLORS.navy, marginBottom: '0.5rem' }}>
-                  {idx + 1}. {q.text}
+                  {idx + 1}. <BilingualText text={q.text} />
                 </div>
                 <ScaleInput value={answers[q.id] || 0} onChange={(v) => handleAnswerChange(q.id, v)} />
               </div>
@@ -189,7 +202,13 @@ export default function PsychometricTest({ isEmbedded = false, hasResults = fals
               fontSize: '1rem'
             }}
           >
-            {allAnswered ? 'See Your Results' : `Answer all questions (${Object.keys(answers).filter((k) => answers[k] > 0).length}/${QUESTIONS.length})`}
+            {allAnswered ? (
+              <BilingualText text="See Your Results" />
+            ) : (
+              <>
+                <BilingualText text="Answer all questions" /> ({Object.keys(answers).filter((k) => answers[k] > 0).length}/{QUESTIONS.length})
+              </>
+            )}
           </button>
         </div>
       </section>
@@ -201,12 +220,18 @@ export default function PsychometricTest({ isEmbedded = false, hasResults = fals
     <section style={{ maxWidth: 1100, margin: '2rem auto', padding: '0 1rem' }}>
       <div style={{ background: COLORS.navy, borderRadius: 12, padding: '2rem', color: COLORS.white }}>
         <h2 style={{ margin: 0, fontSize: '1.35rem', fontWeight: 800 }}>
-          {hasResults ? 'Your Personality Report is Ready' : 'Find what career suits you'}
+          {hasResults ? (
+            <BilingualText text="Your Personality Report is Ready" />
+          ) : (
+            <BilingualText text="Find what career suits you" />
+          )}
         </h2>
         <p style={{ marginTop: '0.75rem', fontSize: '1rem', opacity: 0.95 }}>
-          {hasResults
-            ? 'You have already completed the psychometric test. Review your detailed RIASEC personality analysis, subject profile, and recommended careers.'
-            : 'Answer 60 questions and discover your personality type and matching careers — completely free, no login needed'}
+          {hasResults ? (
+            <BilingualText text="You have already completed the psychometric test. Review your detailed RIASEC personality analysis, subject profile, and recommended careers." />
+          ) : (
+            <BilingualText text="Answer 60 questions and discover your personality type and matching careers — completely free, no login needed" />
+          )}
         </p>
         <div style={{ display: 'flex', gap: '1rem', marginTop: '1.25rem', flexWrap: 'wrap' }}>
           {hasResults && (
@@ -226,7 +251,7 @@ export default function PsychometricTest({ isEmbedded = false, hasResults = fals
                 cursor: 'pointer'
               }}
             >
-              View Full Report →
+              <BilingualText text="View Full Report →" />
             </button>
           )}
           <button
@@ -249,7 +274,11 @@ export default function PsychometricTest({ isEmbedded = false, hasResults = fals
               cursor: 'pointer'
             }}
           >
-            {hasResults ? 'Retake the Test' : 'Take the Test'}
+            {hasResults ? (
+              <BilingualText text="Retake the Test" />
+            ) : (
+              <BilingualText text="Take the Test" />
+            )}
           </button>
         </div>
       </div>

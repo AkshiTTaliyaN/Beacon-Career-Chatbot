@@ -94,10 +94,10 @@ const WORK_ENV = {
 const PARENT_NOTES = {
   Investigative: "Your child is a deep thinker — naturally curious, analytical, and motivated by understanding how things work. They will do best in careers that reward intellectual depth and independent problem solving. Support them by encouraging questions, providing access to books, research articles, and projects. Avoid pushing them toward fast-paced sales or routine clerical roles — they will likely feel unfulfilled. Careers in science, research, technology, and medicine align with their natural strengths.",
   Realistic: "Your child is practical and hands-on — they learn best by doing, not by reading or theorising. They thrive when working with tools, systems, and tangible outcomes. Support them with workshops, technical hobbies, or mechanical projects. Engineering, technical fields, and applied sciences suit their personality. Avoid pressuring them into highly abstract or people-heavy roles unless they show genuine interest.",
-  Artistic: "Your child is creative and expressive — they need freedom to imagine, design, and create. Rigid structures and rule-bound environments will drain them. Support them by encouraging creative outlets and respecting their need for self-expression. Careers in design, media, architecture, and creative technology suit them well. India's creative economy is growing rapidly — this is a legitimate, financially viable path.",
+  Artistic: "Your child is creative and expressive — they need freedom to imagine, design, and create. Rigid structures and rule-bound environments will drain them. Support them by encouraging creative outlets and respecting their need for self-expression. Careers in design, media, architecture, and creative technology suit them well. The creative economy is growing rapidly — this is a legitimate, financially viable path.",
   Social: "Your child is empathetic and people-oriented — they are energised by helping others and building relationships. They will find meaning in careers that involve teaching, healing, counselling, or community work. Support them by valuing emotional intelligence as a real skill. Careers in education, healthcare, psychology, and social work suit them deeply. They may need encouragement to also pursue their own goals, not just others'.",
   Enterprising: "Your child is ambitious and naturally driven to lead. They thrive in challenging, fast-paced environments where they can take initiative and influence others. Support them by encouraging leadership roles, public speaking, and business thinking. Careers in business, law, entrepreneurship, and management suit them. They may take risks — guide them, but resist the urge to over-control their decisions.",
-  Conventional: "Your child is precise, organised, and methodical — they excel at structure, accuracy, and consistency. They thrive in stable, well-defined environments. Support them by valuing their reliability and attention to detail. Careers in finance, accounting, administration, and data management align with their strengths. India has strong, secure career paths in these areas — your child is well-suited to them.",
+  Conventional: "Your child is precise, organised, and methodical — they excel at structure, accuracy, and consistency. They thrive in stable, well-defined environments. Support them by valuing their reliability and attention to detail. Careers in finance, accounting, administration, and data management align with their strengths. There are strong, secure career paths in these areas — your child is well-suited to them.",
 };
 
 const ACTION_PLAN = {
@@ -149,7 +149,7 @@ function getExams(stream, primaryCode) {
       { name: "IISER Aptitude Test", desc: "Research-focused BSc / MSc programs" },
     ],
     PCB: [
-      { name: "NEET UG", desc: "MBBS, BDS, BAMS across India" },
+      { name: "NEET UG", desc: "MBBS, BDS, BAMS" },
       { name: "AIIMS", desc: "Top medical institutions" },
       { name: "JIPMER", desc: "Government medical college, Puducherry" },
       { name: "IISER Aptitude Test", desc: "Research-focused BSc / MSc programs" },
@@ -208,7 +208,7 @@ function getSkills(primaryCode, secondaryCode) {
       { name: "Education tools", desc: "Explore tutoring peers to develop teaching skills early." },
     ],
     E: [
-      { name: "Business basics", desc: "Read case studies on Indian startups and entrepreneurs." },
+      { name: "Business basics", desc: "Read case studies on startups and entrepreneurs." },
       { name: "Public speaking", desc: "Join MUN, debate, or school council to build leadership." },
       { name: "Negotiation skills", desc: "Practise decision-making through business simulations and games." },
       { name: "Financial literacy", desc: "Learn personal finance basics: budgeting, savings, and investing." },
@@ -239,7 +239,7 @@ function getClosingNote(primaryName) {
   const notes = {
     Investigative: "Your Investigative personality means you thrive when given complex problems to solve. The careers ahead of you are intellectually rich and financially rewarding. Start building your analytical skills now — learn Python, strengthen your mathematics, and practise real-world data projects. With steady focus and curiosity, the right path will become clear. Share this report with your parents and teachers to plan the next steps together.",
     Realistic: "Your Realistic nature means you are built to create, build, and solve with your hands and mind. Careers in engineering and technology reward exactly the kind of focused, practical thinking you bring. Start with hands-on projects, build your technical foundation, and explore workshops or labs near you. Share this report with your parents and teachers to plan together.",
-    Artistic: "Your Artistic personality is a genuine strength in today's creative economy. Design, media, and content careers are growing fast in India. Start building a portfolio now — even small projects matter. Share this report with your teachers and parents so they understand the exciting paths available to you.",
+    Artistic: "Your Artistic personality is a genuine strength in today's creative economy. Design, media, and content careers are growing fast. Start building a portfolio now — even small projects matter. Share this report with your teachers and parents so they understand the exciting paths available to you.",
     Social: "Your Social personality is your superpower. People-focused careers in education, counselling, healthcare, and social work are both meaningful and in demand. Start practising communication and leadership skills today. Share this report with your parents and teachers to explore the best pathway for you.",
     Enterprising: "Your Enterprising nature means you are made to lead, influence, and build. Business and law careers reward the ambition and drive you naturally have. Start practising leadership and financial thinking today. Share this report with your parents and teachers to map out your journey.",
     Conventional: "Your Conventional strength means you excel at organisation, accuracy, and structured thinking. Finance, accounting, and administrative careers value exactly these qualities. Start building your spreadsheet and numeracy skills today. Share this report with your parents and teachers to plan your path forward.",
@@ -388,7 +388,7 @@ export default function ReportPage() {
   // ── 3. Fetch banner image (only for fresh test results) ──────────
   useEffect(() => {
     if (!freshTest) return;
-    getCareerBannerImage({ query: 'career,success,india,student', width: 900, height: 220 })
+    getCareerBannerImage({ query: 'career,success,student', width: 900, height: 220 })
       .then(url => setBannerImage(url))
       .catch(() => {});
   }, [freshTest]);

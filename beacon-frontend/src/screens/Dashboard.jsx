@@ -985,7 +985,7 @@ export default function Dashboard({ userName }) {
       <section className="ft-animate-in ft-section" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
         <SectionHeader
           title="Find Your Entrance Exam"
-          subtitle="Every major Indian entrance exam in one place — eligibility, dates, and what it leads to."
+          subtitle="Every major entrance exam in one place — eligibility, dates, and what it leads to."
           accentColor="green"
         />
 
@@ -1046,7 +1046,7 @@ export default function Dashboard({ userName }) {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem' }}>
           {[
             { title: 'AI-powered guidance', desc: 'Personalised to your stream and goals', icon: '🤖', accent: '#00d4ff' },
-            { title: 'Covers all major Indian exams', desc: 'From JEE and NEET to CUET and UPSC', icon: '📝', accent: '#00ff88' },
+            { title: 'Covers all major exams', desc: 'From JEE and NEET to CUET and UPSC', icon: '📝', accent: '#00ff88' },
             { title: 'Free psychometric test', desc: 'Get a detailed personality report', icon: '🧠', accent: '#8b5cf6' },
             { title: 'Available 24/7', desc: 'No counsellor booking — instant guidance', icon: '⚡', accent: '#f59e0b' }
           ].map((point, i) => (
@@ -1093,7 +1093,7 @@ export default function Dashboard({ userName }) {
               color: 'rgba(255,255,255,0.82)',
               fontSize: '0.9rem',
               lineHeight: 1.5
-              }}>Helping Indian students find their path.</div>
+              }}>Helping students find their path.</div>
           </div>
 
           <div style={{ display: 'flex', gap: 48, flex: 1, justifyContent: 'center', flexWrap: 'wrap' }}>

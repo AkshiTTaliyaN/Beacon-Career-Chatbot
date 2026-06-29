@@ -38,16 +38,28 @@ export default function CareerLibrary() {
   };
 
   useEffect(() => {
-    setLoading(true);
-    getCareerCatalog()
-      .then(data => {
-        setCareersData(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        setError(err.message || 'Failed to load career library.');
-        setLoading(false);
-      });
+    let active = true;
+    const fetchCatalog = async () => {
+      await Promise.resolve();
+      if (!active) return;
+      setLoading(true);
+      try {
+        const data = await getCareerCatalog();
+        if (active) {
+          setCareersData(data);
+          setLoading(false);
+        }
+      } catch (err) {
+        if (active) {
+          setError(err.message || 'Failed to load career library.');
+          setLoading(false);
+        }
+      }
+    };
+    fetchCatalog();
+    return () => {
+      active = false;
+    };
   }, []);
 
   const filtered = careersData.filter(c => filter === 'All' ? true : c.stream === filter);

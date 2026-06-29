@@ -3,8 +3,8 @@
 export const CLASSES = [9, 10, 11, 12];
 
 export const BOARDS = [
-  { label: "CBSE", value: "CBSE", description: "Central Board — used by most schools across India" },
-  { label: "ICSE", value: "ICSE", description: "Indian Certificate — common in many private schools" },
+  { label: "CBSE", value: "CBSE", description: "Central Board — used by most schools" },
+  { label: "ICSE", value: "ICSE", description: "Certificate Board — common in many private schools" },
   { label: "State Board", value: "State Board", description: "Your state's own education board" },
   { label: "Other", value: "Other", description: "IGCSE, IB, NIOS, or any other board" },
 ];
@@ -112,7 +112,7 @@ export const TARGET_SECTORS = [
 ];
 
 export const RELOCATION_PREFS = [
-  { label: "Yes — anywhere in India", value: "yes", description: "Happy to move for the right opportunity" },
+  { label: "Yes — anywhere", value: "yes", description: "Happy to move for the right opportunity" },
   { label: "Within my state", value: "state", description: "Not too far from home" },
   { label: "Prefer my city", value: "no", description: "Stay close to home" },
   { label: "Not sure yet", value: "unsure", description: "Haven't decided" },

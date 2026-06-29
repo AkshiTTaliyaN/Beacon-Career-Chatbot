@@ -16,7 +16,7 @@ export default function LanguageToggle({ style = {}, className = "", ...props })
       onClick={() => setLanguage(language === 'km' ? 'en' : 'km')}
       style={{
         background: 'transparent',
-        border: 'none',
+        border: '1px solid rgba(0,212,255,0.4)',
         cursor: 'pointer',
         fontSize: '0.85rem',
         fontWeight: '700',
@@ -25,7 +25,6 @@ export default function LanguageToggle({ style = {}, className = "", ...props })
         justifyContent: 'center',
         padding: '6px 12px',
         borderRadius: '8px',
-        border: '1px solid rgba(0,212,255,0.4)',
         color: 'var(--ft-neon-cyan, #00d4ff)',
         boxShadow: '0 0 8px rgba(0,212,255,0.15)',
         textShadow: '0 0 4px rgba(0,212,255,0.4)',

@@ -19,8 +19,10 @@ export default function BilingualText({ text, inline = false, style = {}, subtit
   useEffect(() => {
     let active = true;
     if (language === 'en' || typeof text !== 'string' || !text.trim()) {
-      setTranslated('');
-      return;
+      const timer = setTimeout(() => {
+        if (active) setTranslated('');
+      }, 0);
+      return () => clearTimeout(timer);
     }
 
     translateText(text, language).then((result) => {

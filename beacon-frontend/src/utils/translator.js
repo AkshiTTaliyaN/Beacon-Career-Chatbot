@@ -12,7 +12,7 @@ function shouldTranslate(text) {
   if (!trimmed) return false;
   
   // Avoid translating strings that only contain numbers, punctuation, emojis, and symbols
-  const regexOnlySymbolsAndNumbers = /^[0-9\s.,%+\-*\/()$#@!?:;'"\\|\[\]{}<>_~`👋🎉🔬🎨🤝📈📋🧠💼🏫⚡⏳🎓📍🌟🎯]*$/;
+  const regexOnlySymbolsAndNumbers = /^[0-9\s.,%+\-*/()$#@!?:;'"\\|[\]{}<>_~`👋🎉🔬🎨🤝📈📋🧠💼🏫⚡⏳🎓📍🌟🎯]*$/u;
   if (regexOnlySymbolsAndNumbers.test(trimmed)) {
     return false;
   }

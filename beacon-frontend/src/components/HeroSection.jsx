@@ -6,7 +6,7 @@ import BilingualText from './BilingualText.jsx'
 
 export default function HeroSection({
   title = 'Career guidance simplified for students',
-  subtitle = 'Free, quick guidance for Indian students in Classes 8–12',
+  subtitle = 'Free, quick guidance for students in Classes 8–12',
   primaryText = 'Start Free Test',
   onPrimary = null,
   secondaryText = null,

@@ -12,8 +12,10 @@ export default function ChatMarkdown({ content }) {
   useEffect(() => {
     let active = true;
     if (language === 'en' || !content) {
-      setTranslated("");
-      return;
+      const timer = setTimeout(() => {
+        if (active) setTranslated("");
+      }, 0);
+      return () => clearTimeout(timer);
     }
     translateText(content, language).then(result => {
       if (active) {

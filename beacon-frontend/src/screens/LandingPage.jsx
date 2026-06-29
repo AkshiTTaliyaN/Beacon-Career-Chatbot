@@ -16,7 +16,7 @@ const FEATURES = [
   {
     icon: "🎯",
     title: "Career Recommendations",
-    desc: "Smart matches across careers, entrance exams, and pathways built for Indian students.",
+    desc: "Smart matches across careers, entrance exams, and pathways built for students.",
   },
   {
     icon: "💬",

@@ -54,7 +54,7 @@ export default function ManzilHeader({
       <div className="manzil-header-center">
         <img
           src={EdCilTopLogo}
-          alt="EdCIL (India) Limited"
+          alt="EdCIL Limited"
           className="manzil-header-edcil-logo"
         />
       </div>

@@ -118,7 +118,7 @@ const IMAGE_PROVIDERS = {
    * Unsplash random static photo — fallback, no key needed.
    * Note: source.unsplash.com/random is deprecated and unreliable.
    */
-  unsplash: ({ query = 'career,success,india', width = 900, height = 260 } = {}) =>
+  unsplash: ({ query = 'career,success', width = 900, height = 260 } = {}) =>
     `https://source.unsplash.com/random/${width}x${height}?${query}`,
 
   /**
@@ -126,7 +126,7 @@ const IMAGE_PROVIDERS = {
    * Requires: VITE_GOOGLE_API_KEY + VITE_GOOGLE_CX_ID in .env
    * Free tier: 100 queries/day.
    */
-  google: async ({ query = 'career success india student' } = {}) => {
+  google: async ({ query = 'career success student' } = {}) => {
     const key = import.meta.env.VITE_GOOGLE_API_KEY;
     const cx  = import.meta.env.VITE_GOOGLE_CX_ID;
     if (!key || !cx) throw new Error('VITE_GOOGLE_API_KEY or VITE_GOOGLE_CX_ID not set in .env');

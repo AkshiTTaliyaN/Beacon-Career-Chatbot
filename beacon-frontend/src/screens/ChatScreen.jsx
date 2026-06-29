@@ -276,7 +276,10 @@ export default function ChatScreen() {
   }, []);
 
   useEffect(() => {
-    bootChat();
+    const timer = setTimeout(() => {
+      bootChat();
+    }, 0);
+    return () => clearTimeout(timer);
   }, [bootChat]);
 
   useEffect(() => {
