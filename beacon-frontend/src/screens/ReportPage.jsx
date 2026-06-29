@@ -26,7 +26,6 @@ import {
   Brain,
 } from "lucide-react";
 import LanguageToggle from '../components/LanguageToggle.jsx';
-import { Download, Briefcase, GraduationCap, Target, Users, Compass, AlertTriangle, CheckCircle2, Calendar, MapPin, BookOpen, TrendingUp, Heart, FileText, Sparkles, Brain } from "lucide-react";
 
 import { API as BEACON_API, APTITUDE_URL } from '../config';
 
