@@ -187,6 +187,7 @@ export default function Dashboard({ userName }) {
 
   const name = userName || window.localStorage.getItem('userName') || ''
   const isReturning = window.localStorage.getItem('beaconReturning') === '1'
+  const isDark = !document.body.classList.contains('light-theme');
 
   useEffect(() => {
     const saved = localStorage.getItem('beacon-theme');
