@@ -477,7 +477,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
 
         <div className="hobbies-container">
           <div className="hobbies-intro">
-            <div className="section-badge" style={{ background: "rgba(0, 212, 255, 0.15)", color: "#00d4ff", display: "inline-block", marginBottom: "12px" }}>
+            <div className="section-badge" style={{ background: "rgba(44, 84, 146, 0.10)", color: "#2C5492", display: "inline-block", marginBottom: "12px" }}>
               Section 2 of 3
             </div>
             <h2>What are your hobbies and interests?</h2>

@@ -844,3 +844,10 @@
   .aptitude-grid { grid-template-columns: 1fr; }
   .broader-grid { grid-template-columns: 1fr 1fr; }
 }
+.text-on-dark {
+  color: var(--text) !important;
+}
+
+.text-on-dark-secondary {
+  color: var(--text-muted) !important;
+}
