@@ -321,20 +321,7 @@ export default function Dashboard({ userName }) {
             {profile?.riasec_scores && (
               <button type="button" className="manzil-header-link" onClick={() => { window.history.pushState({}, '', '/report'); window.dispatchEvent(new PopStateEvent('popstate')) }}>My Report</button>
             )}
-            <button
-              type="button"
-              onClick={handleThemeToggle}
-              style={{
-                background: 'transparent',
-                border: 'none',
-                cursor: 'pointer',
-                fontSize: '1.15rem',
-                padding: 4,
-              }}
-              aria-label="Toggle Theme"
-            >
-              {isDark ? '☀️' : '🌙'}
-            </button>
+
             <div style={{
               width: 36, height: 36, borderRadius: 999,
               background: '#eaf1fb',

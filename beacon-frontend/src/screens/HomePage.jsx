@@ -214,6 +214,7 @@ export default function HomePage({ onStart }) {
       <ManzilHeader
         title="Manzil"
         subtitle={<BilingualText text="by EdCIL" />}
+        showDefaultNav={false}
         right={(
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <LanguageToggle />

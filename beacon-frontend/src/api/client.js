@@ -18,14 +18,29 @@ async function parseError(res) {
   }
 }
 
+let guestLoginPromise = null;
+
 /** Guest login — creates a real anonymous student and returns a JWT (no email needed) */
 export async function guestLogin() {
-  const res = await fetch(`${API}/auth/guest`, { method: "POST" });
-  if (!res.ok) throw new Error(await parseError(res));
-  const data = await res.json();
-  localStorage.setItem(STORAGE_KEYS.token, data.access_token);
-  localStorage.setItem(STORAGE_KEYS.email, "guest");
-  return data;
+  if (guestLoginPromise) {
+    return guestLoginPromise;
+  }
+
+  guestLoginPromise = (async () => {
+    const res = await fetch(`${API}/auth/guest`, { method: "POST" });
+    if (!res.ok) throw new Error(await parseError(res));
+    const data = await res.json();
+    localStorage.setItem(STORAGE_KEYS.token, data.access_token);
+    localStorage.setItem(STORAGE_KEYS.email, "guest");
+    return data;
+  })();
+
+  try {
+    return await guestLoginPromise;
+  } catch (error) {
+    guestLoginPromise = null; // Clear on error so it can be retried
+    throw error;
+  }
 }
 
 /** Step 1 — send OTP to email */
@@ -101,8 +116,25 @@ export async function saveProfile(payload) {
     return { ...clean, is_complete: true, student_id: "demo-student-id" };
   }
 
-  const token = getToken();
-  if (!token) throw new Error("Not logged in. Please sign in again.");
+  // Ensure any background guest login has completed
+  if (guestLoginPromise) {
+    try {
+      await guestLoginPromise;
+    } catch (e) {
+      console.error("Background guest login failed, will retry:", e);
+    }
+  }
+
+  let token = getToken();
+  if (!token) {
+    // If no token exists and no background login succeeded, trigger guest login now
+    try {
+      await guestLogin();
+      token = getToken();
+    } catch (e) {
+      throw new Error("Authentication failed: " + e.message);
+    }
+  }
 
   const res = await fetch(`${API}/profile/save`, {
     method: "POST",

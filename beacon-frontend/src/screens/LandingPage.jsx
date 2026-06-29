@@ -42,6 +42,7 @@ export default function LandingPage({ onStart }) {
       <ManzilHeader
         title="Manzil"
         subtitle="Career Guidance Platform"
+        showDefaultNav={false}
       />
 
       <main className="manzil-landing-main">

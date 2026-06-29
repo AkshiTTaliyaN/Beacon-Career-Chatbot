@@ -153,12 +153,10 @@ export default function App() {
     case STEP.HOME:
       return (
         <HomePage
-          onStart={async () => {
-            try {
-              await guestLogin();
-            } catch (e) {
-              console.error("Guest login failed:", e);
-            }
+          onStart={() => {
+            guestLogin().catch((e) => {
+              console.error("Guest login failed in background:", e);
+            });
             setStep(STEP.BASIC);
           }}
         />

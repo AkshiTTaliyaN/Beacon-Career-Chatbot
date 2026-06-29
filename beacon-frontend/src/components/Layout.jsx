@@ -14,6 +14,7 @@ export default function Layout({ children, step, totalSteps, title, subtitle }) 
       <ManzilHeader
         title="Manzil"
         subtitle="Your career guidance companion"
+        showDefaultNav={false}
         right={DEMO_MODE ? <span className="demo-badge onboard-demo-badge">Demo mode</span> : null}
       />
 

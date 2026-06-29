@@ -8,31 +8,7 @@ export default function ExamExplorer() {
   const [klass, setKlass] = useState('All');
   const [selected, setSelected] = useState(null);
 
-  const [isDark, setIsDark] = useState(() => {
-    const saved = localStorage.getItem('beacon-theme');
-    return saved !== 'light';
-  });
 
-  useEffect(() => {
-    const saved = localStorage.getItem('beacon-theme');
-    if (saved === 'light') {
-      document.body.classList.add('light-theme');
-    } else {
-      document.body.classList.remove('light-theme');
-    }
-  }, []);
-
-  const handleThemeToggle = () => {
-    const newDark = !isDark;
-    setIsDark(newDark);
-    if (newDark) {
-      document.body.classList.remove('light-theme');
-      localStorage.setItem('beacon-theme', 'dark');
-    } else {
-      document.body.classList.add('light-theme');
-      localStorage.setItem('beacon-theme', 'light');
-    }
-  };
 
   const examsData = [
     // Science
@@ -199,14 +175,7 @@ export default function ExamExplorer() {
             <button type="button" className="manzil-header-btn" onClick={() => { window.history.pushState({}, '', '/dashboard'); window.dispatchEvent(new PopStateEvent('popstate')); }}>
               ← Dashboard
             </button>
-            <button
-              type="button"
-              onClick={handleThemeToggle}
-              style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: '1.15rem', padding: 4 }}
-              aria-label="Toggle Theme"
-            >
-              {isDark ? '☀️' : '🌙'}
-            </button>
+
           </>
         )}
       />
