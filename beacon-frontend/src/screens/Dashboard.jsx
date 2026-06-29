@@ -370,43 +370,46 @@ export default function Dashboard({ userName }) {
       )}
 
       {/* ─── Hero Section ─── */}
-      <HeroSection
-        lightMode
-        logoSrc={ManzilLogo}
-        logoAlt="Manzil Logo"
-        logoStyle={{
-          height: 100,
-          maxWidth: 320,
-          borderRadius: 0,
-          boxShadow: 'none',
-          marginBottom: 24,
-        }}
-        title={heading}
-        titleColor="#0f1f3d"
-        subtitle={heroSubtitle}
-        subtitleColor="#5f6b8d"
-        primaryText={'Chat with AI'}
-        secondaryText={'Take Psychometric Test'}
-        primaryButtonStyle={{
-          backgroundColor: '#0f1f3d',
-          color: '#ffffff',
-          borderColor: '#0f1f3d',
-        }}
-        secondaryButtonStyle={{
-          backgroundColor: 'transparent',
-          color: '#0f1f3d',
-          borderColor: '#0f1f3d',
-        }}
-        onPrimary={() => { window.history.pushState({}, '', '/chat'); window.dispatchEvent(new PopStateEvent('popstate')) }}
-        onSecondary={() => {
-          const token = localStorage.getItem('beacon_token');
-          const origin = window.location.origin;
-          const url = token
-            ? `${APTITUDE_URL}?beacon_token=${encodeURIComponent(token)}&origin=${encodeURIComponent(origin)}`
-            : `${APTITUDE_URL}?origin=${encodeURIComponent(origin)}`;
-          window.open(url, '_blank');
-        }}
-      />
+      <div className="dashboard-hero-wrapper">
+        <HeroSection
+          lightMode
+          logoSrc={ManzilLogo}
+          logoAlt="Manzil Logo"
+          logoStyle={{
+            height: 180,
+            maxWidth: 420,
+            borderRadius: 0,
+            boxShadow: 'none',
+            marginBottom: 24,
+          }}
+          title={heading}
+          titleColor="#0f1f3d"
+          subtitle={heroSubtitle}
+          subtitleColor="#5f6b8d"
+          primaryText={'Chat with AI'}
+          secondaryText={'Take Psychometric Test'}
+          primaryButtonStyle={{
+            backgroundColor: '#0f1f3d',
+            color: '#ffffff',
+            borderColor: '#0f1f3d',
+          }}
+          secondaryButtonStyle={{
+            backgroundColor: 'transparent',
+            color: '#0f1f3d',
+            borderColor: '#0f1f3d',
+          }}
+          onPrimary={() => { window.history.pushState({}, '', '/chat'); window.dispatchEvent(new PopStateEvent('popstate')) }}
+          onSecondary={() => {
+            const token = localStorage.getItem('beacon_token');
+            const origin = window.location.origin;
+            const url = token
+              ? `${APTITUDE_URL}?beacon_token=${encodeURIComponent(token)}&origin=${encodeURIComponent(origin)}`
+              : `${APTITUDE_URL}?origin=${encodeURIComponent(origin)}`;
+            window.open(url, '_blank');
+          }}
+        />
+        <div className="dashboard-hero-bottom-wash" aria-hidden="true" />
+      </div>
 
       {/* ═══════════════════════════════════════════════════════════════════
           KPI SUMMARY CARDS — Power BI-style top metrics row

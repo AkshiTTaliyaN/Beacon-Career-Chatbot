@@ -209,13 +209,59 @@
 .ft-dashboard-bg {
   min-height: 100vh;
   background:
-    radial-gradient(circle at 20% 20%, rgba(0, 212, 255, 0.04) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 20% 20%, rgba(0, 212, 255, 0.04) 0%, transparent 45%),
+    radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.04) 0%, transparent 45%),
     var(--ft-bg-primary);
   color: var(--ft-text-primary);
   font-family: var(--ft-font-body);
   position: relative;
 }
+
+/* Dashboard hero background accents */
+.dashboard-hero-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-hero-wrapper::before,
+.dashboard-hero-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 420px;
+  height: 420px;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.14;
+}
+
+.dashboard-hero-wrapper::before {
+  left: -160px;
+  background: radial-gradient(circle, rgba(219, 234, 254, 0.95) 0%, rgba(59, 130, 246, 0.1) 55%, transparent 100%);
+}
+
+.dashboard-hero-wrapper::after {
+  right: -160px;
+  background: radial-gradient(circle, rgba(219, 234, 254, 0.85) 0%, rgba(37, 99, 235, 0.08) 50%, transparent 100%);
+}
+
+.dashboard-hero-bottom-wash {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 160px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(239, 246, 255, 0.95) 70%, rgba(239, 246, 255, 1) 100%);
+  pointer-events: none;
+}
+
+.dashboard-hero-wrapper .hero-section {
+  position: relative;
+  z-index: 1;
+}
+
+/* End dashboard hero accents */
 
 /* Subtle CSS grid overlay */
 .ft-dashboard-bg::before {

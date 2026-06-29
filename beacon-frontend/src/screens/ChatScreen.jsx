@@ -360,11 +360,13 @@ export default function ChatScreen() {
 
   return (
     <div className="chat-page">
-<ManzilHeader
+      <ManzilHeader
         title="Manzil AI Counsellor"
         subtitle="Career · College · Exam guidance"
+        showDefaultNav={false}
         right={(
           <>
+            <LanguageToggle />
             <button type="button" className="manzil-header-btn" onClick={() => navigate("/dashboard")}>
               ← Dashboard
             </button>
@@ -372,32 +374,7 @@ export default function ChatScreen() {
               Restart
             </button>
           </>
-        )}
-      />
-<header className="chat-header">
-        <div className="chat-header-inner">
-          <button type="button" className="chat-back-btn" onClick={() => navigate("/dashboard")}>
-            ← Dashboard
-          </button>
-
-          <div className="chat-header-brand">
-            <div className="chat-header-logo">M</div>
-            <div>
-              <p className="chat-header-kicker">Manzil</p>
-              <h1>Manzil AI Counsellor</h1>
-              <p className="chat-header-sub">Get personalised career, college and exam guidance.</p>
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <LanguageToggle />
-            <button type="button" className="chat-restart-btn" onClick={bootChat} disabled={loading}>
-              Restart
-            </button>
-          </div>
-        </div>
-      </header>
-
+        )} />
       <div className="chat-shell">
         <ProfileChips profile={profile} />
 

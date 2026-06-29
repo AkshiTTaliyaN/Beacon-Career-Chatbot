@@ -47,27 +47,30 @@ export default function HeroSection({
       <div style={{
         position: 'absolute', inset: 0, pointerEvents: 'none',
         backgroundImage: isLight ? 'none' : 'repeating-linear-gradient(0deg, rgba(0,212,255,0.03) 0px, transparent 1px, transparent 60px), repeating-linear-gradient(90deg, rgba(0,212,255,0.03) 0px, transparent 1px, transparent 60px)',
-        backgroundSize: isLight ? undefined : undefined,
         opacity: isLight ? 0 : 1,
       }} />
-      {/* Orb top-right */}
-      <div style={{
-        position: 'absolute', top: -80, right: -60, width: 300, height: 300,
-        borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(0,212,255,0.12) 0%, transparent 70%)',
-        filter: 'blur(40px)',
-        animation: 'ft-float 6s ease-in-out infinite',
-        pointerEvents: 'none',
-      }} />
-      {/* Orb bottom-left */}
-      <div style={{
-        position: 'absolute', bottom: -60, left: -40, width: 250, height: 250,
-        borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%)',
-        filter: 'blur(40px)',
-        animation: 'ft-float 8s ease-in-out infinite reverse',
-        pointerEvents: 'none',
-      }} />
+      {!isLight && (
+        <>
+          {/* Orb top-right */}
+          <div style={{
+            position: 'absolute', top: -80, right: -60, width: 300, height: 300,
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(0,212,255,0.12) 0%, transparent 70%)',
+            filter: 'blur(40px)',
+            animation: 'ft-float 6s ease-in-out infinite',
+            pointerEvents: 'none',
+          }} />
+          {/* Orb bottom-left */}
+          <div style={{
+            position: 'absolute', bottom: -60, left: -40, width: 250, height: 250,
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%)',
+            filter: 'blur(40px)',
+            animation: 'ft-float 8s ease-in-out infinite reverse',
+            pointerEvents: 'none',
+          }} />
+        </>
+      )}
 
       {/* ── Content ── */}
       <div style={{
@@ -76,7 +79,7 @@ export default function HeroSection({
         position: 'relative', zIndex: 1,
       }}>
         {logoSrc && (
-          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 32, width: '100%', backgroundColor: isLight ? '#eef1f6' : 'transparent' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 32, width: '100%', backgroundColor: 'transparent' }}>
             <img
               src={logoSrc}
               alt={logoAlt}
@@ -88,8 +91,8 @@ export default function HeroSection({
                 borderRadius: 0,
                 boxShadow: 'none',
                 backgroundColor: 'transparent',
-                mixBlendMode: isLight ? 'multiply' : 'normal',
-                filter: isLight ? 'drop-shadow(0 10px 20px rgba(15,31,61,0.08))' : 'none',
+                mixBlendMode: 'normal',
+                filter: 'none',
                 ...logoStyle,
               }}
             />
