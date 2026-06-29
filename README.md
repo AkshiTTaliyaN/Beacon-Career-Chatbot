@@ -1,6 +1,6 @@
 # Manzil Career Counselling Platform
 
-A modern, comprehensive web-based career counselling platform designed for Indian school students (Classes 8–12) across Science (PCM/PCB), Commerce, and Arts/Humanities streams. Manzil helps students navigate their post-school career choices through an integrated multi-step onboarding profiling system, a RIASEC personality psychometric test, and a personalized, knowledge-based career chatbot.
+A modern, comprehensive web-based career counselling platform designed for school students (Classes 8–12) across Science (PCM/PCB), Commerce, and Arts/Humanities streams. Manzil helps students navigate their post-school career choices through an integrated multi-step onboarding profiling system, a RIASEC personality psychometric test, and a personalized, knowledge-based career chatbot.
 
 ---
 
@@ -195,9 +195,9 @@ code/
 
 ## Educational Data Sources
 
-Manzil is pre-configured with free, publicly accessible resources tailored to the Indian educational landscape:
-* **NIRF Rankings** - [nirfindia.org](https://www.nirfindia.org) (Top Indian Universities & Colleges)
-* **JEE / NEET Cutoffs** - [josaa.nic.in](https://josaa.nic.in) / [mcc.nic.in](https://mcc.nic.in) (Engineering & Medical admissions)
-* **National Scholarship Portal** - [scholarships.gov.in](https://scholarships.gov.in)
-* **CBSE Academics** - [cbseacademic.nic.in](https://cbseacademic.nic.in)
-* **Salary Trends** - Aggregated profiles from Naukri and AmbitionBox
+Manzil is pre-configured with free, publicly accessible resources tailored to the educational landscape:
+* **University & College Rankings** - Top Universities & Colleges
+* **Entrance Exam Cutoffs** - Engineering & Medical admissions
+* **National Scholarship Information**
+* **Academics & Syllabus Guidelines**
+* **Salary Trends** - Aggregated market profiles
