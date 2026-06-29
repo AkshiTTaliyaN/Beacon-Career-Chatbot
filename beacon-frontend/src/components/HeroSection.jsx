@@ -13,26 +13,42 @@ export default function HeroSection({
   onSecondary = null,
   logoSrc = null,
   logoAlt = 'EdCIL Logo',
+  logoStyle = {},
+  lightMode = false,
+  titleColor = null,
+  subtitleColor = null,
+  primaryButtonStyle = {},
+  secondaryButtonStyle = {},
   children = null,
 }) {
+  const isLight = Boolean(lightMode);
+  const sectionBackground = isLight
+    ? '#ffffff'
+    : 'linear-gradient(180deg, #0d1333 0%, #111842 40%, #161d55 100%)';
+  const textColor = isLight ? '#0f1f3d' : 'rgba(255,255,255,0.95)';
+  const subtitleTextColor = isLight ? '#5f6b8d' : 'rgba(255,255,255,0.75)';
+
   return (
     <section
       aria-label="Manzil hero"
       style={{
-        background: 'linear-gradient(180deg, #0d1333 0%, #111842 40%, #161d55 100%)',
+        background: sectionBackground,
         position: 'relative',
         overflow: 'hidden',
-        color: 'rgba(255,255,255,0.95)',
-        padding: '7rem 1rem 6rem',
+        color: textColor,
+        padding: isLight ? '5.5rem 1rem 4.5rem' : '7rem 1rem 6rem',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        borderBottom: isLight ? '1px solid rgba(15,31,61,0.08)' : 'none',
       }}
     >
       {/* ── Decorative background grid + orbs ── */}
       <div style={{
         position: 'absolute', inset: 0, pointerEvents: 'none',
-        backgroundImage: 'repeating-linear-gradient(0deg, rgba(0,212,255,0.03) 0px, transparent 1px, transparent 60px), repeating-linear-gradient(90deg, rgba(0,212,255,0.03) 0px, transparent 1px, transparent 60px)',
+        backgroundImage: isLight ? 'none' : 'repeating-linear-gradient(0deg, rgba(0,212,255,0.03) 0px, transparent 1px, transparent 60px), repeating-linear-gradient(90deg, rgba(0,212,255,0.03) 0px, transparent 1px, transparent 60px)',
+        backgroundSize: isLight ? undefined : undefined,
+        opacity: isLight ? 0 : 1,
       }} />
       {/* Orb top-right */}
       <div style={{
@@ -60,7 +76,7 @@ export default function HeroSection({
         position: 'relative', zIndex: 1,
       }}>
         {logoSrc && (
-          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 32, width: '100%' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 32, width: '100%', backgroundColor: isLight ? '#eef1f6' : 'transparent' }}>
             <img
               src={logoSrc}
               alt={logoAlt}
@@ -69,8 +85,12 @@ export default function HeroSection({
                 width: 'auto',
                 maxWidth: 340,
                 objectFit: 'contain',
-                borderRadius: 16,
-                boxShadow: '0 8px 40px rgba(0,0,0,0.3)',
+                borderRadius: 0,
+                boxShadow: 'none',
+                backgroundColor: 'transparent',
+                mixBlendMode: isLight ? 'multiply' : 'normal',
+                filter: isLight ? 'drop-shadow(0 10px 20px rgba(15,31,61,0.08))' : 'none',
+                ...logoStyle,
               }}
             />
           </div>
@@ -83,12 +103,13 @@ export default function HeroSection({
           margin: 0,
           letterSpacing: '-0.02em',
           fontFamily: 'Inter, system-ui, -apple-system, sans-serif',
+          color: titleColor || textColor,
         }}>
           <BilingualText text={title} />
         </h1>
         <p style={{
           marginTop: '0.85rem',
-          color: 'rgba(255,255,255,0.65)',
+          color: subtitleColor || subtitleTextColor,
           fontSize: '1.08rem',
           lineHeight: 1.5,
           maxWidth: 580,
@@ -108,7 +129,14 @@ export default function HeroSection({
               type="button"
               className="ft-button-primary"
               onClick={onPrimary || (() => window.open(APTITUDE_URL, '_blank'))}
-              style={{ fontSize: '1rem', padding: '0.95rem 1.8rem' }}
+              style={{
+                fontSize: '1rem',
+                padding: '0.95rem 1.8rem',
+                backgroundColor: isLight ? '#0f1f3d' : '#00d4ff',
+                color: isLight ? '#ffffff' : '#0f1f3d',
+                borderColor: isLight ? '#0f1f3d' : 'transparent',
+                ...primaryButtonStyle,
+              }}
             >
               {primaryText}
             </button>
@@ -118,7 +146,16 @@ export default function HeroSection({
               type="button"
               className="ft-button-secondary"
               onClick={onSecondary || (() => window.open(APTITUDE_URL, '_blank'))}
-              style={{ fontSize: '1rem', padding: '0.95rem 1.8rem' }}
+              style={{
+                fontSize: '1rem',
+                padding: '0.95rem 1.8rem',
+                backgroundColor: isLight ? 'transparent' : 'rgba(255,255,255,0.08)',
+                color: isLight ? '#0f1f3d' : '#ffffff',
+                borderColor: isLight ? '#0f1f3d' : '#00d4ff',
+                borderWidth: 1,
+                borderStyle: 'solid',
+                ...secondaryButtonStyle,
+              }}
             >
               {secondaryText}
             </button>

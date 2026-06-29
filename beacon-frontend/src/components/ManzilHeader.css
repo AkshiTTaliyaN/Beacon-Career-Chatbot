@@ -1,38 +1,33 @@
-.manzil-header-topbar {
-  position: sticky;
-  top: 0;
-  z-index: 110;
-  display: flex;
-  align-items: center;
-  min-height: 36px;
-  padding: 0 1rem;
-  background: #ffffff;
-  border-bottom: 1px solid #e8edf5;
-}
-
-.manzil-header-topbar-logo {
-  height: 36px;
-  width: auto;
-  object-fit: contain;
-}
-
 .manzil-header {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(180px, auto) minmax(220px, 1fr) minmax(220px, auto);
   align-items: center;
-  justify-content: space-between;
   gap: 1rem;
-  min-height: 64px;
-  padding: 0.65rem clamp(1rem, 3vw, 2rem);
+  min-height: 76px;
+  padding: 0.85rem clamp(1rem, 3vw, 2rem);
   background: #ffffff;
   border-bottom: 1px solid #e8edf5;
-  box-shadow: 0 1px 8px rgba(16, 40, 73, 0.06);
   color: #102849;
 }
 
 .manzil-header--sticky {
   position: sticky;
-  top: 36px;
-  z-index: 100;
+  top: 0;
+  z-index: 110;
+}
+
+.manzil-header-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+}
+
+.manzil-header-edcil-logo {
+  height: 78px;
+  width: auto;
+  max-width: 260px;
+  object-fit: contain;
 }
 
 .manzil-header-left {
@@ -44,7 +39,7 @@
 }
 
 .manzil-brand-logo {
-  height: 40px;
+  height: 54px;
   width: auto;
   object-fit: contain;
   flex-shrink: 0;
@@ -171,17 +166,15 @@
 
 @media (max-width: 768px) {
   .manzil-header {
-    flex-wrap: wrap;
-    min-height: auto;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
   }
 
   .manzil-header-center {
-    order: 3;
-    flex-basis: 100%;
     text-align: left;
-    padding-top: 0.25rem;
+    justify-content: start;
   }
 
   .manzil-header-brand {

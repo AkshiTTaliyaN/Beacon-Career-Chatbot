@@ -5,7 +5,7 @@ import RiasecGate from './RiasecGate.jsx'
 import CareerMindMap from '../components/CareerMindMap.jsx'
 import { GlassCard, RadialGauge, KPICard, SectionHeader, FuturisticTooltip, AnimatedBar, GradientDefs, RIASEC_THEME } from '../components/FuturisticCharts.jsx'
 import { getSmartRecommendations, getMyProfile } from '../api/client.js'
-import EdCilLogo from '../assets/edcil-logo.png'
+import ManzilLogo from '../assets/manzil-logo.png'
 import '../styles/futuristic.css'
 import { APTITUDE_URL } from '../config.js'
 import ManzilHeader from '../components/ManzilHeader'
@@ -311,9 +311,9 @@ export default function Dashboard({ userName }) {
 
   return (
     <div className="ft-dashboard-bg">
-      {/* ─── Navbar ─── */}
-<ManzilHeader
+      <ManzilHeader
         title="Manzil"
+        showDefaultNav={false}
         right={(
           <nav className="manzil-header-nav" aria-label="Primary">
             <button type="button" className="manzil-header-link" onClick={() => { window.history.pushState({}, '', '/careers'); window.dispatchEvent(new PopStateEvent('popstate')) }}>Career Library</button>
@@ -369,25 +369,35 @@ export default function Dashboard({ userName }) {
         </div>
       )}
 
-      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '2rem', marginBottom: '1rem' }}>
-        <img
-          src={EdCilLogo}
-          alt="EdCIL Logo"
-          style={{
-            height: 90,
-            width: 90,
-            objectFit: 'contain',
-          }}
-        />
-      </div>
-
       {/* ─── Hero Section ─── */}
       <HeroSection
+        lightMode
+        logoSrc={ManzilLogo}
+        logoAlt="Manzil Logo"
+        logoStyle={{
+          height: 100,
+          maxWidth: 320,
+          borderRadius: 0,
+          boxShadow: 'none',
+          marginBottom: 24,
+        }}
         title={heading}
+        titleColor="#0f1f3d"
         subtitle={heroSubtitle}
+        subtitleColor="#5f6b8d"
         primaryText={'Chat with AI'}
-        onPrimary={() => { window.history.pushState({}, '', '/chat'); window.dispatchEvent(new PopStateEvent('popstate')) }}
         secondaryText={'Take Psychometric Test'}
+        primaryButtonStyle={{
+          backgroundColor: '#0f1f3d',
+          color: '#ffffff',
+          borderColor: '#0f1f3d',
+        }}
+        secondaryButtonStyle={{
+          backgroundColor: 'transparent',
+          color: '#0f1f3d',
+          borderColor: '#0f1f3d',
+        }}
+        onPrimary={() => { window.history.pushState({}, '', '/chat'); window.dispatchEvent(new PopStateEvent('popstate')) }}
         onSecondary={() => {
           const token = localStorage.getItem('beacon_token');
           const origin = window.location.origin;
