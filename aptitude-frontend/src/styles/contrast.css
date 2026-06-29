@@ -1,41 +1,41 @@
 /**
- * Contrast utility classes — use based on background, not page.
+ * Contrast utility classes — updated for light/white theme.
  */
 
 .text-on-dark {
-  color: #ffffff;
+  color: #102849;
 }
 
 .text-on-dark-secondary {
-  color: rgba(255, 255, 255, 0.92);
+  color: #5F6B8D;
 }
 
 .text-on-dark-label {
-  color: rgba(255, 255, 255, 0.85);
+  color: #5F6B8D;
 }
 
 .text-on-dark-muted {
-  color: rgba(255, 255, 255, 0.75);
+  color: #68758a;
 }
 
 .text-on-light {
-  color: #111827;
+  color: #102849;
 }
 
 .text-on-light-secondary {
-  color: #374151;
+  color: #5F6B8D;
 }
 
 .text-on-light-muted {
-  color: #6b7280;
+  color: #68758a;
 }
 
-/* Report: section chrome on gradient / dark page background */
+/* Report: section headings on light page background */
 .results-page .result-section > .section-title,
 .results-page .result-section > .section-title.text-on-dark {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #102849;
   letter-spacing: -0.02em;
   margin-bottom: 12px;
   line-height: 1.15;
@@ -45,22 +45,22 @@
 .results-page .result-section > .section-sub.text-on-dark-secondary {
   font-size: 1.1rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.92);
+  color: #5F6B8D;
   line-height: 1.75;
   margin-bottom: 28px;
 }
 
 .results-page .result-section > .section-sub strong {
-  color: #ffffff;
+  color: #102849;
   font-weight: 700;
 }
 
 .results-page .on-dark-surface .secondary-type strong {
-  color: #ffffff;
+  color: #102849;
   font-weight: 700;
 }
 
-/* Content rendered directly on dark page background (not inside cards) */
+/* Content on light page background */
 .results-page .on-dark-surface,
 .results-page .on-dark-surface .secondary-type,
 .results-page .on-dark-surface .description-text,
@@ -68,16 +68,16 @@
 .results-page .on-dark-surface .score-label,
 .results-page .on-dark-surface .score-pct,
 .results-page .on-dark-surface .hc-label {
-  color: rgba(255, 255, 255, 0.92);
+  color: #5F6B8D;
 }
 
 .results-page .on-dark-surface .hc-value {
-  color: #ffffff;
+  color: #102849;
 }
 
 .results-page .on-dark-surface .hc-label,
 .results-page .on-dark-surface .scores-title {
-  color: rgba(255, 255, 255, 0.85);
+  color: #5F6B8D;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   font-weight: 700;
@@ -85,14 +85,14 @@
 
 .results-page .result-footer,
 .results-page .result-footer p {
-  color: rgba(255, 255, 255, 0.75);
+  color: #5F6B8D;
 }
 
 .results-page .divider {
-  border-top-color: rgba(255, 255, 255, 0.18);
+  border-top-color: #DCE4F5;
 }
 
-/* Light cards — always dark text regardless of page background */
+/* Cards — always dark text */
 .results-page .apt-glass-card,
 .results-page .hero-report-card,
 .results-page .hero-personality-card,
@@ -112,7 +112,7 @@
 .results-page .aptitude-fit-note,
 .results-page .aptitude-highlight-block,
 .results-page .interest-careers-note {
-  color: #111827;
+  color: #102849;
 }
 
 .results-page .career-card .career-reason,
@@ -124,7 +124,7 @@
 .results-page .work-env-card p,
 .results-page .aptitude-fit-note p,
 .results-page .aptitude-highlight-list {
-  color: #374151;
+  color: #5F6B8D;
 }
 
 .results-page .pdf-download-sub,
@@ -132,7 +132,7 @@
 .results-page .challenge-note,
 .results-page .career-stream,
 .results-page .aptitude-pct {
-  color: #6b7280;
+  color: #68758a;
 }
 
 .results-page .career-card-header h4,
@@ -141,5 +141,5 @@
 .results-page .skill-card h4,
 .results-page .broader-sector,
 .results-page .apt-timeline-title {
-  color: #111827;
+  color: #102849;
 }
