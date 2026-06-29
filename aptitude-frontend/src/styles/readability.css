@@ -166,7 +166,7 @@
 
 .results-page .on-dark-surface .hc-value {
   font-size: 2.5rem !important;
-  color: #ffffff !important;
+  color: #102849 !important;
 }
 
 .results-page .pdf-download-card .pdf-download-title {
@@ -180,17 +180,17 @@
 }
 
 .results-page .on-dark-surface .score-label {
-  color: rgba(255, 255, 255, 0.85) !important;
+  color: #102849 !important;
   font-weight: 600 !important;
 }
 
 .results-page .on-dark-surface .score-pct {
-  color: #ffffff !important;
+  color: #102849 !important;
   font-weight: 700 !important;
 }
 
 .results-page .on-dark-surface .scores-title {
-  color: rgba(255, 255, 255, 0.85) !important;
+  color: #5F6B8D !important;
 }
 
 .results-page .on-dark-surface .score-bar-wrap {
@@ -201,15 +201,15 @@
 .results-page .on-dark-surface .secondary-type {
   font-size: 1.15rem !important;
   line-height: 1.8 !important;
-  color: rgba(255, 255, 255, 0.92) !important;
+  color: #5F6B8D !important;
 }
 
 .results-page .on-dark-surface .hc-label {
-  color: rgba(255, 255, 255, 0.85) !important;
+  color: #5F6B8D !important;
 }
 
 .results-page .result-footer p {
-  color: rgba(255, 255, 255, 0.75) !important;
+  color: #5F6B8D !important;
   font-size: 1rem !important;
 }
 
@@ -283,11 +283,11 @@
 }
 
 .test-page.aptitude-page .hobbies-intro h2 {
-  color: #ffffff !important;
+  color: #102849 !important;
 }
 
 .test-page.aptitude-page .hobbies-intro p {
-  color: #cbd5e1 !important;
+  color: #5F6B8D !important;
 }
 
 
@@ -377,9 +377,10 @@
 }
 
 /* Report page defaults to light text on dark gradient */
+/* Report page defaults */
 .report-page,
 .results-page {
-  color: #ffffff;
+  color: #102849;
 }
 
 /* Branded white header on assessment/report pages */

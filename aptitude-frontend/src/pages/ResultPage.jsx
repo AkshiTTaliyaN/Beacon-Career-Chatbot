@@ -383,10 +383,10 @@ export default function ResultPage({
             <div style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
               <Compass size={32} style={{ color: "#10b981", marginTop: "4px" }} />
               <div>
-                <h3 className="section-title" style={{ color: "#102849" }} style={{ margin: "0 0 10px 0", fontSize: "20px", textAlign: "left" }}>
+                <h3 className="section-title" style={{ color: "#102849", margin: "0 0 10px 0", fontSize: "20px", textAlign: "left" }}>
                   Your Personalized Career Matches Are Ready!
                 </h3>
-                <p className="section-sub" style={{ color: "#5F6B8D" }} style={{ margin: "0 0 20px 0", fontSize: "14px", lineHeight: "1.6", color: "#5F6B8D" }}>
+                <p className="section-sub" style={{ color: "#5F6B8D", margin: "0 0 20px 0", fontSize: "14px", lineHeight: "1.6" }}>
                   We have combined your <strong>onboarding academic profile</strong>, <strong>subject ratings</strong>, <strong>RIASEC personality scores</strong>, and <strong>passions/hobbies</strong> to generate your final career recommendations. 
                   Go to your main dashboard to view your fully integrated, stream-aligned, and passion-oriented career roadmaps.
                 </p>
