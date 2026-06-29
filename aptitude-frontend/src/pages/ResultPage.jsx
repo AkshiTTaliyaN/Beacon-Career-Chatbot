@@ -346,7 +346,7 @@ export default function ResultPage({
 
         {/* ── Personality Overview ── */}
         <section className="result-section">
-          <h2 className="section-title text-on-dark">Personality Overview</h2>
+          <h2 className="section-title" style={{ color: "#102849" }}>Personality Overview</h2>
           <div className="overview-layout on-dark-surface">
             <div className="overview-left">
               <span className="primary-type" style={{ color: primaryColor }}>{primary}</span>
@@ -383,10 +383,10 @@ export default function ResultPage({
             <div style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
               <Compass size={32} style={{ color: "#10b981", marginTop: "4px" }} />
               <div>
-                <h3 className="section-title text-on-dark" style={{ margin: "0 0 10px 0", fontSize: "20px", textAlign: "left" }}>
+                <h3 className="section-title" style={{ color: "#102849" }} style={{ margin: "0 0 10px 0", fontSize: "20px", textAlign: "left" }}>
                   Your Personalized Career Matches Are Ready!
                 </h3>
-                <p className="section-sub text-on-dark-secondary" style={{ margin: "0 0 20px 0", fontSize: "14px", lineHeight: "1.6", color: "#9ca3af" }}>
+                <p className="section-sub" style={{ color: "#5F6B8D" }} style={{ margin: "0 0 20px 0", fontSize: "14px", lineHeight: "1.6", color: "#5F6B8D" }}>
                   We have combined your <strong>onboarding academic profile</strong>, <strong>subject ratings</strong>, <strong>RIASEC personality scores</strong>, and <strong>passions/hobbies</strong> to generate your final career recommendations. 
                   Go to your main dashboard to view your fully integrated, stream-aligned, and passion-oriented career roadmaps.
                 </p>
@@ -405,8 +405,8 @@ export default function ResultPage({
         {Object.keys(aptitudeScores).length > 0 && (
           <>
             <section className="result-section">
-              <h2 className="section-title text-on-dark">Your Aptitude Profile</h2>
-              <p className="section-sub text-on-dark-secondary">Based on your self-assessment across six skill areas — this shows where you feel most and least confident:</p>
+              <h2 className="section-title" style={{ color: "#102849" }}>Your Aptitude Profile</h2>
+              <p className="section-sub" style={{ color: "#5F6B8D" }}>Based on your self-assessment across six skill areas — this shows where you feel most and least confident:</p>
 
               <div className="aptitude-grid">
                 {Object.entries(aptitudeScores).map(([skill, data]) => (
@@ -465,8 +465,8 @@ export default function ResultPage({
 
         {/* ── Traits ── */}
         <section className="result-section">
-          <h2 className="section-title text-on-dark">Your Personality Traits</h2>
-          <p className="section-sub text-on-dark-secondary">People with a <strong>{primary}</strong> personality type typically show these characteristics:</p>
+          <h2 className="section-title" style={{ color: "#102849" }}>Your Personality Traits</h2>
+          <p className="section-sub" style={{ color: "#5F6B8D" }}>People with a <strong>{primary}</strong> personality type typically show these characteristics:</p>
           <div className="traits-grid">
             {(traits || []).map((trait, i) => (
               <div key={i} className="trait-chip">
@@ -481,7 +481,7 @@ export default function ResultPage({
 
         {/* ── Strengths & Challenges ── */}
         <section className="result-section">
-          <h2 className="section-title text-on-dark">Strengths &amp; Challenges</h2>
+          <h2 className="section-title" style={{ color: "#102849" }}>Strengths &amp; Challenges</h2>
           <div className="sc-layout">
             <div className="sc-card strengths-card" style={{ borderTopColor: primaryColor }}>
               <h3><CheckCircle2 size={18} /> Your strengths</h3>
@@ -499,7 +499,7 @@ export default function ResultPage({
 
         {/* ── Ideal Work Environment ── */}
         <section className="result-section">
-          <h2 className="section-title text-on-dark">Your Ideal Work Environment</h2>
+          <h2 className="section-title" style={{ color: "#102849" }}>Your Ideal Work Environment</h2>
           <div className="work-env-card">
             <MapPin size={20} className="env-icon" />
             <p>{workEnv}</p>
@@ -512,8 +512,8 @@ export default function ResultPage({
 
         {/* ── Entrance Exams ── */}
         <section className="result-section">
-          <h2 className="section-title text-on-dark">Entrance Exams to Target</h2>
-          <p className="section-sub text-on-dark-secondary">Based on your stream ({result.stream}) and career direction, these are the key exams to prepare for:</p>
+          <h2 className="section-title" style={{ color: "#102849" }}>Entrance Exams to Target</h2>
+          <p className="section-sub" style={{ color: "#5F6B8D" }}>Based on your stream ({result.stream}) and career direction, these are the key exams to prepare for:</p>
           <div className="exam-grid">
             {(entranceExams || []).map((exam, i) => (
               <div key={i} className="exam-card">
@@ -529,8 +529,8 @@ export default function ResultPage({
 
         {/* ── Admission Process ── */}
         <section className="result-section">
-          <h2 className="section-title text-on-dark">Navigating the Admission Process</h2>
-          <p className="section-sub text-on-dark-secondary">Here is what the admission journey looks like for your stream ({result.stream}):</p>
+          <h2 className="section-title" style={{ color: "#102849" }}>Navigating the Admission Process</h2>
+          <p className="section-sub" style={{ color: "#5F6B8D" }}>Here is what the admission journey looks like for your stream ({result.stream}):</p>
           <div className="admission-card">
             <div className="admission-block">
               <h4><Calendar size={16} /> Timeline</h4>
@@ -551,8 +551,8 @@ export default function ResultPage({
 
         {/* ── Action Plan ── */}
         <section className="result-section">
-          <h2 className="section-title text-on-dark">Your Personalised Action Plan</h2>
-          <p className="section-sub text-on-dark-secondary">A step-by-step roadmap from now until college — built around your <strong>{primary}</strong> personality:</p>
+          <h2 className="section-title" style={{ color: "#102849" }}>Your Personalised Action Plan</h2>
+          <p className="section-sub" style={{ color: "#5F6B8D" }}>A step-by-step roadmap from now until college — built around your <strong>{primary}</strong> personality:</p>
           <div className="action-timeline">
             {(actionPlan || []).map((phase, i) => (
               <TimelineCard
@@ -570,8 +570,8 @@ export default function ResultPage({
 
         {/* ── Skills to Build ── */}
         <section className="result-section">
-          <h2 className="section-title text-on-dark">Skills to Build Now</h2>
-          <p className="section-sub text-on-dark-secondary">Start developing these skills before Class 12 ends — they will strengthen both your applications and your confidence:</p>
+          <h2 className="section-title" style={{ color: "#102849" }}>Skills to Build Now</h2>
+          <p className="section-sub" style={{ color: "#5F6B8D" }}>Start developing these skills before Class 12 ends — they will strengthen both your applications and your confidence:</p>
           <div className="skills-grid">
             {(skillsToBuild || []).map((skill, i) => (
               <div key={i} className="skill-card">
@@ -587,8 +587,8 @@ export default function ResultPage({
 
         {/* ── Parent Section ── */}
         <section className="result-section">
-          <h2 className="section-title text-on-dark">For Your Parents</h2>
-          <p className="section-sub text-on-dark-secondary">A clear, jargon-free note to share with your parents — to help them understand your personality type and how to support you.</p>
+          <h2 className="section-title" style={{ color: "#102849" }}>For Your Parents</h2>
+          <p className="section-sub" style={{ color: "#5F6B8D" }}>A clear, jargon-free note to share with your parents — to help them understand your personality type and how to support you.</p>
           <div className="parent-card" style={{ borderLeftColor: primaryColor }}>
             <div className="parent-card-header">
               <Heart size={20} style={{ color: primaryColor }} />
@@ -603,7 +603,7 @@ export default function ResultPage({
 
         {/* ── Closing Note ── */}
         <section className="result-section">
-          <h2 className="section-title text-on-dark">A Note for You</h2>
+          <h2 className="section-title" style={{ color: "#102849" }}>A Note for You</h2>
           <div className="closing-card">
             <div className="closing-accent" style={{ background: primaryColor }} />
             <p className="closing-text">{result.closing_note}</p>
