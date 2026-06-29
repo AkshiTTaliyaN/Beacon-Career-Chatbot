@@ -347,7 +347,7 @@ export default function ResultPage({
         {/* ── Personality Overview ── */}
         <section className="result-section">
           <h2 className="section-title" style={{ color: "#102849" }}>Personality Overview</h2>
-          <div className="overview-layout on-dark-surface">
+          <div className="overview-layout on-dark-surface" style={{ color: "#102849" }}>
             <div className="overview-left">
               <span className="primary-type" style={{ color: primaryColor }}>{primary}</span>
               <p className="secondary-type">Secondary: <strong>{result.secondary_type}</strong></p>
@@ -361,7 +361,7 @@ export default function ResultPage({
             </div>
           </div>
 
-          <div className="scores-section on-dark-surface">
+          <div className="scores-section on-dark-surface" style={{ color: "#102849" }}>
             <p className="scores-title">RIASEC Scores</p>
             {(riasecScores || []).map(item => (
               <div key={item.category} className="score-row">

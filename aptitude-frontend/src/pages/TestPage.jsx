@@ -480,8 +480,9 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
             <div className="section-badge" style={{ background: "rgba(44, 84, 146, 0.10)", color: "#2C5492", display: "inline-block", marginBottom: "12px" }}>
               Section 2 of 3
             </div>
-            <h2>What are your hobbies and interests?</h2>
+            <h2 style={{ color: "#102849" }}>What are your hobbies and interests?</h2>
             <p>Select all that apply. These help us understand what you genuinely enjoy outside of academics — and surface career options that match your real interests, not just your personality type.</p>
+            <p style={{ color: "#5F6B8D" }}>Select all that apply...</p>
           </div>
 
           {HOBBY_CATEGORIES.map((group) => (
