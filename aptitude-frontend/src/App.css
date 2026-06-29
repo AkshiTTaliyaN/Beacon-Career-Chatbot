@@ -5,27 +5,33 @@
   --blue-secondary: #426FB1;
   --blue-dark: #233a72;
   --blue-light: #6A9AD4;
-  --cyan: #00d4ff;
-  --purple: #8b5cf6;
-  --green: #10b981;
-  --navy-bg: #0d1333;
-  --navy-bg-2: #161d55;
-  --blue-bg: #EAF1FB;
-  --navy: #2C5492;
-  --navy-light: #6A9AD4;
-  --bg: #EAF1FB;
+  --blue-pale: #EAF1FB;
+  --blue-muted: #C7D9F2;
   --white: #ffffff;
+  --bg: #F5F8FF;
+  --bg-card: #ffffff;
   --gray: #68758a;
   --gray-light: #dce4f5;
   --text: #102849;
-  --border: #dce4f5;
+  --text-muted: #5F6B8D;
+  --border: #DCE4F5;
+
+  /* Legacy aliases kept so component files don't break */
+  --navy: #2C5492;
+  --navy-light: #6A9AD4;
+  --navy-bg: #F5F8FF;
+  --navy-bg-2: #EAF1FB;
+  --bg-blue: #EAF1FB;
+  --cyan: #2C5492;
+  --purple: #426FB1;
+  --green: #10b981;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   font-family: 'DM Sans', sans-serif;
-  background: linear-gradient(160deg, #0d1333 0%, #161d55 48%, #0b1439 100%);
+  background: #F5F8FF;
   color: var(--text);
   line-height: 1.6;
   font-size: 16px;
@@ -34,80 +40,85 @@ body {
 .app { min-height: 100vh; position: relative; }
 
 /* ─────────────────────────────────────────────────────────────── */
-/* Manzil-like glass + motion primitives                           */
+/* Shell — light background, subtle blue tint                      */
 /* ─────────────────────────────────────────────────────────────── */
 .apt-floating-shell {
   position: relative;
   z-index: 1;
 }
 
-.apt-floating-bg,
-.apt-floating-bg-grid {
-  pointer-events: none;
-}
-
+/* Decorative background — toned-down for light theme */
 .apt-floating-bg {
   position: fixed;
   inset: 0;
   z-index: 0;
   overflow: hidden;
-  background: radial-gradient(circle at 20% 10%, rgba(0,212,255,0.22) 0%, transparent 55%),
-    radial-gradient(circle at 80% 20%, rgba(139,92,246,0.18) 0%, transparent 58%),
-    radial-gradient(circle at 70% 85%, rgba(16,185,129,0.12) 0%, transparent 55%);
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 10%, rgba(44, 84, 146, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 85% 20%, rgba(66, 111, 177, 0.05) 0%, transparent 52%),
+    radial-gradient(circle at 70% 88%, rgba(106, 154, 212, 0.04) 0%, transparent 50%);
 }
 
 .apt-floating-bg-grid {
   position: absolute;
   inset: 0;
+  pointer-events: none;
   background-image:
-    repeating-linear-gradient(0deg, rgba(0,212,255,0.06) 0px, transparent 1px, transparent 56px),
-    repeating-linear-gradient(90deg, rgba(0,212,255,0.06) 0px, transparent 1px, transparent 56px);
-  opacity: 0.85;
+    repeating-linear-gradient(0deg, rgba(44, 84, 146, 0.03) 0px, transparent 1px, transparent 56px),
+    repeating-linear-gradient(90deg, rgba(44, 84, 146, 0.03) 0px, transparent 1px, transparent 56px);
+  opacity: 0.7;
 }
 
+/* Orbs — barely visible on light bg, just add subtle depth */
 .apt-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(70px);
-  opacity: 0.55;
+  filter: blur(80px);
+  opacity: 0.25;
+  pointer-events: none;
 }
 
 .apt-orb--cyan {
-  width: 360px;
-  height: 360px;
-  top: -110px;
-  right: -70px;
-  background: radial-gradient(circle, rgba(0,212,255,0.25) 0%, transparent 70%);
+  width: 400px;
+  height: 400px;
+  top: -120px;
+  right: -80px;
+  background: radial-gradient(circle, rgba(44, 84, 146, 0.15) 0%, transparent 70%);
 }
 
 .apt-orb--purple {
-  width: 300px;
-  height: 300px;
+  width: 320px;
+  height: 320px;
   bottom: 8%;
-  left: -90px;
-  background: radial-gradient(circle, rgba(139,92,246,0.2) 0%, transparent 70%);
+  left: -100px;
+  background: radial-gradient(circle, rgba(66, 111, 177, 0.12) 0%, transparent 70%);
 }
 
 .apt-orb--blue {
-  width: 240px;
-  height: 240px;
+  width: 260px;
+  height: 260px;
   top: 48%;
   right: 16%;
-  background: radial-gradient(circle, rgba(44,84,146,0.35) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(106, 154, 212, 0.10) 0%, transparent 70%);
 }
 
+/* ─────────────────────────────────────────────────────────────── */
+/* Glass card — stays white, lighter shadow on light bg            */
+/* ─────────────────────────────────────────────────────────────── */
 .apt-glass-card {
-  background: rgba(255,255,255,0.92);
-  border: 1px solid rgba(220,228,245,0.9);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
+  background: #ffffff;
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: 18px;
-  color: #111827;
-  box-shadow:
-    0 18px 52px rgba(0,0,0,0.12),
-    0 0 0 1px rgba(255,255,255,0.5) inset;
+  color: var(--text);
+  box-shadow: 0 4px 24px rgba(44, 84, 146, 0.08);
 }
 
+/* ─────────────────────────────────────────────────────────────── */
+/* Buttons                                                         */
+/* ─────────────────────────────────────────────────────────────── */
 .apt-btn {
   display: inline-flex;
   align-items: center;
@@ -122,18 +133,63 @@ body {
 }
 
 .apt-btn-primary {
-  background: linear-gradient(135deg, #2C5492 0%, #161d55 100%);
+  background: linear-gradient(135deg, #2C5492 0%, #426FB1 100%);
   color: white;
-  box-shadow: 0 10px 30px rgba(44,84,146,0.38);
+  box-shadow: 0 6px 20px rgba(44, 84, 146, 0.22);
   transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
 }
 
 .apt-btn-primary:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 14px 38px rgba(44,84,146,0.46);
+  box-shadow: 0 10px 28px rgba(44, 84, 146, 0.30);
   filter: saturate(1.1);
 }
 
+.btn-primary {
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-secondary) 100%);
+  color: white;
+  border: none;
+  padding: 12px 26px;
+  border-radius: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-primary:hover { filter: saturate(1.1); transform: translateY(-1px); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--blue);
+  border: 1.5px solid var(--blue-muted);
+  padding: 11px 24px;
+  border-radius: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-outline:hover { background: var(--blue-pale); border-color: var(--blue); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--gray);
+  border: 1.5px solid var(--border);
+  padding: 11px 24px;
+  border-radius: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-ghost:hover { background: var(--gray-light); }
+
+/* ─────────────────────────────────────────────────────────────── */
+/* Section headers                                                 */
+/* ─────────────────────────────────────────────────────────────── */
 .apt-section-header {
   display: flex;
   align-items: center;
@@ -144,40 +200,39 @@ body {
   width: 10px;
   height: 28px;
   border-radius: 999px;
-  box-shadow: 0 0 22px rgba(0,212,255,0.35);
+  background: var(--blue);
+  box-shadow: 0 0 16px rgba(44, 84, 146, 0.2);
 }
 .apt-section-header-icon {
   font-size: 20px;
-  filter: drop-shadow(0 10px 16px rgba(0,212,255,0.2));
 }
 .apt-section-title {
-  color: #0f172a;
+  color: var(--text);
   font-size: 24px;
   font-weight: 900;
   letter-spacing: -0.03em;
   margin: 0;
 }
 .apt-section-subtitle {
-  color: rgba(16,40,73,0.75);
+  color: var(--text-muted);
   margin: 4px 0 0;
   font-size: 14px;
   line-height: 1.6;
 }
 
-/* KPI cards */
+/* ─────────────────────────────────────────────────────────────── */
+/* KPI cards                                                       */
+/* ─────────────────────────────────────────────────────────────── */
 .apt-kpi-card {
   padding: 14px 14px 16px;
   border-radius: 16px;
-  border: 1px solid rgba(220,228,245,0.9);
-  background: rgba(255,255,255,0.86);
-  box-shadow: 0 6px 20px rgba(44,84,146,0.07);
+  border: 1px solid var(--border);
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(44, 84, 146, 0.06);
 }
 .apt-kpi-card.active {
-  border-color: rgba(0,212,255,0.55);
-  box-shadow: 0 0 0 1px rgba(0,212,255,0.22) inset, 0 14px 40px rgba(0,212,255,0.08);
-}
-.apt-kpi-card.done {
-  opacity: 1;
+  border-color: var(--blue-secondary);
+  box-shadow: 0 0 0 1px rgba(44, 84, 146, 0.12) inset, 0 8px 28px rgba(44, 84, 146, 0.10);
 }
 .apt-kpi-top {
   display: flex;
@@ -189,37 +244,41 @@ body {
   font-weight: 1000;
   font-size: 18px;
   width: 24px;
+  color: var(--blue);
 }
 .apt-kpi-label {
   flex: 1;
   font-weight: 800;
-  color: #102849;
+  color: var(--text);
   font-size: 13px;
 }
 .apt-kpi-right {
   font-weight: 800;
-  color: #6B7280;
+  color: var(--text-muted);
   font-size: 12px;
 }
 .apt-kpi-bar {
   height: 10px;
   border-radius: 999px;
-  background: rgba(16,40,73,0.08);
+  background: var(--gray-light);
   overflow: hidden;
 }
 .apt-kpi-bar-fill {
   height: 100%;
   border-radius: 999px;
-  box-shadow: 0 0 18px rgba(0,212,255,0.25);
+  background: linear-gradient(90deg, var(--blue) 0%, var(--blue-light) 100%);
+  box-shadow: 0 0 10px rgba(44, 84, 146, 0.18);
 }
 .apt-kpi-pct {
   margin-top: 8px;
   font-weight: 900;
-  color: #4B5563;
+  color: var(--text-muted);
   font-size: 12px;
 }
 
-/* Likert scale (1–5 with explicit labels) */
+/* ─────────────────────────────────────────────────────────────── */
+/* Likert scale                                                    */
+/* ─────────────────────────────────────────────────────────────── */
 .apt-likert {
   margin: 18px 0 6px;
 }
@@ -233,7 +292,7 @@ body {
 .apt-likert-option {
   border-radius: 14px;
   padding: 14px 10px;
-  border: 2px solid rgba(220,228,245,0.95);
+  border: 2px solid var(--border);
   background: #ffffff;
   cursor: pointer;
   text-align: center;
@@ -241,20 +300,24 @@ body {
 }
 
 .apt-likert-option:hover {
-  border-color: rgba(44, 84, 146, 0.65);
-  box-shadow: 0 12px 28px rgba(44,84,146,0.14);
+  border-color: var(--blue-secondary);
+  box-shadow: 0 6px 20px rgba(44, 84, 146, 0.10);
 }
 
 .apt-likert-option.selected {
-  background: #2C5492;
-  border-color: #2C5492;
-  box-shadow: 0 0 0 4px rgba(44,84,146,0.16), 0 16px 44px rgba(44,84,146,0.22);
+  background: var(--blue);
+  border-color: var(--blue);
+  box-shadow: 0 0 0 4px rgba(44, 84, 146, 0.12), 0 8px 24px rgba(44, 84, 146, 0.18);
 }
 
 .apt-likert-num {
   font-size: 1.5rem;
   font-weight: 800;
-  color: #111827;
+  color: var(--text);
+}
+
+.apt-likert-option.selected .apt-likert-num {
+  color: #ffffff;
 }
 
 .apt-likert-legend {
@@ -265,15 +328,11 @@ body {
 }
 
 .apt-likert-scale-label {
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 500;
-  color: #374151;
+  color: var(--text-muted);
   line-height: 1.35;
   text-align: center;
-}
-
-.apt-likert-option.selected .apt-likert-num {
-  color: #ffffff;
 }
 
 @media (max-width: 640px) {
@@ -290,7 +349,9 @@ body {
   }
 }
 
-/* Confetti (replaces GIF) */
+/* ─────────────────────────────────────────────────────────────── */
+/* Confetti                                                        */
+/* ─────────────────────────────────────────────────────────────── */
 .apt-confetti {
   position: absolute;
   inset: 0;
@@ -311,18 +372,20 @@ body {
   100% { transform: translateY(320px) rotate(280deg); opacity: 0; }
 }
 
-/* Timeline cards */
+/* ─────────────────────────────────────────────────────────────── */
+/* Timeline cards                                                  */
+/* ─────────────────────────────────────────────────────────────── */
 .apt-timeline-card {
-  background: rgba(255,255,255,0.9);
-  border: 1px solid rgba(220,228,245,0.9);
+  background: #ffffff;
+  border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 16px 16px;
+  padding: 16px;
 }
 .apt-timeline-head {
   display: flex;
   align-items: center;
   gap: 10px;
-  border-bottom: 1px solid rgba(16,40,73,0.08);
+  border-bottom: 1px solid var(--border);
   padding-bottom: 12px;
   margin-bottom: 10px;
 }
@@ -330,7 +393,7 @@ body {
   margin: 0;
   font-size: 16px;
   font-weight: 900;
-  color: #0f172a;
+  color: var(--text);
 }
 .apt-timeline-list {
   list-style: none;
@@ -351,19 +414,24 @@ body {
   border-radius: 999px;
   margin-top: 6px;
   flex-shrink: 0;
+  background: var(--blue-light);
 }
 .apt-timeline-text {
   font-size: 14px;
-  color: rgba(16,40,73,0.76);
+  color: var(--text-muted);
   line-height: 1.6;
 }
 
-/* Hero banner (Landing page) */
+/* ─────────────────────────────────────────────────────────────── */
+/* Hero banner                                                     */
+/* ─────────────────────────────────────────────────────────────── */
 .apt-hero {
   position: relative;
   z-index: 1;
   padding: 72px 56px 64px;
   overflow: hidden;
+  background: linear-gradient(135deg, #EAF1FB 0%, #F5F8FF 100%);
+  border-bottom: 1px solid var(--border);
 }
 
 .apt-hero-inner {
@@ -392,25 +460,25 @@ body {
   align-items: center;
   padding: 7px 14px;
   border-radius: 999px;
-  border: 1px solid rgba(220,228,245,0.85);
-  background: rgba(255,255,255,0.78);
-  color: #0f172a;
-  font-weight: 800;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: var(--blue);
+  font-weight: 700;
   font-size: 13px;
 }
 
+/* Hero text — dark on light bg */
 .apt-hero-title {
   font-size: clamp(34px, 5vw, 54px);
-  color: rgba(255,255,255,0.92);
+  color: var(--text);
   font-weight: 1000;
   letter-spacing: -0.04em;
   margin: 0 0 18px;
   line-height: 1.05;
-  text-shadow: 0 20px 60px rgba(0,0,0,0.25);
 }
 
 .apt-hero-sub {
-  color: rgba(255,255,255,0.72);
+  color: var(--text-muted);
   font-size: 16px;
   line-height: 1.85;
   max-width: 640px;
@@ -418,7 +486,7 @@ body {
 }
 
 .apt-hero-children .hero-sub-light {
-  color: rgba(255,255,255,0.65);
+  color: var(--text-muted);
   font-size: 14px;
   line-height: 1.8;
   margin: 0 0 28px;
@@ -432,9 +500,9 @@ body {
 .apt-hero-illustration-frame {
   border-radius: 18px;
   overflow: hidden;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.14);
-  box-shadow: 0 26px 70px rgba(0,0,0,0.35);
+  background: rgba(44, 84, 146, 0.04);
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 40px rgba(44, 84, 146, 0.10);
 }
 
 .apt-hero-illustration-frame img {
@@ -451,10 +519,11 @@ body {
   .apt-hero-title { text-align: left; }
 }
 
-
-
+/* ─────────────────────────────────────────────────────────────── */
+/* Header / navbar                                                 */
+/* ─────────────────────────────────────────────────────────────── */
 .cc-header {
-  background: var(--navy);
+  background: var(--blue);
   padding: 20px 36px;
   display: flex;
   align-items: center;
@@ -462,6 +531,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: 0 2px 16px rgba(44, 84, 146, 0.14);
 }
 
 .cc-logo {
@@ -473,31 +543,4 @@ body {
 
 .cc-header-center { text-align: center; color: white; }
 .cc-header-center h1 { font-size: 17px; font-weight: 600; }
-.cc-header-center p { font-size: 14px; color: #E5E7EB; margin-top: 2px; font-weight: 700; }
-
-.btn-primary {
-  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-secondary) 100%);
-  color: white; border: none;
-  padding: 12px 26px; border-radius: 12px;
-  font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500;
-  cursor: pointer; transition: background 0.2s;
-}
-.btn-primary:hover { filter: saturate(1.1); transform: translateY(-1px); }
-
-.btn-outline {
-  background: transparent; color: white;
-  border: 1.5px solid rgba(255,255,255,0.3);
-  padding: 11px 24px; border-radius: 12px;
-  font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500;
-  cursor: pointer; transition: all 0.2s;
-}
-.btn-outline:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
-
-.btn-ghost {
-  background: transparent; color: var(--gray);
-  border: 1.5px solid var(--border);
-  padding: 11px 24px; border-radius: 12px;
-  font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500;
-  cursor: pointer; transition: all 0.2s;
-}
-.btn-ghost:hover { background: var(--gray-light); }
+.cc-header-center p { font-size: 14px; color: rgba(255,255,255,0.8); margin-top: 2px; font-weight: 700; }

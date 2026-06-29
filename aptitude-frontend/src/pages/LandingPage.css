@@ -12,7 +12,7 @@
   width: 100%;
 }
 
-/* ── HERO — split layout, lighter colour ──────────────────── */
+/* ── HERO — split layout ──────────────────────────────────── */
 .hero-section {
   display: grid;
   grid-template-columns: 1.1fr 1fr;
@@ -61,7 +61,7 @@
 
 .hero-sub-light {
   font-size: 15px;
-  color: #374151;
+  color: var(--text-muted);   /* was hardcoded #374151 — now uses variable */
   line-height: 1.8;
   margin-bottom: 32px;
   max-width: 580px;
@@ -78,7 +78,7 @@
   overflow: hidden;
   aspect-ratio: 4/5;
   background: var(--gray-light);
-  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 10px 40px rgba(44, 84, 146, 0.10);  /* was generic dark shadow */
   max-width: 380px;
   max-height: 480px;
   justify-self: center;
@@ -176,7 +176,8 @@
 }
 
 /* ── Stats bar ────────────────────────────────────────────── */
-.stats-bar { background: var(--navy); padding: 36px 0; }
+/* Kept intentionally dark — blue bar on white page is a grounding element */
+.stats-bar { background: var(--blue); padding: 36px 0; }   /* was var(--navy) which was dark #0d1333 */
 
 .stats-inner {
   display: flex;
@@ -188,8 +189,8 @@
 
 .stat { padding: 8px 16px; flex: 1; min-width: 180px; }
 .stat strong { display: block; font-size: 24px; color: white; font-weight: 700; margin-bottom: 4px; }
-.stat span { font-size: 13px; color: #E5E7EB; font-weight: 700; }
-.stat-divider { width: 1px; height: 48px; background: rgba(255,255,255,0.15); }
+.stat span { font-size: 13px; color: rgba(255,255,255,0.8); font-weight: 700; }  /* was hardcoded #E5E7EB */
+.stat-divider { width: 1px; height: 48px; background: rgba(255,255,255,0.2); }
 
 /* ── Steps row ────────────────────────────────────────────── */
 .steps-row {
@@ -235,7 +236,7 @@
   margin-bottom: 12px;
 }
 
-.step-extra { font-style: italic; color: #6B7280; margin-bottom: 0; }
+.step-extra { font-style: italic; color: var(--text-muted); margin-bottom: 0; }  /* was hardcoded #6B7280 */
 
 /* ── Report grid ──────────────────────────────────────────── */
 .report-grid {
@@ -254,14 +255,14 @@
 
 .report-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 8px 20px rgba(44, 84, 146, 0.08);  /* was generic dark shadow */
 }
 
 .report-icon-wrap {
   width: 48px;
   height: 48px;
   border-radius: 10px;
-  background: #eff6ff;
+  background: var(--blue-pale);   /* was hardcoded #eff6ff */
   color: var(--blue);
   display: flex;
   align-items: center;
