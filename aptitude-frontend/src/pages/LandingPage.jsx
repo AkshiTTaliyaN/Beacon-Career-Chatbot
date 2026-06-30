@@ -33,11 +33,6 @@ export default function LandingPage({ onStart }) {
       <ManzilHeader
         title="Manzil"
         subtitle="Career Assessment"
-        right={(
-          <nav className="landing-nav" aria-label="Landing navigation">
-            <a href="#">Home</a>
-          </nav>
-        )}
       />
 
       {/* HERO — Manzil-style */}
