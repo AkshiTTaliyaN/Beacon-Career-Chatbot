@@ -4,22 +4,44 @@ A modern, comprehensive web-based career counselling platform designed for schoo
 
 ---
 
-## Recent Expansion & Localization Strategy (Bilingual Khmer Initiative)
+## Core Project Capabilities & Features
 
-### What We Are Doing
-We are scaling the platform to support two separate codebases and educational contexts:
-1. **The India-Centric "Manzil" Portal**: Retains the complete "Manzil" branding, CBSE school board structures, and deep integration with Government of India and EdCIL Ministry of Education initiatives.
-2. **The Localized "Bilingual" Portal**: A generalized entity that removes "Manzil" branding/logos, introducing full English-Khmer bilingual support across onboarding, the dashboard, the chatbot, and the psychometric test pages.
+### 1. Multi-Dimensional Recommendation Engine
+The core of the platform is a rule-based AI expert system that evaluates a student's compatibility across multiple data dimensions to recommend the best-fit careers:
+* **Stream Eligibility**: Filters careers dynamically based on the student's high school stream (e.g. Science PCM/PCB, Commerce, Arts/Humanities), preventing invalid suggestions.
+* **Subject Strength Alignment**: Calculates weighted compatibility using the student's self-reported subject ratings (e.g., Mathematics, Computer Science, Biology).
+* **RIASEC Personality Mapping**: Matches the student's primary and secondary RIASEC personality categories with the career's dominant traits.
+* **Passions & Hobbies Integration**: Injects the student's interests and hobbies (e.g., coding, painting, sports) as active compatibility weights.
+* **Actionable 4-Phase Roadmaps**: For every matched career, the system generates a tailored prep roadmap spanning Classes 9 through 12.
 
-### Why We Are Doing It
-* **Democratization of Career Guidance**: Providing career guidance in native languages ensures that students from diverse linguistic backgrounds (specifically Khmer-speaking regions) can complete psychometric RIASEC assessments and chat with career mentors without language barriers.
-* **Global Generalization**: Decoupling the platform from a single country's brand name makes the underlying scoring engine, chatbot logic, and profiling system easily deployable by any educational authority worldwide.
+### 2. RIASEC Personality Psychometric Test
+A dedicated assessment module based on John Holland's RIASEC model:
+* **Scientific Questionnaire**: Contains 60 statements rating preferences on a 1–5 scale (Strongly Disagree to Strongly Agree).
+* **Dimension Scoring**: Scores the user across six dimensions:
+  * **R (Realistic)**: Hands-on, practical work.
+  * **I (Investigative)**: Scientific, analytical tasks.
+  * **A (Artistic)**: Creative, self-expressive work.
+  * **S (Social)**: Helping, teaching, and serving others.
+  * **E (Enterprising)**: Leadership, business, and persuasion.
+  * **C (Conventional)**: Structured, detail-oriented tasks.
+* **Holland Code Generation**: Combines the highest-scoring dimensions into a unique 3-letter Holland Code (e.g., *IAS*, *RCE*).
 
-### How We Are Doing It
-* **Dynamic Dual-Language Translation Engine**: Built a caching translator utility (`translator.js`) using localized translation dictionaries and an asynchronous fall-through to the Google Translate API. Dynamic translation strings are cached in-memory and saved to browser `localStorage` for instant near-zero latency retrieval on repeat renders.
-* **Aesthetic Subtitle Layouts (`BilingualText` component)**: Deployed a custom React layout component that prints translations as neat subtitles below headers, descriptions, and inputs. 
-* **Numeral Protection Protocol**: Implemented a global interceptor that detects Khmer numeral glyphs (`០–៩`) in translation strings and restores them to standard Arabic numerals (`0–9`). This maintains readable score percentages, question counters ("Question 1 of 60"), and salary numbers.
-* **Responsive Flex Headers & Sizing**: Redesigned the header grids into dynamic CSS Flex containers to push right-aligned active elements (like the Khmer toggle and Government badges) cleanly to the edge of the layout. Refactored image boxes using `object-fit: contain` to preserve the EdCIL branding wide aspect ratios without cropping.
+### 3. Self-Rated Aptitude Profile
+An 18-question self-assessment module covering 6 core skill areas (3 questions per area):
+* **Language & Communication**: English and reading/writing comfort.
+* **Logical Reasoning**: Step-by-step argument analysis.
+* **Pattern Recognition**: Speed in identifying sequences.
+* **Numerical Ability**: Math problem-solving.
+* **Technical Aptitude**: Electronics, systems, and logic.
+* **Spatial & Creative**: Visualization and design skills.
+* The system evaluates these confidence levels to identify strengths and skill gaps for chosen career paths.
+
+### 4. Dynamic Bilingual Translation Engine
+To enable equal access to career counseling, the platform features a dynamic English-to-Khmer translation engine:
+* **Asynchronous Fall-Through**: Automatically retrieves translation strings via the Google Translate API when target language modes are active.
+* **Aggressive Client-Side Caching**: Uses a hybrid cache (in-memory lookup + `localStorage` persistence) to store translated sentences, ensuring near-zero latency renders and no repeated API hits.
+* **Arabic Numeral Protection**: Intercepts Khmer numerals (`០–៩`) and automatically restores them to standard Arabic numerals (`0–9`) globally. This ensures score percentages, timers, and question counts remain readable.
+* **Responsive Layout Sizing**: Redesigned UI headers with CSS Flexbox to slide language toggles and government badges to the far right, and wrapped translation subtitles under English blocks with a clean dual-display (`BilingualText` component).
 
 ---
 
