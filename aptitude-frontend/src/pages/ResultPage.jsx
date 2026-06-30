@@ -7,6 +7,7 @@ import GlassCard from "../components/ui/GlassCard";
 import ConfettiBurst from "../components/ui/ConfettiBurst";
 import CareerAvatar from "../components/ui/CareerAvatar";
 import ManzilHeader from "../components/ManzilHeader";
+import BilingualText from "../components/BilingualText";
 
 const getColor = (category) => RIASEC_COLORS[category?.[0]] || "#2C5492";
 
@@ -241,10 +242,10 @@ export default function ResultPage({
     <div className="result-page report-page results-page apt-floating-shell">
       <FloatingBackground />
       <ManzilHeader
-        title="Manzil"
+        title=""
         center={(
           <div>
-            <h1>Manzil Career &amp; Personality Report</h1>
+            <h1><BilingualText text="Career &amp; Personality Report" /></h1>
             <p>{result.name} • {result.class_level} • {result.stream}</p>
             <p style={{ fontSize: "0.75rem", fontWeight: 600, color: "#6b7280" }}>
               {new Date().toLocaleDateString("en-IN", { year: "numeric", month: "long", day: "numeric" })}
@@ -253,7 +254,7 @@ export default function ResultPage({
         )}
         right={(
           <button type="button" className="manzil-header-btn" onClick={onDownloadPDF}>
-            <Download size={16} /> Download PDF
+            <Download size={16} /> <BilingualText text="Download PDF" />
           </button>
         )}
       />
@@ -277,20 +278,20 @@ export default function ResultPage({
 
             <div className="hero-report-content">
               <div className="hero-report-meta">
-                <span className="hero-report-kicker">Assessment Complete</span>
-                <span className="hero-report-stamp">Personalised for you</span>
+                <span className="hero-report-kicker"><BilingualText text="Assessment Complete" /></span>
+                <span className="hero-report-stamp"><BilingualText text="Personalised for you" /></span>
               </div>
 
               <p className="hero-report-prepared">
-                Prepared exclusively for <strong>{result.name}</strong>
+                <BilingualText text="Prepared exclusively for" /> <strong>{result.name}</strong>
               </p>
               <h2 className="hero-report-greeting">
-                Congratulations, {result.name.split(" ")[0]}!
+                <BilingualText text="Congratulations" />, {result.name.split(" ")[0]}!
               </h2>
 
               <div className="hero-report-career-block">
-                <span className="hero-report-career-label">Primary Personality Type</span>
-                <h3 className="hero-report-career-title">{primary}</h3>
+                <span className="hero-report-career-label"><BilingualText text="Primary Personality Type" /></span>
+                <h3 className="hero-report-career-title"><BilingualText text={primary} /></h3>
               </div>
 
               <div className="hero-report-badges">
@@ -298,12 +299,12 @@ export default function ResultPage({
                   className="hero-personality-badge hero-personality-badge--primary"
                   style={{ color: primaryColor, borderColor: `${primaryColor}55`, background: `${primaryColor}12` }}
                 >
-                  <span className="hero-personality-badge-key">Primary</span>
-                  <span className="hero-personality-badge-val">{primary}</span>
+                  <span className="hero-personality-badge-key"><BilingualText text="Primary" /></span>
+                  <span className="hero-personality-badge-val"><BilingualText text={primary} /></span>
                 </span>
                 <span className="hero-personality-badge hero-personality-badge--secondary">
-                  <span className="hero-personality-badge-key">Secondary</span>
-                  <span className="hero-personality-badge-val">{result.secondary_type}</span>
+                  <span className="hero-personality-badge-key"><BilingualText text="Secondary" /></span>
+                  <span className="hero-personality-badge-val"><BilingualText text={result.secondary_type} /></span>
                 </span>
               </div>
 
@@ -311,16 +312,16 @@ export default function ResultPage({
                 className="hero-holland-highlight"
                 style={{ borderColor: `${primaryColor}44`, background: `linear-gradient(135deg, ${primaryColor}10 0%, rgba(0,212,255,0.08) 100%)` }}
               >
-                <span className="hero-holland-label">Holland Code</span>
+                <span className="hero-holland-label"><BilingualText text="Holland Code" /></span>
                 <span className="hero-holland-value" style={{ color: primaryColor }}>{result.holland_code}</span>
               </div>
 
               <div className="hero-report-summary">
                 <div className="hero-report-summary-label">
                   <Brain size={18} style={{ color: primaryColor }} />
-                  <span>Summary</span>
+                  <span><BilingualText text="Summary" /></span>
                 </div>
-                <p className="hero-report-summary-text">{result.description}</p>
+                <p className="hero-report-summary-text"><BilingualText text={result.description} /></p>
               </div>
             </div>
           </div>
@@ -331,37 +332,37 @@ export default function ResultPage({
           <div className="pdf-download-inner">
             <Download size={18} style={{ color: primaryColor }} />
             <div className="pdf-download-text">
-              <div className="pdf-download-title">Download your report</div>
-              <div className="pdf-download-sub">Save it for school, parents, and future planning.</div>
+              <div className="pdf-download-title"><BilingualText text="Download your report" /></div>
+              <div className="pdf-download-sub"><BilingualText text="Save it for school, parents, and future planning." /></div>
             </div>
             <button type="button" className="btn-primary pdf-download-btn" onClick={onDownloadPDF} style={{ background: primaryColor }}>
-              Download PDF
+              <BilingualText text="Download PDF" />
             </button>
           </div>
         </GlassCard>
 
         {/* ── Personality Overview ── */}
         <section className="result-section">
-          <h2 className="section-title" style={{ color: "#102849" }}>Personality Overview</h2>
+          <h2 className="section-title" style={{ color: "#102849" }}><BilingualText text="Personality Overview" /></h2>
           <div className="overview-layout on-dark-surface" style={{ color: "#102849" }}>
             <div className="overview-left">
-              <span className="primary-type" style={{ color: primaryColor }}>{primary}</span>
-              <p className="secondary-type">Secondary: <strong>{result.secondary_type}</strong></p>
+              <span className="primary-type" style={{ color: primaryColor }}><BilingualText text={primary} /></span>
+              <p className="secondary-type"><BilingualText text="Secondary:" /> <strong><BilingualText text={result.secondary_type} /></strong></p>
               <div className="holland-code">
-                <span className="hc-label">Holland Code</span>
+                <span className="hc-label"><BilingualText text="Holland Code" /></span>
                 <span className="hc-value">{result.holland_code}</span>
               </div>
             </div>
             <div className="overview-right">
-              <p className="description-text">{result.description}</p>
+              <p className="description-text"><BilingualText text={result.description} /></p>
             </div>
           </div>
 
           <div className="scores-section on-dark-surface" style={{ color: "#102849" }}>
-            <p className="scores-title">RIASEC Scores</p>
+            <p className="scores-title"><BilingualText text="RIASEC Scores" /></p>
             {(riasecScores || []).map(item => (
               <div key={item.category} className="score-row">
-                <span className="score-label">{item.category}</span>
+                <span className="score-label"><BilingualText text={item.category} /></span>
                 <div className="score-bar-wrap">
                   <div className="score-bar-fill" style={{ width: `${item.score}%`, background: getColor(item.category) }} />
                 </div>
@@ -380,15 +381,14 @@ export default function ResultPage({
               <Compass size={32} style={{ color: "#10b981", marginTop: "4px" }} />
               <div>
                 <h3 className="section-title" style={{ color: "#102849", margin: "0 0 10px 0", fontSize: "20px", textAlign: "left" }}>
-                  Your Personalized Career Matches Are Ready!
+                  <BilingualText text="Your Personalized Career Matches Are Ready!" />
                 </h3>
                 <p className="section-sub" style={{ color: "#5F6B8D", margin: "0 0 20px 0", fontSize: "14px", lineHeight: "1.6" }}>
-                  We have combined your <strong>onboarding academic profile</strong>, <strong>subject ratings</strong>, <strong>RIASEC personality scores</strong>, and <strong>passions/hobbies</strong> to generate your final career recommendations. 
-                  Go to your main dashboard to view your fully integrated, stream-aligned, and passion-oriented career roadmaps.
+                  <BilingualText text="We have combined your onboarding academic profile, subject ratings, RIASEC personality scores, and passions/hobbies to generate your final career recommendations. Go to your main dashboard to view your fully integrated, stream-aligned, and passion-oriented career roadmaps." />
                 </p>
                 <button className="btn-primary" style={{ background: "linear-gradient(135deg, #10b981 0%, #059669 100%)", padding: "12px 24px", fontSize: "15px", fontWeight: "bold" }}
                   onClick={() => { window.location.href = dashboardUrl; }}>
-                  View My Career Matches on Dashboard →
+                  <BilingualText text="View My Career Matches on Dashboard →" />
                 </button>
               </div>
             </div>
@@ -401,8 +401,8 @@ export default function ResultPage({
         {Object.keys(aptitudeScores).length > 0 && (
           <>
             <section className="result-section">
-              <h2 className="section-title" style={{ color: "#102849" }}>Your Aptitude Profile</h2>
-              <p className="section-sub" style={{ color: "#5F6B8D" }}>Based on your self-assessment across six skill areas — this shows where you feel most and least confident:</p>
+              <h2 className="section-title" style={{ color: "#102849" }}><BilingualText text="Your Aptitude Profile" /></h2>
+              <p className="section-sub" style={{ color: "#5F6B8D" }}><BilingualText text="Based on your self-assessment across six skill areas — this shows where you feel most and least confident:" /></p>
 
               <div className="aptitude-grid">
                 {Object.entries(aptitudeScores).map(([skill, data]) => (
@@ -412,10 +412,10 @@ export default function ResultPage({
                       borderColor: LEVEL_COLORS[data.level] + "40"
                     }}>
                     <div className="aptitude-skill-header">
-                      <span className="aptitude-skill-label">{data.label}</span>
+                      <span className="aptitude-skill-label"><BilingualText text={data.label} /></span>
                       <span className="aptitude-level-badge"
                         style={{ background: LEVEL_COLORS[data.level] + "20", color: LEVEL_COLORS[data.level] }}>
-                        {data.level}
+                        <BilingualText text={data.level} />
                       </span>
                     </div>
                     <div className="aptitude-bar-wrap">
@@ -430,7 +430,7 @@ export default function ResultPage({
               {/* Aptitude fit note */}
               <div className="aptitude-fit-note">
                 <Brain size={18} style={{ color: primaryColor, flexShrink: 0 }} />
-                <p>{aptitudeFitNote}</p>
+                <p><BilingualText text={aptitudeFitNote} /></p>
               </div>
 
               {/* Strong skills */}
@@ -439,16 +439,16 @@ export default function ResultPage({
                   <div className="aptitude-highlight-block strength-block">
                     <CheckCircle2 size={16} style={{ color: "#10b981" }} />
                     <div>
-                      <p className="aptitude-highlight-title">You rated yourself highly in</p>
-                      <p className="aptitude-highlight-list">{strongSkills.join(", ")}</p>
+                      <p className="aptitude-highlight-title"><BilingualText text="You rated yourself highly in" /></p>
+                      <p className="aptitude-highlight-list"><BilingualText text={strongSkills.join(", ")} /></p>
                     </div>
                   </div>
                   {needsSupport.length > 0 && (
                     <div className="aptitude-highlight-block support-block">
                       <AlertTriangle size={16} style={{ color: "#f59e0b" }} />
                       <div>
-                        <p className="aptitude-highlight-title">Areas to focus on for your career path</p>
-                        <p className="aptitude-highlight-list">{needsSupport.join(", ")}</p>
+                        <p className="aptitude-highlight-title"><BilingualText text="Areas to focus on for your career path" /></p>
+                        <p className="aptitude-highlight-list"><BilingualText text={needsSupport.join(", ")} /></p>
                       </div>
                     </div>
                   )}
@@ -461,13 +461,13 @@ export default function ResultPage({
 
         {/* ── Traits ── */}
         <section className="result-section">
-          <h2 className="section-title" style={{ color: "#102849" }}>Your Personality Traits</h2>
-          <p className="section-sub" style={{ color: "#5F6B8D" }}>People with a <strong>{primary}</strong> personality type typically show these characteristics:</p>
+          <h2 className="section-title" style={{ color: "#102849" }}><BilingualText text="Your Personality Traits" /></h2>
+          <p className="section-sub" style={{ color: "#5F6B8D" }}><BilingualText text={`People with a ${primary} personality type typically show these characteristics:`} /></p>
           <div className="traits-grid">
             {(traits || []).map((trait, i) => (
               <div key={i} className="trait-chip">
                 <span className="trait-dot" style={{ background: primaryColor }} />
-                {trait}
+                <BilingualText text={trait} />
               </div>
             ))}
           </div>
@@ -477,16 +477,16 @@ export default function ResultPage({
 
         {/* ── Strengths & Challenges ── */}
         <section className="result-section">
-          <h2 className="section-title" style={{ color: "#102849" }}>Strengths &amp; Challenges</h2>
+          <h2 className="section-title" style={{ color: "#102849" }}><BilingualText text="Strengths &amp; Challenges" /></h2>
           <div className="sc-layout">
             <div className="sc-card strengths-card" style={{ borderTopColor: primaryColor }}>
-              <h3><CheckCircle2 size={18} /> Your strengths</h3>
-              <ul>{strengths.map((s, i) => <li key={i}>{s}</li>)}</ul>
+              <h3><CheckCircle2 size={18} /> <BilingualText text="Your strengths" /></h3>
+              <ul>{strengths.map((s, i) => <li key={i}><BilingualText text={s} /></li>)}</ul>
             </div>
             <div className="sc-card challenges-card" style={{ borderTopColor: primaryColor }}>
-              <h3><AlertTriangle size={18} /> Potential challenges</h3>
-              <ul>{challenges.map((c, i) => <li key={i}>{c}</li>)}</ul>
-              <p className="challenge-note">These are natural tendencies, not fixed limitations. Awareness is the first step to growth.</p>
+              <h3><AlertTriangle size={18} /> <BilingualText text="Potential challenges" /></h3>
+              <ul>{challenges.map((c, i) => <li key={i}><BilingualText text={c} /></li>)}</ul>
+              <p className="challenge-note"><BilingualText text="These are natural tendencies, not fixed limitations. Awareness is the first step to growth." /></p>
             </div>
           </div>
         </section>
@@ -495,10 +495,10 @@ export default function ResultPage({
 
         {/* ── Ideal Work Environment ── */}
         <section className="result-section">
-          <h2 className="section-title" style={{ color: "#102849" }}>Your Ideal Work Environment</h2>
+          <h2 className="section-title" style={{ color: "#102849" }}><BilingualText text="Your Ideal Work Environment" /></h2>
           <div className="work-env-card">
             <MapPin size={20} className="env-icon" />
-            <p>{workEnv}</p>
+            <p><BilingualText text={workEnv} /></p>
           </div>
         </section>
 
@@ -506,14 +506,14 @@ export default function ResultPage({
 
         {/* ── Skills to Build ── */}
         <section className="result-section">
-          <h2 className="section-title" style={{ color: "#102849" }}>Skills to Build Now</h2>
-          <p className="section-sub" style={{ color: "#5F6B8D" }}>Start developing these skills before Class 12 ends — they will strengthen both your applications and your confidence:</p>
+          <h2 className="section-title" style={{ color: "#102849" }}><BilingualText text="Skills to Build Now" /></h2>
+          <p className="section-sub" style={{ color: "#5F6B8D" }}><BilingualText text="Start developing these skills before Class 12 ends — they will strengthen both your applications and your confidence:" /></p>
           <div className="skills-grid">
             {(skillsToBuild || []).map((skill, i) => (
               <div key={i} className="skill-card">
                 <BookOpen size={16} />
-                <h4>{skill.name}</h4>
-                <p>{skill.desc}</p>
+                <h4><BilingualText text={skill.name} /></h4>
+                <p><BilingualText text={skill.desc} /></p>
               </div>
             ))}
           </div>
@@ -523,15 +523,15 @@ export default function ResultPage({
 
         {/* ── Parent Section ── */}
         <section className="result-section">
-          <h2 className="section-title" style={{ color: "#102849" }}>For Your Parents</h2>
-          <p className="section-sub" style={{ color: "#5F6B8D" }}>A clear, jargon-free note to share with your parents — to help them understand your personality type and how to support you.</p>
+          <h2 className="section-title" style={{ color: "#102849" }}><BilingualText text="For Your Parents" /></h2>
+          <p className="section-sub" style={{ color: "#5F6B8D" }}><BilingualText text="A clear, jargon-free note to share with your parents — to help them understand your personality type and how to support you." /></p>
           <div className="parent-card" style={{ borderLeftColor: primaryColor }}>
             <div className="parent-card-header">
               <Heart size={20} style={{ color: primaryColor }} />
-              <h4>A note for parents of a <strong>{primary}</strong> child</h4>
+              <h4><BilingualText text={`A note for parents of a ${primary} child`} /></h4>
             </div>
-            <p>{parentNote}</p>
-            <p className="parent-footer">Share this report openly with your parents. A career decision works best when student, parents, and teachers are aligned on a path that fits the child's authentic personality.</p>
+            <p><BilingualText text={parentNote} /></p>
+            <p className="parent-footer"><BilingualText text="Share this report openly with your parents. A career decision works best when student, parents, and teachers are aligned on a path that fits the child's authentic personality." /></p>
           </div>
         </section>
 
@@ -539,23 +539,23 @@ export default function ResultPage({
 
         {/* ── Closing Note ── */}
         <section className="result-section">
-          <h2 className="section-title" style={{ color: "#102849" }}>A Note for You</h2>
+          <h2 className="section-title" style={{ color: "#102849" }}><BilingualText text="A Note for You" /></h2>
           <div className="closing-card">
             <div className="closing-accent" style={{ background: primaryColor }} />
-            <p className="closing-text">{result.closing_note}</p>
-            <p className="closing-footer">Remember — this report is a starting point, not a verdict. Career paths are rarely straight lines. Use this as a guide to explore, ask questions, and make informed choices. You have time.</p>
+            <p className="closing-text"><BilingualText text={result.closing_note} /></p>
+            <p className="closing-footer"><BilingualText text="Remember — this report is a starting point, not a verdict. Career paths are rarely straight lines. Use this as a guide to explore, ask questions, and make informed choices. You have time." /></p>
           </div>
         </section>
 
         <div className="result-footer">
-          <p>Manzil © 2026 — This report is an illustrative guide based on a psychometric assessment. For personalised counselling, contact a qualified career counsellor.</p>
+          <p><BilingualText text="This report is an illustrative guide based on a psychometric assessment. For personalised counselling, contact a qualified career counsellor." /></p>
           <div className="footer-actions">
             <button className="btn-primary" style={{ background: "#10b981" }}
               onClick={() => { window.location.href = dashboardUrl; }}>
-               <Compass size={16} /> View My Recommended Careers
+               <Compass size={16} /> <BilingualText text="View My Recommended Careers" />
             </button>
-            <button className="btn-primary" onClick={onDownloadPDF}><Download size={16} /> Download PDF Report</button>
-            <button className="btn-ghost" onClick={onRetake}>Take Test Again</button>
+            <button className="btn-primary" onClick={onDownloadPDF}><Download size={16} /> <BilingualText text="Download PDF Report" /></button>
+            <button className="btn-ghost" onClick={onRetake}><BilingualText text="Take Test Again" /></button>
           </div>
         </div>
 

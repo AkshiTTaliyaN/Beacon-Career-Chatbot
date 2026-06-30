@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import HeroBanner from "../components/ui/HeroBanner";
 import GlassCard from "../components/ui/GlassCard";
 import ManzilHeader from "../components/ManzilHeader";
+import BilingualText from "../components/BilingualText";
 
 const RIASEC_TYPES = [
   { code: "R", name: "Realistic", desc: "Practical, hands-on, mechanical", color: RIASEC_COLORS.R },
@@ -31,8 +32,8 @@ export default function LandingPage({ onStart }) {
   return (
     <div className="landing">
       <ManzilHeader
-        title="Manzil"
-        subtitle="Career Assessment"
+        title=""
+        subtitle={<BilingualText text="Career Assessment" />}
       />
 
       {/* HERO — Manzil-style */}
@@ -43,18 +44,18 @@ export default function LandingPage({ onStart }) {
       >
         <HeroBanner
           onStart={onStart}
-          title="Find what career truly suits you."
-          subtitle="Answer 60 carefully designed questions based on the globally recognised RIASEC framework and discover your personality type, matching careers, entrance exams, and a personalised roadmap."
+          title={<BilingualText text="Find what career truly suits you." />}
+          subtitle={<BilingualText text="Answer 60 carefully designed questions based on the globally recognised RIASEC framework and discover your personality type, matching careers, entrance exams, and a personalised roadmap." />}
           badges={[
-            "Psychometric test with detailed report",
-            "No counsellor booking needed",
-            "Completely free",
+            <BilingualText key="1" text="Psychometric test with detailed report" inline />,
+            <BilingualText key="2" text="No counsellor booking needed" inline />,
+            <BilingualText key="3" text="Completely free" inline />,
           ]}
           imageSrc={heroImage}
-          ctaText="Take the Test →"
+          ctaText={<BilingualText text="Take the Test →" />}
         >
           <p className="hero-sub-light">
-            Built on the same psychometric model used by universities, career counsellors, and platforms worldwide — including the US Department of Labor's O*NET system.
+            <BilingualText text="Built on the same psychometric model used by universities, career counsellors, and platforms worldwide — including the US Department of Labor's O*NET system." />
           </p>
         </HeroBanner>
       </motion.div>
@@ -63,21 +64,19 @@ export default function LandingPage({ onStart }) {
       <section className="content-section">
         <div className="section-wide">
           <div className="section-header-row">
-            <h2 className="section-heading">What is the RIASEC Test?</h2>
-            <p className="section-tagline">A scientific framework for understanding who you are.</p>
+            <h2 className="section-heading"><BilingualText text="What is the RIASEC Test?" /></h2>
+            <p className="section-tagline"><BilingualText text="A scientific framework for understanding who you are." /></p>
           </div>
           <div className="riasec-explanation">
             <div className="riasec-text">
               <p className="section-body">
-                The RIASEC model — developed by psychologist <strong>John L. Holland</strong> — is one of the most widely researched and used career assessment frameworks in the world.
-                It classifies personalities into six types: <strong>Realistic, Investigative, Artistic, Social, Enterprising,</strong> and <strong>Conventional</strong>.
+                <BilingualText text="The RIASEC model — developed by psychologist John L. Holland — is one of the most widely researched and used career assessment frameworks in the world. It classifies personalities into six types: Realistic, Investigative, Artistic, Social, Enterprising, and Conventional." />
               </p>
               <p className="section-body">
-                This model is used by universities, career counsellors, and platforms across the globe — including the US Department of Labor's O*NET system — to help people identify careers that align with who they genuinely are.
-                Your combination of these six types produces a <strong>Holland Code</strong> (e.g. IAS, RCE) which maps directly to careers, streams, and study pathways.
+                <BilingualText text="This model is used by universities, career counsellors, and platforms across the globe — including the US Department of Labor's O*NET system — to help people identify careers that align with who they genuinely are. Your combination of these six types produces a Holland Code (e.g. IAS, RCE) which maps directly to careers, streams, and study pathways." />
               </p>
               <p className="section-body">
-                Unlike generic personality tests, RIASEC is designed specifically for career fit. It does not ask vague philosophical questions — it asks about activities, preferences, and work styles that directly correlate with real-world professions and industries.
+                <BilingualText text="Unlike generic personality tests, RIASEC is designed specifically for career fit. It does not ask vague philosophical questions — it asks about activities, preferences, and work styles that directly correlate with real-world professions and industries." />
               </p>
             </div>
             <div className="riasec-types-grid">
@@ -86,8 +85,8 @@ export default function LandingPage({ onStart }) {
                   <div className="type-pill-inner">
                     <span className="type-code" style={{ color: t.color }}>{t.code}</span>
                     <div>
-                      <strong>{t.name}</strong>
-                      <p>{t.desc}</p>
+                      <strong><BilingualText text={t.name} /></strong>
+                      <p><BilingualText text={t.desc} /></p>
                     </div>
                   </div>
                 </GlassCard>
@@ -100,13 +99,13 @@ export default function LandingPage({ onStart }) {
       {/* STATS BAR */}
       <section className="stats-bar">
         <div className="section-wide stats-inner">
-          <div className="stat"><strong>6</strong><span>Personality dimensions</span></div>
+          <div className="stat"><strong>6</strong><span><BilingualText text="Personality dimensions" /></span></div>
           <div className="stat-divider"/>
-          <div className="stat"><strong>60</strong><span>Carefully designed questions</span></div>
+          <div className="stat"><strong>60</strong><span><BilingualText text="Carefully designed questions" /></span></div>
           <div className="stat-divider"/>
-          <div className="stat"><strong>Globally validated</strong><span>Used worldwide as a career standard</span></div>
+          <div className="stat"><strong><BilingualText text="Globally validated" /></strong><span><BilingualText text="Used worldwide as a career standard" /></span></div>
           <div className="stat-divider"/>
-          <div className="stat"><strong>Instant</strong><span>No waiting, no login needed</span></div>
+          <div className="stat"><strong><BilingualText text="Instant" /></strong><span><BilingualText text="No waiting, no login needed" /></span></div>
         </div>
       </section>
 
@@ -114,27 +113,27 @@ export default function LandingPage({ onStart }) {
       <section className="content-section alt-bg">
         <div className="section-wide">
           <div className="section-header-row">
-            <h2 className="section-heading">How it works</h2>
-            <p className="section-tagline">Three simple steps from start to your personalised report.</p>
+            <h2 className="section-heading"><BilingualText text="How it works" /></h2>
+            <p className="section-tagline"><BilingualText text="Three simple steps from start to your personalised report." /></p>
           </div>
           <div className="steps-row">
             <div className="step-card">
               <div className="step-num">1</div>
-              <h3>Take the test</h3>
-              <p>Answer 60 statements honestly on a 1–5 scale (Strongly Disagree to Strongly Agree). Takes about 10–15 minutes. There are no right or wrong answers — only honest ones.</p>
-              <p className="step-extra">Pick what genuinely reflects you, not what sounds impressive on paper.</p>
+              <h3><BilingualText text="Take the test" /></h3>
+              <p><BilingualText text="Answer 60 statements honestly on a 1–5 scale (Strongly Disagree to Strongly Agree). Takes about 10–15 minutes. There are no right or wrong answers — only honest ones." /></p>
+              <p className="step-extra"><BilingualText text="Pick what genuinely reflects you, not what sounds impressive on paper." /></p>
             </div>
             <div className="step-card">
               <div className="step-num">2</div>
-              <h3>Get your Holland Code</h3>
-              <p>Your answers are scored across all 6 RIASEC dimensions to generate your unique 3-letter personality code (like IAS, RCE, or SAE).</p>
-              <p className="step-extra">This code directly maps to careers, work environments, and study paths that genuinely fit who you are.</p>
+              <h3><BilingualText text="Get your Holland Code" /></h3>
+              <p><BilingualText text="Your answers are scored across all 6 RIASEC dimensions to generate your unique 3-letter personality code (like IAS, RCE, or SAE)." /></p>
+              <p className="step-extra"><BilingualText text="This code directly maps to careers, work environments, and study paths that genuinely fit who you are." /></p>
             </div>
             <div className="step-card">
               <div className="step-num">3</div>
-              <h3>See your full report</h3>
-              <p>Get matched careers across multiple sectors, with Indian and international salary ranges, entrance exams, skill roadmap, and a parent-friendly explanation.</p>
-              <p className="step-extra">Download it as a PDF to save, print, or share with parents and teachers.</p>
+              <h3><BilingualText text="See your full report" /></h3>
+              <p><BilingualText text="Get matched careers across multiple sectors, with Indian and international salary ranges, entrance exams, skill roadmap, and a parent-friendly explanation." /></p>
+              <p className="step-extra"><BilingualText text="Download it as a PDF to save, print, or share with parents and teachers." /></p>
             </div>
           </div>
         </div>
@@ -144,8 +143,8 @@ export default function LandingPage({ onStart }) {
       <section className="content-section">
         <div className="section-wide">
           <div className="section-header-row">
-            <h2 className="section-heading">What your report includes</h2>
-            <p className="section-tagline">A complete personalised guide, not just a result.</p>
+            <h2 className="section-heading"><BilingualText text="What your report includes" /></h2>
+            <p className="section-tagline"><BilingualText text="A complete personalised guide, not just a result." /></p>
           </div>
           <div className="report-grid">
             {[
@@ -165,14 +164,14 @@ export default function LandingPage({ onStart }) {
                   <div className="report-icon-wrap">
                     <Icon size={26} strokeWidth={1.8}/>
                   </div>
-                  <h4>{item.title}</h4>
-                  <p>{item.desc}</p>
+                  <h4><BilingualText text={item.title} /></h4>
+                  <p><BilingualText text={item.desc} /></p>
                 </div>
               );
             })}
           </div>
           <div className="cta-bottom">
-            <button className="btn-primary btn-large" onClick={onStart}>Start the Test →</button>
+            <button className="btn-primary btn-large" onClick={onStart}><BilingualText text="Start the Test →" /></button>
           </div>
         </div>
       </section>
@@ -181,14 +180,14 @@ export default function LandingPage({ onStart }) {
       <section className="content-section alt-bg">
         <div className="section-wide">
           <div className="section-header-row">
-            <h2 className="section-heading">Frequently asked questions</h2>
-            <p className="section-tagline">Everything students and parents commonly ask about Manzil.</p>
+            <h2 className="section-heading"><BilingualText text="Frequently asked questions" /></h2>
+            <p className="section-tagline"><BilingualText text="Frequently asked questions about this assessment." /></p>
           </div>
           <div className="faq-grid">
             {FAQS.map((faq, i) => (
               <div key={i} className="faq-item">
-                <h4 className="faq-q">{faq.q}</h4>
-                <p className="faq-a">{faq.a}</p>
+                <h4 className="faq-q"><BilingualText text={faq.q} /></h4>
+                <p className="faq-a"><BilingualText text={faq.a} /></p>
               </div>
             ))}
           </div>
@@ -197,7 +196,7 @@ export default function LandingPage({ onStart }) {
 
       <footer className="landing-footer">
         <div className="section-wide">
-          <p>Manzil © 2026 — A psychometric career guidance platform for Indian students.</p>
+          <p><BilingualText text="Career Guidance Portal © 2026 — A psychometric career guidance platform." /></p>
         </div>
       </footer>
     </div>

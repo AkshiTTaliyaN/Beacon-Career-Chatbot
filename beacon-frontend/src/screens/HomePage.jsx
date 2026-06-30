@@ -166,7 +166,7 @@ export default function HomePage({ onStart }) {
     {
       icon: '🧠',
       title: 'AI Career Counsellor',
-      desc: 'Chat with Manzil — an AI counsellor trained on Indian career paths, entrance exams, and scholarships. Get personalised guidance anytime.',
+      desc: 'Chat with our AI counsellor trained on Indian career paths, entrance exams, and scholarships. Get personalised guidance anytime.',
       color: '#2c5492',
     },
     {
@@ -212,8 +212,8 @@ export default function HomePage({ onStart }) {
     <div className="ft-dashboard-bg" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif' }}>
 
       <ManzilHeader
-        title="Manzil"
-        subtitle={<BilingualText text="by EdCIL" />}
+        title={<BilingualText text="Career Guidance Portal" />}
+        subtitle={<BilingualText text="Ministry of Education · Government of India" />}
         showDefaultNav={false}
         right={(
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
@@ -440,7 +440,7 @@ export default function HomePage({ onStart }) {
               <BilingualText text="A Government Enterprise" />
             </h3>
             <p style={{ margin: 0, color: '#5f6b8d', fontSize: '0.9rem', lineHeight: 1.7 }}>
-              <BilingualText text="EdCIL Limited is a Mini Ratna enterprise under the Ministry of Education. Manzil is EdCIL's initiative to democratise career guidance for every student — free, unbiased, and built around the education ecosystem." />
+              <BilingualText text="EdCIL Limited is a Mini Ratna enterprise under the Ministry of Education. This platform is EdCIL's initiative to democratise career guidance for every student — free, unbiased, and built around the education ecosystem." />
             </p>
           </div>
         </motion.div>
@@ -498,7 +498,7 @@ export default function HomePage({ onStart }) {
       }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
           <img src={EdCilLogo} alt="EdCIL" style={{ height: 20, width: 20, objectFit: 'cover', borderRadius: 4, opacity: 0.6 }} />
-          <span><BilingualText text="Manzil by EdCIL Limited" /></span>
+          <span><BilingualText text="Career Guidance Portal by EdCIL Limited" /></span>
         </div>
         <p style={{ margin: 0 }}>
           © {new Date().getFullYear()} <BilingualText text="EdCIL Limited · Ministry of Education · All rights reserved" />

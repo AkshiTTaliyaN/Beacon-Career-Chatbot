@@ -9,6 +9,7 @@ import FloatingBackground from "../components/ui/FloatingBackground";
 import ManzilHeader from "../components/ManzilHeader";
 import ProgressWidget from "../components/ui/ProgressWidget";
 import AgreeScale from "../components/ui/AgreeScale";
+import BilingualText from "../components/BilingualText";
 
 const CATEGORY_LABELS = { R: "Realistic", I: "Investigative", A: "Artistic", S: "Social", E: "Enterprising", C: "Conventional" };
 
@@ -271,63 +272,63 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
       <div className="test-page aptitude-page assessment-page apt-floating-shell">
         <FloatingBackground />
         <ManzilHeader
-          title="Career Aptitude Test"
-          right={<button type="button" className="manzil-header-btn" onClick={onBack}>← Back</button>}
+          title={<BilingualText text="Career Aptitude Test" />}
+          right={<button type="button" className="manzil-header-btn" onClick={onBack}><BilingualText text="← Back" /></button>}
         />
         <div className="details-container">
           <div className="intro-card">
-            <div className="intro-badge">Psychometric + Aptitude Assessment</div>
-            <h1>Career Aptitude Test</h1>
-            <p>This test combines three assessments — your <strong>personality type (RIASEC)</strong>, your <strong>interests and hobbies</strong>, and your <strong>self-rated aptitude</strong> — to give you a well-rounded career recommendation.</p>
-            <p>Be honest — there are no right or wrong answers. Choose what genuinely reflects you.</p>
+            <div className="intro-badge"><BilingualText text="Psychometric + Aptitude Assessment" /></div>
+            <h1><BilingualText text="Career Aptitude Test" /></h1>
+            <p><BilingualText text="This test combines three assessments — your personality type (RIASEC), your interests and hobbies, and your self-rated aptitude — to give you a well-rounded career recommendation." /></p>
+            <p><BilingualText text="Be honest — there are no right or wrong answers. Choose what genuinely reflects you." /></p>
             <div className="intro-stats">
-              <div><strong>3</strong><span>Sections</span></div>
-              <div><strong>60</strong><span>Questions</span></div>
-              <div><strong>15–20 min</strong><span>Estimated time</span></div>
-              <div><strong>Instant</strong><span>Results</span></div>
+              <div><strong>3</strong><span><BilingualText text="Sections" /></span></div>
+              <div><strong>60</strong><span><BilingualText text="Questions" /></span></div>
+              <div><strong>15–20 min</strong><span><BilingualText text="Estimated time" /></span></div>
+              <div><strong>Instant</strong><span><BilingualText text="Results" /></span></div>
             </div>
           </div>
           <form className="details-form" onSubmit={handleDetailsSubmit}>
-            <h2>{profileData?.name ? "Confirm your details" : "Enter your details"}</h2>
+            <h2><BilingualText text={profileData?.name ? "Confirm your details" : "Enter your details"} /></h2>
             <p className="form-sub" style={profileData?.name ? { color: "#10b981", fontWeight: 600 } : {}}>
               {profileData?.name
                 ? details.stream
-                  ? "✓ Your details are pre-filled from your Manzil profile."
-                  : "✓ Name pre-filled from your Manzil profile. Please select your stream below."
+                  ? "✓ Your details are pre-filled from your profile."
+                  : "✓ Name pre-filled from your profile. Please select your stream below."
                 : "Your details appear on your personalised report. They are not stored anywhere."}
             </p>
             <div className="form-group">
-              <label>Full Name</label>
+              <label><BilingualText text="Full Name" /></label>
               <input type="text" placeholder="e.g. Aryan Sharma" value={details.name}
                 onChange={(e) => setDetails({ ...details, name: e.target.value })} required />
             </div>
             <div className="form-row">
               <div className="form-group">
-                <label>Current Class</label>
+                <label><BilingualText text="Current Class" /></label>
                 <select value={details.class_level}
                   onChange={(e) => setDetails({ ...details, class_level: e.target.value })} required>
-                  <option value="">Select class</option>
-                  <option value="Class 10">Class 10</option>
-                  <option value="Class 11">Class 11</option>
-                  <option value="Class 12">Class 12</option>
+                  <option value=""><BilingualText text="Select class" /></option>
+                  <option value="Class 10"><BilingualText text="Class 10" /></option>
+                  <option value="Class 11"><BilingualText text="Class 11" /></option>
+                  <option value="Class 12"><BilingualText text="Class 12" /></option>
                 </select>
               </div>
               <div className="form-group">
-                <label>Stream (or Intended)</label>
+                <label><BilingualText text="Stream (or Intended)" /></label>
                 <select value={details.stream}
                   onChange={(e) => setDetails({ ...details, stream: e.target.value })} required>
-                  <option value="">Select stream</option>
-                  <option value="PCM">PCM (Physics, Chemistry, Maths)</option>
-                  <option value="PCB">PCB (Physics, Chemistry, Biology)</option>
-                  <option value="Commerce">Commerce</option>
-                  <option value="Humanities">Humanities / Arts</option>
-                  <option value="none">Not Decided / General</option>
+                  <option value=""><BilingualText text="Select stream" /></option>
+                  <option value="PCM"><BilingualText text="PCM (Physics, Chemistry, Maths)" /></option>
+                  <option value="PCB"><BilingualText text="PCB (Physics, Chemistry, Biology)" /></option>
+                  <option value="Commerce"><BilingualText text="Commerce" /></option>
+                  <option value="Humanities"><BilingualText text="Humanities / Arts" /></option>
+                  <option value="none"><BilingualText text="Not Decided / General" /></option>
                 </select>
               </div>
             </div>
             <button type="submit" className="btn-primary btn-large"
               style={{ width: "100%", marginTop: "12px" }}>
-              Begin Test →
+              <BilingualText text="Begin Test →" />
             </button>
           </form>
         </div>
@@ -383,9 +384,9 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
           <main className="test-main">
             <div className="section-motto">
               <span className="section-badge" style={{ background: info.color + "18", color: info.color }}>
-                {CATEGORY_LABELS[currentCat]} — Question {qInSection} of 10
+                <BilingualText text={CATEGORY_LABELS[currentCat]} /> — <BilingualText text="Question" /> {qInSection} <BilingualText text="of" /> 10
               </span>
-              <p>{CATEGORY_MOTTOS[currentCat]}</p>
+              <p><BilingualText text={CATEGORY_MOTTOS[currentCat]} /></p>
             </div>
 
             <AnimatePresence mode="wait">
@@ -397,15 +398,15 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
               >
-                <p className="q-number">Question {current + 1} of 60</p>
-                <h2 className="q-text">{q.text}</h2>
+                <p className="q-number"><BilingualText text="Question" /> {current + 1} <BilingualText text="of" /> 60</p>
+                <h2 className="q-text"><BilingualText text={q.text} /></h2>
 
                 <AgreeScale items={RIASEC_SCALE} value={selected} onChange={setSelected} color={info.color} />
 
                 <div className="q-nav">
-                  <button className="btn-ghost" onClick={handlePrev} disabled={current === 0}>← Previous</button>
+                  <button className="btn-ghost" onClick={handlePrev} disabled={current === 0}><BilingualText text="← Previous" /></button>
                   <button className="btn-primary" onClick={handleNext} style={{ background: info.color }}>
-                    {current === 59 ? "Next Section →" : "Next →"}
+                    {current === 59 ? <BilingualText text="Next Section →" /> : <BilingualText text="Next →" />}
                   </button>
                 </div>
               </motion.div>
@@ -461,14 +462,14 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
       <div className="test-page aptitude-page assessment-page apt-floating-shell">
         <FloatingBackground />
         <ManzilHeader
-          title="Manzil"
+          title=""
           center={(
             <div>
-              <h1>Section 2 of 3 — Interests</h1>
+              <h1><BilingualText text="Section 2 of 3 — Interests" /></h1>
               <p>{details.name} • {details.class_level} • {details.stream}</p>
             </div>
           )}
-          right={<span className="manzil-header-counter">{selectedHobbies.length} selected</span>}
+          right={<span className="manzil-header-counter">{selectedHobbies.length} <BilingualText text="selected" /></span>}
         />
 
         <div className="progress-bar-wrap">
@@ -478,16 +479,15 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
         <div className="hobbies-container">
           <div className="hobbies-intro">
             <div className="section-badge" style={{ background: "rgba(44, 84, 146, 0.10)", color: "#2C5492", display: "inline-block", marginBottom: "12px" }}>
-              Section 2 of 3
+              <BilingualText text="Section 2 of 3" />
             </div>
-            <h2 style={{ color: "#102849" }}>What are your hobbies and interests?</h2>
-            <p>Select all that apply. These help us understand what you genuinely enjoy outside of academics — and surface career options that match your real interests, not just your personality type.</p>
-            <p style={{ color: "#5F6B8D" }}>Select all that apply...</p>
+            <h2 style={{ color: "#102849" }}><BilingualText text="What are your hobbies and interests?" /></h2>
+            <p><BilingualText text="Select all that apply. These help us understand what you genuinely enjoy outside of academics — and surface career options that match your real interests, not just your personality type." /></p>
           </div>
 
           {HOBBY_CATEGORIES.map((group) => (
             <div key={group.category} className="hobby-group">
-              <h3 className="hobby-group-title">{group.category}</h3>
+              <h3 className="hobby-group-title"><BilingualText text={group.category} /></h3>
               <div className="hobby-chips">
                 {group.hobbies.map((hobby) => {
                   const isSelected = selectedHobbies.includes(hobby);
@@ -496,7 +496,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
                       className={`hobby-chip ${isSelected ? "selected" : ""}`}
                       onClick={() => toggleHobby(hobby)}>
                       {isSelected && <span className="hobby-check">✓</span>}
-                      {hobby}
+                      <BilingualText text={hobby} />
                     </button>
                   );
                 })}
@@ -507,14 +507,14 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
           <div className="hobbies-footer">
             <p className="hobbies-selected-count">
               {selectedHobbies.length === 0
-                ? "No hobbies selected yet"
-                : `${selectedHobbies.length} interest${selectedHobbies.length > 1 ? "s" : ""} selected`}
+                ? <BilingualText text="No hobbies selected yet" />
+                : <BilingualText text={`${selectedHobbies.length} interest${selectedHobbies.length > 1 ? "s" : ""} selected`} />}
             </p>
             <div className="q-nav">
-              <button className="btn-ghost" onClick={() => setStep("questions")}>← Back to Section 1</button>
+              <button className="btn-ghost" onClick={() => setStep("questions")}><BilingualText text="← Back to Section 1" /></button>
               <button className="btn-primary" onClick={handleHobbiesNext}
                 style={{ background: "#2C5492" }}>
-                Next Section →
+                <BilingualText text="Next Section →" />
               </button>
             </div>
           </div>
@@ -573,9 +573,9 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
             <div className="section-motto">
               <span className="section-badge"
                 style={{ background: aptitudeColor + "18", color: aptitudeColor }}>
-                {aptitudeSkillInfo?.label} — Question {qInAptitudeSkill} of 3
+                <BilingualText text={aptitudeSkillInfo?.label} /> — <BilingualText text="Question" /> {qInAptitudeSkill} <BilingualText text="of" /> 3
               </span>
-              <p>{aptitudeSkillInfo?.about}</p>
+              <p><BilingualText text={aptitudeSkillInfo?.about} /></p>
             </div>
 
             <AnimatePresence mode="wait">
@@ -587,15 +587,15 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
               >
-                <p className="q-number">Question {aptitudeCurrent + 1} of 18</p>
-                <h2 className="q-text">{aq?.text}</h2>
+                <p className="q-number"><BilingualText text="Question" /> {aptitudeCurrent + 1} <BilingualText text="of" /> 18</p>
+                <h2 className="q-text"><BilingualText text={aq?.text} /></h2>
 
                 <AgreeScale items={APTITUDE_SCALE} value={aptitudeSelected} onChange={setAptitudeSelected} color={aptitudeColor} />
 
                 <div className="q-nav">
-                  <button className="btn-ghost" onClick={handleAptitudePrev}>← Previous</button>
+                  <button className="btn-ghost" onClick={handleAptitudePrev}><BilingualText text="← Previous" /></button>
                   <button className="btn-primary" onClick={handleAptitudeNext} style={{ background: aptitudeColor }}>
-                    {aptitudeCurrent === 17 ? "Submit Test ✓" : "Next →"}
+                    {aptitudeCurrent === 17 ? <BilingualText text="Submit Test ✓" /> : <BilingualText text="Next →" />}
                   </button>
                 </div>
               </motion.div>

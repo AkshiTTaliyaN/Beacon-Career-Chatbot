@@ -1,3 +1,5 @@
+import BilingualText from "../BilingualText";
+
 export default function OptionCard({
   name,
   value,
@@ -22,8 +24,8 @@ export default function OptionCard({
       <div className="option-card-inner">
         {icon && <span className="option-card-icon" aria-hidden="true">{icon}</span>}
         <div className="option-card-text">
-          <span className="option-card-label">{label}</span>
-          {description && <span className="option-card-desc">{description}</span>}
+          <span className="option-card-label"><BilingualText text={label} /></span>
+          {description && <span className="option-card-desc"><BilingualText text={description} /></span>}
         </div>
         {checked && <span className="option-card-check" aria-hidden="true">✓</span>}
       </div>

@@ -33,7 +33,7 @@ function navigate(path) {
 }
 
 export default function ManzilHeader({
-  title = "Manzil",
+  title = "",
   subtitle,
   center,
   right,
@@ -44,9 +44,9 @@ export default function ManzilHeader({
 }) {
   const resolvedNavItems = Array.isArray(navItems) ? navItems : DEFAULT_NAV_ITEMS;
 
-  const leftContent = (title !== "Manzil" || subtitle) ? (
+  const leftContent = (title || subtitle) ? (
     <div className="manzil-header-brand">
-      {title !== "Manzil" ? <span className="manzil-header-page-title">{title}</span> : null}
+      {title ? <span className="manzil-header-page-title">{title}</span> : null}
       {subtitle ? <span className="manzil-header-subtitle">{subtitle}</span> : null}
     </div>
   ) : null;
@@ -57,19 +57,12 @@ export default function ManzilHeader({
     >
       <div className="manzil-header-left">
         <img
-          src={ManzilLogo}
-          alt="Manzil"
-          className="manzil-brand-logo"
-        />
-        {leftContent}
-      </div>
-
-      <div className="manzil-header-center">
-        <img
           src={EdCilLogo}
           alt="EdCIL (India) Limited"
-          className="manzil-header-edcil-logo"
+          className="manzil-header-edcil-logo-left"
+          style={{ height: '36px', objectFit: 'contain', marginRight: '12px' }}
         />
+        {leftContent}
       </div>
 
       <div className="manzil-header-right">
@@ -85,7 +78,7 @@ export default function ManzilHeader({
                 {item.label}
               </button>
             ))}
-            <div className="manzil-header-avatar">M</div>
+            <div className="manzil-header-avatar">U</div>
           </nav>
         )}
         {right}
