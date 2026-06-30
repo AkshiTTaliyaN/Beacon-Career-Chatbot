@@ -5,7 +5,7 @@ import RiasecGate from './RiasecGate.jsx'
 import CareerMindMap from '../components/CareerMindMap.jsx'
 import { GlassCard, RadialGauge, KPICard, SectionHeader, RIASEC_THEME } from '../components/FuturisticCharts.jsx'
 import { getSmartRecommendations, getMyProfile } from '../api/client.js'
-import ManzilLogo from '../assets/manzil-logo.png'
+import EdCilLogo from '../assets/edcil.jpeg'
 import '../styles/futuristic.css'
 import { APTITUDE_URL } from '../config.js'
 import ManzilHeader from '../components/ManzilHeader'
@@ -282,7 +282,7 @@ export default function Dashboard({ userName }) {
   return (
     <div className="ft-dashboard-bg">
       <ManzilHeader
-        title="Manzil"
+        title=""
         showDefaultNav={false}
         right={(
           <nav className="manzil-header-nav" aria-label="Primary">
@@ -330,8 +330,8 @@ export default function Dashboard({ userName }) {
       <div className="dashboard-hero-wrapper">
         <HeroSection
           lightMode
-          logoSrc={ManzilLogo}
-          logoAlt="Manzil Logo"
+          logoSrc={EdCilLogo}
+          logoAlt="EdCIL Logo"
           logoStyle={{
             height: 180,
             maxWidth: 420,
@@ -996,7 +996,7 @@ export default function Dashboard({ userName }) {
           ═══════════════════════════════════════════════════════════════════ */}
       <section className="ft-animate-in ft-section" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
         <SectionHeader
-          title="Why Manzil"
+          title="Key Benefits"
           subtitle=""
           accentColor="cyan"
         />
@@ -1044,7 +1044,7 @@ export default function Dashboard({ userName }) {
 }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', gap: 24, alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap' }}>
           <div style={{ flex: '0 0 260px' }}>
-            <div style={{ fontWeight: 800, fontSize: 20, color: '#00d4ff', textShadow: '0 0 20px rgba(0,212,255,0.3)' }}>Manzil</div>
+            <div style={{ fontWeight: 800, fontSize: 20, color: '#00d4ff', textShadow: '0 0 20px rgba(0,212,255,0.3)' }}>Career Guidance</div>
             <div style={{
               marginTop: 10,
               color: 'rgba(255,255,255,0.82)',
@@ -1106,7 +1106,7 @@ export default function Dashboard({ userName }) {
           color: 'rgba(255,255,255,0.72)',
           fontSize: '0.82rem',
         }}>
-          2026 Manzil. All rights reserved.
+          2026 Career Guidance Portal. All rights reserved.
         </div>
       </footer>
     </div>

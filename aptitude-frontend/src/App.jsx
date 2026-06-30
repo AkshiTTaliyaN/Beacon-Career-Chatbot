@@ -133,7 +133,7 @@ export default function App() {
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `Manzil_Report_${formData.name.replace(/\s+/g, "_")}.pdf`;
+      a.download = `Career_Report_${formData.name.replace(/\s+/g, "_")}.pdf`;
       a.click();
       URL.revokeObjectURL(url);
     } catch (err) {

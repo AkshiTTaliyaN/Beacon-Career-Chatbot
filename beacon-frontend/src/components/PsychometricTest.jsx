@@ -170,7 +170,7 @@ export default function PsychometricTest({ isEmbedded = false, hasResults = fals
 
         <div style={{ background: COLORS.white, borderRadius: 12, padding: '1.5rem', boxShadow: '0 6px 18px rgba(44,84,146,0.06)' }}>
           <h2 style={{ color: COLORS.navy, fontWeight: 800, marginBottom: '0.5rem' }}>
-            <BilingualText text="Manzil Personality Test" />
+            <BilingualText text="Personality Test" />
           </h2>
           <p style={{ color: COLORS.muted, fontSize: '0.95rem', marginBottom: '1.5rem' }}>
             <BilingualText text="Answer each question on a scale of 1 (Not interested) to 5 (Very interested)" />

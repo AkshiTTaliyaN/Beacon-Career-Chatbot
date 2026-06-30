@@ -954,7 +954,7 @@ export default function ReportPage() {
             </section>
 
             <footer style={{ color: 'rgba(255, 255, 255, 0.45)', fontSize: 13, textAlign: 'center', padding: '1rem 0 4rem 0' }}>
-              Manzil © 2026 — This report is based on the globally validated RIASEC psychometric model.
+              Career Guidance Portal © 2026 — This report is based on the globally validated RIASEC psychometric model.
               For personalised counselling contact our team.
             </footer>
           </>

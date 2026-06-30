@@ -21,7 +21,7 @@ const FEATURES = [
   {
     icon: "💬",
     title: "AI Counsellor",
-    desc: "Chat with Manzil AI for personalised guidance on colleges, streams, and next steps.",
+    desc: "Chat with our AI for personalised guidance on colleges, streams, and next steps.",
   },
 ];
 
@@ -40,7 +40,7 @@ export default function LandingPage({ onStart }) {
       </div>
 
       <ManzilHeader
-        title="Manzil"
+        title=""
         subtitle="Career Guidance Platform"
         showDefaultNav={false}
       />
@@ -99,7 +99,7 @@ export default function LandingPage({ onStart }) {
       </main>
 
       <footer className="manzil-landing-footer">
-        <p>Manzil — guiding students from curiosity to clarity.</p>
+        <p>Guiding students from curiosity to clarity.</p>
       </footer>
     </div>
   );

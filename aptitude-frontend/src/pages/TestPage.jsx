@@ -342,7 +342,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
       <div className="test-page aptitude-page assessment-page apt-floating-shell">
         <FloatingBackground />
         <ManzilHeader
-          title="Manzil"
+          title=""
           center={(
             <div>
               <h1>Section 1 of 3 — Personality</h1>
@@ -529,7 +529,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
       <div className="test-page aptitude-page assessment-page apt-floating-shell">
         <FloatingBackground />
         <ManzilHeader
-          title="Manzil"
+          title=""
           center={(
             <div>
               <h1>Section 3 of 3 — Aptitude</h1>

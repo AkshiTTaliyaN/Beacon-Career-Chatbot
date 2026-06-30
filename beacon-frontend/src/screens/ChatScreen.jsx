@@ -19,10 +19,10 @@ const QUICK_ACTIONS = [
   { id: "start", icon: "✨", label: "Not Sure Where To Start", message: "I'm not sure where to start with my career planning." },
 ];
 
-function ManzilAvatar() {
+function AIAvatar() {
   return (
     <div className="chat-avatar" aria-hidden="true">
-      <span>M</span>
+      <span>A</span>
     </div>
   );
 }
@@ -35,9 +35,9 @@ function MessageBubble({ role, text }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
     >
-      {role === "bot" && <ManzilAvatar />}
+      {role === "bot" && <AIAvatar />}
       <div className="chat-bubble">
-        {role === "bot" && <div className="chat-bubble-label">Manzil AI</div>}
+        {role === "bot" && <div className="chat-bubble-label">Career AI</div>}
         {role === "bot" ? (
           <ChatMarkdown content={text} />
         ) : (
@@ -364,7 +364,7 @@ export default function ChatScreen() {
   return (
     <div className="chat-page">
       <ManzilHeader
-        title="Manzil AI Counsellor"
+        title="AI Career Counsellor"
         subtitle="Career · College · Exam guidance"
         showDefaultNav={false}
         right={(
@@ -390,8 +390,8 @@ export default function ChatScreen() {
             </AnimatePresence>
 
             {loading && (
-              <div className="typing-row" aria-label="Manzil AI is typing">
-                <ManzilAvatar />
+              <div className="typing-row" aria-label="AI is typing">
+                <AIAvatar />
                 <div className="typing-bubble">
                   <span />
                   <span />
@@ -429,7 +429,7 @@ export default function ChatScreen() {
               onChange={(e) => setTextValue(e.target.value)}
               placeholder="Ask anything about careers, colleges, streams, exams, or your future..."
               disabled={loading}
-              aria-label="Message Manzil AI Counsellor"
+              aria-label="Message AI Career Counsellor"
             />
             <button type="submit" className="btn-send" disabled={loading || !textValue.trim()} aria-label="Send message">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
