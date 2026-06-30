@@ -4,6 +4,25 @@ A modern, comprehensive web-based career counselling platform designed for schoo
 
 ---
 
+## Recent Expansion & Localization Strategy (Bilingual Khmer Initiative)
+
+### What We Are Doing
+We are scaling the platform to support two separate codebases and educational contexts:
+1. **The India-Centric "Manzil" Portal**: Retains the complete "Manzil" branding, CBSE school board structures, and deep integration with Government of India and EdCIL Ministry of Education initiatives.
+2. **The Localized "Bilingual" Portal**: A generalized entity that removes "Manzil" branding/logos, introducing full English-Khmer bilingual support across onboarding, the dashboard, the chatbot, and the psychometric test pages.
+
+### Why We Are Doing It
+* **Democratization of Career Guidance**: Providing career guidance in native languages ensures that students from diverse linguistic backgrounds (specifically Khmer-speaking regions) can complete psychometric RIASEC assessments and chat with career mentors without language barriers.
+* **Global Generalization**: Decoupling the platform from a single country's brand name makes the underlying scoring engine, chatbot logic, and profiling system easily deployable by any educational authority worldwide.
+
+### How We Are Doing It
+* **Dynamic Dual-Language Translation Engine**: Built a caching translator utility (`translator.js`) using localized translation dictionaries and an asynchronous fall-through to the Google Translate API. Dynamic translation strings are cached in-memory and saved to browser `localStorage` for instant near-zero latency retrieval on repeat renders.
+* **Aesthetic Subtitle Layouts (`BilingualText` component)**: Deployed a custom React layout component that prints translations as neat subtitles below headers, descriptions, and inputs. 
+* **Numeral Protection Protocol**: Implemented a global interceptor that detects Khmer numeral glyphs (`០–៩`) in translation strings and restores them to standard Arabic numerals (`0–9`). This maintains readable score percentages, question counters ("Question 1 of 60"), and salary numbers.
+* **Responsive Flex Headers & Sizing**: Redesigned the header grids into dynamic CSS Flex containers to push right-aligned active elements (like the Khmer toggle and Government badges) cleanly to the edge of the layout. Refactored image boxes using `object-fit: contain` to preserve the EdCIL branding wide aspect ratios without cropping.
+
+---
+
 ## Technical Architecture & Core Approach
 
 ### 1. Unified Knowledge-Based Chatbot (Integrated)
