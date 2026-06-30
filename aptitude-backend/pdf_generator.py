@@ -143,7 +143,7 @@ def generate_pdf(result: dict) -> bytes:
         for i, career in enumerate(result["primary_careers"][:3]):
             c_title = safe_html(career.get("title", ""))
             c_salary = safe_html(career.get("salary", ""))
-            c_reason = safe_html(career.get("reason", ""))
+            c_reason = safe_html(career.get("description") or career.get("reason", ""))
             c_stream = safe_html(career.get("stream", ""))
 
             career_data = [[

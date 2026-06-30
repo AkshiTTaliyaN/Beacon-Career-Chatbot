@@ -159,11 +159,20 @@ def synthesise_result(
     description = PERSONALITY_DESCRIPTIONS.get(primary_code, "")
 
     # Look up primary careers from RIASEC map
-    primary_careers = (
+    raw_careers = (
         CAREER_MAP.get(holland_code)
         or CAREER_MAP.get(primary_code + secondary_code)
         or CAREER_MAP.get(primary_code, [])
     )
+    primary_careers = [
+        {
+            "title": c["title"],
+            "salary": c["salary"],
+            "reason": c["reason"],
+            "description": c["reason"],
+            "stream": c["stream"]
+        } for c in raw_careers
+    ]
 
     riasec_score_list = [
         {"category": CATEGORY_NAMES[cat], "code": cat, "score": score}

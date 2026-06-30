@@ -92,13 +92,13 @@ export default function App() {
     setFormData(payload);
 
     try {
-  console.log("SUBMIT PAYLOAD", payload);
+      console.log("SUBMIT PAYLOAD", payload);
 
-  const res = await fetch(`${APTITUDE_API}/api/submit`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
+      const res = await fetch(`${APTITUDE_API}/api/submit`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
       if (!res.ok) throw new Error(`Submission failed with status ${res.status}`);
 
       const json = await res.json();
@@ -108,6 +108,23 @@ export default function App() {
           json.selected_hobbies || payload.hobbies,
           json.aptitude_scores
         );
+
+        // Fetch Engine 1 smart recommendations from beacon-backend
+        if (beaconToken.current) {
+          try {
+            const smartRes = await fetch(`${BEACON_API}/recommendations/smart`, {
+              headers: { Authorization: `Bearer ${beaconToken.current}` }
+            });
+            if (smartRes.ok) {
+              const smartJson = await smartRes.json();
+              if (smartJson.recommendations) {
+                json.primary_careers = smartJson.recommendations;
+              }
+            }
+          } catch (e) {
+            console.error("Failed to fetch Engine 1 recommendations:", e);
+          }
+        }
       }
 
       setResult(json);
@@ -119,13 +136,17 @@ export default function App() {
   };
 
   const handleDownloadPDF = async () => {
-    if (!formData) return;
+    if (!formData || !result) return;
 
     try {
+      const pdfPayload = {
+        ...formData,
+        recommendations: result.primary_careers
+      };
       const res = await fetch(`${APTITUDE_API}/api/download-pdf`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(pdfPayload),
       });
       if (!res.ok) throw new Error(`PDF request failed with status ${res.status}`);
 
