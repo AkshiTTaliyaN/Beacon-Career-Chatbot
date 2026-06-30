@@ -180,7 +180,7 @@ export default function HomePage({ onStart }) {
     {
       icon: '📚',
       title: 'Career Library',
-      desc: 'Explore 100+ career paths across government, private, and entrepreneurship sectors — complete with roadmaps, required exams, and salary ranges.',
+      desc: 'Explore 100+ career paths across government, private, and entrepreneurship sectors, complete with roadmaps, required exams, and salary ranges.',
       color: '#00ff88',
     },
     {
@@ -198,7 +198,7 @@ export default function HomePage({ onStart }) {
     {
       icon: '📄',
       title: 'Detailed PDF Report',
-      desc: 'Generate a professional career guidance report summarising your profile, top career matches, and next steps — shareable with parents and mentors.',
+      desc: 'Generate a professional career guidance report summarising your profile, top career matches, and next steps, shareable with parents and mentors.',
       color: '#14b8a6',
     },
   ]
@@ -282,11 +282,11 @@ export default function HomePage({ onStart }) {
           </div>
           <div style={{ display: 'block' }}>
             <div style={{ fontSize: '0.6em', fontWeight: 700, color: '#2c5492' }}>
-              — Free for Every Student
+              Free for Every Student
             </div>
             {language === 'km' && (
               <div style={{ fontSize: '0.45em', fontWeight: 500, color: '#5f6b8d', marginTop: '0.1rem', letterSpacing: 'normal', textTransform: 'none' }}>
-                - ឥតគិតថ្លៃសម្រាប់សិស្សគ្រប់រូប
+                ឥតគិតថ្លៃសម្រាប់សិស្សគ្រប់រូប
               </div>
             )}
           </div>
@@ -360,7 +360,7 @@ export default function HomePage({ onStart }) {
               <BilingualText text="Everything a student needs" />
             </h2>
             <p style={{ color: '#5f6b8d', fontSize: '1rem', maxWidth: 520, margin: '0 auto', lineHeight: 1.65 }}>
-              <BilingualText text="From personality profiling to AI counselling — all tools in one platform, designed specifically for the education system." />
+              <BilingualText text="From personality profiling to AI counselling, all tools are integrated in one platform designed specifically for the education system." />
             </p>
           </div>
 
@@ -432,7 +432,7 @@ export default function HomePage({ onStart }) {
               <BilingualText text="A Government Enterprise" />
             </h3>
             <p style={{ margin: 0, color: '#5f6b8d', fontSize: '0.9rem', lineHeight: 1.7 }}>
-              <BilingualText text="EdCIL Limited is a Mini Ratna enterprise under the Ministry of Education. This platform is EdCIL's initiative to democratise career guidance for every student — free, unbiased, and built around the education ecosystem." />
+              <BilingualText text="EdCIL Limited is a Mini Ratna enterprise under the Ministry of Education. This platform is EdCIL's initiative to democratise career guidance for every student, making it free, unbiased, and built around the education ecosystem." />
             </p>
           </div>
         </motion.div>
