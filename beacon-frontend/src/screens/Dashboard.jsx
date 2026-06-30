@@ -18,7 +18,7 @@ import {
 /* ─── Radar Tooltip ───────────────────────────────────────────────── */
 function RadarTooltipContent({ active, payload }) {
   if (!active || !payload || !payload.length) return null;
-  const isDark = !document.body.classList.contains('light-theme');
+  const isDark = false;
   return (
     <div style={{
       background: isDark ? 'rgba(13,19,51,0.95)' : '#ffffff',
@@ -42,7 +42,7 @@ function RadarTooltipContent({ active, payload }) {
 /* ─── Custom Radar Axis Tick ──────────────────────────────────────── */
 function FuturisticRadarTick({ x, y, cx, cy, payload }) {
   const theme = RIASEC_THEME[payload.value] || {};
-  const isDark = !document.body.classList.contains('light-theme');
+  const isDark = false;
   
   // Calculate vector from center to coordinate
   const dx = x - cx;
@@ -187,7 +187,7 @@ export default function Dashboard({ userName }) {
 
   const name = userName || window.localStorage.getItem('userName') || ''
   const isReturning = window.localStorage.getItem('beaconReturning') === '1'
-  const isDark = !document.body.classList.contains('light-theme');
+  const isDark = false;
 
   useEffect(() => {
     const saved = localStorage.getItem('beacon-theme');
@@ -795,7 +795,7 @@ export default function Dashboard({ userName }) {
                         if (!active || !payload?.[0]) return null;
                         const v = payload[0].value;
                         const labels = ['','Struggling','Getting by','Comfortable','Really good','Favourite'];
-                        const localIsDark = !document.body.classList.contains('light-theme');
+                        const localIsDark = false;
                         return (
                           <div style={{
                             background: localIsDark ? 'rgba(13,19,51,0.95)' : '#ffffff',
