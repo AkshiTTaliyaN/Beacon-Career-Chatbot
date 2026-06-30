@@ -4,6 +4,7 @@ import EdCilLogo from '../assets/edcil.jpeg'
 import ManzilHeader from '../components/ManzilHeader'
 import LanguageToggle from '../components/LanguageToggle.jsx'
 import BilingualText from '../components/BilingualText.jsx'
+import { useLanguage } from '../context/LanguageContext'
 import '../styles/futuristic.css'
 
 /* ── helpers ─────────────────────────────────────────────────────────────── */
@@ -162,6 +163,7 @@ function StepCard({ num, title, desc, color, delay = 0 }) {
 
 /* ── Main HomePage ─────────────────────────────────────────────────────────── */
 export default function HomePage({ onStart }) {
+  const { language } = useLanguage()
   const features = [
     {
       icon: '🧠',
@@ -256,15 +258,38 @@ export default function HomePage({ onStart }) {
             position: 'relative', zIndex: 1,
           }}
         >
-          <BilingualText text="Career Guidance" />{' '}
-          <span style={{
-            background: 'linear-gradient(135deg, #00d4ff, #8b5cf6)',
-            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-          }}>
-            <BilingualText text="Built for Everyone" />
-          </span>
-          {' '}<BilingualText text="— Free for Every Student" />
+          <div style={{ display: 'block', marginBottom: '0.4rem' }}>
+            <div style={{ color: '#102849' }}>Career Guidance</div>
+            {language === 'km' && (
+              <div style={{ fontSize: '0.55em', fontWeight: 500, color: '#5f6b8d', marginTop: '0.1rem', letterSpacing: 'normal', textTransform: 'none' }}>
+                ការណែនាំអំពីអាជីព
+              </div>
+            )}
+          </div>
+          <div style={{ display: 'block', marginBottom: '0.4rem' }}>
+            <span style={{
+              background: 'linear-gradient(135deg, #00d4ff, #8b5cf6)',
+              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}>
+              Built for Everyone
+            </span>
+            {language === 'km' && (
+              <div style={{ fontSize: '0.55em', fontWeight: 500, color: '#5f6b8d', marginTop: '0.1rem', background: 'none', WebkitTextFillColor: '#5f6b8d', WebkitBackgroundClip: 'initial', letterSpacing: 'normal', textTransform: 'none' }}>
+                បង្កើតឡើងសម្រាប់អ្នករាល់គ្នា
+              </div>
+            )}
+          </div>
+          <div style={{ display: 'block' }}>
+            <div style={{ fontSize: '0.6em', fontWeight: 700, color: '#2c5492' }}>
+              — Free for Every Student
+            </div>
+            {language === 'km' && (
+              <div style={{ fontSize: '0.45em', fontWeight: 500, color: '#5f6b8d', marginTop: '0.1rem', letterSpacing: 'normal', textTransform: 'none' }}>
+                - ឥតគិតថ្លៃសម្រាប់សិស្សគ្រប់រូប
+              </div>
+            )}
+          </div>
         </motion.h1>
 
         {/* Subtitle */}
@@ -278,7 +303,7 @@ export default function HomePage({ onStart }) {
             position: 'relative', zIndex: 1,
           }}
         >
-          <BilingualText text="AI-powered career counselling, psychometric profiling, and personalised roadmaps for Class 8–12 students. No fees. No bias. Just clear direction." />
+          <BilingualText text="AI-powered career counselling, psychometric profiling, and personalised roadmaps for Class 9–12 students. No fees. No bias. Just clear direction." />
         </motion.p>
 
         {/* CTA */}
