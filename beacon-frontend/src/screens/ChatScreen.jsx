@@ -354,7 +354,7 @@ export default function ChatScreen() {
     !loading &&
     !error &&
     currentNode?.type === "question" &&
-    messages.length <= 2;
+    (currentNode?.question_id === "Q1" || messages.length <= 2);
 
   const showSuggestions =
     currentNode?.type === "question" &&

@@ -383,8 +383,8 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
           {/* Centre question */}
           <main className="test-main">
             <div className="section-motto">
-              <span className="section-badge" style={{ background: info.color + "18", color: info.color }}>
-                <BilingualText text={CATEGORY_LABELS[currentCat]} /> — <BilingualText text="Question" /> {qInSection} <BilingualText text="of" /> 10
+              <span className="section-badge" style={{ background: info.color + "18", color: info.color, display: "inline-flex", alignItems: "center", gap: "6px" }}>
+                <BilingualText inline text={CATEGORY_LABELS[currentCat]} /> — Question {qInSection} of 10
               </span>
               <p><BilingualText text={CATEGORY_MOTTOS[currentCat]} /></p>
             </div>
@@ -479,7 +479,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
         <div className="hobbies-container">
           <div className="hobbies-intro">
             <div className="section-badge" style={{ background: "rgba(44, 84, 146, 0.10)", color: "#2C5492", display: "inline-block", marginBottom: "12px" }}>
-              <BilingualText text="Section 2 of 3" />
+              Section 2 of 3
             </div>
             <h2 style={{ color: "#102849" }}><BilingualText text="What are your hobbies and interests?" /></h2>
             <p><BilingualText text="Select all that apply. These help us understand what you genuinely enjoy outside of academics — and surface career options that match your real interests, not just your personality type." /></p>
@@ -508,7 +508,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
             <p className="hobbies-selected-count">
               {selectedHobbies.length === 0
                 ? <BilingualText text="No hobbies selected yet" />
-                : <BilingualText text={`${selectedHobbies.length} interest${selectedHobbies.length > 1 ? "s" : ""} selected`} />}
+                : <span>{selectedHobbies.length} <BilingualText inline text={selectedHobbies.length > 1 ? "interests selected" : "interest selected"} /></span>}
             </p>
             <div className="q-nav">
               <button className="btn-ghost" onClick={() => setStep("questions")}><BilingualText text="← Back to Section 1" /></button>
@@ -587,7 +587,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
               >
-                <p className="q-number"><BilingualText text="Question" /> {aptitudeCurrent + 1} <BilingualText text="of" /> 18</p>
+                <p className="q-number">Question {aptitudeCurrent + 1} of 18</p>
                 <h2 className="q-text"><BilingualText text={aq?.text} /></h2>
 
                 <AgreeScale items={APTITUDE_SCALE} value={aptitudeSelected} onChange={setAptitudeSelected} color={aptitudeColor} />

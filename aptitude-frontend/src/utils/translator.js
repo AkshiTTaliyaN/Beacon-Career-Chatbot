@@ -28,58 +28,78 @@ function shouldTranslate(text) {
  * @param {string} targetLang 
  * @returns {Promise<string>}
  */
+function restoreNumbers(text) {
+  if (!text) return '';
+  const khmerDigits = {
+    '០': '0',
+    '១': '1',
+    '២': '2',
+    '៣': '3',
+    '៤': '4',
+    '៥': '5',
+    '៦': '6',
+    '៧': '7',
+    '៨': '8',
+    '៩': '9'
+  };
+  return text.split('').map(char => khmerDigits[char] || char).join('');
+}
+
 export async function translateText(text, targetLang = 'km') {
   if (!shouldTranslate(text)) return '';
 
   const cacheKey = `${targetLang}:${text}`;
 
-  // 1. Check in-memory cache
-  if (memCache[cacheKey]) {
-    return memCache[cacheKey];
-  }
-
-  // 2. Check localStorage cache
-  try {
-    const cached = localStorage.getItem(`lang_cache:${cacheKey}`);
-    if (cached) {
-      memCache[cacheKey] = cached;
-      return cached;
+  // Helper function to do the raw fetch/cache
+  const getRawTranslation = async () => {
+    // 1. Check in-memory cache
+    if (memCache[cacheKey]) {
+      return memCache[cacheKey];
     }
-  } catch (e) {
-    console.warn('localStorage read error:', e);
-  }
 
-  // 3. Fetch from unofficial Google Translate single API
-  try {
-    const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${targetLang}&dt=t&q=${encodeURIComponent(text)}`;
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`Translate API returned code ${res.status}`);
-    
-    const data = await res.json();
-    
-    // Parse Google Translate single API response format:
-    // [[[translatedText, originalText, ...], ...], ...]
-    if (data && data[0] && Array.isArray(data[0])) {
-      const translatedText = data[0]
-        .map(segment => segment[0])
-        .filter(Boolean)
-        .join('');
-        
-      if (translatedText) {
-        // Save to memory cache
-        memCache[cacheKey] = translatedText;
-        // Save to localStorage cache
-        try {
-          localStorage.setItem(`lang_cache:${cacheKey}`, translatedText);
-        } catch (e) {
-          console.warn('localStorage write error:', e);
-        }
-        return translatedText;
+    // 2. Check localStorage cache
+    try {
+      const cached = localStorage.getItem(`lang_cache:${cacheKey}`);
+      if (cached) {
+        memCache[cacheKey] = cached;
+        return cached;
       }
+    } catch (e) {
+      console.warn('localStorage read error:', e);
     }
-  } catch (err) {
-    console.error('Translation failed:', err);
-  }
 
-  return '';
+    // 3. Fetch from unofficial Google Translate single API
+    try {
+      const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${targetLang}&dt=t&q=${encodeURIComponent(text)}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`Translate API returned code ${res.status}`);
+      
+      const data = await res.json();
+      
+      if (data && data[0] && Array.isArray(data[0])) {
+        const translatedText = data[0]
+          .map(segment => segment[0])
+          .filter(Boolean)
+          .join('');
+          
+        if (translatedText) {
+          // Save to memory cache
+          memCache[cacheKey] = translatedText;
+          // Save to localStorage cache
+          try {
+            localStorage.setItem(`lang_cache:${cacheKey}`, translatedText);
+          } catch (e) {
+            console.warn('localStorage write error:', e);
+          }
+          return translatedText;
+        }
+      }
+    } catch (err) {
+      console.error('Translation failed:', err);
+    }
+    return '';
+  };
+
+  const rawResult = await getRawTranslation();
+  return restoreNumbers(rawResult);
 }

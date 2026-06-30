@@ -241,40 +241,7 @@ export default function HomePage({ onStart }) {
         <div style={{ position: 'absolute', bottom: '-5%', right: '5%', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', top: '30%', right: '15%', width: 250, height: 250, borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,0,110,0.05) 0%, transparent 70%)', filter: 'blur(40px)', pointerEvents: 'none' }} />
 
-        {/* EdCIL Logo */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          style={{ marginBottom: '2rem', position: 'relative', zIndex: 1 }}
-        >
-          <div style={{
-            width: 100, height: 100, borderRadius: 24,
-            overflow: 'hidden',
-            border: '2px solid rgba(0,212,255,0.25)',
-            boxShadow: '0 0 40px rgba(0,212,255,0.15), 0 0 80px rgba(0,212,255,0.06)',
-            margin: '0 auto',
-          }}>
-            <img src={EdCilLogo} alt="EdCIL" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-          </div>
-        </motion.div>
 
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
-          style={{
-            display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
-            padding: '0.4rem 1rem', borderRadius: 999, marginBottom: '1.5rem',
-            background: 'rgba(0,212,255,0.08)', border: '1px solid rgba(0,212,255,0.2)',
-            fontSize: '0.78rem', fontWeight: 600, color: '#2c5492', letterSpacing: '0.05em',
-            position: 'relative', zIndex: 1,
-          }}
-        >
-          <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#00ff88', boxShadow: '0 0 6px #00ff88', display: 'inline-block' }} />
-          <BilingualText text="Powered by EdCIL · Ministry of Education" />
-        </motion.div>
 
         {/* Headline */}
         <motion.h1
@@ -351,9 +318,9 @@ export default function HomePage({ onStart }) {
       {/* ── Stats bar ──────────────────────────────────────────────────── */}
       <section style={{ padding: '1rem 1.5rem 3rem', position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: 900, margin: '0 auto', display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-          <StatCard value={100}  suffix="+"  label="Career Paths"       color="#00d4ff" delay={0}    />
-          <StatCard value={50}   suffix="+"  label="Entrance Exams"     color="#8b5cf6" delay={0.1}  />
-          <StatCard value={8}    suffix=""   label="Classes Supported"  color="#00ff88" delay={0.2}  />
+          <StatCard value={180}  suffix="+"  label="Career Paths"       color="#00d4ff" delay={0}    />
+          <StatCard value={10}   suffix="+"  label="Entrance Exams"     color="#8b5cf6" delay={0.1}  />
+          <StatCard value={4}    suffix=""   label="Classes Supported"  color="#00ff88" delay={0.2}  />
           <StatCard value={6}    suffix=""   label="RIASEC Types Mapped" color="#f59e0b" delay={0.3}  />
         </div>
       </section>
@@ -430,7 +397,7 @@ export default function HomePage({ onStart }) {
           <img
             src={EdCilLogo}
             alt="EdCIL"
-            style={{ width: 80, height: 80, objectFit: 'cover', borderRadius: 16, border: '1px solid rgba(0,212,255,0.2)', flexShrink: 0 }}
+            style={{ width: 140, height: 50, objectFit: 'contain', borderRadius: 8, border: '1px solid rgba(0,212,255,0.15)', background: '#f8fafc', padding: '6px', flexShrink: 0 }}
           />
           <div style={{ flex: 1, minWidth: 240 }}>
             <div style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#2c5492', marginBottom: '0.4rem' }}>
