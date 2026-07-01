@@ -109,7 +109,7 @@ function QuickActionBar({ onSelect, loading, visible }) {
             transition={{ duration: 0.18 }}
           >
             <span className="quick-action-icon" aria-hidden="true">{action.icon}</span>
-            <span className="quick-action-label"><BilingualText text={action.label} /></span>
+            <span className="quick-action-label"><BilingualText text={action.label} inline={true} /></span>
           </motion.button>
         ))}
       </div>
@@ -136,7 +136,7 @@ function OptionBar({ options, onSelect, loading }) {
             transition={{ duration: 0.18 }}
           >
             <span>{option.letter}</span>
-            <em><BilingualText text={option.text} /></em>
+            <em><BilingualText text={option.text} inline={true} /></em>
           </motion.button>
         ))}
       </div>

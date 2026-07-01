@@ -257,15 +257,15 @@ function ScoreBar({ label, value, color }) {
   return (
     <div style={{ marginBottom: 14 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
-        <span style={{ color: 'rgba(255, 255, 255, 0.95)', fontWeight: 700, fontSize: '0.95rem' }}>{label}</span>
-        <span style={{ color: 'rgba(255, 255, 255, 0.65)', fontWeight: 600 }}>{pct}%</span>
+        <span style={{ color: 'var(--ft-text-primary)', fontWeight: 700, fontSize: '0.95rem' }}>{label}</span>
+        <span style={{ color: 'var(--ft-text-secondary)', fontWeight: 600 }}>{pct}%</span>
       </div>
-      <div style={{ background: 'rgba(255, 255, 255, 0.08)', borderRadius: 8, height: 12, overflow: 'hidden' }}>
+      <div style={{ background: 'rgba(16, 40, 73, 0.08)', borderRadius: 8, height: 12, overflow: 'hidden' }}>
         <div
           style={{
             width: `${pct}%`,
             height: '100%',
-            background: color || '#00d4ff',
+            background: color || 'var(--ft-brand-navy-light)',
             borderRadius: 8,
             transition: 'width 0.8s ease',
           }}
@@ -279,8 +279,8 @@ function ScoreBar({ label, value, color }) {
 function SectionHeading({ title, subtitle }) {
   return (
     <div style={{ marginBottom: 20 }}>
-      <h2 style={{ color: '#00d4ff', margin: '0 0 6px 0', fontSize: '1.4rem', fontWeight: 800 }}>{title}</h2>
-      {subtitle && <p style={{ margin: 0, color: 'rgba(255, 255, 255, 0.6)', fontSize: '0.92rem', lineHeight: 1.5 }}>{subtitle}</p>}
+      <h2 style={{ color: 'var(--ft-text-primary)', margin: '0 0 6px 0', fontSize: '1.4rem', fontWeight: 800 }}>{title}</h2>
+      {subtitle && <p style={{ margin: 0, color: 'var(--ft-text-muted)', fontSize: '0.92rem', lineHeight: 1.5 }}>{subtitle}</p>}
     </div>
   );
 }
@@ -326,7 +326,7 @@ function ReportRadarTick({ x, y, cx, cy, payload }) {
         textAnchor={textAnchor}
         dy={adjustedDy}
         style={{
-          fill: '#00d4ff',
+          fill: 'var(--ft-text-primary)',
           fontSize: 12,
           fontWeight: 700,
           fontFamily: 'Inter, system-ui, sans-serif',
@@ -433,7 +433,7 @@ export default function ReportPage() {
     <div className="ft-dashboard-bg" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', color: 'var(--ft-text-primary)', fontFamily: 'Inter, system-ui, sans-serif' }}>
 
       <ManzilHeader
-        title="Career Report"
+        title=""
         right={(
           <>
             <LanguageToggle className="no-print" />
@@ -585,29 +585,29 @@ export default function ReportPage() {
               <SectionHeading title="Personality Overview" />
               <GlassCard elevated style={{ display: 'flex', gap: 24, alignItems: 'flex-start', flexWrap: 'wrap', padding: '2rem' }}>
                 <div style={{ flex: '0 0 170px' }}>
-                  <div style={{ background: primaryColor + '20', color: '#fff', padding: '1.2rem', borderRadius: 12, textAlign: 'center', fontWeight: 800, fontSize: '1.3rem', border: `2px solid ${primaryColor}55`, textShadow: `0 0 10px ${primaryColor}aa` }}>
+                  <div style={{ background: primaryColor + '15', color: primaryColor, padding: '1.2rem', borderRadius: 12, textAlign: 'center', fontWeight: 800, fontSize: '1.3rem', border: `2px solid ${primaryColor}77` }}>
                     {primaryName}
                   </div>
-                  <div style={{ marginTop: 14, color: 'rgba(255, 255, 255, 0.75)', fontSize: '0.92rem' }}>
-                    Secondary: <strong style={{ color: '#00d4ff' }}>{secondaryName}</strong>
+                  <div style={{ marginTop: 14, color: 'var(--ft-text-secondary)', fontSize: '0.92rem' }}>
+                    Secondary: <strong style={{ color: 'var(--ft-brand-navy-light)' }}>{secondaryName}</strong>
                   </div>
-                  <div style={{ marginTop: 8, fontSize: '0.88rem', color: 'rgba(255, 255, 255, 0.55)' }}>
-                    Holland Code: <strong style={{ color: '#00d4ff' }}>{sortedScores.slice(0, 3).map(s => s.code).join('')}</strong>
+                  <div style={{ marginTop: 8, fontSize: '0.88rem', color: 'var(--ft-text-muted)' }}>
+                    Holland Code: <strong style={{ color: 'var(--ft-brand-navy-light)' }}>{sortedScores.slice(0, 3).map(s => s.code).join('')}</strong>
                   </div>
                 </div>
                 <div style={{ flex: 1, minWidth: 220 }}>
-                  <p style={{ marginTop: 0, color: 'rgba(255, 255, 255, 0.85)', lineHeight: 1.75, fontSize: '0.98rem' }}>
+                  <p style={{ marginTop: 0, color: 'var(--ft-text-primary)', lineHeight: 1.75, fontSize: '0.98rem' }}>
                     {PERSONALITY_DESCS[primaryName] || ''}
                   </p>
                   <div style={{ marginTop: 20 }}>
-                    <h4 style={{ margin: '0 0 12px 0', color: '#00d4ff', fontSize: '1rem', fontWeight: 800 }}>RIASEC Scores</h4>
-                    <div style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: 20, borderRadius: 12 }}>
+                    <h4 style={{ margin: '0 0 12px 0', color: 'var(--ft-brand-navy)', fontSize: '1rem', fontWeight: 800 }}>RIASEC Scores</h4>
+                    <div style={{ background: 'rgba(16, 40, 73, 0.02)', border: '1px solid rgba(16, 40, 73, 0.08)', padding: 20, borderRadius: 12 }}>
                       {sortedScores.map(item => (
                         <ScoreBar
                           key={item.code}
                           label={item.name}
                           value={item.value}
-                          color={RIASEC_COLORS[item.name] || '#00d4ff'}
+                          color={RIASEC_COLORS[item.name] || 'var(--ft-brand-navy-light)'}
                         />
                       ))}
                     </div>
@@ -922,38 +922,37 @@ export default function ReportPage() {
 
             {/* ── Full score breakdown cards ────────────────────────────── */}
             <section style={{ marginBottom: 32 }}>
-              <h2 style={{ color: '#00d4ff', margin: '0 0 16px 0', fontSize: '1.4rem', fontWeight: 800 }}>Your Full Score Breakdown</h2>
+              <h2 style={{ color: 'var(--ft-text-primary)', margin: '0 0 16px 0', fontSize: '1.4rem', fontWeight: 800 }}>Your Full Score Breakdown</h2>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 12 }}>
                 {sortedScores.map((item, i) => (
                   <div key={item.code} style={{
-                    background: 'rgba(255, 255, 255, 0.04)',
-                    border: `1px solid ${i === 0 ? (item.color || primaryColor) + '77' : 'rgba(255, 255, 255, 0.08)'}`,
+                    background: 'var(--ft-bg-tertiary)',
+                    border: `1px solid ${i === 0 ? (item.color || primaryColor) + '77' : 'var(--ft-border-subtle)'}`,
                     borderTop: `3px solid ${RIASEC_COLORS[item.name] || '#94a3b8'}`,
                     borderRadius: 10,
                     padding: '1.2rem',
-                    backdropFilter: 'blur(12px)',
-                    WebkitBackdropFilter: 'blur(12px)',
+                    boxShadow: '0 4px 12px rgba(44, 84, 146, 0.03)',
                   }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div>
-                        <div style={{ fontWeight: 800, color: 'rgba(255, 255, 255, 0.95)', fontSize: '1.05rem' }}>{item.name}</div>
-                        <div style={{ fontSize: '0.82rem', color: 'rgba(255, 255, 255, 0.55)', marginTop: 2 }}>{item.code}</div>
+                        <div style={{ fontWeight: 800, color: 'var(--ft-text-primary)', fontSize: '1.05rem' }}>{item.name}</div>
+                        <div style={{ fontSize: '0.82rem', color: 'var(--ft-text-muted)', marginTop: 2 }}>{item.code}</div>
                       </div>
-                      <div style={{ fontSize: '1.8rem', fontWeight: 800, color: RIASEC_COLORS[item.name] || 'rgba(255, 255, 255, 0.85)' }}>
+                      <div style={{ fontSize: '1.8rem', fontWeight: 800, color: RIASEC_COLORS[item.name] || 'var(--ft-text-primary)' }}>
                         {item.value}%
                       </div>
                     </div>
-                    <div style={{ marginTop: 12, background: 'rgba(255, 255, 255, 0.08)', borderRadius: 6, height: 8, overflow: 'hidden' }}>
-                      <div style={{ width: `${item.value}%`, height: '100%', background: RIASEC_COLORS[item.name] || '#00d4ff', borderRadius: 6 }} />
+                    <div style={{ marginTop: 12, background: 'rgba(16, 40, 73, 0.08)', borderRadius: 6, height: 8, overflow: 'hidden' }}>
+                      <div style={{ width: `${item.value}%`, height: '100%', background: RIASEC_COLORS[item.name] || 'var(--ft-brand-navy-light)', borderRadius: 6 }} />
                     </div>
                     {i === 0 && <div style={{ marginTop: 10, fontSize: '0.8rem', color: primaryColor, fontWeight: 700 }}>Primary type</div>}
-                    {i === 1 && <div style={{ marginTop: 10, fontSize: '0.8rem', color: 'rgba(255, 255, 255, 0.5)', fontWeight: 700 }}>Secondary type</div>}
+                    {i === 1 && <div style={{ marginTop: 10, fontSize: '0.8rem', color: 'var(--ft-text-muted)', fontWeight: 700 }}>Secondary type</div>}
                   </div>
                 ))}
               </div>
             </section>
 
-            <footer style={{ color: 'rgba(255, 255, 255, 0.45)', fontSize: 13, textAlign: 'center', padding: '1rem 0 4rem 0' }}>
+            <footer style={{ color: 'var(--ft-text-muted)', fontSize: 13, textAlign: 'center', padding: '1rem 0 4rem 0' }}>
               Career Guidance Portal © 2026 — This report is based on the globally validated RIASEC psychometric model.
               For personalised counselling contact our team.
             </footer>

@@ -156,10 +156,24 @@ def _get_gemini_chat_response(message: str, profile_summary: dict, history: list
         response = chat.send_message(message)
         return response.text
     except Exception as e:
-        print(f"Error querying Gemini API: {e}")
+        import traceback
+        import datetime
+        error_msg = f"Error querying Gemini API: {e}"
+        print(error_msg)
+        traceback.print_exc()
+        try:
+            log_dir = Path(__file__).resolve().parent / "logs"
+            log_dir.mkdir(exist_ok=True)
+            log_file = log_dir / "gemini_errors.log"
+            with open(log_file, "a", encoding="utf-8") as lf:
+                lf.write(f"[{datetime.datetime.now().isoformat()}] {error_msg}\n")
+                lf.write(traceback.format_exc())
+                lf.write("=" * 80 + "\n")
+        except Exception as log_exc:
+            print(f"Failed to log error to file: {log_exc}")
         return (
             "I'm sorry, I encountered an issue connecting to my AI brain. "
-            "Please try again in a few moments."
+            f"Please try again in a few moments. (Details: {e})"
         )
 
 
