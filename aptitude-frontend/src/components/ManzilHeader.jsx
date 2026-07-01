@@ -4,7 +4,6 @@ import "./ManzilHeader.css";
 
 const DEFAULT_NAV_ITEMS = [
   { label: "Career Library", path: "/careers" },
-  { label: "Exam Explorer", path: "/exams" },
   { label: "Chat", path: "/chat" },
   { label: "My Report", path: "/report" },
 ];
@@ -42,7 +41,21 @@ export default function ManzilHeader({
   showDefaultNav = true,
   navItems,
 }) {
-  const resolvedNavItems = Array.isArray(navItems) ? navItems : DEFAULT_NAV_ITEMS;
+  const hasTakenTest =
+  localStorage.getItem("psychometricCompleted") === "true";
+
+  const resolvedNavItems = (
+  Array.isArray(navItems)
+    ? navItems
+    : DEFAULT_NAV_ITEMS
+).filter(item => {
+
+  if (item.label === "My Report" && !hasTakenTest) {
+    return false;
+  }
+
+  return true;
+});
 
   const leftContent = (title || subtitle) ? (
     <div className="manzil-header-brand">

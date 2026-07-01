@@ -242,6 +242,8 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
       setAptitudeSelected(newAnswers[aptitudeCurrent + 1] || 0);
     } else {
       // All three sections done — submit
+      localStorage.setItem("psychometricCompleted", "true");
+      
       onSubmit({
         name: details.name.trim(),
         class_level: details.class_level,
