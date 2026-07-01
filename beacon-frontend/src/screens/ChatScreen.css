@@ -1,7 +1,9 @@
 /* Manzil AI Counsellor — premium chat experience */
 
 .chat-page {
-  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
   background: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
   color: #111827;
   display: flex;
@@ -250,7 +252,7 @@
 
 .message-panel {
   flex: 1;
-  min-height: 420px;
+  min-height: 180px;
   max-height: calc(100vh - 340px);
   overflow-y: auto;
   background: rgba(255, 255, 255, 0.88);
@@ -585,6 +587,7 @@
 }
 
 .chat-option {
+  width: 100%;
   min-height: 58px;
   border: 1px solid #e5e7eb;
   border-radius: 14px;
@@ -955,8 +958,8 @@
   }
 
   .message-panel {
-    min-height: 320px;
-    max-height: none;
+    min-height: 180px;
+    max-height: calc(100vh - 300px);
     padding: 16px;
   }
 

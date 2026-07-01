@@ -146,6 +146,13 @@ def _get_gemini_chat_response(message: str, profile_summary: dict, history: list
                 genai_types.Content(role=role, parts=[genai_types.Part(text=msg["text"])])
             )
 
+        # GenAI SDK constraint: "History must start with a user turn."
+        # Drop any initial model/bot turns from history until we hit the first user turn.
+        first_user_idx = 0
+        while first_user_idx < len(gemini_history) and gemini_history[first_user_idx].role != "user":
+            first_user_idx += 1
+        gemini_history = gemini_history[first_user_idx:]
+
         chat = client.chats.create(
             model="gemini-2.5-flash",
             config=genai_types.GenerateContentConfig(
