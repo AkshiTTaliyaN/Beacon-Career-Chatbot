@@ -246,7 +246,7 @@ export default function ResultPage({
         center={(
           <div>
             <h1><BilingualText text="Career &amp; Personality Report" /></h1>
-            <p>{result.name} • {result.class_level} • {result.stream}</p>
+            <p>{result.name} • {result.class_level} • {result.stream === "none" ? "Stream not decided" : result.stream}</p>
             <p style={{ fontSize: "0.75rem", fontWeight: 600, color: "#6b7280" }}>
               {new Date().toLocaleDateString("en-IN", { year: "numeric", month: "long", day: "numeric" })}
             </p>

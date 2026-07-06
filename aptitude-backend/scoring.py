@@ -301,8 +301,22 @@ def get_exams(stream: str, primary: str) -> List[dict]:
             {"name": "NID DAT", "desc": "National Institute of Design"},
             {"name": "NIFT Entrance", "desc": "Fashion and design colleges"},
         ],
+        # Student takes both Maths and Biology - keep engineering and medical open
+        "PCM/PCB": [
+            {"name": "JEE Main", "desc": "NITs and IIITs for engineering"},
+            {"name": "NEET UG", "desc": "MBBS, BDS, BAMS across India"},
+            {"name": "BITSAT", "desc": "BITS Pilani"},
+            {"name": "IISER Aptitude Test", "desc": "Research-focused BSc / MSc programs"},
+        ],
+        # Stream not decided yet (Class 9/10) - show broad, stream-neutral options
+        "none": [
+            {"name": "CUET", "desc": "Central Universities, open to every stream"},
+            {"name": "JEE Main", "desc": "Engineering route, if you pick PCM later"},
+            {"name": "NEET UG", "desc": "Medical route, if you pick PCB later"},
+            {"name": "CLAT", "desc": "Law route, open to all streams after Class 12"},
+        ],
     }
-    return exam_map.get(stream, exam_map["PCM"])
+    return exam_map.get(stream, exam_map["none"])
 
 
 def get_skills(primary: str, secondary: str) -> List[dict]:

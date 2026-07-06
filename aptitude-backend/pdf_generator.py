@@ -61,7 +61,8 @@ def generate_pdf(result: dict) -> bytes:
 
     res_name = safe_html(result.get('name', ''))
     res_class = safe_html(result.get('class_level', ''))
-    res_stream = safe_html(result.get('stream', ''))
+    raw_stream = result.get('stream', '')
+    res_stream = safe_html("Stream not decided" if raw_stream == "none" else raw_stream)
     res_primary = safe_html(result.get('primary_type', ''))
     res_secondary = safe_html(result.get('secondary_type', ''))
     res_desc = safe_html(result.get('description', ''))

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
 import Layout from "../components/Layout";
 import RadioCards from "../components/RadioCards";
 import AnimatedQuestionCard from "../components/onboarding/AnimatedQuestionCard";
@@ -17,6 +16,12 @@ export default function BasicInfoScreen({ form, setForm, onNext, onBack }) {
   const [errors, setErrors] = useState({});
   const cls = Number(form.current_class);
   const showStream = cls >= 10;
+  // Class 11/12 students are already enrolled in a stream, so "Not decided yet"
+  // only makes sense for Class 10 (who are still choosing after boards).
+  const isEnrolledInStream = cls >= 11;
+  const streamOptions = isEnrolledInStream
+    ? STREAMS.filter((s) => s.value !== "none")
+    : STREAMS;
 
   const cityOptions = form.state ? (STATE_CITIES[form.state] || []) : [];
 
@@ -74,7 +79,12 @@ export default function BasicInfoScreen({ form, setForm, onNext, onBack }) {
                   className={`pill ${Number(form.current_class) === c ? "selected" : ""}`}
                   onClick={() => {
                     update("current_class", String(c));
-                    if (c < 10) update("stream", "none");
+                    if (c < 10) {
+                      update("stream", "none");
+                    } else if (c >= 11 && form.stream === "none") {
+                      // "Not decided yet" isn't valid for Class 11/12 — force a real pick
+                      update("stream", "");
+                    }
                   }}
                 >
                   Class {c}
@@ -106,12 +116,16 @@ export default function BasicInfoScreen({ form, setForm, onNext, onBack }) {
 
         {showStream && (
           <AnimatedQuestionCard
-            question="🔬 What's your stream, or what are you leaning towards?"
+            question={
+              isEnrolledInStream
+                ? "🔬 What's your stream?"
+                : "🔬 What's your stream, or what are you leaning towards?"
+            }
             delay={0.15}
           >
             <RadioCards
               name="stream"
-              options={STREAMS}
+              options={streamOptions}
               value={form.stream}
               onChange={(v) => update("stream", v)}
               error={errors.stream}

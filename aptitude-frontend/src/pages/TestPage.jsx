@@ -285,7 +285,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
             <p><BilingualText text="Be honest, there are no right or wrong answers. Choose what genuinely reflects you." /></p>
             <div className="intro-stats">
               <div><strong>3</strong><span><BilingualText text="Sections" /></span></div>
-              <div><strong>60</strong><span><BilingualText text="Questions" /></span></div>
+              <div><strong>78</strong><span><BilingualText text="Questions" /></span></div>
               <div><strong>15–20 min</strong><span><BilingualText text="Estimated time" /></span></div>
               <div><strong>Instant</strong><span><BilingualText text="Results" /></span></div>
             </div>
@@ -308,23 +308,37 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
               <div className="form-group">
                 <label><BilingualText text="Current Class" /></label>
                 <select value={details.class_level}
-                  onChange={(e) => setDetails({ ...details, class_level: e.target.value })} required>
+                  onChange={(e) => {
+                    const cls = e.target.value;
+                    // Class 11/12 students are already enrolled in a stream, so
+                    // "Not Decided" stops being a valid answer for them.
+                    const enrolled = cls === "Class 11" || cls === "Class 12";
+                    setDetails({
+                      ...details,
+                      class_level: cls,
+                      stream: enrolled && details.stream === "none" ? "" : details.stream,
+                    });
+                  }} required>
                   <option value=""><BilingualText text="Select class" /></option>
+                  <option value="Class 9"><BilingualText text="Class 9" /></option>
                   <option value="Class 10"><BilingualText text="Class 10" /></option>
                   <option value="Class 11"><BilingualText text="Class 11" /></option>
                   <option value="Class 12"><BilingualText text="Class 12" /></option>
                 </select>
               </div>
               <div className="form-group">
-                <label><BilingualText text="Stream (or Intended)" /></label>
+                <label><BilingualText text={details.class_level === "Class 11" || details.class_level === "Class 12" ? "Stream" : "Stream (or Intended)"} /></label>
                 <select value={details.stream}
                   onChange={(e) => setDetails({ ...details, stream: e.target.value })} required>
                   <option value=""><BilingualText text="Select stream" /></option>
                   <option value="PCM"><BilingualText text="PCM (Physics, Chemistry, Maths)" /></option>
                   <option value="PCB"><BilingualText text="PCB (Physics, Chemistry, Biology)" /></option>
+                  <option value="PCM/PCB"><BilingualText text="PCM + PCB (both)" /></option>
                   <option value="Commerce"><BilingualText text="Commerce" /></option>
                   <option value="Humanities"><BilingualText text="Humanities / Arts" /></option>
-                  <option value="none"><BilingualText text="Not Decided / General" /></option>
+                  {details.class_level !== "Class 11" && details.class_level !== "Class 12" && (
+                    <option value="none"><BilingualText text="Not Decided / General" /></option>
+                  )}
                 </select>
               </div>
             </div>

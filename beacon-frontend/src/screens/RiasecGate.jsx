@@ -56,7 +56,7 @@ export default function RiasecGate() {
 
         {/* Description */}
         <p style={{ margin: '0 0 8px 0', opacity: 0.85, lineHeight: 1.7, maxWidth: 540, fontSize: '0.95rem' }}>
-          Take our free 60-question psychometric test based on the globally trusted RIASEC model.
+          Take our free 78-question psychometric test based on the globally trusted RIASEC model.
           It takes about 10–15 minutes, and your results are saved to your profile automatically.
         </p>
         <p style={{ margin: '0 0 28px 0', opacity: 0.7, fontSize: '0.88rem', lineHeight: 1.6 }}>
