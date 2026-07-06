@@ -457,3 +457,10 @@ body {
     height: 2.75rem;
   }
 }
+/* Decorative header badge is too wide for phone headers - the Login
+   button and language toggle matter more on small screens. */
+@media (max-width: 640px) {
+  .gov-initiative-badge {
+    display: none;
+  }
+}

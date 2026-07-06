@@ -544,3 +544,17 @@ body {
 .cc-header-center { text-align: center; color: white; }
 .cc-header-center h1 { font-size: 17px; font-weight: 600; }
 .cc-header-center p { font-size: 14px; color: rgba(255,255,255,0.8); margin-top: 2px; font-weight: 700; }
+/* ── Mobile safety net ──────────────────────────────────────────────
+   Fixed-width decorative elements (floating grid, gradient orbs) were
+   pushing the page wider than phone viewports, so every screen could
+   pan sideways. Clip horizontal overflow and keep media contained. */
+html,
+body {
+  overflow-x: hidden;
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+}

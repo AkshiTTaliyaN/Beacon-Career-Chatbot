@@ -174,26 +174,44 @@
 
 @media (max-width: 768px) {
   .manzil-header {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    min-height: 56px;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
   }
 
+  /* The centered logo collides with the left brand and the nav on small
+     screens - the left header logo already carries the branding. */
   .manzil-header-center {
-    text-align: left;
-    justify-content: start;
+    display: none;
   }
 
   .manzil-header-brand {
     display: none;
   }
 
+  /* Was flex-shrink: 0, which forced the nav row to overflow the screen
+     instead of wrapping. Let it shrink and wrap onto extra rows. */
+  .manzil-header-right {
+    flex-shrink: 1;
+    min-width: 0;
+    flex-wrap: wrap;
+    row-gap: 0.35rem;
+  }
+
   .manzil-header-nav {
     gap: 0.65rem;
+    row-gap: 0.35rem;
+    justify-content: flex-end;
   }
 
   .manzil-header-link {
+    font-size: 0.8rem;
+  }
+
+  .manzil-header-btn {
+    padding: 0.4rem 0.7rem;
     font-size: 0.8rem;
   }
 }

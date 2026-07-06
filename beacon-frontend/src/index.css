@@ -1,3 +1,19 @@
 #root {
   min-height: 100vh;
 }
+
+/* ── Mobile safety net ──────────────────────────────────────────────
+   Decorative blur orbs and wide inline-styled rows were pushing the
+   document wider than the viewport on phones, making every page pan
+   sideways. Clip horizontal overflow globally and keep media inside
+   their containers. */
+html,
+body {
+  overflow-x: hidden;
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+}

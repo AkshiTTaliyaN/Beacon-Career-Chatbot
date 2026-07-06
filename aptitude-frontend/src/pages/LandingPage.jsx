@@ -45,7 +45,7 @@ export default function LandingPage({ onStart }) {
         <HeroBanner
           onStart={onStart}
           title={<BilingualText text="Find what career truly suits you." />}
-          subtitle={<BilingualText text="Answer 60 carefully designed questions based on the globally recognised RIASEC framework and discover your personality type, matching careers, entrance exams, and a personalised roadmap." />}
+          subtitle={<BilingualText text="Answer 78 carefully designed questions based on the globally recognised RIASEC framework and discover your personality type, matching careers, entrance exams, and a personalised roadmap." />}
           badges={[
             <BilingualText key="1" text="Psychometric test with detailed report" inline />,
             <BilingualText key="2" text="No counsellor booking needed" inline />,
@@ -120,7 +120,7 @@ export default function LandingPage({ onStart }) {
             <div className="step-card">
               <div className="step-num">1</div>
               <h3><BilingualText text="Take the test" /></h3>
-              <p><BilingualText text="Answer 60 statements honestly on a 1–5 scale (Strongly Disagree to Strongly Agree). Takes about 10–15 minutes. There are no right or wrong answers, only honest ones." /></p>
+              <p><BilingualText text="Answer 78 questions honestly across personality, interests, and aptitude. Takes about 15–20 minutes. There are no right or wrong answers, only honest ones." /></p>
               <p className="step-extra"><BilingualText text="Pick what genuinely reflects you, not what sounds impressive on paper." /></p>
             </div>
             <div className="step-card">

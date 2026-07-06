@@ -218,7 +218,7 @@ export default function HomePage({ onStart, onLogin }) {
         subtitle={<BilingualText text="Ministry of Education · Government of India" />}
         showDefaultNav={false}
         right={(
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap', justifyContent: 'flex-end', minWidth: 0 }}>
             <LanguageToggle />
             <button
               onClick={onLogin}
@@ -233,7 +233,7 @@ export default function HomePage({ onStart, onLogin }) {
             >
               <BilingualText text="Login" />
             </button>
-            <span style={{
+            <span className="gov-initiative-badge" style={{
               fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase',
               padding: '0.35rem 0.85rem', borderRadius: 999,
               background: '#eaf1fb', border: '1px solid #dce4f5',

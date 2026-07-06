@@ -34,3 +34,23 @@
 .star-label.active {
   color: #f59e0b;
 }
+
+/* On narrow screens the label + 5 fixed-size stars can't share one row,
+   so the stars were spilling outside the card. Let the card wrap and
+   shrink the stars slightly. */
+@media (max-width: 480px) {
+  .subject-card {
+    flex-wrap: wrap;
+    row-gap: 8px;
+  }
+
+  .star-rating {
+    width: 100%;
+    align-items: flex-end;
+  }
+
+  .star-btn svg {
+    width: 22px;
+    height: 22px;
+  }
+}

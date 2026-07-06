@@ -338,7 +338,7 @@ export default function Dashboard({ userName }) {
           logoAlt="EdCIL Logo"
           logoStyle={{
             height: 180,
-            maxWidth: 420,
+            maxWidth: 'min(420px, 90vw)',
             borderRadius: 0,
             boxShadow: 'none',
             marginBottom: 24,
