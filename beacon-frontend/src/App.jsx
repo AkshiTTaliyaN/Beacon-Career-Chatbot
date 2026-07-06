@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import { INITIAL_FORM } from "./constants/formOptions";
 import { DEMO_MODE } from "./config";
-import { getMyProfile, guestLogin } from "./api/client";
+import { getMyProfile } from "./api/client";
 
 // Import LoginScreen for passwordless email authentication
 import LoginScreen from "./screens/LoginScreen";
@@ -41,7 +41,6 @@ const STEP = {
 
 export default function App() {
   const [step, setStep] = useState(STEP.HOME);
-  const [email, setEmail] = useState("");
   const [form, setForm] = useState(INITIAL_FORM);
   const [booting, setBooting] = useState(true);
   const [path, setPath] = useState(window.location.pathname);
@@ -142,12 +141,10 @@ export default function App() {
     case STEP.HOME:
       return (
         <HomePage
-          onStart={() => {
-            guestLogin().catch((e) => {
-              console.error("Guest login failed in background:", e);
-            });
-            setStep(STEP.BASIC);
-          }}
+          // Email is the front door: /auth/login checks the address against the
+          // database — existing + completed profile → dashboard, otherwise the
+          // onboarding flow starts (handled in handleLoginSuccess).
+          onStart={() => setStep(STEP.LOGIN)}
           onLogin={() => setStep(STEP.LOGIN)}
         />
       );
