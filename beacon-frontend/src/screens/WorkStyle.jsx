@@ -22,12 +22,12 @@ const PRIORITY_DISPLAY = {
 };
 
 const WORK_LABELS = {
-  building: '🔧 Building & fixing things — models, machines, DIY',
+  building: '🔧 Building & fixing things, models, machines, DIY',
   researching: '🔍 Finding patterns & solving problems',
-  creative: '🎨 Creating — art, writing, design, music',
+  creative: '🎨 Creating, art, writing, design, music',
   helping: '🤝 Helping & teaching people',
   leading: '📣 Leading groups & pitching ideas',
-  structured: '📋 Organised work — plans, data, checklists',
+  structured: '📋 Organised work, plans, data, checklists',
 };
 
 export default function WorkStyle({ form, setForm, onNext, onBack }) {
@@ -45,7 +45,7 @@ export default function WorkStyle({ form, setForm, onNext, onBack }) {
       return;
     }
     if ((arr || []).length >= 3) {
-      setMsg('Pick 3 max — tap one to swap.');
+      setMsg('Pick 3 max, tap one to swap.');
       return;
     }
     setForm((prev) => ({ ...prev, careerPriorities: [...arr, p] }));
@@ -71,7 +71,7 @@ export default function WorkStyle({ form, setForm, onNext, onBack }) {
       step={5}
       totalSteps={9}
       title="What kind of work fits you?"
-      subtitle="Slide to rate how much you'd enjoy each type — 1 = not my thing, 5 = love it."
+      subtitle="Slide to rate how much you'd enjoy each type - 1 = not my thing, 5 = love it."
     >
       <form onSubmit={handleNext} className="form onboard-form">
 

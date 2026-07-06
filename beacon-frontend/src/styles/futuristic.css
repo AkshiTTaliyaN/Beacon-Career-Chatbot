@@ -1,5 +1,5 @@
 /* ============================================================
-   FUTURISTIC DESIGN SYSTEM — v1.0
+   FUTURISTIC DESIGN SYSTEM, v1.0
    Foundation CSS for the Manzil Career Dashboard
    Dark theme · Glassmorphism · Neon accents · Animations
    ============================================================ */
@@ -606,7 +606,7 @@
    10. RESPONSIVE BREAKPOINTS
    ──────────────────────────────────────────────────────────── */
 
-/* Tablet — 640px to 1024px */
+/* Tablet - 640px to 1024px */
 @media (max-width: 1024px) {
   .ft-grid-4 { grid-template-columns: repeat(2, 1fr); }
   .ft-grid-3 { grid-template-columns: repeat(2, 1fr); }
@@ -617,7 +617,7 @@
   .ft-section { padding: 1.5rem 1rem; }
 }
 
-/* Mobile — below 640px */
+/* Mobile, below 640px */
 @media (max-width: 640px) {
   .ft-grid-4,
   .ft-grid-3,

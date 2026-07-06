@@ -30,7 +30,7 @@ Base = declarative_base()
 
 def get_db():
     """
-    Dependency function — FastAPI injects a DB session into every
+    Dependency function - FastAPI injects a DB session into every
     route that asks for it, and closes it automatically when done.
 
     Usage in routes:
@@ -47,6 +47,6 @@ def get_db():
 
 def create_tables():
 
-    from models import Student, StudentProfile, Recommendation  # noqa — ensures models registered
+    from models import Student, StudentProfile, Recommendation  # noqa, ensures models registered
     Base.metadata.create_all(bind=engine)
     print("Database tables created / verified")

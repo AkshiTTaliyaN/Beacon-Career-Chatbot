@@ -2,7 +2,7 @@
 career_catalog.py
 Flat list of careers used exclusively by the unified scoring engine.
 Each entry has full metadata for all 5 scoring components.
-DO NOT modify aptitude-backend/career_mapping.py — that is unchanged.
+DO NOT modify aptitude-backend/career_mapping.py, that is unchanged.
 """
 
 CAREER_CATALOG = [
@@ -30,7 +30,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "medium",
         "requires_relocation": False,
-        "reason": "Your analytical nature and curiosity are exactly what data science rewards. Data Scientists spend their days finding patterns in complex datasets and building models that power real decisions — the kind of deep, focused problem-solving your profile points toward.",
+        "reason": "Your analytical nature and curiosity are exactly what data science rewards. Data Scientists spend their days finding patterns in complex datasets and building models that power real decisions, the kind of deep, focused problem-solving your profile points toward.",
     },
 
     {
@@ -53,7 +53,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "medium",
         "requires_relocation": False,
-        "reason": "Logical problem solving is the daily currency of software engineering. Engineers design systems, debug complex issues, and build tools that millions of people use — a career that rewards the kind of structured analytical thinking your profile shows.",
+        "reason": "Logical problem solving is the daily currency of software engineering. Engineers design systems, debug complex issues, and build tools that millions of people use, a career that rewards the kind of structured analytical thinking your profile shows.",
     },
 
     {
@@ -77,7 +77,7 @@ CAREER_CATALOG = [
         "sector": "study",
         "cost_level": "low",
         "requires_relocation": True,
-        "reason": "Your curiosity and drive to understand how things work are the defining traits of a research scientist. Research Scientists spend years exploring unknowns — running experiments, publishing findings, and pushing the boundaries of human knowledge.",
+        "reason": "Your curiosity and drive to understand how things work are the defining traits of a research scientist. Research Scientists spend years exploring unknowns, running experiments, publishing findings, and pushing the boundaries of human knowledge.",
     },
 
     {
@@ -101,7 +101,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "medium",
         "requires_relocation": False,
-        "reason": "Turning raw numbers into actionable business insights is the core of data analysis. Data Analysts work at the intersection of logic and communication — finding the story inside data that organisations use to make better decisions.",
+        "reason": "Turning raw numbers into actionable business insights is the core of data analysis. Data Analysts work at the intersection of logic and communication, finding the story inside data that organisations use to make better decisions.",
     },
 
     {
@@ -195,7 +195,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "medium",
         "requires_relocation": False,
-        "reason": "UX Research sits at the intersection of analytical thinking and human empathy. UX Researchers design studies, conduct user interviews, and synthesise findings to make digital products intuitive — combining rigorous method with creative insight.",
+        "reason": "UX Research sits at the intersection of analytical thinking and human empathy. UX Researchers design studies, conduct user interviews, and synthesise findings to make digital products intuitive, combining rigorous method with creative insight.",
     },
 
     # ─── Realistic Primary ─────────────────────────────────────────────────────
@@ -243,7 +243,7 @@ CAREER_CATALOG = [
         "sector": "govt",
         "cost_level": "low",
         "requires_relocation": True,
-        "reason": "Bridges, dams, roads, and buildings — civil engineers design and oversee the infrastructure that holds society together. This career combines spatial reasoning, mathematics, and hands-on site management to create lasting physical structures.",
+        "reason": "Bridges, dams, roads, and buildings, civil engineers design and oversee the infrastructure that holds society together. This career combines spatial reasoning, mathematics, and hands-on site management to create lasting physical structures.",
     },
 
     {
@@ -288,7 +288,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "high",
         "requires_relocation": False,
-        "reason": "Architecture is where design meets engineering — creating spaces that are both structurally sound and aesthetically powerful. Architects design buildings from initial concept through construction, balancing artistic vision with practical constraints.",
+        "reason": "Architecture is where design meets engineering, creating spaces that are both structurally sound and aesthetically powerful. Architects design buildings from initial concept through construction, balancing artistic vision with practical constraints.",
     },
 
     {
@@ -311,7 +311,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "medium",
         "requires_relocation": False,
-        "reason": "Medicine combines deep scientific knowledge with direct human impact. Doctors diagnose illness, treat patients, and make critical decisions daily — a career for those who want rigorous intellectual challenge and the profound satisfaction of helping people heal.",
+        "reason": "Medicine combines deep scientific knowledge with direct human impact. Doctors diagnose illness, treat patients, and make critical decisions daily, a career for those who want rigorous intellectual challenge and the profound satisfaction of helping people heal.",
     },
 
     {
@@ -358,7 +358,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "medium",
         "requires_relocation": False,
-        "reason": "UI/UX Design is where aesthetic sensibility meets user psychology. Designers craft the visual and interactive experience of apps and websites — solving real problems with creative solutions that make digital products feel intuitive and beautiful.",
+        "reason": "UI/UX Design is where aesthetic sensibility meets user psychology. Designers craft the visual and interactive experience of apps and websites, solving real problems with creative solutions that make digital products feel intuitive and beautiful.",
     },
 
     {
@@ -379,7 +379,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "low",
         "requires_relocation": False,
-        "reason": "Graphic designers communicate ideas visually — through logos, layouts, illustrations, and brand identities. This is a career for people who think in images, have a strong sense of composition and colour, and want their creativity to drive their work.",
+        "reason": "Graphic designers communicate ideas visually, through logos, layouts, illustrations, and brand identities. This is a career for people who think in images, have a strong sense of composition and colour, and want their creativity to drive their work.",
     },
 
     {
@@ -424,7 +424,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "low",
         "requires_relocation": True,
-        "reason": "Journalism is about finding truth and telling it clearly to the public. Journalists investigate, interview, research, and write — serving as the link between events and the citizens who need to understand them.",
+        "reason": "Journalism is about finding truth and telling it clearly to the public. Journalists investigate, interview, research, and write, serving as the link between events and the citizens who need to understand them.",
     },
 
     {
@@ -446,7 +446,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "medium",
         "requires_relocation": True,
-        "reason": "Game design combines technical building, creative world-making, and deep understanding of player psychology. Game Designers craft interactive experiences that millions of people choose to spend time in — one of the most creative and technically demanding careers in technology.",
+        "reason": "Game design combines technical building, creative world-making, and deep understanding of player psychology. Game Designers craft interactive experiences that millions of people choose to spend time in, one of the most creative and technically demanding careers in technology.",
     },
 
     # ─── Social Primary ────────────────────────────────────────────────────────
@@ -472,7 +472,7 @@ CAREER_CATALOG = [
         "sector": "govt",
         "cost_level": "low",
         "requires_relocation": False,
-        "reason": "Teaching is one of the most directly impactful careers a person can choose — shaping how young minds understand the world. Educators combine deep subject knowledge with the ability to explain, inspire, and guide students through their most formative years.",
+        "reason": "Teaching is one of the most directly impactful careers a person can choose, shaping how young minds understand the world. Educators combine deep subject knowledge with the ability to explain, inspire, and guide students through their most formative years.",
     },
 
     {
@@ -518,7 +518,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "medium",
         "requires_relocation": False,
-        "reason": "Human Resources is about building and maintaining the environment where people do their best work. HR Managers handle hiring, culture, conflict resolution, and employee development — making them the people who hold organisations together from the inside.",
+        "reason": "Human Resources is about building and maintaining the environment where people do their best work. HR Managers handle hiring, culture, conflict resolution, and employee development, making them the people who hold organisations together from the inside.",
     },
 
     {
@@ -540,7 +540,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "medium",
         "requires_relocation": False,
-        "reason": "Clinical and counselling psychologists help people understand and manage their mental and emotional lives. It is a career that demands both scientific rigour (evidence-based therapy methods) and deep human empathy — working with some of the most complex challenges people face.",
+        "reason": "Clinical and counselling psychologists help people understand and manage their mental and emotional lives. It is a career that demands both scientific rigour (evidence-based therapy methods) and deep human empathy, working with some of the most complex challenges people face.",
     },
 
     # ─── Enterprising Primary ──────────────────────────────────────────────────
@@ -566,7 +566,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "high",
         "requires_relocation": True,
-        "reason": "Management consultants solve complex business problems for organisations across industries. They analyse data, identify inefficiencies, and recommend strategic changes — a career that rewards ambitious analytical thinkers who can also communicate and influence.",
+        "reason": "Management consultants solve complex business problems for organisations across industries. They analyse data, identify inefficiencies, and recommend strategic changes, a career that rewards ambitious analytical thinkers who can also communicate and influence.",
     },
 
     {
@@ -590,7 +590,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "high",
         "requires_relocation": True,
-        "reason": "Investment bankers advise companies on raising capital, mergers, and major financial decisions. It is one of the highest-pressure and highest-reward careers in finance — demanding sharp analytical skills, resilience, and the ability to manage complex deals.",
+        "reason": "Investment bankers advise companies on raising capital, mergers, and major financial decisions. It is one of the highest-pressure and highest-reward careers in finance, demanding sharp analytical skills, resilience, and the ability to manage complex deals.",
     },
 
     {
@@ -613,7 +613,7 @@ CAREER_CATALOG = [
         "sector": "entrepreneur",
         "cost_level": "low",
         "requires_relocation": False,
-        "reason": "Entrepreneurship is building something from nothing — identifying a problem, assembling a team, and executing relentlessly under uncertainty. It is the career path that rewards the most diverse skill set: vision, execution, resilience, and the ability to lead.",
+        "reason": "Entrepreneurship is building something from nothing, identifying a problem, assembling a team, and executing relentlessly under uncertainty. It is the career path that rewards the most diverse skill set: vision, execution, resilience, and the ability to lead.",
     },
 
     {
@@ -636,7 +636,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "medium",
         "requires_relocation": False,
-        "reason": "Marketing managers create campaigns and strategies that connect products with people. They combine creative storytelling, data-driven targeting, and business understanding to influence how brands are perceived — and to drive real revenue growth.",
+        "reason": "Marketing managers create campaigns and strategies that connect products with people. They combine creative storytelling, data-driven targeting, and business understanding to influence how brands are perceived, and to drive real revenue growth.",
     },
 
     {
@@ -660,7 +660,7 @@ CAREER_CATALOG = [
         "sector": "govt",
         "cost_level": "low",
         "requires_relocation": True,
-        "reason": "Civil Services officers lead the implementation of government policy at district, state, and national levels. The IAS and allied services offer the rare combination of authority, social impact, and intellectual challenge — solving real problems that affect millions of people.",
+        "reason": "Civil Services officers lead the implementation of government policy at district, state, and national levels. The IAS and allied services offer the rare combination of authority, social impact, and intellectual challenge, solving real problems that affect millions of people.",
     },
 
     {
@@ -683,7 +683,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "medium",
         "requires_relocation": False,
-        "reason": "Law is about constructing arguments, navigating complex systems, and advocating for outcomes — whether in a courtroom, a boardroom, or a policy chamber. Lawyers combine deep analytical thinking with persuasive communication to represent and advise clients.",
+        "reason": "Law is about constructing arguments, navigating complex systems, and advocating for outcomes, whether in a courtroom, a boardroom, or a policy chamber. Lawyers combine deep analytical thinking with persuasive communication to represent and advise clients.",
     },
 
     # ─── Conventional Primary ──────────────────────────────────────────────────
@@ -709,7 +709,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "low",
         "requires_relocation": False,
-        "reason": "Chartered Accountants are the financial backbone of organisations — auditing accounts, managing tax compliance, and providing strategic financial advice. It is one of India's most respected and financially rewarding professional qualifications.",
+        "reason": "Chartered Accountants are the financial backbone of organisations, auditing accounts, managing tax compliance, and providing strategic financial advice. It is one of India's most respected and financially rewarding professional qualifications.",
     },
 
     {
@@ -755,7 +755,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "medium",
         "requires_relocation": False,
-        "reason": "Operations managers keep organisations running efficiently — coordinating logistics, managing teams, and optimising processes. It is a career that combines systematic thinking with leadership, and rewards people who find satisfaction in making complex systems work smoothly.",
+        "reason": "Operations managers keep organisations running efficiently, coordinating logistics, managing teams, and optimising processes. It is a career that combines systematic thinking with leadership, and rewards people who find satisfaction in making complex systems work smoothly.",
     },
 
     {
@@ -778,7 +778,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "medium",
         "requires_relocation": True,
-        "reason": "Supply chain managers coordinate the flow of goods from supplier to customer — balancing cost, speed, and reliability across complex global networks. This is a career for systematic thinkers who enjoy optimising large, moving systems.",
+        "reason": "Supply chain managers coordinate the flow of goods from supplier to customer, balancing cost, speed, and reliability across complex global networks. This is a career for systematic thinkers who enjoy optimising large, moving systems.",
     },
 
     {
@@ -801,7 +801,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "medium",
         "requires_relocation": False,
-        "reason": "QA Analysts ensure that software, products, and processes meet defined quality standards — finding errors before they reach end users. This career rewards methodical thinking, attention to detail, and a systematic approach to testing and verification.",
+        "reason": "QA Analysts ensure that software, products, and processes meet defined quality standards, finding errors before they reach end users. This career rewards methodical thinking, attention to detail, and a systematic approach to testing and verification.",
     },
 
     {
@@ -851,7 +851,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "medium",
         "requires_relocation": False,
-        "reason": "AI/ML Engineers design intelligent systems that learn from data — from recommendation engines to self-driving algorithms. If you enjoy mathematics, coding, and pushing the boundaries of what machines can do, this career channels that curiosity into one of the fastest-growing fields in technology.",
+        "reason": "AI/ML Engineers design intelligent systems that learn from data, from recommendation engines to self-driving algorithms. If you enjoy mathematics, coding, and pushing the boundaries of what machines can do, this career channels that curiosity into one of the fastest-growing fields in technology.",
     },
 
     {
@@ -898,7 +898,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "medium",
         "requires_relocation": False,
-        "reason": "Cloud Architects design the large-scale infrastructure that powers modern applications — selecting services, ensuring scalability, and keeping costs under control. If you like building robust, well-engineered systems and enjoy staying current with rapidly evolving platforms, this career offers both strong pay and creative engineering challenges.",
+        "reason": "Cloud Architects design the large-scale infrastructure that powers modern applications, selecting services, ensuring scalability, and keeping costs under control. If you like building robust, well-engineered systems and enjoy staying current with rapidly evolving platforms, this career offers both strong pay and creative engineering challenges.",
     },
 
     {
@@ -922,7 +922,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "high",
         "requires_relocation": True,
-        "reason": "Robotics Engineers bring machines to life — designing, programming, and testing robots for manufacturing, healthcare, and exploration. This career is ideal for hands-on builders who love integrating mechanical design, electronics, and software into tangible working systems.",
+        "reason": "Robotics Engineers bring machines to life, designing, programming, and testing robots for manufacturing, healthcare, and exploration. This career is ideal for hands-on builders who love integrating mechanical design, electronics, and software into tangible working systems.",
     },
 
     {
@@ -947,7 +947,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "high",
         "requires_relocation": True,
-        "reason": "Aerospace Engineers design aircraft, spacecraft, and satellite systems — tackling some of humanity's most complex engineering challenges. If physics and mathematics excite you and you dream of contributing to aviation or space exploration, this career puts that passion to work.",
+        "reason": "Aerospace Engineers design aircraft, spacecraft, and satellite systems, tackling some of humanity's most complex engineering challenges. If physics and mathematics excite you and you dream of contributing to aviation or space exploration, this career puts that passion to work.",
     },
 
     {
@@ -1018,7 +1018,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "high",
         "requires_relocation": True,
-        "reason": "Bioinformatics Specialists decode biological data using computational tools — analysing genomes, protein structures, and drug interactions. This interdisciplinary career is tailor-made for someone who loves both biology and programming and wants to accelerate discoveries in medicine and life sciences.",
+        "reason": "Bioinformatics Specialists decode biological data using computational tools, analysing genomes, protein structures, and drug interactions. This interdisciplinary career is tailor-made for someone who loves both biology and programming and wants to accelerate discoveries in medicine and life sciences.",
     },
 
     {
@@ -1065,7 +1065,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "medium",
         "requires_relocation": False,
-        "reason": "Food Technologists develop, test, and improve food products — ensuring safety, nutrition, and taste at industrial scale. This hands-on career suits science students who enjoy lab work and want to see their innovations reach millions of consumers.",
+        "reason": "Food Technologists develop, test, and improve food products, ensuring safety, nutrition, and taste at industrial scale. This hands-on career suits science students who enjoy lab work and want to see their innovations reach millions of consumers.",
     },
 
     {
@@ -1112,7 +1112,7 @@ CAREER_CATALOG = [
         "sector": "study",
         "cost_level": "high",
         "requires_relocation": True,
-        "reason": "Marine Biologists study ocean ecosystems, coral reefs, and aquatic species — often spending time on field expeditions and in coastal labs. If you love biology and the natural world and don't mind outdoor fieldwork, this career lets you contribute to ocean conservation and discovery.",
+        "reason": "Marine Biologists study ocean ecosystems, coral reefs, and aquatic species, often spending time on field expeditions and in coastal labs. If you love biology and the natural world and don't mind outdoor fieldwork, this career lets you contribute to ocean conservation and discovery.",
     },
 
     {
@@ -1160,7 +1160,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "medium",
         "requires_relocation": False,
-        "reason": "Renewable Energy Consultants advise organisations on transitioning to solar, wind, and other clean energy sources — combining engineering knowledge with business strategy. If you care about climate change and enjoy applied physics, this career lets you make a measurable environmental impact.",
+        "reason": "Renewable Energy Consultants advise organisations on transitioning to solar, wind, and other clean energy sources, combining engineering knowledge with business strategy. If you care about climate change and enjoy applied physics, this career lets you make a measurable environmental impact.",
     },
 
     {
@@ -1208,7 +1208,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "medium",
         "requires_relocation": False,
-        "reason": "Financial Risk Managers identify, quantify, and mitigate risks that could threaten an organisation's financial health — from market volatility to credit defaults. This career rewards strong quantitative skills and meticulous analysis, offering stability and high compensation in the banking and financial services sector.",
+        "reason": "Financial Risk Managers identify, quantify, and mitigate risks that could threaten an organisation's financial health, from market volatility to credit defaults. This career rewards strong quantitative skills and meticulous analysis, offering stability and high compensation in the banking and financial services sector.",
     },
 
     {
@@ -1328,7 +1328,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "high",
         "requires_relocation": True,
-        "reason": "Corporate Lawyers advise businesses on mergers, contracts, compliance, and intellectual property — combining sharp legal reasoning with commercial acumen. If you are articulate, persuasive, and enjoy navigating complex regulations, this high-stakes career offers strong financial rewards and professional prestige.",
+        "reason": "Corporate Lawyers advise businesses on mergers, contracts, compliance, and intellectual property, combining sharp legal reasoning with commercial acumen. If you are articulate, persuasive, and enjoy navigating complex regulations, this high-stakes career offers strong financial rewards and professional prestige.",
     },
 
     {
@@ -1404,7 +1404,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "high",
         "requires_relocation": True,
-        "reason": "Forensic Psychologists apply psychological science to the legal system — profiling offenders, assessing witness credibility, and aiding criminal investigations. This career suits deeply analytical individuals who are fascinated by human behaviour and want to contribute to justice and rehabilitation.",
+        "reason": "Forensic Psychologists apply psychological science to the legal system, profiling offenders, assessing witness credibility, and aiding criminal investigations. This career suits deeply analytical individuals who are fascinated by human behaviour and want to contribute to justice and rehabilitation.",
     },
 
     {
@@ -1429,7 +1429,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "low",
         "requires_relocation": False,
-        "reason": "Digital Marketing Strategists plan and execute online campaigns — leveraging SEO, social media, and data analytics to grow brands and drive revenue. If you are creative, persuasive, and enjoy blending storytelling with data, this career offers rapid growth in the booming digital economy.",
+        "reason": "Digital Marketing Strategists plan and execute online campaigns, leveraging SEO, social media, and data analytics to grow brands and drive revenue. If you are creative, persuasive, and enjoy blending storytelling with data, this career offers rapid growth in the booming digital economy.",
     },
 
     {
@@ -1454,7 +1454,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "medium",
         "requires_relocation": False,
-        "reason": "Brand Managers own the identity and market positioning of products — orchestrating advertising, packaging, pricing, and consumer research. This career rewards enterprising leaders with a creative streak who can translate consumer insights into compelling brand strategies.",
+        "reason": "Brand Managers own the identity and market positioning of products, orchestrating advertising, packaging, pricing, and consumer research. This career rewards enterprising leaders with a creative streak who can translate consumer insights into compelling brand strategies.",
     },
 
     {
@@ -1479,7 +1479,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "medium",
         "requires_relocation": True,
-        "reason": "Sports Managers handle athlete representation, event logistics, and franchise operations — serving as the business backbone of the sports industry. If you are a natural leader with a love for sports and strong organisational skills, this career lets you turn that passion into a profession.",
+        "reason": "Sports Managers handle athlete representation, event logistics, and franchise operations, serving as the business backbone of the sports industry. If you are a natural leader with a love for sports and strong organisational skills, this career lets you turn that passion into a profession.",
     },
 
     {
@@ -1503,7 +1503,7 @@ CAREER_CATALOG = [
         "sector": "private",
         "cost_level": "low",
         "requires_relocation": False,
-        "reason": "HR Analytics Specialists use data to improve hiring, retention, and employee engagement — translating workforce patterns into actionable strategies. If you enjoy working with people-centric data and want a structured yet impactful corporate role, this career blends human resources expertise with analytical rigour.",
+        "reason": "HR Analytics Specialists use data to improve hiring, retention, and employee engagement, translating workforce patterns into actionable strategies. If you enjoy working with people-centric data and want a structured yet impactful corporate role, this career blends human resources expertise with analytical rigour.",
     },
 
     {
@@ -1552,7 +1552,7 @@ CAREER_CATALOG = [
         "sector": "govt",
         "cost_level": "medium",
         "requires_relocation": True,
-        "reason": "Wildlife Biologists study animal behaviour, track populations, and design conservation strategies — often working in forests, wetlands, and national parks. If you love nature, enjoy outdoor fieldwork, and want to protect biodiversity, this career turns your passion for the living world into meaningful conservation action.",
+        "reason": "Wildlife Biologists study animal behaviour, track populations, and design conservation strategies, often working in forests, wetlands, and national parks. If you love nature, enjoy outdoor fieldwork, and want to protect biodiversity, this career turns your passion for the living world into meaningful conservation action.",
     },
 
     {

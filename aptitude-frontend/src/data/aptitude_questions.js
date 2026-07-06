@@ -1,4 +1,4 @@
-// aptitude_questions.js — 18 self-rated aptitude questions
+// aptitude_questions.js - 18 self-rated aptitude questions
 // 3 per skill area in this order:
 //   english (0-2), patterns (3-5), logical (6-8),
 //   maths (9-11), visual (12-14), detail (15-17)

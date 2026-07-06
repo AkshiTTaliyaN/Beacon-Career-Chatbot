@@ -300,7 +300,7 @@ def _workstyle_score(student_workstyle: dict, career: dict) -> float:
     return numerator / denominator
 
 
-# Some catalog entries use labels the onboarding form never offers —
+# Some catalog entries use labels the onboarding form never offers -
 # normalise them to the selectable equivalent so they can actually match.
 PRIORITY_SYNONYMS = {"Creativity": "Creative Freedom"}
 
@@ -311,7 +311,7 @@ def _priority_score(student_priorities: list, career: dict) -> float:
     alignment = {PRIORITY_SYNONYMS.get(p, p) for p in career.get("priority_alignment", [])}
     student_set = set(student_priorities)
     matches = len(student_set & alignment)
-    # Don't penalise careers whose alignment list is shorter than 3 — score
+    # Don't penalise careers whose alignment list is shorter than 3, score
     # against the maximum possible overlap, not a fixed 3.
     max_possible = min(len(student_set), len(alignment)) or 1
     return matches / max_possible
@@ -429,7 +429,7 @@ def _generate_reason(
     elif top1 == "priorities" and top2 == "riasec":
         intro = f"The career priorities you selected and your {primary_label} personality type align well."
     else:
-        intro = f"Your profile — including your {primary_label} personality score and overall preferences — points toward this career."
+        intro = f"Your profile, including your {primary_label} personality score and overall preferences, points toward this career."
 
     detail = career.get("reason", "")
     return f"{intro} {detail}"
@@ -520,7 +520,7 @@ def score_careers(profile) -> list[dict]:
     riasec = profile.riasec_scores or {}
     subject_ratings = dict(profile.subject_ratings or {})
     # Frontend stores the rating as "englishLiterature" but the career catalog
-    # weights it as "english" — bridge the two so English isn't silently dropped.
+    # weights it as "english", bridge the two so English isn't silently dropped.
     if "englishLiterature" in subject_ratings and "english" not in subject_ratings:
         subject_ratings["english"] = subject_ratings["englishLiterature"]
     work_style = profile.work_style or {}
@@ -639,7 +639,7 @@ def score_careers(profile) -> list[dict]:
         })
 
     # Sort descending, dedupe by title (the catalog contains a few duplicate
-    # entries — keep the highest-scoring one), then take top 10
+    # entries, keep the highest-scoring one), then take top 10
     results.sort(key=lambda x: x["total_score"], reverse=True)
     seen_titles = set()
     deduped = []

@@ -61,7 +61,7 @@ export default function RiasecGate() {
         </p>
         <p style={{ margin: '0 0 28px 0', opacity: 0.7, fontSize: '0.88rem', lineHeight: 1.6 }}>
           We then combine your scores with your subject strengths, work preferences, and career goals
-          to recommend careers built for you — not a generic list everyone gets.
+          to recommend careers built for you, not a generic list everyone gets.
         </p>
 
         {/* Features row */}

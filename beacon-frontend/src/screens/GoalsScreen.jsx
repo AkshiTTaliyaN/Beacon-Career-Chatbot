@@ -113,7 +113,7 @@ export default function GoalsScreen({ form, setForm, onSuccess, onBack }) {
         <div className="btn-row">
           <button type="button" className="btn btn-ghost" onClick={onBack} disabled={loading}>Back</button>
           <button type="submit" className="btn btn-primary" disabled={loading}>
-            {loading ? "Saving…" : "Finish — show my results →"}
+            {loading ? "Saving…" : "Finish, show my results →"}
           </button>
         </div>
       </form>

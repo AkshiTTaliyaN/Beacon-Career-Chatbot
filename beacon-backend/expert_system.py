@@ -50,7 +50,7 @@ def _status_from_score(score: int) -> str:
 
 
 def _rule_stream_compatibility(ctx: dict) -> None:
-    """Rule 1 — Stream Compatibility.
+    """Rule 1 - Stream Compatibility.
 
     If the student's stream is not in the career's accepted streams list,
     apply a heavy penalty and flag red.
@@ -69,7 +69,7 @@ def _rule_stream_compatibility(ctx: dict) -> None:
 
 
 def _rule_academic_strength(ctx: dict) -> None:
-    """Rule 2 — Academic Strength.
+    """Rule 2 - Academic Strength.
 
     For every high-weight subject in the career, check the student's
     self-rated proficiency and adjust score accordingly.
@@ -83,7 +83,7 @@ def _rule_academic_strength(ctx: dict) -> None:
 
         student_rating = ratings.get(subject)
         if student_rating is None:
-            continue  # no data for this subject — skip silently
+            continue  # no data for this subject, skip silently
 
         if student_rating <= 2:
             ctx["score"] -= 15
@@ -96,13 +96,13 @@ def _rule_academic_strength(ctx: dict) -> None:
         elif student_rating >= 4:
             ctx["score"] += 5
             ctx["strengths"].append(
-                f"Strong proficiency in {subject} ({student_rating}/5) — "
+                f"Strong proficiency in {subject} ({student_rating}/5) - "
                 f"a key subject for {career['title']}."
             )
 
 
 def _rule_study_hours(ctx: dict) -> None:
-    """Rule 3 — Study Hours vs Competitive Exam requirement.
+    """Rule 3 - Study Hours vs Competitive Exam requirement.
 
     If the career has related entrance exams and the student studies
     very few hours, add a warning.
@@ -123,7 +123,7 @@ def _rule_study_hours(ctx: dict) -> None:
 
 
 def _rule_financial_feasibility(ctx: dict) -> None:
-    """Rule 4 — Financial Feasibility.
+    """Rule 4 - Financial Feasibility.
 
     If cost is a concern and the career pathway is expensive, add
     practical warnings and checklist items.
@@ -145,7 +145,7 @@ def _rule_financial_feasibility(ctx: dict) -> None:
 
 
 def _rule_relocation(ctx: dict) -> None:
-    """Rule 5 — Relocation Preference.
+    """Rule 5 - Relocation Preference.
 
     If the student prefers not to relocate but the career typically
     requires it, add a minor penalty.
@@ -163,7 +163,7 @@ def _rule_relocation(ctx: dict) -> None:
 
 
 def _rule_riasec_alignment(ctx: dict) -> None:
-    """Bonus — RIASEC Alignment.
+    """Bonus - RIASEC Alignment.
 
     Match student's dominant RIASEC code against the career's primary
     and secondary codes.
@@ -181,13 +181,13 @@ def _rule_riasec_alignment(ctx: dict) -> None:
         ctx["score"] += 5
         ctx["strengths"].append(
             f"Your dominant personality type ({top_code}) matches the primary RIASEC "
-            f"code for {career['title']} — a strong natural fit."
+            f"code for {career['title']}, a strong natural fit."
         )
     elif top_code == career.get("riasec_secondary", "").upper():
         ctx["score"] += 3
         ctx["strengths"].append(
             f"Your dominant personality type ({top_code}) aligns with the secondary "
-            f"RIASEC code for {career['title']} — a supportive fit."
+            f"RIASEC code for {career['title']}, a supportive fit."
         )
 
 
@@ -447,8 +447,8 @@ def _generate_roadmap(career: dict, profile: dict) -> list[dict]:
     roadmap_templates = [
         {"phase": "1", "title": "Foundations (Class 9–10)", "class_range": (9, 10)},
         {"phase": "2", "title": "Core Academic Build (Class 11)", "class_range": (11, 11)},
-        {"phase": "3", "title": "Intensive Prep (Class 12 — First Half)", "class_range": (12, 12)},
-        {"phase": "4", "title": "Revision & Testing (Class 12 — Second Half)", "class_range": (13, 99)},
+        {"phase": "3", "title": "Intensive Prep (Class 12 - First Half)", "class_range": (12, 12)},
+        {"phase": "4", "title": "Revision & Testing (Class 12 - Second Half)", "class_range": (13, 99)},
     ]
 
     roadmap = []

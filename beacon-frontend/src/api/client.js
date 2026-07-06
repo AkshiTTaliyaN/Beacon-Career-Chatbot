@@ -20,7 +20,7 @@ async function parseError(res) {
 
 let guestLoginPromise = null;
 
-/** Guest login — creates a real anonymous student and returns a JWT (no email needed) */
+/** Guest login, creates a real anonymous student and returns a JWT (no email needed) */
 export async function guestLogin() {
   if (guestLoginPromise) {
     return guestLoginPromise;
@@ -98,7 +98,7 @@ export async function saveProfile(payload) {
     const clean = Object.fromEntries(
       Object.entries(payload).filter(([, v]) => v !== "" && v != null)
     );
-    console.log("📋 Profile payload (demo — ready for POST /profile/save):", clean);
+    console.log("📋 Profile payload (demo, ready for POST /profile/save):", clean);
     return { ...clean, is_complete: true, student_id: "demo-student-id" };
   }
 
@@ -224,11 +224,11 @@ export async function consultExpert(careerTitle) {
       roadmap: [
         { phase: "1", title: "Foundations (Class 9-10)", items: ["Focus on core school subjects", "Build logical reasoning", "Attend introductory workshops"] },
         { phase: "2", title: "Core Academic Build (Class 11)", items: ["Master core syllabus", "Start entrance exam prep", "Join relevant clubs"] },
-        { phase: "3", title: "Intensive Prep (Class 12 — First Half)", items: ["Complete syllabus by Oct", "Start full-length mock tests", "Register for exams"] },
-        { phase: "4", title: "Revision & Testing (Class 12 — Second Half)", items: ["Revise formulas", "Balance board + entrance prep", "Attend counselling seminars"] },
+        { phase: "3", title: "Intensive Prep (Class 12 - First Half)", items: ["Complete syllabus by Oct", "Start full-length mock tests", "Register for exams"] },
+        { phase: "4", title: "Revision & Testing (Class 12 - Second Half)", items: ["Revise formulas", "Balance board + entrance prep", "Attend counselling seminars"] },
       ],
       relevant_exams: [
-        { name: "JEE Main", timeline: "January & April", prep_focus: "Physics, Chemistry, Math — speed and accuracy", leads_to: "B.E./B.Tech at NITs, IIITs" },
+        { name: "JEE Main", timeline: "January & April", prep_focus: "Physics, Chemistry, Math, speed and accuracy", leads_to: "B.E./B.Tech at NITs, IIITs" },
       ],
       backup_careers: ["Software Engineer", "Data Scientist", "Research Scientist"],
     };
@@ -281,7 +281,7 @@ export function hasSession() {
   return Boolean(getToken());
 }
 
-/** GET /recommendations/smart — throws {code: 'riasec_required'} on HTTP 428 */
+/** GET /recommendations/smart, throws {code: 'riasec_required'} on HTTP 428 */
 export async function getSmartRecommendations() {
   if (DEMO_MODE) {
     // Demo stub: return gate signal so dashboard shows the gate
@@ -312,7 +312,7 @@ export async function updateRiasecScores(scores) {
   if (DEMO_MODE) return;
 
   const token = getToken();
-  if (!token) return; // silent — no token means not logged in
+  if (!token) return; // silent, no token means not logged in
 
   const res = await fetch(`${API}/profile/update`, {
     method: "PATCH",
@@ -322,11 +322,11 @@ export async function updateRiasecScores(scores) {
     },
     body: JSON.stringify({ riasec_scores: scores }),
   });
-  // Silently ignore errors — this is a background write
+  // Silently ignore errors, this is a background write
   return res.ok ? res.json() : null;
 }
 
-/** GET /recommendations/catalog — fetch complete list of careers and exams */
+/** GET /recommendations/catalog, fetch complete list of careers and exams */
 export async function getCareerCatalog() {
   if (DEMO_MODE) {
     // Return a subset of careers for offline demo mode

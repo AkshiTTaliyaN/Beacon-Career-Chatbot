@@ -4,8 +4,8 @@
 
 | Setting | Connected? |
 |--------|----------------|
-| `DEMO_MODE = true` (default) | **No** — UI only; OTP and save are faked / console.log |
-| `DEMO_MODE = false` + backend running | **Yes** — real API calls |
+| `DEMO_MODE = true` (default) | **No** - UI only; OTP and save are faked / console.log |
+| `DEMO_MODE = false` + backend running | **Yes**, real API calls |
 
 The code in `src/api/client.js` already targets `http://localhost:8000` with the correct endpoints. You only need infrastructure + one config flip.
 
@@ -13,12 +13,12 @@ The code in `src/api/client.js` already targets `http://localhost:8000` with the
 
 ## Step-by-step (production connection)
 
-### Step 1 — Install PostgreSQL (Windows)
+### Step 1 - Install PostgreSQL (Windows)
 
 1. Download PostgreSQL 16 from https://www.postgresql.org/download/windows/
 2. Install with port **5432** and set a password for user `postgres`.
 
-### Step 2 — Create the database
+### Step 2 - Create the database
 
 Open **SQL Shell (psql)** or pgAdmin and run:
 
@@ -34,7 +34,7 @@ Your connection string:
 postgresql://beacon_user:yourpassword@localhost:5432/beacon
 ```
 
-### Step 3 — Install Redis (OTP storage)
+### Step 3 - Install Redis (OTP storage)
 
 **Docker (easiest on Windows):**
 
@@ -50,14 +50,14 @@ docker exec -it beacon-redis redis-cli ping
 
 Should print `PONG`.
 
-### Step 4 — Configure the backend
+### Step 4 - Configure the backend
 
 ```powershell
 cd beacon-backend
 copy .env.example .env
 ```
 
-Edit `.env` — minimum required:
+Edit `.env`, minimum required:
 
 ```env
 DATABASE_URL=postgresql://beacon_user:yourpassword@localhost:5432/beacon
@@ -68,7 +68,7 @@ FRONTEND_URL=http://localhost:5173
 
 SMTP is optional for testing; OTP will print in the terminal if email fails.
 
-### Step 5 — Start the backend
+### Step 5 - Start the backend
 
 ```powershell
 python -m venv venv
@@ -82,7 +82,7 @@ Check:
 - Browser: http://localhost:8000 → `{"status":"ok","app":"Manzil API"}`
 - Docs: http://localhost:8000/docs
 
-### Step 6 — Turn off demo mode in the frontend
+### Step 6 - Turn off demo mode in the frontend
 
 Edit `beacon-frontend/src/config.js`:
 
@@ -96,7 +96,7 @@ Optional `.env` in the frontend folder:
 VITE_API_URL=http://localhost:8000
 ```
 
-### Step 7 — Start the frontend
+### Step 7 - Start the frontend
 
 ```powershell
 cd beacon-frontend
@@ -105,7 +105,7 @@ npm run dev
 
 Open http://localhost:5173
 
-### Step 8 — Test the full flow
+### Step 8 - Test the full flow
 
 1. Enter a real email → **Send OTP**
 2. Check the **uvicorn terminal** for the OTP (if SMTP not configured)
@@ -129,7 +129,7 @@ SELECT current_class, stream, city, state, is_complete FROM student_profiles;
 | `connection refused` on API | Start uvicorn; check port 8000 |
 | Redis error | Start Redis container / service |
 | PostgreSQL auth failed | Fix `DATABASE_URL` password in `.env` |
-| `422 Unprocessable Entity` | Form sent wrong enum — check Network tab response body |
+| `422 Unprocessable Entity` | Form sent wrong enum, check Network tab response body |
 | OTP always fails | Use OTP from terminal; request a new one with Resend |
 
 ---

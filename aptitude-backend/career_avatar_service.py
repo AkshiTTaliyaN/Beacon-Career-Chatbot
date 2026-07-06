@@ -1,6 +1,6 @@
 """
 Career avatar generation with Gemini/Imagen and filesystem caching.
-Any career title can be used — no manual career-to-image mappings required.
+Any career title can be used, no manual career-to-image mappings required.
 """
 from __future__ import annotations
 

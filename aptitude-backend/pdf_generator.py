@@ -245,7 +245,7 @@ def generate_pdf(result: dict) -> bytes:
     story.append(HRFlowable(width="100%", thickness=0.5, color=BORDER_COLOR))
     story.append(Spacer(1, 0.2*cm))
     story.append(Paragraph(
-        "Manzil © 2026 — This report is an illustrative guide based on an assessment. For personalised counselling contact our team.",
+        "Manzil © 2026 - This report is an illustrative guide based on an assessment. For personalised counselling contact our team.",
         ParagraphStyle("Footer", parent=styles["Normal"], fontSize=8, textColor=GRAY_TEXT, alignment=TA_CENTER)
     ))
 

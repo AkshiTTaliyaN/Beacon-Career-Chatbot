@@ -7,7 +7,7 @@ import { getMyProfile } from "./api/client";
 // Import LoginScreen for passwordless email authentication
 import LoginScreen from "./screens/LoginScreen";
 
-// ─── AUTH FROZEN — re-enable when mail IDs are available ──────────────────────
+// ─── AUTH FROZEN, re-enable when mail IDs are available ──────────────────────
 // import OTPScreen from "./screens/OTPScreen";
 // ──────────────────────────────────────────────────────────────────────────────
 
@@ -68,12 +68,12 @@ export default function App() {
           if (profile.name) {
             localStorage.setItem("userName", profile.name);
           }
-          // Mark as returning — they already completed onboarding before
+          // Mark as returning, they already completed onboarding before
           localStorage.setItem("beaconReturning", "1");
           setStep(STEP.SUCCESS);
         }
       } catch {
-        /* ignore — user will log in again */
+        /* ignore, user will log in again */
       } finally {
         setBooting(false);
       }
@@ -107,7 +107,7 @@ export default function App() {
     if (form.name) {
       localStorage.setItem("userName", form.name);
     }
-    // Do NOT set beaconReturning here — this is a brand-new user
+    // Do NOT set beaconReturning here, this is a brand-new user
     // finishing onboarding for the first time.
     // Navigate to dashboard
     window.history.pushState({}, "", "/dashboard");
@@ -142,7 +142,7 @@ export default function App() {
       return (
         <HomePage
           // Email is the front door: /auth/login checks the address against the
-          // database — existing + completed profile → dashboard, otherwise the
+          // database, existing + completed profile → dashboard, otherwise the
           // onboarding flow starts (handled in handleLoginSuccess).
           onStart={() => setStep(STEP.LOGIN)}
           onLogin={() => setStep(STEP.LOGIN)}

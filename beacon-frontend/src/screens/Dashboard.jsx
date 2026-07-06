@@ -213,7 +213,7 @@ export default function Dashboard({ userName }) {
       .then(data => setRecs(data.recommendations || []))
       .catch(err => {
         if (err.code === 'riasec_required') setRecsGated(true)
-        else setRecsError('Could not load recommendations — try refreshing.')
+        else setRecsError('Could not load recommendations, try refreshing.')
       })
 
     // Fetch profile
@@ -283,7 +283,7 @@ export default function Dashboard({ userName }) {
     heroSubtitle = 'Ready to continue your career journey? Pick up where you left off.'
   } else if (firstName) {
     heading = `Hello, ${firstName}! 🎉`
-    heroSubtitle = "Your profile is set up — let's find the perfect career path for you."
+    heroSubtitle = "Your profile is set up, let's find the perfect career path for you."
   } else {
     heading = 'Your career journey starts here'
     heroSubtitle = 'Explore careers, take the psychometric test, or chat with our AI counsellor'
@@ -373,7 +373,7 @@ export default function Dashboard({ userName }) {
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          KPI SUMMARY CARDS — Power BI-style top metrics row
+          KPI SUMMARY CARDS - Power BI-style top metrics row
           ═══════════════════════════════════════════════════════════════════ */}
       {(recs && recs.length > 0 || hasProfileAnalytics) && (
         <section className="ft-animate-in ft-section" style={{ paddingTop: '3rem', paddingBottom: '1rem' }}>
@@ -629,7 +629,7 @@ export default function Dashboard({ userName }) {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          PROFILE ANALYTICS — Radar + Subject Charts + RIASEC Gauges
+          PROFILE ANALYTICS - Radar + Subject Charts + RIASEC Gauges
           ═══════════════════════════════════════════════════════════════════ */}
       <section className="ft-animate-in ft-section" style={{ paddingTop: '3rem', paddingBottom: '4rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, alignItems: 'flex-start' }}>
@@ -809,7 +809,7 @@ export default function Dashboard({ userName }) {
                             color: localIsDark ? 'rgba(255,255,255,0.9)' : '#0f172a', fontSize: 13,
                           }}>
                             <div style={{ fontWeight: 700 }}>{payload[0].payload.subject}</div>
-                            <div style={{ color: '#00d4ff', marginTop: 4 }}>{v}/5 — {labels[v] || v}</div>
+                            <div style={{ color: '#00d4ff', marginTop: 4 }}>{v}/5 - {labels[v] || v}</div>
                           </div>
                         );
                       }}
@@ -881,7 +881,7 @@ export default function Dashboard({ userName }) {
         <section className="ft-animate-in ft-section" style={{ paddingBottom: '4rem' }}>
           <SectionHeader
             title="Your Career Galaxy"
-            subtitle="Your top career matches orbit as planets — hover to pause, click a planet to explore your personalised fit."
+            subtitle="Your top career matches orbit as planets, hover to pause, click a planet to explore your personalised fit."
             accentColor="amber"
           />
           <CareerMindMap recs={recs} />
@@ -894,7 +894,7 @@ export default function Dashboard({ userName }) {
       <section className="ft-animate-in ft-section" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
         <SectionHeader
           title="Explore Careers"
-          subtitle="Browse careers across Science, Commerce, and Arts — find what suits you."
+          subtitle="Browse careers across Science, Commerce, and Arts, find what suits you."
           accentColor="cyan"
         />
 
@@ -946,7 +946,7 @@ export default function Dashboard({ userName }) {
       <section className="ft-animate-in ft-section" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
         <SectionHeader
           title="Find Your Entrance Exam"
-          subtitle="Every major entrance exam in one place — eligibility, dates, and what it leads to."
+          subtitle="Every major entrance exam in one place, eligibility, dates, and what it leads to."
           accentColor="green"
         />
 
@@ -1009,7 +1009,7 @@ export default function Dashboard({ userName }) {
             { title: 'AI-powered guidance', desc: 'Personalised to your stream and goals', icon: '🤖', accent: '#00d4ff' },
             { title: 'Covers all major exams', desc: 'From JEE and NEET to CUET and UPSC', icon: '📝', accent: '#00ff88' },
             { title: 'Free psychometric test', desc: 'Get a detailed personality report', icon: '🧠', accent: '#8b5cf6' },
-            { title: 'Available 24/7', desc: 'No counsellor booking — instant guidance', icon: '⚡', accent: '#f59e0b' }
+            { title: 'Available 24/7', desc: 'No counsellor booking, instant guidance', icon: '⚡', accent: '#f59e0b' }
           ].map((point, i) => (
             <GlassCard
               key={i}

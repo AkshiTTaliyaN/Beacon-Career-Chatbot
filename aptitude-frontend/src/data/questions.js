@@ -1,4 +1,4 @@
-// questions.js — 60 RIASEC questions
+// questions.js - 60 RIASEC questions
 // 10 per category: R (0-9), I (10-19), A (20-29), S (30-39), E (40-49), C (50-59)
 // Scale: 1 = Strongly Disagree, 2 = Disagree, 3 = Neutral, 4 = Agree, 5 = Strongly Agree
 

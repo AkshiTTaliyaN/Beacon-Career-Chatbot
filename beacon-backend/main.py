@@ -17,7 +17,7 @@ from routes import auth_router, profile_router, rec_router, chat_router, expert_
 
 app = FastAPI(
     title="Manzil API",
-    description="Government Career Guidance Platform — Backend API",
+    description="Government Career Guidance Platform - Backend API",
     version="1.0.0"
 )
 

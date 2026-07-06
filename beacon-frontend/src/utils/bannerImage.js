@@ -1,5 +1,5 @@
 /**
- * bannerImage.js — Image / GIF abstraction layer
+ * bannerImage.js - Image / GIF abstraction layer
  *
  * ┌─────────────────────────────────────────────────────────────┐
  * │  To switch provider: change PROVIDER below.                 │
@@ -7,20 +7,20 @@
  * └─────────────────────────────────────────────────────────────┘
  *
  * Supported providers:
- *   "curatedGifs"  — random GIF picked from a hand-curated list (ACTIVE)
+ *   "curatedGifs" , random GIF picked from a hand-curated list (ACTIVE)
  *                    Zero setup, zero API key, works offline.
  *                    Add / remove IDs in CURATED_GIFS below.
  *
- *   "giphy"        — live random GIF from Giphy API
+ *   "giphy"       , live random GIF from Giphy API
  *                    Requires: VITE_GIPHY_API_KEY in .env
  *                    Get key free at: https://developers.giphy.com (2 min)
  *
- *   "tenor"        — live random GIF from Tenor (Google)
+ *   "tenor"       , live random GIF from Tenor (Google)
  *                    Requires: VITE_TENOR_API_KEY in .env
  *
- *   "unsplash"     — random static photo (no key, but boring)
+ *   "unsplash"    , random static photo (no key, but boring)
  *
- *   "google"       — Google Custom Search image
+ *   "google"       - Google Custom Search image
  *                    Requires: VITE_GOOGLE_API_KEY + VITE_GOOGLE_CX_ID
  */
 
@@ -82,11 +82,11 @@ function randomGif() {
 /* ─── Provider resolvers ──────────────────────────────────────── */
 const IMAGE_PROVIDERS = {
 
-  /** Zero-setup curated GIF list — ACTIVE provider */
+  /** Zero-setup curated GIF list - ACTIVE provider */
   curatedGifs: () => randomGif(),
 
   /**
-   * Giphy live API — plug in when faculty approves.
+   * Giphy live API, plug in when faculty approves.
    * Free key: https://developers.giphy.com (takes 2 min)
    * Add VITE_GIPHY_API_KEY to beacon-frontend/.env
    */
@@ -101,7 +101,7 @@ const IMAGE_PROVIDERS = {
   },
 
   /**
-   * Tenor — plug in when faculty approves.
+   * Tenor, plug in when faculty approves.
    * Add VITE_TENOR_API_KEY to beacon-frontend/.env
    */
   tenor: async ({ query = 'nailed it celebrate' } = {}) => {
@@ -115,14 +115,14 @@ const IMAGE_PROVIDERS = {
   },
 
   /**
-   * Unsplash random static photo — fallback, no key needed.
+   * Unsplash random static photo, fallback, no key needed.
    * Note: source.unsplash.com/random is deprecated and unreliable.
    */
   unsplash: ({ query = 'career,success', width = 900, height = 260 } = {}) =>
     `https://source.unsplash.com/random/${width}x${height}?${query}`,
 
   /**
-   * Google Custom Search — static image.
+   * Google Custom Search, static image.
    * Requires: VITE_GOOGLE_API_KEY + VITE_GOOGLE_CX_ID in .env
    * Free tier: 100 queries/day.
    */
@@ -141,7 +141,7 @@ const IMAGE_PROVIDERS = {
 /**
  * getCareerBannerImage(options?)
  * Returns a URL string, or null on error.
- * Always safe to call — errors are caught and logged silently.
+ * Always safe to call, errors are caught and logged silently.
  */
 export async function getCareerBannerImage(options = {}) {
   try {

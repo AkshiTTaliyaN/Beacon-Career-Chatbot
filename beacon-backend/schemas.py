@@ -1,6 +1,6 @@
 """
 schemas.py
-Pydantic models — define what data comes IN to the API
+Pydantic models, define what data comes IN to the API
 and what goes OUT.
 """
 from pydantic import BaseModel, EmailStr, field_validator
@@ -150,7 +150,7 @@ class ProfileResponse(BaseModel):
 
 
 class ProfileUpdate(BaseModel):
-    """Partial update — used by chatbot / aptitude-frontend to write data back."""
+    """Partial update, used by chatbot / aptitude-frontend to write data back."""
     riasec_scores: Optional[dict] = None
     hobbies: Optional[list] = None
     aptitude_scores: Optional[dict] = None

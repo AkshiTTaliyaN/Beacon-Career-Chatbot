@@ -39,7 +39,7 @@ export function writeCachedAvatarUrl(careerName, url) {
   try {
     localStorage.setItem(getAvatarCacheKey(careerName), url);
   } catch {
-    // Ignore quota errors — URL can still be used for this session.
+    // Ignore quota errors - URL can still be used for this session.
   }
 }
 

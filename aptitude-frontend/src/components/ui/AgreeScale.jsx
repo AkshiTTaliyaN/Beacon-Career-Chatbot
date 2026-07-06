@@ -15,7 +15,7 @@ export default function AgreeScale({ items, value, onChange, color = "#2C5492" }
               className={`apt-likert-option${selected ? " selected" : ""}`}
               onClick={() => onChange(it.value)}
               aria-pressed={selected}
-              aria-label={`${it.value} — ${it.label}`}
+              aria-label={`${it.value} - ${it.label}`}
               style={{ ["--opt-color"]: color }}
               whileHover={{ y: -2, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}

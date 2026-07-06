@@ -1,5 +1,5 @@
 /**
- * Contrast utility classes — updated for light/white theme.
+ * Contrast utility classes, updated for light/white theme.
  */
 
 .text-on-dark {
@@ -92,7 +92,7 @@
   border-top-color: #DCE4F5;
 }
 
-/* Cards — always dark text */
+/* Cards, always dark text */
 .results-page .apt-glass-card,
 .results-page .hero-report-card,
 .results-page .hero-personality-card,

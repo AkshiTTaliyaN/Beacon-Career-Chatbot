@@ -569,7 +569,7 @@
 .sc-card h3 { font-size: 1.4rem; font-weight: 700; color: var(--text); margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
 .sc-card ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
 .sc-card li { font-size: 15px; color: var(--text-muted); line-height: 1.65; padding-left: 18px; position: relative; }
-.sc-card li::before { content: "—"; position: absolute; left: 0; color: var(--text-muted); }
+.sc-card li::before { content: "-"; position: absolute; left: 0; color: var(--text-muted); }
 .challenge-note { font-size: 13px; color: var(--text-muted); font-style: italic; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); }
 
 /* ── Work environment ─────────────────────────────────────────── */

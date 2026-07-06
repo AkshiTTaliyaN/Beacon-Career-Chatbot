@@ -106,7 +106,7 @@ export default function BasicInfoScreen({ form, setForm, onNext, onBack }) {
 
         {showStream && (
           <AnimatedQuestionCard
-            question="🔬 What's your stream — or what are you leaning towards?"
+            question="🔬 What's your stream, or what are you leaning towards?"
             delay={0.15}
           >
             <RadioCards

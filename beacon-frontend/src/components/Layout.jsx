@@ -20,7 +20,7 @@ export default function Layout({ children, step, totalSteps, title, subtitle }) 
       />
 
       <main className="main onboard-main">
-        {/* No opacity animation on outer card — always visible */}
+        {/* No opacity animation on outer card, always visible */}
         <div className="card glass-panel">
           <div key={`${step}-${title}`}>
             {title && <h1 className="card-title onboard-card-title"><BilingualText text={title} /></h1>}

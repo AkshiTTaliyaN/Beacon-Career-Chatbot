@@ -1,5 +1,5 @@
 /*
- * App.css — updated for full-website layout
+ * App.css, updated for full-website layout
  * Changes:
  *  - Brand section is centered (no icon, text-center)
  *  - Wider card max-width for desktop screens
@@ -41,7 +41,7 @@ body {
   flex-direction: column;
 }
 
-/* ─── Header — full-width website top bar ───────────────────── */
+/* ─── Header, full-width website top bar ───────────────────── */
 .header {
   display: flex;
   align-items: center;
@@ -53,7 +53,7 @@ body {
   width: 100%;
 }
 
-/* Brand block — centered, no icon */
+/* Brand block, centered, no icon */
 .brand {
   display: flex;
   flex-direction: column;
@@ -107,7 +107,7 @@ body {
   padding: 2.5rem 1.5rem 3rem;
 }
 
-/* ─── Card — wider for website context ──────────────────────── */
+/* ─── Card, wider for website context ──────────────────────── */
 .card {
   width: 100%;
   max-width: 680px;          /* wider than original 560px */

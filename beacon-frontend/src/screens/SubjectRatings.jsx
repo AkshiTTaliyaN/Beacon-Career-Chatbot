@@ -140,7 +140,7 @@ export default function SubjectRatings({ form, setForm, onNext, onBack }) {
       step={3}
       totalSteps={9}
       title="How do you feel about your subjects?"
-      subtitle={`Be honest — 1 star means it's tough, 5 means you genuinely love it.`}
+      subtitle={`Be honest - 1 star means it's tough, 5 means you genuinely love it.`}
     >
       {form.stream && form.stream !== "none" && cls >= 11 && (
         <span
@@ -164,7 +164,7 @@ export default function SubjectRatings({ form, setForm, onNext, onBack }) {
         <div className="rating-progress">
           <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.82rem", color: "#556d8f", marginBottom: 6 }}>
             <span style={{ fontWeight: 700 }}>
-              {allRated ? "All rated — nice work!" : `${ratedCount} / ${subjects.length} done`}
+              {allRated ? "All rated, nice work!" : `${ratedCount} / ${subjects.length} done`}
             </span>
             {!allRated && <span style={{ color: "#9ca3af" }}>Rate all to continue</span>}
           </div>

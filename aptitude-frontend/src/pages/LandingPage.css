@@ -12,7 +12,7 @@
   width: 100%;
 }
 
-/* ── HERO — split layout ──────────────────────────────────── */
+/* ── HERO, split layout ──────────────────────────────────── */
 .hero-section {
   display: grid;
   grid-template-columns: 1.1fr 1fr;
@@ -61,7 +61,7 @@
 
 .hero-sub-light {
   font-size: 15px;
-  color: var(--text-muted);   /* was hardcoded #374151 — now uses variable */
+  color: var(--text-muted);   /* was hardcoded #374151, now uses variable */
   line-height: 1.8;
   margin-bottom: 32px;
   max-width: 580px;
@@ -176,7 +176,7 @@
 }
 
 /* ── Stats bar ────────────────────────────────────────────── */
-/* Kept intentionally dark — blue bar on white page is a grounding element */
+/* Kept intentionally dark, blue bar on white page is a grounding element */
 .stats-bar { background: var(--blue); padding: 36px 0; }   /* was var(--navy) which was dark #0d1333 */
 
 .stats-inner {

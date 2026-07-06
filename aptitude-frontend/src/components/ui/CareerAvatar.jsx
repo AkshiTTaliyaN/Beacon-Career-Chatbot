@@ -78,7 +78,7 @@ export default function CareerAvatar({
       } catch {
         if (cancelled) return;
 
-        // Cached URL may be stale — retry once with a fresh URL.
+        // Cached URL may be stale, retry once with a fresh URL.
         if (cachedUrl) {
           try {
             const freshUrl = buildCareerAvatarUrl(careerName);

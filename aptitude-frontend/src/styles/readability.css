@@ -1,5 +1,5 @@
 /**
- * Global readability overrides — Aptitude & Report pages
+ * Global readability overrides - Aptitude & Report pages
  * Forces dark text on light cards; WCAG AA oriented palette
  */
 
@@ -213,7 +213,7 @@
   font-size: 1rem !important;
 }
 
-/* Hero card — premium certificate layout */
+/* Hero card, premium certificate layout */
 .results-page .hero-report-card,
 .results-page .hero-personality-card {
   background: linear-gradient(165deg, #ffffff 0%, #f8fbff 48%, #eef4ff 100%) !important;
@@ -356,7 +356,7 @@
   margin-bottom: 20px !important;
 }
 
-/* Sidebar title on dark page edge — keep readable on dark bg */
+/* Sidebar title on dark page edge, keep readable on dark bg */
 .test-page.aptitude-page .sidebar-title {
   color: #E5E7EB !important;
   font-size: 0.8rem !important;

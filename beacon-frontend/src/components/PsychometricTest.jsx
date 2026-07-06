@@ -108,7 +108,7 @@ export default function PsychometricTest({ isEmbedded = false, hasResults = fals
       /* ignore storage errors */
     }
 
-    // Navigate to /report — main entry will render ReportPage
+    // Navigate to /report, main entry will render ReportPage
     window.history.pushState({}, '', '/report')
     window.dispatchEvent(new PopStateEvent('popstate'))
   }
@@ -230,7 +230,7 @@ export default function PsychometricTest({ isEmbedded = false, hasResults = fals
           {hasResults ? (
             <BilingualText text="You have already completed the psychometric test. Review your detailed RIASEC personality analysis, subject profile, and recommended careers." />
           ) : (
-            <BilingualText text="Answer 60 questions and discover your personality type and matching careers — completely free, no login needed" />
+            <BilingualText text="Answer 60 questions and discover your personality type and matching careers, completely free, no login needed" />
           )}
         </p>
         <div style={{ display: 'flex', gap: '1rem', marginTop: '1.25rem', flexWrap: 'wrap' }}>

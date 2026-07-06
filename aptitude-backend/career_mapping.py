@@ -217,7 +217,7 @@ HOBBY_MAP = {
 # DOMAIN TO CAREERS
 # Maps career domain tags to interest-aligned career suggestions.
 # These appear on the result page as "Based on your interests, you may also
-# want to explore..." — separate from the primary RIASEC recommendation.
+# want to explore...", separate from the primary RIASEC recommendation.
 # ---------------------------------------------------------------------------
 DOMAIN_CAREERS = {
     "design":               [{"title": "Graphic Designer", "salary": "₹4 – 15 LPA", "stream": "Humanities"},

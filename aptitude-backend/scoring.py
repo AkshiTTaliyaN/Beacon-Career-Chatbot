@@ -30,7 +30,7 @@ APTITUDE_THRESHOLDS = {
 
 
 # ---------------------------------------------------------------------------
-# SECTION 1 — RIASEC SCORING (unchanged logic, same as before)
+# SECTION 1 - RIASEC SCORING (unchanged logic, same as before)
 # ---------------------------------------------------------------------------
 def calculate_riasec_scores(answers: List[int]) -> Dict[str, float]:
     """
@@ -50,7 +50,7 @@ def calculate_riasec_scores(answers: List[int]) -> Dict[str, float]:
 
 
 # ---------------------------------------------------------------------------
-# SECTION 2 — INTEREST / HOBBY PROCESSING
+# SECTION 2 - INTEREST / HOBBY PROCESSING
 # ---------------------------------------------------------------------------
 def process_interests(selected_hobbies: List[str]) -> Dict:
     """
@@ -98,7 +98,7 @@ def process_interests(selected_hobbies: List[str]) -> Dict:
 
 
 # ---------------------------------------------------------------------------
-# SECTION 3 — APTITUDE SCORING
+# SECTION 3 - APTITUDE SCORING
 # ---------------------------------------------------------------------------
 def calculate_aptitude_scores(answers: List[int]) -> Dict:
     """
@@ -132,7 +132,7 @@ def calculate_aptitude_scores(answers: List[int]) -> Dict:
 
 
 # ---------------------------------------------------------------------------
-# SYNTHESIS — Combines all three sections into one unified result
+# SYNTHESIS - Combines all three sections into one unified result
 # ---------------------------------------------------------------------------
 def synthesise_result(
     riasec_scores: Dict[str, float],
@@ -262,7 +262,7 @@ def _get_aptitude_fit_note(
         return (
             f"Your aptitude scores suggest you may want extra support in "
             f"{', '.join(low_relevant)} before pursuing this career path. "
-            f"This does not mean you cannot succeed — it means focused preparation will be important."
+            f"This does not mean you cannot succeed, it means focused preparation will be important."
         )
     else:
         return (
@@ -362,9 +362,9 @@ def get_skills(primary: str, secondary: str) -> List[dict]:
 def get_closing_note(primary_name: str, careers: list) -> str:
     career_name = careers[0]["title"] if careers else "your chosen career"
     notes = {
-        "Investigative": "Your Investigative personality means you thrive when given complex problems to solve. The careers ahead of you are intellectually rich and financially rewarding. Start building your analytical skills now — learn Python, strengthen your mathematics, and practise real-world data projects. With steady focus and curiosity, the right path will become clear. Share this report with your parents and teachers to plan the next steps together.",
+        "Investigative": "Your Investigative personality means you thrive when given complex problems to solve. The careers ahead of you are intellectually rich and financially rewarding. Start building your analytical skills now, learn Python, strengthen your mathematics, and practise real-world data projects. With steady focus and curiosity, the right path will become clear. Share this report with your parents and teachers to plan the next steps together.",
         "Realistic": "Your Realistic nature means you are built to create, build, and solve with your hands and mind. Careers in engineering and technology reward exactly the kind of focused, practical thinking you bring. Start with hands-on projects, build your technical foundation, and explore workshops or labs near you. Share this report with your parents and teachers to plan together.",
-        "Artistic": "Your Artistic personality is a genuine strength in today's creative economy. Design, media, and content careers are growing fast in India. Start building a portfolio now — even small projects matter. Share this report with your teachers and parents so they understand the exciting paths available to you.",
+        "Artistic": "Your Artistic personality is a genuine strength in today's creative economy. Design, media, and content careers are growing fast in India. Start building a portfolio now, even small projects matter. Share this report with your teachers and parents so they understand the exciting paths available to you.",
         "Social": "Your Social personality is your superpower. People-focused careers in education, counselling, healthcare, and social work are both meaningful and in demand. Start practising communication and leadership skills today. Share this report with your parents and teachers to explore the best pathway for you.",
         "Enterprising": "Your Enterprising nature means you are made to lead, influence, and build. Business and law careers reward the ambition and drive you naturally have. Start practising leadership and financial thinking today. Share this report with your parents and teachers to map out your journey.",
         "Conventional": "Your Conventional strength means you excel at organisation, accuracy, and structured thinking. Finance, accounting, and administrative careers value exactly these qualities. Start building your spreadsheet and numeracy skills today. Share this report with your parents and teachers to plan your path forward.",

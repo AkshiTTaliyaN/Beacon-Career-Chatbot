@@ -28,35 +28,35 @@ const CATEGORY_INFO = {
     tagline: "The Builder",
     about: "Realistic types are practical, hands-on people who enjoy working with tools, machines, and physical systems. They prefer concrete tasks with visible results over abstract thinking.",
     careers: ["Mechanical Engineer", "Architect", "Electrician", "Pilot", "Civil Engineer"],
-    tip: "Think about activities you genuinely enjoy — not ones you think sound good.",
+    tip: "Think about activities you genuinely enjoy, not ones you think sound good.",
   },
   I: {
     color: RIASEC_COLORS.I,
     tagline: "The Thinker",
     about: "Investigative types are curious, analytical, and love solving complex problems. They are driven by a need to understand how things work and thrive in research and data-driven environments.",
     careers: ["Data Scientist", "Research Scientist", "Doctor", "Software Engineer", "Economist"],
-    tip: "Answer based on your natural curiosity — not what you studied or were told to like.",
+    tip: "Answer based on your natural curiosity, not what you studied or were told to like.",
   },
   A: {
     color: RIASEC_COLORS.A,
     tagline: "The Creator",
     about: "Artistic types are imaginative, expressive, and value originality. They thrive in environments that offer creative freedom and dislike rigid structures or routine.",
     careers: ["UI/UX Designer", "Film Director", "Journalist", "Architect", "Musician"],
-    tip: "Think about when you feel most free and energised — that is your Artistic side speaking.",
+    tip: "Think about when you feel most free and energised, that is your Artistic side speaking.",
   },
   S: {
     color: RIASEC_COLORS.S,
     tagline: "The Helper",
     about: "Social types are empathetic, people-oriented, and motivated by helping others. They are natural communicators who find meaning in making a positive difference in people's lives.",
     careers: ["Psychologist", "Teacher", "Doctor", "Social Worker", "HR Manager"],
-    tip: "Reflect on moments when helping someone felt genuinely fulfilling — not just polite.",
+    tip: "Reflect on moments when helping someone felt genuinely fulfilling, not just polite.",
   },
   E: {
     color: RIASEC_COLORS.E,
     tagline: "The Leader",
     about: "Enterprising types are ambitious, persuasive, and natural leaders. They are energised by challenge, competition, and the opportunity to influence and achieve.",
     careers: ["Entrepreneur", "Lawyer", "Marketing Manager", "Politician", "Business Consultant"],
-    tip: "Think about whether you naturally step up in group situations — or prefer to follow.",
+    tip: "Think about whether you naturally step up in group situations, or prefer to follow.",
   },
   C: {
     color: RIASEC_COLORS.C,
@@ -67,7 +67,7 @@ const CATEGORY_INFO = {
   },
 };
 
-// Aptitude skill colours — reuse the blue theme
+// Aptitude skill colours, reuse the blue theme
 const APTITUDE_COLORS = {
   english:  "#2C5492",
   patterns: "#3B63A3",
@@ -100,7 +100,7 @@ const APTITUDE_SKILL_INFO = {
   english: {
     label: "English & Language Skills",
     about: "This section looks at how comfortable you are with reading, writing, and understanding language.",
-    tip: "Answer based on your everyday experience with English — not just your exam scores.",
+    tip: "Answer based on your everyday experience with English, not just your exam scores.",
   },
   patterns: {
     label: "Finding Patterns & Sequences",
@@ -110,17 +110,17 @@ const APTITUDE_SKILL_INFO = {
   logical: {
     label: "Logical Thinking",
     about: "This section looks at how naturally you break problems into steps and evaluate arguments.",
-    tip: "Reflect on how you approach decisions — do you reason through them or go with instinct?",
+    tip: "Reflect on how you approach decisions, do you reason through them or go with instinct?",
   },
   maths: {
     label: "Maths & Numbers",
     about: "This section explores your comfort with numerical calculations, ratios, and quantitative problem solving.",
-    tip: "Be honest — this is about day-to-day comfort with numbers, not just exam performance.",
+    tip: "Be honest, this is about day-to-day comfort with numbers, not just exam performance.",
   },
   visual: {
     label: "Visualising & Drawing",
     about: "This section looks at how easily you picture objects in space, read maps, and sketch from memory.",
-    tip: "Think about how naturally you visualise things — rotating shapes, reading diagrams, etc.",
+    tip: "Think about how naturally you visualise things, rotating shapes, reading diagrams, etc.",
   },
   detail: {
     label: "Attention to Detail",
@@ -152,15 +152,15 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
     }
   }, [profileData]);
 
-  // Section 1 — RIASEC
+  // Section 1 - RIASEC
   const [answers, setAnswers] = useState(Array(60).fill(0));
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState(0);
 
-  // Section 2 — Hobbies
+  // Section 2 - Hobbies
   const [selectedHobbies, setSelectedHobbies] = useState([]);
 
-  // Section 3 — Aptitude
+  // Section 3 - Aptitude
   const [aptitudeAnswers, setAptitudeAnswers] = useState(Array(18).fill(0));
   const [aptitudeCurrent, setAptitudeCurrent] = useState(0);
   const [aptitudeSelected, setAptitudeSelected] = useState(0);
@@ -201,7 +201,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
       setCurrent(current + 1);
       setSelected(newAnswers[current + 1] || 0);
     } else {
-      // RIASEC done — move to hobbies
+      // RIASEC done, move to hobbies
       setStep("hobbies");
     }
   };
@@ -241,7 +241,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
       setAptitudeCurrent(aptitudeCurrent + 1);
       setAptitudeSelected(newAnswers[aptitudeCurrent + 1] || 0);
     } else {
-      // All three sections done — submit
+      // All three sections done, submit
       localStorage.setItem("psychometricCompleted", "true");
       
       onSubmit({
@@ -281,8 +281,8 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
           <div className="intro-card">
             <div className="intro-badge"><BilingualText text="Psychometric + Aptitude Assessment" /></div>
             <h1><BilingualText text="Career Aptitude Test" /></h1>
-            <p><BilingualText text="This test combines three assessments — your personality type (RIASEC), your interests and hobbies, and your self-rated aptitude — to give you a well-rounded career recommendation." /></p>
-            <p><BilingualText text="Be honest — there are no right or wrong answers. Choose what genuinely reflects you." /></p>
+            <p><BilingualText text="This test combines three assessments, your personality type (RIASEC), your interests and hobbies, and your self-rated aptitude, to give you a well-rounded career recommendation." /></p>
+            <p><BilingualText text="Be honest, there are no right or wrong answers. Choose what genuinely reflects you." /></p>
             <div className="intro-stats">
               <div><strong>3</strong><span><BilingualText text="Sections" /></span></div>
               <div><strong>60</strong><span><BilingualText text="Questions" /></span></div>
@@ -347,7 +347,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
           title=""
           center={(
             <div>
-              <h1>Section 1 of 3 — Personality</h1>
+              <h1>Section 1 of 3 - Personality</h1>
               <p>{details.name} • {details.class_level} • {details.stream}</p>
             </div>
           )}
@@ -386,7 +386,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
           <main className="test-main">
             <div className="section-motto">
               <span className="section-badge" style={{ background: info.color + "18", color: info.color, display: "inline-flex", alignItems: "center", gap: "6px" }}>
-                <BilingualText inline text={CATEGORY_LABELS[currentCat]} /> — Question {qInSection} of 10
+                <BilingualText inline text={CATEGORY_LABELS[currentCat]} /> - Question {qInSection} of 10
               </span>
               <p><BilingualText text={CATEGORY_MOTTOS[currentCat]} /></p>
             </div>
@@ -467,7 +467,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
           title=""
           center={(
             <div>
-              <h1><BilingualText text="Section 2 of 3 — Interests" /></h1>
+              <h1><BilingualText text="Section 2 of 3 - Interests" /></h1>
               <p>{details.name} • {details.class_level} • {details.stream}</p>
             </div>
           )}
@@ -484,7 +484,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
               Section 2 of 3
             </div>
             <h2 style={{ color: "#102849" }}><BilingualText text="What are your hobbies and interests?" /></h2>
-            <p><BilingualText text="Select all that apply. These help us understand what you genuinely enjoy outside of academics — and surface career options that match your real interests, not just your personality type." /></p>
+            <p><BilingualText text="Select all that apply. These help us understand what you genuinely enjoy outside of academics, and surface career options that match your real interests, not just your personality type." /></p>
           </div>
 
           {HOBBY_CATEGORIES.map((group) => (
@@ -534,7 +534,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
           title=""
           center={(
             <div>
-              <h1>Section 3 of 3 — Aptitude</h1>
+              <h1>Section 3 of 3 - Aptitude</h1>
               <p>{details.name} • {details.class_level} • {details.stream}</p>
             </div>
           )}
@@ -547,7 +547,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
         </div>
 
         <div className="test-layout">
-          {/* Left sidebar — aptitude skill progress */}
+          {/* Left sidebar, aptitude skill progress */}
           <aside className="test-sidebar">
             <p className="sidebar-title">Skill areas</p>
             {Object.entries(APTITUDE_SKILL_INFO).map(([skill, info], i) => {
@@ -575,7 +575,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
             <div className="section-motto">
               <span className="section-badge"
                 style={{ background: aptitudeColor + "18", color: aptitudeColor }}>
-                <BilingualText text={aptitudeSkillInfo?.label} /> — <BilingualText text="Question" /> {qInAptitudeSkill} <BilingualText text="of" /> 3
+                <BilingualText text={aptitudeSkillInfo?.label} /> - <BilingualText text="Question" /> {qInAptitudeSkill} <BilingualText text="of" /> 3
               </span>
               <p><BilingualText text={aptitudeSkillInfo?.about} /></p>
             </div>

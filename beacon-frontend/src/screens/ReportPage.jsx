@@ -83,21 +83,21 @@ const CHALLENGES = {
 };
 
 const WORK_ENV = {
-  Investigative: "You thrive in environments that reward curiosity and independent thinking — research labs, tech companies, universities, or data-driven organisations. You need intellectual challenge, freedom to explore ideas, and colleagues who value depth over speed.",
-  Realistic: "You perform best in structured, practical environments — engineering firms, workshops, construction, manufacturing, or field-based roles. You need clear outcomes, hands-on work, and environments where you can see the results of your effort.",
-  Artistic: "You flourish in creative, flexible environments — design studios, media companies, startups, or cultural organisations. You need autonomy, creative freedom, and space to experiment without excessive bureaucracy.",
-  Social: "You do best in people-centred environments — schools, hospitals, NGOs, counselling centres, or community organisations. You need meaningful human interaction, collaborative teams, and a sense that your work is making a real difference.",
-  Enterprising: "You are energised by fast-paced, goal-oriented environments — startups, sales organisations, consulting firms, or leadership roles in any sector. You need challenge, autonomy, and the ability to influence decisions.",
-  Conventional: "You excel in structured, well-organised environments — banks, accounting firms, government offices, or large corporations with clear processes. You need clear expectations, defined roles, and environments where precision is valued.",
+  Investigative: "You thrive in environments that reward curiosity and independent thinking, research labs, tech companies, universities, or data-driven organisations. You need intellectual challenge, freedom to explore ideas, and colleagues who value depth over speed.",
+  Realistic: "You perform best in structured, practical environments, engineering firms, workshops, construction, manufacturing, or field-based roles. You need clear outcomes, hands-on work, and environments where you can see the results of your effort.",
+  Artistic: "You flourish in creative, flexible environments, design studios, media companies, startups, or cultural organisations. You need autonomy, creative freedom, and space to experiment without excessive bureaucracy.",
+  Social: "You do best in people-centred environments, schools, hospitals, NGOs, counselling centres, or community organisations. You need meaningful human interaction, collaborative teams, and a sense that your work is making a real difference.",
+  Enterprising: "You are energised by fast-paced, goal-oriented environments, startups, sales organisations, consulting firms, or leadership roles in any sector. You need challenge, autonomy, and the ability to influence decisions.",
+  Conventional: "You excel in structured, well-organised environments, banks, accounting firms, government offices, or large corporations with clear processes. You need clear expectations, defined roles, and environments where precision is valued.",
 };
 
 const PARENT_NOTES = {
-  Investigative: "Your child is a deep thinker — naturally curious, analytical, and motivated by understanding how things work. They will do best in careers that reward intellectual depth and independent problem solving. Support them by encouraging questions, providing access to books, research articles, and projects. Avoid pushing them toward fast-paced sales or routine clerical roles — they will likely feel unfulfilled. Careers in science, research, technology, and medicine align with their natural strengths.",
-  Realistic: "Your child is practical and hands-on — they learn best by doing, not by reading or theorising. They thrive when working with tools, systems, and tangible outcomes. Support them with workshops, technical hobbies, or mechanical projects. Engineering, technical fields, and applied sciences suit their personality. Avoid pressuring them into highly abstract or people-heavy roles unless they show genuine interest.",
-  Artistic: "Your child is creative and expressive — they need freedom to imagine, design, and create. Rigid structures and rule-bound environments will drain them. Support them by encouraging creative outlets and respecting their need for self-expression. Careers in design, media, architecture, and creative technology suit them well. The creative economy is growing rapidly — this is a legitimate, financially viable path.",
-  Social: "Your child is empathetic and people-oriented — they are energised by helping others and building relationships. They will find meaning in careers that involve teaching, healing, counselling, or community work. Support them by valuing emotional intelligence as a real skill. Careers in education, healthcare, psychology, and social work suit them deeply. They may need encouragement to also pursue their own goals, not just others'.",
-  Enterprising: "Your child is ambitious and naturally driven to lead. They thrive in challenging, fast-paced environments where they can take initiative and influence others. Support them by encouraging leadership roles, public speaking, and business thinking. Careers in business, law, entrepreneurship, and management suit them. They may take risks — guide them, but resist the urge to over-control their decisions.",
-  Conventional: "Your child is precise, organised, and methodical — they excel at structure, accuracy, and consistency. They thrive in stable, well-defined environments. Support them by valuing their reliability and attention to detail. Careers in finance, accounting, administration, and data management align with their strengths. There are strong, secure career paths in these areas — your child is well-suited to them.",
+  Investigative: "Your child is a deep thinker, naturally curious, analytical, and motivated by understanding how things work. They will do best in careers that reward intellectual depth and independent problem solving. Support them by encouraging questions, providing access to books, research articles, and projects. Avoid pushing them toward fast-paced sales or routine clerical roles, they will likely feel unfulfilled. Careers in science, research, technology, and medicine align with their natural strengths.",
+  Realistic: "Your child is practical and hands-on, they learn best by doing, not by reading or theorising. They thrive when working with tools, systems, and tangible outcomes. Support them with workshops, technical hobbies, or mechanical projects. Engineering, technical fields, and applied sciences suit their personality. Avoid pressuring them into highly abstract or people-heavy roles unless they show genuine interest.",
+  Artistic: "Your child is creative and expressive, they need freedom to imagine, design, and create. Rigid structures and rule-bound environments will drain them. Support them by encouraging creative outlets and respecting their need for self-expression. Careers in design, media, architecture, and creative technology suit them well. The creative economy is growing rapidly, this is a legitimate, financially viable path.",
+  Social: "Your child is empathetic and people-oriented, they are energised by helping others and building relationships. They will find meaning in careers that involve teaching, healing, counselling, or community work. Support them by valuing emotional intelligence as a real skill. Careers in education, healthcare, psychology, and social work suit them deeply. They may need encouragement to also pursue their own goals, not just others'.",
+  Enterprising: "Your child is ambitious and naturally driven to lead. They thrive in challenging, fast-paced environments where they can take initiative and influence others. Support them by encouraging leadership roles, public speaking, and business thinking. Careers in business, law, entrepreneurship, and management suit them. They may take risks, guide them, but resist the urge to over-control their decisions.",
+  Conventional: "Your child is precise, organised, and methodical, they excel at structure, accuracy, and consistency. They thrive in stable, well-defined environments. Support them by valuing their reliability and attention to detail. Careers in finance, accounting, administration, and data management align with their strengths. There are strong, secure career paths in these areas, your child is well-suited to them.",
 };
 
 const ACTION_PLAN = {
@@ -122,7 +122,7 @@ const ACTION_PLAN = {
     { phase: "After Class 12", actions: ["Pursue Psychology, Education, Social Work, or Medicine", "Complete internships in counselling or NGO settings", "Build a track record of impact in community work", "Consider higher studies in clinical or counselling psychology"] },
   ],
   Enterprising: [
-    { phase: "Class 11 (Now)", actions: ["Read business case studies and entrepreneur biographies", "Take leadership roles in school clubs or events", "Develop public speaking and presentation skills", "Start a small project — selling, organising, or building"] },
+    { phase: "Class 11 (Now)", actions: ["Read business case studies and entrepreneur biographies", "Take leadership roles in school clubs or events", "Develop public speaking and presentation skills", "Start a small project, selling, organising, or building"] },
     { phase: "Class 12", actions: ["Prepare for IPM, CLAT, or commerce entrance exams", "Build a strong CV with leadership experience", "Start a small entrepreneurial side project", "Develop financial literacy and business reading"] },
     { phase: "After Class 12", actions: ["Pursue BBA, B.Com, LLB, or related fields", "Join entrepreneurship cells and business clubs", "Take internships at startups or consulting firms", "Build your network early through LinkedIn and events"] },
   ],
@@ -134,10 +134,10 @@ const ACTION_PLAN = {
 };
 
 const ADMISSION_PROCESS = {
-  PCM: { timeline: "Class 12 final year — apply Oct–Mar; exams Jan–June; counselling June–Aug.", docs: "Class 10 & 12 marksheets, JEE scorecard, ID proof, photos, category certificate (if applicable).", cutoffs: "JEE Main: 90+ percentile for NITs, 95+ for IIITs. JEE Advanced: rank under 10,000 for IITs." },
-  PCB: { timeline: "Class 12 final year — apply Dec–Feb; NEET in May; counselling July–Sep.", docs: "Class 10 & 12 marksheets, NEET scorecard, ID proof, photos, category certificate (if applicable).", cutoffs: "NEET: 600+ for government MBBS in most states, 720 for AIIMS Delhi." },
-  Commerce: { timeline: "Class 12 final year — CUET in May, CA Foundation in May/Nov, IPMAT in May.", docs: "Class 10 & 12 marksheets, entrance exam scorecard, ID proof, photos.", cutoffs: "CUET: 95+ percentile for top DU colleges. CA Foundation: 50% aggregate, 40% per subject." },
-  Humanities: { timeline: "Class 12 final year — CUET in May, CLAT in Dec, NID/NIFT in Jan.", docs: "Class 10 & 12 marksheets, entrance exam scorecard, portfolio (for design), ID proof.", cutoffs: "CUET: 95+ percentile for top humanities colleges. CLAT: rank under 500 for NLU Bangalore." },
+  PCM: { timeline: "Class 12 final year, apply Oct–Mar; exams Jan–June; counselling June–Aug.", docs: "Class 10 & 12 marksheets, JEE scorecard, ID proof, photos, category certificate (if applicable).", cutoffs: "JEE Main: 90+ percentile for NITs, 95+ for IIITs. JEE Advanced: rank under 10,000 for IITs." },
+  PCB: { timeline: "Class 12 final year, apply Dec–Feb; NEET in May; counselling July–Sep.", docs: "Class 10 & 12 marksheets, NEET scorecard, ID proof, photos, category certificate (if applicable).", cutoffs: "NEET: 600+ for government MBBS in most states, 720 for AIIMS Delhi." },
+  Commerce: { timeline: "Class 12 final year - CUET in May, CA Foundation in May/Nov, IPMAT in May.", docs: "Class 10 & 12 marksheets, entrance exam scorecard, ID proof, photos.", cutoffs: "CUET: 95+ percentile for top DU colleges. CA Foundation: 50% aggregate, 40% per subject." },
+  Humanities: { timeline: "Class 12 final year - CUET in May, CLAT in Dec, NID/NIFT in Jan.", docs: "Class 10 & 12 marksheets, entrance exam scorecard, portfolio (for design), ID proof.", cutoffs: "CUET: 95+ percentile for top humanities colleges. CLAT: rank under 500 for NLU Bangalore." },
 };
 
 function getExams(stream, primaryCode) {
@@ -237,9 +237,9 @@ function getSkills(primaryCode, secondaryCode) {
 
 function getClosingNote(primaryName) {
   const notes = {
-    Investigative: "Your Investigative personality means you thrive when given complex problems to solve. The careers ahead of you are intellectually rich and financially rewarding. Start building your analytical skills now — learn Python, strengthen your mathematics, and practise real-world data projects. With steady focus and curiosity, the right path will become clear. Share this report with your parents and teachers to plan the next steps together.",
+    Investigative: "Your Investigative personality means you thrive when given complex problems to solve. The careers ahead of you are intellectually rich and financially rewarding. Start building your analytical skills now, learn Python, strengthen your mathematics, and practise real-world data projects. With steady focus and curiosity, the right path will become clear. Share this report with your parents and teachers to plan the next steps together.",
     Realistic: "Your Realistic nature means you are built to create, build, and solve with your hands and mind. Careers in engineering and technology reward exactly the kind of focused, practical thinking you bring. Start with hands-on projects, build your technical foundation, and explore workshops or labs near you. Share this report with your parents and teachers to plan together.",
-    Artistic: "Your Artistic personality is a genuine strength in today's creative economy. Design, media, and content careers are growing fast. Start building a portfolio now — even small projects matter. Share this report with your teachers and parents so they understand the exciting paths available to you.",
+    Artistic: "Your Artistic personality is a genuine strength in today's creative economy. Design, media, and content careers are growing fast. Start building a portfolio now, even small projects matter. Share this report with your teachers and parents so they understand the exciting paths available to you.",
     Social: "Your Social personality is your superpower. People-focused careers in education, counselling, healthcare, and social work are both meaningful and in demand. Start practising communication and leadership skills today. Share this report with your parents and teachers to explore the best pathway for you.",
     Enterprising: "Your Enterprising nature means you are made to lead, influence, and build. Business and law careers reward the ambition and drive you naturally have. Start practising leadership and financial thinking today. Share this report with your parents and teachers to map out your journey.",
     Conventional: "Your Conventional strength means you excel at organisation, accuracy, and structured thinking. Finance, accounting, and administrative careers value exactly these qualities. Start building your spreadsheet and numeracy skills today. Share this report with your parents and teachers to plan your path forward.",
@@ -480,7 +480,7 @@ export default function ReportPage() {
             {/* ── Fresh-test congratulatory banner ─────────────────────── */}
             {freshTest && (
               <>
-                {/* GIF banner — powered by bannerImage.js (change PROVIDER there to switch source) */}
+                {/* GIF banner, powered by bannerImage.js (change PROVIDER there to switch source) */}
                 {bannerImage && (
                   <div style={{
                     borderRadius: 16,
@@ -488,7 +488,7 @@ export default function ReportPage() {
                     marginBottom: 20,
                     boxShadow: '0 6px 32px rgba(44,84,146,0.18)',
                   }}>
-                    {/* Dark container — objectFit:contain so GIFs aren't cropped */}
+                    {/* Dark container, objectFit:contain so GIFs aren't cropped */}
                     <div style={{
                       background: '#0f172a',
                       display: 'flex',
@@ -532,7 +532,7 @@ export default function ReportPage() {
                           You actually did it, {studentName.split(' ')[0]}!
                         </div>
                         <div style={{ opacity: 0.8, fontSize: '0.85rem', marginTop: 2 }}>
-                          Your RIASEC personality report is ready below — scroll down to explore.
+                          Your RIASEC personality report is ready below, scroll down to explore.
                         </div>
                       </div>
                     </div>
@@ -676,7 +676,7 @@ export default function ReportPage() {
                 <section style={{ marginBottom: 32 }}>
                   <SectionHeading
                     title="Subject Strength Profile"
-                    subtitle="Your self-rated comfort level with each subject — 1 (struggling) to 5 (favourite)."
+                    subtitle="Your self-rated comfort level with each subject - 1 (struggling) to 5 (favourite)."
                   />
                   <GlassCard elevated style={{ padding: '2rem' }}>
                     <ResponsiveContainer width="100%" height={Math.max(200, subjectData.length * 52)}>
@@ -703,7 +703,7 @@ export default function ReportPage() {
                           tickLine={false}
                         />
                         <Tooltip
-                          formatter={(val) => [`${val}/5 — ${['','Struggling','Getting by','Comfortable','Really good','Favourite'][val] || val}`, 'Rating']}
+                          formatter={(val) => [`${val}/5 - ${['','Struggling','Getting by','Comfortable','Really good','Favourite'][val] || val}`, 'Rating']}
                           contentStyle={{ borderRadius: 8, border: '1px solid rgba(255,255,255,0.15)', background: '#080c24', color: '#fff', fontSize: 13 }}
                         />
                         <Bar dataKey="rating" radius={[0, 8, 8, 0]} maxBarSize={28}>
@@ -838,7 +838,7 @@ export default function ReportPage() {
 
             {/* ── Action Plan ── */}
             <section style={{ marginBottom: 32 }}>
-              <SectionHeading title="Your Personalised Action Plan" subtitle={`A step-by-step roadmap from now until college — built around your ${primaryName} personality:`} />
+              <SectionHeading title="Your Personalised Action Plan" subtitle={`A step-by-step roadmap from now until college, built around your ${primaryName} personality:`} />
               <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                 {(ACTION_PLAN[primaryName] || []).map((phase, i) => (
                   <GlassCard
@@ -867,7 +867,7 @@ export default function ReportPage() {
 
             {/* ── Skills to Build ── */}
             <section style={{ marginBottom: 32 }}>
-              <SectionHeading title="Skills to Build Now" subtitle="Start developing these skills before Class 12 ends — they will strengthen both your applications and your confidence:" />
+              <SectionHeading title="Skills to Build Now" subtitle="Start developing these skills before Class 12 ends, they will strengthen both your applications and your confidence:" />
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
                 {(getSkills(sortedScores[0]?.code, sortedScores[1]?.code) || []).map((skill, i) => (
                   <GlassCard key={i} glowColor="purple" style={{ padding: 18, display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -885,7 +885,7 @@ export default function ReportPage() {
 
             {/* ── Parent Section ── */}
             <section style={{ marginBottom: 32 }}>
-              <SectionHeading title="For Your Parents" subtitle="A clear, jargon-free note to share with your parents — to help them understand your personality type and how to support you." />
+              <SectionHeading title="For Your Parents" subtitle="A clear, jargon-free note to share with your parents, to help them understand your personality type and how to support you." />
               <GlassCard glowColor="green" style={{ padding: 22, borderLeft: `4px solid ${primaryColor}` }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
                   <Heart size={20} style={{ color: primaryColor }} />
@@ -913,7 +913,7 @@ export default function ReportPage() {
                   {getClosingNote(primaryName)}
                 </p>
                 <p style={{ margin: 0, color: 'var(--ft-text-muted)', fontSize: '0.78rem', fontStyle: 'italic' }}>
-                  Remember — this report is a starting point, not a verdict. Career paths are rarely straight lines. Use this as a guide to explore, ask questions, and make informed choices. You have time.
+                  Remember, this report is a starting point, not a verdict. Career paths are rarely straight lines. Use this as a guide to explore, ask questions, and make informed choices. You have time.
                 </p>
               </GlassCard>
             </section>
@@ -953,7 +953,7 @@ export default function ReportPage() {
             </section>
 
             <footer style={{ color: 'var(--ft-text-muted)', fontSize: 13, textAlign: 'center', padding: '1rem 0 4rem 0' }}>
-              Career Guidance Portal © 2026 — This report is based on the globally validated RIASEC psychometric model.
+              Career Guidance Portal © 2026 - This report is based on the globally validated RIASEC psychometric model.
               For personalised counselling contact our team.
             </footer>
           </>

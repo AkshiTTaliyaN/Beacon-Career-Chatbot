@@ -1,5 +1,5 @@
 """
-routes.py  — only the _profile_to_response helper needs to change.
+routes.py , only the _profile_to_response helper needs to change.
 Everything else (auth_router, profile_router, rec_router) is identical
 to the original. Replace the entire file.
 """
@@ -558,7 +558,7 @@ def email_login(
 def guest_login(db: Session = Depends(get_db)):
     """
     Create an anonymous guest student and return a JWT.
-    Each call generates a fresh unique student — no email required.
+    Each call generates a fresh unique student, no email required.
     """
     import uuid as _uuid
 
@@ -674,7 +674,7 @@ def get_career_catalog():
     catalog_with_exams = []
     seen_titles = set()
     for career in CAREER_CATALOG:
-        # The catalog contains a few duplicate titles — show each career once
+        # The catalog contains a few duplicate titles, show each career once
         if career["title"] in seen_titles:
             continue
         seen_titles.add(career["title"])
@@ -716,7 +716,7 @@ def get_smart_recommendations(
     """Unified 5-signal career recommendation engine. Returns top 10 careers."""
     student_uuid = UUID(student_id)
 
-    # 1 — load profile
+    # 1, load profile
     profile = db.query(StudentProfile).filter(
         StudentProfile.student_id == student_uuid
     ).first()
@@ -727,14 +727,14 @@ def get_smart_recommendations(
             detail="Profile not found. Please complete onboarding."
         )
 
-    # 2 — gate: RIASEC scores required
+    # 2, gate: RIASEC scores required
     if not profile.riasec_scores:
         raise HTTPException(
             status_code=428,  # Precondition Required
             detail="riasec_required"
         )
 
-    # 3 — check 24h cache in Recommendation.full_output
+    # 3, check 24h cache in Recommendation.full_output
     cached = db.query(Recommendation).filter(
         Recommendation.student_id == student_uuid
     ).order_by(Recommendation.generated_at.desc()).first()
@@ -751,10 +751,10 @@ def get_smart_recommendations(
                 if age_hours < CACHE_TTL_HOURS:
                     return fo
 
-    # 4 — run scoring engine
+    # 4, run scoring engine
     recommendations = score_careers(profile)
 
-    # 5 — build response payload
+    # 5, build response payload
     now_iso = datetime.datetime.utcnow().isoformat()
     payload = {
         "type": "smart_v2",
@@ -770,7 +770,7 @@ def get_smart_recommendations(
         },
     }
 
-    # 6 — cache: upsert into recommendations table
+    # 6, cache: upsert into recommendations table
     if cached:
         cached.full_output = payload
         cached.career_path_1 = recommendations[0]["title"] if len(recommendations) > 0 else None

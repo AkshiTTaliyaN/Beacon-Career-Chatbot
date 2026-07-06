@@ -11,7 +11,7 @@
  *  - Custom Recharts renderers
  *
  * All visual styling lives in `../styles/futuristic.css`.
- * Components only reference CSS class names — no inline colour values
+ * Components only reference CSS class names, no inline colour values
  * unless they are dynamic and cannot be expressed as classes.
  *
  * @module FuturisticCharts
@@ -22,15 +22,15 @@ import '../styles/futuristic.css';
 import BilingualText from './BilingualText.jsx';
 
 /* ═══════════════════════════════════════════════════════════════════
-   RIASEC_THEME — colour & icon map for Holland / RIASEC types
+   RIASEC_THEME, colour & icon map for Holland / RIASEC types
    ═══════════════════════════════════════════════════════════════════ */
 
 /**
  * Mapping of RIASEC personality types to their futuristic neon theme.
  * Each entry contains:
- *  - `color`  — primary neon hex colour
- *  - `label`  — single-character abbreviation
- *  - `icon`   — representative emoji
+ *  - `color` , primary neon hex colour
+ *  - `label` , single-character abbreviation
+ *  - `icon`  , representative emoji
  *
  * @type {Record<string, { color: string, label: string, icon: string }>}
  */
@@ -44,7 +44,7 @@ export const RIASEC_THEME = {
 };
 
 /* ═══════════════════════════════════════════════════════════════════
-   useCountUp — animated number counter hook
+   useCountUp, animated number counter hook
    ═══════════════════════════════════════════════════════════════════ */
 
 /**
@@ -115,7 +115,7 @@ export function useCountUp(target, duration = 1200) {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   GlassCard — glassmorphism container
+   GlassCard, glassmorphism container
    ═══════════════════════════════════════════════════════════════════ */
 
 /**
@@ -165,7 +165,7 @@ export function GlassCard({
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   RadialGauge — SVG arc gauge for RIASEC scores
+   RadialGauge - SVG arc gauge for RIASEC scores
    ═══════════════════════════════════════════════════════════════════ */
 
 /**
@@ -326,7 +326,7 @@ export function RadialGauge({
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   KPICard — animated key performance indicator card
+   KPICard, animated key performance indicator card
    ═══════════════════════════════════════════════════════════════════ */
 
 /**
@@ -405,7 +405,7 @@ export function KPICard({
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   FuturisticTooltip — custom recharts tooltip
+   FuturisticTooltip, custom recharts tooltip
    ═══════════════════════════════════════════════════════════════════ */
 
 /**
@@ -442,7 +442,7 @@ export function FuturisticTooltip({ active, payload, label }) {
               {item.name || item.dataKey}
             </span>
             <span className="ft-tooltip__value">
-              {item.value != null ? item.value : '—'}
+              {item.value != null ? item.value : '-'}
             </span>
           </li>
         ))}
@@ -452,7 +452,7 @@ export function FuturisticTooltip({ active, payload, label }) {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   SectionHeader — titled section divider
+   SectionHeader, titled section divider
    ═══════════════════════════════════════════════════════════════════ */
 
 /**
@@ -520,7 +520,7 @@ export function SectionHeader({
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   AnimatedBar — custom recharts <Bar shape={…} /> renderer
+   AnimatedBar, custom recharts <Bar shape={…} /> renderer
    ═══════════════════════════════════════════════════════════════════ */
 
 /** Internal counter for unique gradient IDs across multiple bars. */
@@ -599,7 +599,7 @@ export function AnimatedBar(props) {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   GradientDefs — shared SVG gradient / filter definitions
+   GradientDefs, shared SVG gradient / filter definitions
    ═══════════════════════════════════════════════════════════════════ */
 
 /**
@@ -618,8 +618,8 @@ export function AnimatedBar(props) {
  *    to transparent (bottom).
  *
  * Available filter IDs:
- *  - `ft-glow-filter`     — general glow
- *  - `ft-glow-filter-lg`  — stronger glow (stdDeviation 5)
+ *  - `ft-glow-filter`    , general glow
+ *  - `ft-glow-filter-lg` , stronger glow (stdDeviation 5)
  */
 export function GradientDefs() {
   return (

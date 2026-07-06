@@ -39,7 +39,7 @@ export default function AcademicsScreen({ form, setForm, onNext, onBack }) {
       step={6}
       totalSteps={9}
       title="Your learning journey"
-      subtitle="How you study, what clicks for you, and where you're headed — keep it real."
+      subtitle="How you study, what clicks for you, and where you're headed, keep it real."
     >
       <form onSubmit={handleNext} className="form onboard-form">
 
@@ -133,7 +133,7 @@ export default function AcademicsScreen({ form, setForm, onNext, onBack }) {
         </AnimatedQuestionCard>
 
         <div className="family-section">
-          <p className="family-section-label">👨‍👩‍👧 A bit about your family — all optional</p>
+          <p className="family-section-label">👨‍👩‍👧 A bit about your family, all optional</p>
 
           <label className="field">
             <span className="field-label">💰 What's your family's approximate yearly income?</span>

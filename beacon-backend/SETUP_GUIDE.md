@@ -1,4 +1,4 @@
-# Manzil — Complete Setup Guide
+# Manzil - Complete Setup Guide
 
 ## What You Have Built
 
@@ -15,19 +15,19 @@ beacon-backend/
 ├── requirements.txt ← Python packages to install
 └── .env.example     ← Copy this to .env and fill it in
 
-beacon-frontend/   ← React app (Manzil onboarding) — npm run dev
+beacon-frontend/   ← React app (Manzil onboarding), npm run dev
     └── See ../beacon-frontend/CONNECT_BACKEND.md
 ```
 
 ---
 
-## Step 1 — Install PostgreSQL
+## Step 1 - Install PostgreSQL
 
 ### Windows
 1. Go to https://www.postgresql.org/download/windows/
 2. Download the installer for PostgreSQL 16
-3. Run installer — keep all defaults
-4. Set a password for the `postgres` user — **remember this**
+3. Run installer, keep all defaults
+4. Set a password for the `postgres` user - **remember this**
 5. Keep port as `5432`
 
 ### Mac
@@ -37,11 +37,11 @@ brew services start postgresql@16
 ```
 ---
 
-## Step 2 — Create the Database
+## Step 2 - Create the Database
 
 Open a terminal and run:
 
-### Windows — open pgAdmin (installed with PostgreSQL) or run:
+### Windows, open pgAdmin (installed with PostgreSQL) or run:
 ```cmd
 psql -U postgres
 ```
@@ -74,14 +74,14 @@ postgresql://beacon_user:yourpassword@localhost:5432/beacon
 
 ---
 
-## Step 3 — Install Redis
+## Step 3 - Install Redis
 
 Redis is used for storing OTPs temporarily.
 
 ### Windows
 Redis does not run natively on Windows. Use one of these:
 
-**Option A — WSL (recommended):**
+**Option A - WSL (recommended):**
 ```bash
 wsl --install          # if WSL not installed
 # Inside WSL terminal:
@@ -89,7 +89,7 @@ sudo apt install redis-server -y
 sudo service redis-server start
 ```
 
-**Option B — Docker:**
+**Option B - Docker:**
 ```bash
 docker run -d -p 6379:6379 redis:alpine
 ```
@@ -115,7 +115,7 @@ redis-cli ping
 
 ---
 
-## Step 4 — Set Up the Python Backend
+## Step 4 - Set Up the Python Backend
 
 ```bash
 # Navigate to your backend folder
@@ -136,7 +136,7 @@ pip install -r requirements.txt
 
 ---
 
-## Step 5 — Configure Environment Variables
+## Step 5 - Configure Environment Variables
 
 ```bash
 # Copy the example file
@@ -165,7 +165,7 @@ FROM_EMAIL=yourgmail@gmail.com
 
 ---
 
-## Step 6 — Run the Backend
+## Step 6 - Run the Backend
 
 ```bash
 # Make sure venv is activated, then:
@@ -190,7 +190,7 @@ The `--reload` flag means the server restarts automatically whenever you save a 
 
 ---
 
-## Step 7 — Verify the Database Tables Were Created
+## Step 7 - Verify the Database Tables Were Created
 
 ```bash
 # Connect to PostgreSQL
@@ -213,7 +213,7 @@ psql -U beacon_user -d beacon
 
 ---
 
-## Step 8 — Open the Frontend
+## Step 8 - Open the Frontend
 
 ```bash
 cd ../beacon-frontend
@@ -226,14 +226,14 @@ The frontend calls `http://localhost:8000` by default.
 
 **Full test flow:**
 1. Enter your email → click Send OTP
-2. Check your terminal — if email is not set up, OTP prints there
+2. Check your terminal, if email is not set up, OTP prints there
 3. Enter the OTP → click Verify
 4. Fill out the form → click Submit
-5. Open pgAdmin or psql and check the tables — you will see the data saved
+5. Open pgAdmin or psql and check the tables, you will see the data saved
 
 ---
 
-## Step 9 — Verify Data is Saving to PostgreSQL
+## Step 9 - Verify Data is Saving to PostgreSQL
 
 After submitting the form, run this in psql:
 
@@ -286,7 +286,7 @@ When you deploy (put this online), change that one line to your server URL:
 const API = "https://your-server.com";
 ```
 
-The token is saved in `localStorage` so the student stays logged in across browser sessions. On page load, the frontend checks if a valid token exists and loads the profile automatically — this is what makes returning students skip the form.
+The token is saved in `localStorage` so the student stays logged in across browser sessions. On page load, the frontend checks if a valid token exists and loads the profile automatically, this is what makes returning students skip the form.
 
 ---
 
@@ -302,7 +302,7 @@ The token is saved in `localStorage` so the student stays logged in across brows
 - Redis is not running. Start it (see Step 3).
 
 **OTP not received by email**
-- Check terminal — OTP prints there in dev mode.
+- Check terminal - OTP prints there in dev mode.
 - If you want real emails: verify Gmail App Password is correct.
 
 **`422 Unprocessable Entity` from API**
@@ -332,7 +332,7 @@ project/
 │   └── .env.example        ← safe to commit
 │
 └── beacon-frontend/
-    └── (React — Manzil onboarding)
+    └── (React - Manzil onboarding)
 ```
 
 Add a `.gitignore` file:

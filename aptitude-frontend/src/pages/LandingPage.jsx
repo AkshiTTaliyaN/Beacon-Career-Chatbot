@@ -21,11 +21,11 @@ const FAQS = [
   { q: "Is this test free?", a: "Yes, completely free. No login, no payment, no hidden charges. You can take the test as many times as you want." },
   { q: "What is a Holland Code?", a: "A Holland Code is a 3-letter combination (like IAS or RCE) that represents your top 3 personality types from the RIASEC model. It is used worldwide to match people to careers that genuinely suit them." },
   { q: "How accurate is the RIASEC test?", a: "The RIASEC model was developed by psychologist John Holland and has been validated across decades of research. It is one of the most widely used career assessment frameworks in the world, used by universities, counsellors, and career platforms globally." },
-  { q: "What if I don't agree with my result?", a: "Results reflect your answers at this moment. If something feels off, retake the test and answer as honestly as possible. Avoid choosing what you think sounds good — choose what genuinely feels like you. Your environment, mood, and recent experiences can also influence answers." },
-  { q: "Can Class 10 students take this test?", a: "Absolutely. This test is designed for students in Class 10, 11, and 12 who are exploring streams and career options. Earlier is often better — it gives you more time to plan." },
-  { q: "Will this tell me exactly what to do with my life?", a: "No — and no test can. This report gives you a strong, evidence-based starting point. Use it as a guide to explore, not a final verdict. The best career decisions come from a mix of self-awareness, real-world experience, and conversations with mentors." },
+  { q: "What if I don't agree with my result?", a: "Results reflect your answers at this moment. If something feels off, retake the test and answer as honestly as possible. Avoid choosing what you think sounds good, choose what genuinely feels like you. Your environment, mood, and recent experiences can also influence answers." },
+  { q: "Can Class 10 students take this test?", a: "Absolutely. This test is designed for students in Class 10, 11, and 12 who are exploring streams and career options. Earlier is often better, it gives you more time to plan." },
+  { q: "Will this tell me exactly what to do with my life?", a: "No, and no test can. This report gives you a strong, evidence-based starting point. Use it as a guide to explore, not a final verdict. The best career decisions come from a mix of self-awareness, real-world experience, and conversations with mentors." },
   { q: "Is my data stored anywhere?", a: "Your name and details only appear on your personalised report. We do not store, share, or sell your information. The test runs entirely in your browser and on our server during the session." },
-  { q: "Can I share the report with my parents?", a: "Yes — and we encourage it. The report includes a section specifically written for parents to help them understand your personality type and how to support your career direction." },
+  { q: "Can I share the report with my parents?", a: "Yes, and we encourage it. The report includes a section specifically written for parents to help them understand your personality type and how to support your career direction." },
 ];
 
 export default function LandingPage({ onStart }) {
@@ -36,7 +36,7 @@ export default function LandingPage({ onStart }) {
         subtitle={<BilingualText text="Career Assessment" />}
       />
 
-      {/* HERO — Manzil-style */}
+      {/* HERO - Manzil-style */}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -55,12 +55,12 @@ export default function LandingPage({ onStart }) {
           ctaText={<BilingualText text="Take the Test →" />}
         >
           <p className="hero-sub-light">
-            <BilingualText text="Built on the same psychometric model used by universities, career counsellors, and platforms worldwide — including the US Department of Labor's O*NET system." />
+            <BilingualText text="Built on the same psychometric model used by universities, career counsellors, and platforms worldwide, including the US Department of Labor's O*NET system." />
           </p>
         </HeroBanner>
       </motion.div>
 
-      {/* WHAT IS RIASEC — wider, left aligned */}
+      {/* WHAT IS RIASEC, wider, left aligned */}
       <section className="content-section">
         <div className="section-wide">
           <div className="section-header-row">
@@ -70,13 +70,13 @@ export default function LandingPage({ onStart }) {
           <div className="riasec-explanation">
             <div className="riasec-text">
               <p className="section-body">
-                <BilingualText text="The RIASEC model — developed by psychologist John L. Holland — is one of the most widely researched and used career assessment frameworks in the world. It classifies personalities into six types: Realistic, Investigative, Artistic, Social, Enterprising, and Conventional." />
+                <BilingualText text="The RIASEC model, developed by psychologist John L. Holland, is one of the most widely researched and used career assessment frameworks in the world. It classifies personalities into six types: Realistic, Investigative, Artistic, Social, Enterprising, and Conventional." />
               </p>
               <p className="section-body">
-                <BilingualText text="This model is used by universities, career counsellors, and platforms across the globe — including the US Department of Labor's O*NET system — to help people identify careers that align with who they genuinely are. Your combination of these six types produces a Holland Code (e.g. IAS, RCE) which maps directly to careers, streams, and study pathways." />
+                <BilingualText text="This model is used by universities, career counsellors, and platforms across the globe, including the US Department of Labor's O*NET system, to help people identify careers that align with who they genuinely are. Your combination of these six types produces a Holland Code (e.g. IAS, RCE) which maps directly to careers, streams, and study pathways." />
               </p>
               <p className="section-body">
-                <BilingualText text="Unlike generic personality tests, RIASEC is designed specifically for career fit. It does not ask vague philosophical questions — it asks about activities, preferences, and work styles that directly correlate with real-world professions and industries." />
+                <BilingualText text="Unlike generic personality tests, RIASEC is designed specifically for career fit. It does not ask vague philosophical questions, it asks about activities, preferences, and work styles that directly correlate with real-world professions and industries." />
               </p>
             </div>
             <div className="riasec-types-grid">
@@ -120,7 +120,7 @@ export default function LandingPage({ onStart }) {
             <div className="step-card">
               <div className="step-num">1</div>
               <h3><BilingualText text="Take the test" /></h3>
-              <p><BilingualText text="Answer 60 statements honestly on a 1–5 scale (Strongly Disagree to Strongly Agree). Takes about 10–15 minutes. There are no right or wrong answers — only honest ones." /></p>
+              <p><BilingualText text="Answer 60 statements honestly on a 1–5 scale (Strongly Disagree to Strongly Agree). Takes about 10–15 minutes. There are no right or wrong answers, only honest ones." /></p>
               <p className="step-extra"><BilingualText text="Pick what genuinely reflects you, not what sounds impressive on paper." /></p>
             </div>
             <div className="step-card">
@@ -150,11 +150,11 @@ export default function LandingPage({ onStart }) {
             {[
               { icon: Brain, title: "Personality breakdown", desc: "Your primary and secondary personality types explained in detail with traits, strengths, and natural work style. Understand who you are at your core." },
               { icon: BarChart3, title: "RIASEC score chart", desc: "A clear visual breakdown of your scores across all 6 personality dimensions with exact percentages, so you can see where each type ranks." },
-              { icon: Briefcase, title: "Career matches across sectors", desc: "Top careers from technology, healthcare, business, creative and more — with Indian salary ranges, international comparisons, and required streams." },
+              { icon: Briefcase, title: "Career matches across sectors", desc: "Top careers from technology, healthcare, business, creative and more, with Indian salary ranges, international comparisons, and required streams." },
               { icon: FileText, title: "Entrance exams & admissions", desc: "The key exams you should be targeting based on your stream and career direction, along with admission timelines and application guidance." },
-              { icon: Wrench, title: "Personalised skill roadmap", desc: "A timeline of skills to build during Class 11, Class 12, and after — with specific resources and starting points for each skill." },
+              { icon: Wrench, title: "Personalised skill roadmap", desc: "A timeline of skills to build during Class 11, Class 12, and after, with specific resources and starting points for each skill." },
               { icon: Users, title: "Section for your parents", desc: "A clear, jargon-free explanation written for parents to help them understand your personality type and how to best support your career direction." },
-              { icon: MapPin, title: "Ideal work environment", desc: "What kind of workplaces, teams, and roles will help you thrive — and which environments will drain you over time." },
+              { icon: MapPin, title: "Ideal work environment", desc: "What kind of workplaces, teams, and roles will help you thrive, and which environments will drain you over time." },
               { icon: Lightbulb, title: "Strengths & growth areas", desc: "Your natural strengths to leverage and potential blind spots to develop, based on years of research into personality types." },
               { icon: Download, title: "Downloadable PDF report", desc: "A professionally formatted report you can save, print, and share with parents, teachers, or counsellors any time you need." },
             ].map((item, i) => {
@@ -196,7 +196,7 @@ export default function LandingPage({ onStart }) {
 
       <footer className="landing-footer">
         <div className="section-wide">
-          <p><BilingualText text="Career Guidance Portal © 2026 — A psychometric career guidance platform." /></p>
+          <p><BilingualText text="Career Guidance Portal © 2026 - A psychometric career guidance platform." /></p>
         </div>
       </footer>
     </div>

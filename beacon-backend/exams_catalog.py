@@ -13,7 +13,7 @@ EXAMS_CATALOG = [
         "conducting_body": "NTA (National Testing Agency)",
         "eligibility_streams": ["pcm", "pcmb"],
         "min_class": 12,
-        "leads_to": "B.Tech / B.E. admissions to NITs, IIITs, and GFTIs — gateway to engineering and technology careers",
+        "leads_to": "B.Tech / B.E. admissions to NITs, IIITs, and GFTIs, gateway to engineering and technology careers",
         "timeline": "January & April sessions each year",
         "prep_focus": "Physics, Chemistry, and Mathematics at Class 11-12 level; emphasis on problem-solving speed and conceptual clarity",
         "related_careers": [
@@ -34,7 +34,7 @@ EXAMS_CATALOG = [
         "conducting_body": "IITs (Indian Institutes of Technology)",
         "eligibility_streams": ["pcm", "pcmb"],
         "min_class": 12,
-        "leads_to": "B.Tech / B.S. / Dual Degree admissions to the 23 IITs — the most prestigious engineering institutions in India",
+        "leads_to": "B.Tech / B.S. / Dual Degree admissions to the 23 IITs, the most prestigious engineering institutions in India",
         "timeline": "May / June (only for top 2,50,000 JEE Main qualifiers)",
         "prep_focus": "Deep conceptual understanding of Physics, Chemistry, and Mathematics; multi-concept problems and analytical reasoning",
         "related_careers": [
@@ -92,7 +92,7 @@ EXAMS_CATALOG = [
         "conducting_body": "NID (National Institute of Design)",
         "eligibility_streams": ["pcm", "pcb", "pcmb", "comm", "arts", "any"],
         "min_class": 12,
-        "leads_to": "B.Des. programmes at NID Ahmedabad and its campuses — leading to careers in industrial, communication, and textile design",
+        "leads_to": "B.Des. programmes at NID Ahmedabad and its campuses, leading to careers in industrial, communication, and textile design",
         "timeline": "Prelims in December, Mains / Studio Test in April",
         "prep_focus": "Visual aptitude, sketching, design thinking, observation skills, creativity, and general awareness of design",
         "related_careers": [
@@ -109,7 +109,7 @@ EXAMS_CATALOG = [
         "conducting_body": "UPSC (Union Public Service Commission)",
         "eligibility_streams": ["pcm", "pcb", "pcmb", "comm", "arts", "any"],
         "min_class": 21,  # requires a bachelor's degree (effectively post-graduation of class 12 + 3)
-        "leads_to": "IAS, IPS, IFS, and other All India / Central Services — top administrative positions in Indian government",
+        "leads_to": "IAS, IPS, IFS, and other All India / Central Services, top administrative positions in Indian government",
         "timeline": "Prelims in May, Mains in September, Interview in February-March (annual cycle)",
         "prep_focus": "General studies (history, geography, polity, economy, science), essay writing, optional subject, current affairs, and ethics",
         "related_careers": [
@@ -126,7 +126,7 @@ EXAMS_CATALOG = [
         "conducting_body": "UPSC (Union Public Service Commission)",
         "eligibility_streams": ["pcm", "pcmb", "any"],
         "min_class": 12,
-        "leads_to": "Training at the National Defence Academy — commissioning into the Indian Army, Navy, or Air Force",
+        "leads_to": "Training at the National Defence Academy, commissioning into the Indian Army, Navy, or Air Force",
         "timeline": "April & September (two attempts per year); Navy and Air Force wings require PCM",
         "prep_focus": "Mathematics, general ability (English, GK, physics, chemistry, geography, history), and physical fitness",
         "related_careers": [
@@ -143,7 +143,7 @@ EXAMS_CATALOG = [
         "conducting_body": "IIM Indore / IIM Rohtak",
         "eligibility_streams": ["pcm", "pcb", "pcmb", "comm", "arts", "any"],
         "min_class": 12,
-        "leads_to": "5-year Integrated Programme in Management (IPM) at IIMs — direct path to an MBA without a separate entrance after graduation",
+        "leads_to": "5-year Integrated Programme in Management (IPM) at IIMs, direct path to an MBA without a separate entrance after graduation",
         "timeline": "May / June each year",
         "prep_focus": "Quantitative aptitude, verbal ability, and logical reasoning; strong fundamentals in mathematics and English",
         "related_careers": [
@@ -178,10 +178,10 @@ EXAMS_CATALOG = [
 
     {
         "name": "NIFT Entrance",
-        "conducting_body": "NTA (for NIFT — National Institute of Fashion Technology)",
+        "conducting_body": "NTA (for NIFT - National Institute of Fashion Technology)",
         "eligibility_streams": ["pcm", "pcb", "pcmb", "comm", "arts", "any"],
         "min_class": 12,
-        "leads_to": "B.Des. / B.FTech programmes at NIFT campuses across India — careers in fashion design, textile design, and fashion management",
+        "leads_to": "B.Des. / B.FTech programmes at NIFT campuses across India, careers in fashion design, textile design, and fashion management",
         "timeline": "February each year",
         "prep_focus": "Creative ability test (CAT), general ability test (GAT) covering quantitative ability, English, GK, and design awareness",
         "related_careers": [
@@ -199,7 +199,7 @@ EXAMS_CATALOG = [
         "conducting_body": "ICAI (Institute of Chartered Accountants of India)",
         "eligibility_streams": ["comm", "pcm", "pcmb", "arts", "any"],
         "min_class": 12,
-        "leads_to": "Chartered Accountancy qualification (CA Foundation → CA Intermediate → CA Final) — the gold standard for accounting and audit professionals",
+        "leads_to": "Chartered Accountancy qualification (CA Foundation → CA Intermediate → CA Final), the gold standard for accounting and audit professionals",
         "timeline": "January, May, and September sessions each year",
         "prep_focus": "Accounting principles, business laws, quantitative aptitude, business economics, and business correspondence",
         "related_careers": [

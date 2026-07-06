@@ -86,7 +86,7 @@ bearer_scheme = HTTPBearer()
 def hash_email(email: str) -> str:
     """
     SHA-256 hash of lowercased email.
-    Stored in DB for lookups — never the plain email.
+    Stored in DB for lookups, never the plain email.
     """
     return hashlib.sha256(email.lower().strip().encode()).hexdigest()
 
@@ -152,7 +152,7 @@ def get_current_student_id(
     credentials: HTTPAuthorizationCredentials = Depends(bearer_scheme)
 ) -> str:
     """
-    FastAPI dependency — extracts and validates JWT from
+    FastAPI dependency, extracts and validates JWT from
     the Authorization: Bearer <token> header.
     """
     return decode_access_token(credentials.credentials)
@@ -164,7 +164,7 @@ def get_current_student_id_optional(
     credentials: Optional[HTTPAuthorizationCredentials] = Depends(HTTPBearer(auto_error=False))
 ) -> Optional[str]:
     """
-    FastAPI dependency — extracts and validates JWT from
+    FastAPI dependency, extracts and validates JWT from
     the Authorization: Bearer <token> header, returning None if
     missing or invalid.
     """
@@ -173,4 +173,4 @@ def get_current_student_id_optional(
     try:
         return decode_access_token(credentials.credentials)
     except Exception:
-        return None
+        return None

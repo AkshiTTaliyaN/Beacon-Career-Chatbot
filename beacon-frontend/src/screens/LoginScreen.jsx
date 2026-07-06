@@ -37,7 +37,7 @@ export default function LoginScreen({ onSuccess, onBack }) {
     <Layout
       step={0}
       totalSteps={9}
-      title="Hey — let's find your path"
+      title="Hey, let's find your path"
       subtitle="Free career guidance built around who you actually are."
     >
       <form onSubmit={handleSubmit} className="form onboard-form">

@@ -1,4 +1,4 @@
-// hobbies.js — grouped hobby options for Section 2 (interest inventory)
+// hobbies.js, grouped hobby options for Section 2 (interest inventory)
 // Rendered as a multi-select checkbox screen.
 // Values must exactly match the keys in HOBBY_MAP in career_mapping.py.
 
@@ -81,5 +81,5 @@ export const HOBBY_CATEGORIES = [
   },
 ];
 
-// Flat list of all hobby strings — useful for validation
+// Flat list of all hobby strings, useful for validation
 export const ALL_HOBBIES = HOBBY_CATEGORIES.flatMap((cat) => cat.hobbies);
