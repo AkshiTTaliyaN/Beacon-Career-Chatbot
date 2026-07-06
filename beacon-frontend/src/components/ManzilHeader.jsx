@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import EdCilTopLogo from "../assets/edcil.jpeg";
 import ManzilLogo from "../assets/manzil-logo.png";
+import ProfileDropdown from "./ProfileDropdown";
 import "./ManzilHeader.css";
 
 const DEFAULT_NAV_ITEMS = [
@@ -65,9 +66,7 @@ export default function ManzilHeader({
                 {item.label}
               </button>
             ))}
-            <div className="manzil-header-avatar" title={userName || "Profile"}>
-              {userInitial}
-            </div>
+            <ProfileDropdown name={userName} />
           </nav>
         )}
         {right}

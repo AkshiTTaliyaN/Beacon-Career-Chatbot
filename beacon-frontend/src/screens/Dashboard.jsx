@@ -9,6 +9,7 @@ import EdCilLogo from '../assets/edcil.jpeg'
 import '../styles/futuristic.css'
 import { APTITUDE_URL } from '../config.js'
 import ManzilHeader from '../components/ManzilHeader'
+import ProfileDropdown from '../components/ProfileDropdown'
 import {
   RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
   BarChart, Bar, XAxis, YAxis, Tooltip, Legend, Cell,
@@ -185,7 +186,7 @@ export default function Dashboard({ userName }) {
   const [freshTest] = useState(urlParams.get('scores_written') === '1')
   const hasProfileToken = Boolean(localStorage.getItem('beacon_token'))
 
-  const name = userName || window.localStorage.getItem('userName') || ''
+  const [name, setName] = useState(userName || window.localStorage.getItem('userName') || '')
   const isReturning = window.localStorage.getItem('beaconReturning') === '1'
   const isDark = false;
 
@@ -219,7 +220,16 @@ export default function Dashboard({ userName }) {
     const token = localStorage.getItem('beacon_token')
     if (token) {
       getMyProfile()
-        .then(data => setProfile(data))
+        .then(data => {
+          setProfile(data)
+          // Backend /auth/login does not return the user's name, so a returning
+          // user on a fresh device would otherwise see a blank greeting. Backfill
+          // the name from their saved profile.
+          if (data?.name) {
+            localStorage.setItem('userName', data.name)
+            setName(data.name)
+          }
+        })
         .catch(() => setProfileError('Could not load your profile analytics. Please refresh and try again.'))
         .finally(() => setProfileLoading(false))
     }
@@ -292,13 +302,7 @@ export default function Dashboard({ userName }) {
               <button type="button" className="manzil-header-link" onClick={() => { window.history.pushState({}, '', '/report'); window.dispatchEvent(new PopStateEvent('popstate')) }}>My Report</button>
             )}
 
-            <div style={{
-              width: 36, height: 36, borderRadius: 999,
-              background: '#eaf1fb',
-              border: '1px solid #dce4f5',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              color: '#2c5492', fontWeight: 700, fontSize: 14,
-            }} title={name || 'Profile'}>{(name && name[0]) || 'P'}</div>
+            <ProfileDropdown name={name} />
           </nav>
         )}
       />

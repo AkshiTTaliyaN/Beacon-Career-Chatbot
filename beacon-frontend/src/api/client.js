@@ -43,28 +43,8 @@ export async function guestLogin() {
   }
 }
 
-/** Step 1 — send OTP to email */
-export async function requestOtp(email) {
-  if (DEMO_MODE) {
-    console.info("📧 Demo mode: OTP not sent. On the next screen, enter any 6 digits.");
-    return { message: `Demo: proceed with any 6-digit code for ${email}` };
-  }
-
-  const res = await fetch(`${API}/auth/request-otp`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email }),
-  });
-  if (!res.ok) throw new Error(await parseError(res));
-  return res.json();
-}
-
-/** Step 2 — verify OTP and receive JWT */
-export async function verifyOtp(email, otp) {
-  if (!/^\d{6}$/.test(otp)) {
-    throw new Error("OTP must be exactly 6 digits");
-  }
-
+/** Login with email address (passwordless) */
+export async function loginWithEmail(email) {
   if (DEMO_MODE) {
     const token = `demo-token-${Date.now()}`;
     localStorage.setItem(STORAGE_KEYS.token, token);
@@ -78,11 +58,17 @@ export async function verifyOtp(email, otp) {
     };
   }
 
-  /* ─── PRODUCTION (active when DEMO_MODE is false) ─── */
-  const res = await fetch(`${API}/auth/verify-otp`, {
+  /* production mode */
+  const token = getToken();
+  const headers = { "Content-Type": "application/json" };
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
+  const res = await fetch(`${API}/auth/login`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, otp }),
+    headers,
+    body: JSON.stringify({ email }),
   });
   if (!res.ok) throw new Error(await parseError(res));
   const data = await res.json();

@@ -4,8 +4,10 @@ import { INITIAL_FORM } from "./constants/formOptions";
 import { DEMO_MODE } from "./config";
 import { getMyProfile, guestLogin } from "./api/client";
 
+// Import LoginScreen for passwordless email authentication
+import LoginScreen from "./screens/LoginScreen";
+
 // ─── AUTH FROZEN — re-enable when mail IDs are available ──────────────────────
-// import LoginScreen from "./screens/LoginScreen";
 // import OTPScreen from "./screens/OTPScreen";
 // ──────────────────────────────────────────────────────────────────────────────
 
@@ -26,8 +28,7 @@ import ExamExplorer from "./screens/ExamExplorer";
 import ExpertSystemScreen from "./screens/ExpertSystemScreen";
 
 const STEP = {
-  // LOGIN: "login",   // FROZEN
-  // OTP: "otp",       // FROZEN
+  LOGIN: "login",
   HOME: "home",
   BASIC: "basic",
   SUBJECT_RATINGS: "subject_ratings",
@@ -91,23 +92,16 @@ export default function App() {
 
   // ─── Step-based onboarding flow ───
 
-  // ─── AUTH FROZEN ──────────────────────────────────────────────────────────
-  // function handleLoginSuccess(addr) {
-  //   setEmail(addr);
-  //   setStep(STEP.OTP);
-  // }
-
-  // function handleOtpSuccess(data) {
-  //   if (data.profile_complete) {
-  //     if (data.name) localStorage.setItem("userName", data.name);
-  //     localStorage.setItem("beaconReturning", "1");
-  //     setStep(STEP.SUCCESS);
-  //   } else {
-  //     localStorage.removeItem("beaconReturning");
-  //     setStep(STEP.BASIC);
-  //   }
-  // }
-  // ──────────────────────────────────────────────────────────────────────────
+  function handleLoginSuccess(data) {
+    if (data.profile_complete) {
+      if (data.name) localStorage.setItem("userName", data.name);
+      localStorage.setItem("beaconReturning", "1");
+      setStep(STEP.SUCCESS);
+    } else {
+      localStorage.removeItem("beaconReturning");
+      setStep(STEP.BASIC);
+    }
+  }
 
   function handleProfileComplete() {
     // Store the user's name for the dashboard greeting
@@ -138,18 +132,13 @@ export default function App() {
   }
 
   switch (step) {
-    // ─── AUTH FROZEN ────────────────────────────────────────────────────────
-    // case STEP.LOGIN:
-    //   return <LoginScreen onSuccess={handleLoginSuccess} />;
-    // case STEP.OTP:
-    //   return (
-    //     <OTPScreen
-    //       email={email}
-    //       onSuccess={handleOtpSuccess}
-    //       onBack={() => setStep(STEP.LOGIN)}
-    //     />
-    //   );
-    // ────────────────────────────────────────────────────────────────────────
+    case STEP.LOGIN:
+      return (
+        <LoginScreen
+          onSuccess={handleLoginSuccess}
+          onBack={() => setStep(STEP.HOME)}
+        />
+      );
     case STEP.HOME:
       return (
         <HomePage
@@ -159,6 +148,7 @@ export default function App() {
             });
             setStep(STEP.BASIC);
           }}
+          onLogin={() => setStep(STEP.LOGIN)}
         />
       );
     case STEP.BASIC:

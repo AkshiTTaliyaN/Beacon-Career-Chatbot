@@ -2,19 +2,11 @@
 auth.py
 All authentication logic:
 - SHA-256 email hashing
-- OTP generation and storage in Redis
-- OTP email sending via SMTP
+- Fernet email encryption
 - JWT token creation and verification
-
 """
 import hashlib
-import random
-import string
-import smtplib
-import redis
 import os
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
 from dotenv import load_dotenv
@@ -29,14 +21,6 @@ load_dotenv()
 SECRET_KEY             = os.getenv("SECRET_KEY", "change-this-in-production")
 ALGORITHM              = os.getenv("ALGORITHM", "HS256")
 ACCESS_TOKEN_EXPIRE    = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 43200))
-OTP_EXPIRE_MINUTES     = int(os.getenv("OTP_EXPIRE_MINUTES", 10))
-REDIS_URL              = os.getenv("REDIS_URL", "redis://localhost:6379")
-SMTP_HOST              = os.getenv("SMTP_HOST", "smtp.gmail.com")
-SMTP_PORT              = int(os.getenv("SMTP_PORT", 587))
-SMTP_USER              = os.getenv("SMTP_USER", "")
-SMTP_PASSWORD          = os.getenv("SMTP_PASSWORD", "")
-FROM_EMAIL             = os.getenv("FROM_EMAIL", "")
-FROM_NAME              = os.getenv("FROM_NAME", "Manzil")
 
 _EMAIL_ENCRYPTION_KEY  = os.getenv("EMAIL_ENCRYPTION_KEY", "").strip()
 
@@ -94,17 +78,6 @@ def _load_fernet() -> Fernet:
 
 _fernet = _load_fernet()
 
-# ─── Redis — lazy connection (only connects when OTP functions are called) ─────
-# While auth is frozen, Redis is never touched. This lets the backend start
-# cleanly without a Redis server. Re-enable eager connection when auth is restored.
-_redis_client = None
-
-def _get_redis():
-    global _redis_client
-    if _redis_client is None:
-        _redis_client = redis.from_url(REDIS_URL, decode_responses=True)
-    return _redis_client
-
 bearer_scheme = HTTPBearer()
 
 
@@ -133,8 +106,8 @@ def encrypt_email(email: str) -> str:
 
 def decrypt_email(encrypted: str) -> str:
     """
-    Reverse of encrypt_email.
-    Used when we need to send an OTP to a returning user's address.
+    Reverse of encrypt_email. Recovers the plaintext address from its
+    stored Fernet ciphertext.
     """
     try:
         return _fernet.decrypt(encrypted.encode()).decode()
@@ -143,84 +116,6 @@ def decrypt_email(encrypted: str) -> str:
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Could not decrypt email address. Encryption key may have changed or the token is invalid."
         )
-
-
-# ─── OTP ─────────────────────────────────────────────────────────────────────
-
-def generate_otp() -> str:
-    """Generate a 6-digit numeric OTP."""
-    return "".join(random.choices(string.digits, k=6))
-
-
-def store_otp(email: str, otp: str) -> None:
-    """
-    Store OTP in Redis with expiry.
-    Key: otp:<email_hash>   Value: OTP string
-    """
-    key = f"otp:{hash_email(email)}"
-    _get_redis().setex(key, OTP_EXPIRE_MINUTES * 60, otp)
-
-
-def verify_otp(email: str, otp: str) -> bool:
-    """
-    Check OTP from Redis. Deletes it after successful verification
-    so it cannot be reused.
-    """
-    key = f"otp:{hash_email(email)}"
-    stored = _get_redis().get(key)
-    if stored and stored == otp:
-        _get_redis().delete(key)
-        return True
-    return False
-
-
-# ─── Email sending ────────────────────────────────────────────────────────────
-
-def send_otp_email(email: str, otp: str) -> bool:
-    """
-    Send OTP via SMTP.
-    Returns True if sent successfully, False otherwise.
-    """
-    try:
-        msg = MIMEMultipart("alternative")
-        msg["Subject"] = f"{otp} — Your Manzil login code"
-        msg["From"]    = f"{FROM_NAME} <{FROM_EMAIL}>"
-        msg["To"]      = email
-
-        text = f"""
-Your Manzil login code is: {otp}
-
-This code expires in {OTP_EXPIRE_MINUTES} minutes.
-If you did not request this, ignore this email.
-
-— Manzil Team
-"""
-
-        html = f"""
-<html><body style="font-family:sans-serif;max-width:480px;margin:40px auto;color:#1A1714">
-  <p style="font-size:14px;color:#6B6560;margin-bottom:8px">Your login code</p>
-  <p style="font-size:48px;font-weight:700;letter-spacing:8px;color:#2D5BE3;margin:0">{otp}</p>
-  <p style="font-size:13px;color:#A09B96;margin-top:16px">
-    Expires in {OTP_EXPIRE_MINUTES} minutes.
-    If you did not request this, ignore this email.
-  </p>
-  <hr style="border:none;border-top:1px solid #E4E0DB;margin:24px 0"/>
-  <p style="font-size:12px;color:#A09B96">Manzil — Career Guidance Platform</p>
-</body></html>
-"""
-        msg.attach(MIMEText(text, "plain"))
-        msg.attach(MIMEText(html, "html"))
-
-        with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
-            server.starttls()
-            server.login(SMTP_USER, SMTP_PASSWORD)
-            server.sendmail(FROM_EMAIL, email, msg.as_string())
-
-        return True
-
-    except Exception as e:
-        print(f"[ERROR] Email send failed: {e}")
-        return False
 
 
 # ─── JWT ─────────────────────────────────────────────────────────────────────
@@ -261,3 +156,21 @@ def get_current_student_id(
     the Authorization: Bearer <token> header.
     """
     return decode_access_token(credentials.credentials)
+
+
+from typing import Optional
+
+def get_current_student_id_optional(
+    credentials: Optional[HTTPAuthorizationCredentials] = Depends(HTTPBearer(auto_error=False))
+) -> Optional[str]:
+    """
+    FastAPI dependency — extracts and validates JWT from
+    the Authorization: Bearer <token> header, returning None if
+    missing or invalid.
+    """
+    if not credentials:
+        return None
+    try:
+        return decode_access_token(credentials.credentials)
+    except Exception:
+        return None

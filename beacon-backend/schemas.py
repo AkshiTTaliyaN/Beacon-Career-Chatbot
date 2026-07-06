@@ -16,19 +16,8 @@ from models import (
 
 # ─── AUTH ─────────────────────────────────────────────────────────────────────
 
-class OTPRequest(BaseModel):
+class LoginRequest(BaseModel):
     email: EmailStr
-
-class OTPVerify(BaseModel):
-    email: EmailStr
-    otp: str
-
-    @field_validator("otp")
-    @classmethod
-    def otp_must_be_6_digits(cls, v):
-        if not v.isdigit() or len(v) != 6:
-            raise ValueError("OTP must be exactly 6 digits")
-        return v
 
 class TokenResponse(BaseModel):
     access_token: str

@@ -162,7 +162,7 @@ function StepCard({ num, title, desc, color, delay = 0 }) {
 }
 
 /* ── Main HomePage ─────────────────────────────────────────────────────────── */
-export default function HomePage({ onStart }) {
+export default function HomePage({ onStart, onLogin }) {
   const { language } = useLanguage()
   const features = [
     {
@@ -220,6 +220,19 @@ export default function HomePage({ onStart }) {
         right={(
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <LanguageToggle />
+            <button
+              onClick={onLogin}
+              className="ft-button-secondary"
+              style={{
+                fontSize: "0.85rem",
+                padding: "0.45rem 1.1rem",
+                borderRadius: "8px",
+                whiteSpace: "nowrap",
+                cursor: "pointer"
+              }}
+            >
+              <BilingualText text="Login" />
+            </button>
             <span style={{
               fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase',
               padding: '0.35rem 0.85rem', borderRadius: 999,

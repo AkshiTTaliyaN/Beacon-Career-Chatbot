@@ -87,6 +87,10 @@ aptitude-backend/data/career_avatar_cache/
 check_postgres.py
 check_setup.py
 
+# ─── Local test / scratch scripts (not part of the app) ───────────────────
+test_chatbot_flow.py
+test_mapping.py
+
 # ─── Misc ─────────────────────────────────────────────────────────────────
 *.bak
 *.tmp

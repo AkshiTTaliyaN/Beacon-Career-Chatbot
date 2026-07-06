@@ -19,15 +19,14 @@ from sqlalchemy.orm import Session
 from database import get_db
 from models import Student, StudentProfile, Recommendation
 from schemas import (
-    OTPRequest, OTPVerify, TokenResponse,
+    LoginRequest, TokenResponse,
     ProfileCreate, ProfileResponse, ProfileUpdate,
     RecommendationCreate, RecommendationResponse,
-    MessageResponse
 )
 from auth import (
-    hash_email, encrypt_email, decrypt_email,
-    generate_otp, store_otp, verify_otp, send_otp_email,
-    create_access_token, get_current_student_id
+    hash_email, encrypt_email,
+    create_access_token, get_current_student_id,
+    get_current_student_id_optional
 )
 from career_scorer import score_careers
 
@@ -477,65 +476,78 @@ def get_expert_careers(
     return sorted([c["title"] for c in CAREER_CATALOG])
 
 
-# ─── AUTH — FROZEN ────────────────────────────────────────────────────────────
-# Email/OTP login is disabled until mail IDs are available.
-# To re-enable: un-comment both route handlers below, make Redis eager in auth.py,
-# add a Redis service on Railway, set REDIS_URL env var, and restore App.jsx routing.
+# ─── AUTHENTICATION ───────────────────────────────────────────────────────────
+# Email-only passwordless login.
 
 auth_router = APIRouter(prefix="/auth", tags=["Authentication"])
 
 
-# @auth_router.post("/request-otp", response_model=MessageResponse)
-# def request_otp(body: OTPRequest, db: Session = Depends(get_db)):
-#     otp = generate_otp()
-#     store_otp(body.email, otp)
-#     sent = send_otp_email(body.email, otp)
-#     if not sent:
-#         print(f"\n[DEV MODE] OTP for {body.email}: {otp}\n")
-#     return {"message": f"OTP sent to {body.email}"}
+@auth_router.post("/login", response_model=TokenResponse)
+def email_login(
+    body: LoginRequest,
+    db: Session = Depends(get_db),
+    current_student_id: Optional[str] = Depends(get_current_student_id_optional)
+):
+    email_hash = hash_email(body.email)
+    
+    # Check if student with this email already exists
+    student = db.query(Student).filter(Student.email_hash == email_hash).first()
+    
+    is_new_user = False
+    profile_complete = False
+    
+    if student:
+        # Returning user: log in and check if profile is complete
+        profile = db.query(StudentProfile).filter(
+            StudentProfile.student_id == student.id
+        ).first()
+        profile_complete = profile.is_complete if profile else False
+    else:
+        # Email does not exist in DB yet.
+        # Check if they are currently a guest so we can upgrade/migrate their guest record
+        if current_student_id:
+            try:
+                guest_uuid = UUID(current_student_id)
+                guest_student = db.query(Student).filter(Student.id == guest_uuid).first()
+                if guest_student:
+                    # Update guest student to use this email
+                    guest_student.email_hash = email_hash
+                    guest_student.email_encrypted = encrypt_email(body.email)
+                    db.commit()
+                    student = guest_student
+                    
+                    # Check if guest has completed profile
+                    profile = db.query(StudentProfile).filter(
+                        StudentProfile.student_id == student.id
+                    ).first()
+                    profile_complete = profile.is_complete if profile else False
+            except Exception:
+                pass
+        
+        if not student:
+            # If not a guest or update failed, create new student
+            student = Student(
+                email_hash=email_hash,
+                email_encrypted=encrypt_email(body.email)
+            )
+            db.add(student)
+            db.commit()
+            db.refresh(student)
+            is_new_user = True
 
+    from datetime import datetime
+    student.last_login = datetime.utcnow()
+    db.commit()
 
-# @auth_router.post("/verify-otp", response_model=TokenResponse)
-# def verify_otp_route(body: OTPVerify, db: Session = Depends(get_db)):
-#     if not verify_otp(body.email, body.otp):
-#         raise HTTPException(
-#             status_code=status.HTTP_400_BAD_REQUEST,
-#             detail="Incorrect or expired OTP. Please request a new one."
-#         )
-#
-#     email_hash = hash_email(body.email)
-#     student = db.query(Student).filter(Student.email_hash == email_hash).first()
-#
-#     is_new_user = False
-#     profile_complete = False
-#
-#     if not student:
-#         student = Student(
-#             email_hash=email_hash,
-#             email_encrypted=encrypt_email(body.email)
-#         )
-#         db.add(student)
-#         db.commit()
-#         db.refresh(student)
-#         is_new_user = True
-#     else:
-#         profile = db.query(StudentProfile).filter(
-#             StudentProfile.student_id == student.id
-#         ).first()
-#         profile_complete = profile.is_complete if profile else False
-#
-#     from datetime import datetime
-#     student.last_login = datetime.utcnow()
-#     db.commit()
-#
-#     token = create_access_token(str(student.id))
-#     return {
-#         "access_token": token,
-#         "token_type": "bearer",
-#         "student_id": str(student.id),
-#         "is_new_user": is_new_user,
-#         "profile_complete": profile_complete,
-#     }
+    token = create_access_token(str(student.id))
+    return {
+        "access_token": token,
+        "token_type": "bearer",
+        "student_id": str(student.id),
+        "is_new_user": is_new_user,
+        "profile_complete": profile_complete,
+    }
+
 
 
 # ─── GUEST LOGIN (no email required) ─────────────────────────────────────────
@@ -600,6 +612,8 @@ def save_profile(
         )
         db.add(profile)
 
+    # Invalidate recommendations cache to force re-evaluation next time
+    db.query(Recommendation).filter(Recommendation.student_id == student_uuid).delete()
     db.commit()
     db.refresh(profile)
     return _profile_to_response(profile, student_id)
@@ -640,6 +654,8 @@ def update_profile(
     for field, value in body.model_dump(exclude_unset=True).items():
         setattr(profile, field, value)
 
+    # Invalidate recommendations cache to force re-evaluation next time
+    db.query(Recommendation).filter(Recommendation.student_id == student_uuid).delete()
     db.commit()
     db.refresh(profile)
     return _profile_to_response(profile, student_id)
@@ -656,7 +672,12 @@ def get_career_catalog():
     from exams_catalog import EXAMS_CATALOG
     
     catalog_with_exams = []
+    seen_titles = set()
     for career in CAREER_CATALOG:
+        # The catalog contains a few duplicate titles — show each career once
+        if career["title"] in seen_titles:
+            continue
+        seen_titles.add(career["title"])
         # Find relevant exams
         exams = [exam["name"] for exam in EXAMS_CATALOG if career["title"] in exam.get("related_careers", [])]
         exam_str = ", ".join(exams) if exams else "College-specific or merit-based"
@@ -720,7 +741,9 @@ def get_smart_recommendations(
 
     if cached and cached.full_output:
         fo = cached.full_output
-        if fo.get("type") == "smart_v1" and len(fo.get("recommendations", [])) == 10:
+        # "smart_v2": bumped after scorer fixes (aptitude pct key, english subject
+        # bridge, dedupe, keyword matching) so stale v1 caches recompute.
+        if fo.get("type") == "smart_v2" and len(fo.get("recommendations", [])) == 10:
             generated_at_str = fo.get("smart_generated_at", "")
             if generated_at_str:
                 generated_at = datetime.datetime.fromisoformat(generated_at_str)
@@ -734,7 +757,7 @@ def get_smart_recommendations(
     # 5 — build response payload
     now_iso = datetime.datetime.utcnow().isoformat()
     payload = {
-        "type": "smart_v1",
+        "type": "smart_v2",
         "recommendations": recommendations,
         "generated_at": now_iso,
         "smart_generated_at": now_iso,

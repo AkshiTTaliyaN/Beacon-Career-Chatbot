@@ -4,6 +4,7 @@ Seven-component unified career scoring engine.
 Weights: RIASEC 25% | Passion 15% | Aptitude 15% | Subject 20% | WorkStyle 15% | Priorities 5% | Feasibility 5%
 """
 
+import re
 from typing import Optional, List, Dict
 from career_catalog import CAREER_CATALOG
 
@@ -74,91 +75,107 @@ HOBBY_MAP = {
     "Building models":          {"riasec": ["R", "I"], "domains": ["engineering", "architecture", "product_design"]},
 }
 
+def _has_keyword(title_lower: str, keywords: list) -> bool:
+    """
+    Keyword match with word boundaries for short tokens.
+    Plain substring matching made "ca" hit "Medi_ca_l" and "ev" hit "D_ev_eloper",
+    assigning wrong domains to ~27 careers. Tokens of ≤3 chars must now match
+    as whole words; longer phrases keep substring behaviour.
+    """
+    for k in keywords:
+        if len(k) <= 3:
+            if re.search(r"\b" + re.escape(k) + r"\b", title_lower):
+                return True
+        elif k in title_lower:
+            return True
+    return False
+
+
 def get_career_domains(title: str) -> list[str]:
     title_lower = title.lower()
     domains = []
     
     # Map keywords to domains
-    if any(k in title_lower for k in ["software", "developer", "cloud", "web3", "ethical hacker", "prompt", "ar/vr", "game ai", "blockchain"]):
+    if _has_keyword(title_lower, ["software", "developer", "cloud", "web3", "ethical hacker", "prompt", "ar/vr", "game ai", "blockchain"]):
         domains.append("software_engineering")
-    if any(k in title_lower for k in ["data", "analyst", "science", "bioinformatics", "risk modeller"]):
+    if _has_keyword(title_lower, ["data", "analyst", "science", "bioinformatics", "risk modeller"]):
         domains.append("data_science")
-    if any(k in title_lower for k in ["scientist", "research", "biologist", "chemist", "forensics", "volcanologist"]):
+    if _has_keyword(title_lower, ["scientist", "research", "biologist", "chemist", "forensics", "volcanologist"]):
         domains.append("research")
-    if any(k in title_lower for k in ["engineer", "technician", "integrator", "installer", "vlsi"]):
+    if _has_keyword(title_lower, ["engineer", "technician", "integrator", "installer", "vlsi"]):
         domains.append("engineering")
-    if any(k in title_lower for k in ["designer", "illustrator", "artist", "compositor", "animator", "visualizer", "restorer", "customizer", "builder", "modder", "architect"]):
+    if _has_keyword(title_lower, ["designer", "illustrator", "artist", "compositor", "animator", "visualizer", "restorer", "customizer", "builder", "modder", "architect"]):
         domains.append("design")
-    if any(k in title_lower for k in ["animator", "vfx", "motion graphics", "special effects", "sfx"]):
+    if _has_keyword(title_lower, ["animator", "vfx", "motion graphics", "special effects", "sfx"]):
         domains.append("animation")
-    if any(k in title_lower for k in ["architect", "urban planner", "visualizer", "sustainable building"]):
+    if _has_keyword(title_lower, ["architect", "urban planner", "visualizer", "sustainable building"]):
         domains.append("architecture")
-    if any(k in title_lower for k in ["interior designer", "furniture"]):
+    if _has_keyword(title_lower, ["interior designer", "furniture"]):
         domains.append("interior_design")
-    if any(k in title_lower for k in ["product manager", "product designer", "industrial designer", "toy designer", "footwear designer", "sneaker"]):
+    if _has_keyword(title_lower, ["product manager", "product designer", "industrial designer", "toy designer", "footwear designer", "sneaker"]):
         domains.append("product_design")
-    if any(k in title_lower for k in ["fashion", "textile", "stylist", "footwear"]):
+    if _has_keyword(title_lower, ["fashion", "textile", "stylist", "footwear"]):
         domains.append("fashion")
-    if any(k in title_lower for k in ["journalist", "anchor", "vlogger", "writer", "editor", "copywriter", "novelist", "public relations", "pr", "relations"]):
+    if _has_keyword(title_lower, ["journalist", "anchor", "vlogger", "writer", "editor", "copywriter", "novelist", "public relations", "pr", "relations"]):
         domains.append("media")
         domains.append("journalism")
-    if any(k in title_lower for k in ["writer", "editor", "copywriter", "novelist", "author"]):
+    if _has_keyword(title_lower, ["writer", "editor", "copywriter", "novelist", "author"]):
         domains.append("literature")
         domains.append("content")
-    if any(k in title_lower for k in ["lawyer", "legal", "judge", "compliance", "auditor", "safety auditor", "privacy"]):
+    if _has_keyword(title_lower, ["lawyer", "legal", "judge", "compliance", "auditor", "safety auditor", "privacy"]):
         domains.append("law")
-    if any(k in title_lower for k in ["dj", "music", "sound", "audio", "dubbing", "voice", "actor", "comedian", "choreographer", "vfx", "compositor", "film", "director"]):
+    if _has_keyword(title_lower, ["dj", "music", "sound", "audio", "dubbing", "voice", "actor", "comedian", "choreographer", "vfx", "compositor", "film", "director"]):
         domains.append("performing_arts")
-    if any(k in title_lower for k in ["music", "sound", "audio"]):
+    if _has_keyword(title_lower, ["music", "sound", "audio"]):
         domains.append("music_production")
-    if any(k in title_lower for k in ["event", "wedding", "coordinator", "producer", "tournament director", "curator"]):
+    if _has_keyword(title_lower, ["event", "wedding", "coordinator", "producer", "tournament director", "curator"]):
         domains.append("event_management")
-    if any(k in title_lower for k in ["sports", "athlete", "gamer", "coach", "fitness", "calisthenics"]):
+    if _has_keyword(title_lower, ["sports", "athlete", "gamer", "coach", "fitness", "calisthenics"]):
         domains.append("sports")
-    if any(k in title_lower for k in ["army", "police", "officer", "ips", "defence", "pilot", "forensics"]):
+    if _has_keyword(title_lower, ["army", "police", "officer", "ips", "defence", "pilot", "forensics"]):
         domains.append("defence")
-    if any(k in title_lower for k in ["physiotherapist", "recreation therapist", "sports medicine", "rehabilitation", "therapist", "counsellor", "psychologist", "coach"]):
+    if _has_keyword(title_lower, ["physiotherapist", "recreation therapist", "sports medicine", "rehabilitation", "therapist", "counsellor", "psychologist", "coach"]):
         domains.append("physiotherapy")
-    if any(k in title_lower for k in ["doctor", "surgeon", "mbbs", "dentist", "nurse", "healthcare", "medical", "pharmacist", "therapist", "nutritionist", "hospital"]):
+    if _has_keyword(title_lower, ["doctor", "surgeon", "mbbs", "dentist", "nurse", "healthcare", "medical", "pharmacist", "therapist", "nutritionist", "hospital"]):
         domains.append("healthcare")
         domains.append("medicine")
-    if any(k in title_lower for k in ["geography", "town planner", "urban", "landscape", "gis"]):
+    if _has_keyword(title_lower, ["geography", "town planner", "urban", "landscape", "gis"]):
         domains.append("geography")
-    if any(k in title_lower for k in ["environmental", "wildlife", "climate", "sustainability", "solar", "renewable", "ecologist", "biologist"]):
+    if _has_keyword(title_lower, ["environmental", "wildlife", "climate", "sustainability", "solar", "renewable", "ecologist", "biologist"]):
         domains.append("environmental_science")
-    if any(k in title_lower for k in ["professor", "lecturer", "academic", "research scholar", "teacher", "educator", "education"]):
+    if _has_keyword(title_lower, ["professor", "lecturer", "academic", "research scholar", "teacher", "educator", "education"]):
         domains.append("academia")
         domains.append("education")
-    if any(k in title_lower for k in ["ias", "ips", "civil services", "public policy", "government", "diplomat", "customs"]):
+    if _has_keyword(title_lower, ["ias", "ips", "civil services", "public policy", "government", "diplomat", "customs"]):
         domains.append("civil_services")
-    if any(k in title_lower for k in ["political", "policy", "relations", "sociologist", "advocate"]):
+    if _has_keyword(title_lower, ["political", "policy", "relations", "sociologist", "advocate"]):
         domains.append("politics")
-    if any(k in title_lower for k in ["biotechnology", "genetic", "bioinformatics", "bio"]):
+    if _has_keyword(title_lower, ["biotechnology", "genetic", "bioinformatics", "bio"]):
         domains.append("biotechnology")
-    if any(k in title_lower for k in ["linguist", "translator", "interpreter", "language"]):
+    if _has_keyword(title_lower, ["linguist", "translator", "interpreter", "language"]):
         domains.append("linguistics")
-    if any(k in title_lower for k in ["ifs", "international relations", "diplomat"]):
+    if _has_keyword(title_lower, ["ifs", "international relations", "diplomat"]):
         domains.append("foreign_services")
-    if any(k in title_lower for k in ["social worker", "ngo", "community", "volunteer", "youth", "counsellor", "therapist"]):
+    if _has_keyword(title_lower, ["social worker", "ngo", "community", "volunteer", "youth", "counsellor", "therapist"]):
         domains.append("social_work")
         domains.append("ngo")
-    if any(k in title_lower for k in ["hr", "talent", "recruitment", "acquisition", "personnel"]):
+    if _has_keyword(title_lower, ["hr", "talent", "recruitment", "acquisition", "personnel"]):
         domains.append("hr")
-    if any(k in title_lower for k in ["marketing", "brand", "sales", "growth", "public relations", "pr", "advocacy"]):
+    if _has_keyword(title_lower, ["marketing", "brand", "sales", "growth", "public relations", "pr", "advocacy"]):
         domains.append("marketing")
-    if any(k in title_lower for k in ["consultant", "analyst", "business", "manager", "strategist", "specialist", "advisory", "entrepreneur", "startup", "merchandising", "real estate", "franchisee"]):
+    if _has_keyword(title_lower, ["consultant", "analyst", "business", "manager", "strategist", "specialist", "advisory", "entrepreneur", "startup", "merchandising", "real estate", "franchisee"]):
         domains.append("corporate")
-    if any(k in title_lower for k in ["veterinarian", "veterinary", "animal", "dog", "wildlife"]):
+    if _has_keyword(title_lower, ["veterinarian", "veterinary", "animal", "dog", "wildlife"]):
         domains.append("veterinary")
-    if any(k in title_lower for k in ["hotel", "chef", "culinary", "hospitality", "brewer", "barista", "catering"]):
+    if _has_keyword(title_lower, ["hotel", "chef", "culinary", "hospitality", "brewer", "barista", "catering"]):
         domains.append("hospitality")
-    if any(k in title_lower for k in ["food", "nutritionist", "dietitian", "brewer", "fermentation"]):
+    if _has_keyword(title_lower, ["food", "nutritionist", "dietitian", "brewer", "fermentation"]):
         domains.append("food_technology")
-    if any(k in title_lower for k in ["agricultural", "agronomist", "farming", "farmer", "hydroponics", "soil"]):
+    if _has_keyword(title_lower, ["agricultural", "agronomist", "farming", "farmer", "hydroponics", "soil"]):
         domains.append("agriculture")
-    if any(k in title_lower for k in ["automobile", "automotive", "bicycle", "mechanic", "ev", "aerospace"]):
+    if _has_keyword(title_lower, ["automobile", "automotive", "bicycle", "mechanic", "ev", "aerospace"]):
         domains.append("automobile")
-    if any(k in title_lower for k in ["chartered accountant", "accountancy", "ca", "cfa", "finance", "investment", "banking", "tax", "payroll", "underwriter", "trader", "broker", "portfolio", "audit", "accountant"]):
+    if _has_keyword(title_lower, ["chartered accountant", "accountancy", "ca", "cfa", "finance", "investment", "banking", "tax", "payroll", "underwriter", "trader", "broker", "portfolio", "audit", "accountant"]):
         domains.append("finance")
         
     return list(set(domains))
@@ -225,7 +242,11 @@ def _aptitude_score(student_aptitude_scores: dict, career: dict) -> float:
     for skill in relevant_skills:
         skill_data = student_aptitude_scores.get(skill)
         if skill_data:
-            pct = skill_data.get("pct") if isinstance(skill_data, dict) else skill_data
+            # aptitude-backend writes {"percentage": ...}; accept "pct" too for safety
+            if isinstance(skill_data, dict):
+                pct = skill_data.get("pct", skill_data.get("percentage"))
+            else:
+                pct = skill_data
             if pct is not None:
                 numerator += (pct / 100.0)
                 count += 1
@@ -253,6 +274,12 @@ def _subject_score(student_ratings: dict, career: dict) -> float:
     return numerator / denominator
 
 
+# The onboarding form collects 6 workstyle axes; some catalog entries weight
+# "fieldwork", which is never collected. Map it to the closest collected axis
+# (hands-on/outdoor work → "building") so those careers don't lose the signal.
+WORKSTYLE_AXIS_ALIASES = {"fieldwork": "building"}
+
+
 def _workstyle_score(student_workstyle: dict, career: dict) -> float:
     weights = career.get("workstyle_weights", {})
     if not weights or not student_workstyle:
@@ -261,6 +288,8 @@ def _workstyle_score(student_workstyle: dict, career: dict) -> float:
     numerator = 0.0
     denominator = 0.0
     for axis, weight in weights.items():
+        if axis not in student_workstyle:
+            axis = WORKSTYLE_AXIS_ALIASES.get(axis, axis)
         if axis in student_workstyle:
             val = student_workstyle[axis]
             numerator += (val / 5.0) * weight
@@ -271,13 +300,21 @@ def _workstyle_score(student_workstyle: dict, career: dict) -> float:
     return numerator / denominator
 
 
+# Some catalog entries use labels the onboarding form never offers —
+# normalise them to the selectable equivalent so they can actually match.
+PRIORITY_SYNONYMS = {"Creativity": "Creative Freedom"}
+
+
 def _priority_score(student_priorities: list, career: dict) -> float:
     if not student_priorities:
         return 0.5
-    alignment = set(career.get("priority_alignment", []))
+    alignment = {PRIORITY_SYNONYMS.get(p, p) for p in career.get("priority_alignment", [])}
     student_set = set(student_priorities)
     matches = len(student_set & alignment)
-    return matches / 3.0
+    # Don't penalise careers whose alignment list is shorter than 3 — score
+    # against the maximum possible overlap, not a fixed 3.
+    max_possible = min(len(student_set), len(alignment)) or 1
+    return matches / max_possible
 
 
 def _feasibility_score(profile_data: dict, career: dict, riasec_score: float = 0.5, passion_score: float = 0.5) -> str | float:
@@ -481,7 +518,11 @@ def score_careers(profile) -> list[dict]:
     Integrates onboarding signals, RIASEC personality, Hobbies/Passion, and Aptitude tests.
     """
     riasec = profile.riasec_scores or {}
-    subject_ratings = profile.subject_ratings or {}
+    subject_ratings = dict(profile.subject_ratings or {})
+    # Frontend stores the rating as "englishLiterature" but the career catalog
+    # weights it as "english" — bridge the two so English isn't silently dropped.
+    if "englishLiterature" in subject_ratings and "english" not in subject_ratings:
+        subject_ratings["english"] = subject_ratings["englishLiterature"]
     work_style = profile.work_style or {}
     career_priorities = profile.career_priorities or []
     hobbies = profile.hobbies or []
@@ -597,9 +638,17 @@ def score_careers(profile) -> list[dict]:
             "total_score": round(total, 4),
         })
 
-    # Sort descending and take top 10
+    # Sort descending, dedupe by title (the catalog contains a few duplicate
+    # entries — keep the highest-scoring one), then take top 10
     results.sort(key=lambda x: x["total_score"], reverse=True)
-    top10 = results[:10]
+    seen_titles = set()
+    deduped = []
+    for item in results:
+        if item["title"] in seen_titles:
+            continue
+        seen_titles.add(item["title"])
+        deduped.append(item)
+    top10 = deduped[:10]
 
     # Add rank and strip score
     for i, item in enumerate(top10, 1):
