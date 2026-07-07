@@ -432,11 +432,6 @@ export default function HomePage({ onStart, onLogin }) {
             boxShadow: '0 0 60px rgba(0,212,255,0.05)',
           }}
         >
-          <img
-            src={EdCilLogo}
-            alt="EdCIL"
-            style={{ width: 140, height: 50, objectFit: 'contain', borderRadius: 8, border: '1px solid rgba(0,212,255,0.15)', background: '#f8fafc', padding: '6px', flexShrink: 0 }}
-          />
           <div style={{ flex: 1, minWidth: 240 }}>
             <div style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#2c5492', marginBottom: '0.4rem' }}>
               <BilingualText text="About EdCIL" />
