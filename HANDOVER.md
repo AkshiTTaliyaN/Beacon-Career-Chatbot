@@ -268,7 +268,7 @@ services below are connected.
    SECRET_KEY                = <python -c "import secrets; print(secrets.token_hex(32))">
    ALGORITHM                 = HS256
    ACCESS_TOKEN_EXPIRE_MINUTES = 43200
-   EMAIL_ENCRYPTION_KEY      = <python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())">
+   EMAIL_ENCRYPTION_KEY      = <python -c "import base64, os; print(base64.urlsafe_b64encode(os.urandom(32)).decode())">
    ENVIRONMENT               = production
    GEMINI_API_KEY            = <your key>
    ```
