@@ -741,9 +741,9 @@ def get_smart_recommendations(
 
     if cached and cached.full_output:
         fo = cached.full_output
-        # "smart_v2": bumped after scorer fixes (aptitude pct key, english subject
+        # "smart_v3": bumped after scorer fixes (aptitude pct key, english subject
         # bridge, dedupe, keyword matching) so stale v1 caches recompute.
-        if fo.get("type") == "smart_v2" and len(fo.get("recommendations", [])) == 10:
+        if fo.get("type") == "smart_v3" and len(fo.get("recommendations", [])) == 10:
             generated_at_str = fo.get("smart_generated_at", "")
             if generated_at_str:
                 generated_at = datetime.datetime.fromisoformat(generated_at_str)
@@ -757,7 +757,7 @@ def get_smart_recommendations(
     # 5, build response payload
     now_iso = datetime.datetime.utcnow().isoformat()
     payload = {
-        "type": "smart_v2",
+        "type": "smart_v3",
         "recommendations": recommendations,
         "generated_at": now_iso,
         "smart_generated_at": now_iso,

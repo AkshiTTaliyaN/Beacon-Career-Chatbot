@@ -48,7 +48,7 @@ HOBBY_MAP = {
     "Lawn Tennis":              {"riasec": ["R", "E"], "domains": ["sports", "physiotherapy"]},
     "Volleyball":               {"riasec": ["R", "E"], "domains": ["sports", "physiotherapy"]},
     "Gym/Weightlifting":        {"riasec": ["R"],      "domains": ["sports", "physiotherapy", "healthcare"]},
-    "E-sports/Competitive Gaming":{"riasec": ["I", "R"], "domains": ["software_engineering", "sports"]},
+    "E-sports/Competitive Gaming":{"riasec": ["I", "R"], "domains": ["esports", "software_engineering"]},
     "Skateboarding":            {"riasec": ["R"],      "domains": ["sports"]},
 
     # Intellectual
@@ -94,7 +94,14 @@ def _has_keyword(title_lower: str, keywords: list) -> bool:
 def get_career_domains(title: str) -> list[str]:
     title_lower = title.lower()
     domains = []
-    
+
+    # E-sports is competitive gaming, not physical sport. Match it to its own
+    # domain (only the gaming hobby maps there) instead of letting the "sports"
+    # substring in "E-sports" tag these careers for every cricket/football player.
+    is_esports = any(k in title_lower for k in ["esports", "e-sports", "gaming", "gamer"])
+    if is_esports:
+        domains.append("esports")
+
     # Map keywords to domains
     if _has_keyword(title_lower, ["software", "developer", "cloud", "web3", "ethical hacker", "prompt", "ar/vr", "game ai", "blockchain"]):
         domains.append("software_engineering")
@@ -130,7 +137,7 @@ def get_career_domains(title: str) -> list[str]:
         domains.append("music_production")
     if _has_keyword(title_lower, ["event", "wedding", "coordinator", "producer", "tournament director", "curator"]):
         domains.append("event_management")
-    if _has_keyword(title_lower, ["sports", "athlete", "gamer", "coach", "fitness", "calisthenics"]):
+    if not is_esports and _has_keyword(title_lower, ["sports", "athlete", "coach", "fitness", "calisthenics"]):
         domains.append("sports")
     if _has_keyword(title_lower, ["army", "police", "officer", "ips", "defence", "pilot", "forensics"]):
         domains.append("defence")
@@ -220,14 +227,18 @@ def _passion_score(student_hobbies: list, career_title: str) -> float:
             student_domains.update(mapping["domains"])
     
     career_domains = set(get_career_domains(career_title))
-            
+
     if not career_domains:
         return 0.5
-        
+
+    # Graded overlap instead of binary. A single shared domain used to grant
+    # the full passion boost, so one cricket hobby made every career whose
+    # title vaguely touched "sports" look like a passion match. Now the boost
+    # scales with how much of the career's domain profile the student covers.
     overlap = student_domains & career_domains
-    if overlap:
-        return 1.0  # match found
-    return 0.0
+    if not overlap:
+        return 0.0
+    return min(1.0, len(overlap) / min(len(career_domains), 3))
 
 
 def _aptitude_score(student_aptitude_scores: dict, career: dict) -> float:
@@ -271,7 +282,15 @@ def _subject_score(student_ratings: dict, career: dict) -> float:
 
     if denominator == 0:
         return 0.5
-    return numerator / denominator
+
+    # Confidence blend: judge the match only as far as we can actually see it.
+    # A career whose weights are mostly in subjects the student never rated
+    # (e.g. businessStudies for a PCM student) was previously scored on the one
+    # visible subject alone, letting a single 5-star rating produce a perfect
+    # match. Blend toward neutral in proportion to the unseen weight.
+    raw = numerator / denominator
+    coverage = denominator / sum(weights.values())
+    return raw * coverage + 0.5 * (1 - coverage)
 
 
 # The onboarding form collects 6 workstyle axes; some catalog entries weight
