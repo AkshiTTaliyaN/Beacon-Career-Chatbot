@@ -199,20 +199,105 @@ for combined recommendations → download PDF report.
 
 ---
 
-## 9. Deployment (current production setup)
+## 9. Production deployment (Vercel + Railway + Neon)
 
-- **Backends → Railway** (both have a `Procfile`; Railway injects `$PORT`).
-  Set the same env vars as local `.env`, plus `ENVIRONMENT=production` on
-  beacon-backend. Add a Railway PostgreSQL plugin and use its `DATABASE_URL`.
-- **Frontends → Vercel** (beacon-frontend has `vercel.json`).
-  Set env vars in the Vercel project:
-  - beacon-frontend: `VITE_API_URL` (Railway beacon-backend URL),
-    `VITE_APTITUDE_URL` (deployed aptitude-frontend URL), `VITE_DEMO_MODE=false`
-  - aptitude-frontend: `VITE_APTITUDE_API_URL`, `VITE_BEACON_API_URL`
-- **CORS**: add the deployed frontend URLs to `ALLOWED_ORIGINS` on
-  beacon-backend if they are not `*.vercel.app`.
+The live stack mirrors the local one:
 
-Deploy order when APIs change: **backends first, then frontends**.
+| Piece | Service | Notes |
+|---|---|---|
+| PostgreSQL database | **Neon** (neon.tech) | free tier; gives a `postgresql://...` connection string |
+| beacon-backend | **Railway** (railway.app) | deployed from the GitHub repo, `Procfile`-based |
+| aptitude-backend | **Railway** | second service in the same Railway project |
+| beacon-frontend | **Vercel** (vercel.com) | e.g. `https://manzil-career-counselling.vercel.app` |
+| aptitude-frontend | **Vercel** | second Vercel project from the same repo |
+
+⚠️ The production secrets (Neon `DATABASE_URL`, production `SECRET_KEY`,
+`EMAIL_ENCRYPTION_KEY`, `GEMINI_API_KEY`) live **only in the Railway
+dashboard**, not in this repo. Either get them from the previous owner or
+generate fresh ones (fresh keys = fresh database; old student data stays
+readable only with the old `EMAIL_ENCRYPTION_KEY`).
+
+### Option A — take over the existing deployments (keeps current URLs & data)
+
+Have the previous owner invite you / transfer ownership on each dashboard:
+
+1. **Neon** → Project → Settings → Collaborators (or transfer the project)
+2. **Railway** → Project → Settings → Members
+3. **Vercel** → each Project → Settings → Members / transfer to your team
+4. **GitHub** → repo → Settings → Collaborators (deploys trigger from pushes)
+
+Nothing else changes — pushing to `main` on GitHub auto-deploys everywhere.
+
+### Option B — recreate the whole stack from scratch on your own accounts
+
+**B1. Neon (database)**
+1. Sign up at https://neon.tech → New Project (region: closest to your users)
+2. Copy the connection string (looks like
+   `postgresql://user:pass@ep-xxxx.region.aws.neon.tech/neondb?sslmode=require`)
+3. Tables are created automatically on the backend's first boot — no SQL to run.
+   (To carry over old data: restore `database_dump.sql` into Neon with
+   `psql "<neon-connection-string>" -f database_dump.sql`.)
+
+**B2. Railway (both backends)**
+1. Sign up at https://railway.app → New Project → **Deploy from GitHub repo**
+   → pick this repository
+2. In the service settings set **Root Directory = `beacon-backend`**
+   (Railway reads the `Procfile` there; no build command needed)
+3. Service → Variables → add:
+   ```
+   DATABASE_URL              = <the Neon connection string>
+   SECRET_KEY                = <python -c "import secrets; print(secrets.token_hex(32))">
+   ALGORITHM                 = HS256
+   ACCESS_TOKEN_EXPIRE_MINUTES = 43200
+   EMAIL_ENCRYPTION_KEY      = <python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())">
+   ENVIRONMENT               = production
+   GEMINI_API_KEY            = <your key>
+   ```
+4. Settings → Networking → **Generate Domain** → note the URL
+   (e.g. `https://beacon-backend-production-xxxx.up.railway.app`)
+5. Repeat for the second service: **+ New → GitHub repo → same repo**,
+   Root Directory = `aptitude-backend`, Variables: just `GEMINI_API_KEY`
+   (optional). Generate its domain too.
+6. Verify: open `<beacon-railway-url>/health` → `{"status":"healthy"}`
+
+**B3. Vercel (both frontends)**
+1. Sign up at https://vercel.com → Add New Project → import the GitHub repo
+2. **Root Directory = `beacon-frontend`** (framework auto-detects Vite)
+3. Environment Variables:
+   ```
+   VITE_API_URL      = <beacon-backend Railway URL>
+   VITE_APTITUDE_URL = <aptitude-frontend Vercel URL - add after B3.5>
+   VITE_DEMO_MODE    = false
+   ```
+4. Deploy → note the domain (e.g. `https://your-app.vercel.app`)
+5. Second project: import the same repo again,
+   **Root Directory = `aptitude-frontend`**, variables:
+   ```
+   VITE_APTITUDE_API_URL = <aptitude-backend Railway URL>
+   VITE_BEACON_API_URL   = <beacon-backend Railway URL>
+   ```
+6. Go back to the beacon-frontend project and fill in `VITE_APTITUDE_URL`
+   with the aptitude-frontend domain, then **Redeploy** (Vite bakes env vars
+   in at build time - changing a variable requires a redeploy).
+
+**B4. Wire up CORS**
+On both Railway backend services add:
+```
+ALLOWED_ORIGINS = https://<beacon-frontend-domain>,https://<aptitude-frontend-domain>
+```
+(`*.vercel.app` domains are already allowed by beacon-backend, but setting
+this explicitly is safer, and aptitude-backend requires it.)
+
+**B5. End-to-end check**
+Open the beacon-frontend domain → Start Counselling → onboard → dashboard →
+Take Psychometric Test (must open the aptitude domain with a token in the
+URL) → finish test → back on the dashboard the recommendations must load →
+download the PDF.
+
+### Ongoing workflow
+
+Push to `main` on GitHub → Railway and Vercel redeploy automatically.
+Deploy order matters only for breaking API changes: backends first.
 
 ---
 
