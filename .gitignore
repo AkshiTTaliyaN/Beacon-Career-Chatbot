@@ -97,3 +97,6 @@ test_mapping.py
 *.temp
 ~$*
 *.code-workspace
+
+# ─── AI assistant local config (not part of the project) ──────────────────
+.claude/
