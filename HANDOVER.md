@@ -30,10 +30,28 @@ scoring engine from all combined signals.
 
 ## 2. Get the code
 
+**If you received a zip / pendrive:** copy `Manzil-Handover.zip` to your
+computer, extract it anywhere (e.g. `Documents\Manzil`), and open a terminal
+in the extracted folder. If you were also given a secrets folder, follow its
+`README.txt` to place the `.env` files before starting the apps.
+
+**Or clone from GitHub:**
+
 ```bash
 git clone https://github.com/AkshiTTaliyaN/Manzil-Career-Chatbot.git
 cd Manzil-Career-Chatbot
 ```
+
+**Optional - restoring the previous database:** if the drive includes a
+`database_dump.sql`, restore it after creating the database (step 3):
+
+```bash
+psql -U postgres -d manzil -f database_dump.sql
+```
+
+In that case keep the original `EMAIL_ENCRYPTION_KEY` from the provided
+`.env` - a new key cannot decrypt the old data. For a fresh start, skip
+this and generate your own keys.
 
 ---
 
