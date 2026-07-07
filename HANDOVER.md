@@ -233,19 +233,22 @@ Nothing else changes — pushing to `main` on GitHub auto-deploys everywhere.
 **B0. Put the code on your own GitHub (required first)**
 
 Railway and Vercel deploy *from a GitHub repository*, so the code must live
-in a repo you control:
+in a repo you control.
 
-1. Create an account / sign in at https://github.com → New repository
-   (e.g. `manzil`, private is fine)
-2. From the extracted project folder:
+**Easiest — fork:** sign in at https://github.com, open
+https://github.com/AkshiTTaliyaN/Manzil-Career-Chatbot and click **Fork**.
+Done — use your fork everywhere below.
+
+**Or, if starting from a zip:** create a new empty repo, then from the
+extracted project folder:
    ```bash
-   git init                      # skip if the folder already has .git
+   git init
    git add .
    git commit -m "Initial import"
+   git branch -M main
    git remote add origin https://github.com/<your-username>/manzil.git
    git push -u origin main
    ```
-   (If git complains about the branch name, run `git branch -M main` first.)
 
 From now on, every `git push` auto-deploys to Railway and Vercel once the
 services below are connected.
