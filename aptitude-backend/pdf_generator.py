@@ -179,6 +179,99 @@ def generate_pdf(result: dict) -> bytes:
         story.append(HRFlowable(width="100%", thickness=1, color=BORDER_COLOR))
         story.append(Spacer(1, 0.4*cm))
 
+    # ── APTITUDE SNAPSHOT ────────────────────────────────────────────────────
+    aptitude = result.get("aptitude_scores") or {}
+    if aptitude:
+        story.append(Paragraph("Aptitude Snapshot", h2_style))
+        story.append(Paragraph(
+            "Self-rated ability across six skill areas (from the aptitude section of your test).",
+            ParagraphStyle("AptSub", parent=styles["Normal"], fontSize=9, textColor=GRAY_TEXT, spaceAfter=6)
+        ))
+        level_colors = {"High": colors.HexColor("#22c55e"), "Medium": colors.HexColor("#f97316"), "Low": colors.HexColor("#ef4444")}
+        for skill_data in aptitude.values():
+            label = safe_html(skill_data.get("label", ""))
+            pct = skill_data.get("percentage", 0)
+            level = skill_data.get("level", "")
+            bar_color = level_colors.get(level, BLUE_PRIMARY)
+            row = [[
+                Paragraph(f"<b>{label}</b>", ParagraphStyle("AptLabel", parent=styles["Normal"], fontSize=9, textColor=DARK_NAVY)),
+                score_bar(label, pct, bar_color),
+                Paragraph(f"<font color='{bar_color.hexval().replace('0x', '#')}'><b>{safe_html(level)}</b></font>",
+                          ParagraphStyle("AptLevel", parent=styles["Normal"], fontSize=9)),
+            ]]
+            apt_table = Table(row, colWidths=[4.5*cm, 10*cm, 2*cm])
+            apt_table.setStyle(TableStyle([
+                ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 3),
+                ("TOPPADDING", (0, 0), (-1, -1), 2),
+            ]))
+            story.append(apt_table)
+
+        fit_note = safe_html(result.get("aptitude_fit_note", ""))
+        if fit_note:
+            story.append(Spacer(1, 0.2*cm))
+            story.append(Paragraph(f"<i>{fit_note}</i>", ParagraphStyle("FitNote", parent=styles["Normal"], fontSize=9, leading=13, textColor=GRAY_TEXT)))
+
+        story.append(Spacer(1, 0.4*cm))
+        story.append(HRFlowable(width="100%", thickness=1, color=BORDER_COLOR))
+        story.append(Spacer(1, 0.4*cm))
+
+    # ── INTERESTS & HOBBIES ──────────────────────────────────────────────────
+    hobbies = result.get("selected_hobbies") or []
+    interest_careers = result.get("interest_careers") or []
+    if hobbies or interest_careers:
+        story.append(Paragraph("Your Interests", h2_style))
+        if hobbies:
+            story.append(Paragraph(
+                f"<b>Hobbies you selected:</b> {safe_html(', '.join(hobbies))}",
+                ParagraphStyle("Hobbies", parent=styles["Normal"], fontSize=10, leading=15, textColor=DARK_NAVY, spaceAfter=6)
+            ))
+        if interest_careers:
+            story.append(Paragraph(
+                "<b>Careers aligned with these interests:</b>",
+                ParagraphStyle("IntHead", parent=styles["Normal"], fontSize=10, textColor=DARK_NAVY, spaceAfter=4)
+            ))
+            for c in interest_careers[:4]:
+                story.append(Paragraph(
+                    f"• <b>{safe_html(c.get('title', ''))}</b>"
+                    + (f" ({safe_html(c.get('salary', ''))})" if c.get("salary") else ""),
+                    ParagraphStyle("IntItem", parent=styles["Normal"], fontSize=9, leading=14, textColor=GRAY_TEXT, leftIndent=8)
+                ))
+        story.append(Spacer(1, 0.4*cm))
+        story.append(HRFlowable(width="100%", thickness=1, color=BORDER_COLOR))
+        story.append(Spacer(1, 0.4*cm))
+
+    # ── ENTRANCE EXAMS ───────────────────────────────────────────────────────
+    exams = result.get("entrance_exams") or []
+    if exams:
+        story.append(Paragraph("Entrance Exams to Explore", h2_style))
+        exam_rows = []
+        for i in range(0, len(exams), 2):
+            pair = exams[i:i+2]
+            cells = []
+            for exam in pair:
+                cells.append([
+                    Paragraph(f"<b>{safe_html(exam.get('name', ''))}</b>", ParagraphStyle("ExamName", parent=styles["Normal"], fontSize=10, textColor=BLUE_PRIMARY)),
+                    Spacer(1, 2),
+                    Paragraph(safe_html(exam.get("desc", "")), ParagraphStyle("ExamDesc", parent=styles["Normal"], fontSize=9, leading=13, textColor=GRAY_TEXT)),
+                ])
+            while len(cells) < 2:
+                cells.append([Paragraph("", styles["Normal"])])
+            exam_rows.append(cells)
+        for cells in exam_rows:
+            exam_table = Table([cells], colWidths=[8*cm, 8*cm])
+            exam_table.setStyle(TableStyle([
+                ("VALIGN", (0, 0), (-1, -1), "TOP"),
+                ("LEFTPADDING", (0, 0), (-1, -1), 6),
+                ("RIGHTPADDING", (0, 0), (-1, -1), 6),
+                ("TOPPADDING", (0, 0), (-1, -1), 4),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
+            ]))
+            story.append(exam_table)
+        story.append(Spacer(1, 0.3*cm))
+        story.append(HRFlowable(width="100%", thickness=1, color=BORDER_COLOR))
+        story.append(Spacer(1, 0.4*cm))
+
     # ── DETAILED RECOMMENDATIONS CTA ──────────────────────────────────────────
     story.append(Paragraph("Your Personalized Career Recommendations", h2_style))
     story.append(Spacer(1, 0.2*cm))
