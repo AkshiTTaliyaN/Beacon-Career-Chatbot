@@ -199,40 +199,26 @@ for combined recommendations → download PDF report.
 
 ---
 
-## 9. Production deployment (Vercel + Railway + Neon)
-
-The live stack mirrors the local one:
+## 9. Production deployment (Vercel + Render + Neon — all free tiers)
 
 | Piece | Service | Notes |
 |---|---|---|
 | PostgreSQL database | **Neon** (neon.tech) | free tier; gives a `postgresql://...` connection string |
-| beacon-backend | **Railway** (railway.app) | deployed from the GitHub repo, `Procfile`-based |
-| aptitude-backend | **Railway** | second service in the same Railway project |
-| beacon-frontend | **Vercel** (vercel.com) | e.g. `https://manzil-career-counselling.vercel.app` |
+| beacon-backend | **Render** (render.com) | free Web Service, deployed from the GitHub repo |
+| aptitude-backend | **Render** | second free Web Service from the same repo |
+| beacon-frontend | **Vercel** (vercel.com) | free Hobby project |
 | aptitude-frontend | **Vercel** | second Vercel project from the same repo |
 
-⚠️ The production secrets (Neon `DATABASE_URL`, production `SECRET_KEY`,
-`EMAIL_ENCRYPTION_KEY`, `GEMINI_API_KEY`) live **only in the Railway
-dashboard**, not in this repo. Either get them from the previous owner or
-generate fresh ones (fresh keys = fresh database; old student data stays
-readable only with the old `EMAIL_ENCRYPTION_KEY`).
+⚠️ **Render free-tier behaviour:** a free Web Service goes to sleep after
+~15 minutes without traffic, and the next request takes ~50 seconds while it
+wakes up. Before demos, open `<backend-url>/health` for both backends a
+minute early to warm them up.
 
-### Option A — take over the existing deployments (keeps current URLs & data)
-
-Have the previous owner invite you / transfer ownership on each dashboard:
-
-1. **Neon** → Project → Settings → Collaborators (or transfer the project)
-2. **Railway** → Project → Settings → Members
-3. **Vercel** → each Project → Settings → Members / transfer to your team
-4. **GitHub** → repo → Settings → Collaborators (deploys trigger from pushes)
-
-Nothing else changes — pushing to `main` on GitHub auto-deploys everywhere.
-
-### Option B — recreate the whole stack from scratch on your own accounts
+### Recreate the whole stack from scratch on your own accounts
 
 **B0. Put the code on your own GitHub (required first)**
 
-Railway and Vercel deploy *from a GitHub repository*, so the code must live
+Render and Vercel deploy *from a GitHub repository*, so the code must live
 in a repo you control.
 
 **Easiest — fork:** sign in at https://github.com, open
@@ -250,7 +236,7 @@ extracted project folder:
    git push -u origin main
    ```
 
-From now on, every `git push` auto-deploys to Railway and Vercel once the
+From now on, every `git push` auto-deploys to Render and Vercel once the
 services below are connected.
 
 **B1. Neon (database)**
@@ -261,12 +247,22 @@ services below are connected.
    (To carry over old data: restore `database_dump.sql` into Neon with
    `psql "<neon-connection-string>" -f database_dump.sql`.)
 
-**B2. Railway (both backends)**
-1. Sign up at https://railway.app → New Project → **Deploy from GitHub repo**
-   → pick this repository
-2. In the service settings set **Root Directory = `beacon-backend`**
-   (Railway reads the `Procfile` there; no build command needed)
-3. Service → Variables → add:
+**B2. Render (both backends)**
+1. Sign up at https://render.com ("Sign in with GitHub" is easiest)
+2. **New → Web Service** → connect your GitHub account when prompted →
+   select your fork of the repo
+3. Fill the form:
+   | Field | Value |
+   |---|---|
+   | Name | `manzil-beacon-backend` (becomes the URL) |
+   | Region | Singapore (closest to India) |
+   | Branch | `main` |
+   | Root Directory | `beacon-backend` |
+   | Runtime | Python 3 (auto-detected; `.python-version` pins 3.11) |
+   | Build Command | `pip install -r requirements.txt` |
+   | Start Command | `uvicorn main:app --host 0.0.0.0 --port $PORT` |
+   | Instance Type | **Free** |
+4. Under **Environment Variables** (Advanced / Environment tab) add:
    ```
    DATABASE_URL              = <the Neon connection string>
    SECRET_KEY                = <python -c "import secrets; print(secrets.token_hex(32))">
@@ -276,19 +272,20 @@ services below are connected.
    ENVIRONMENT               = production
    GEMINI_API_KEY            = <your key>
    ```
-4. Settings → Networking → **Generate Domain** → note the URL
-   (e.g. `https://beacon-backend-production-xxxx.up.railway.app`)
-5. Repeat for the second service: **+ New → GitHub repo → same repo**,
-   Root Directory = `aptitude-backend`, Variables: just `GEMINI_API_KEY`
-   (optional). Generate its domain too.
-6. Verify: open `<beacon-railway-url>/health` → `{"status":"healthy"}`
+5. **Create Web Service** → wait for the first build (a few minutes) →
+   the URL is `https://manzil-beacon-backend.onrender.com`
+6. Verify: open `<that-url>/health` → `{"status":"healthy"}`
+7. Repeat **New → Web Service** for the second backend:
+   Name `manzil-aptitude-backend`, Root Directory `aptitude-backend`,
+   same Build/Start commands, Instance Type Free,
+   env var `GEMINI_API_KEY` only (optional). Note its URL.
 
 **B3. Vercel (both frontends)**
 1. Sign up at https://vercel.com → Add New Project → import the GitHub repo
 2. **Root Directory = `beacon-frontend`** (framework auto-detects Vite)
 3. Environment Variables:
    ```
-   VITE_API_URL      = <beacon-backend Railway URL>
+   VITE_API_URL      = <beacon-backend Render URL>
    VITE_APTITUDE_URL = <aptitude-frontend Vercel URL - add after B3.5>
    VITE_DEMO_MODE    = false
    ```
@@ -296,30 +293,34 @@ services below are connected.
 5. Second project: import the same repo again,
    **Root Directory = `aptitude-frontend`**, variables:
    ```
-   VITE_APTITUDE_API_URL = <aptitude-backend Railway URL>
-   VITE_BEACON_API_URL   = <beacon-backend Railway URL>
+   VITE_APTITUDE_API_URL = <aptitude-backend Render URL>
+   VITE_BEACON_API_URL   = <beacon-backend Render URL>
    ```
 6. Go back to the beacon-frontend project and fill in `VITE_APTITUDE_URL`
    with the aptitude-frontend domain, then **Redeploy** (Vite bakes env vars
    in at build time - changing a variable requires a redeploy).
 
 **B4. Wire up CORS**
-On both Railway backend services add:
+On both Render backend services (Environment tab) add:
 ```
 ALLOWED_ORIGINS = https://<beacon-frontend-domain>,https://<aptitude-frontend-domain>
 ```
 (`*.vercel.app` domains are already allowed by beacon-backend, but setting
 this explicitly is safer, and aptitude-backend requires it.)
+Render redeploys automatically when environment variables change.
 
 **B5. End-to-end check**
 Open the beacon-frontend domain → Start Counselling → onboard → dashboard →
 Take Psychometric Test (must open the aptitude domain with a token in the
 URL) → finish test → back on the dashboard the recommendations must load →
 download the PDF.
+Remember: after ~15 idle minutes the free backends sleep — the first
+request of a session takes ~50 s to wake them. Hitting `/health` on both
+backends before a demo avoids the wait.
 
 ### Ongoing workflow
 
-Push to `main` on GitHub → Railway and Vercel redeploy automatically.
+Push to `main` on GitHub → Render and Vercel redeploy automatically.
 Deploy order matters only for breaking API changes: backends first.
 
 ---
