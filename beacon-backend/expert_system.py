@@ -11,7 +11,7 @@ from typing import Any
 
 from career_catalog import CAREER_CATALOG
 from exams_catalog import EXAMS_CATALOG
-from career_scorer import get_career_domains
+from career_scorer import get_career_domains, _riasec_score, _passion_score
 
 
 # ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -52,19 +52,50 @@ def _status_from_score(score: int) -> str:
 def _rule_stream_compatibility(ctx: dict) -> None:
     """Rule 1 - Stream Compatibility.
 
-    If the student's stream is not in the career's accepted streams list,
-    apply a heavy penalty and flag red.
+    Mirrors the recommendation engine's stream logic: a direct match earns a
+    bonus, and a mismatch is softened when the student's personality and
+    hobbies align strongly with the career (the same passion bypass the
+    engine applies when it ranks careers). Without that alignment the
+    mismatch stays a heavy penalty and forces red.
     """
     career = ctx["career"]
-    stream = ctx["profile"].get("stream", "").strip().lower()
+    profile = ctx["profile"]
+    stream = (profile.get("stream") or "").strip().lower()
+    career_streams = career.get("streams", [])
 
-    if stream and stream not in career.get("streams", []):
-        ctx["score"] -= 60
+    if not stream or stream == "none" or not career_streams:
+        return
+
+    if stream in career_streams:
+        ctx["score"] += 10
+        ctx["strengths"].append(
+            f"Your current stream ({stream.upper()}) is directly aligned with "
+            f"the typical pathway for {career['title']}."
+        )
+        return
+
+    riasec_scores = profile.get("riasec_scores") or {}
+    hobbies = profile.get("hobbies") or []
+    r_score = _riasec_score(riasec_scores, career) if riasec_scores else 0.5
+    p_score = _passion_score(hobbies, career["title"]) if hobbies else 0.5
+    streams_txt = ", ".join(s.upper() for s in career_streams)
+
+    if r_score >= 0.70 and p_score >= 0.70:
+        ctx["score"] -= 15
+        if ctx["current_status"] != "red":
+            ctx["current_status"] = "amber"
+        ctx["warnings"].append(
+            f"Your current stream ({stream.upper()}) differs from the typical streams "
+            f"for {career['title']} ({streams_txt}). Your personality and hobby "
+            f"alignment are strong enough to make this a viable cross-stream path, "
+            f"but plan for portfolio-based or stream-open entrance routes."
+        )
+    else:
+        ctx["score"] -= 40
         ctx["force_status"] = "red"
         ctx["warnings"].append(
             f"Your current stream ({stream.upper()}) is not typically aligned with "
-            f"{career['title']}. The recommended streams are: "
-            f"{', '.join(s.upper() for s in career['streams'])}."
+            f"{career['title']}. The recommended streams are: {streams_txt}."
         )
 
 
@@ -165,29 +196,50 @@ def _rule_relocation(ctx: dict) -> None:
 def _rule_riasec_alignment(ctx: dict) -> None:
     """Bonus - RIASEC Alignment.
 
-    Match student's dominant RIASEC code against the career's primary
-    and secondary codes.
+    Uses the same weighted primary/secondary blend as the recommendation
+    engine (primary 70%, secondary 30%) so the two scores move together:
+    strong personality alignment adds up to +25, weak alignment costs up
+    to -25. A descriptive strength is added when the dominant type matches.
     """
     career = ctx["career"]
-    riasec_scores = ctx["profile"].get("riasec_scores", {})
-    top_code = _top_riasec(riasec_scores)
-
-    if not top_code:
+    riasec_scores = ctx["profile"].get("riasec_scores") or {}
+    if not riasec_scores:
         return
 
-    top_code = top_code.strip().upper()
+    blend = _riasec_score(riasec_scores, career)
+    ctx["score"] += round((blend - 0.5) * 50)
 
+    top_code = (_top_riasec(riasec_scores) or "").strip().upper()
     if top_code == career.get("riasec_primary", "").upper():
-        ctx["score"] += 5
         ctx["strengths"].append(
             f"Your dominant personality type ({top_code}) matches the primary RIASEC "
             f"code for {career['title']}, a strong natural fit."
         )
     elif top_code == career.get("riasec_secondary", "").upper():
-        ctx["score"] += 3
         ctx["strengths"].append(
             f"Your dominant personality type ({top_code}) aligns with the secondary "
             f"RIASEC code for {career['title']}, a supportive fit."
+        )
+
+
+def _rule_passion_alignment(ctx: dict) -> None:
+    """Bonus - Hobby / Passion Alignment.
+
+    Uses the same hobby-to-domain mapping as the recommendation engine, so a
+    career the engine surfaced through the student's hobbies also gets credit
+    here.
+    """
+    career = ctx["career"]
+    hobbies = ctx["profile"].get("hobbies") or []
+    if not hobbies:
+        return
+
+    p_score = _passion_score(hobbies, career["title"])
+    if p_score >= 0.7:
+        ctx["score"] += 8
+        ctx["strengths"].append(
+            f"Your hobbies map directly to the day-to-day work of {career['title']}, "
+            f"genuine interest is a strong predictor of persistence."
         )
 
 
@@ -582,6 +634,7 @@ def consult(career_title: str, profile_data: dict) -> dict:
     _rule_financial_feasibility(ctx)
     _rule_relocation(ctx)
     _rule_riasec_alignment(ctx)
+    _rule_passion_alignment(ctx)
 
     # ── Finalise score & status ──────────────────────────────────────────
     final_score = _clamp(ctx["score"])

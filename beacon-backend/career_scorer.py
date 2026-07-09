@@ -129,6 +129,11 @@ def get_career_domains(title: str) -> list[str]:
     if _has_keyword(title_lower, ["writer", "editor", "copywriter", "novelist", "author"]):
         domains.append("literature")
         domains.append("content")
+    if _has_keyword(title_lower, ["content creator", "content", "youtuber", "influencer", "streamer", "social media", "creator"]):
+        if "media" not in domains:
+            domains.append("media")
+        if "content" not in domains:
+            domains.append("content")
     if _has_keyword(title_lower, ["lawyer", "legal", "judge", "compliance", "auditor", "safety auditor", "privacy"]):
         domains.append("law")
     if _has_keyword(title_lower, ["dj", "music", "sound", "audio", "dubbing", "voice", "actor", "comedian", "choreographer", "vfx", "compositor", "film", "director"]):
@@ -633,12 +638,15 @@ def score_careers(profile) -> list[dict]:
         reason = _generate_reason(career, component_scores, profile_data)
 
         # ── Stream Display Label ──────────────────────────────────────────────
-        stream_display_map = {
-            "pcm": "PCM", "pcb": "PCB", "pcmb": "PCM/PCB",
-            "comm": "Commerce", "arts": "Arts",
-        }
-        student_stream = profile_data.get("stream", "")
-        stream_display = stream_display_map.get(student_stream, "All Streams")
+        # Show the career's accepted streams (not the student's stream) so the
+        # dashboard chip agrees with the expert consultation page.
+        stream_label_map = {"pcm": "PCM", "pcb": "PCB", "comm": "Commerce", "arts": "Arts"}
+        stream_labels = []
+        for s in career.get("streams", []):
+            lbl = stream_label_map.get(s)
+            if lbl and lbl not in stream_labels:
+                stream_labels.append(lbl)
+        stream_display = "/".join(stream_labels) if stream_labels else "All Streams"
 
         description = ENGINE2_EXPLANATIONS.get(career["title"]) or career.get("reason", "")
 
