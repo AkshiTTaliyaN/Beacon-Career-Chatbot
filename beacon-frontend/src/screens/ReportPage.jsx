@@ -103,32 +103,32 @@ const PARENT_NOTES = {
 const ACTION_PLAN = {
   Investigative: [
     { phase: "Class 11 (Now)", actions: ["Strengthen mathematics and analytical subjects", "Start learning Python or basic programming", "Read scientific articles and journals weekly", "Join science Olympiads or research clubs"] },
-    { phase: "Class 12", actions: ["Begin JEE/NEET/IISER prep alongside boards", "Build small data or research projects", "Apply for summer research programs (KVPI, IISER, IIT internships)", "Strengthen English for international applications"] },
+    { phase: "Class 12", actions: ["__EXAM_PREP__", "Build small data or research projects", "Apply for summer research programs (KVPI, IISER, IIT internships)", "Strengthen English for international applications"] },
     { phase: "After Class 12", actions: ["Pursue B.Tech, BSc Research, or MBBS based on stream", "Engage in research from year one of college", "Consider international research opportunities", "Build a profile of papers, projects, or internships"] },
   ],
   Realistic: [
     { phase: "Class 11 (Now)", actions: ["Focus on physics, mathematics, and applied subjects", "Take up hands-on hobbies (electronics, mechanics, building)", "Visit workshops, factories, or engineering exhibitions", "Try AutoCAD or basic CAD software"] },
-    { phase: "Class 12", actions: ["Start JEE preparation seriously", "Build small physical or technical projects", "Visit IITs/NITs on open day if possible", "Develop strong drawing and spatial reasoning"] },
+    { phase: "Class 12", actions: ["__EXAM_PREP__", "Build small physical or technical projects", "Visit IITs/NITs on open day if possible", "Develop strong drawing and spatial reasoning"] },
     { phase: "After Class 12", actions: ["Pursue B.Tech, Diploma, or applied engineering", "Take internships at engineering firms", "Build a portfolio of completed technical projects", "Consider specialisations like robotics, automotive, or aerospace"] },
   ],
   Artistic: [
     { phase: "Class 11 (Now)", actions: ["Build a portfolio of your creative work", "Learn one design tool (Figma, Photoshop, or Canva)", "Take art, music, writing, or photography classes", "Follow creative professionals on social media for inspiration"] },
-    { phase: "Class 12", actions: ["Prepare for NID, NIFT, or other design entrance exams", "Build a strong, organised digital portfolio", "Attempt small creative freelance projects", "Read design and creative industry publications"] },
+    { phase: "Class 12", actions: ["__EXAM_PREP__", "Build a strong, organised digital portfolio", "Attempt small creative freelance projects", "Read design and creative industry publications"] },
     { phase: "After Class 12", actions: ["Pursue B.Des, BFA, or Mass Communication degrees", "Build a professional online portfolio (Behance, Dribbble)", "Take internships at creative studios or media houses", "Develop a strong personal brand and online presence"] },
   ],
   Social: [
     { phase: "Class 11 (Now)", actions: ["Volunteer with a local NGO or community group", "Develop public speaking and communication skills", "Read introductory psychology or sociology books", "Join debate, MUN, or peer counselling activities"] },
-    { phase: "Class 12", actions: ["Prepare for CUET if pursuing humanities", "Begin shadowing teachers, doctors, or counsellors", "Maintain a journal of your volunteering experiences", "Apply for leadership roles in school"] },
+    { phase: "Class 12", actions: ["__EXAM_PREP__", "Begin shadowing teachers, doctors, or counsellors", "Maintain a journal of your volunteering experiences", "Apply for leadership roles in school"] },
     { phase: "After Class 12", actions: ["Pursue Psychology, Education, Social Work, or Medicine", "Complete internships in counselling or NGO settings", "Build a track record of impact in community work", "Consider higher studies in clinical or counselling psychology"] },
   ],
   Enterprising: [
     { phase: "Class 11 (Now)", actions: ["Read business case studies and entrepreneur biographies", "Take leadership roles in school clubs or events", "Develop public speaking and presentation skills", "Start a small project, selling, organising, or building"] },
-    { phase: "Class 12", actions: ["Prepare for IPM, CLAT, or commerce entrance exams", "Build a strong CV with leadership experience", "Start a small entrepreneurial side project", "Develop financial literacy and business reading"] },
+    { phase: "Class 12", actions: ["__EXAM_PREP__", "Build a strong CV with leadership experience", "Start a small entrepreneurial side project", "Develop financial literacy and business reading"] },
     { phase: "After Class 12", actions: ["Pursue BBA, B.Com, LLB, or related fields", "Join entrepreneurship cells and business clubs", "Take internships at startups or consulting firms", "Build your network early through LinkedIn and events"] },
   ],
   Conventional: [
     { phase: "Class 11 (Now)", actions: ["Strengthen mathematics, accounting, and economics", "Master MS Excel and basic spreadsheet skills", "Develop strong organisational and time-management habits", "Read business newspapers (Mint, Economic Times)"] },
-    { phase: "Class 12", actions: ["Prepare for CA Foundation or commerce entrance exams", "Build accuracy in numerical and analytical work", "Develop typing speed and digital literacy", "Maintain strong academic discipline"] },
+    { phase: "Class 12", actions: ["__EXAM_PREP__", "Build accuracy in numerical and analytical work", "Develop typing speed and digital literacy", "Maintain strong academic discipline"] },
     { phase: "After Class 12", actions: ["Pursue B.Com, CA, CFA, or BBA in Finance", "Take internships at audit firms or banks", "Build certifications in finance and data analysis", "Aim for stable, professional career tracks early"] },
   ],
 };
@@ -139,6 +139,46 @@ const ADMISSION_PROCESS = {
   Commerce: { timeline: "Class 12 final year - CUET in May, CA Foundation in May/Nov, IPMAT in May.", docs: "Class 10 & 12 marksheets, entrance exam scorecard, ID proof, photos.", cutoffs: "CUET: 95+ percentile for top DU colleges. CA Foundation: 50% aggregate, 40% per subject." },
   Humanities: { timeline: "Class 12 final year - CUET in May, CLAT in Dec, NID/NIFT in Jan.", docs: "Class 10 & 12 marksheets, entrance exam scorecard, portfolio (for design), ID proof.", cutoffs: "CUET: 95+ percentile for top humanities colleges. CLAT: rank under 500 for NLU Bangalore." },
 };
+
+/* Map the profile's raw stream value (pcm/pcb/pcmb/comm/arts/none) to the
+   track used by the exams, admission-process, and action-plan sections.
+   When the stream is undecided, infer the most likely track from the
+   student's primary RIASEC type so all three sections tell one story. */
+function normalizeStream(stream, primaryCode) {
+  const lower = (stream || "").toLowerCase();
+  if (lower.includes("pcb")) return "PCB";
+  if (lower.includes("pcm")) return "PCM";
+  if (lower.includes("comm")) return "Commerce";
+  if (lower.includes("arts") || lower.includes("humanities") || lower.includes("liberal")) return "Humanities";
+  const byPersonality = { I: "PCM", R: "PCM", A: "Humanities", S: "Humanities", E: "Commerce", C: "Commerce" };
+  return byPersonality[primaryCode] || "PCM";
+}
+
+const TRACK_LABELS = {
+  PCM: "PCM (Engineering / Technology)",
+  PCB: "PCB (Medical / Life Sciences)",
+  Commerce: "Commerce",
+  Humanities: "Arts / Humanities",
+};
+
+const EXAM_PREP_BY_TRACK = {
+  PCM: "Begin JEE Main / JEE Advanced preparation alongside boards",
+  PCB: "Begin NEET preparation alongside boards",
+  Commerce: "Prepare for CA Foundation, CUET, or IPMAT alongside boards",
+  Humanities: "Prepare for CUET, CLAT, or design entrance exams alongside boards",
+};
+
+/* Personality-based roadmap, with the entrance-exam step swapped in from
+   the student's actual stream so it never contradicts the Admission
+   Process and Entrance Exams sections above it. */
+function getActionPlan(primaryName, track) {
+  const plan = ACTION_PLAN[primaryName] || [];
+  const examLine = EXAM_PREP_BY_TRACK[track] || EXAM_PREP_BY_TRACK.PCM;
+  return plan.map(phase => ({
+    ...phase,
+    actions: (phase.actions || []).map(a => (a === "__EXAM_PREP__" ? examLine : a)),
+  }));
+}
 
 function getExams(stream, primaryCode) {
   const examMap = {
@@ -167,14 +207,7 @@ function getExams(stream, primaryCode) {
       { name: "NIFT Entrance", desc: "Fashion and design colleges" },
     ],
   };
-  let normalizedStream = "PCM";
-  const lower = (stream || "").toLowerCase();
-  if (lower.includes("pcb")) normalizedStream = "PCB";
-  else if (lower.includes("pcm")) normalizedStream = "PCM";
-  else if (lower.includes("comm") || lower.includes("commerce")) normalizedStream = "Commerce";
-  else if (lower.includes("arts") || lower.includes("humanities") || lower.includes("liberal")) normalizedStream = "Humanities";
-
-  return examMap[normalizedStream] || examMap["PCM"];
+  return examMap[normalizeStream(stream, primaryCode)] || examMap["PCM"];
 }
 
 function getSkills(primaryCode, secondaryCode) {
@@ -429,6 +462,13 @@ export default function ReportPage() {
   const hasScores    = sortedScores.length >= 2;
   const primaryColor = RIASEC_COLORS[primaryName] || NAVY;
 
+  // One shared track drives the Entrance Exams, Admission Process, and
+  // Action Plan sections so they never contradict each other.
+  const track      = normalizeStream(profile?.stream, sortedScores[0]?.code);
+  const trackLabel = TRACK_LABELS[track] || track;
+  const admission  = ADMISSION_PROCESS[track] || ADMISSION_PROCESS.PCM;
+  const actionPlan = getActionPlan(primaryName, track);
+
   return (
     <div className="ft-dashboard-bg" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', color: 'var(--ft-text-primary)', fontFamily: 'Inter, system-ui, sans-serif' }}>
 
@@ -436,6 +476,14 @@ export default function ReportPage() {
         title=""
         right={(
           <>
+            <button
+              type="button"
+              className="manzil-header-btn no-print"
+              onClick={() => { window.history.pushState({}, '', '/dashboard'); window.dispatchEvent(new PopStateEvent('popstate')); }}
+              style={{ padding: '0.5rem 1.2rem', fontSize: '0.85rem' }}
+            >
+              ← Back to Dashboard
+            </button>
             <LanguageToggle className="no-print" />
             <button
               type="button"
@@ -455,8 +503,8 @@ export default function ReportPage() {
           /* ── No scores state ──────────────────────────────────────── */
           <GlassCard elevated style={{ textAlign: 'center', padding: '4rem 2rem', maxWidth: 600, margin: '4rem auto' }}>
             <div style={{ fontSize: 48, marginBottom: 16 }}>🧠</div>
-            <h2 style={{ color: 'var(--ft-neon-cyan)', marginBottom: 12 }}>No test results yet</h2>
-            <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: 24, maxWidth: 420, margin: '0 auto 24px', lineHeight: 1.6 }}>
+            <h2 style={{ color: 'var(--ft-brand-navy)', marginBottom: 12 }}>No test results yet</h2>
+            <p style={{ color: 'var(--ft-text-secondary)', marginBottom: 24, maxWidth: 420, margin: '0 auto 24px', lineHeight: 1.6 }}>
               Take the psychometric test to generate your personalised RIASEC report.
               It takes 10–15 minutes and your results are saved to your profile.
             </p>
@@ -629,7 +677,7 @@ export default function ReportPage() {
                   <GlassCard elevated style={{ padding: '2rem' }}>
                     <ResponsiveContainer width="100%" height={340}>
                        <RadarChart cx="50%" cy="50%" outerRadius="60%" data={radarData}>
-                        <PolarGrid gridType="polygon" stroke="rgba(255, 255, 255, 0.15)" />
+                        <PolarGrid gridType="polygon" stroke="rgba(16, 40, 73, 0.15)" />
                          <PolarAngleAxis
                            dataKey="dimension"
                            tick={<ReportRadarTick />}
@@ -637,7 +685,7 @@ export default function ReportPage() {
                          <PolarRadiusAxis
                            angle={30}
                            domain={[0, 100]}
-                           tick={{ fill: 'rgba(255, 255, 255, 0.45)', fontSize: 11 }}
+                           tick={{ fill: 'var(--ft-text-muted)', fontSize: 11 }}
                            tickCount={5}
                          />
                          <Radar
@@ -659,7 +707,7 @@ export default function ReportPage() {
                            dot={{ fill: '#14b8a6', r: 4 }}
                          />
                          <Legend
-                           formatter={v => <span style={{ color: 'rgba(255, 255, 255, 0.85)', fontWeight: 600, fontSize: 13 }}>{v}</span>}
+                           formatter={v => <span style={{ color: 'var(--ft-text-secondary)', fontWeight: 600, fontSize: 13 }}>{v}</span>}
                          />
                          <Tooltip content={<RadarTooltipContent />} />
                        </RadarChart>
@@ -689,8 +737,8 @@ export default function ReportPage() {
                           type="number"
                           domain={[0, 5]}
                           ticks={[1, 2, 3, 4, 5]}
-                          tick={{ fill: 'rgba(255, 255, 255, 0.45)', fontSize: 12 }}
-                          tickFormatter={v => ['', '😟', '😐', '🙂', '😄', '⭐'][v] || v}
+                          tick={{ fill: 'var(--ft-text-secondary)', fontSize: 12, fontWeight: 600 }}
+                          tickFormatter={v => ['', '1 😟', '2 😐', '3 🙂', '4 😄', '5 ⭐'][v] || v}
                           axisLine={false}
                           tickLine={false}
                         />
@@ -710,16 +758,16 @@ export default function ReportPage() {
                           {subjectData.map((entry, i) => (
                             <Cell
                               key={i}
-                              fill={entry.rating >= 4 ? '#f59e0b' : entry.rating === 3 ? '#00d4ff' : 'rgba(255, 255, 255, 0.15)'}
+                              fill={entry.rating >= 4 ? '#f59e0b' : entry.rating === 3 ? '#00d4ff' : '#cbd5e1'}
                             />
                           ))}
                         </Bar>
                       </BarChart>
                     </ResponsiveContainer>
-                    <div style={{ display: 'flex', gap: 16, justifyContent: 'center', marginTop: 12, fontSize: 12, color: 'rgba(255, 255, 255, 0.55)' }}>
+                    <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap', marginTop: 12, fontSize: 12, color: 'var(--ft-text-secondary)', fontWeight: 600 }}>
                       <span><span style={{ color: '#f59e0b', fontWeight: 800 }}>■</span> Strong (4–5)</span>
                       <span><span style={{ color: '#00d4ff', fontWeight: 800 }}>■</span> Average (3)</span>
-                      <span><span style={{ color: 'rgba(255, 255, 255, 0.3)', fontWeight: 800 }}>■</span> Needs work (1–2)</span>
+                      <span><span style={{ color: '#cbd5e1', fontWeight: 800 }}>■</span> Needs work (1–2)</span>
                     </div>
                   </GlassCard>
                 </section>
@@ -785,7 +833,7 @@ export default function ReportPage() {
 
             {/* ── Entrance Exams ── */}
             <section style={{ marginBottom: 32 }}>
-              <SectionHeading title="Entrance Exams to Target" subtitle={`Based on your stream (${profile?.stream?.toUpperCase() || 'Science'}) and career direction, these are the key exams to prepare for:`} />
+              <SectionHeading title="Entrance Exams to Target" subtitle={`Based on your ${trackLabel} track, these are the key exams to prepare for:`} />
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16 }}>
                 {(getExams(profile?.stream || 'pcm', sortedScores[0]?.code) || []).map((exam, i) => (
                   <GlassCard key={i} glowColor="cyan" style={{ padding: 18, display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -803,7 +851,7 @@ export default function ReportPage() {
 
             {/* ── Admission Process ── */}
             <section style={{ marginBottom: 32 }}>
-              <SectionHeading title="Navigating the Admission Process" subtitle={`Here is what the admission journey looks like for your stream:`} />
+              <SectionHeading title="Navigating the Admission Process" subtitle={`Here is what the admission journey looks like for your ${trackLabel} track:`} />
               <GlassCard glowColor="purple" style={{ padding: 22 }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
                   <div>
@@ -811,7 +859,7 @@ export default function ReportPage() {
                       <Calendar size={16} style={{ color: 'var(--ft-neon-purple)' }} /> Timeline
                     </h4>
                     <p style={{ margin: 0, color: 'var(--ft-text-secondary)', fontSize: '0.88rem', lineHeight: 1.5 }}>
-                      {(ADMISSION_PROCESS[profile?.stream?.toUpperCase()] || ADMISSION_PROCESS["PCM"]).timeline}
+                      {admission.timeline}
                     </p>
                   </div>
                   <div>
@@ -819,7 +867,7 @@ export default function ReportPage() {
                       <FileText size={16} style={{ color: 'var(--ft-neon-purple)' }} /> Documents Needed
                     </h4>
                     <p style={{ margin: 0, color: 'var(--ft-text-secondary)', fontSize: '0.88rem', lineHeight: 1.5 }}>
-                      {(ADMISSION_PROCESS[profile?.stream?.toUpperCase()] || ADMISSION_PROCESS["PCM"]).docs}
+                      {admission.docs}
                     </p>
                   </div>
                   <div>
@@ -827,7 +875,7 @@ export default function ReportPage() {
                       <TrendingUp size={16} style={{ color: 'var(--ft-neon-purple)' }} /> Typical Cutoffs
                     </h4>
                     <p style={{ margin: 0, color: 'var(--ft-text-secondary)', fontSize: '0.88rem', lineHeight: 1.5 }}>
-                      {(ADMISSION_PROCESS[profile?.stream?.toUpperCase()] || ADMISSION_PROCESS["PCM"]).cutoffs}
+                      {admission.cutoffs}
                     </p>
                   </div>
                 </div>
@@ -840,7 +888,7 @@ export default function ReportPage() {
             <section style={{ marginBottom: 32 }}>
               <SectionHeading title="Your Personalised Action Plan" subtitle={`A step-by-step roadmap from now until college, built around your ${primaryName} personality:`} />
               <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-                {(ACTION_PLAN[primaryName] || []).map((phase, i) => (
+                {actionPlan.map((phase, i) => (
                   <GlassCard
                     key={i}
                     glowColor="cyan"
