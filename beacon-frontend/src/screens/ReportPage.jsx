@@ -25,8 +25,6 @@ import {
   Sparkles,
   Brain,
 } from "lucide-react";
-import LanguageToggle from '../components/LanguageToggle.jsx';
-
 import { API as BEACON_API, APTITUDE_URL } from '../config';
 
 
@@ -484,7 +482,6 @@ export default function ReportPage() {
             >
               ← Back to Dashboard
             </button>
-            <LanguageToggle className="no-print" />
             <button
               type="button"
               className="manzil-header-btn"

@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { sendChatChoice, startChat } from "../api/client";
 import ChatMarkdown from "../components/ChatMarkdown";
 import ManzilHeader from "../components/ManzilHeader";
-import LanguageToggle from "../components/LanguageToggle.jsx";
 import BilingualText from "../components/BilingualText.jsx";
 import "./ChatScreen.css";
 
@@ -369,7 +368,6 @@ export default function ChatScreen() {
         showDefaultNav={false}
         right={(
           <>
-            <LanguageToggle />
             <button type="button" className="manzil-header-btn" onClick={() => navigate("/dashboard")}>
               ← Dashboard
             </button>

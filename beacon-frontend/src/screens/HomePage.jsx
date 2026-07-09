@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import EdCilLogo from '../assets/edcil.jpeg'
 import ManzilHeader from '../components/ManzilHeader'
-import LanguageToggle from '../components/LanguageToggle.jsx'
 import BilingualText from '../components/BilingualText.jsx'
 import { useLanguage } from '../context/LanguageContext'
 import '../styles/futuristic.css'
@@ -219,7 +218,6 @@ export default function HomePage({ onStart, onLogin }) {
         showDefaultNav={false}
         right={(
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap', justifyContent: 'flex-end', minWidth: 0 }}>
-            <LanguageToggle />
             <button
               onClick={onLogin}
               className="ft-button-secondary"

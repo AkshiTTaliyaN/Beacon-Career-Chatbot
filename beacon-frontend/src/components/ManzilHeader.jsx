@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import EdCilTopLogo from "../assets/edcil.jpeg";
 import ManzilLogo from "../assets/manzil-logo.png";
 import ProfileDropdown from "./ProfileDropdown";
+import LanguageToggle from "./LanguageToggle.jsx";
 import "./ManzilHeader.css";
 
 const DEFAULT_NAV_ITEMS = [
@@ -69,6 +70,7 @@ export default function ManzilHeader({
             <ProfileDropdown name={userName} />
           </nav>
         )}
+        <LanguageToggle className="no-print" />
         {right}
       </div>
     </header>

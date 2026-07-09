@@ -1,5 +1,6 @@
 import EdCilLogo from "../assets/edcil.jpeg";
 import ManzilLogo from "../assets/manzil-logo.png";
+import LanguageToggle from "./LanguageToggle.jsx";
 import "./ManzilHeader.css";
 
 const DEFAULT_NAV_ITEMS = [
@@ -94,6 +95,7 @@ export default function ManzilHeader({
             <div className="manzil-header-avatar">U</div>
           </nav>
         )}
+        <LanguageToggle className="no-print" />
         {right}
       </div>
     </header>
