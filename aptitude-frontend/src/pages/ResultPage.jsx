@@ -204,14 +204,18 @@ const ADMISSION_PROCESS = {
 const LEVEL_COLORS = { High: "#10b981", Medium: "#f59e0b", Low: "#ef4444" };
 const LEVEL_BG    = { High: "#f0fdf4", Medium: "#fffbeb", Low: "#fef2f2" };
 
+// OCEAN (Big Five) uses ONE neutral accent for all traits. Personality traits
+// are not good/bad, so the green/amber/red skill palette must not be used here.
+const OCEAN_COLOR = "#6C5CE7";
+const OCEAN_TINT  = "#F3F1FD";
+
 export default function ResultPage({
   result,
   beaconOrigin,
   onDownloadPDF,
-  onRetake
+  onRetake,
+  standalone = false,   // true on the public assessment site: no portal, no dashboard
 }) {
-  console.log("RESULT RECEIVED:", result);
-
   const primary = result.primary_type;
 
   const primaryColor = getColor(primary);
@@ -235,14 +239,15 @@ export default function ResultPage({
   const aptitudeFitNote  = result.aptitude_fit_note || "";
   const selectedHobbies  = result.selected_hobbies || [];
 
- 
-  
+  // OCEAN / Big Five summary (array of { trait, label, percentage, level, workstyle })
+  const oceanSummary     = result.ocean_summary || [];
 
   return (
     <div className="result-page report-page results-page apt-floating-shell">
       <FloatingBackground />
       <ManzilHeader
         title=""
+        standalone={standalone}
         center={(
           <div>
             <h1><BilingualText text="Career &amp; Personality Report" /></h1>
@@ -374,28 +379,84 @@ export default function ResultPage({
 
         <hr className="divider" />
 
-        {/* ── Dashboard Career Matches CTA ── */}
-        <section className="result-section dashboard-cta-section">
-          <div className="dashboard-cta-card" style={{ borderLeftColor: "#10b981", background: "rgba(16, 185, 129, 0.06)", padding: "30px", borderRadius: "12px", borderLeft: "5px solid #10b981" }}>
-            <div style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
-              <Compass size={32} style={{ color: "#10b981", marginTop: "4px" }} />
-              <div>
-                <h3 className="section-title" style={{ color: "#102849", margin: "0 0 10px 0", fontSize: "20px", textAlign: "left" }}>
-                  <BilingualText text="Your Personalized Career Matches Are Ready!" />
-                </h3>
-                <p className="section-sub" style={{ color: "#5F6B8D", margin: "0 0 20px 0", fontSize: "14px", lineHeight: "1.6" }}>
-                  <BilingualText text="We have combined your onboarding academic profile, subject ratings, RIASEC personality scores, and passions/hobbies to generate your final career recommendations. Go to your main dashboard to view your fully integrated, stream-aligned, and passion-oriented career roadmaps." />
-                </p>
-                <button className="btn-primary" style={{ background: "linear-gradient(135deg, #10b981 0%, #059669 100%)", padding: "12px 24px", fontSize: "15px", fontWeight: "bold" }}
-                  onClick={() => { window.location.href = dashboardUrl; }}>
-                  <BilingualText text="View My Career Matches on Dashboard →" />
-                </button>
+        {/* ── Dashboard Career Matches CTA ──
+            PORTAL ONLY. A standalone student has no Manzil account and no
+            dashboard, so this whole block is hidden there. Their career matches
+            are the RIASEC ones already shown in this report and the PDF. */}
+        {!standalone && (
+          <>
+            <section className="result-section dashboard-cta-section">
+              <div className="dashboard-cta-card" style={{ borderLeftColor: "#10b981", background: "rgba(16, 185, 129, 0.06)", padding: "30px", borderRadius: "12px", borderLeft: "5px solid #10b981" }}>
+                <div style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
+                  <Compass size={32} style={{ color: "#10b981", marginTop: "4px" }} />
+                  <div>
+                    <h3 className="section-title" style={{ color: "#102849", margin: "0 0 10px 0", fontSize: "20px", textAlign: "left" }}>
+                      <BilingualText text="Your Personalized Career Matches Are Ready!" />
+                    </h3>
+                    <p className="section-sub" style={{ color: "#5F6B8D", margin: "0 0 20px 0", fontSize: "14px", lineHeight: "1.6" }}>
+                      <BilingualText text="We have combined your onboarding academic profile, subject ratings, RIASEC personality scores, and passions/hobbies to generate your final career recommendations. Go to your main dashboard to view your fully integrated, stream-aligned, and passion-oriented career roadmaps." />
+                    </p>
+                    <button className="btn-primary" style={{ background: "linear-gradient(135deg, #10b981 0%, #059669 100%)", padding: "12px 24px", fontSize: "15px", fontWeight: "bold" }}
+                      onClick={() => { window.location.href = dashboardUrl; }}>
+                      <BilingualText text="View My Career Matches on Dashboard →" />
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </section>
+            </section>
 
-        <hr className="divider" />
+            <hr className="divider" />
+          </>
+        )}
+
+        {/* ── Career Matches (STANDALONE ONLY) ──
+            The portal sends students to the dashboard for this. Standalone has
+            no dashboard, so the RIASEC career matches are shown inline instead,
+            otherwise the student is told matches exist and never shown any. */}
+        {standalone && primaryCareers.length > 0 && (
+          <>
+            <section className="result-section">
+              <h2 className="section-title" style={{ color: "#102849" }}><BilingualText text="Your Top Career Matches" /></h2>
+              <p className="section-sub" style={{ color: "#5F6B8D" }}><BilingualText text="Careers that align with your personality type, based on your Holland Code." /></p>
+
+              <div className="skills-grid">
+                {primaryCareers.slice(0, 3).map((career, i) => (
+                  <div key={i} className="skill-card" style={{ borderTop: `3px solid ${primaryColor}` }}>
+                    <Briefcase size={16} />
+                    <h4><BilingualText text={career.title} /></h4>
+                    {career.salary && (
+                      <p style={{ fontWeight: 700, color: "#102849", marginBottom: "6px" }}>{career.salary}</p>
+                    )}
+                    <p><BilingualText text={career.description || career.reason || ""} /></p>
+                    {career.stream && (
+                      <p style={{ marginTop: "8px", fontSize: "0.8rem", fontWeight: 700, color: primaryColor }}>
+                        <BilingualText text={career.stream} />
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {interestCareers.length > 0 && (
+                <>
+                  <p className="section-sub" style={{ color: "#5F6B8D", marginTop: "24px" }}>
+                    <BilingualText text="Careers aligned with the hobbies and interests you selected:" />
+                  </p>
+                  <div className="traits-grid">
+                    {interestCareers.map((c, i) => (
+                      <div key={i} className="trait-chip">
+                        <span className="trait-dot" style={{ background: primaryColor }} />
+                        <BilingualText text={c.title} />
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+            </section>
+
+            <hr className="divider" />
+          </>
+        )}
 
         {/* ── Aptitude Summary ── */}
         {Object.keys(aptitudeScores).length > 0 && (
@@ -454,6 +515,42 @@ export default function ResultPage({
                   )}
                 </div>
               )}
+            </section>
+            <hr className="divider" />
+          </>
+        )}
+
+        {/* ── Personality Style (Big Five / OCEAN) ──
+            Neutral palette: one indigo accent for all traits. Traits are not
+            good/bad, so the aptitude green/amber/red is deliberately not used. */}
+        {oceanSummary.length > 0 && (
+          <>
+            <section className="result-section">
+              <h2 className="section-title" style={{ color: "#102849" }}><BilingualText text="Your Personality Style" /></h2>
+              <p className="section-sub" style={{ color: "#5F6B8D" }}><BilingualText text="Based on the Big Five (OCEAN) model, this shows how you naturally think, feel, and work day to day. These describe your style, not your ability, there are no better or worse results here." /></p>
+
+              <div className="aptitude-grid">
+                {oceanSummary.map((t) => (
+                  <div key={t.trait} className="aptitude-skill-card"
+                    style={{ background: OCEAN_TINT, borderColor: OCEAN_COLOR + "40" }}>
+                    <div className="aptitude-skill-header">
+                      <span className="aptitude-skill-label"><BilingualText text={t.label} /></span>
+                      <span className="aptitude-level-badge"
+                        style={{ background: OCEAN_COLOR + "20", color: OCEAN_COLOR }}>
+                        <BilingualText text={t.level} />
+                      </span>
+                    </div>
+                    <div className="aptitude-bar-wrap">
+                      <div className="aptitude-bar-fill"
+                        style={{ width: `${t.percentage}%`, background: OCEAN_COLOR }} />
+                    </div>
+                    <span className="aptitude-pct">{t.percentage}%</span>
+                    <p style={{ marginTop: "10px", fontSize: "0.85rem", lineHeight: 1.5, color: "#5F6B8D" }}>
+                      <BilingualText text={t.workstyle} />
+                    </p>
+                  </div>
+                ))}
+              </div>
             </section>
             <hr className="divider" />
           </>
@@ -550,10 +647,13 @@ export default function ResultPage({
         <div className="result-footer">
           <p><BilingualText text="This report is an illustrative guide based on a psychometric assessment. For personalised counselling, contact a qualified career counsellor." /></p>
           <div className="footer-actions">
-            <button className="btn-primary" style={{ background: "#10b981" }}
-              onClick={() => { window.location.href = dashboardUrl; }}>
-               <Compass size={16} /> <BilingualText text="View My Recommended Careers" />
-            </button>
+            {/* PORTAL ONLY: the dashboard does not exist on the standalone site. */}
+            {!standalone && (
+              <button className="btn-primary" style={{ background: "#10b981" }}
+                onClick={() => { window.location.href = dashboardUrl; }}>
+                <Compass size={16} /> <BilingualText text="View My Recommended Careers" />
+              </button>
+            )}
             <button className="btn-primary" onClick={onDownloadPDF}><Download size={16} /> <BilingualText text="Download PDF Report" /></button>
             <button className="btn-ghost" onClick={onRetake}><BilingualText text="Take Test Again" /></button>
           </div>

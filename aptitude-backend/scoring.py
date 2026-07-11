@@ -131,20 +131,165 @@ def calculate_aptitude_scores(answers: List[int]) -> Dict:
     return skill_scores
 
 
+# ===========================================================================
+# SECTION 4 - OCEAN (BIG FIVE) SCORING
 # ---------------------------------------------------------------------------
-# SYNTHESIS - Combines all three sections into one unified result
+# Instrument: Mini-IPIP (Donnellan et al., 2006), 20 items, 4 per trait,
+# 1-5 agreement scale. 11 items are reverse-keyed and are flipped once here
+# (6 - answer). The frontend data marks them but does NOT flip them.
+#
+# IMPORTANT — this is NOT an ability scale. High/Low here describe WHERE a
+# person sits on a trait, not how well they did. "Low Neuroticism" is not a
+# failure and "High Neuroticism" is not an achievement. The result page must
+# therefore NOT paint these bars with the good/amber/bad skill palette.
+# ===========================================================================
+
+# Trait order and display names.
+OCEAN_TRAITS = ["O", "C", "E", "A", "N"]
+OCEAN_TRAIT_LABELS = {
+    "O": "Openness",
+    "C": "Conscientiousness",
+    "E": "Extraversion",
+    "A": "Agreeableness",
+    "N": "Neuroticism",
+}
+
+# Which of the 20 items are reverse-keyed, by 1-based id (matches
+# ocean_questions.js). Kept here so backend scoring is self-contained and does
+# not depend on the frontend sending the reverse flags.
+OCEAN_REVERSE_IDS = {6, 7, 8, 9, 10, 15, 16, 17, 18, 19, 20}
+
+# Which trait each 1-based item id belongs to (matches ocean_questions.js order).
+# NOTE: coupled by position to ocean_questions.js — if you reorder the
+# questions there, update this map and OCEAN_REVERSE_IDS to match.
+OCEAN_ITEM_TRAIT = {
+    1: "E", 2: "A", 3: "C", 4: "N", 5: "O",
+    6: "E", 7: "A", 8: "C", 9: "N", 10: "O",
+    11: "E", 12: "A", 13: "C", 14: "N", 15: "O",
+    16: "E", 17: "A", 18: "C", 19: "N", 20: "O",
+}
+
+# Band cutoffs on the 0-100 percentage. level is a POSITION label, not a
+# quality judgement. Adjust these two numbers to change the bands.
+OCEAN_BANDS = {
+    "high":     67,   # percentage >= 67  -> "High"
+    "moderate": 34,   # 34 <= percentage < 67 -> "Moderate"
+    # below 34 -> "Low"
+}
+
+
+def calculate_ocean_scores(answers: List[int]) -> Dict:
+    """
+    Takes 20 answers (1-5 scale) in ocean_questions.js order.
+    Reverse-keyed items are flipped (6 - answer) before summing.
+    Each trait = 4 items -> raw 4-20 -> percentage 0-100.
+
+    Returns, per trait key (O/C/E/A/N):
+      { "label", "raw", "percentage", "level" }
+    Same shape as aptitude_scores so the result bar component can render it,
+    but "level" here is a POSITION on the trait, not a High/Low ability grade.
+    """
+    if len(answers) != 20:
+        raise ValueError(f"Expected 20 OCEAN answers, got {len(answers)}")
+
+    # Accumulate raw sums per trait, applying reverse-keying.
+    raw_totals = {t: 0 for t in OCEAN_TRAITS}
+    for idx, answer in enumerate(answers):
+        item_id = idx + 1  # answers are in id order 1..20
+        trait = OCEAN_ITEM_TRAIT[item_id]
+        value = (6 - answer) if item_id in OCEAN_REVERSE_IDS else answer
+        raw_totals[trait] += value
+
+    trait_scores = {}
+    for trait in OCEAN_TRAITS:
+        raw = raw_totals[trait]                  # 4-20
+        percentage = round(((raw - 4) / 16) * 100, 1)   # 4→0%, 12→50%, 20→100%
+
+        if percentage >= OCEAN_BANDS["high"]:
+            level = "High"
+        elif percentage >= OCEAN_BANDS["moderate"]:
+            level = "Moderate"
+        else:
+            level = "Low"
+
+        trait_scores[trait] = {
+            "label": OCEAN_TRAIT_LABELS[trait],
+            "raw": raw,
+            "percentage": percentage,
+            "level": level,
+        }
+
+    return trait_scores
+
+
+# Work-style descriptions (trait-neutral): one sentence per trait per band.
+# Framed as HOW the student tends to work, to sit under (not compete with)
+# the RIASEC career direction. Never framed as good/bad.
+OCEAN_WORKSTYLE = {
+    "O": {
+        "High": "You are drawn to new ideas, variety, and creative problem-solving, and tend to do well in roles that reward imagination and exploration.",
+        "Moderate": "You balance new ideas with the practical and familiar, comfortable trying new approaches while still valuing what already works.",
+        "Low": "You prefer the concrete, tested, and practical, and tend to do well in roles with clear methods rather than open-ended experimentation.",
+    },
+    "C": {
+        "High": "You are organised, dependable, and follow through, and tend to do well in structured roles where planning and consistency matter.",
+        "Moderate": "You can be organised when it counts while staying flexible, adapting your structure to what a task needs.",
+        "Low": "You work best with flexibility and spontaneity rather than rigid structure, and tend to prefer roles that are not heavily process-bound.",
+    },
+    "E": {
+        "High": "You gain energy from people and interaction, and tend to do well in collaborative, outward-facing, or team-based roles.",
+        "Moderate": "You are comfortable both with people and working on your own, adaptable across team and independent settings.",
+        "Low": "You focus and recharge best working independently, and tend to do well in roles that allow deep, self-directed work over constant interaction.",
+    },
+    "A": {
+        "High": "You are cooperative, considerate, and attuned to others, and tend to do well in supportive, people-centred, or team-oriented roles.",
+        "Moderate": "You balance cooperation with directness, able to work with others while still holding your own position.",
+        "Low": "You are direct, objective, and comfortable with disagreement, and tend to do well in roles that reward candour and independent judgement.",
+    },
+    "N": {
+        # HIGH = more emotionally reactive. Kept neutral and supportive at every
+        # band; never framed as a defect.
+        "High": "You experience emotions strongly, which can bring sensitivity and awareness; you tend to do best in steady, supportive environments and benefit from managing pressure deliberately.",
+        "Moderate": "You are generally steady and handle everyday pressure reasonably well, with normal ups and downs.",
+        "Low": "You stay calm and even under pressure, and tend to do well in demanding or high-stakes environments that require composure.",
+    },
+}
+
+
+def build_ocean_summary(ocean_scores: Dict) -> List[Dict]:
+    """
+    Turns the raw trait scores into an ordered, display-ready list for the
+    result page: one entry per trait with its band and a trait-neutral
+    work-style sentence. Order follows OCEAN_TRAITS (O, C, E, A, N).
+    """
+    summary = []
+    for trait in OCEAN_TRAITS:
+        data = ocean_scores[trait]
+        summary.append({
+            "trait": trait,
+            "label": data["label"],
+            "percentage": data["percentage"],
+            "level": data["level"],
+            "workstyle": OCEAN_WORKSTYLE[trait][data["level"]],
+        })
+    return summary
+
+
+# ---------------------------------------------------------------------------
+# SYNTHESIS - Combines all sections into one unified result
 # ---------------------------------------------------------------------------
 def synthesise_result(
     riasec_scores: Dict[str, float],
     interest_data: Dict,
     aptitude_scores: Dict,
+    ocean_scores: Dict,
     name: str,
     class_level: str,
     stream: str,
 ) -> dict:
     """
-    Master function. Takes scores from all three sections and returns
-    a single unified result dictionary for the result page and PDF.
+    Master function. Takes scores from all sections and returns a single
+    unified result dictionary for the result page and PDF.
     """
 
     # --- RIASEC primary analysis ---
@@ -228,6 +373,10 @@ def synthesise_result(
         "strong_skills": strong_skills,
         "needs_support": needs_support,
         "aptitude_fit_note": aptitude_fit_note,
+
+        # OCEAN / Big Five section
+        "ocean_scores": ocean_scores,
+        "ocean_summary": build_ocean_summary(ocean_scores),
 
         # Supporting data (unchanged from original)
         "entrance_exams": get_exams(stream, primary_code),

@@ -20,6 +20,11 @@ LIGHT_BG = colors.HexColor("#f8fafc")
 GRAY_TEXT = colors.HexColor("#64748b")
 BORDER_COLOR = colors.HexColor("#e2e8f0")
 
+# Big Five (OCEAN) uses ONE neutral accent. Traits are not good/bad, so the
+# green/amber/red aptitude palette is deliberately not used here.
+OCEAN_COLOR = colors.HexColor("#6C5CE7")
+OCEAN_COLOR_HEX = "#6C5CE7"
+
 CATEGORY_COLORS = {
     "Investigative": colors.HexColor("#3b82f6"),
     "Realistic": colors.HexColor("#ef4444"),
@@ -33,7 +38,7 @@ def score_bar(label, score, bar_color):
     """Create a progress bar row as a table."""
     bar_width = 340
     fill_width = int(bar_width * score / 100)
-    
+
     d = Drawing(bar_width + 60, 22)
     # Background bar
     d.add(Rect(0, 4, bar_width, 12, fillColor=colors.HexColor("#e2e8f0"), strokeColor=None))
@@ -55,9 +60,14 @@ def generate_pdf(result: dict) -> bytes:
         bottomMargin=2*cm
     )
 
-
     styles = getSampleStyleSheet()
     story = []
+
+    # Which frontend asked for this PDF. A standalone student has no Manzil
+    # account and no dashboard, so the closing CTA must not send them to one.
+    # Defaults to "portal" so existing behaviour is unchanged if unset.
+    app_mode = result.get("app_mode", "portal")
+    is_standalone = app_mode == "standalone"
 
     res_name = safe_html(result.get('name', ''))
     res_class = safe_html(result.get('class_level', ''))
@@ -216,6 +226,45 @@ def generate_pdf(result: dict) -> bytes:
         story.append(HRFlowable(width="100%", thickness=1, color=BORDER_COLOR))
         story.append(Spacer(1, 0.4*cm))
 
+    # ── PERSONALITY STYLE (BIG FIVE / OCEAN) ─────────────────────────────────
+    # Neutral palette: one indigo accent for every trait. High/Low describe
+    # position on a trait, not ability, so no green/amber/red here.
+    ocean_summary = result.get("ocean_summary") or []
+    if ocean_summary:
+        story.append(Paragraph("Your Personality Style", h2_style))
+        story.append(Paragraph(
+            "Based on the Big Five (OCEAN) model, this shows how you naturally think, feel, and work day to day. "
+            "These describe your style, not your ability, there are no better or worse results here.",
+            ParagraphStyle("OceanSub", parent=styles["Normal"], fontSize=9, leading=13, textColor=GRAY_TEXT, spaceAfter=6)
+        ))
+        for t in ocean_summary:
+            label = safe_html(t.get("label", ""))
+            pct = t.get("percentage", 0)
+            level = safe_html(t.get("level", ""))
+            workstyle = safe_html(t.get("workstyle", ""))
+            row = [[
+                Paragraph(f"<b>{label}</b>", ParagraphStyle("OceanLabel", parent=styles["Normal"], fontSize=9, textColor=DARK_NAVY)),
+                score_bar(label, pct, OCEAN_COLOR),
+                Paragraph(f"<font color='{OCEAN_COLOR_HEX}'><b>{level}</b></font>",
+                          ParagraphStyle("OceanLevel", parent=styles["Normal"], fontSize=9)),
+            ]]
+            ocean_table = Table(row, colWidths=[4.5*cm, 10*cm, 2*cm])
+            ocean_table.setStyle(TableStyle([
+                ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 1),
+                ("TOPPADDING", (0, 0), (-1, -1), 2),
+            ]))
+            story.append(ocean_table)
+            if workstyle:
+                story.append(Paragraph(
+                    workstyle,
+                    ParagraphStyle("OceanDesc", parent=styles["Normal"], fontSize=8.5, leading=12, textColor=GRAY_TEXT, leftIndent=6, spaceAfter=5)
+                ))
+
+        story.append(Spacer(1, 0.4*cm))
+        story.append(HRFlowable(width="100%", thickness=1, color=BORDER_COLOR))
+        story.append(Spacer(1, 0.4*cm))
+
     # ── INTERESTS & HOBBIES ──────────────────────────────────────────────────
     hobbies = result.get("selected_hobbies") or []
     interest_careers = result.get("interest_careers") or []
@@ -272,21 +321,37 @@ def generate_pdf(result: dict) -> bytes:
         story.append(HRFlowable(width="100%", thickness=1, color=BORDER_COLOR))
         story.append(Spacer(1, 0.4*cm))
 
-    # ── DETAILED RECOMMENDATIONS CTA ──────────────────────────────────────────
-    story.append(Paragraph("Your Personalized Career Recommendations", h2_style))
-    story.append(Spacer(1, 0.2*cm))
-    cta_text = (
-        "We have combined your onboarding academic profile, subject ratings, "
-        "RIASEC personality scores, and passions/hobbies to generate your final "
-        "career recommendations. <b>To view your unified, stream-aligned, and "
-        "interest-aligned career matches with detailed roadmaps, please log in "
-        "to the Manzil Platform and check your Student Dashboard.</b>"
-    )
+    # ── CLOSING RECOMMENDATIONS SECTION ───────────────────────────────────────
+    # Portal students get sent to their dashboard, where Engine 1 has combined
+    # this assessment with their onboarding profile. Standalone students have no
+    # account and no dashboard, so pointing them there would be a dead end.
+    if is_standalone:
+        story.append(Paragraph("What To Do With This Report", h2_style))
+        story.append(Spacer(1, 0.2*cm))
+        cta_text = (
+            "This report brings together four things: your RIASEC personality type, the "
+            "interests and hobbies you selected, your self-rated aptitude across six skill "
+            "areas, and your Big Five personality style. Together they point toward the "
+            "career directions above. <b>Read it with your parents and a teacher you trust, "
+            "use the entrance exams and skills sections to plan your next year, and treat "
+            "the career matches as directions worth exploring rather than a final answer. "
+            "You can retake this assessment any time.</b>"
+        )
+    else:
+        story.append(Paragraph("Your Personalized Career Recommendations", h2_style))
+        story.append(Spacer(1, 0.2*cm))
+        cta_text = (
+            "We have combined your onboarding academic profile, subject ratings, "
+            "RIASEC personality scores, and passions/hobbies to generate your final "
+            "career recommendations. <b>To view your unified, stream-aligned, and "
+            "interest-aligned career matches with detailed roadmaps, please log in "
+            "to the Manzil Platform and check your Student Dashboard.</b>"
+        )
+
     story.append(Paragraph(cta_text, ParagraphStyle("CTA", parent=styles["Normal"], fontSize=10, leading=16, textColor=DARK_NAVY)))
     story.append(Spacer(1, 0.6*cm))
     story.append(HRFlowable(width="100%", thickness=1, color=BORDER_COLOR))
     story.append(Spacer(1, 0.4*cm))
-
 
     # ── SKILLS TO BUILD ──────────────────────────────────────────────────────
     story.append(Paragraph("Skills to Build Now", h2_style))

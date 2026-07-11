@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import QUESTIONS from "../data/questions";
 import APTITUDE_QUESTIONS from "../data/aptitude_questions";
+import OCEAN_QUESTIONS from "../data/ocean_questions";
 import { HOBBY_CATEGORIES } from "../data/hobbies";
 import { RIASEC_COLORS } from "../constants/riasecColors";
 import "./TestPage.css";
@@ -77,6 +78,10 @@ const APTITUDE_COLORS = {
   detail:   "#8AACDD",
 };
 
+// Single neutral accent for the whole OCEAN section. One colour on purpose:
+// a per-trait colour would let a student infer what each item measures.
+const OCEAN_COLOR = "#6C5CE7";
+
 const APTITUDE_SCALE = [
   { value: 1, label: "Never" },
   { value: 2, label: "Rarely" },
@@ -92,6 +97,9 @@ const RIASEC_SCALE = [
   { value: 4, label: "Agree" },
   { value: 5, label: "Strongly Agree" },
 ];
+
+// OCEAN uses the same Disagree->Agree anchors as RIASEC.
+const OCEAN_SCALE = RIASEC_SCALE;
 
 // ---------------------------------------------------------------------------
 // APTITUDE SECTION METADATA
@@ -133,7 +141,7 @@ const APTITUDE_SKILL_INFO = {
 // MAIN COMPONENT
 // ---------------------------------------------------------------------------
 export default function TestPage({ onSubmit, onBack, profileData }) {
-  // step: "details" | "questions" | "hobbies" | "aptitude"
+  // step: "details" | "questions" | "hobbies" | "aptitude" | "ocean"
   const [step, setStep] = useState("details");
 
   const [details, setDetails] = useState({
@@ -165,8 +173,13 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
   const [aptitudeCurrent, setAptitudeCurrent] = useState(0);
   const [aptitudeSelected, setAptitudeSelected] = useState(0);
 
+  // Section 4 - OCEAN (Big Five)
+  const [oceanAnswers, setOceanAnswers] = useState(Array(20).fill(0));
+  const [oceanCurrent, setOceanCurrent] = useState(0);
+  const [oceanSelected, setOceanSelected] = useState(0);
+
   // ── RIASEC helpers ────────────────────────────────────────────────────────
-  const progress = (current / 60) * 100;
+  const progress = (current / 60) * 50;
   const q = QUESTIONS[current];
   const currentCat = q.category;
   const sectionStart = ["R", "I", "A", "S", "E", "C"].indexOf(currentCat) * 10;
@@ -180,6 +193,11 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
   const qInAptitudeSkill = aptitudeCurrent - aptitudeSkillStart + 1;
   const aptitudeSkillInfo = APTITUDE_SKILL_INFO[aq?.skill];
   const aptitudeColor = APTITUDE_COLORS[aq?.skill] || "#2C5492";
+
+  // ── OCEAN helpers ─────────────────────────────────────────────────────────
+  const oq = OCEAN_QUESTIONS[oceanCurrent];
+  const oceanProgress = (oceanCurrent / 20) * 100;
+  const oceanAnswered = oceanAnswers.filter((a) => a > 0).length;
 
   // ── Handlers: Details ─────────────────────────────────────────────────────
   const handleDetailsSubmit = (e) => {
@@ -241,17 +259,9 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
       setAptitudeCurrent(aptitudeCurrent + 1);
       setAptitudeSelected(newAnswers[aptitudeCurrent + 1] || 0);
     } else {
-      // All three sections done, submit
-      localStorage.setItem("psychometricCompleted", "true");
-      
-      onSubmit({
-        name: details.name.trim(),
-        class_level: details.class_level,
-        stream: details.stream,
-        riasec_answers: answers,
-        hobbies: selectedHobbies,
-        aptitude_answers: newAnswers,
-      });
+      // Aptitude done, move to OCEAN (final section). State is already set to
+      // newAnswers above, so the full 18 are captured before OCEAN submits.
+      setStep("ocean");
     }
   };
 
@@ -268,6 +278,43 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
     }
   };
 
+  // ── Handlers: OCEAN ───────────────────────────────────────────────────────
+  const handleOceanNext = () => {
+    if (oceanSelected === 0) { alert("Please select an option before continuing."); return; }
+    const newAnswers = [...oceanAnswers];
+    newAnswers[oceanCurrent] = oceanSelected;
+    setOceanAnswers(newAnswers);
+    if (oceanCurrent < 19) {
+      setOceanCurrent(oceanCurrent + 1);
+      setOceanSelected(newAnswers[oceanCurrent + 1] || 0);
+    } else {
+      // All four sections done, submit.
+      localStorage.setItem("psychometricCompleted", "true");
+      onSubmit({
+        name: details.name.trim(),
+        class_level: details.class_level,
+        stream: details.stream,
+        riasec_answers: answers,
+        hobbies: selectedHobbies,
+        aptitude_answers: aptitudeAnswers,
+        ocean_answers: newAnswers,
+      });
+    }
+  };
+
+  const handleOceanPrev = () => {
+    if (oceanCurrent > 0) {
+      const newAnswers = [...oceanAnswers];
+      newAnswers[oceanCurrent] = oceanSelected;
+      setOceanAnswers(newAnswers);
+      setOceanCurrent(oceanCurrent - 1);
+      setOceanSelected(newAnswers[oceanCurrent - 1] || 0);
+    } else {
+      // Go back to aptitude
+      setStep("aptitude");
+    }
+  };
+
   // ── RENDER: Details ───────────────────────────────────────────────────────
   if (step === "details") {
     return (
@@ -281,12 +328,12 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
           <div className="intro-card">
             <div className="intro-badge"><BilingualText text="Psychometric + Aptitude Assessment" /></div>
             <h1><BilingualText text="Career Aptitude Test" /></h1>
-            <p><BilingualText text="This test combines three assessments, your personality type (RIASEC), your interests and hobbies, and your self-rated aptitude, to give you a well-rounded career recommendation." /></p>
+            <p><BilingualText text="This test combines four short assessments, your personality type (RIASEC), your interests and hobbies, your self-rated aptitude, and a short set of statements about how you typically think and act, to give you a well-rounded career recommendation." /></p>
             <p><BilingualText text="Be honest, there are no right or wrong answers. Choose what genuinely reflects you." /></p>
             <div className="intro-stats">
-              <div><strong>3</strong><span><BilingualText text="Sections" /></span></div>
-              <div><strong>78</strong><span><BilingualText text="Questions" /></span></div>
-              <div><strong>15–20 min</strong><span><BilingualText text="Estimated time" /></span></div>
+              <div><strong>4</strong><span><BilingualText text="Sections" /></span></div>
+              <div><strong>98</strong><span><BilingualText text="Questions" /></span></div>
+              <div><strong>20–25 min</strong><span><BilingualText text="Estimated time" /></span></div>
               <div><strong>Instant</strong><span><BilingualText text="Results" /></span></div>
             </div>
           </div>
@@ -361,7 +408,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
           title=""
           center={(
             <div>
-              <h1>Section 1 of 3 - Personality</h1>
+              <h1>Section 1 of 4 - Personality</h1>
               <p>{details.name} • {details.class_level} • {details.stream}</p>
             </div>
           )}
@@ -481,7 +528,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
           title=""
           center={(
             <div>
-              <h1><BilingualText text="Section 2 of 3 - Interests" /></h1>
+              <h1><BilingualText text="Section 2 of 4 - Interests" /></h1>
               <p>{details.name} • {details.class_level} • {details.stream}</p>
             </div>
           )}
@@ -489,13 +536,13 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
         />
 
         <div className="progress-bar-wrap">
-          <div className="progress-bar-fill" style={{ width: "66%" }} />
+          <div className="progress-bar-fill" style={{ width: "50%" }} />
         </div>
 
         <div className="hobbies-container">
           <div className="hobbies-intro">
             <div className="section-badge" style={{ background: "rgba(44, 84, 146, 0.10)", color: "#2C5492", display: "inline-block", marginBottom: "12px" }}>
-              Section 2 of 3
+              Section 2 of 4
             </div>
             <h2 style={{ color: "#102849" }}><BilingualText text="What are your hobbies and interests?" /></h2>
             <p><BilingualText text="Select all that apply. These help us understand what you genuinely enjoy outside of academics, and surface career options that match your real interests, not just your personality type." /></p>
@@ -548,7 +595,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
           title=""
           center={(
             <div>
-              <h1>Section 3 of 3 - Aptitude</h1>
+              <h1>Section 3 of 4 - Aptitude</h1>
               <p>{details.name} • {details.class_level} • {details.stream}</p>
             </div>
           )}
@@ -557,7 +604,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
 
         <div className="progress-bar-wrap">
           <div className="progress-bar-fill"
-            style={{ width: `${66 + (aptitudeProgress / 3)}%` }} />
+            style={{ width: `${50 + (aptitudeProgress / 4)}%` }} />
         </div>
 
         <div className="test-layout">
@@ -611,8 +658,10 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
                 <div className="q-nav">
                   <button className="btn-ghost" onClick={handleAptitudePrev}><BilingualText text="← Previous" /></button>
                   <button className="btn-primary" onClick={handleAptitudeNext} style={{ background: aptitudeColor }}>
-                    {aptitudeCurrent === 17 ? <BilingualText text="Submit Test ✓" /> : <BilingualText text="Next →" />}
-                  </button>
+  {aptitudeCurrent === 17
+    ? <BilingualText text="Next Section →" />
+    : <BilingualText text="Next →" />}
+</button>
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -646,6 +695,104 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
                   );
                 })}
               </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    );
+  }
+
+  // ── RENDER: OCEAN (Big Five) ──────────────────────────────────────────────
+  // Trait names are deliberately hidden everywhere on this screen so students
+  // cannot answer "to look good" on a named trait. One neutral accent colour,
+  // generic headers, no per-trait grouping.
+  if (step === "ocean") {
+    return (
+      <div className="test-page aptitude-page assessment-page apt-floating-shell">
+        <FloatingBackground />
+        <ManzilHeader
+          title=""
+          center={(
+            <div>
+              <h1>Section 4 of 4 - About You</h1>
+              <p>{details.name} • {details.class_level} • {details.stream}</p>
+            </div>
+          )}
+          right={<span className="manzil-header-counter">Statement {oceanCurrent + 1} of 20</span>}
+        />
+
+        <div className="progress-bar-wrap">
+          <div className="progress-bar-fill" style={{ width: `${75 + oceanProgress * 0.25}%` }} />
+        </div>
+
+        <div className="test-layout">
+          {/* Left sidebar, generic overall progress (NO trait breakdown) */}
+          <aside className="test-sidebar">
+            <p className="sidebar-title">Your progress</p>
+            <div className="info-progress-note" style={{ marginTop: 0 }}>
+              <p><strong>{oceanAnswered}</strong> of <strong>20</strong> answered</p>
+              <div className="mini-dots">
+                {Array.from({ length: 20 }).map((_, j) => {
+                  const ans = oceanAnswers[j];
+                  const isCur = j === oceanCurrent;
+                  return (
+                    <div key={j}
+                      className={`mini-dot ${ans > 0 ? "filled" : ""} ${isCur ? "current" : ""}`}
+                      style={ans > 0 || isCur ? { background: OCEAN_COLOR } : {}} />
+                  );
+                })}
+              </div>
+            </div>
+          </aside>
+
+          {/* Centre statement */}
+          <main className="test-main">
+            <div className="section-motto">
+              <span className="section-badge" style={{ background: OCEAN_COLOR + "18", color: OCEAN_COLOR }}>
+                <BilingualText inline text="About You" /> - <BilingualText inline text="Statement" /> {oceanCurrent + 1} <BilingualText inline text="of" /> 20
+              </span>
+              <p><BilingualText text="These statements describe different ways people think, feel, and act. There are no right or wrong answers, just choose how much each one sounds like you." /></p>
+            </div>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={oceanCurrent}
+                className="question-card"
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <p className="q-number">Statement {oceanCurrent + 1} of 20</p>
+                <h2 className="q-text"><BilingualText text={oq?.text} /></h2>
+
+                <AgreeScale items={OCEAN_SCALE} value={oceanSelected} onChange={setOceanSelected} color={OCEAN_COLOR} />
+
+                <div className="q-nav">
+                  <button className="btn-ghost" onClick={handleOceanPrev}><BilingualText text="← Previous" /></button>
+                  <button className="btn-primary" onClick={handleOceanNext} style={{ background: OCEAN_COLOR }}>
+                    {oceanCurrent === 19 ? <BilingualText text="Submit Test ✓" /> : <BilingualText text="Next →" />}
+                  </button>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </main>
+
+          {/* Right info panel, generic guidance (NO trait reveal) */}
+          <aside className="info-panel">
+            <div className="info-panel-header" style={{ borderColor: OCEAN_COLOR }}>
+              <div>
+                <p className="info-type-name">About You</p>
+                <p className="info-tagline" style={{ color: OCEAN_COLOR }}>Self-Reflection</p>
+              </div>
+            </div>
+            <p className="info-about">This short section looks at how you typically think, feel, and work day to day. It rounds out your report with a picture of your natural style.</p>
+            <div className="info-tip" style={{ borderColor: OCEAN_COLOR, background: OCEAN_COLOR + "10" }}>
+              <p className="info-tip-label" style={{ color: OCEAN_COLOR }}>💡 Answering tip</p>
+              <p className="info-tip-text">Go with your first instinct. The honest answer is more useful than the one that sounds impressive.</p>
+            </div>
+            <div className="info-progress-note">
+              <p>Statement <strong>{oceanCurrent + 1}</strong> of <strong>20</strong></p>
             </div>
           </aside>
         </div>
