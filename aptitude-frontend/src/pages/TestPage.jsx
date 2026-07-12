@@ -140,7 +140,7 @@ const APTITUDE_SKILL_INFO = {
 // ---------------------------------------------------------------------------
 // MAIN COMPONENT
 // ---------------------------------------------------------------------------
-export default function TestPage({ onSubmit, onBack, profileData }) {
+export default function TestPage({ onSubmit, onBack, profileData, standalone = false }) {
   // step: "details" | "questions" | "hobbies" | "aptitude" | "ocean"
   const [step, setStep] = useState("details");
 
@@ -321,6 +321,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
       <div className="test-page aptitude-page assessment-page apt-floating-shell">
         <FloatingBackground />
         <ManzilHeader
+          standalone={standalone}
           title={<BilingualText text="Career Aptitude Test" />}
           right={<button type="button" className="manzil-header-btn" onClick={onBack}><BilingualText text="← Back" /></button>}
         />
@@ -405,6 +406,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
       <div className="test-page aptitude-page assessment-page apt-floating-shell">
         <FloatingBackground />
         <ManzilHeader
+          standalone={standalone}
           title=""
           center={(
             <div>
@@ -525,6 +527,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
       <div className="test-page aptitude-page assessment-page apt-floating-shell">
         <FloatingBackground />
         <ManzilHeader
+          standalone={standalone}
           title=""
           center={(
             <div>
@@ -592,6 +595,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
       <div className="test-page aptitude-page assessment-page apt-floating-shell">
         <FloatingBackground />
         <ManzilHeader
+          standalone={standalone} 
           title=""
           center={(
             <div>
@@ -711,6 +715,7 @@ export default function TestPage({ onSubmit, onBack, profileData }) {
       <div className="test-page aptitude-page assessment-page apt-floating-shell">
         <FloatingBackground />
         <ManzilHeader
+          standalone={standalone} 
           title=""
           center={(
             <div>
