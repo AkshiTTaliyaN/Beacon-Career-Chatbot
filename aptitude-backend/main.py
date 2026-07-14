@@ -16,7 +16,7 @@ from scoring import (
 from pdf_generator import generate_pdf
 from career_avatar_service import get_career_avatar
 
-app = FastAPI(title="Manzil Aptitude API")
+app = FastAPI(title="Lakshayaveer Aptitude API")
 
 LOCAL_DEV_ORIGINS = [
     "http://localhost:3001",
@@ -131,7 +131,7 @@ def download_pdf(req: PDFRequest):
         io.BytesIO(pdf_bytes),
         media_type="application/pdf",
         headers={
-            "Content-Disposition": f"attachment; filename=Manzil_Report_{req.name.replace(' ', '_')}.pdf"
+            "Content-Disposition": f"attachment; filename=Lakshayaveer_Report_{req.name.replace(' ', '_')}.pdf"
         },
     )
 

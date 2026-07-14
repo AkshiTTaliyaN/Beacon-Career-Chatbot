@@ -4,10 +4,11 @@
   align-items: center;
   position: relative;
   gap: 1rem;
-  min-height: 76px;
-  padding: 0.85rem clamp(1rem, 3vw, 2rem);
-  background: #ffffff;
+  min-height: 72px;
+  padding: 0.8rem clamp(1rem, 3vw, 2rem);
+  background: rgba(255, 255, 255, 0.97);
   border-bottom: 1px solid #e8edf5;
+  box-shadow: 0 1px 0 rgba(15, 31, 61, 0.02), 0 8px 24px rgba(15, 31, 61, 0.025);
   color: #102849;
 }
 
@@ -41,7 +42,7 @@
 .manzil-header-left {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
+  gap: 0.8rem;
   min-width: 0;
   flex-shrink: 0;
 }
@@ -56,7 +57,7 @@
 .manzil-header-brand {
   display: flex;
   flex-direction: column;
-  gap: 0.1rem;
+  gap: 0.12rem;
   min-width: 0;
 }
 
@@ -104,38 +105,51 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 0.75rem;
+  gap: 1rem;
   flex-shrink: 0;
 }
 
 .manzil-header-nav {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.7rem;
   flex-wrap: wrap;
 }
 
 .manzil-header-link {
   background: none;
   border: none;
-  padding: 0;
+  padding: 0.5rem 0.8rem;
   font-size: 0.9rem;
   font-weight: 600;
   color: #2c5492;
   cursor: pointer;
   text-decoration: none;
-  transition: color 0.2s ease;
+  border-radius: 999px;
+  transition: color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .manzil-header-link:hover {
-  color: #426fb1;
+  color: #102849;
+  background: #f3f7fd;
+}
+
+.manzil-header-link.active {
+  color: #102849;
+  background: #eef4fc;
+  box-shadow: inset 0 0 0 1px #d8e5f7;
+}
+
+.manzil-header-link:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(44, 84, 146, 0.16);
 }
 
 .manzil-header-avatar {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 999px;
-  background: #eaf1fb;
+  background: linear-gradient(135deg, #eaf1fb 0%, #dce8f8 100%);
   border: 1px solid #dce4f5;
   display: inline-flex;
   align-items: center;
@@ -143,6 +157,7 @@
   color: #2c5492;
   font-weight: 700;
   font-size: 0.95rem;
+  box-shadow: 0 6px 16px rgba(44, 84, 146, 0.1);
 }
 
 .manzil-header-btn {

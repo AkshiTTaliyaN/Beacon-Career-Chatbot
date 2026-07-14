@@ -16,7 +16,7 @@ from database import create_tables
 from routes import auth_router, profile_router, rec_router, chat_router, expert_router
 
 app = FastAPI(
-    title="Manzil API",
+    title="Lakshayaveer API",
     description="Government Career Guidance Platform - Backend API",
     version="1.0.0"
 )
@@ -55,12 +55,12 @@ app.include_router(expert_router)
 @app.on_event("startup")
 def startup():
     create_tables()
-    print("Manzil API started")
+    print("Lakshayaveer API started")
 
 
 @app.get("/", tags=["Health"])
 def root():
-    return {"status": "ok", "app": "Manzil API"}
+    return {"status": "ok", "app": "Lakshayaveer API"}
 
 @app.get("/health", tags=["Health"])
 def health():

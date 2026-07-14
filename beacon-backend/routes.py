@@ -120,7 +120,7 @@ def _get_gemini_chat_response(message: str, profile_summary: dict, history: list
 
     # Compile the system prompt
     system_prompt = (
-        "You are Manzil, a highly supportive, professional AI Career Counsellor for Indian school students.\n\n"
+        "You are Lakshayaveer, a highly supportive, professional AI Career Counsellor for Indian school students.\n\n"
         "Here is the student's profiling context from onboarding:\n"
         f"{profile_str}\n\n"
         "Here is some relevant context retrieved from official syllabus, exam, and scholarship documents:\n"
@@ -563,7 +563,7 @@ def guest_login(db: Session = Depends(get_db)):
     import uuid as _uuid
 
     guest_uuid   = str(_uuid.uuid4())
-    guest_email  = f"guest_{guest_uuid}@manzil.internal"
+    guest_email  = f"guest_{guest_uuid}@lakshayaveer.internal"
 
     student = Student(
         email_hash      = hash_email(guest_email),

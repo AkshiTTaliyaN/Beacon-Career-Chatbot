@@ -996,7 +996,7 @@ export default function Dashboard({ userName }) {
       <PsychometricTest hasResults={Boolean(profile?.riasec_scores)} />
 
       {/* ═══════════════════════════════════════════════════════════════════
-          WHY MANZIL
+          WHY LAKSHAYAVEER
           ═══════════════════════════════════════════════════════════════════ */}
       <section className="ft-animate-in ft-section" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
         <SectionHeader

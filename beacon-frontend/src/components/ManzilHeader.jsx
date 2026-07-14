@@ -28,6 +28,7 @@ export default function ManzilHeader({
   navItems,
 }) {
   const userName = typeof window !== "undefined" ? localStorage.getItem("userName") || "" : "";
+  const activePath = typeof window !== "undefined" ? window.location.pathname : "";
   const userInitial = useMemo(() => {
     return userName.trim().slice(0, 1).toUpperCase() || "U";
   }, [userName]);
@@ -61,8 +62,9 @@ export default function ManzilHeader({
               <button
                 key={item.path}
                 type="button"
-                className="manzil-header-link"
+                className={`manzil-header-link${activePath === item.path ? " active" : ""}`}
                 onClick={() => navigate(item.path)}
+                aria-current={activePath === item.path ? "page" : undefined}
               >
                 {item.label}
               </button>

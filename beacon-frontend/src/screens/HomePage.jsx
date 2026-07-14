@@ -34,14 +34,15 @@ function StatCard({ value, suffix = '', label, color, delay = 0 }) {
       initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay }}
+      className="home-page-card home-page-stat-card"
       style={{
         background: '#ffffff',
         border: `1px solid ${color}33`,
-        borderRadius: 16,
-        padding: '1.5rem 1.25rem',
+        borderRadius: 18,
+        padding: '1.35rem 1.15rem',
         textAlign: 'center',
         backdropFilter: 'blur(12px)',
-        boxShadow: `0 0 30px ${color}18`,
+        boxShadow: `0 12px 30px ${color}14`,
         flex: 1,
         minWidth: 140,
       }}
@@ -73,20 +74,21 @@ function FeatureCard({ icon, title, desc, color, delay = 0 }) {
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.55, delay }}
+      className="home-page-card home-page-feature-card"
       style={{
         background: '#ffffff',
         border: '1px solid #e8edf5',
-        borderRadius: 18,
-        padding: '1.75rem 1.5rem',
+        borderRadius: 20,
+        padding: '1.5rem 1.35rem',
         backdropFilter: 'blur(16px)',
-        transition: 'transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease',
+        transition: 'transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease',
         cursor: 'default',
         position: 'relative',
         overflow: 'hidden',
       }}
       whileHover={{
-        y: -4,
-        boxShadow: `0 16px 48px rgba(0,0,0,0.3), 0 0 30px ${color}22`,
+        y: -3,
+        boxShadow: `0 16px 40px rgba(15,31,61,0.12), 0 0 24px ${color}16`,
         borderColor: `${color}44`,
       }}
     >
@@ -129,17 +131,18 @@ function StepCard({ num, title, desc, color, delay = 0 }) {
       initial={{ opacity: 0, x: -20 }}
       animate={inView ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.5, delay }}
+      className="home-page-card home-page-step-card"
       style={{
-        display: 'flex', gap: '1.25rem', alignItems: 'flex-start',
-        padding: '1.25rem 1.5rem',
+        display: 'flex', gap: '1rem', alignItems: 'flex-start',
+        padding: '1.1rem 1.2rem',
         background: '#f8fbff',
         border: '1px solid #e8edf5',
-        borderRadius: 16,
+        borderRadius: 18,
         backdropFilter: 'blur(10px)',
       }}
     >
-      <div style={{
-        width: 40, height: 40, borderRadius: 12, flexShrink: 0,
+      <div className="home-page-step-badge" style={{
+        width: 42, height: 42, borderRadius: 12, flexShrink: 0,
         background: `linear-gradient(135deg, ${color}55, ${color}22)`,
         border: `1px solid ${color}55`,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -244,116 +247,162 @@ export default function HomePage({ onStart, onLogin }) {
       />
 
       {/* ── Hero ───────────────────────────────────────────────────────── */}
-      <section style={{
+      <section className="home-page-hero-section" style={{
         position: 'relative', overflow: 'hidden',
-        padding: 'clamp(5rem, 12vw, 8rem) 1.5rem clamp(4rem, 8vw, 6rem)',
-        display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center',
+        minHeight: '70vh',
+        padding: 'clamp(1.75rem, 3vw, 2.5rem) 1.25rem',
+        display: 'flex', alignItems: 'center',
+        background: 'linear-gradient(180deg, #f8fbff 0%, #ffffff 100%)',
       }}>
-        {/* Background orbs */}
-        <div style={{ position: 'absolute', top: '-10%', left: '10%', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,212,255,0.07) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', bottom: '-5%', right: '5%', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', top: '30%', right: '15%', width: 250, height: 250, borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,0,110,0.05) 0%, transparent 70%)', filter: 'blur(40px)', pointerEvents: 'none' }} />
-
-
-
-        {/* Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          style={{
-            fontSize: 'clamp(2.25rem, 5.5vw, 4rem)',
-            fontWeight: 900, lineHeight: 1.08, letterSpacing: '-0.04em',
-            margin: '0 0 1.25rem', maxWidth: 820,
-            color: '#102849',
-            position: 'relative', zIndex: 1,
-          }}
-        >
-          <div style={{ display: 'block', marginBottom: '0.4rem' }}>
-            <div style={{ color: '#102849' }}>Career Guidance</div>
-            {language === 'km' && (
-              <div style={{ fontSize: '0.55em', fontWeight: 500, color: '#5f6b8d', marginTop: '0.1rem', letterSpacing: 'normal', textTransform: 'none' }}>
-                ការណែនាំអំពីអាជីព
-              </div>
-            )}
-          </div>
-          <div style={{ display: 'block', marginBottom: '0.4rem' }}>
-            <span style={{
-              background: 'linear-gradient(135deg, #00d4ff, #8b5cf6)',
-              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
-              Built for Everyone
-            </span>
-            {language === 'km' && (
-              <div style={{ fontSize: '0.55em', fontWeight: 500, color: '#5f6b8d', marginTop: '0.1rem', background: 'none', WebkitTextFillColor: '#5f6b8d', WebkitBackgroundClip: 'initial', letterSpacing: 'normal', textTransform: 'none' }}>
-                បង្កើតឡើងសម្រាប់អ្នករាល់គ្នា
-              </div>
-            )}
-          </div>
-          <div style={{ display: 'block' }}>
-            <div style={{ fontSize: '0.6em', fontWeight: 700, color: '#2c5492' }}>
-              Free for Every Student
+        <div className="home-page-hero-shell" style={{
+          position: 'relative', zIndex: 1,
+          width: '100%', maxWidth: 1180,
+          margin: '0 auto',
+          padding: 'clamp(1.5rem, 3vw, 2.25rem)',
+          border: '1px solid #e4ebf6',
+          borderRadius: 28,
+          background: 'rgba(255,255,255,0.96)',
+          boxShadow: '0 20px 50px rgba(15,31,61,0.05)',
+          display: 'grid',
+          gridTemplateColumns: '1.05fr 0.95fr',
+          gap: 'clamp(1.25rem, 3vw, 2rem)',
+          alignItems: 'center',
+        }}>
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left' }}
+          >
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem', padding: '0.45rem 0.7rem', border: '1px solid #e4ebf6', borderRadius: 999, background: '#f8fbff' }}>
+              <img src={EdCilLogo} alt="EdCIL" style={{ width: 34, height: 34, objectFit: 'contain', borderRadius: 8 }} />
+              <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#2c5492', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+                <BilingualText text="EdCIL · Ministry of Education" />
+              </span>
             </div>
-            {language === 'km' && (
-              <div style={{ fontSize: '0.45em', fontWeight: 500, color: '#5f6b8d', marginTop: '0.1rem', letterSpacing: 'normal', textTransform: 'none' }}>
-                ឥតគិតថ្លៃសម្រាប់សិស្សគ្រប់រូប
+
+            <motion.h1
+              className="home-page-hero-title"
+              style={{
+                fontSize: 'clamp(2.2rem, 4.3vw, 3.3rem)',
+                fontWeight: 800, lineHeight: 1.04, letterSpacing: '-0.04em',
+                margin: '0 0 0.85rem', maxWidth: 560,
+                color: '#102849',
+                position: 'relative', zIndex: 1,
+              }}
+            >
+              <div style={{ display: 'block', marginBottom: '0.35rem' }}>
+                <div style={{ color: '#102849' }}>Career Guidance</div>
+                {language === 'km' && (
+                  <div style={{ fontSize: '0.55em', fontWeight: 500, color: '#5f6b8d', marginTop: '0.1rem', letterSpacing: 'normal', textTransform: 'none' }}>
+                    ការណែនាំអំពីអាជីព
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        </motion.h1>
+              <div style={{ display: 'block', marginBottom: '0.35rem' }}>
+                <span style={{ color: '#2c5492' }}>
+                  Built for Everyone
+                </span>
+                {language === 'km' && (
+                  <div style={{ fontSize: '0.55em', fontWeight: 500, color: '#5f6b8d', marginTop: '0.1rem', background: 'none', WebkitTextFillColor: '#5f6b8d', WebkitBackgroundClip: 'initial', letterSpacing: 'normal', textTransform: 'none' }}>
+                    បង្កើតឡើងសម្រាប់អ្នករាល់គ្នា
+                  </div>
+                )}
+              </div>
+              <div style={{ display: 'block' }}>
+                <div style={{ fontSize: '0.6em', fontWeight: 700, color: '#2c5492' }}>
+                  Free for Every Student
+                </div>
+                {language === 'km' && (
+                  <div style={{ fontSize: '0.45em', fontWeight: 500, color: '#5f6b8d', marginTop: '0.1rem', letterSpacing: 'normal', textTransform: 'none' }}>
+                    ឥតគិតថ្លៃសម្រាប់សិស្សគ្រប់រូប
+                  </div>
+                )}
+              </div>
+            </motion.h1>
 
-        {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, delay: 0.3 }}
-          style={{
-            fontSize: 'clamp(1rem, 2vw, 1.2rem)', color: '#5f6b8d',
-            maxWidth: 620, lineHeight: 1.65, margin: '0 0 2.5rem',
-            position: 'relative', zIndex: 1,
-          }}
-        >
-          <BilingualText text="AI-powered career counselling, psychometric profiling, and personalised roadmaps for Class 9–12 students. No fees. No bias. Just clear direction." />
-        </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.3 }}
+              className="home-page-hero-subtitle"
+              style={{
+                fontSize: 'clamp(1rem, 1.75vw, 1.08rem)', color: '#5f6b8d',
+                maxWidth: 620, lineHeight: 1.7, margin: '0 0 1.4rem',
+                position: 'relative', zIndex: 1,
+              }}
+            >
+              <BilingualText text="AI-powered career counselling, psychometric profiling, and personalised roadmaps for Class 9–12 students. No fees. No bias. Just clear direction." />
+            </motion.p>
 
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          style={{ display: 'flex', gap: '0.85rem', flexWrap: 'wrap', justifyContent: 'center', position: 'relative', zIndex: 1 }}
-        >
-          <button
-            className="ft-button-primary"
-            style={{ fontSize: '1rem', padding: '0.9rem 2rem', borderRadius: 999 }}
-            onClick={onStart}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="home-page-hero-actions"
+              style={{ display: 'flex', gap: '0.85rem', flexWrap: 'wrap', justifyContent: 'flex-start', position: 'relative', zIndex: 1 }}
+            >
+              <button
+                className="ft-button-primary home-page-button-primary"
+                style={{ fontSize: '1rem', padding: '0.95rem 1.7rem', borderRadius: 12 }}
+                onClick={onStart}
+              >
+                <BilingualText text="Start Counselling →" />
+              </button>
+              <button
+                className="ft-button-secondary home-page-button-secondary"
+                style={{ fontSize: '1rem', padding: '0.95rem 1.7rem', borderRadius: 12 }}
+                onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                <BilingualText text="How It Works ↓" />
+              </button>
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            style={{ display: 'flex', justifyContent: 'center' }}
           >
-            <BilingualText text="Start Counselling →" />
-          </button>
-          <button
-            className="ft-button-secondary"
-            style={{ fontSize: '1rem', padding: '0.85rem 2rem', borderRadius: 999 }}
-            onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
-          >
-            <BilingualText text="How It Works ↓" />
-          </button>
-        </motion.div>
-
-        {/* Scroll hint */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
-          style={{ marginTop: '3.5rem', color: '#9ca3af', fontSize: '0.75rem', letterSpacing: '0.1em', position: 'relative', zIndex: 1 }}
-        >
-          <div style={{ animation: 'ft-float 2s ease-in-out infinite' }}>▼</div>
-        </motion.div>
+            <div className="home-page-hero-preview" style={{ width: '100%', maxWidth: 480, padding: '1.1rem', border: '1px solid #e4ebf6', borderRadius: 24, background: '#f8fbff', boxShadow: '0 12px 28px rgba(15,31,61,0.04)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.9rem' }}>
+                <div>
+                  <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#2c5492', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Student roadmap</div>
+                  <div style={{ fontSize: '1rem', fontWeight: 700, color: '#102849', marginTop: '0.15rem' }}>Recommended next steps</div>
+                </div>
+                <div style={{ padding: '0.4rem 0.6rem', borderRadius: 999, background: '#ffffff', border: '1px solid #e4ebf6', color: '#2c5492', fontSize: '0.75rem', fontWeight: 700 }}>Live</div>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '0.75rem', marginBottom: '0.8rem' }}>
+                <div style={{ padding: '0.8rem', borderRadius: 16, background: '#ffffff', border: '1px solid #e4ebf6' }}>
+                  <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#5f6b8d', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Profile</div>
+                  <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#102849', marginTop: '0.25rem' }}>92%</div>
+                </div>
+                <div style={{ padding: '0.8rem', borderRadius: 16, background: '#ffffff', border: '1px solid #e4ebf6' }}>
+                  <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#5f6b8d', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Matches</div>
+                  <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#102849', marginTop: '0.25rem' }}>18 paths</div>
+                </div>
+              </div>
+              <div style={{ padding: '0.85rem', borderRadius: 18, background: '#ffffff', border: '1px solid #e4ebf6' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.6rem' }}>
+                  <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#102849' }}>Next recommendation</span>
+                  <span style={{ fontSize: '0.72rem', color: '#2c5492', fontWeight: 700 }}>AI guided</span>
+                </div>
+                <div style={{ height: 8, borderRadius: 999, background: '#eef4fc', overflow: 'hidden' }}>
+                  <div style={{ width: '72%', height: '100%', borderRadius: 999, background: '#2c5492' }} />
+                </div>
+                <div style={{ marginTop: '0.7rem', color: '#5f6b8d', fontSize: '0.86rem', lineHeight: 1.55 }}>
+                  Explore careers, exams, and roadmaps tailored to your profile.
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
       {/* ── Stats bar ──────────────────────────────────────────────────── */}
-      <section style={{ padding: '1rem 1.5rem 3rem', position: 'relative', zIndex: 1 }}>
-        <div style={{ maxWidth: 900, margin: '0 auto', display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+      <section className="home-page-stats-section" style={{ padding: '0.75rem 1.5rem 2.5rem', position: 'relative', zIndex: 1 }}>
+        <div className="home-page-stat-grid" style={{ maxWidth: 900, margin: '0 auto', display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
           <StatCard value={180}  suffix="+"  label="Career Paths"       color="#00d4ff" delay={0}    />
           <StatCard value={10}   suffix="+"  label="Entrance Exams"     color="#8b5cf6" delay={0.1}  />
           <StatCard value={4}    suffix=""   label="Classes Supported"  color="#00ff88" delay={0.2}  />
@@ -362,7 +411,7 @@ export default function HomePage({ onStart, onLogin }) {
       </section>
 
       {/* ── Features ───────────────────────────────────────────────────── */}
-      <section id="features" style={{ padding: '4rem 1.5rem', position: 'relative', zIndex: 1 }}>
+      <section id="features" className="home-page-section" style={{ padding: '3.5rem 1.5rem', position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           {/* Section header */}
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
@@ -389,7 +438,7 @@ export default function HomePage({ onStart, onLogin }) {
       </section>
 
       {/* ── How it Works ───────────────────────────────────────────────── */}
-      <section id="how-it-works" style={{ padding: '4rem 1.5rem', position: 'relative', zIndex: 1 }}>
+      <section id="how-it-works" className="home-page-section" style={{ padding: '3.5rem 1.5rem', position: 'relative', zIndex: 1 }}>
         {/* Section bg glow */}
         <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 600, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(139,92,246,0.04) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
 
@@ -419,15 +468,16 @@ export default function HomePage({ onStart, onLogin }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.6 }}
-          style={{
+          className="home-page-card home-page-about-card"
+        style={{
             maxWidth: 900, margin: '0 auto',
             background: '#ffffff',
             border: '1px solid #dce4f5',
-            borderRadius: 24,
-            padding: 'clamp(2rem, 4vw, 3rem)',
+            borderRadius: 22,
+            padding: 'clamp(1.75rem, 3.5vw, 2.5rem)',
             backdropFilter: 'blur(16px)',
             display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap',
-            boxShadow: '0 0 60px rgba(0,212,255,0.05)',
+            boxShadow: '0 16px 36px rgba(15,31,61,0.06)',
           }}
         >
           <div style={{ flex: 1, minWidth: 240 }}>
@@ -445,20 +495,21 @@ export default function HomePage({ onStart, onLogin }) {
       </section>
 
       {/* ── CTA Section ────────────────────────────────────────────────── */}
-      <section style={{ padding: '2rem 1.5rem 4rem', position: 'relative', zIndex: 1 }}>
+      <section style={{ padding: '1.5rem 1.5rem 3.5rem', position: 'relative', zIndex: 1 }}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
+          className="home-page-card home-page-cta-panel"
           style={{
             maxWidth: 700, margin: '0 auto', textAlign: 'center',
-            padding: '3rem 2rem',
+            padding: '2.5rem 2rem',
             background: '#f0f4ff',
             border: '1px solid #dce4f5',
             borderRadius: 24,
             backdropFilter: 'blur(16px)',
-            boxShadow: '0 0 60px rgba(0,212,255,0.06)',
+            boxShadow: '0 16px 36px rgba(44,84,146,0.08)',
             position: 'relative',
             overflow: 'hidden',
           }}

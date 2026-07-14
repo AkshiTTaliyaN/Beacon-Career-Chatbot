@@ -30,7 +30,7 @@ export default function HeroSection({
 
   return (
     <section
-      aria-label="Manzil hero"
+      aria-label="Lakshayaveer hero"
       style={{
         background: sectionBackground,
         position: 'relative',
