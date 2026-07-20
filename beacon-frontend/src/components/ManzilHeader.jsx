@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import EdCilTopLogo from "../assets/edcil.jpeg";
-import ManzilLogo from "../assets/manzil-logo.png";
 import ProfileDropdown from "./ProfileDropdown";
 import LanguageToggle from "./LanguageToggle.jsx";
 import "./ManzilHeader.css";

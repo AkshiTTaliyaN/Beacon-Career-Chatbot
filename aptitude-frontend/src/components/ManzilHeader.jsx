@@ -1,5 +1,4 @@
 import EdCilLogo from "../assets/edcil.jpeg";
-import ManzilLogo from "../assets/manzil-logo.png";
 import LanguageToggle from "./LanguageToggle.jsx";
 import "./ManzilHeader.css";
 
