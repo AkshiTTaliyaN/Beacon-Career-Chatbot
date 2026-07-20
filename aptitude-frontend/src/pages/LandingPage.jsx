@@ -30,7 +30,7 @@ const TEST_SECTIONS = [
 // the student's Manzil profile. Saying "we store nothing" in both would be
 // false in one of them.
 const DATA_FAQ_STANDALONE = "Your report is saved only in this browser, on this device, so you can come back to it later. It is not sent to an account, shared, or sold. Clearing your browser data deletes it. Your name and details appear only on your own report.";
-const DATA_FAQ_PORTAL = "Your answers are scored on our server and your results are saved to your Manzil student profile, so your dashboard and counsellor can use them. We do not sell your information or share it outside Manzil.";
+const DATA_FAQ_PORTAL = "Your answers are scored on our server and your results are saved to your Lakshayaveer student profile, so your dashboard and counsellor can use them. We do not sell your information or share it outside Lakshayaveer.";
 
 function buildFaqs(standalone) {
   return [
