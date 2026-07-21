@@ -368,30 +368,32 @@ export default function HomePage({ onStart, onLogin }) {
             <div className="home-page-hero-preview" style={{ width: '100%', maxWidth: 480, padding: '1.1rem', border: '1px solid #e4ebf6', borderRadius: 24, background: '#f8fbff', boxShadow: '0 12px 28px rgba(15,31,61,0.04)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.9rem' }}>
                 <div>
-                  <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#2c5492', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Student roadmap</div>
-                  <div style={{ fontSize: '1rem', fontWeight: 700, color: '#102849', marginTop: '0.15rem' }}>Recommended next steps</div>
+                  <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#2c5492', letterSpacing: '0.08em', textTransform: 'uppercase' }}>What you'll get</div>
+                  <div style={{ fontSize: '1rem', fontWeight: 700, color: '#102849', marginTop: '0.15rem' }}>Your personalised roadmap</div>
                 </div>
-                <div style={{ padding: '0.4rem 0.6rem', borderRadius: 999, background: '#ffffff', border: '1px solid #e4ebf6', color: '#2c5492', fontSize: '0.75rem', fontWeight: 700 }}>Live</div>
+                <div style={{ padding: '0.4rem 0.6rem', borderRadius: 999, background: '#ffffff', border: '1px solid #e4ebf6', color: '#5f6b8d', fontSize: '0.75rem', fontWeight: 700 }}>Preview</div>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '0.75rem', marginBottom: '0.8rem' }}>
                 <div style={{ padding: '0.8rem', borderRadius: 16, background: '#ffffff', border: '1px solid #e4ebf6' }}>
-                  <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#5f6b8d', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Profile</div>
-                  <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#102849', marginTop: '0.25rem' }}>92%</div>
+                  <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#5f6b8d', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Career matches</div>
+                  <div style={{ fontSize: '0.92rem', fontWeight: 700, color: '#102849', marginTop: '0.25rem' }}>Across sectors</div>
                 </div>
                 <div style={{ padding: '0.8rem', borderRadius: 16, background: '#ffffff', border: '1px solid #e4ebf6' }}>
-                  <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#5f6b8d', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Matches</div>
-                  <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#102849', marginTop: '0.25rem' }}>18 paths</div>
+                  <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#5f6b8d', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Skill roadmap</div>
+                  <div style={{ fontSize: '0.92rem', fontWeight: 700, color: '#102849', marginTop: '0.25rem' }}>Class 9 to 12</div>
                 </div>
               </div>
               <div style={{ padding: '0.85rem', borderRadius: 18, background: '#ffffff', border: '1px solid #e4ebf6' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.6rem' }}>
-                  <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#102849' }}>Next recommendation</span>
-                  <span style={{ fontSize: '0.72rem', color: '#2c5492', fontWeight: 700 }}>AI guided</span>
+                <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#102849', marginBottom: '0.6rem' }}>What's inside</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
+                  {['Personality profile', 'Matched careers & entrance exams', 'Step-by-step skill roadmap'].map((item) => (
+                    <div key={item} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#3c4a63', fontSize: '0.86rem' }}>
+                      <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#2c5492', flexShrink: 0 }} />
+                      {item}
+                    </div>
+                  ))}
                 </div>
-                <div style={{ height: 8, borderRadius: 999, background: '#eef4fc', overflow: 'hidden' }}>
-                  <div style={{ width: '72%', height: '100%', borderRadius: 999, background: '#2c5492' }} />
-                </div>
-                <div style={{ marginTop: '0.7rem', color: '#5f6b8d', fontSize: '0.86rem', lineHeight: 1.55 }}>
+                <div style={{ marginTop: '0.7rem', color: '#5f6b8d', fontSize: '0.82rem', lineHeight: 1.5 }}>
                   Explore careers, exams, and roadmaps tailored to your profile.
                 </div>
               </div>

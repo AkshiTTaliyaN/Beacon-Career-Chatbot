@@ -618,6 +618,36 @@ export default function ResultPage({
 
         <hr className="divider" />
 
+        {/* ── Personalised Roadmap ── */}
+        {(ACTION_PLAN[primary] || []).length > 0 && (
+          <>
+            <section className="result-section">
+              <h2 className="section-title" style={{ color: "#102849" }}><BilingualText text="Your Personalised Roadmap" /></h2>
+              <p className="section-sub" style={{ color: "#5F6B8D" }}><BilingualText text={`A step-by-step timeline from now until college, built around your ${primary} personality:`} /></p>
+              <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                {(ACTION_PLAN[primary] || []).map((phase, i) => (
+                  <div key={i} style={{ background: "#ffffff", border: "1px solid #e4ebf6", borderRadius: 16, padding: "18px 20px", boxShadow: "0 4px 14px rgba(15,31,61,0.04)" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 10, borderBottom: "1px solid #eef2f8", paddingBottom: 10, marginBottom: 12 }}>
+                      <Compass size={18} style={{ color: primaryColor }} />
+                      <h4 style={{ margin: 0, fontSize: 15, fontWeight: 800, color: "#102849" }}><BilingualText text={phase.phase} /></h4>
+                    </div>
+                    <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 8 }}>
+                      {(phase.actions || []).map((action, idx) => (
+                        <li key={idx} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                          <span style={{ width: 7, height: 7, borderRadius: "50%", background: primaryColor, marginTop: 7, flexShrink: 0 }} />
+                          <span style={{ fontSize: 13.5, color: "#3c4a63", lineHeight: 1.55 }}><BilingualText text={action} /></span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <hr className="divider" />
+          </>
+        )}
+
         {/* ── Parent Section ── */}
         <section className="result-section">
           <h2 className="section-title" style={{ color: "#102849" }}><BilingualText text="For Your Parents" /></h2>

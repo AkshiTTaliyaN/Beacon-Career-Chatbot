@@ -17,6 +17,20 @@ const RIASEC_TYPES = [
   { code: "C", name: "Conventional", desc: "Organised, precise, detail-oriented", color: RIASEC_COLORS.C },
 ];
 
+// Big Five (OCEAN) dimensions for the landing-page grid. Framed as two-ended
+// spectrums with no "good" end, and one neutral accent colour, on purpose:
+// naming desirable traits with descriptions before the test would let students
+// answer "to look good." Neuroticism is relabelled "Emotional Style" for the
+// same reason. This mirrors how the report presents OCEAN ("styles, not scores").
+const OCEAN_COLOR = "#6C5CE7";
+const OCEAN_TYPES = [
+  { code: "O", name: "Openness", desc: "How you approach ideas: curious and inventive, or practical and grounded." },
+  { code: "C", name: "Conscientiousness", desc: "How you organise: structured and planned, or flexible and spontaneous." },
+  { code: "E", name: "Extraversion", desc: "Where you draw energy: from people and activity, or from calm and focus." },
+  { code: "A", name: "Agreeableness", desc: "How you work with others: cooperative and warm, or direct and independent." },
+  { code: "N", name: "Emotional Style", desc: "How you respond to pressure: steady and even, or sensitive and alert." },
+];
+
 // The four sections of the assessment, in the order the student meets them.
 const TEST_SECTIONS = [
   { num: "1", name: "Personality", count: "60 questions", desc: "The RIASEC framework, which maps how you like to work to real careers." },
@@ -168,6 +182,19 @@ export default function LandingPage({
             <p className="section-body">
               <BilingualText text="These are styles, not abilities. There is no good or bad score, and none of them make a career unavailable to you. They are there to help you understand yourself and choose environments where you will do well, which is why they sit alongside your career recommendations rather than changing them." />
             </p>
+          </div>
+          <div className="riasec-types-grid" style={{ marginTop: "1.75rem" }}>
+            {OCEAN_TYPES.map((t) => (
+              <GlassCard key={t.code} className="type-pill apt-type-pill-glass" hover={false}>
+                <div className="type-pill-inner">
+                  <span className="type-code" style={{ color: OCEAN_COLOR }}>{t.code}</span>
+                  <div>
+                    <strong><BilingualText text={t.name} /></strong>
+                    <p><BilingualText text={t.desc} /></p>
+                  </div>
+                </div>
+              </GlassCard>
+            ))}
           </div>
         </div>
       </section>

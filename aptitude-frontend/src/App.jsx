@@ -34,6 +34,7 @@ const LS_COMPLETED = "psychometricCompleted";
 export default function App() {
   const [page, setPage] = useState("landing");
   const [result, setResult] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState(null);
   const beaconToken = useRef(null);
   const [profileData, setProfileData] = useState(null);
@@ -141,8 +142,12 @@ export default function App() {
       ocean_answers: data.ocean_answers ?? [],
     };
     setFormData(payload);
+    setSubmitting(true);
 
     try {
+      // Only the aptitude scoring call gates the result screen. It is fast
+      // (pure computation) and returns everything the report needs: RIASEC,
+      // OCEAN, aptitude, and the RIASEC-based career matches.
       const res = await fetch(`${APTITUDE_API}/api/submit`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -151,33 +156,6 @@ export default function App() {
       if (!res.ok) throw new Error(`Submission failed with status ${res.status}`);
 
       const json = await res.json();
-
-      if (!IS_STANDALONE && json.riasec_scores) {
-        await writeTestResultsBack(
-          json.riasec_scores,
-          json.selected_hobbies || payload.hobbies,
-          json.aptitude_scores
-        );
-
-        // Engine 1 smart recommendations live on beacon-backend. They do not
-        // exist in standalone, so the report simply falls back to the RIASEC
-        // career matches computed by aptitude-backend.
-        if (beaconToken.current) {
-          try {
-            const smartRes = await fetch(`${BEACON_API}/recommendations/smart`, {
-              headers: { Authorization: `Bearer ${beaconToken.current}` },
-            });
-            if (smartRes.ok) {
-              const smartJson = await smartRes.json();
-              if (smartJson.recommendations) {
-                json.primary_careers = smartJson.recommendations;
-              }
-            }
-          } catch (e) {
-            console.error("Failed to fetch Engine 1 recommendations:", e);
-          }
-        }
-      }
 
       // Persist so "My Report" survives a refresh or a return visit.
       // Device-local only. Nothing is uploaded by this.
@@ -191,11 +169,54 @@ export default function App() {
         }
       }
 
+      // Show the report immediately — do NOT wait on the two beacon-backend
+      // round-trips below, which may cold-start and add tens of seconds.
       setResult(json);
       setPage("result");
+      setSubmitting(false);
+
+      // Portal mode only: write scores back to the student's profile and pull
+      // Engine 1 smart recommendations. Runs in the background; when the smart
+      // recs land, they enrich the already-visible report. Standalone has no
+      // beacon backend, so it simply keeps the RIASEC matches from aptitude.
+      if (!IS_STANDALONE && json.riasec_scores) {
+        enrichWithBeacon(json, payload);
+      }
     } catch (err) {
       console.error("Submission error:", err);
+      setSubmitting(false);
       alert(`Could not connect to the server. Make sure the backend is running at ${APTITUDE_API}.`);
+    }
+  };
+
+  // Background (non-blocking) portal-mode work: profile write-back + Engine 1
+  // smart recommendations. Never gates the result screen.
+  const enrichWithBeacon = async (json, payload) => {
+    try {
+      await writeTestResultsBack(
+        json.riasec_scores,
+        json.selected_hobbies || payload.hobbies,
+        json.aptitude_scores
+      );
+    } catch (e) {
+      console.error("Failed to write test results back:", e);
+    }
+
+    if (beaconToken.current) {
+      try {
+        const smartRes = await fetch(`${BEACON_API}/recommendations/smart`, {
+          headers: { Authorization: `Bearer ${beaconToken.current}` },
+        });
+        if (smartRes.ok) {
+          const smartJson = await smartRes.json();
+          if (smartJson.recommendations) {
+            // Enrich the already-rendered report in place.
+            setResult((prev) => (prev ? { ...prev, primary_careers: smartJson.recommendations } : prev));
+          }
+        }
+      } catch (e) {
+        console.error("Failed to fetch Engine 1 recommendations:", e);
+      }
     }
   };
 
@@ -262,7 +283,28 @@ export default function App() {
           onBack={() => setPage("landing")}
           profileData={profileData}
           standalone={IS_STANDALONE}
+          submitting={submitting}
         />
+      )}
+
+      {submitting && (
+        <div
+          role="status"
+          aria-live="polite"
+          style={{
+            position: "fixed", inset: 0, zIndex: 1000,
+            background: "rgba(9, 16, 34, 0.55)", backdropFilter: "blur(3px)",
+            display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "1.1rem",
+          }}
+        >
+          <div style={{
+            width: 46, height: 46, borderRadius: "50%",
+            border: "4px solid rgba(255,255,255,0.25)", borderTopColor: "#fff",
+            animation: "apt-spin 0.9s linear infinite",
+          }} />
+          <div style={{ color: "#fff", fontWeight: 700, fontSize: "1.05rem" }}>Scoring your answers…</div>
+          <style>{`@keyframes apt-spin { to { transform: rotate(360deg); } }`}</style>
+        </div>
       )}
       {page === "result" && result && (
         <ResultPage

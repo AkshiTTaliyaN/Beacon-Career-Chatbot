@@ -19,8 +19,8 @@ export default function HeroBanner({
         <div className="apt-hero-content">
           {badges?.length ? (
             <div className="apt-hero-badges">
-              {badges.map((b) => (
-                <span key={b} className="apt-badge">
+              {badges.map((b, i) => (
+                <span key={i} className="apt-badge">
                   {b}
                 </span>
               ))}
@@ -41,7 +41,7 @@ export default function HeroBanner({
         {imageSrc ? (
           <div className="apt-hero-illustration" aria-hidden={imageCaption ? "false" : "true"}>
             <div className="apt-hero-illustration-frame">
-              <img src={imageSrc} alt={imageCaption ? imageAlt : imageCaption || imageAlt} />
+              <img src={imageSrc} alt={imageCaption ? imageAlt : imageCaption || imageAlt} width="1600" height="1067" fetchpriority="high" decoding="async" />
             </div>
             {imageCaption ? <div className="apt-hero-illustration-caption">{imageCaption}</div> : null}
           </div>

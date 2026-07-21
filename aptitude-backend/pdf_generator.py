@@ -34,6 +34,42 @@ CATEGORY_COLORS = {
     "Social": colors.HexColor("#14b8a6"),
 }
 
+# Phased skill roadmap per primary RIASEC type. Mirrors ACTION_PLAN in
+# aptitude-frontend/src/pages/ResultPage.jsx so the PDF matches the on-screen
+# report. Keyed by full type name (result["primary_type"]).
+ACTION_PLAN = {
+    "Investigative": [
+        ("Class 11 (Now)", ["Strengthen mathematics and analytical subjects", "Start learning Python or basic programming", "Read scientific articles and journals weekly", "Join science Olympiads or research clubs"]),
+        ("Class 12", ["Begin JEE/NEET/IISER prep alongside boards", "Build small data or research projects", "Apply for summer research programs (KVPI, IISER, IIT internships)", "Strengthen English for international applications"]),
+        ("After Class 12", ["Pursue B.Tech, BSc Research, or MBBS based on stream", "Engage in research from year one of college", "Consider international research opportunities", "Build a profile of papers, projects, or internships"]),
+    ],
+    "Realistic": [
+        ("Class 11 (Now)", ["Focus on physics, mathematics, and applied subjects", "Take up hands-on hobbies (electronics, mechanics, building)", "Visit workshops, factories, or engineering exhibitions", "Try AutoCAD or basic CAD software"]),
+        ("Class 12", ["Start JEE preparation seriously", "Build small physical or technical projects", "Visit IITs/NITs on open day if possible", "Develop strong drawing and spatial reasoning"]),
+        ("After Class 12", ["Pursue B.Tech, Diploma, or applied engineering", "Take internships at engineering firms", "Build a portfolio of completed technical projects", "Consider specialisations like robotics, automotive, or aerospace"]),
+    ],
+    "Artistic": [
+        ("Class 11 (Now)", ["Build a portfolio of your creative work", "Learn one design tool (Figma, Photoshop, or Canva)", "Take art, music, writing, or photography classes", "Follow creative professionals on social media for inspiration"]),
+        ("Class 12", ["Prepare for NID, NIFT, or other design entrance exams", "Build a strong, organised digital portfolio", "Attempt small creative freelance projects", "Read design and creative industry publications"]),
+        ("After Class 12", ["Pursue B.Des, BFA, or Mass Communication degrees", "Build a professional online portfolio (Behance, Dribbble)", "Take internships at creative studios or media houses", "Develop a strong personal brand and online presence"]),
+    ],
+    "Social": [
+        ("Class 11 (Now)", ["Volunteer with a local NGO or community group", "Develop public speaking and communication skills", "Read introductory psychology or sociology books", "Join debate, MUN, or peer counselling activities"]),
+        ("Class 12", ["Prepare for CUET if pursuing humanities", "Begin shadowing teachers, doctors, or counsellors", "Maintain a journal of your volunteering experiences", "Apply for leadership roles in school"]),
+        ("After Class 12", ["Pursue Psychology, Education, Social Work, or Medicine", "Complete internships in counselling or NGO settings", "Build a track record of impact in community work", "Consider higher studies in clinical or counselling psychology"]),
+    ],
+    "Enterprising": [
+        ("Class 11 (Now)", ["Read business case studies and entrepreneur biographies", "Take leadership roles in school clubs or events", "Develop public speaking and presentation skills", "Start a small project, selling, organising, or building"]),
+        ("Class 12", ["Prepare for IPM, CLAT, or commerce entrance exams", "Build a strong CV with leadership experience", "Start a small entrepreneurial side project", "Develop financial literacy and business reading"]),
+        ("After Class 12", ["Pursue BBA, B.Com, LLB, or related fields", "Join entrepreneurship cells and business clubs", "Take internships at startups or consulting firms", "Build your network early through LinkedIn and events"]),
+    ],
+    "Conventional": [
+        ("Class 11 (Now)", ["Strengthen mathematics, accounting, and economics", "Master MS Excel and basic spreadsheet skills", "Develop strong organisational and time-management habits", "Read business newspapers (Mint, Economic Times)"]),
+        ("Class 12", ["Prepare for CA Foundation or commerce entrance exams", "Build accuracy in numerical and analytical work", "Develop typing speed and digital literacy", "Maintain strong academic discipline"]),
+        ("After Class 12", ["Pursue B.Com, CA, CFA, or BBA in Finance", "Take internships at audit firms or banks", "Build certifications in finance and data analysis", "Aim for stable, professional career tracks early"]),
+    ],
+}
+
 def score_bar(label, score, bar_color):
     """Create a progress bar row as a table."""
     bar_width = 340
@@ -344,8 +380,8 @@ def generate_pdf(result: dict) -> bytes:
             "We have combined your onboarding academic profile, subject ratings, "
             "RIASEC personality scores, and passions/hobbies to generate your final "
             "career recommendations. <b>To view your unified, stream-aligned, and "
-            "interest-aligned career matches with detailed roadmaps, please log in "
-            "to the Manzil Platform and check your Student Dashboard.</b>"
+            "interest-aligned career matches, please log in "
+            "to the Lakshayaveer Platform and check your Student Dashboard.</b>"
         )
 
     story.append(Paragraph(cta_text, ParagraphStyle("CTA", parent=styles["Normal"], fontSize=10, leading=16, textColor=DARK_NAVY)))
@@ -393,6 +429,28 @@ def generate_pdf(result: dict) -> bytes:
     story.append(HRFlowable(width="100%", thickness=1, color=BORDER_COLOR))
     story.append(Spacer(1, 0.4*cm))
 
+    # ── PERSONALISED ROADMAP ─────────────────────────────────────────────────
+    roadmap = ACTION_PLAN.get(result.get("primary_type", ""), [])
+    if roadmap:
+        primary_color = CATEGORY_COLORS.get(result.get("primary_type", ""), BLUE_PRIMARY)
+        story.append(Paragraph("Your Personalised Roadmap", h2_style))
+        story.append(Spacer(1, 0.1*cm))
+        story.append(Paragraph(
+            "A step-by-step timeline from now until college, built around your personality type.",
+            ParagraphStyle("RoadmapSub", parent=styles["Normal"], fontSize=9.5, leading=14, textColor=GRAY_TEXT)
+        ))
+        story.append(Spacer(1, 0.3*cm))
+        phase_title_style = ParagraphStyle("PhaseTitle", parent=styles["Normal"], fontSize=11, textColor=primary_color, spaceBefore=0, spaceAfter=2)
+        action_style = ParagraphStyle("ActionItem", parent=styles["Normal"], fontSize=9.5, leading=14, textColor=DARK_NAVY, leftIndent=10, bulletIndent=0)
+        for phase_name, actions in roadmap:
+            story.append(Paragraph(f"<b>{safe_html(phase_name)}</b>", phase_title_style))
+            for action in actions:
+                story.append(Paragraph(safe_html(action), action_style, bulletText="•"))
+            story.append(Spacer(1, 0.25*cm))
+        story.append(Spacer(1, 0.2*cm))
+        story.append(HRFlowable(width="100%", thickness=1, color=BORDER_COLOR))
+        story.append(Spacer(1, 0.4*cm))
+
     # ── CLOSING NOTE ─────────────────────────────────────────────────────────
     story.append(Paragraph("Closing Note", h2_style))
     closing = safe_html(result.get("closing_note", ""))
@@ -404,7 +462,7 @@ def generate_pdf(result: dict) -> bytes:
     story.append(HRFlowable(width="100%", thickness=0.5, color=BORDER_COLOR))
     story.append(Spacer(1, 0.2*cm))
     story.append(Paragraph(
-        "Manzil © 2026 - This report is an illustrative guide based on an assessment. For personalised counselling contact our team.",
+        "Lakshayaveer © 2026 - This report is an illustrative guide based on an assessment. For personalised counselling contact our team.",
         ParagraphStyle("Footer", parent=styles["Normal"], fontSize=8, textColor=GRAY_TEXT, alignment=TA_CENTER)
     ))
 

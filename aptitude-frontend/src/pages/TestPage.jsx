@@ -140,7 +140,7 @@ const APTITUDE_SKILL_INFO = {
 // ---------------------------------------------------------------------------
 // MAIN COMPONENT
 // ---------------------------------------------------------------------------
-export default function TestPage({ onSubmit, onBack, profileData, standalone = false }) {
+export default function TestPage({ onSubmit, onBack, profileData, standalone = false, submitting = false }) {
   // step: "details" | "questions" | "hobbies" | "aptitude" | "ocean"
   const [step, setStep] = useState("details");
 
@@ -774,9 +774,11 @@ export default function TestPage({ onSubmit, onBack, profileData, standalone = f
                 <AgreeScale items={OCEAN_SCALE} value={oceanSelected} onChange={setOceanSelected} color={OCEAN_COLOR} />
 
                 <div className="q-nav">
-                  <button className="btn-ghost" onClick={handleOceanPrev}><BilingualText text="← Previous" /></button>
-                  <button className="btn-primary" onClick={handleOceanNext} style={{ background: OCEAN_COLOR }}>
-                    {oceanCurrent === 19 ? <BilingualText text="Submit Test ✓" /> : <BilingualText text="Next →" />}
+                  <button className="btn-ghost" onClick={handleOceanPrev} disabled={submitting}><BilingualText text="← Previous" /></button>
+                  <button className="btn-primary" onClick={handleOceanNext} style={{ background: OCEAN_COLOR }} disabled={submitting}>
+                    {oceanCurrent === 19
+                      ? (submitting ? <BilingualText text="Scoring…" /> : <BilingualText text="Submit Test ✓" />)
+                      : <BilingualText text="Next →" />}
                   </button>
                 </div>
               </motion.div>
